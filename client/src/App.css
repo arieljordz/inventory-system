@@ -1,0 +1,53 @@
+html,
+body,
+#root {
+  height: 100%;
+}
+body.dark-mode {
+  background-color: #1e1e2f;
+  color: #f1f1f1;
+}
+
+body.dark-mode .card {
+  background-color: #2c2c3e;
+  color: #ffffff;
+}
+
+body.dark-mode .navbar,
+body.dark-mode .main-sidebar {
+  background-color: #343a40 !important;
+}
+
+/* Header navbar adjustments */
+body.dark-mode .main-header.navbar {
+  background-color: #2e2e3e !important;
+  color: #ffffff;
+}
+
+body.dark-mode .main-header.navbar .nav-link {
+  color: #ffffff !important;
+}
+
+body.dark-mode .main-header.navbar .nav-link:hover {
+  color: #f8f9fa !important;
+}
+
+/* Modal adjustments for dark mode */
+body.dark-mode .modal-content {
+  background-color: #2e2e3e;
+  color: #ffffff;
+}
+
+body.dark-mode .modal-header,
+body.dark-mode .modal-footer {
+  border-color: #444;
+}
+
+body.dark-mode .modal-title {
+  color: #ffffff;
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1); /* Invert close button color for dark background */
+}
+
