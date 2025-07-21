@@ -10,7 +10,7 @@ const Sidebar = () => {
       {/* Brand Logo */}
       <Link to="/dashboard" className="brand-link d-flex align-items-center">
         <img
-          src="/images/vms-icon.png" 
+          src="/images/is-icon.png" 
           alt="Logo"
           className="brand-image img-circle elevation-3"
           style={{ opacity: 0.9, width: "35px", height: "35px" }}
