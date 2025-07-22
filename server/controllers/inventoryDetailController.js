@@ -22,49 +22,34 @@ export const getInventoryDetailsByStatus = async (req, res) => {
       return res.status(400).json({ message: "Invalid status." });
     }
 
-    if (status === StatusEnum.AVAILABLE) {
-      // Group by product
-      const groupedDetails = await InventoryDetail.aggregate([
-        { $match: { status } },
-        {
-          $lookup: {
-            from: "products",
-            localField: "product",
-            foreignField: "_id",
-            as: "productDetails"
-          }
-        },
-        { $unwind: "$productDetails" },
-        {
-          $group: {
-            _id: "$product",
-            product: { $first: "$productDetails" },
-            inventoryLogs: {
-              $push: {
-                _id: "$_id",
-                movementType: "$movementType",
-                quantity: "$quantity",
-                remarks: "$remarks",
-                createdAt: "$createdAt"
-              }
-            }
-          }
-        },
-        { $sort: { "inventoryLogs.createdAt": -1 } }
-      ]);
+    const isGrouped = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK].includes(status);
 
-      return res.status(200).json(groupedDetails);
+    if (isGrouped) {
+      // Fetch directly from Product collection based on status
+      const products = await Product.find({ status }).sort({ name: 1 });
+
+      const result = products.map((product) => ({
+        product,
+        totalQuantity: product.quantity ?? 0,
+        status,
+        inventoryLogs: [], // Placeholder if needed
+      }));
+
+      return res.status(200).json(result);
     }
 
-    // Flat list for other statuses
-    const details = await InventoryDetail.find({ status })
+    // Flat list for other statuses (FOR_PICK_UP, SHIPPING, etc.)
+    const flatDetails = await InventoryDetail.find({ status })
       .populate("product")
       .sort({ createdAt: -1 });
 
-    return res.status(200).json(details);
+    return res.status(200).json(flatDetails);
   } catch (error) {
-    console.error("Get Inventory Details Error:", error);
-    res.status(500).json({ message: "Server error." });
+    console.error("Get Inventory Details Error:", {
+      message: error.message,
+      stack: error.stack,
+    });
+    return res.status(500).json({ message: "Server error." });
   }
 };
 
@@ -143,9 +128,7 @@ export const tagForPickUp = async (req, res) => {
     const { pickupQty } = req.body;
 
     if (typeof pickupQty !== "number" || pickupQty <= 0) {
-      return res
-        .status(400)
-        .json({ message: "A valid pickupQty is required." });
+      return res.status(400).json({ message: "A valid pickupQty is required." });
     }
 
     const product = await Product.findById(req.params.id);
@@ -154,19 +137,22 @@ export const tagForPickUp = async (req, res) => {
     }
 
     if (pickupQty > product.quantity) {
-      return res
-        .status(400)
-        .json({ message: "Pickup quantity exceeds available stock." });
+      return res.status(400).json({ message: "Pickup quantity exceeds available stock." });
     }
 
-    // Update product quantity
+    const remainingQty = product.quantity - pickupQty;
+
+    // Update product quantity and status if needed
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      { quantity: product.quantity - pickupQty },
+      {
+        quantity: remainingQty,
+        status: remainingQty <= 0 ? StatusEnum.OUT_OF_STOCK : product.status,
+      },
       { new: true }
     );
 
-    // Create a single inventory detail record
+    // Log inventory movement
     await InventoryDetail.create({
       product: product._id,
       movementType: MovementTypeEnum.OUT,

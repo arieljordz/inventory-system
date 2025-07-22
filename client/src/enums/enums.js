@@ -4,6 +4,7 @@ export const PasswordEnum = Object.freeze({
 
 export const StatusEnum = Object.freeze({
   AVAILABLE: "Available",
+  OUT_OF_STOCK: "Out of Stock",
   FOR_PICK_UP: "For Pick Up",
   TO_SHIP: "To Ship",
   SHIPPING: "Shipping",

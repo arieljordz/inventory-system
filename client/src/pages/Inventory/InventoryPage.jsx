@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Navpath from "../../components/common/Navpath";
 import InventoryTable from "../../components/inventory/InventoryTable";
 import {
@@ -9,6 +9,7 @@ import {
 import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
+import usePagination from "../../hooks/usePagination";
 
 const InventoryPage = () => {
   const today = new Date().toISOString().split("T")[0];
@@ -17,7 +18,6 @@ const InventoryPage = () => {
   const [stats, setStats] = useState({ remaining: 0, totalIn: 0, totalOut: 0 });
   const [movements, setMovements] = useState([]);
   const [remainingPerProduct, setRemainingPerProduct] = useState([]);
-
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(10);
@@ -31,7 +31,7 @@ const InventoryPage = () => {
         getRemainingPerProduct(),
       ]);
 
-      const totals = computeTotalsByRange(movementsRes.data);
+      const totals = computeTotalsByRange(movementsRes.data, startDate, endDate);
 
       setStats({ remaining: statsRes.data.remaining, ...totals });
       setMovements(movementsRes.data);
@@ -41,12 +41,7 @@ const InventoryPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [dateRange]);
-
-  const computeTotalsByRange = (movements) => {
-    const { startDate, endDate } = dateRange;
+  const computeTotalsByRange = (movements, startDate, endDate) => {
     const filtered = movements.filter((m) => {
       const movementDate = new Date(m.createdAt).toISOString().split("T")[0];
       return movementDate >= startDate && movementDate <= endDate;
@@ -63,7 +58,6 @@ const InventoryPage = () => {
     return { totalIn, totalOut };
   };
 
-  // ========== Filtering and Pagination ==========
   const filteredMovements = movements.filter((m) => {
     const values = [
       m.product?.name,
@@ -76,15 +70,16 @@ const InventoryPage = () => {
     );
   });
 
-  const itemsPerPageValue =
-    itemsPerPage === "All" ? filteredMovements.length : parseInt(itemsPerPage);
-  const indexOfLastItem = currentPage * itemsPerPageValue;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPageValue;
-  const currentData = filteredMovements.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages =
-    itemsPerPage === "All"
-      ? 1
-      : Math.ceil(filteredMovements.length / itemsPerPageValue);
+  const pagination = usePagination({
+    totalItems: filteredMovements.length,
+    itemsPerPage: itemsPerPage === "All" ? filteredMovements.length : parseInt(itemsPerPage),
+    currentPage,
+  });
+
+  const currentData = filteredMovements.slice(
+    pagination.indexOfFirstItem,
+    pagination.indexOfLastItem
+  );
 
   const totalRemainingQty = remainingPerProduct.reduce(
     (sum, item) => sum + item.quantity,
@@ -151,10 +146,10 @@ const InventoryPage = () => {
           {/* Pagination */}
           <PaginationControls
             currentPage={currentPage}
-            totalPages={totalPages}
+            totalPages={pagination.totalPages}
             totalItems={filteredMovements.length}
-            indexOfFirstItem={indexOfFirstItem}
-            indexOfLastItem={indexOfLastItem}
+            indexOfFirstItem={pagination.indexOfFirstItem}
+            indexOfLastItem={pagination.indexOfLastItem}
             onPageChange={setCurrentPage}
           />
         </div>
@@ -163,7 +158,6 @@ const InventoryPage = () => {
   );
 };
 
-// InfoBox Subcomponent for cleaner reuse
 const InfoBox = ({ icon, label, value, color }) => (
   <div className="col-md-3 col-sm-6 col-12">
     <div className={`info-box bg-${color}`}>

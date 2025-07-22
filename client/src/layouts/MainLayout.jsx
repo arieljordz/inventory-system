@@ -11,8 +11,8 @@ const MainLayout = () => {
       <Sidebar />
 
       <div className="content-wrapper">
-        <div className="content">
-          <div className="container-fluid">
+        <div className="content pt-3">
+          <div className="container-fluid pt-5 pb-3">
             <Outlet />
           </div>
         </div>

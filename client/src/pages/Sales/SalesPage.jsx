@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navpath from "../../components/common/Navpath";
 
 const SalesPage = () => {
@@ -7,6 +7,34 @@ const SalesPage = () => {
     startDate: today,
     endDate: today,
   });
+  const [salesData, setSalesData] = useState([]);
+
+  const handleFilter = () => {
+    // Simulated API call - replace with your actual API call logic
+    const filteredData = [
+      {
+        id: 1,
+        customer: "Juan Dela Cruz",
+        product: "Product A",
+        total: 1200,
+        status: "Completed",
+        date: "2025-07-20",
+      },
+      {
+        id: 2,
+        customer: "Maria Santos",
+        product: "Product B",
+        total: 850,
+        status: "Pending",
+        date: "2025-07-20",
+      },
+    ];
+    setSalesData(filteredData);
+  };
+
+  useEffect(() => {
+    handleFilter(); // Initial load with today's data
+  }, []);
 
   return (
     <>
@@ -69,17 +97,21 @@ const SalesPage = () => {
               />
             </div>
             <div className="col-md-2">
-              <button className="btn btn-primary btn-block">Filter</button>
+              <button className="btn btn-primary btn-block" onClick={handleFilter}>
+                Filter
+              </button>
             </div>
           </div>
 
-          {/* Sales Table Placeholder */}
+          {/* Sales Table */}
           <div className="card">
-            <div className="card-header">
+            <div className="card-header d-flex justify-content-between align-items-center">
               <h3 className="card-title">Sales Records</h3>
+              <button className="btn btn-outline-info btn-sm">
+                <i className="fas fa-store"></i> Check Shopee Sales
+              </button>
             </div>
             <div className="card-body table-responsive">
-              {/* Replace this with your actual table */}
               <table className="table table-bordered table-hover text-nowrap">
                 <thead>
                   <tr>
@@ -92,27 +124,36 @@ const SalesPage = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Juan Dela Cruz</td>
-                    <td>Product A</td>
-                    <td>₱1,200</td>
-                    <td>
-                      <span className="badge bg-success">Completed</span>
-                    </td>
-                    <td>2025-07-20</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Maria Santos</td>
-                    <td>Product B</td>
-                    <td>₱850</td>
-                    <td>
-                      <span className="badge bg-warning">Pending</span>
-                    </td>
-                    <td>2025-07-20</td>
-                  </tr>
-                  {/* Add dynamic data here later */}
+                  {salesData.length === 0 ? (
+                    <tr>
+                      <td colSpan="6" className="text-center text-muted py-3">
+                        No sales data found for the selected date range.
+                      </td>
+                    </tr>
+                  ) : (
+                    salesData.map((sale, index) => (
+                      <tr key={sale.id}>
+                        <td>{index + 1}</td>
+                        <td>{sale.customer}</td>
+                        <td>{sale.product}</td>
+                        <td>₱{sale.total}</td>
+                        <td>
+                          <span
+                            className={`badge bg-${
+                              sale.status === "Completed"
+                                ? "success"
+                                : sale.status === "Pending"
+                                ? "warning"
+                                : "secondary"
+                            }`}
+                          >
+                            {sale.status}
+                          </span>
+                        </td>
+                        <td>{sale.date}</td>
+                      </tr>
+                    ))
+                  )}
                 </tbody>
               </table>
             </div>

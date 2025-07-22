@@ -8,15 +8,15 @@ const Sidebar = () => {
   return (
     <aside className="main-sidebar sidebar-dark-primary elevation-4">
       {/* Brand Logo */}
-      <Link to="/dashboard" className="brand-link d-flex align-items-center">
+      <div className="brand-link d-flex align-items-center">
         <img
-          src="/images/is-icon.png" 
+          src="/images/is-icon.png"
           alt="Logo"
           className="brand-image img-circle elevation-3"
           style={{ opacity: 0.9, width: "35px", height: "35px" }}
         />
-        <span className="brand-text font-weight-light ml-2">Inventory System</span>
-      </Link>
+        <span className="brand-text ml-2">INVENTORY</span>
+      </div>
 
       <div className="sidebar">
         <nav className="mt-2">

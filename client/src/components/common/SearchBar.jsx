@@ -3,7 +3,7 @@ import React from "react";
 const SearchBar = ({
   searchTerm = "",
   onSearchChange,
-  itemsPerPage = 10,
+  itemsPerPage = 5,
   onItemsPerPageChange,
   itemsPerPageOptions = [5, 10, 20, 50, "All"],
   icon = "🔍",

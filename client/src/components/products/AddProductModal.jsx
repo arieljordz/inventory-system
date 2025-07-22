@@ -1,126 +1,147 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const AddProductModal = ({ form, handleChange, handleSubmit, isEditMode }) => {
+const AddProductModal = ({ isOpen, onClose, form, onChange, onSubmit, isEditMode }) => {
+  const [imagePreview, setImagePreview] = useState(null);
+
+  useEffect(() => {
+    if (form.image && typeof form.image === "object") {
+      setImagePreview(URL.createObjectURL(form.image));
+    } else {
+      setImagePreview(null);
+    }
+  }, [form.image]);
+
+  if (!isOpen) return null;
+
   return (
-    <div
-      className="modal fade"
-      id="addProductModal"
-      tabIndex="-1"
-      role="dialog"
-      aria-hidden="true"
-    >
-      <div className="modal-dialog modal-lg" role="document">
-        <form onSubmit={handleSubmit} encType="multipart/form-data">
-          <div className="modal-content">
-            <div className="modal-header bg-primary">
-              <h5 className="modal-title text-white">
-                {isEditMode ? "Edit Product" : "Add Product"}
-              </h5>
-              <button
-                type="button"
-                className="close text-white"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
+    <>
+      {/* Backdrop */}
+      <div className="modal-backdrop fade show"></div>
 
-            <div className="modal-body">
-              <div className="form-row">
-                <div className="form-group col-md-6">
-                  <label htmlFor="serialNumber">Serial Number</label>
-                  <input
-                    type="text"
-                    name="serialNumber"
-                    className="form-control"
-                    value={form.serialNumber}
-                    onChange={handleChange}
-                    required
-                  />
+      {/* Modal */}
+      <div className="modal fade show d-block" tabIndex="-1" role="dialog" aria-modal="true">
+        <div className="modal-dialog modal-lg" role="document">
+          <form onSubmit={onSubmit} encType="multipart/form-data">
+            <div className="modal-content">
+              <div className="modal-header bg-primary text-white">
+                <h5 className="modal-title">
+                  {isEditMode ? "Edit Product" : "Add Product"}
+                </h5>
+                <button type="button" className="close text-white" onClick={onClose}>
+                  <span>&times;</span>
+                </button>
+              </div>
+
+              <div className="modal-body">
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label>Serial Number</label>
+                    <input
+                      type="text"
+                      name="serialNumber"
+                      className="form-control"
+                      value={form.serialNumber}
+                      onChange={onChange}
+                      required
+                      placeholder="Enter serial number"
+                    />
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label>Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      className="form-control"
+                      value={form.name}
+                      onChange={onChange}
+                      required
+                      placeholder="Enter product name"
+                    />
+                  </div>
                 </div>
 
-                <div className="form-group col-md-6">
-                  <label htmlFor="name">Name</label>
-                  <input
-                    type="text"
-                    name="name"
-                    className="form-control"
-                    value={form.name}
-                    onChange={handleChange}
-                    required
-                  />
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label>Price</label>
+                    <input
+                      type="number"
+                      name="price"
+                      className="form-control"
+                      value={form.price}
+                      onChange={onChange}
+                      required
+                      placeholder="Enter product price"
+                    />
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label>Quantity</label>
+                    <input
+                      type="number"
+                      name="quantity"
+                      className="form-control"
+                      value={form.quantity}
+                      onChange={onChange}
+                      required
+                      placeholder="Enter quantity"
+                      disabled={isEditMode}
+                    />
+                  </div>
                 </div>
 
-                <div className="form-group col-md-6">
-                  <label htmlFor="price">Price</label>
-                  <input
-                    type="number"
-                    name="price"
-                    className="form-control"
-                    value={form.price}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="form-group col-md-6">
-                  <label htmlFor="description">Description</label>
-                  <input
-                    type="text"
+                <div className="form-group">
+                  <label>Description</label>
+                  <textarea
                     name="description"
                     className="form-control"
+                    rows="2"
                     value={form.description}
-                    onChange={handleChange}
+                    onChange={onChange}
+                    placeholder="Enter product description"
                   />
                 </div>
-                <div className="form-group col-md-6">
-                  <label>Quantity</label>
-                  <input
-                    type="number"
-                    name="quantity"
-                    className="form-control"
-                    value={form.quantity || ""}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="form-group col-md-6">
-                  <label htmlFor="image">Image</label>
+
+                <div className="form-group">
+                  <label>Image</label>
                   <div className="custom-file">
                     <input
                       type="file"
-                      className="custom-file-input"
-                      id="image"
                       name="image"
-                      onChange={handleChange}
+                      className="custom-file-input"
+                      id="productImage"
+                      onChange={onChange}
+                      accept="image/*"
                     />
-                    <label className="custom-file-label" htmlFor="image">
-                      Choose file
+                    <label className="custom-file-label" htmlFor="productImage">
+                      {form.image?.name || "Choose image"}
                     </label>
                   </div>
                 </div>
+
+                {imagePreview && (
+                  <div className="text-center mt-3">
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="img-thumbnail"
+                      style={{ maxWidth: "200px", maxHeight: "150px" }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="modal-footer">
+                <button type="button" className="btn btn-secondary" onClick={onClose}>
+                  Cancel
+                </button>
+                <button type="submit" className="btn btn-primary">
+                  {isEditMode ? "Update" : "Create"}
+                </button>
               </div>
             </div>
-
-            <div className="modal-footer justify-content-end">
-              <button type="submit" className="btn btn-success">
-                <i className="fas fa-save mr-1"></i>
-                {isEditMode ? "Update" : "Add"}
-              </button>
-              <button
-                type="button"
-                className="btn btn-secondary"
-                data-dismiss="modal"
-              >
-                <i className="fas fa-times mr-1"></i>
-                Cancel
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

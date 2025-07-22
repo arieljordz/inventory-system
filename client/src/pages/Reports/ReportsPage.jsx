@@ -7,8 +7,12 @@ import * as XLSX from "xlsx";
 import { toast } from "react-toastify";
 
 const ReportsPage = () => {
+  const today = new Date().toISOString().split("T")[0];
+  const [dateRange, setDateRange] = useState({
+    from: today,
+    to: today,
+  });
   const [reportType, setReportType] = useState("inventory");
-  const [dateRange, setDateRange] = useState({ from: "", to: "" });
   const [isGenerating, setIsGenerating] = useState(false);
   const [reportData, setReportData] = useState([]);
 
@@ -28,10 +32,10 @@ const ReportsPage = () => {
 
       if (!res.data || res.data.length === 0) {
         toast.info("No records found for the selected range.");
+      } else {
+        setReportData(res.data);
+        toast.success("Report generated successfully.");
       }
-
-      setReportData(res.data);
-      toast.success("Report generated successfully.");
     } catch (err) {
       console.error("Failed to fetch report:", err);
       toast.error("Error generating report.");
@@ -117,7 +121,10 @@ const ReportsPage = () => {
                     className="form-control"
                     value={dateRange.from}
                     onChange={(e) =>
-                      setDateRange((prev) => ({ ...prev, from: e.target.value }))
+                      setDateRange((prev) => ({
+                        ...prev,
+                        from: e.target.value,
+                      }))
                     }
                   />
                 </div>

@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="main-footer text-sm">
+    <footer className="main-footer text-sm fixed-bottom py-2">
       <div className="float-right d-none d-sm-inline">
         Inventory System v1.0
       </div>

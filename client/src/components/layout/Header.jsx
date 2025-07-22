@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // adjust path if needed
-import ThemeToggle from "../common/ThemeToggle"; // adjust path if needed
+import { useAuth } from "../../context/AuthContext"; 
+import ThemeToggle from "../common/ThemeToggle"; 
 
 const Header = () => {
   const { logout } = useAuth();
@@ -9,11 +9,11 @@ const Header = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/"); // Redirect to login or homepage
+    navigate("/");
   };
 
   return (
-    <nav className="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav className="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
       {/* Left navbar links */}
       <ul className="navbar-nav">
         <li className="nav-item">

@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
 import bsCustomFileInput from "bs-custom-file-input";
+
+import { StatusEnum } from "../../enums/enums";
 import Navpath from "../../components/common/Navpath";
 import AddProductModal from "../../components/products/AddProductModal";
 import ProductTable from "../../components/products/ProductTable";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
+import RestockModal from "../../components/products/RestockModal";
 
+import usePagination from "../../hooks/usePagination";
 import {
   createProduct,
   getProducts,
@@ -15,44 +19,52 @@ import {
   updateProduct,
   restockProduct,
 } from "../../services/productService";
-import RestockModal from "../../components/products/RestockModal";
+
+// ----- Initial States -----
+const initialFormState = {
+  serialNumber: "",
+  name: "",
+  price: "",
+  quantity: "",
+  description: "",
+  image: null,
+};
+
+const initialRestockForm = {
+  productId: "",
+  quantity: "",
+  remarks: "",
+  name: "",
+};
 
 const ProductsPage = () => {
+  // ----- States -----
   const [products, setProducts] = useState([]);
-  const [form, setForm] = useState({
-    serialNumber: "",
-    name: "",
-    price: "",
-    quantity: "", // ✅ added quantity
-    description: "",
-    image: null,
-  });
-
+  const [form, setForm] = useState(initialFormState);
+  const [restockForm, setRestockForm] = useState(initialRestockForm);
   const [searchTerm, setSearchTerm] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [restockForm, setRestockForm] = useState({
-    productId: "",
-    quantity: "",
-    remarks: "",
-    name: "",
-  });
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showRestockModal, setShowRestockModal] = useState(false);
 
+  // ----- Effects -----
   useEffect(() => {
     bsCustomFileInput.init();
     fetchProducts();
   }, []);
 
+  // ----- Handlers -----
   const fetchProducts = async () => {
     try {
       setLoading(true);
       const { data } = await getProducts();
+      // console.log("Products:", data);
       setProducts(data);
-    } catch (err) {
-      console.log(err);
+    } catch {
       toast.error("Failed to fetch products.");
     } finally {
       setLoading(false);
@@ -60,20 +72,12 @@ const ProductsPage = () => {
   };
 
   const resetForm = () => {
-    setForm({
-      serialNumber: "",
-      name: "",
-      price: "",
-      quantity: "", // ✅ reset quantity
-      description: "",
-      image: null,
-    });
+    setForm(initialFormState);
     setIsEditMode(false);
     setEditingId(null);
-    document.getElementById("image").value = "";
   };
 
-  const handleChange = (e) => {
+  const handleFormChange = (e) => {
     const { name, value, files } = e.target;
     setForm((prev) => ({
       ...prev,
@@ -81,36 +85,47 @@ const ProductsPage = () => {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmitForm = async (e) => {
     e.preventDefault();
+
     const formData = new FormData();
-    for (let key in form) {
-      if (form[key]) {
-        formData.append(key, form[key]);
-      }
-    }
+    Object.keys(form).forEach((key) => {
+      if (form[key]) formData.append(key, form[key]);
+    });
 
     try {
       if (isEditMode) {
         await updateProduct(editingId, formData);
         toast.success("Product updated successfully.");
       } else {
-        await createProduct(formData); // ✅ createProduct expects quantity
+        await createProduct(formData);
         toast.success("Product created successfully.");
       }
+
+      handleCloseAddModal();
       fetchProducts();
-      window.$("#addProductModal").modal("hide");
-      resetForm();
     } catch (error) {
-      console.error(error);
-      const errorMsg =
-        error?.response?.data?.message || "Something went wrong.";
-      if (errorMsg === "Serial number already exists") {
-        toast.error("A product with this serial number already exists.");
-      } else {
-        toast.error(errorMsg);
-      }
+      const msg = error?.response?.data?.message || "Something went wrong.";
+      toast.error(
+        msg === "Serial number already exists"
+          ? "A product with this serial number already exists."
+          : msg
+      );
     }
+  };
+
+  const handleEdit = (product) => {
+    setForm({
+      serialNumber: product.serialNumber || "",
+      name: product.name || "",
+      price: product.price || "",
+      quantity: product.quantity || "",
+      description: product.description || "",
+      image: null,
+    });
+    setEditingId(product._id);
+    setIsEditMode(true);
+    setShowAddModal(true);
   };
 
   const handleDelete = async (id) => {
@@ -127,67 +142,74 @@ const ProductsPage = () => {
         await deleteProduct(id);
         toast.success("Product deleted.");
         fetchProducts();
-      } catch (err) {
+      } catch {
         toast.error("Failed to delete product.");
       }
     }
   };
 
-  const handleEdit = (product) => {
-    setIsEditMode(true);
-    setEditingId(product._id);
-    setForm({
-      serialNumber: product.serialNumber || "",
-      name: product.name || "",
-      price: product.price || "",
-      quantity: product.quantity || "",
-      description: product.description || "",
-      image: null,
-    });
-    window.$("#addProductModal").modal("show");
+  const handleOpenAddModal = () => {
+    resetForm();
+    setShowAddModal(true);
   };
 
-  const handleRestock = (product) => {
+  const handleCloseAddModal = () => {
+    resetForm();
+    setShowAddModal(false);
+  };
+
+  const handleOpenRestockModal = (product) => {
     setRestockForm({
       productId: product._id,
       quantity: "",
       remarks: "",
       name: product.name,
     });
-    window.$("#restockModal").modal("show");
+    setShowRestockModal(true);
+  };
+
+  const handleCloseRestockModal = () => {
+    setRestockForm(initialRestockForm);
+    setShowRestockModal(false);
   };
 
   const handleRestockChange = (e) => {
     const { name, value } = e.target;
-
     setRestockForm((prev) => ({
       ...prev,
       [name]: name === "quantity" ? parseInt(value, 10) || "" : value,
     }));
   };
 
-const handleRestockSubmit = async (e) => {
-  e.preventDefault();
-  try {
-    const payload = {
-      quantity: Number(restockForm.quantity),
-      remarks: restockForm.remarks || "Restock",
-    };
+  const handleRestockSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const payload = {
+        quantity: Number(restockForm.quantity),
+        remarks: restockForm.remarks || "Restock",
+      };
+      await restockProduct(restockForm.productId, payload);
+      toast.success("Product restocked successfully.");
+      handleCloseRestockModal();
+      fetchProducts();
+    } catch {
+      toast.error("Failed to restock product.");
+    }
+  };
 
-    console.log("Sending to backend:", payload);
+  const statusColorMap = {
+    [StatusEnum.AVAILABLE]: "info", // blue
+    [StatusEnum.FOR_PICK_UP]: "warning", // yellow
+    [StatusEnum.TO_SHIP]: "primary", // dark blue
+    [StatusEnum.SHIPPING]: "success", // green
+    [StatusEnum.RETURNED]: "secondary", // gray — suitable for returned
+    [StatusEnum.DELIVERED]: "teal", // teal (you can keep as "secondary" if "teal" not supported)
+    [StatusEnum.COMPLETED]: "dark", // dark gray
+    [StatusEnum.OUT_OF_STOCK]: "danger", // red — appropriate for no stock
+  };
 
-    await restockProduct(restockForm.productId, payload);
-
-    toast.success("Product restocked successfully.");
-    window.$("#restockModal").modal("hide");
-    fetchProducts();
-  } catch (err) {
-    toast.error("Failed to restock.");
-  }
-};
-
-  // ===== Filtering and Pagination =====
-  const filteredData = products.filter((product) => {
+  // ----- Filtering and Pagination -----
+  const filteredProducts = products.filter((product) => {
     const values = [
       product.serialNumber,
       product.name,
@@ -199,20 +221,19 @@ const handleRestockSubmit = async (e) => {
     );
   });
 
-  const itemsPerPageValue =
-    itemsPerPage === "All" ? filteredData.length : parseInt(itemsPerPage);
+  const totalItems = filteredProducts.length;
+  const { indexOfFirstItem, indexOfLastItem, totalPages } = usePagination({
+    totalItems,
+    itemsPerPage,
+    currentPage,
+  });
 
-  const indexOfLastItem = currentPage * itemsPerPageValue;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPageValue;
-  const currentData = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
-  const totalPages =
-    itemsPerPage === "All"
-      ? 1
-      : Math.ceil(filteredData.length / itemsPerPageValue);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+  // ----- JSX -----
   return (
     <>
       <Navpath levelOne="Products" levelTwo="Home" levelThree="Products" />
@@ -220,14 +241,8 @@ const handleRestockSubmit = async (e) => {
       <section className="content">
         <div className="container-fluid">
           <div className="mb-3">
-            <button
-              className="btn btn-primary"
-              data-toggle="modal"
-              data-target="#addProductModal"
-              onClick={resetForm}
-            >
-              <i className="fas fa-plus mr-1"></i>
-              Add Product
+            <button className="btn btn-primary" onClick={handleOpenAddModal}>
+              <i className="fas fa-plus mr-1"></i> Add Product
             </button>
           </div>
 
@@ -235,37 +250,45 @@ const handleRestockSubmit = async (e) => {
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             itemsPerPage={itemsPerPage}
-            onItemsPerPageChange={setItemsPerPage}
+            onItemsPerPageChange={(val) =>
+              setItemsPerPage(val === "All" ? totalItems : parseInt(val, 10))
+            }
           />
+
           <ProductTable
-            products={currentData}
-            onDelete={handleDelete}
+            products={currentItems}
             onEdit={handleEdit}
-            onRestock={handleRestock}
+            onDelete={handleDelete}
+            onRestock={handleOpenRestockModal}
+            statusColorMap={statusColorMap}
           />
 
           <PaginationControls
             currentPage={currentPage}
             totalPages={totalPages}
-            totalItems={filteredData.length}
+            totalItems={totalItems}
             indexOfFirstItem={indexOfFirstItem}
             indexOfLastItem={indexOfLastItem}
-            onPageChange={paginate}
+            onPageChange={setCurrentPage}
           />
         </div>
       </section>
 
       <AddProductModal
+        isOpen={showAddModal}
+        onClose={handleCloseAddModal}
         form={form}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
+        onChange={handleFormChange}
+        onSubmit={handleSubmitForm}
         isEditMode={isEditMode}
       />
 
       <RestockModal
+        show={showRestockModal}
         restockForm={restockForm}
         onChange={handleRestockChange}
         onSubmit={handleRestockSubmit}
+        onClose={handleCloseRestockModal}
       />
     </>
   );

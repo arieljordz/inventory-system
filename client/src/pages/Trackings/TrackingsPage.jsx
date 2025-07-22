@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Navpath from "../../components/common/Navpath";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
 import TrackingsTable from "../../components/trackings/TrackingsTable";
-import { getInventoryDetailsByStatus, tagInventoryForPickUp } from "../../services/inventoryDetailService";
+import {
+  getInventoryDetailsByStatus,
+  tagInventoryForPickUp,
+} from "../../services/inventoryDetailService";
 import { StatusEnum } from "../../enums/enums";
 import usePagination from "../../hooks/usePagination";
 import { toast } from "react-toastify";
+
+const groupedStatuses = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK];
 
 const statusIconMap = {
   [StatusEnum.AVAILABLE]: "ion ion-cube",
@@ -16,6 +21,7 @@ const statusIconMap = {
   [StatusEnum.RETURNED]: "ion ion-refresh",
   [StatusEnum.DELIVERED]: "ion ion-checkmark",
   [StatusEnum.COMPLETED]: "ion ion-clipboard",
+  [StatusEnum.OUT_OF_STOCK]: "ion ion-close-circled",
 };
 
 const statusColorMap = {
@@ -23,9 +29,10 @@ const statusColorMap = {
   [StatusEnum.FOR_PICK_UP]: "warning",
   [StatusEnum.TO_SHIP]: "primary",
   [StatusEnum.SHIPPING]: "success",
-  [StatusEnum.RETURNED]: "danger",
-  [StatusEnum.DELIVERED]: "secondary",
+  [StatusEnum.RETURNED]: "secondary",
+  [StatusEnum.DELIVERED]: "teal",
   [StatusEnum.COMPLETED]: "dark",
+  [StatusEnum.OUT_OF_STOCK]: "danger",
 };
 
 const TrackingsPage = () => {
@@ -34,45 +41,85 @@ const TrackingsPage = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
 
-  useEffect(() => {
-    const fetchStatusCounts = async () => {
-      const counts = {};
-      for (const status of Object.values(StatusEnum)) {
+  // Count items by status
+  const fetchStatusCounts = useCallback(async () => {
+    const counts = {};
+    await Promise.all(
+      Object.values(StatusEnum).map(async (status) => {
         try {
           const { data } = await getInventoryDetailsByStatus(status);
-          counts[status] = data.length;
+
+          // console.log("status:", status);
+          if (status === StatusEnum.AVAILABLE) {
+            // Only count products that are actually available (e.g., quantity > 0)
+            counts[status] = data.filter(
+              (item) => item.product?.quantity > 0
+            ).length;
+          } else if (status === StatusEnum.OUT_OF_STOCK) {
+            console.log(
+              "Raw data for OUT_OF_STOCK:",
+              data.map((item) => item.product)
+            );
+
+            counts[status] = data.filter(
+              (item) => item.product?.status === StatusEnum.OUT_OF_STOCK
+            ).length;
+
+            console.log("Filtered OUT_OF_STOCK count:", counts[status]);
+          } else {
+            // Default behavior for other statuses
+            counts[status] = data.length;
+          }
         } catch (err) {
-          console.error(`Failed to fetch data for ${status}`, err);
           counts[status] = 0;
         }
-      }
-      setStatusCounts(counts);
-    };
+      })
+    );
+    setStatusCounts(counts);
+  }, []);
 
-    fetchStatusCounts();
+  // Fetch inventory details for the selected status
+  const fetchDetailsByStatus = useCallback(async (status) => {
+    try {
+      const { data } = await getInventoryDetailsByStatus(status);
+      setFilteredData(data);
+      setCurrentPage(1);
+    } catch (err) {
+      toast.error("Failed to load data.");
+    }
   }, []);
 
   useEffect(() => {
-    if (!selectedStatus) return;
+    fetchStatusCounts();
+  }, [fetchStatusCounts]);
 
-    const fetchDetails = async () => {
-      try {
-        const { data } = await getInventoryDetailsByStatus(selectedStatus);
-        setFilteredData(data);
-        setCurrentPage(1);
-      } catch (err) {
-        console.error("Error fetching selected status:", err);
-        toast.error("Failed to load data.");
-      }
-    };
+  useEffect(() => {
+    if (selectedStatus) {
+      fetchDetailsByStatus(selectedStatus);
+    }
+  }, [selectedStatus, fetchDetailsByStatus]);
 
-    fetchDetails();
-  }, [selectedStatus]);
+  const handleTagForPickUp = async (detail, quantity) => {
+    try {
+      await tagInventoryForPickUp(detail.product._id, quantity);
+      toast.success("Product tagged for pick up!");
+      await fetchDetailsByStatus(selectedStatus);
+      await fetchStatusCounts();
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Failed to tag product.");
+    }
+  };
 
-  const filteredBySearch = filteredData.filter(({ product }) => {
+  // Uniform filtering by product info
+  const filteredBySearch = filteredData.filter((item) => {
+    const product = groupedStatuses.includes(selectedStatus)
+      ? item.product
+      : item.product;
+
     const search = searchTerm.toLowerCase();
+
     return (
       product?.name?.toLowerCase().includes(search) ||
       product?.serialNumber?.toLowerCase().includes(search) ||
@@ -88,51 +135,37 @@ const TrackingsPage = () => {
     currentPage,
   });
 
-  const currentItems = filteredBySearch.slice(indexOfFirstItem, indexOfLastItem);
-
-  const handleTagForPickUp = async (detail, quantity) => {
-    try {
-      await tagInventoryForPickUp(detail.product._id, quantity);
-      toast.success("Product tagged for pick up!");
-      setSelectedStatus((prev) => prev); // Re-trigger fetch
-    } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to tag product.");
-    }
-  };
+  const currentItems = filteredBySearch.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   return (
     <>
       <Navpath levelOne="Trackings" levelTwo="Home" levelThree="Trackings" />
-
       <section className="content">
         <div className="container-fluid">
           <div className="row">
-            {Object.entries(StatusEnum).map(([key, value]) => {
-              const count = statusCounts[value] || 0;
-              const icon = statusIconMap[value];
-              const color = statusColorMap[value];
-
-              return (
-                <div className="col-lg-3 col-6" key={key}>
-                  <div
-                    className={`small-box bg-${color}`}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => setSelectedStatus(value)}
-                  >
-                    <div className="inner">
-                      <h3>{count}</h3>
-                      <p>{value}</p>
-                    </div>
-                    <div className="icon">
-                      <i className={icon}></i>
-                    </div>
-                    <div className="small-box-footer text-white">
-                      Click to view <i className="fas fa-arrow-circle-right"></i>
-                    </div>
+            {Object.entries(StatusEnum).map(([key, value]) => (
+              <div className="col-lg-3 col-6" key={key}>
+                <div
+                  className={`small-box bg-${statusColorMap[value]}`}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setSelectedStatus(value)}
+                >
+                  <div className="inner">
+                    <h3>{statusCounts[value] || 0}</h3>
+                    <p>{value}</p>
+                  </div>
+                  <div className="icon">
+                    <i className={statusIconMap[value]}></i>
+                  </div>
+                  <div className="small-box-footer text-white">
+                    Click to view <i className="fas fa-arrow-circle-right"></i>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
           {selectedStatus && (
@@ -142,23 +175,27 @@ const TrackingsPage = () => {
                 onSearchChange={setSearchTerm}
                 itemsPerPage={itemsPerPage}
                 onItemsPerPageChange={(value) =>
-                  setItemsPerPage(value === "All" ? filteredBySearch.length : Number(value))
+                  setItemsPerPage(
+                    value === "All" ? filteredBySearch.length : Number(value)
+                  )
                 }
               />
 
               <TrackingsTable
                 products={currentItems}
                 selectedStatus={selectedStatus}
-                refreshData={() => setSelectedStatus((prev) => prev)}
+                refreshData={() => fetchDetailsByStatus(selectedStatus)}
                 onTagForPickUp={handleTagForPickUp}
+                statusColorMap={statusColorMap}
               />
 
               <PaginationControls
                 currentPage={currentPage}
                 totalPages={totalPages}
-                itemsPerPage={itemsPerPage}
+                totalItems={filteredBySearch.length}
+                indexOfFirstItem={indexOfFirstItem}
+                indexOfLastItem={indexOfLastItem}
                 onPageChange={setCurrentPage}
-                onItemsPerPageChange={setItemsPerPage}
               />
             </>
           )}

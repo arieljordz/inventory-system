@@ -7,6 +7,7 @@ const Dashboard = () => {
     totalProducts: 0,
     totalQuantity: 0,
     forPickUp: 0,
+    outOfStock: 0, // ✅ Added outOfStock
   });
 
   useEffect(() => {
@@ -43,9 +44,9 @@ const Dashboard = () => {
     },
     {
       color: "danger",
-      count: new Date().toLocaleDateString(),
-      label: "Last Updated",
-      icon: "ion ion-calendar",
+      count: stats.outOfStock, // ✅ Out of Stock count
+      label: "Out of Stock",
+      icon: "ion ion-close-circled",
     },
   ];
 

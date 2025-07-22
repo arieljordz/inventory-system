@@ -1,50 +1,49 @@
 import React, { useState } from "react";
-import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
+import { StatusEnum } from "../../enums/enums";
+import AddQuantityModal from "./AddQuantityModal";
 
-const TrackingsTable = ({ products = [], selectedStatus, onTagForPickUp }) => {
+const TrackingsTable = ({
+  products = [],
+  selectedStatus,
+  onTagForPickUp,
+  statusColorMap,
+}) => {
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [pickupQuantity, setPickupQuantity] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  // Helper functions
-  const getQuantity = (obj) => {
-    const statusesFromObj = [
-      StatusEnum.FOR_PICK_UP,
-      StatusEnum.TO_SHIP,
-      StatusEnum.SHIPPING,
-      StatusEnum.RETURNED,
-      StatusEnum.DELIVERED,
-      StatusEnum.COMPLETED,
-    ];
-    return statusesFromObj.includes(selectedStatus)
-      ? obj.quantity
-      : obj.product.quantity;
+  const isProductBased = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK].includes(
+    selectedStatus
+  );
+
+  /** Get base product object */
+  const getProduct = (item) => {
+    return isProductBased ? item.product || {} : item.product || item;
   };
 
-  const getStatus = (obj) => {
-    const statusesFromObj = [
-      StatusEnum.FOR_PICK_UP,
-      StatusEnum.TO_SHIP,
-      StatusEnum.SHIPPING,
-      StatusEnum.RETURNED,
-      StatusEnum.DELIVERED,
-      StatusEnum.COMPLETED,
-    ];
-    return statusesFromObj.includes(selectedStatus)
-      ? obj.status
-      : obj.product.status;
+  /** Get quantity depending on status */
+  const getQuantity = (item) => {
+    const product = getProduct(item);
+    return isProductBased ? product.quantity || 0 : item.quantity || 0;
   };
 
-  const isTagged = (obj) => {
-    const currentStatus = getStatus(obj);
-    return (
-      currentStatus === StatusEnum.FOR_PICK_UP ||
-      currentStatus === StatusEnum.TO_SHIP
-    );
+  /** Get status from product */
+  const getStatus = (item) => {
+    if (isProductBased) {
+      const product = getProduct(item);
+      return product.status || "-";
+    } else {
+      return item.status || "-";
+    }
   };
 
-  const handleOpenModal = (product) => {
-    setSelectedProduct(product);
+  const isTagged = (item) => {
+    const status = getStatus(item);
+    return [StatusEnum.FOR_PICK_UP, StatusEnum.TO_SHIP].includes(status);
+  };
+
+  const handleOpenModal = (item) => {
+    setSelectedProduct(item);
     setPickupQuantity("");
     setShowModal(true);
   };
@@ -56,14 +55,13 @@ const TrackingsTable = ({ products = [], selectedStatus, onTagForPickUp }) => {
   };
 
   const handleConfirmPickup = () => {
-    if (
-      selectedProduct &&
-      typeof onTagForPickUp === "function" &&
-      Number(pickupQuantity) > 0 &&
-      Number(pickupQuantity) <= getQuantity(selectedProduct)
-    ) {
-      onTagForPickUp(selectedProduct, Number(pickupQuantity));
+    const qty = Number(pickupQuantity);
+    const maxQty = getQuantity(selectedProduct);
+
+    if (qty > 0 && qty <= maxQty && typeof onTagForPickUp === "function") {
+      onTagForPickUp(selectedProduct, qty);
     }
+
     handleCloseModal();
   };
 
@@ -76,6 +74,7 @@ const TrackingsTable = ({ products = [], selectedStatus, onTagForPickUp }) => {
             <span className="text-primary">{selectedStatus}</span>
           </h3>
         </div>
+
         <div className="card-body table-responsive p-0">
           <table className="table table-bordered table-hover mb-0">
             <thead>
@@ -101,103 +100,72 @@ const TrackingsTable = ({ products = [], selectedStatus, onTagForPickUp }) => {
                   </td>
                 </tr>
               ) : (
-                products.map((obj, index) => (
-                  <tr key={obj._id}>
-                    <td className="text-center">{index + 1}</td>
-                    <td className="text-center">
-                      {obj.product.serialNumber || "-"}
-                    </td>
-                    <td className="text-center">{obj.product.name || "-"}</td>
-                    <td className="text-right">
-                      ₱{parseFloat(obj.product.price * getQuantity(obj) || 0).toFixed(2)}
-                    </td>
-                    <td className="text-center">{obj.product.description || "-"}</td>
-                    <td className="text-center">{getQuantity(obj)}</td>
-                    <td className="text-center">
-                      {obj.product.createdAt
-                        ? new Date(obj.product.createdAt).toLocaleDateString()
-                        : "-"}
-                    </td>
-                    <td className="text-center">
-                      <span className="badge badge-info">{getStatus(obj)}</span>
-                    </td>
-                    <td className="text-center">
-                      <button
-                        className="btn btn-sm btn-primary"
-                        onClick={() => handleOpenModal(obj)}
-                        title="Mark as For Pick Up"
-                        disabled={isTagged(obj)}
-                      >
-                        <i className="fas fa-truck-loading mr-1"></i>
-                        {isTagged(obj) ? "Tagged" : "Pick Up"}
-                      </button>
-                    </td>
-                  </tr>
-                ))
+                products.map((item, index) => {
+                  const product = getProduct(item);
+                  const quantity = getQuantity(item);
+                  const status = getStatus(item);
+                  const badgeColor = statusColorMap?.[status] || "secondary";
+                  const createdAt = product.createdAt
+                    ? new Date(product.createdAt).toLocaleDateString()
+                    : "-";
+
+                  const priceDisplay = isProductBased
+                    ? parseFloat(product.price || 0).toFixed(2)
+                    : parseFloat((product.price || 0) * quantity).toFixed(2);
+
+                  return (
+                    <tr key={item._id}>
+                      <td className="text-center">{index + 1}</td>
+                      <td className="text-center">
+                        {product.serialNumber || "-"}
+                      </td>
+                      <td className="text-center">{product.name || "-"}</td>
+                      <td className="text-right">₱{priceDisplay}</td>
+                      <td className="text-center">
+                        {product.description || "-"}
+                      </td>
+                      <td className="text-center">{quantity}</td>
+                      <td className="text-center">{createdAt}</td>
+                      <td className="text-center">
+                        <span className={`badge badge-${badgeColor}`}>
+                          {status}
+                        </span>
+                      </td>
+                      <td className="text-center">
+                        <button
+                          className="btn btn-sm btn-primary"
+                          onClick={() => handleOpenModal(item)}
+                          title={
+                            isTagged(item)
+                              ? "Already tagged"
+                              : quantity <= 0
+                              ? "Out of stock"
+                              : "Tag for Pick Up"
+                          }
+                          disabled={isTagged(item) || quantity <= 0}
+                        >
+                          <i className="fas fa-truck-loading mr-1"></i>
+                          {isTagged(item) ? "Tagged" : "Pick Up"}
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
               )}
             </tbody>
           </table>
         </div>
       </div>
 
-      {/* Modal */}
-      {showModal && (
-        <div
-          className="modal d-block"
-          tabIndex="-1"
-          role="dialog"
-          style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
-        >
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Enter Quantity for Pick Up</h5>
-                <button
-                  type="button"
-                  className="close"
-                  onClick={handleCloseModal}
-                >
-                  <span>&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>
-                  <strong>{selectedProduct?.product?.name}</strong> <br />
-                  Available Quantity: {getQuantity(selectedProduct)}
-                </p>
-                <input
-                  type="number"
-                  className="form-control"
-                  value={pickupQuantity}
-                  onChange={(e) => setPickupQuantity(e.target.value)}
-                  placeholder="Enter quantity"
-                  min={1}
-                  max={getQuantity(selectedProduct)}
-                />
-              </div>
-              <div className="modal-footer">
-                <button
-                  className="btn btn-secondary"
-                  onClick={handleCloseModal}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="btn btn-primary"
-                  onClick={handleConfirmPickup}
-                  disabled={
-                    !pickupQuantity ||
-                    Number(pickupQuantity) <= 0 ||
-                    Number(pickupQuantity) > getQuantity(selectedProduct)
-                  }
-                >
-                  Confirm
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <AddQuantityModal
+        show={showModal}
+        selectedProduct={selectedProduct}
+        pickupQuantity={pickupQuantity}
+        setPickupQuantity={setPickupQuantity}
+        getQuantity={getQuantity}
+        handleConfirmPickup={handleConfirmPickup}
+        onClose={handleCloseModal}
+      />
     </>
   );
 };

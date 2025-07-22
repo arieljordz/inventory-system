@@ -168,7 +168,6 @@ export const restockProduct = async (req, res) => {
   try {
     const { productId } = req.params;
     let { quantity, remarks = "Restock" } = req.body;
-    // console.log("Body received at backend:", req.body);
 
     quantity = parseInt(quantity, 10);
     if (!quantity || quantity <= 0) {
@@ -180,9 +179,17 @@ export const restockProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
+    // Update quantity
     product.quantity += quantity;
+
+    // Update status if quantity >= 1
+    if (product.quantity >= 1 && product.status !== StatusEnum.AVAILABLE) {
+      product.status = StatusEnum.AVAILABLE;
+    }
+
     await product.save();
 
+    // Log the restock
     await InventoryDetail.create({
       product: product._id,
       movementType: MovementTypeEnum.IN,
@@ -211,14 +218,19 @@ export const getProductStats = async (req, res) => {
     // Count inventory records with "FOR_PICKUP" status
     const forPickUp = await InventoryDetail.countDocuments({ status: StatusEnum.FOR_PICK_UP });
 
+    // ✅ Count products with quantity <= 0 (out of stock)
+    const outOfStock = await Product.countDocuments({ quantity: { $lte: 0 } });
+
     res.json({
       totalProducts,
       totalQuantity: totalQuantityResult[0]?.total || 0,
       forPickUp,
+      outOfStock, // ✅ Added to response
     });
   } catch (error) {
     console.error("Get Product Stats Error:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
 
