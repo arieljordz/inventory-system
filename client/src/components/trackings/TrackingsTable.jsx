@@ -109,7 +109,7 @@ const TrackingsTable = ({ products = [], selectedStatus, onTagForPickUp }) => {
                     </td>
                     <td className="text-center">{obj.product.name || "-"}</td>
                     <td className="text-right">
-                      ₱{parseFloat(obj.product.price || 0).toFixed(2)}
+                      ₱{parseFloat(obj.product.price * getQuantity(obj) || 0).toFixed(2)}
                     </td>
                     <td className="text-center">{obj.product.description || "-"}</td>
                     <td className="text-center">{getQuantity(obj)}</td>

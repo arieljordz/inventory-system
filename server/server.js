@@ -10,6 +10,7 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js"; 
 import inventoryDetailRoutes from "./routes/inventoryDetailRoutes.js"; 
+import reportRoutes from "./routes/reportRoutes.js";
 
 // Initialize Express app
 const app = express();
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/inventory-details", inventoryDetailRoutes);
+app.use("/api/reports", reportRoutes);
 
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));

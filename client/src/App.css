@@ -51,3 +51,34 @@ body.dark-mode .btn-close {
   filter: invert(1); /* Invert close button color for dark background */
 }
 
+body.dark-mode select.form-control {
+  background-color: #2c2c3e;
+  color: #ffffff;
+  border: 1px solid #6c757d;
+  appearance: auto;
+}
+
+select.form-control {
+  appearance: auto;
+  -webkit-appearance: auto;
+  -moz-appearance: auto;
+  background-color: #ffffff;
+  color: #212529;
+  border: 1px solid #ced4da;
+}
+
+/* Light mode placeholders */
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+  color: #6c757d;
+  opacity: 1; /* Ensure full opacity for consistency */
+}
+
+/* Dark mode placeholders */
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder,
+body.dark-mode select::placeholder {
+  color: #cfcfcf;
+  opacity: 1;
+}
