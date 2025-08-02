@@ -1,22 +1,27 @@
 import Product from "../models/Product.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
+import cloudinary from "../config/cloudinary.js";
 
-// @desc    Add a new product
-// @route   POST /api/products
-// @access  Public or Protected
 export const addProduct = async (req, res) => {
   try {
     const { serialNumber, name, price, description, quantity = 0 } = req.body;
-    let imageUrl = "";
 
     const existingProduct = await Product.findOne({ serialNumber });
     if (existingProduct) {
       return res.status(400).json({ message: "Serial number already exists" });
     }
 
+    // Upload proof image if present
+    let imageUrl = null;
+    let imageId = null;
+
     if (req.file) {
-      imageUrl = req.file.path; // Cloudinary path from multer
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "products",
+      });
+      imageUrl = result.secure_url;
+      imageId = result.public_id;
     }
 
     const newProduct = new Product({
@@ -25,6 +30,7 @@ export const addProduct = async (req, res) => {
       price,
       description,
       image: imageUrl,
+      imageId: imageId,
       quantity,
     });
 
@@ -48,9 +54,6 @@ export const addProduct = async (req, res) => {
   }
 };
 
-// @desc    Get all products
-// @route   GET /api/products
-// @access  Public
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.find().sort({ createdAt: -1 });
@@ -61,9 +64,6 @@ export const getProducts = async (req, res) => {
   }
 };
 
-// @desc    Get products by status
-// @route   GET /api/products/status/:status
-// @access  Public
 export const getProductsByStatus = async (req, res) => {
   try {
     const { status } = req.params;
@@ -77,9 +77,6 @@ export const getProductsByStatus = async (req, res) => {
   }
 };
 
-// @desc    Get product by ID
-// @route   GET /api/products/:id
-// @access  Public
 export const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -92,17 +89,17 @@ export const getProductById = async (req, res) => {
   }
 };
 
-// @desc    Update a product
-// @route   PUT /api/products/:id
 export const updateProduct = async (req, res) => {
   try {
-    const { serialNumber, quantity } = req.body;
+    const { serialNumber } = req.body;
     const productId = req.params.id;
 
     const product = await Product.findById(productId);
-    if (!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
-    // Prevent duplicate serial numbers
+    // Check for duplicate serial number
     const existing = await Product.findOne({
       serialNumber,
       _id: { $ne: productId },
@@ -111,31 +108,33 @@ export const updateProduct = async (req, res) => {
       return res.status(400).json({ message: "Serial number already exists" });
     }
 
-    // Optionally log inventory changes if quantity has changed
-    const quantityChanged =
-      quantity !== undefined && quantity !== product.quantity;
+    // Remove quantity from body to prevent manual updates
+    const { quantity, ...updateFields } = req.body;
+
+    // Handle new image upload
+    if (req.file) {
+      // Delete old image if it exists
+      if (product.imageId) {
+        await cloudinary.uploader.destroy(product.imageId);
+      }
+
+      // Upload new image
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "products",
+      });
+
+      updateFields.image = result.secure_url;
+      updateFields.imageId = result.public_id;
+    }
 
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
-      req.body,
+      updateFields,
       {
         new: true,
         runValidators: true,
       }
     );
-
-    // Log inventory movement (IN/OUT) if quantity changed
-    if (quantityChanged) {
-      const movementType = quantity > product.quantity ? MovementTypeEnum.IN : MovementTypeEnum.OUT;
-      const quantityDiff = Math.abs(quantity - product.quantity);
-
-      await InventoryDetail.create({
-        product: updatedProduct._id,
-        movementType,
-        quantity: quantityDiff,
-        remarks: `Quantity ${movementType.toLowerCase()} during update`,
-      });
-    }
 
     res.status(200).json(updatedProduct);
   } catch (error) {
@@ -144,16 +143,22 @@ export const updateProduct = async (req, res) => {
   }
 };
 
-// @desc    Delete a product
-// @route   DELETE /api/products/:id
 export const deleteProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
 
-    await product.remove();
+    // Delete image from Cloudinary if it exists
+    if (product.imageId) {
+      await cloudinary.uploader.destroy(product.imageId);
+    }
 
-    // Optional: Remove associated inventory records
+    // Delete the product
+    await Product.deleteOne({ _id: req.params.id });
+
+    // Optional: Delete related inventory details
     await InventoryDetail.deleteMany({ product: req.params.id });
 
     res.status(200).json({ message: "Product deleted successfully" });
@@ -163,7 +168,6 @@ export const deleteProduct = async (req, res) => {
   }
 };
 
-
 export const restockProduct = async (req, res) => {
   try {
     const { productId } = req.params;
@@ -171,7 +175,9 @@ export const restockProduct = async (req, res) => {
 
     quantity = parseInt(quantity, 10);
     if (!quantity || quantity <= 0) {
-      return res.status(400).json({ message: "Quantity must be a number greater than zero" });
+      return res
+        .status(400)
+        .json({ message: "Quantity must be a number greater than zero" });
     }
 
     const product = await Product.findById(productId);
@@ -216,7 +222,9 @@ export const getProductStats = async (req, res) => {
     ]);
 
     // Count inventory records with "FOR_PICKUP" status
-    const forPickUp = await InventoryDetail.countDocuments({ status: StatusEnum.FOR_PICK_UP });
+    const forPickUp = await InventoryDetail.countDocuments({
+      status: StatusEnum.FOR_PICK_UP,
+    });
 
     // ✅ Count products with quantity <= 0 (out of stock)
     const outOfStock = await Product.countDocuments({ quantity: { $lte: 0 } });
@@ -232,5 +240,3 @@ export const getProductStats = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-

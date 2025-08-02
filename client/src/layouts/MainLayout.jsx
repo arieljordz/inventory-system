@@ -12,7 +12,7 @@ const MainLayout = () => {
 
       <div className="content-wrapper">
         <div className="content pt-3">
-          <div className="container-fluid pt-5 pb-3">
+          <div className="container-fluid pt-5 pb-5">
             <Outlet />
           </div>
         </div>

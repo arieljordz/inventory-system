@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import Navpath from "../../components/common/Navpath";
-import InventoryTable from "../../components/inventory/InventoryTable";
+import InventoryTable from "./InventoryTable";
 import {
   getInventoryStats,
   getInventoryMovements,
@@ -9,18 +9,21 @@ import {
 import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
-import usePagination from "../../hooks/usePagination";
 
 const InventoryPage = () => {
   const today = new Date().toISOString().split("T")[0];
 
-  const [dateRange, setDateRange] = useState({ startDate: today, endDate: today });
+  const [dateRange, setDateRange] = useState({
+    startDate: today,
+    endDate: today,
+  });
   const [stats, setStats] = useState({ remaining: 0, totalIn: 0, totalOut: 0 });
-  const [movements, setMovements] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
   const [remainingPerProduct, setRemainingPerProduct] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [paginatedItems, setPaginatedItems] = useState([]);
 
   const fetchData = async () => {
     try {
@@ -31,18 +34,22 @@ const InventoryPage = () => {
         getRemainingPerProduct(),
       ]);
 
-      const totals = computeTotalsByRange(movementsRes.data, startDate, endDate);
+      const totals = computeTotalsByRange(
+        movementsRes.data,
+        startDate,
+        endDate
+      );
 
       setStats({ remaining: statsRes.data.remaining, ...totals });
-      setMovements(movementsRes.data);
+      setFilteredData(movementsRes.data);
       setRemainingPerProduct(remainingRes.data);
     } catch (err) {
       console.error("Failed to fetch inventory data", err);
     }
   };
 
-  const computeTotalsByRange = (movements, startDate, endDate) => {
-    const filtered = movements.filter((m) => {
+  const computeTotalsByRange = (filteredData, startDate, endDate) => {
+    const filtered = filteredData.filter((m) => {
       const movementDate = new Date(m.createdAt).toISOString().split("T")[0];
       return movementDate >= startDate && movementDate <= endDate;
     });
@@ -58,33 +65,32 @@ const InventoryPage = () => {
     return { totalIn, totalOut };
   };
 
-  const filteredMovements = movements.filter((m) => {
-    const values = [
-      m.product?.name,
-      m.product?.serialNumber,
-      m.movementType,
-      m.quantity,
-    ];
-    return values.some((val) =>
-      String(val).toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
+  const filteredBySearch = useMemo(() => {
+    return filteredData.filter((m) => {
+      const product = m.product || {};
+      const searchableFields = ["name", "serialNumber"];
+      const otherFields = [m.movementType, m.quantity];
 
-  const pagination = usePagination({
-    totalItems: filteredMovements.length,
-    itemsPerPage: itemsPerPage === "All" ? filteredMovements.length : parseInt(itemsPerPage),
-    currentPage,
-  });
+      const matchesProductFields = searchableFields.some((field) =>
+        String(product[field] || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      );
 
-  const currentData = filteredMovements.slice(
-    pagination.indexOfFirstItem,
-    pagination.indexOfLastItem
-  );
+      const matchesOtherFields = otherFields.some((field) =>
+        String(field || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      );
 
-  const totalRemainingQty = remainingPerProduct.reduce(
-    (sum, item) => sum + item.quantity,
-    0
-  );
+      return matchesProductFields || matchesOtherFields;
+    });
+  }, [filteredData, searchTerm]);
+
+  const handleItemsPerPageChange = useCallback((val) => {
+    setItemsPerPage(val);
+    setCurrentPage(1);
+  }, []);
 
   return (
     <>
@@ -93,10 +99,30 @@ const InventoryPage = () => {
         <div className="container-fluid">
           {/* Info Boxes */}
           <div className="row">
-            <InfoBox icon="fas fa-layer-group" label="Unique Products" value={remainingPerProduct.length} color="primary" />
-            <InfoBox icon="fas fa-boxes" label="Remaining Qty (Total)" value={totalRemainingQty} color="info" />
-            <InfoBox icon="fas fa-arrow-circle-down" label="Total In" value={stats.totalIn} color="success" />
-            <InfoBox icon="fas fa-arrow-circle-up" label="Total Out" value={stats.totalOut} color="danger" />
+            <InfoBox
+              icon="fas fa-layer-group"
+              label="Unique Products"
+              value={remainingPerProduct.length}
+              color="primary"
+            />
+            <InfoBox
+              icon="fas fa-boxes"
+              label="Remaining Qty (Total)"
+              value={remainingPerProduct.length}
+              color="info"
+            />
+            <InfoBox
+              icon="fas fa-arrow-circle-down"
+              label="Total In"
+              value={stats.totalIn}
+              color="success"
+            />
+            <InfoBox
+              icon="fas fa-arrow-circle-up"
+              label="Total Out"
+              value={stats.totalOut}
+              color="danger"
+            />
           </div>
 
           {/* Date Filter */}
@@ -107,7 +133,12 @@ const InventoryPage = () => {
                 type="date"
                 className="form-control"
                 value={dateRange.startDate}
-                onChange={(e) => setDateRange((prev) => ({ ...prev, startDate: e.target.value }))}
+                onChange={(e) =>
+                  setDateRange((prev) => ({
+                    ...prev,
+                    startDate: e.target.value,
+                  }))
+                }
               />
             </div>
             <div className="col-md-3">
@@ -116,7 +147,9 @@ const InventoryPage = () => {
                 type="date"
                 className="form-control"
                 value={dateRange.endDate}
-                onChange={(e) => setDateRange((prev) => ({ ...prev, endDate: e.target.value }))}
+                onChange={(e) =>
+                  setDateRange((prev) => ({ ...prev, endDate: e.target.value }))
+                }
               />
             </div>
             <div className="col-md-2">
@@ -127,30 +160,27 @@ const InventoryPage = () => {
           </div>
 
           {/* Search + Items Per Page */}
+
           <SearchBar
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             itemsPerPage={itemsPerPage}
-            onItemsPerPageChange={(value) => {
-              setItemsPerPage(value);
-              setCurrentPage(1);
-            }}
+            onItemsPerPageChange={handleItemsPerPageChange}
           />
 
           {/* Inventory Table */}
           <InventoryTable
-            data={currentData}
+            data={paginatedItems}
             remainingPerProduct={remainingPerProduct}
           />
 
           {/* Pagination */}
           <PaginationControls
+            data={filteredBySearch}
             currentPage={currentPage}
-            totalPages={pagination.totalPages}
-            totalItems={filteredMovements.length}
-            indexOfFirstItem={pagination.indexOfFirstItem}
-            indexOfLastItem={pagination.indexOfLastItem}
+            itemsPerPage={itemsPerPage}
             onPageChange={setCurrentPage}
+            onPaginatedDataChange={setPaginatedItems}
           />
         </div>
       </section>

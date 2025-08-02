@@ -5,9 +5,6 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-// Context
-import { ThemeProvider } from "./context/ThemeContext";
-
 // Layout
 import MainLayout from "./layouts/MainLayout";
 
@@ -24,28 +21,26 @@ const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 function App() {
   return (
-    <ThemeProvider>
-      <GoogleOAuthProvider clientId={API_KEY}>
-        <BrowserRouter>
-          <Routes>
-            {/* Login page without layout */}
-            <Route path="/" element={<LoginPage />} />
+    <GoogleOAuthProvider clientId={API_KEY}>
+      <BrowserRouter>
+        <Routes>
+          {/* Login page without layout */}
+          <Route path="/" element={<LoginPage />} />
 
-            {/* Pages with layout */}
-            <Route element={<MainLayout />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/products" element={<ProductsPage />} />
-              <Route path="/trackings" element={<TrackingsPage />} />
-              <Route path="/inventory" element={<InventoryPage />} />
-              <Route path="/sales" element={<SalesPage />} />
-              <Route path="/reports" element={<ReportsPage />} />
-            </Route>
-          </Routes>
+          {/* Pages with layout */}
+          <Route element={<MainLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/trackings" element={<TrackingsPage />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/sales" element={<SalesPage />} />
+            <Route path="/reports" element={<ReportsPage />} />
+          </Route>
+        </Routes>
 
-          <ToastContainer position="top-right" autoClose={2000} />
-        </BrowserRouter>
-      </GoogleOAuthProvider>
-    </ThemeProvider>
+        <ToastContainer position="top-right" autoClose={2000} />
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   );
 }
 

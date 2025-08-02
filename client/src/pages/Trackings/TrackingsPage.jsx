@@ -1,15 +1,14 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import Navpath from "../../components/common/Navpath";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
-import TrackingsTable from "../../components/trackings/TrackingsTable";
 import {
   getInventoryDetailsByStatus,
   tagInventoryForPickUp,
 } from "../../services/inventoryDetailService";
 import { StatusEnum } from "../../enums/enums";
-import usePagination from "../../hooks/usePagination";
 import { toast } from "react-toastify";
+import TrackingsTable from "./TrackingsTable";
 
 const groupedStatuses = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK];
 
@@ -42,6 +41,7 @@ const TrackingsPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [paginatedItems, setPaginatedItems] = useState([]);
 
   // Count items by status
   const fetchStatusCounts = useCallback(async () => {
@@ -58,16 +58,11 @@ const TrackingsPage = () => {
               (item) => item.product?.quantity > 0
             ).length;
           } else if (status === StatusEnum.OUT_OF_STOCK) {
-            console.log(
-              "Raw data for OUT_OF_STOCK:",
-              data.map((item) => item.product)
-            );
-
             counts[status] = data.filter(
               (item) => item.product?.status === StatusEnum.OUT_OF_STOCK
             ).length;
 
-            console.log("Filtered OUT_OF_STOCK count:", counts[status]);
+            // console.log("Filtered OUT_OF_STOCK count:", counts[status]);
           } else {
             // Default behavior for other statuses
             counts[status] = data.length;
@@ -112,33 +107,24 @@ const TrackingsPage = () => {
     }
   };
 
-  // Uniform filtering by product info
-  const filteredBySearch = filteredData.filter((item) => {
-    const product = groupedStatuses.includes(selectedStatus)
-      ? item.product
-      : item.product;
+  // Filtered products
+  const filteredBySearch = useMemo(() => {
+    return filteredData.filter((item) => {
+      const product = item.product || {};
+      const searchableFields = ["name", "serialNumber", "description", "sku"];
 
-    const search = searchTerm.toLowerCase();
+      return searchableFields.some((field) =>
+        String(product[field] || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      );
+    });
+  }, [filteredData, searchTerm]);
 
-    return (
-      product?.name?.toLowerCase().includes(search) ||
-      product?.serialNumber?.toLowerCase().includes(search) ||
-      product?.description?.toLowerCase().includes(search) ||
-      product?.sku?.toLowerCase().includes(search)
-    );
-  });
-
-  const totalItems = filteredBySearch.length;
-  const { indexOfFirstItem, indexOfLastItem, totalPages } = usePagination({
-    totalItems,
-    itemsPerPage,
-    currentPage,
-  });
-
-  const currentItems = filteredBySearch.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
+  const handleItemsPerPageChange = useCallback((val) => {
+    setItemsPerPage(val);
+    setCurrentPage(1);
+  }, []);
 
   return (
     <>
@@ -174,15 +160,11 @@ const TrackingsPage = () => {
                 searchTerm={searchTerm}
                 onSearchChange={setSearchTerm}
                 itemsPerPage={itemsPerPage}
-                onItemsPerPageChange={(value) =>
-                  setItemsPerPage(
-                    value === "All" ? filteredBySearch.length : Number(value)
-                  )
-                }
+                onItemsPerPageChange={handleItemsPerPageChange}
               />
 
               <TrackingsTable
-                products={currentItems}
+                products={paginatedItems}
                 selectedStatus={selectedStatus}
                 refreshData={() => fetchDetailsByStatus(selectedStatus)}
                 onTagForPickUp={handleTagForPickUp}
@@ -190,12 +172,11 @@ const TrackingsPage = () => {
               />
 
               <PaginationControls
+                data={filteredBySearch}
                 currentPage={currentPage}
-                totalPages={totalPages}
-                totalItems={filteredBySearch.length}
-                indexOfFirstItem={indexOfFirstItem}
-                indexOfLastItem={indexOfLastItem}
+                itemsPerPage={itemsPerPage}
                 onPageChange={setCurrentPage}
+                onPaginatedDataChange={setPaginatedItems}
               />
             </>
           )}

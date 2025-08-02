@@ -1,6 +1,7 @@
 import InventoryDetail from "../models/InventoryDetail.js";
 import Product from "../models/Product.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
+import moment from "moment-timezone";
 
 // GET /api/inventory/remaining-by-product
 export const getRemainingQuantities = async (req, res) => {
@@ -58,22 +59,12 @@ export const getInventoryStats = async (req, res) => {
   const { start, end } = req.query;
 
   try {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
+    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
+    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
 
-    // Validate dates
-    if (isNaN(startDate) || isNaN(endDate)) {
-      return res.status(400).json({ message: "Invalid date range" });
-    }
-
-    // Normalize end date to end of day
-    endDate.setHours(23, 59, 59, 999);
-
-    // Remaining = sum of all available product quantities
     const products = await Product.find({});
     const remaining = products.reduce((sum, prod) => sum + (prod.quantity || 0), 0);
 
-    // Movements within range
     const movements = await InventoryDetail.find({
       createdAt: { $gte: startDate, $lte: endDate },
     });
@@ -93,21 +84,18 @@ export const getInventoryStats = async (req, res) => {
   }
 };
 
-
 // GET /api/inventory-details/movements?start=YYYY-MM-DD&end=YYYY-MM-DD
 export const getInventoryMovements = async (req, res) => {
   const { start, end } = req.query;
 
   try {
-    const startDate = new Date(start);
-    const endDate = new Date(end);
+    // Convert PH time (Asia/Manila) to UTC
+    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
+    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
 
     if (isNaN(startDate) || isNaN(endDate)) {
       return res.status(400).json({ message: "Invalid date range" });
     }
-
-    // Normalize end date
-    endDate.setHours(23, 59, 59, 999);
 
     const movements = await InventoryDetail.find({
       createdAt: { $gte: startDate, $lte: endDate },
@@ -121,7 +109,6 @@ export const getInventoryMovements = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
 
 export const tagForPickUp = async (req, res) => {
   try {

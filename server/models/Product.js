@@ -24,6 +24,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    imageId: {
+      type: String,
+      default: "",
+    },
     quantity: {
       type: Number,
       default: 0,

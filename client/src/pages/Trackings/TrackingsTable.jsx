@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StatusEnum } from "../../enums/enums";
+import { formatAmount, formatDate } from "../../utils/commonUtils";
 import AddQuantityModal from "./AddQuantityModal";
 
 const TrackingsTable = ({
@@ -12,57 +13,41 @@ const TrackingsTable = ({
   const [pickupQuantity, setPickupQuantity] = useState("");
   const [showModal, setShowModal] = useState(false);
 
-  const isProductBased = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK].includes(
-    selectedStatus
-  );
+  const isProductBased = [
+    StatusEnum.AVAILABLE,
+    StatusEnum.OUT_OF_STOCK,
+  ].includes(selectedStatus);
 
-  /** Get base product object */
-  const getProduct = (item) => {
-    return isProductBased ? item.product || {} : item.product || item;
-  };
+  // Helpers
+  const getProduct = (item) =>
+    isProductBased ? item.product || {} : item.product || item;
+  const getQuantity = (item) =>
+    isProductBased ? getProduct(item).quantity || 0 : item.quantity || 0;
+  const getStatus = (item) =>
+    isProductBased ? getProduct(item).status || "-" : item.status || "-";
+  const isTagged = (item) =>
+    [StatusEnum.FOR_PICK_UP, StatusEnum.TO_SHIP].includes(getStatus(item));
 
-  /** Get quantity depending on status */
-  const getQuantity = (item) => {
-    const product = getProduct(item);
-    return isProductBased ? product.quantity || 0 : item.quantity || 0;
-  };
-
-  /** Get status from product */
-  const getStatus = (item) => {
-    if (isProductBased) {
-      const product = getProduct(item);
-      return product.status || "-";
-    } else {
-      return item.status || "-";
-    }
-  };
-
-  const isTagged = (item) => {
-    const status = getStatus(item);
-    return [StatusEnum.FOR_PICK_UP, StatusEnum.TO_SHIP].includes(status);
-  };
-
-  const handleOpenModal = (item) => {
+  // Modal handlers
+  const openModal = (item) => {
     setSelectedProduct(item);
     setPickupQuantity("");
     setShowModal(true);
   };
 
-  const handleCloseModal = () => {
+  const closeModal = () => {
     setSelectedProduct(null);
     setPickupQuantity("");
     setShowModal(false);
   };
 
-  const handleConfirmPickup = () => {
+  const confirmPickup = () => {
     const qty = Number(pickupQuantity);
     const maxQty = getQuantity(selectedProduct);
-
     if (qty > 0 && qty <= maxQty && typeof onTagForPickUp === "function") {
       onTagForPickUp(selectedProduct, qty);
     }
-
-    handleCloseModal();
+    closeModal();
   };
 
   return (
@@ -79,9 +64,7 @@ const TrackingsTable = ({
           <table className="table table-bordered table-hover mb-0">
             <thead>
               <tr>
-                <th className="text-center" style={{ width: "50px" }}>
-                  #
-                </th>
+                <th className="text-center p-1">#</th>
                 <th className="text-center">Serial Number</th>
                 <th className="text-center">Name</th>
                 <th className="text-right">Price</th>
@@ -105,27 +88,30 @@ const TrackingsTable = ({
                   const quantity = getQuantity(item);
                   const status = getStatus(item);
                   const badgeColor = statusColorMap?.[status] || "secondary";
-                  const createdAt = product.createdAt
-                    ? new Date(product.createdAt).toLocaleDateString()
-                    : "-";
+                  const isAlreadyTagged = isTagged(item);
 
-                  const priceDisplay = isProductBased
-                    ? parseFloat(product.price || 0).toFixed(2)
-                    : parseFloat((product.price || 0) * quantity).toFixed(2);
+                  const price = isProductBased
+                    ? parseFloat(product.price || 0)
+                    : parseFloat((product.price || 0) * quantity);
+                  const priceDisplay = formatAmount(price.toFixed(2));
 
                   return (
-                    <tr key={item._id}>
-                      <td className="text-center">{index + 1}</td>
+                    <tr key={index}>
+                      <td className="text-center align-middle p-2">
+                        {index + 1}
+                      </td>
                       <td className="text-center">
                         {product.serialNumber || "-"}
                       </td>
                       <td className="text-center">{product.name || "-"}</td>
-                      <td className="text-right">₱{priceDisplay}</td>
+                      <td className="text-right">{priceDisplay}</td>
                       <td className="text-center">
                         {product.description || "-"}
                       </td>
                       <td className="text-center">{quantity}</td>
-                      <td className="text-center">{createdAt}</td>
+                      <td className="text-center">
+                        {formatDate(product.createdAt)}
+                      </td>
                       <td className="text-center">
                         <span className={`badge badge-${badgeColor}`}>
                           {status}
@@ -134,18 +120,18 @@ const TrackingsTable = ({
                       <td className="text-center">
                         <button
                           className="btn btn-sm btn-primary"
-                          onClick={() => handleOpenModal(item)}
+                          onClick={() => openModal(item)}
+                          disabled={isAlreadyTagged || quantity <= 0}
                           title={
-                            isTagged(item)
+                            isAlreadyTagged
                               ? "Already tagged"
                               : quantity <= 0
                               ? "Out of stock"
                               : "Tag for Pick Up"
                           }
-                          disabled={isTagged(item) || quantity <= 0}
                         >
                           <i className="fas fa-truck-loading mr-1"></i>
-                          {isTagged(item) ? "Tagged" : "Pick Up"}
+                          {isAlreadyTagged ? "Tagged" : "Pick Up"}
                         </button>
                       </td>
                     </tr>
@@ -163,8 +149,8 @@ const TrackingsTable = ({
         pickupQuantity={pickupQuantity}
         setPickupQuantity={setPickupQuantity}
         getQuantity={getQuantity}
-        handleConfirmPickup={handleConfirmPickup}
-        onClose={handleCloseModal}
+        handleConfirmPickup={confirmPickup}
+        onClose={closeModal}
       />
     </>
   );

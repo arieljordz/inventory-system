@@ -82,3 +82,27 @@ body.dark-mode select::placeholder {
   color: #cfcfcf;
   opacity: 1;
 }
+
+.small-badge {
+  font-size: 0.55rem !important;
+  padding: 2px 4px !important;
+  line-height: 1 !important;
+  height: auto !important;
+  min-width: 14px !important;
+  top: 4px !important;
+  right: 0px !important;
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4); /* semi-transparent black */
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+

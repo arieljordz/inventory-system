@@ -17,3 +17,9 @@ export const MovementTypeEnum = Object.freeze({
   IN: "IN",
   OUT: "OUT",
 });
+
+export const ReportTypeEnum = Object.freeze({
+  INVENTORY: "Inventory",
+  SALES: "Sales",
+  PICKUPS: "Pickups",
+});

@@ -5,13 +5,18 @@ const ThemeToggle = () => {
   const { darkMode, toggleDarkMode } = useTheme();
 
   return (
-    <button
-      className="btn btn-sm btn-outline-secondary"
-      onClick={toggleDarkMode}
+    <a
+      href="#"
+      className="nav-link btn btn-link"
+      onClick={(e) => {
+        e.preventDefault();
+        toggleDarkMode();
+      }}
+      role="button"
       title="Toggle theme"
     >
       <i className={`fas ${darkMode ? "fa-sun" : "fa-moon"}`}></i>
-    </button>
+    </a>
   );
 };
 

@@ -1,26 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import Swal from "sweetalert2";
-import bsCustomFileInput from "bs-custom-file-input";
-
-import { StatusEnum } from "../../enums/enums";
-import Navpath from "../../components/common/Navpath";
-import AddProductModal from "../../components/products/AddProductModal";
-import ProductTable from "../../components/products/ProductTable";
-import SearchBar from "../../components/common/SearchBar";
-import PaginationControls from "../../components/common/PaginationControls";
-import RestockModal from "../../components/products/RestockModal";
-
-import usePagination from "../../hooks/usePagination";
+import { toast } from "react-toastify";
+import { useSpinner } from "../../context/SpinnerContext";
 import {
-  createProduct,
   getProducts,
-  deleteProduct,
+  createProduct,
   updateProduct,
+  deleteProduct,
   restockProduct,
 } from "../../services/productService";
+import ProductTable from "./ProductTable";
+import ProductModal from "./ProductModal";
+import Navpath from "../../components/common/Navpath";
+import SearchBar from "../../components/common/SearchBar";
+import PaginationControls from "../../components/common/PaginationControls";
+import RestockModal from "./RestockModal";
 
-// ----- Initial States -----
 const initialFormState = {
   serialNumber: "",
   name: "",
@@ -30,54 +25,76 @@ const initialFormState = {
   image: null,
 };
 
-const initialRestockForm = {
-  productId: "",
-  quantity: "",
-  remarks: "",
-  name: "",
-};
-
 const ProductsPage = () => {
-  // ----- States -----
+  const { showSpinner, hideSpinner } = useSpinner();
   const [products, setProducts] = useState([]);
   const [form, setForm] = useState(initialFormState);
-  const [restockForm, setRestockForm] = useState(initialRestockForm);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
-  const [editingId, setEditingId] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [showAddModal, setShowAddModal] = useState(false);
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [paginatedItems, setPaginatedItems] = useState([]);
+
   const [showRestockModal, setShowRestockModal] = useState(false);
+  const [restockForm, setRestockForm] = useState({
+    _id: "",
+    name: "",
+    quantity: 1,
+    remarks: "",
+  });
 
-  // ----- Effects -----
-  useEffect(() => {
-    bsCustomFileInput.init();
-    fetchProducts();
-  }, []);
-
-  // ----- Handlers -----
+  // Fetch products
   const fetchProducts = async () => {
     try {
-      setLoading(true);
-      const { data } = await getProducts();
-      // console.log("Products:", data);
-      setProducts(data);
-    } catch {
-      toast.error("Failed to fetch products.");
-    } finally {
-      setLoading(false);
+      const res = await getProducts();
+      setProducts(res.data);
+    } catch (error) {
+      console.error("Failed to fetch products", error);
     }
   };
 
-  const resetForm = () => {
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  // Filtered products
+  const filteredBySearch = useMemo(() => {
+    return products.filter((item) =>
+      ["serialNumber", "name", "price", "description"].some((field) =>
+        String(item[field] || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      )
+    );
+  }, [products, searchTerm]);
+
+  const handleItemsPerPageChange = useCallback((val) => {
+    setItemsPerPage(val);
+    setCurrentPage(1);
+  }, []);
+
+  // Modal controls
+  const openCreateModal = () => {
     setForm(initialFormState);
     setIsEditMode(false);
-    setEditingId(null);
+    setIsModalOpen(true);
   };
 
-  const handleFormChange = (e) => {
+  const openEditModal = (product) => {
+    console.log("product:", product);
+    setForm({ ...product, image: product.image || "" });
+    setIsEditMode(true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setForm(initialFormState);
+    setIsModalOpen(false);
+  };
+
+  const handleChange = (e) => {
     const { name, value, files } = e.target;
     setForm((prev) => ({
       ...prev,
@@ -85,211 +102,161 @@ const ProductsPage = () => {
     }));
   };
 
-  const handleSubmitForm = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const formData = new FormData();
-    Object.keys(form).forEach((key) => {
-      if (form[key]) formData.append(key, form[key]);
-    });
+    showSpinner(); // 👈 Start spinner
 
     try {
-      if (isEditMode) {
-        await updateProduct(editingId, formData);
-        toast.success("Product updated successfully.");
-      } else {
-        await createProduct(formData);
-        toast.success("Product created successfully.");
+      const formData = new FormData();
+      for (const key in form) {
+        if (form[key] !== null) {
+          formData.append(key, form[key]);
+        }
       }
 
-      handleCloseAddModal();
-      fetchProducts();
-    } catch (error) {
-      const msg = error?.response?.data?.message || "Something went wrong.";
-      toast.error(
-        msg === "Serial number already exists"
-          ? "A product with this serial number already exists."
-          : msg
-      );
+      if (isEditMode) {
+        await updateProduct(form._id, formData);
+      } else {
+        await createProduct(formData);
+      }
+
+      const res = await getProducts();
+      setProducts(res.data);
+      closeModal();
+    } catch (err) {
+      console.error("Error saving product", err);
+    } finally {
+      hideSpinner(); // 👈 Stop spinner regardless of error/success
     }
   };
 
-  const handleEdit = (product) => {
-    setForm({
-      serialNumber: product.serialNumber || "",
-      name: product.name || "",
-      price: product.price || "",
-      quantity: product.quantity || "",
-      description: product.description || "",
-      image: null,
-    });
-    setEditingId(product._id);
-    setIsEditMode(true);
-    setShowAddModal(true);
-  };
-
-  const handleDelete = async (id) => {
+  const handleDelete = async (productId) => {
     const result = await Swal.fire({
       title: "Are you sure?",
-      text: "This product will be permanently deleted.",
+      text: "This action cannot be undone.",
       icon: "warning",
       showCancelButton: true,
+      cancelButtonColor: "#6c757d",
       confirmButtonText: "Yes, delete it!",
     });
 
-    if (result.isConfirmed) {
-      try {
-        await deleteProduct(id);
-        toast.success("Product deleted.");
-        fetchProducts();
-      } catch {
-        toast.error("Failed to delete product.");
-      }
+    if (!result.isConfirmed) return;
+
+    try {
+      await deleteProduct(productId);
+      const res = await getProducts();
+      setProducts(res.data);
+
+      Swal.fire({
+        title: "Deleted!",
+        text: "Product has been deleted.",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to delete product.",
+        icon: "error",
+      });
     }
   };
 
-  const handleOpenAddModal = () => {
-    resetForm();
-    setShowAddModal(true);
-  };
-
-  const handleCloseAddModal = () => {
-    resetForm();
-    setShowAddModal(false);
-  };
-
-  const handleOpenRestockModal = (product) => {
+  const handleRestock = (product) => {
     setRestockForm({
-      productId: product._id,
-      quantity: "",
-      remarks: "",
+      _id: product._id,
       name: product.name,
+      quantity: 1,
+      remarks: "",
     });
     setShowRestockModal(true);
   };
 
-  const handleCloseRestockModal = () => {
-    setRestockForm(initialRestockForm);
-    setShowRestockModal(false);
-  };
-
-  const handleRestockChange = (e) => {
+  const handleRestockFormChange = (e) => {
     const { name, value } = e.target;
     setRestockForm((prev) => ({
       ...prev,
-      [name]: name === "quantity" ? parseInt(value, 10) || "" : value,
+      [name]: value,
     }));
   };
 
   const handleRestockSubmit = async (e) => {
     e.preventDefault();
+    showSpinner();
+
     try {
-      const payload = {
-        quantity: Number(restockForm.quantity),
+      await restockProduct(restockForm._id, {
+        quantity: restockForm.quantity,
         remarks: restockForm.remarks || "Restock",
-      };
-      await restockProduct(restockForm.productId, payload);
-      toast.success("Product restocked successfully.");
-      handleCloseRestockModal();
+      });
+
+      toast.success("Product restocked successfully!");
+      setShowRestockModal(false);
       fetchProducts();
-    } catch {
-      toast.error("Failed to restock product.");
+    } catch (error) {
+      console.error("Restock error:", error);
+      // toast.error("Failed to restock product");
+    } finally {
+      hideSpinner();
     }
   };
 
-  const statusColorMap = {
-    [StatusEnum.AVAILABLE]: "info", // blue
-    [StatusEnum.FOR_PICK_UP]: "warning", // yellow
-    [StatusEnum.TO_SHIP]: "primary", // dark blue
-    [StatusEnum.SHIPPING]: "success", // green
-    [StatusEnum.RETURNED]: "secondary", // gray — suitable for returned
-    [StatusEnum.DELIVERED]: "teal", // teal (you can keep as "secondary" if "teal" not supported)
-    [StatusEnum.COMPLETED]: "dark", // dark gray
-    [StatusEnum.OUT_OF_STOCK]: "danger", // red — appropriate for no stock
-  };
-
-  // ----- Filtering and Pagination -----
-  const filteredProducts = products.filter((product) => {
-    const values = [
-      product.serialNumber,
-      product.name,
-      product.price,
-      product.description,
-    ];
-    return values.some((val) =>
-      String(val).toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  });
-
-  const totalItems = filteredProducts.length;
-  const { indexOfFirstItem, indexOfLastItem, totalPages } = usePagination({
-    totalItems,
-    itemsPerPage,
-    currentPage,
-  });
-
-  const currentItems = filteredProducts.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
-
-  // ----- JSX -----
   return (
     <>
-      <Navpath levelOne="Products" levelTwo="Home" levelThree="Products" />
-
+      <Navpath
+        levelOne="Product Management"
+        levelTwo="Home"
+        levelThree="Products"
+      />
       <section className="content">
         <div className="container-fluid">
-          <div className="mb-3">
-            <button className="btn btn-primary" onClick={handleOpenAddModal}>
-              <i className="fas fa-plus mr-1"></i> Add Product
-            </button>
-          </div>
+          <button className="btn btn-primary mb-3" onClick={openCreateModal}>
+            <i className="fas fa-plus mr-1"></i> Add Product
+          </button>
 
           <SearchBar
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             itemsPerPage={itemsPerPage}
-            onItemsPerPageChange={(val) =>
-              setItemsPerPage(val === "All" ? totalItems : parseInt(val, 10))
-            }
+            onItemsPerPageChange={handleItemsPerPageChange}
           />
 
           <ProductTable
-            products={currentItems}
-            onEdit={handleEdit}
+            products={paginatedItems}
+            onEdit={openEditModal}
             onDelete={handleDelete}
-            onRestock={handleOpenRestockModal}
-            statusColorMap={statusColorMap}
+            onRestock={handleRestock}
           />
 
           <PaginationControls
+            data={filteredBySearch}
             currentPage={currentPage}
-            totalPages={totalPages}
-            totalItems={totalItems}
-            indexOfFirstItem={indexOfFirstItem}
-            indexOfLastItem={indexOfLastItem}
+            itemsPerPage={itemsPerPage}
             onPageChange={setCurrentPage}
+            onPaginatedDataChange={setPaginatedItems}
+          />
+
+          <ProductModal
+            isOpen={isModalOpen}
+            onClose={closeModal}
+            form={form}
+            onChange={handleChange}
+            onSubmit={handleSubmit}
+            isEditMode={isEditMode}
+          />
+
+          <RestockModal
+            show={showRestockModal}
+            onClose={() => setShowRestockModal(false)}
+            restockForm={restockForm}
+            onChange={handleRestockFormChange}
+            onSubmit={handleRestockSubmit}
           />
         </div>
       </section>
-
-      <AddProductModal
-        isOpen={showAddModal}
-        onClose={handleCloseAddModal}
-        form={form}
-        onChange={handleFormChange}
-        onSubmit={handleSubmitForm}
-        isEditMode={isEditMode}
-      />
-
-      <RestockModal
-        show={showRestockModal}
-        restockForm={restockForm}
-        onChange={handleRestockChange}
-        onSubmit={handleRestockSubmit}
-        onClose={handleCloseRestockModal}
-      />
     </>
   );
 };

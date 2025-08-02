@@ -1,9 +1,9 @@
 import React from "react";
 
 const SearchBar = ({
-  searchTerm = "",
+  searchTerm,
   onSearchChange,
-  itemsPerPage = 5,
+  itemsPerPage,
   onItemsPerPageChange,
   itemsPerPageOptions = [5, 10, 20, 50, "All"],
   icon = "🔍",
@@ -30,7 +30,11 @@ const SearchBar = ({
           <select
             className="form-control"
             value={itemsPerPage}
-            onChange={(e) => onItemsPerPageChange(e.target.value)}
+            onChange={(e) =>
+              onItemsPerPageChange(
+                e.target.value === "All" ? "All" : parseInt(e.target.value, 10)
+              )
+            }
           >
             {itemsPerPageOptions.map((opt) => (
               <option key={opt} value={opt}>

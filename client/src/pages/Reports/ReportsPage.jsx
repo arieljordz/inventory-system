@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getReports } from "../../services/reportService";
 import Navpath from "../../components/common/Navpath";
+import { ReportTypeEnum } from "../../enums/enums";
 import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
@@ -12,7 +13,7 @@ const ReportsPage = () => {
     from: today,
     to: today,
   });
-  const [reportType, setReportType] = useState("inventory");
+  const [reportType, setReportType] = useState(ReportTypeEnum.INVENTORY);
   const [isGenerating, setIsGenerating] = useState(false);
   const [reportData, setReportData] = useState([]);
 
@@ -108,9 +109,9 @@ const ReportsPage = () => {
                     value={reportType}
                     onChange={(e) => setReportType(e.target.value)}
                   >
-                    <option value="inventory">Inventory</option>
-                    <option value="sales">Sales</option>
-                    <option value="pickups">Pick Ups</option>
+                    <option value={ReportTypeEnum.INVENTORY}>Inventory</option>
+                    <option value={ReportTypeEnum.SALES}>Sales</option>
+                    <option value={ReportTypeEnum.PICKUPS}>Pick Ups</option>
                   </select>
                 </div>
 
