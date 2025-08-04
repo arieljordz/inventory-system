@@ -18,6 +18,14 @@ export const formatDateTime = (dateTime) => {
   })}`;
 };
 
+export const getCurrentDate = () => {
+  const now = new Date();
+  const dateNow = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Manila",
+  }).format(now); // "en-CA" gives YYYY-MM-DD format
+  return dateNow;
+};
+
 export const getStatusBadgeData = (
   status,
   customColorMap = {},

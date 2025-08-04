@@ -24,8 +24,11 @@ export const UnitTypeEnum = Object.freeze({
 
 export const ReportTypeEnum = Object.freeze({
   INVENTORY: "Inventory",
+  INVENTORY_IN: "Inventory - In",
+  INVENTORY_OUT: "Inventory - Out",
   SALES: "Sales",
-  PICKUPS: "Pickups",
+  SALES_PAID: "Sales - Paid",
+  SALES_UNPAID: "Sales - Unpaid",
 });
 
 export const PlatformEnum = Object.freeze({

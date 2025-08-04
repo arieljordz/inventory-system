@@ -6,5 +6,10 @@ const multipartHeaders = {
 
 export const getAllOrders = () => api.get("/api/orders");
 
+export const getAllOrdersByDate = (start, end) =>
+  api.get("/api/orders/by-date", {
+    params: { start, end },
+  });
+
 export const importOrdersByPlatform = (formData) =>
   api.post("/api/orders/import-orders", formData, multipartHeaders);

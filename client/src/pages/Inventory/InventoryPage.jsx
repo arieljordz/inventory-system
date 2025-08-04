@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
+import { useSpinner } from "../../context/SpinnerContext";
 import Navpath from "../../components/common/Navpath";
 import InventoryTable from "./InventoryTable";
 import {
@@ -6,18 +7,19 @@ import {
   getInventoryMovements,
   getRemainingPerProduct,
 } from "../../services/inventoryDetailService";
+import { getCurrentDate } from "../../utils/commonUtils";
 import { InfoBox } from "../../components/common/FormInputs";
-import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
+import { MovementTypeEnum } from "../../enums/enums";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
+import DateRangeFilter from "../../components/common/DateRangeFilter";
 
 const InventoryPage = () => {
-  const today = new Date().toISOString().split("T")[0];
-
   const [dateRange, setDateRange] = useState({
-    startDate: today,
-    endDate: today,
+    startDate: getCurrentDate(),
+    endDate: getCurrentDate(),
   });
+  const { showSpinner, hideSpinner } = useSpinner();
   const [stats, setStats] = useState({ remaining: 0, totalIn: 0, totalOut: 0 });
   const [filteredData, setFilteredData] = useState([]);
   const [remainingPerProduct, setRemainingPerProduct] = useState([]);
@@ -26,8 +28,10 @@ const InventoryPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [paginatedItems, setPaginatedItems] = useState([]);
 
-  const fetchData = async () => {
+  const handleFilter = async () => {
     try {
+      showSpinner(); // Start spinner
+
       const { startDate, endDate } = dateRange;
       const [statsRes, movementsRes, remainingRes] = await Promise.all([
         getInventoryStats(startDate, endDate),
@@ -46,6 +50,8 @@ const InventoryPage = () => {
       setRemainingPerProduct(remainingRes.data);
     } catch (err) {
       console.error("Failed to fetch inventory data", err);
+    } finally {
+      hideSpinner(); // Always stop spinner
     }
   };
 
@@ -135,38 +141,11 @@ const InventoryPage = () => {
           </div>
 
           {/* Date Filter */}
-          <div className="row mb-4 align-items-end">
-            <div className="col-md-3">
-              <label>Start Date</label>
-              <input
-                type="date"
-                className="form-control"
-                value={dateRange.startDate}
-                onChange={(e) =>
-                  setDateRange((prev) => ({
-                    ...prev,
-                    startDate: e.target.value,
-                  }))
-                }
-              />
-            </div>
-            <div className="col-md-3">
-              <label>End Date</label>
-              <input
-                type="date"
-                className="form-control"
-                value={dateRange.endDate}
-                onChange={(e) =>
-                  setDateRange((prev) => ({ ...prev, endDate: e.target.value }))
-                }
-              />
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-block" onClick={fetchData}>
-                Filter
-              </button>
-            </div>
-          </div>
+          <DateRangeFilter
+            dateRange={dateRange}
+            onDateChange={setDateRange}
+            onFilter={handleFilter}
+          />
 
           {/* Search + Items Per Page */}
 

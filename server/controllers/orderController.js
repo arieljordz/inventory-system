@@ -1,5 +1,6 @@
 import path from "path";
 import xlsx from "xlsx";
+import moment from "moment-timezone";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
@@ -10,6 +11,26 @@ export const getAllOrders = async (req, res) => {
     const orders = await Order.find()
       .populate("product", "name sku price image description") // Select only key fields
       .sort({ createdAt: -1 }); // Latest orders first
+
+    res.status(200).json(orders);
+  } catch (error) {
+    console.error("Get Orders Error:", error);
+    res.status(500).json({ message: "Failed to fetch orders." });
+  }
+};
+
+export const getAllOrdersByDate = async (req, res) => {
+  try {
+    const { start, end } = req.query;
+
+    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
+    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
+
+    const orders = await Order.find({
+      createdAt: { $gte: startDate, $lte: endDate },
+    })
+      .populate("product", "name sku price image description")
+      .sort({ createdAt: -1 });
 
     res.status(200).json(orders);
   } catch (error) {

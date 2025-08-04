@@ -1,6 +1,6 @@
 import React from "react";
 
-const SalesFilter = ({ dateRange, onDateChange, onFilter }) => {
+const DateRangeFilter = ({ dateRange, onDateChange, onFilter }) => {
   return (
     <div className="row mb-3 align-items-end">
       <div className="col-md-3">
@@ -34,4 +34,4 @@ const SalesFilter = ({ dateRange, onDateChange, onFilter }) => {
   );
 };
 
-export default SalesFilter;
+export default DateRangeFilter;

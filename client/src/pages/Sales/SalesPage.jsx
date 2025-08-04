@@ -8,14 +8,18 @@ import React, {
 import { toast } from "react-toastify";
 import { InfoBox } from "../../components/common/FormInputs";
 import { useSpinner } from "../../context/SpinnerContext";
-import { getAllOrders } from "../../services/orderService";
-import { importSalesByPlatform } from "../../services/salesService";
+import { getAllOrdersByDate } from "../../services/orderService";
+import { getCurrentDate, formatAmount } from "../../utils/commonUtils";
+import {
+  importSalesByPlatform,
+  getSalesStatsByDate,
+} from "../../services/salesService";
 import { PlatformEnum, CourierEnum } from "../../enums/enums";
 import Navpath from "../../components/common/Navpath";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
+import DateRangeFilter from "../../components/common/DateRangeFilter";
 import SalesTable from "./SalesTable";
-import SalesFilter from "./SalesFilter";
 import ImportModal from "./ImportModal";
 
 const initialFormState = {
@@ -28,13 +32,13 @@ const initialFormState = {
 };
 
 const SalesPage = () => {
-  const today = new Date().toISOString().split("T")[0];
   const [dateRange, setDateRange] = useState({
-    startDate: today,
-    endDate: today,
+    startDate: getCurrentDate(),
+    endDate: getCurrentDate(),
   });
   const { showSpinner, hideSpinner } = useSpinner();
   const [orders, setOrders] = useState([]);
+  const [stats, setStats] = useState([]);
   const [form, setForm] = useState(initialFormState);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -52,22 +56,6 @@ const SalesPage = () => {
       })),
     []
   );
-
-  const fetchOrders = async () => {
-    try {
-      showSpinner();
-      const res = await getAllOrders();
-      setOrders(res.data);
-    } catch (error) {
-      console.error("Failed to fetch orders", error);
-    } finally {
-      hideSpinner();
-    }
-  };
-
-  useEffect(() => {
-    fetchOrders();
-  }, []);
 
   const filteredBySearch = useMemo(() => {
     return orders.filter((item) =>
@@ -91,13 +79,23 @@ const SalesPage = () => {
       [name]: value,
     }));
   };
-  const handleFilter = () => {
-    // Filtering logic here
-  };
 
-  useEffect(() => {
-    handleFilter(); // Initial load with today's data
-  }, []);
+  const handleFilter = async () => {
+    try {
+      showSpinner();
+      const { startDate, endDate } = dateRange;
+      const [statsRes, ordersRes] = await Promise.all([
+        getSalesStatsByDate(startDate, endDate),
+        getAllOrdersByDate(startDate, endDate),
+      ]);
+      setOrders(ordersRes.data);
+      setStats(statsRes.data);
+    } catch (error) {
+      console.error("Failed to fetch orders", error);
+    } finally {
+      hideSpinner();
+    }
+  };
 
   const handleImport = async (e) => {
     const file = e.target.files[0];
@@ -148,30 +146,30 @@ const SalesPage = () => {
               label="Total Sales"
               icon="fas fa-dollar-sign"
               color="success"
-              value="₱50,000"
+              value={formatAmount(stats.totalSales || 0)}
             />
             <InfoBox
               label="Total Orders"
               icon="fas fa-receipt"
               color="primary"
-              value="120"
+              value={stats.totalOrders || 0}
             />
             <InfoBox
               label="Revenue Today"
               icon="fas fa-calendar-day"
               color="info"
-              value="₱4,200"
+              value={formatAmount(stats.revenue || 0)}
             />
             <InfoBox
-              label="Pending Orders"
+              label="Unpaid Orders"
               icon="fas fa-clock"
-              color="warning"
-              value="5"
+              color="danger"
+              value={stats.unpaidOrders || 0}
             />
           </div>
 
           {/* Filters */}
-          <SalesFilter
+          <DateRangeFilter
             dateRange={dateRange}
             onDateChange={setDateRange}
             onFilter={handleFilter}

@@ -120,9 +120,9 @@ const OrderPage = () => {
     try {
       showSpinner();
 
-      const response = await importOrdersByPlatform(formData); 
+      const response = await importOrdersByPlatform(formData);
 
-      console.log("response:", response);
+    //   console.log("response:", response);
       const { summary, details } = response.data;
 
       if (details.skipped.length) {
@@ -149,7 +149,9 @@ const OrderPage = () => {
     } finally {
       hideSpinner();
       setShowImportModal(false);
-      if (e?.target) e.target.value = null; // Reset file input
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null; // Reset file input
+      }
     }
   };
 

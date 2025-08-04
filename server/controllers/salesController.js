@@ -1,6 +1,10 @@
+
+import mongoose from "mongoose";
 import path from "path";
 import xlsx from "xlsx";
+import moment from "moment-timezone";
 import Order from "../models/Order.js";
+import Product from "../models/Product.js"; 
 
 export const importSalesByPlatform = async (req, res) => {
   try {
@@ -76,3 +80,54 @@ export const importSalesByPlatform = async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 };
+
+export const getSalesStatsByDate = async (req, res) => {
+  try {
+    const { start, end } = req.query;
+
+    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
+    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
+
+    const todayStart = moment.tz("Asia/Manila").startOf("day").toDate();
+    const todayEnd = moment.tz("Asia/Manila").endOf("day").toDate();
+
+    // 1. Get all orders in the given date range
+    const orders = await Order.find({
+      createdAt: { $gte: startDate, $lte: endDate },
+    }).populate("product", "price");
+
+    // 2. Get today's orders only for revenue
+    const todaysOrders = await Order.find({
+      createdAt: { $gte: todayStart, $lte: todayEnd },
+    }).populate("product", "price");
+
+    let totalSales = 0;
+    let unpaidOrders = 0;
+    let revenue = 0;
+
+    for (const order of orders) {
+      const quantity = order.quantity || 0;
+      const price = order.product?.price || 0;
+      totalSales += quantity * price;
+
+      if (!order.isPaid) unpaidOrders += 1;
+    }
+
+    for (const order of todaysOrders) {
+      const quantity = order.quantity || 0;
+      const price = order.product?.price || 0;
+      revenue += quantity * price;
+    }
+
+    res.json({
+      totalOrders: orders.length,
+      totalSales,
+      revenueToday: revenue,
+      unpaidOrders,
+    });
+  } catch (error) {
+    console.error("Error getting order stats:", error);
+    res.status(500).json({ message: "Failed to get order stats" });
+  }
+};
+

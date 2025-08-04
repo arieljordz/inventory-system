@@ -6,3 +6,8 @@ const multipartHeaders = {
 
 export const importSalesByPlatform = (formData) =>
   api.post("/api/sales/import-sales", formData, multipartHeaders);
+
+export const getSalesStatsByDate = (start, end) =>
+  api.get("/api/sales/stats", {
+    params: { start, end },
+  });

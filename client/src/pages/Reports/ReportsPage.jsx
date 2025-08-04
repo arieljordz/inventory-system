@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSpinner } from "../../context/SpinnerContext";
 import { getReports } from "../../services/reportService";
 import Navpath from "../../components/common/Navpath";
 import { ReportTypeEnum } from "../../enums/enums";
@@ -6,33 +7,40 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { toast } from "react-toastify";
+import { getCurrentDate } from "../../utils/commonUtils";
+import ReportFilter from "./ReportFilter";
+import ReportTable from "./ReportTable";
 
 const ReportsPage = () => {
-  const today = new Date().toISOString().split("T")[0];
-  const [dateRange, setDateRange] = useState({
-    from: today,
-    to: today,
-  });
+  const { showSpinner, hideSpinner } = useSpinner();
+
   const [reportType, setReportType] = useState(ReportTypeEnum.INVENTORY);
-  const [isGenerating, setIsGenerating] = useState(false);
   const [reportData, setReportData] = useState([]);
+  const [dateRange, setDateRange] = useState({
+    startDate: getCurrentDate(),
+    endDate: getCurrentDate(),
+  });
 
   const handleGenerateReport = async () => {
-    if (!dateRange.from || !dateRange.to) {
-      toast.error("Please select both From and To dates.");
+    const { startDate, endDate } = dateRange;
+
+    if (!startDate || !endDate) {
+      toast.error("Please select both start and end dates.");
       return;
     }
 
     try {
-      setIsGenerating(true);
+      showSpinner();
       const res = await getReports({
         reportType,
-        from: dateRange.from,
-        to: dateRange.to,
+        startDate,
+        endDate,
       });
 
+      console.log(res.data);
       if (!res.data || res.data.length === 0) {
         toast.info("No records found for the selected range.");
+        setReportData([]);
       } else {
         setReportData(res.data);
         toast.success("Report generated successfully.");
@@ -41,18 +49,36 @@ const ReportsPage = () => {
       console.error("Failed to fetch report:", err);
       toast.error("Error generating report.");
     } finally {
-      setIsGenerating(false);
+      hideSpinner();
     }
   };
 
   const formatReportData = () => {
-    return reportData.map((item) => ({
-      Product: item.product?.name || "-",
-      "Movement Type": item.movementType,
-      Quantity: item.quantity,
-      Status: item.status,
-      Date: new Date(item.createdAt).toLocaleDateString(),
-    }));
+    if (!reportData.length) return [];
+    console.log("reportType:", reportType);
+    return reportData.map((item) => {
+      const base = {
+        Product: item.product?.name || "-",
+        Quantity: item.quantity,
+        Date: new Date(item.createdAt).toLocaleDateString(),
+      };
+
+      if (reportType.includes("Inventory")) {
+        return {
+          ...base,
+          "Movement Type": item.movementType,
+          Status: item.status || "-",
+        };
+      } else {
+        return {
+          ...base,
+          Courier: item.courier || "-",
+          Platform: item.platform || "-",
+          Paid: item.isPaid ? "Yes" : "No",
+          Status: item.status || "-",
+        };
+      }
+    });
   };
 
   const handleExport = (format) => {
@@ -100,57 +126,13 @@ const ReportsPage = () => {
             </div>
             <div className="card-body">
               {/* Filter Inputs */}
-              <div className="row mb-3">
-                <div className="col-md-4">
-                  <label>Report Type</label>
-                  <select
-                    className="form-control"
-                    value={reportType}
-                    onChange={(e) => setReportType(e.target.value)}
-                  >
-                    <option value={ReportTypeEnum.INVENTORY}>Inventory</option>
-                    <option value={ReportTypeEnum.SALES}>Sales</option>
-                    <option value={ReportTypeEnum.PICKUPS}>Pick Ups</option>
-                  </select>
-                </div>
-
-                <div className="col-md-3">
-                  <label>From</label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    value={dateRange.from}
-                    onChange={(e) =>
-                      setDateRange((prev) => ({
-                        ...prev,
-                        from: e.target.value,
-                      }))
-                    }
-                  />
-                </div>
-
-                <div className="col-md-3">
-                  <label>To</label>
-                  <input
-                    type="date"
-                    className="form-control"
-                    value={dateRange.to}
-                    onChange={(e) =>
-                      setDateRange((prev) => ({ ...prev, to: e.target.value }))
-                    }
-                  />
-                </div>
-
-                <div className="col-md-2 d-flex align-items-end">
-                  <button
-                    className="btn btn-success btn-block"
-                    onClick={handleGenerateReport}
-                    disabled={isGenerating}
-                  >
-                    {isGenerating ? "Generating..." : "Generate"}
-                  </button>
-                </div>
-              </div>
+              <ReportFilter
+                reportType={reportType}
+                setReportType={setReportType}
+                dateRange={dateRange}
+                setDateRange={setDateRange}
+                handleGenerateReport={handleGenerateReport}
+              />
 
               {/* Export Buttons */}
               {reportData.length > 0 && (
@@ -171,40 +153,7 @@ const ReportsPage = () => {
               )}
 
               {/* Report Table */}
-              {reportData.length > 0 ? (
-                <div className="table-responsive">
-                  <table className="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Product</th>
-                        <th>Movement Type</th>
-                        <th>Quantity</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {reportData.map((item, index) => (
-                        <tr key={index}>
-                          <td>{item.product?.name || "-"}</td>
-                          <td>{item.movementType}</td>
-                          <td>{item.quantity}</td>
-                          <td>{item.status}</td>
-                          <td>
-                            {new Date(item.createdAt).toLocaleDateString()}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ) : (
-                !isGenerating && (
-                  <div className="text-center text-muted mt-4">
-                    <i>No report generated yet.</i>
-                  </div>
-                )
-              )}
+              <ReportTable reportData={reportData} reportType={reportType} />
             </div>
           </div>
         </div>
