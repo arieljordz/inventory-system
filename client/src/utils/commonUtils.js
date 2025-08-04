@@ -18,19 +18,43 @@ export const formatDateTime = (dateTime) => {
   })}`;
 };
 
-// ✅ Refactor getStatusBadge to return metadata (not JSX)
-export const getStatusBadgeData = (status, customColorMap = {}) => {
+export const getStatusBadgeData = (
+  status,
+  customColorMap = {},
+  customLabelMap = {}
+) => {
+  // Normalize status to string
+  const statusKey = typeof status === "boolean" ? String(status) : status;
+
   const defaultColorMap = {
     Available: "success",
     "For Pick Up": "warning",
     "Out of Stock": "danger",
+    true: "success",
+    false: "secondary",
+  };
+
+  const defaultLabelMap = {
+    true: "Paid",
+    false: "Unpaid",
   };
 
   const colorMap = { ...defaultColorMap, ...customColorMap };
-  const color = colorMap[status] || "secondary";
+  const labelMap = { ...defaultLabelMap, ...customLabelMap };
 
   return {
-    label: status,
-    color,
+    label: labelMap[statusKey] ?? statusKey,
+    color: colorMap[statusKey] ?? "secondary",
   };
+};
+
+export const computeTotalPrice = (quantity, price) => {
+  const qty = Number(quantity);
+  const unitPrice = Number(price);
+
+  if (isNaN(qty) || isNaN(unitPrice) || qty < 0 || unitPrice < 0) {
+    return 0;
+  }
+
+  return qty * unitPrice;
 };

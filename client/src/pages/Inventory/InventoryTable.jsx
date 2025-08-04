@@ -91,7 +91,7 @@ const InventoryTable = ({ data = [] }) => {
                               <th className="text-center">Type</th>
                               <th className="text-center">Quantity</th>
                               <th>Remarks</th>
-                              <th className="text-center">Date</th>
+                              <th className="text-center">Transaction Date</th>
                             </tr>
                           </thead>
                           <tbody>

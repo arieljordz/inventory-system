@@ -7,7 +7,9 @@ import moment from "moment-timezone";
 // GET /api/inventory/remaining-by-product
 export const getRemainingQuantities = async (req, res) => {
   try {
-    const products = await Product.find({}).select("name serialNumber quantity");
+    const products = await Product.find({}).select(
+      "name serialNumber quantity"
+    );
 
     res.status(200).json(products);
   } catch (err) {
@@ -24,7 +26,9 @@ export const getInventoryDetailsByStatus = async (req, res) => {
       return res.status(400).json({ message: "Invalid status." });
     }
 
-    const isGrouped = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK].includes(status);
+    const isGrouped = [StatusEnum.AVAILABLE, StatusEnum.OUT_OF_STOCK].includes(
+      status
+    );
 
     if (isGrouped) {
       // Fetch directly from Product collection based on status
@@ -64,7 +68,10 @@ export const getInventoryStats = async (req, res) => {
     const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
 
     const products = await Product.find({});
-    const remaining = products.reduce((sum, prod) => sum + (prod.quantity || 0), 0);
+    const remaining = products.reduce(
+      (sum, prod) => sum + (prod.quantity || 0),
+      0
+    );
 
     const movements = await InventoryDetail.find({
       createdAt: { $gte: startDate, $lte: endDate },
@@ -113,10 +120,18 @@ export const getInventoryMovements = async (req, res) => {
 
 export const tagOrderForPickUp = async (req, res) => {
   try {
-    const { pickupQty, courier, remarks } = req.body;
+    const quantity = parseInt(req.body.quantity, 10);
+    const platform = req.body.platform?.trim();
+    const platformOrderId = req.body.platformOrderId?.trim();
+    const courier = req.body.courier?.trim();
+    const remarks = req.body.remarks?.trim();
 
-    if (typeof pickupQty !== "number" || pickupQty <= 0) {
-      return res.status(400).json({ message: "A valid pickupQty is required." });
+    if (isNaN(quantity) || quantity <= 0) {
+      return res.status(400).json({ message: "A valid quantity is required." });
+    }
+
+    if (!courier) {
+      return res.status(400).json({ message: "Courier is required." });
     }
 
     const product = await Product.findById(req.params.id);
@@ -124,48 +139,46 @@ export const tagOrderForPickUp = async (req, res) => {
       return res.status(404).json({ message: "Product not found." });
     }
 
-    if (pickupQty > product.quantity) {
+    if (quantity > product.quantity) {
       return res.status(400).json({ message: "Pickup quantity exceeds available stock." });
     }
 
-    const remainingQty = product.quantity - pickupQty;
+    const remainingQty = product.quantity - quantity;
 
-    // 1. Create Order
+    // Create order first
     const order = await Order.create({
       product: product._id,
-      quantity: pickupQty,
+      quantity,
+      platform,
+      platformOrderId,
       courier,
       remarks: remarks || "Tagged for pickup",
     });
 
-    // 2. Update Product
-    const updatedFields = {
-      quantity: remainingQty,
-    };
-
-    // Only mark as OUT_OF_STOCK if no quantity remains
-    if (remainingQty === 0) {
-      updatedFields.status = StatusEnum.OUT_OF_STOCK;
-    }
-
+    // Update product
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      updatedFields,
+      {
+        quantity: remainingQty,
+        ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+      },
       { new: true }
     );
 
-    // 3. Log inventory movement
+    // Create inventory detail with order reference
     await InventoryDetail.create({
       product: product._id,
-      movementType: MovementTypeEnum.OUT,
-      quantity: pickupQty,
-      remarks: `Tagged for pickup - Order ID: ${order._id}`,
+      order: order._id,
+      movementType: "OUT",
+      quantity,
+      courier,
+      platform,
       status: StatusEnum.FOR_PICK_UP,
-      pickedUpBy: courier,
+      remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
     });
 
     return res.status(200).json({
-      message: `${pickupQty} item(s) tagged for pickup.`,
+      message: `${quantity} item(s) tagged for pickup.`,
       product: updatedProduct,
       order,
     });
@@ -174,7 +187,5 @@ export const tagOrderForPickUp = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-
 
 

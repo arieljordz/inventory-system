@@ -116,8 +116,9 @@ const ProductsPage = () => {
     try {
       const formData = new FormData();
       for (const key in form) {
-        if (form[key] !== null) {
-          formData.append(key, form[key]);
+        const value = form[key];
+        if (value !== null && value !== undefined) {
+          formData.append(key, value);
         }
       }
 

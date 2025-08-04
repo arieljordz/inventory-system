@@ -6,6 +6,7 @@ import {
   getInventoryMovements,
   getRemainingPerProduct,
 } from "../../services/inventoryDetailService";
+import { InfoBox } from "../../components/common/FormInputs";
 import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
@@ -66,24 +67,32 @@ const InventoryPage = () => {
   };
 
   const filteredBySearch = useMemo(() => {
+    const search = searchTerm.trim().toLowerCase();
+
     return filteredData.filter((m) => {
       const product = m.product || {};
-      const searchableFields = ["name", "serialNumber"];
-      const otherFields = [m.movementType, m.quantity];
+      const value = String(m.movementType || "").toLowerCase();
 
-      const matchesProductFields = searchableFields.some((field) =>
+      if (["in", "out"].includes(search)) {
+        return value === search; // strict match for movementType only
+      }
+
+      const productFields = ["name"];
+      const rootFields = ["movementType", "quantity"];
+
+      const matchesProductFields = productFields.some((field) =>
         String(product[field] || "")
           .toLowerCase()
-          .includes(searchTerm.toLowerCase())
+          .includes(search)
       );
 
-      const matchesOtherFields = otherFields.some((field) =>
-        String(field || "")
+      const matchesRootFields = rootFields.some((field) =>
+        String(m[field] || "")
           .toLowerCase()
-          .includes(searchTerm.toLowerCase())
+          .includes(search)
       );
 
-      return matchesProductFields || matchesOtherFields;
+      return matchesProductFields || matchesRootFields;
     });
   }, [filteredData, searchTerm]);
 
@@ -187,19 +196,5 @@ const InventoryPage = () => {
     </>
   );
 };
-
-const InfoBox = ({ icon, label, value, color }) => (
-  <div className="col-md-3 col-sm-6 col-12">
-    <div className={`info-box bg-${color}`}>
-      <span className="info-box-icon">
-        <i className={`fas ${icon}`}></i>
-      </span>
-      <div className="info-box-content">
-        <span className="info-box-text">{label}</span>
-        <span className="info-box-number">{value}</span>
-      </div>
-    </div>
-  </div>
-);
 
 export default InventoryPage;

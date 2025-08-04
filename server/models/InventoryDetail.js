@@ -8,6 +8,10 @@ const inventoryDetailSchema = new mongoose.Schema(
       ref: "Product",
       required: true,
     },
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+    },
     movementType: {
       type: String,
       enum: ["IN", "OUT"],
@@ -18,10 +22,13 @@ const inventoryDetailSchema = new mongoose.Schema(
       required: true,
       min: 1,
     },
-    pickedUpBy: {
+    courier: {
       type: String,
       default: "",
-      trim: true,
+    },
+    platform: {
+      type: String,
+      default: "",
     },
     status: {
       type: String,

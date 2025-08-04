@@ -1,5 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useEffect,
+  useState,
+  useMemo,
+  useCallback,
+  useRef,
+} from "react";
+import { toast } from "react-toastify";
+import { InfoBox } from "../../components/common/FormInputs";
+import { useSpinner } from "../../context/SpinnerContext";
+import { getAllOrders } from "../../services/orderService";
+import { importSalesByPlatform } from "../../services/salesService";
+import { PlatformEnum, CourierEnum } from "../../enums/enums";
 import Navpath from "../../components/common/Navpath";
+import SearchBar from "../../components/common/SearchBar";
+import PaginationControls from "../../components/common/PaginationControls";
+import SalesTable from "./SalesTable";
+import SalesFilter from "./SalesFilter";
+import ImportModal from "./ImportModal";
+
+const initialFormState = {
+  quantity: "",
+  platformOrderId: "",
+  price: "",
+  courier: CourierEnum.SPX,
+  platform: PlatformEnum.SHOPEE,
+  remarks: "",
+};
 
 const SalesPage = () => {
   const today = new Date().toISOString().split("T")[0];
@@ -7,34 +33,109 @@ const SalesPage = () => {
     startDate: today,
     endDate: today,
   });
-  const [salesData, setSalesData] = useState([]);
+  const { showSpinner, hideSpinner } = useSpinner();
+  const [orders, setOrders] = useState([]);
+  const [form, setForm] = useState(initialFormState);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [paginatedItems, setPaginatedItems] = useState([]);
 
+  const [showImportModal, setShowImportModal] = useState(false);
+  const fileInputRef = useRef(null);
+
+  const platformOptions = useMemo(
+    () =>
+      Object.entries(PlatformEnum).map(([key, value]) => ({
+        label: value,
+        value: key,
+      })),
+    []
+  );
+
+  const fetchOrders = async () => {
+    try {
+      showSpinner();
+      const res = await getAllOrders();
+      setOrders(res.data);
+    } catch (error) {
+      console.error("Failed to fetch orders", error);
+    } finally {
+      hideSpinner();
+    }
+  };
+
+  useEffect(() => {
+    fetchOrders();
+  }, []);
+
+  const filteredBySearch = useMemo(() => {
+    return orders.filter((item) =>
+      ["name", "platform", "platfromOrderId", "courier"].some((field) =>
+        String(item[field] || "")
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
+      )
+    );
+  }, [orders, searchTerm]);
+
+  const handleItemsPerPageChange = useCallback((val) => {
+    setItemsPerPage(val);
+    setCurrentPage(1);
+  }, []);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   const handleFilter = () => {
-    // Simulated API call - replace with your actual API call logic
-    const filteredData = [
-      {
-        id: 1,
-        customer: "Juan Dela Cruz",
-        product: "Product A",
-        total: 1200,
-        status: "Completed",
-        date: "2025-07-20",
-      },
-      {
-        id: 2,
-        customer: "Maria Santos",
-        product: "Product B",
-        total: 850,
-        status: "Pending",
-        date: "2025-07-20",
-      },
-    ];
-    setSalesData(filteredData);
+    // Filtering logic here
   };
 
   useEffect(() => {
     handleFilter(); // Initial load with today's data
   }, []);
+
+  const handleImport = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const platform = form.platform?.trim();
+    if (!platform) {
+      toast.error("Please select a platform before uploading.");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("platform", platform);
+    formData.append("file", file);
+
+    try {
+      showSpinner();
+
+      const response = await importSalesByPlatform(formData);
+      const { message, updatedOrderIds } = response.data;
+
+      toast.success(message || "Import successful.");
+      if (updatedOrderIds?.length) {
+        console.log("Updated Orders:", updatedOrderIds);
+      }
+
+      await fetchOrders(); // Refresh data after import
+    } catch (err) {
+      console.error("Import failed:", err);
+      toast.error(err.response?.data?.message || "Failed to import orders.");
+    } finally {
+      hideSpinner();
+      setShowImportModal(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = null; // Reset file input
+      }
+    }
+  };
 
   return (
     <>
@@ -70,113 +171,48 @@ const SalesPage = () => {
           </div>
 
           {/* Filters */}
-          <div className="row mb-3 align-items-end">
-            <div className="col-md-3">
-              <label>Start Date</label>
-              <input
-                type="date"
-                className="form-control"
-                value={dateRange.startDate}
-                onChange={(e) =>
-                  setDateRange((prev) => ({
-                    ...prev,
-                    startDate: e.target.value,
-                  }))
-                }
-              />
-            </div>
-            <div className="col-md-3">
-              <label>End Date</label>
-              <input
-                type="date"
-                className="form-control"
-                value={dateRange.endDate}
-                onChange={(e) =>
-                  setDateRange((prev) => ({ ...prev, endDate: e.target.value }))
-                }
-              />
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-primary btn-block" onClick={handleFilter}>
-                Filter
-              </button>
-            </div>
-          </div>
+          <SalesFilter
+            dateRange={dateRange}
+            onDateChange={setDateRange}
+            onFilter={handleFilter}
+          />
 
-          {/* Sales Table */}
-          <div className="card">
-            <div className="card-header d-flex justify-content-between align-items-center">
-              <h3 className="card-title">Sales Records</h3>
-              <button className="btn btn-outline-info btn-sm">
-                <i className="fas fa-store"></i> Check Shopee Sales
-              </button>
-            </div>
-            <div className="card-body table-responsive">
-              <table className="table table-bordered table-hover text-nowrap">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Customer</th>
-                    <th>Product</th>
-                    <th>Total</th>
-                    <th>Status</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {salesData.length === 0 ? (
-                    <tr>
-                      <td colSpan="6" className="text-center text-muted py-3">
-                        No sales data found for the selected date range.
-                      </td>
-                    </tr>
-                  ) : (
-                    salesData.map((sale, index) => (
-                      <tr key={sale.id}>
-                        <td>{index + 1}</td>
-                        <td>{sale.customer}</td>
-                        <td>{sale.product}</td>
-                        <td>₱{sale.total}</td>
-                        <td>
-                          <span
-                            className={`badge bg-${
-                              sale.status === "Completed"
-                                ? "success"
-                                : sale.status === "Pending"
-                                ? "warning"
-                                : "secondary"
-                            }`}
-                          >
-                            {sale.status}
-                          </span>
-                        </td>
-                        <td>{sale.date}</td>
-                      </tr>
-                    ))
-                  )}
-                </tbody>
-              </table>
-            </div>
-          </div>
+          <button
+            className="btn btn-success mb-3"
+            onClick={() => setShowImportModal(true)}
+          >
+            <i className="fas fa-file-import mr-1"></i> Import Sales
+          </button>
+          <SearchBar
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            itemsPerPage={itemsPerPage}
+            onItemsPerPageChange={handleItemsPerPageChange}
+          />
+
+          <SalesTable orders={paginatedItems} />
+
+          <PaginationControls
+            data={filteredBySearch}
+            currentPage={currentPage}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setCurrentPage}
+            onPaginatedDataChange={setPaginatedItems}
+          />
+
+          <ImportModal
+            show={showImportModal}
+            onClose={() => setShowImportModal(false)}
+            form={form}
+            handleChange={handleChange}
+            fileInputRef={fileInputRef}
+            handleImport={handleImport}
+            platformOptions={platformOptions}
+          />
         </div>
       </section>
     </>
   );
 };
-
-// InfoBox Subcomponent
-const InfoBox = ({ label, icon, color, value }) => (
-  <div className="col-md-3 col-sm-6 col-12">
-    <div className={`info-box bg-${color}`}>
-      <span className="info-box-icon">
-        <i className={icon}></i>
-      </span>
-      <div className="info-box-content">
-        <span className="info-box-text">{label}</span>
-        <span className="info-box-number">{value}</span>
-      </div>
-    </div>
-  </div>
-);
 
 export default SalesPage;

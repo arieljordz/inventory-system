@@ -11,7 +11,7 @@ export const addProduct = async (req, res) => {
       price,
       description,
       quantity = 0,
-      category = "", // optional
+      category = "",
       unit = "pcs",
       supplier = "",
       location = "Main Warehouse",
@@ -22,6 +22,7 @@ export const addProduct = async (req, res) => {
 
     const sku = generateSKU({ name, category, variant, size });
 
+    // Check for duplicate SKU
     const existingProduct = await Product.findOne({ sku });
     if (existingProduct) {
       return res.status(400).json({ message: "SKU already exists" });
@@ -49,19 +50,25 @@ export const addProduct = async (req, res) => {
       supplier,
       location,
       status,
+      variant,
+      size,
       image: imageUrl,
       imageId,
     });
 
     const savedProduct = await newProduct.save();
 
+    // Create an initial inventory record if quantity > 0
     if (quantity > 0) {
       await InventoryDetail.create({
         product: savedProduct._id,
+        order: null, // no order since this is initial stock
         movementType: MovementTypeEnum.IN,
         quantity,
         remarks: "Initial stock",
         status: savedProduct.status,
+        courier: "",
+        platform: "",
       });
     }
 

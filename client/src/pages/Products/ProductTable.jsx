@@ -49,7 +49,11 @@ const ProductTable = ({ products = [], onEdit, onDelete, onRestock }) => {
           <td className="text-center align-middle">
             <StatusBadge
               status={product.status}
-              customColorMap={{ Available: "success" }}
+              customLabelMap={{
+                Available: "In Stock",
+                "For Pick Up": "Awaiting Pickup",
+                "Out of Stock": "No Stock",
+              }}
             />
           </td>
           <td className="text-center align-middle">

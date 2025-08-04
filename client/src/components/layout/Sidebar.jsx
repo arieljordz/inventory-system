@@ -17,11 +17,11 @@ const menuItems = [
     label: "Orders",
     icon: "fas fa-shopping-cart", // Order cart icon
   },
-  // {
-  //   path: "/trackings",
-  //   label: "Trackings",
-  //   icon: "fas fa-map-marker-alt", // Location/Tracking
-  // },
+  {
+    path: "/trackings",
+    label: "Trackings",
+    icon: "fas fa-map-marker-alt", // Location/Tracking
+  },
   {
     path: "/inventory",
     label: "Inventory",

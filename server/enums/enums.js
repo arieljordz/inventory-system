@@ -18,8 +18,24 @@ export const MovementTypeEnum = Object.freeze({
   OUT: "OUT",
 });
 
+export const UnitTypeEnum = Object.freeze({
+  PIECE: "pcs",
+});
+
 export const ReportTypeEnum = Object.freeze({
   INVENTORY: "Inventory",
   SALES: "Sales",
   PICKUPS: "Pickups",
+});
+
+export const PlatformEnum = Object.freeze({
+  SHOPEE: "Shopee",
+  TIKTOK: "Tiktok",
+  LAZADA: "Lazada",
+});
+
+export const CourierEnum = Object.freeze({
+  SPX: "Standard Local-SPX Express",
+  JNT: "Standard Local-J&T Express",
+  LBC: "Standard Local-LBC Express",
 });

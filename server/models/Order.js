@@ -13,6 +13,16 @@ const orderSchema = new mongoose.Schema(
       required: true,
       min: 1,
     },
+    platformOrderId: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    platform: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     courier: {
       type: String,
       required: true,
@@ -22,6 +32,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       enum: Object.values(StatusEnum),
       default: StatusEnum.FOR_PICK_UP,
+    },
+    isPaid: {
+      type: Boolean,
+      default: false,
     },
     remarks: {
       type: String,

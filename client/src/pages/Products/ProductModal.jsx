@@ -1,30 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-
-// Reusable input component
-const TextInput = ({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  required = false,
-  type = "text",
-  disabled = false,
-}) => (
-  <Form.Group controlId={name} className="mb-2">
-    <Form.Label>{label}</Form.Label>
-    <Form.Control
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-      disabled={disabled}
-    />
-  </Form.Group>
-);
+import { UnitTypeEnum } from "../../enums/enums";
+import { TextInput, TextArea, SelectInput } from "../../components/common/FormInputs";
 
 const ProductModal = ({
   isOpen,
@@ -35,6 +12,15 @@ const ProductModal = ({
   isEditMode,
 }) => {
   const [imagePreview, setImagePreview] = useState(null);
+
+  const unitOptions = useMemo(
+    () =>
+      Object.entries(UnitTypeEnum).map(([key, value]) => ({
+        label: value,
+        value: key,
+      })),
+    []
+  );
 
   useEffect(() => {
     if (form.image && typeof form.image === "object") {
@@ -56,30 +42,26 @@ const ProductModal = ({
         </Modal.Header>
 
         <Modal.Body>
-          <Row>
-            <Col md={6}>
-              <TextInput
-                label="Name"
-                name="name"
-                value={form.name}
-                onChange={onChange}
-                placeholder="Enter product name"
-                required
-              />
-            </Col>
-            <Col md={6}>
-              <TextInput
-                label="Variant"
-                name="variant"
-                value={form.variant}
-                onChange={onChange}
-                placeholder="Enter variant (optional)"
-              />
-            </Col>
-          </Row>
+          <TextArea
+            label="Product Name"
+            name="name"
+            value={form.name}
+            onChange={onChange}
+            placeholder="Enter product name"
+            required
+          />
+
+          <TextArea
+            label="Product Description"
+            name="description"
+            value={form.description}
+            onChange={onChange}
+            placeholder="Enter product description"
+            required
+          />
 
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <TextInput
                 label="Price"
                 name="price"
@@ -88,9 +70,10 @@ const ProductModal = ({
                 placeholder="Enter product price"
                 required
                 type="number"
+                max={6}
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <TextInput
                 label="Quantity"
                 name="quantity"
@@ -102,23 +85,27 @@ const ProductModal = ({
                 disabled={isEditMode}
               />
             </Col>
+            <Col md={4}>
+              <SelectInput
+                label="Unit"
+                name="unit"
+                value={form.unit}
+                onChange={onChange}
+                options={unitOptions}
+                required
+              />
+            </Col>
           </Row>
 
           <Row>
             <Col md={6}>
-              <Form.Group controlId="unit" className="mb-2">
-                <Form.Label>Unit</Form.Label>
-                <Form.Control
-                  as="select"
-                  name="unit"
-                  value={form.unit}
-                  onChange={onChange}
-                >
-                  <option value="pcs">pcs</option>
-                  {/* <option value="kg">kg</option>
-                  <option value="liters">liters</option> */}
-                </Form.Control>
-              </Form.Group>
+              <TextInput
+                label="Variant"
+                name="variant"
+                value={form.variant}
+                onChange={onChange}
+                placeholder="Enter variant (optional)"
+              />
             </Col>
             <Col md={6}>
               <TextInput
@@ -131,19 +118,7 @@ const ProductModal = ({
             </Col>
           </Row>
 
-          <Form.Group controlId="description" className="mb-2">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              as="textarea"
-              name="description"
-              value={form.description}
-              onChange={onChange}
-              placeholder="Enter product description"
-              rows={2}
-            />
-          </Form.Group>
-
-          <Form.Group controlId="productImage">
+          <Form.Group controlId="productImage" className="mb-2">
             <Form.Label>Image</Form.Label>
             <Form.Control
               type="file"

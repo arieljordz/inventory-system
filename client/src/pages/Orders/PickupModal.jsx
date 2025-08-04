@@ -1,47 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-
-const TextInput = ({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  required = false,
-  type = "text",
-  disabled = false,
-  inputRef = null,
-  min,
-  max,
-}) => (
-  <Form.Group controlId={name} className="mb-2">
-    <Form.Label>{label}</Form.Label>
-    <Form.Control
-      type={type}
-      name={name}
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      required={required}
-      disabled={disabled}
-      ref={inputRef}
-      min={min}
-      max={max}
-    />
-  </Form.Group>
-);
+import { PlatformEnum, CourierEnum } from "../../enums/enums";
+import { TextInput, SelectInput } from "../../components/common/FormInputs";
 
 const PickupModal = ({
   show,
   selectedProduct,
   form,
-  setForm,
   getQuantity,
   onClose,
+  onChange,
   handleConfirmPickup,
 }) => {
   const inputRef = useRef(null);
   const [showOverflowWarning, setShowOverflowWarning] = useState(false);
+
+  const platformOptions = useMemo(
+    () =>
+      Object.entries(PlatformEnum).map(([key, value]) => ({
+        label: value,
+        value: key,
+      })),
+    []
+  );
+
+  const courierOptions = useMemo(
+    () =>
+      Object.entries(CourierEnum).map(([key, value]) => ({
+        label: value,
+        value: value,
+      })),
+    []
+  );
 
   const inputQty = Number(form.quantity);
   const availableQty = getQuantity?.() || 0;
@@ -82,7 +72,7 @@ const PickupModal = ({
             name="quantity"
             type="number"
             value={form.quantity}
-            onChange={(e) => setForm({ ...form, quantity: e.target.value })}
+            onChange={onChange}
             placeholder="Enter quantity"
             required
             inputRef={inputRef}
@@ -96,13 +86,31 @@ const PickupModal = ({
             </small>
           )}
 
+          <SelectInput
+            label="Platform"
+            name="platform"
+            value={form.platform}
+            onChange={onChange}
+            options={platformOptions}
+            required
+          />
+
           <TextInput
+            label="Platform OrderId"
+            name="platformOrderId"
+            type="text"
+            value={form.platformOrderId}
+            onChange={onChange}
+            placeholder="Enter orderId"
+            required
+          />
+
+          <SelectInput
             label="Courier"
             name="courier"
-            type="text"
             value={form.courier}
-            onChange={(e) => setForm({ ...form, courier: e.target.value })}
-            placeholder="Enter courier"
+            onChange={onChange}
+            options={courierOptions}
             required
           />
         </Modal.Body>
@@ -118,6 +126,8 @@ const PickupModal = ({
               !form.quantity ||
               inputQty <= 0 ||
               inputQty > availableQty ||
+              !form.platform.trim() ||
+              !form.platformOrderId.trim() ||
               !form.courier.trim()
             }
           >

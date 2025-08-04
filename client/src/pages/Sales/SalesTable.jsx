@@ -6,11 +6,12 @@ import {
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
 
-const OrderTable = ({ orders = [], onOpenModal }) => {
+const SalesTable = ({ orders = [] }) => {
+  // console.log("orders:", orders);
   return (
     <div className="card">
       <div className="card-header">
-        <h3 className="card-title">Available Products</h3>
+        <h3 className="card-title">Order List</h3>
       </div>
 
       <div className="card-body table-responsive p-0">
@@ -18,65 +19,60 @@ const OrderTable = ({ orders = [], onOpenModal }) => {
           <thead>
             <tr>
               <th className="text-center p-1">#</th>
+              <th className="text-center">Platform</th>
+              <th className="text-center">Platform OrderId</th>
               <th className="text-center">SKU</th>
               <th className="text-center">Name</th>
-              <th className="text-center">Description</th>
+              <th className="text-center">Courier</th>
               <th className="text-center">Quantity</th>
               <th className="text-center">Total Price</th>
-              <th className="text-center">Date Added</th>
-              <th className="text-center">Status</th>
-              <th className="text-center">Actions</th>
+              <th className="text-center">Date Ordered</th>
+              <th className="text-center">Payment Status</th>
             </tr>
           </thead>
           <tbody>
             {orders.length === 0 ? (
               <tr>
-                <td colSpan="9" className="text-center text-muted py-4">
+                <td colSpan="10" className="text-center text-muted py-4">
                   No orders found.
                 </td>
               </tr>
             ) : (
-              orders.map((product, index) => (
-                <tr key={product._id || index}>
+              orders.map((order, index) => (
+                <tr key={order._id || index}>
                   <td className="text-center align-middle p-2">{index + 1}</td>
                   <td className="text-center align-middle">
-                    {product.sku || "-"}
+                    {order.platform || "-"}
                   </td>
                   <td className="text-center align-middle">
-                    {product.name || "-"}
+                    {order.platformOrderId || "-"}
                   </td>
                   <td className="text-center align-middle">
-                    {product.description || "-"}
+                    {order.product.sku || "-"}
                   </td>
                   <td className="text-center align-middle">
-                    {product.quantity || 0}
+                    {order.product.name || "-"}
+                  </td>
+                  <td className="text-center align-middle">
+                    {order.courier || "-"}
+                  </td>
+                  <td className="text-center align-middle">
+                    {order.quantity || 0}
                   </td>
                   <td className="text-right align-middle">
                     {formatAmount(
-                      computeTotalPrice(product.quantity, product.price)
+                      computeTotalPrice(order.quantity, order.product.price)
                     )}
                   </td>
                   <td className="text-center align-middle">
-                    {formatDate(product.createdAt)}
+                    {formatDate(order.createdAt)}
                   </td>
                   <td className="text-center align-middle">
                     <StatusBadge
-                      status={product.status}
-                      customLabelMap={{
-                        Available: "In Stock",
-                        "For Pick Up": "Awaiting Pickup",
-                        "Out of Stock": "No Stock",
-                      }}
+                      status={order.isPaid}
+                      customColorMap={{ true: "success", false: "danger" }}
+                      customLabelMap={{ true: "Paid", false: "Unpaid" }}
                     />
-                  </td>
-                  <td className="text-center align-middle">
-                    <button
-                      className="btn btn-sm btn-primary"
-                      onClick={() => onOpenModal(product)}
-                      title="Tag for Pick Up"
-                    >
-                      <i className="fas fa-truck-loading mr-1"></i>
-                    </button>
                   </td>
                 </tr>
               ))
@@ -88,4 +84,4 @@ const OrderTable = ({ orders = [], onOpenModal }) => {
   );
 };
 
-export default OrderTable;
+export default SalesTable;
