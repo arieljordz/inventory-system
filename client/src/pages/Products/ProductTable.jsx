@@ -3,8 +3,6 @@ import { formatAmount, formatDate } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
 
 const ProductTable = ({ products = [], onEdit, onDelete, onRestock }) => {
-  // console.log("products:", products);
-
   const renderActions = (product) => (
     <>
       <button
@@ -36,32 +34,33 @@ const ProductTable = ({ products = [], onEdit, onDelete, onRestock }) => {
       products.map((product, index) => (
         <tr key={product._id}>
           <td className="text-center align-middle p-2">{index + 1}</td>
-          <td className="text-center align-middle">
-            {product.serialNumber || "N/A"}
-          </td>
+          <td className="text-center align-middle">{product.sku || "N/A"}</td>
           <td className="text-center align-middle">{product.name || "N/A"}</td>
-          <td className="text-right align-middle">
-            {formatAmount(product.price)}
-          </td>
           <td className="text-center align-middle">
             {product.description || "-"}
           </td>
-          <td className="text-center align-middle">{product.quantity ?? 0}</td>
           <td className="text-center align-middle">
-            {formatDate(product.createdAt)}
+            {product.variant || "N/A"}
           </td>
+          <td className="text-right align-middle">
+            {formatAmount(product.price)}
+          </td>
+          <td className="text-center align-middle">{product.quantity ?? 0}</td>
           <td className="text-center align-middle">
             <StatusBadge
               status={product.status}
               customColorMap={{ Available: "success" }}
             />
           </td>
+          <td className="text-center align-middle">
+            {formatDate(product.createdAt)}
+          </td>
           <td className="text-center align-middle">{renderActions(product)}</td>
         </tr>
       ))
     ) : (
       <tr>
-        <td colSpan="9" className="text-center text-muted py-3">
+        <td colSpan="10" className="text-center text-muted py-3">
           No products found.
         </td>
       </tr>
@@ -77,13 +76,14 @@ const ProductTable = ({ products = [], onEdit, onDelete, onRestock }) => {
           <thead className="thead-light">
             <tr>
               <th className="text-center p-1">#</th>
-              <th className="text-center">Serial Number</th>
-              <th className="text-center">Name</th>
-              <th className="text-right">Price</th>
+              <th className="text-center">SKU</th>
+              <th className="text-center">Product Name</th>
               <th className="text-center">Description</th>
+              <th className="text-center">Variant</th>
+              <th className="text-right">Price</th>
               <th className="text-center">Quantity</th>
-              <th className="text-center">Date Added</th>
               <th className="text-center">Status</th>
+              <th className="text-center">Date Added</th>
               <th className="text-center" style={{ width: "150px" }}>
                 Actions
               </th>

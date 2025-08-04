@@ -20,8 +20,13 @@ export const getInventoryMovements = (startDate, endDate) =>
 export const getInventoryDetailsByStatus = (status) =>
   api.get(`/api/inventory-details/status/${status}`);
 
-export const tagInventoryForPickUp = (id, pickupQty) =>
-  api.post(`/api/inventory-details/tag/${id}`, { pickupQty });
+export const tagInventoryForPickUp = (id, pickupQty, courier, remarks = "") =>
+  api.post(`/api/inventory-details/tag/${id}`, {
+    pickupQty,
+    courier,
+    remarks,
+  });
+
 
 
 

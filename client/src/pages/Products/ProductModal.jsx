@@ -36,7 +36,6 @@ const ProductModal = ({
 }) => {
   const [imagePreview, setImagePreview] = useState(null);
 
-  console.log("form:", form);
   useEffect(() => {
     if (form.image && typeof form.image === "object") {
       setImagePreview(URL.createObjectURL(form.image));
@@ -60,22 +59,21 @@ const ProductModal = ({
           <Row>
             <Col md={6}>
               <TextInput
-                label="Serial Number"
-                name="serialNumber"
-                value={form.serialNumber}
-                onChange={onChange}
-                placeholder="Enter serial number"
-                required
-              />
-            </Col>
-            <Col md={6}>
-              <TextInput
                 label="Name"
                 name="name"
                 value={form.name}
                 onChange={onChange}
                 placeholder="Enter product name"
                 required
+              />
+            </Col>
+            <Col md={6}>
+              <TextInput
+                label="Variant"
+                name="variant"
+                value={form.variant}
+                onChange={onChange}
+                placeholder="Enter variant (optional)"
               />
             </Col>
           </Row>
@@ -106,7 +104,34 @@ const ProductModal = ({
             </Col>
           </Row>
 
-          <Form.Group controlId="description">
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="unit" className="mb-2">
+                <Form.Label>Unit</Form.Label>
+                <Form.Control
+                  as="select"
+                  name="unit"
+                  value={form.unit}
+                  onChange={onChange}
+                >
+                  <option value="pcs">pcs</option>
+                  {/* <option value="kg">kg</option>
+                  <option value="liters">liters</option> */}
+                </Form.Control>
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <TextInput
+                label="Supplier"
+                name="supplier"
+                value={form.supplier}
+                onChange={onChange}
+                placeholder="Enter supplier (optional)"
+              />
+            </Col>
+          </Row>
+
+          <Form.Group controlId="description" className="mb-2">
             <Form.Label>Description</Form.Label>
             <Form.Control
               as="textarea"

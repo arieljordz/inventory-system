@@ -12,6 +12,7 @@ import MainLayout from "./layouts/MainLayout";
 import LoginPage from "./pages/Login/LoginPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductsPage from "./pages/Products/ProductsPage";
+import OrderPage from "./pages/Orders/OrderPage";
 import TrackingsPage from "./pages/Trackings/TrackingsPage";
 import SalesPage from "./pages/Sales/SalesPage";
 import ReportsPage from "./pages/Reports/ReportsPage";
@@ -31,6 +32,7 @@ function App() {
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<ProductsPage />} />
+            <Route path="/orders" element={<OrderPage />} />
             <Route path="/trackings" element={<TrackingsPage />} />
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/sales" element={<SalesPage />} />

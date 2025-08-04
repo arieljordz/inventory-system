@@ -1,8 +1,47 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
+const menuItems = [
+  {
+    path: "/dashboard",
+    label: "Dashboard",
+    icon: "fas fa-tachometer-alt",
+  },
+  {
+    path: "/products",
+    label: "Products",
+    icon: "fas fa-boxes", // Inventory items
+  },
+  {
+    path: "/orders",
+    label: "Orders",
+    icon: "fas fa-shopping-cart", // Order cart icon
+  },
+  // {
+  //   path: "/trackings",
+  //   label: "Trackings",
+  //   icon: "fas fa-map-marker-alt", // Location/Tracking
+  // },
+  {
+    path: "/inventory",
+    label: "Inventory",
+    icon: "fas fa-warehouse", // Warehouse
+  },
+  {
+    path: "/sales",
+    label: "Sales",
+    icon: "fas fa-cash-register", // Cash register
+  },
+  {
+    path: "/reports",
+    label: "Reports",
+    icon: "fas fa-chart-bar", // Report chart
+  },
+];
+
 const Sidebar = () => {
   const location = useLocation();
+
   const isActive = (path) => location.pathname.startsWith(path);
 
   return (
@@ -15,66 +54,21 @@ const Sidebar = () => {
           className="brand-image img-circle elevation-3"
           style={{ opacity: 0.9, width: "35px", height: "35px" }}
         />
-        <span className="brand-text ml-2">INVENTORY</span>
+        <span className="brand-text ml-2 font-weight-light">INVENTORY</span>
       </div>
 
+      {/* Sidebar Menu */}
       <div className="sidebar">
         <nav className="mt-2">
           <ul className="nav nav-pills nav-sidebar flex-column" role="menu">
-            <li className="nav-item">
-              <Link
-                to="/dashboard"
-                className={`nav-link ${isActive("/dashboard") ? "active" : ""}`}
-              >
-                <i className="nav-icon fas fa-tachometer-alt"></i>
-                <p>Dashboard</p>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/products"
-                className={`nav-link ${isActive("/products") ? "active" : ""}`}
-              >
-                <i className="nav-icon fas fa-boxes"></i>
-                <p>Products</p>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/trackings"
-                className={`nav-link ${isActive("/trackings") ? "active" : ""}`}
-              >
-                <i className="nav-icon fas fa-shipping-fast"></i>
-                <p>Tracking</p>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/inventory"
-                className={`nav-link ${isActive("/inventory") ? "active" : ""}`}
-              >
-                <i className="nav-icon fas fa-box"></i>
-                <p>Inventory</p>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/sales"
-                className={`nav-link ${isActive("/sales") ? "active" : ""}`}
-              >
-                <i className="nav-icon fas fa-chart-line"></i>
-                <p>Sales</p>
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                to="/reports"
-                className={`nav-link ${isActive("/reports") ? "active" : ""}`}
-              >
-                <i className="nav-icon fas fa-file-alt"></i>
-                <p>Reports</p>
-              </Link>
-            </li>
+            {menuItems.map(({ path, label, icon }) => (
+              <li className="nav-item" key={path}>
+                <Link to={path} className={`nav-link ${isActive(path) ? "active" : ""}`}>
+                  <i className={`nav-icon ${icon}`}></i>
+                  <p>{label}</p>
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

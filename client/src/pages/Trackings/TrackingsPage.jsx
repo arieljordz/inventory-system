@@ -111,7 +111,7 @@ const TrackingsPage = () => {
   const filteredBySearch = useMemo(() => {
     return filteredData.filter((item) => {
       const product = item.product || {};
-      const searchableFields = ["name", "serialNumber", "description", "sku"];
+      const searchableFields = ["name", "description", "sku"];
 
       return searchableFields.some((field) =>
         String(product[field] || "")

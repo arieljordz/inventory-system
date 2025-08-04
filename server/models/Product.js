@@ -3,11 +3,6 @@ import { StatusEnum } from "../enums/enums.js";
 
 const productSchema = new mongoose.Schema(
   {
-    serialNumber: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     name: {
       type: String,
       required: true,
@@ -32,6 +27,30 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
       min: 0,
+    },
+    sku: {
+      type: String,
+      unique: true,
+    },
+    variant: {
+      type: String,
+      default: "",
+    },
+    category: {
+      type: String,
+      default: "",
+    },
+    unit: {
+      type: String,
+      default: "pcs",
+    },
+    supplier: {
+      type: String,
+      default: "",
+    },
+    location: {
+      type: String,
+      default: "Main Warehouse",
     },
     status: {
       type: String,

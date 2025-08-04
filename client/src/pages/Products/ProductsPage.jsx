@@ -9,6 +9,7 @@ import {
   deleteProduct,
   restockProduct,
 } from "../../services/productService";
+import { StatusEnum } from "../../enums/enums";
 import ProductTable from "./ProductTable";
 import ProductModal from "./ProductModal";
 import Navpath from "../../components/common/Navpath";
@@ -17,11 +18,17 @@ import PaginationControls from "../../components/common/PaginationControls";
 import RestockModal from "./RestockModal";
 
 const initialFormState = {
-  serialNumber: "",
   name: "",
   price: "",
   quantity: "",
   description: "",
+  sku: "",
+  category: "",
+  unit: "pcs",
+  supplier: "",
+  location: "Main Warehouse",
+  status: StatusEnum.AVAILABLE,
+  variant: "",
   image: null,
 };
 
@@ -62,7 +69,7 @@ const ProductsPage = () => {
   // Filtered products
   const filteredBySearch = useMemo(() => {
     return products.filter((item) =>
-      ["serialNumber", "name", "price", "description"].some((field) =>
+      ["name", "price", "description"].some((field) =>
         String(item[field] || "")
           .toLowerCase()
           .includes(searchTerm.toLowerCase())

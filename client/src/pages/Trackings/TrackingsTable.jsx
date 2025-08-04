@@ -65,10 +65,10 @@ const TrackingsTable = ({
             <thead>
               <tr>
                 <th className="text-center p-1">#</th>
-                <th className="text-center">Serial Number</th>
+                <th className="text-center">SKU</th>
                 <th className="text-center">Name</th>
-                <th className="text-right">Price</th>
                 <th className="text-center">Description</th>
+                <th className="text-right">Price</th>
                 <th className="text-center">Quantity</th>
                 <th className="text-center">Date Added</th>
                 <th className="text-center">Status</th>
@@ -100,14 +100,12 @@ const TrackingsTable = ({
                       <td className="text-center align-middle p-2">
                         {index + 1}
                       </td>
-                      <td className="text-center">
-                        {product.serialNumber || "-"}
-                      </td>
+                      <td className="text-center">{product.sku || "-"}</td>
                       <td className="text-center">{product.name || "-"}</td>
-                      <td className="text-right">{priceDisplay}</td>
                       <td className="text-center">
                         {product.description || "-"}
                       </td>
+                      <td className="text-right">{priceDisplay}</td>
                       <td className="text-center">{quantity}</td>
                       <td className="text-center">
                         {formatDate(product.createdAt)}
@@ -131,7 +129,6 @@ const TrackingsTable = ({
                           }
                         >
                           <i className="fas fa-truck-loading mr-1"></i>
-                          {isAlreadyTagged ? "Tagged" : "Pick Up"}
                         </button>
                       </td>
                     </tr>

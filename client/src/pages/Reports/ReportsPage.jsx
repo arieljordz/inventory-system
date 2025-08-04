@@ -48,7 +48,6 @@ const ReportsPage = () => {
   const formatReportData = () => {
     return reportData.map((item) => ({
       Product: item.product?.name || "-",
-      "Serial Number": item.product?.serialNumber || "-",
       "Movement Type": item.movementType,
       Quantity: item.quantity,
       Status: item.status,
@@ -178,7 +177,6 @@ const ReportsPage = () => {
                     <thead>
                       <tr>
                         <th>Product</th>
-                        <th>Serial Number</th>
                         <th>Movement Type</th>
                         <th>Quantity</th>
                         <th>Status</th>
@@ -189,7 +187,6 @@ const ReportsPage = () => {
                       {reportData.map((item, index) => (
                         <tr key={index}>
                           <td>{item.product?.name || "-"}</td>
-                          <td>{item.product?.serialNumber || "-"}</td>
                           <td>{item.movementType}</td>
                           <td>{item.quantity}</td>
                           <td>{item.status}</td>
