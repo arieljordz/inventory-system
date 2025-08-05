@@ -5,6 +5,7 @@ import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum } from "../enums/enums.js";
+import { logAudit } from "../utils/auditLogger.js";
 
 export const getAllOrders = async (req, res) => {
   try {
@@ -50,10 +51,14 @@ export const importOrdersByPlatform = async (req, res) => {
       return res.status(400).json({ message: "No valid file uploaded" });
     }
 
-    const ext = path.extname(req.file.originalname).toLowerCase().replace(".", "");
+    const ext = path
+      .extname(req.file.originalname)
+      .toLowerCase()
+      .replace(".", "");
     if (!["csv", "xlsx", "xls"].includes(ext)) {
       return res.status(400).json({
-        message: "Unsupported file format. Please upload .csv, .xlsx, or .xls files.",
+        message:
+          "Unsupported file format. Please upload .csv, .xlsx, or .xls files.",
       });
     }
 
@@ -82,7 +87,10 @@ export const importOrdersByPlatform = async (req, res) => {
       // Check if order already exists
       const existingOrder = await Order.findOne({ platformOrderId });
       if (existingOrder) {
-        results.skipped.push({ platformOrderId, reason: "Order already exists" });
+        results.skipped.push({
+          platformOrderId,
+          reason: "Order already exists",
+        });
         continue;
       }
 
@@ -137,6 +145,23 @@ export const importOrdersByPlatform = async (req, res) => {
         order,
         inventoryDetail,
       });
+
+      // ✅ Log audit
+      await logAudit({
+        action: "IMPORT_ORDER",
+        user: req.user?._id || null, // assumes user is attached via middleware
+        description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
+        collectionName: "Order",
+        documentId: order._id,
+        before: null,
+        after: {
+          order,
+          inventoryDetail,
+          product: updatedProduct,
+        },
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
     }
 
     res.status(201).json({
@@ -152,5 +177,3 @@ export const importOrdersByPlatform = async (req, res) => {
     res.status(500).json({ message: "Failed to import orders" });
   }
 };
-
-

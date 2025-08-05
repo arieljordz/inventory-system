@@ -2,6 +2,7 @@ import path from "path";
 import xlsx from "xlsx";
 import moment from "moment-timezone";
 import Order from "../models/Order.js";
+import { logAudit } from "../utils/auditLogger.js";
 
 export const importSalesByPlatform = async (req, res) => {
   try {
@@ -77,6 +78,19 @@ export const importSalesByPlatform = async (req, res) => {
       order.isPaid = true;
       await order.save();
       results.updated.push(order._id);
+
+      // ✅ Log audit
+      await logAudit({
+        action: "UPDATE",
+        user: req.user?._id, // assuming `req.user` is populated via middleware
+        description: `Marked order ${order._id} as paid via file import (${platform})`,
+        collectionName: "Order",
+        documentId: order._id,
+        before,
+        after: { isPaid: true },
+        ip: req.ip,
+        userAgent: req.get("User-Agent"),
+      });
     }
 
     res.json({

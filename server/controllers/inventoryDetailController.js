@@ -2,6 +2,7 @@ import InventoryDetail from "../models/InventoryDetail.js";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
+import { logAudit } from "../utils/auditLogger.js";
 import moment from "moment-timezone";
 
 // GET /api/inventory/remaining-by-product
@@ -68,7 +69,9 @@ export const getInventoryStats = async (req, res) => {
     const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
 
     // 1. Count and total quantity of available products
-    const availableProducts = await Product.find({ status: StatusEnum.AVAILABLE });
+    const availableProducts = await Product.find({
+      status: StatusEnum.AVAILABLE,
+    });
 
     const availableProductCount = availableProducts.length;
     const totalAvailableQuantity = availableProducts.reduce(
@@ -149,7 +152,9 @@ export const tagOrderForPickUp = async (req, res) => {
     }
 
     if (quantity > product.quantity) {
-      return res.status(400).json({ message: "Pickup quantity exceeds available stock." });
+      return res
+        .status(400)
+        .json({ message: "Pickup quantity exceeds available stock." });
     }
 
     const remainingQty = product.quantity - quantity;
@@ -186,6 +191,19 @@ export const tagOrderForPickUp = async (req, res) => {
       remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
     });
 
+    // ✅ Log audit
+    await logAudit({
+      action: "TAG_FOR_PICKUP",
+      user: req.user?._id || null, // assuming you have user attached to request
+      description: `Tagged ${quantity} item(s) for pickup.`,
+      collectionName: "Product",
+      documentId: product._id,
+      before: beforeProduct,
+      after: updatedProduct,
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
+
     return res.status(200).json({
       message: `${quantity} item(s) tagged for pickup.`,
       product: updatedProduct,
@@ -196,5 +214,3 @@ export const tagOrderForPickUp = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-

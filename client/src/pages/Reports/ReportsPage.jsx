@@ -8,7 +8,12 @@ import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { toast } from "react-toastify";
 import { getCurrentDate } from "../../utils/commonUtils";
-import { formatReportData, getCenteredColumns } from "../../utils/reportUtils";
+import {
+  formatReportData,
+  getCenteredColumns,
+  getReportFileName,
+  getReportTitleText,
+} from "../../utils/reportUtils";
 import ReportFilter from "./ReportFilter";
 import ReportTable from "./ReportTable";
 
@@ -66,11 +71,19 @@ const ReportsPage = () => {
     try {
       const headers = Object.keys(formattedReport[0]);
       const body = formattedReport.map((row) => Object.values(row));
-      const centerCols = getCenteredColumns(activeReportType); // ✅ use activeReportType
+      const centerCols = getCenteredColumns(activeReportType);
+      const { startDate, endDate } = dateRange;
+
+      const filename = getReportFileName(
+        activeReportType,
+        startDate,
+        endDate,
+        format === "pdf" ? "pdf" : "xlsx"
+      );
 
       if (format === "pdf") {
         const doc = new jsPDF();
-        doc.text(`Report: ${activeReportType.toUpperCase()}`, 14, 15); // ✅ use activeReportType
+        doc.text(getReportTitleText(activeReportType, startDate, endDate), 14, 15);
 
         const columnStyles = {};
         headers.forEach((col, idx) => {
@@ -86,7 +99,7 @@ const ReportsPage = () => {
           columnStyles,
         });
 
-        doc.save(`report-${activeReportType}-${Date.now()}.pdf`); // ✅ use activeReportType
+        doc.save(filename);
         toast.success("PDF report downloaded.");
       }
 
@@ -94,10 +107,8 @@ const ReportsPage = () => {
         const worksheet = XLSX.utils.json_to_sheet(formattedReport);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-        XLSX.writeFile(
-          workbook,
-          `report-${activeReportType}-${Date.now()}.xlsx`
-        ); // ✅ use activeReportType
+
+        XLSX.writeFile(workbook, filename);
         toast.success("Excel report downloaded.");
       }
     } catch (err) {

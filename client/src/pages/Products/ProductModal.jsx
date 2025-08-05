@@ -74,7 +74,6 @@ const ProductModal = ({
                 placeholder="Enter product price"
                 required
                 type="number"
-                max={6}
               />
             </Col>
             <Col md={4}>

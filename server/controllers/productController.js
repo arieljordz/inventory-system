@@ -3,6 +3,7 @@ import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
+import { logAudit } from "../utils/auditLogger.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -31,13 +32,13 @@ export const addProduct = async (req, res) => {
     let imageUrl = "";
     let imageId = "";
 
-    // if (req.file) {
-    //   const result = await cloudinary.uploader.upload(req.file.path, {
-    //     folder: "products",
-    //   });
-    //   imageUrl = result.secure_url;
-    //   imageId = result.public_id;
-    // }
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "products",
+      });
+      imageUrl = result.secure_url;
+      imageId = result.public_id;
+    }
 
     const newProduct = new Product({
       name,
@@ -62,7 +63,7 @@ export const addProduct = async (req, res) => {
     if (quantity > 0) {
       await InventoryDetail.create({
         product: savedProduct._id,
-        order: null, // no order since this is initial stock
+        order: null,
         movementType: MovementTypeEnum.IN,
         quantity,
         remarks: "Initial stock",
@@ -71,6 +72,18 @@ export const addProduct = async (req, res) => {
         platform: "",
       });
     }
+
+    // ✅ Log audit
+    await logAudit({
+      action: "create",
+      user: req.user?._id, // assumes you're using auth middleware
+      description: `Added new product: ${name}`,
+      collectionName: "Product",
+      documentId: savedProduct._id,
+      after: savedProduct.toObject(),
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
 
     res.status(201).json(savedProduct);
   } catch (error) {
@@ -164,6 +177,19 @@ export const updateProduct = async (req, res) => {
       }
     );
 
+    // ✅ Log audit
+    await logAudit({
+      action: "update",
+      user: req.user?._id,
+      description: `Updated product: ${updatedProduct.name}`,
+      collectionName: "Product",
+      documentId: updatedProduct._id,
+      before: product.toObject(),
+      after: updatedProduct.toObject(),
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
+
     res.status(200).json(updatedProduct);
   } catch (error) {
     console.error("Update Product Error:", error);
@@ -188,6 +214,19 @@ export const deleteProduct = async (req, res) => {
 
     // Optional: Delete related inventory details
     await InventoryDetail.deleteMany({ product: req.params.id });
+
+    // ✅ Log audit
+    await logAudit({
+      action: "delete",
+      user: req.user?._id,
+      description: `Deleted product: ${product.name}`,
+      collectionName: "Product",
+      documentId: product._id,
+      before: product.toObject(),
+      after: null,
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
 
     res.status(200).json({ message: "Product deleted successfully" });
   } catch (error) {
@@ -230,6 +269,19 @@ export const restockProduct = async (req, res) => {
       quantity,
       remarks,
       status: StatusEnum.AVAILABLE,
+    });
+
+    // ✅ Log audit
+    await logAudit({
+      action: "restock",
+      user: req.user?._id,
+      description: `Restocked product: ${product.name} (+${quantity})`,
+      collectionName: "Product",
+      documentId: product._id,
+      before,
+      after: product.toObject(),
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
     });
 
     res.status(200).json({ message: "Product restocked", product });

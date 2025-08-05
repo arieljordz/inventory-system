@@ -9,16 +9,16 @@ export const formatReportData = (reportData = [], reportType = "") => {
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       // Inventory Report
       return {
-        Product: item.product?.name || "-",
+        "Product Name": item.product?.name || "-",
         Quantity: item.quantity,
-        "Type": item.movementType || "-",
+        Type: item.movementType || "-",
         Date: date,
         Status: item.status || "-",
       };
     } else {
       // Sales Report
       return {
-        Product: item.product?.name || "-",
+        "Product Name": item.product?.name || "-",
         "Platform Order ID": item.platformOrderId || "-",
         Quantity: item.quantity,
         Platform: item.platform || "-",
@@ -44,4 +44,27 @@ export const getCenteredColumns = (reportType = "") => {
       "Payment Status",
     ];
   }
+};
+
+export const getReportFileName = (
+  reportType,
+  startDate,
+  endDate,
+  extension
+) => {
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const mm = String(date.getMonth() + 1).padStart(2, "0");
+    const dd = String(date.getDate()).padStart(2, "0");
+    const yyyy = date.getFullYear();
+    return `${mm}${dd}${yyyy}`;
+  };
+
+  const start = formatDate(startDate);
+  const end = formatDate(endDate);
+  return `report-${reportType}-${start}-${end}.${extension}`;
+};
+
+export const getReportTitleText = (reportType, startDate, endDate) => {
+  return `Report: ${reportType.toUpperCase()} ${startDate} - ${endDate}`;
 };
