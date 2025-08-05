@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSpinner } from "../../context/SpinnerContext";
 import Navpath from "../../components/common/Navpath";
 import { getProductStats } from "../../services/productService";
 
@@ -7,8 +8,14 @@ const Dashboard = () => {
     totalProducts: 0,
     totalQuantity: 0,
     forPickUp: 0,
-    outOfStock: 0, // ✅ Added outOfStock
+    outOfStock: 0,
   });
+
+  const { hideSpinner } = useSpinner();
+
+  useEffect(() => {
+    hideSpinner();
+  }, [hideSpinner]);
 
   useEffect(() => {
     const fetchStats = async () => {
@@ -44,7 +51,7 @@ const Dashboard = () => {
     },
     {
       color: "danger",
-      count: stats.outOfStock, // ✅ Out of Stock count
+      count: stats.outOfStock,
       label: "Out of Stock",
       icon: "ion ion-close-circled",
     },
