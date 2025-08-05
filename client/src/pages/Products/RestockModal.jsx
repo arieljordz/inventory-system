@@ -72,10 +72,10 @@ const RestockModal = ({ show, onClose, restockForm, onChange, onSubmit }) => {
 
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
-            Cancel
+            <i className="fas fa-times-circle mr-1"></i> Cancel
           </Button>
           <Button type="submit" variant="info">
-            Restock
+            <i className="fas fa-arrow-circle-down mr-1"></i> Restock
           </Button>
         </Modal.Footer>
       </Form>
