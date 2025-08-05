@@ -111,7 +111,7 @@ const ProductsPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    showSpinner(); // 👈 Start spinner
+    showSpinner();
 
     try {
       const formData = new FormData();
@@ -124,8 +124,10 @@ const ProductsPage = () => {
 
       if (isEditMode) {
         await updateProduct(form._id, formData);
+        toast.success("Product updated successfully!");
       } else {
         await createProduct(formData);
+        toast.success("Product created successfully!");
       }
 
       const res = await getProducts();
@@ -133,8 +135,9 @@ const ProductsPage = () => {
       closeModal();
     } catch (err) {
       console.error("Error saving product", err);
+      toast.error("Failed to save product");
     } finally {
-      hideSpinner(); // 👈 Stop spinner regardless of error/success
+      hideSpinner();
     }
   };
 

@@ -15,10 +15,6 @@ export const getReportData = async (req, res) => {
       endDate,
     } = req.query;
 
-    // console.log("Report Type:", reportType);
-    // console.log("Final startDate:", startDate);
-    // console.log("Final endDate:", endDate);
-    // Build date filter
     const dateFilter = {};
     if (startDate || endDate) {
       dateFilter.createdAt = {};
@@ -38,13 +34,15 @@ export const getReportData = async (req, res) => {
 
     let filter = { ...dateFilter };
     let data = [];
+    let isSalesReport = false;
 
     if (
       reportType === ReportTypeEnum.SALES ||
       reportType === ReportTypeEnum.SALES_PAID ||
       reportType === ReportTypeEnum.SALES_UNPAID
     ) {
-      // Sales reports from Order collection
+      isSalesReport = true;
+
       switch (reportType) {
         case ReportTypeEnum.SALES_PAID:
           filter.isPaid = true;
@@ -52,9 +50,7 @@ export const getReportData = async (req, res) => {
         case ReportTypeEnum.SALES_UNPAID:
           filter.isPaid = false;
           break;
-        case ReportTypeEnum.SALES:
         default:
-          // No need to filter `isPaid`
           break;
       }
 
@@ -62,7 +58,6 @@ export const getReportData = async (req, res) => {
         .populate("product", "name serialNumber price")
         .sort({ createdAt: -1 });
     } else {
-      // Inventory reports from InventoryDetail collection
       switch (reportType) {
         case ReportTypeEnum.INVENTORY_IN:
           filter.movementType = MovementTypeEnum.IN;
@@ -70,7 +65,8 @@ export const getReportData = async (req, res) => {
         case ReportTypeEnum.INVENTORY_OUT:
           filter.movementType = MovementTypeEnum.OUT;
           break;
-        // INVENTORY or default includes all types
+        default:
+          break;
       }
 
       data = await InventoryDetail.find(filter)
@@ -78,7 +74,30 @@ export const getReportData = async (req, res) => {
         .sort({ createdAt: -1 });
     }
 
-    res.json(data);
+    // Compute totalAmount per item
+    const tempFormattedData = data.map((item) => {
+      const price = item.product?.price || 0;
+      const quantity = item.quantity || 0;
+      const totalAmount = isSalesReport ? price * quantity : 0;
+
+      return {
+        ...item.toObject(),
+        totalAmount,
+      };
+    });
+
+    // Calculate the grand total for sales report
+    const grandTotalAmount = isSalesReport
+      ? tempFormattedData.reduce((sum, item) => sum + item.totalAmount, 0)
+      : 0;
+
+    // Attach grandTotalAmount to each item
+    const formattedData = tempFormattedData.map((item) => ({
+      ...item,
+      grandTotalAmount,
+    }));
+
+    res.json({ data: formattedData });
   } catch (error) {
     console.error("Error generating report:", error);
     res.status(500).json({ error: "Failed to generate report" });

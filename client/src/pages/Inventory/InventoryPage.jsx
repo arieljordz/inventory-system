@@ -86,7 +86,7 @@ const InventoryPage = () => {
 
   return (
     <>
-      <Navpath levelOne="Inventory" levelTwo="Home" levelThree="Inventory" />
+      <Navpath levelOne="Inventory Management" levelTwo="Home" levelThree="Inventory" />
       <section className="content">
         <div className="container-fluid">
           {/* Info Boxes */}

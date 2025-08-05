@@ -1,94 +1,86 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import axios from "axios";
+import React, { createContext, useContext, useEffect, useState } from "react";
+import api from "../api/api";
 
-const API_URL = import.meta.env.VITE_BASE_API_URL;
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const storeUserData = (data) => {
-    localStorage.setItem("user", JSON.stringify(data));
-    setUser(data);
-  };
-
-  const googleLogin = async (userPayload) => {
+  // Fetch user info using session cookie
+  const fetchUser = async () => {
     try {
-      const { data } = await axios.post(
-        `${API_URL}/api/auth/google-login`,
-        userPayload,
-        { withCredentials: true }
-      );
-
-      if (!data.isVerified) {
-        alert("Your account is not verified yet. Please contact support.");
-        return { success: false, message: "Account not verified" };
-      }
-
-      storeUserData(data);
-
-      return {
-        success: true,
-        message: "Google login successful",
-        redirectPath: "/dashboard",
-      };
+      const res = await api.get("/api/auth/me");
+      setUser(res.data);
     } catch (err) {
-      console.error("Google login error:", err);
-      return { success: false, message: "Google login failed" };
+      setUser(null); 
+    } finally {
+      setLoading(false);
     }
   };
 
-  const fetchSession = async () => {
+  // Login using Google or other methods
+  const googleLogin = async (payload) => {
     try {
-      const { data } = await axios.get(`${API_URL}/api/auth/me`, {
-        withCredentials: true,
-      });
+      // console.log("payload:", payload);
+      const res = await api.post(
+        "/api/auth/google-login",
+        { token: payload },
+        { withCredentials: true }
+      );
 
-      if (!data.isVerified) {
-        alert("Your account is not verified yet. Please contact support.");
-        localStorage.removeItem("user");
-        setUser(null);
-        return;
+      // Fetch the logged-in user info
+      setUser(res.data);
+
+      // Check if user is verified
+      if (!res.data?.isVerified) {
+        return {
+          success: false,
+          message:
+            "Your account is not verified. Please wait for admin approval.",
+        };
       }
 
-      setUser(data);
-    } catch (error) {
-      setUser(null);
+      // Proceed if verified
+      return { success: true, redirectPath: "/dashboard" };
+    } catch (err) {
+      console.error(
+        "Login failed:",
+        err.response?.data?.message || err.message
+      );
+      return {
+        success: false,
+        message: err.response?.data?.message || "Login failed",
+      };
+    } finally {
+      setLoading(false);
     }
   };
 
   const logout = async () => {
     try {
-      await axios.post(`${API_URL}/api/auth/logout`, {}, {
-        withCredentials: true,
-      });
-      localStorage.removeItem("user");
+      await api.post("/api/auth/logout");
       setUser(null);
-    } catch (error) {
-      console.error("Logout failed", error);
+      window.location.href = "/";
+    } catch (err) {
+      console.error(
+        "Logout failed:",
+        err.response?.data?.message || err.message
+      );
     }
   };
 
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    if (storedUser) {
-      const parsedUser = JSON.parse(storedUser);
-
-      if (!parsedUser.isVerified) {
-        alert("Your account is not verified yet. Please contact support.");
-        localStorage.removeItem("user");
-        setUser(null);
-      } else {
-        setUser(parsedUser);
-      }
-    } else {
-      fetchSession();
-    }
+    fetchUser();
   }, []);
 
+  const isAuthenticated = !!user;
+
   return (
-    <AuthContext.Provider value={{ user, googleLogin, logout, setUser }}>
-      {children}
+    <AuthContext.Provider
+      value={{ user, loading, isAuthenticated, googleLogin, logout }}
+    >
+      {!loading && children}
     </AuthContext.Provider>
   );
 };

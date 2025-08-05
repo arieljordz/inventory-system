@@ -1,4 +1,4 @@
-import express from 'express';
+import express from "express";
 import {
   addProduct,
   getProducts,
@@ -8,20 +8,23 @@ import {
   getProductsByStatus,
   restockProduct,
   getProductStats,
-} from '../controllers/productController.js';
+} from "../controllers/productController.js";
 
-import upload from '../middlewares/uploadMiddleware.js';
+import upload from "../middlewares/uploadMiddleware.js";
+import { authenticate } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
-// Product routes
-router.post('/', upload.single('image'), addProduct);
-router.get('/', getProducts); 
-router.get('/status/:status', getProductsByStatus);
-router.get('/stats', getProductStats);
-router.get('/:id', getProductById);
-router.put('/:id', upload.single('image'), updateProduct);
-router.delete('/:id', deleteProduct);
-router.post('/:productId/restock', restockProduct);
+// Public route
+router.get("/", getProducts);
+router.get("/status/:status", getProductsByStatus);
+router.get("/stats", authenticate, getProductStats);
+router.get("/:id", authenticate, getProductById);
+
+// Protected routes
+router.post("/", authenticate, upload.single("image"), addProduct);
+router.put("/:id", authenticate, upload.single("image"), updateProduct);
+router.delete("/:id", authenticate, deleteProduct);
+router.post("/:productId/restock", authenticate, restockProduct);
 
 export default router;

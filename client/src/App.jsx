@@ -4,6 +4,7 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import { useAxiosInterceptor } from "./hooks/useAxiosInterceptor";
 
 // Layout
 import MainLayout from "./layouts/MainLayout";
@@ -21,6 +22,7 @@ import InventoryPage from "./pages/Inventory/InventoryPage";
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
 function App() {
+  useAxiosInterceptor();
   return (
     <GoogleOAuthProvider clientId={API_KEY}>
       <BrowserRouter>

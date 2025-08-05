@@ -7,9 +7,14 @@ import { jsPDF } from "jspdf";
 import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { toast } from "react-toastify";
-import { getCurrentDate } from "../../utils/commonUtils";
+import {
+  getCurrentDate,
+  parseCurrencyToFloat,
+  formatAmount,
+} from "../../utils/commonUtils";
 import {
   formatReportData,
+  formatExportData,
   getCenteredColumns,
   getReportFileName,
   getReportTitleText,
@@ -29,6 +34,7 @@ const ReportsPage = () => {
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
   });
+  const [isReportGenerated, setIsReportGenerated] = useState(false);
 
   const handleGenerateReport = async () => {
     const { startDate, endDate } = dateRange;
@@ -42,12 +48,15 @@ const ReportsPage = () => {
       showSpinner();
       const res = await getReports({ reportType, startDate, endDate });
 
-      if (!res.data || res.data.length === 0) {
+      // console.log("res.data:", res.data);
+      if (!res.data?.data || res.data?.data.length === 0) {
         toast.info("No records found for the selected range.");
         setReportData([]);
+        setIsReportGenerated(false);
       } else {
-        setReportData(res.data);
-        setActiveReportType(reportType); // ✅ apply current filter
+        setReportData(res.data?.data);
+        setActiveReportType(reportType);
+        setIsReportGenerated(true);
         toast.success("Report generated successfully.");
       }
     } catch (err) {
@@ -62,17 +71,39 @@ const ReportsPage = () => {
     return formatReportData(reportData, activeReportType);
   }, [reportData, activeReportType]);
 
+  const formattedExportReport = useMemo(() => {
+    return formatExportData(reportData, activeReportType);
+  }, [reportData, activeReportType]);
+
   const handleExport = (format) => {
-    if (!formattedReport.length) {
+    if (!formattedExportReport.length) {
       toast.warning("No data available to export.");
       return;
     }
 
     try {
-      const headers = Object.keys(formattedReport[0]);
-      const body = formattedReport.map((row) => Object.values(row));
+      const isSalesReport = activeReportType.includes(ReportTypeEnum.SALES);
+      const headers = Object.keys(formattedExportReport[0]);
       const centerCols = getCenteredColumns(activeReportType);
       const { startDate, endDate } = dateRange;
+
+      // Prepare body
+      const body = formattedExportReport.map((row) => Object.values(row));
+
+      // Compute grand total for sales
+      let grandTotal = 0;
+      if (isSalesReport) {
+        grandTotal = formattedExportReport.reduce(
+          (acc, row) => acc + parseCurrencyToFloat(row["Total Amount"]),
+          0
+        );
+
+        // Append grand total row
+        const totalRow = headers.map((header) =>
+          header === "Total Amount" ? `${grandTotal}` : ""
+        );
+        body.push(totalRow);
+      }
 
       const filename = getReportFileName(
         activeReportType,
@@ -82,34 +113,23 @@ const ReportsPage = () => {
       );
 
       if (format === "pdf") {
-        const doc = new jsPDF();
-        doc.text(getReportTitleText(activeReportType, startDate, endDate), 14, 15);
-
-        const columnStyles = {};
-        headers.forEach((col, idx) => {
-          if (centerCols.includes(col)) {
-            columnStyles[idx] = { halign: "center" };
-          }
-        });
-
-        autoTable(doc, {
-          startY: 20,
-          head: [headers],
+        exportToPDF({
+          headers,
           body,
-          columnStyles,
+          centerCols,
+          startDate,
+          endDate,
+          activeReportType,
+          filename,
         });
-
-        doc.save(filename);
-        toast.success("PDF report downloaded.");
       }
 
       if (format === "excel") {
-        const worksheet = XLSX.utils.json_to_sheet(formattedReport);
-        const workbook = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-
-        XLSX.writeFile(workbook, filename);
-        toast.success("Excel report downloaded.");
+        exportToExcel({
+          headers,
+          body,
+          filename,
+        });
       }
     } catch (err) {
       console.error("Export failed:", err);
@@ -117,9 +137,54 @@ const ReportsPage = () => {
     }
   };
 
+  const exportToPDF = ({
+    headers,
+    body,
+    centerCols,
+    startDate,
+    endDate,
+    activeReportType,
+    filename,
+  }) => {
+    const doc = new jsPDF();
+
+    doc.text(getReportTitleText(activeReportType, startDate, endDate), 14, 15);
+
+    const columnStyles = {};
+    headers.forEach((col, idx) => {
+      if (centerCols.includes(col)) {
+        columnStyles[idx] = { halign: "center" };
+      }
+    });
+
+    autoTable(doc, {
+      startY: 20,
+      head: [headers],
+      body,
+      columnStyles,
+    });
+
+    doc.save(filename);
+    toast.success("PDF report downloaded.");
+  };
+
+  const exportToExcel = ({ headers, body, filename }) => {
+    const exportData = [headers, ...body];
+    const worksheet = XLSX.utils.aoa_to_sheet(exportData);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
+
+    XLSX.writeFile(workbook, filename);
+    toast.success("Excel report downloaded.");
+  };
+
   return (
     <>
-      <Navpath levelOne="Reports" levelTwo="Home" levelThree="Reports" />
+      <Navpath
+        levelOne="Reports Management"
+        levelTwo="Home"
+        levelThree="Reports"
+      />
       <section className="content">
         <div className="container-fluid">
           <div className="card">
@@ -130,35 +195,40 @@ const ReportsPage = () => {
               {/* Filter Inputs */}
               <ReportFilter
                 reportType={reportType}
-                setReportType={setReportType}
+                setReportType={(value) => {
+                  setReportType(value);
+                  setIsReportGenerated(false); // hide the table on change
+                }}
                 dateRange={dateRange}
                 setDateRange={setDateRange}
                 handleGenerateReport={handleGenerateReport}
               />
 
-              {/* Export Buttons */}
-              {formattedReport.length > 0 && (
-                <div className="mb-3 d-flex justify-content-end">
-                  <button
-                    className="btn btn-outline-primary mr-2"
-                    onClick={() => handleExport("excel")}
-                  >
-                    <i className="fas fa-file-excel mr-1"></i> Export to Excel
-                  </button>
-                  <button
-                    className="btn btn-outline-danger"
-                    onClick={() => handleExport("pdf")}
-                  >
-                    <i className="fas fa-file-pdf mr-1"></i> Export to PDF
-                  </button>
-                </div>
-              )}
+              {isReportGenerated && (
+                <>
+                  {/* Export Buttons */}
+                  <div className="mb-3 d-flex justify-content-end">
+                    <button
+                      className="btn btn-outline-primary mr-2"
+                      onClick={() => handleExport("excel")}
+                    >
+                      <i className="fas fa-file-excel mr-1"></i> Export to Excel
+                    </button>
+                    <button
+                      className="btn btn-outline-danger"
+                      onClick={() => handleExport("pdf")}
+                    >
+                      <i className="fas fa-file-pdf mr-1"></i> Export to PDF
+                    </button>
+                  </div>
 
-              {/* Report Table */}
-              <ReportTable
-                formattedReport={formattedReport}
-                activeReportType={activeReportType}
-              />
+                  {/* Report Table */}
+                  <ReportTable
+                    formattedReport={formattedReport}
+                    activeReportType={activeReportType}
+                  />
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -1,47 +1,46 @@
+import { OAuth2Client } from "google-auth-library";
 import User from "../models/User.js";
-import jwt from "jsonwebtoken";
+import { generateToken } from "../utils/generateToken.js";
 
-// Generate token with user payload (not just userId)
-const generateToken = (user) => {
-  return jwt.sign(
-    {
-      userId: user._id,
-      name: user.name,
-      email: user.email,
-      isVerified: user.isVerified,
-    },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-  );
-};
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
+// POST /api/auth/google-login
 export const googleLogin = async (req, res) => {
   try {
-    const { name, email, picture, password } = req.body;
+    const { token } = req.body;
+
+    if (!token) {
+      return res.status(400).json({ message: "Token is required." });
+    }
+
+    // Verify token
+    const ticket = await client.verifyIdToken({
+      idToken: token,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    const { name, email, picture } = payload;
 
     if (!email) {
-      return res.status(400).json({ message: "Email is required." });
+      return res
+        .status(400)
+        .json({ message: "Invalid Google token (no email)." });
     }
 
     let user = await User.findOne({ email });
 
     if (!user) {
-      user = new User({
-        name,
-        email,
-        picture,
-        password,
-        isVerified: false,
-      });
+      user = new User({ name, email, picture, isVerified: false });
       await user.save();
     }
 
-    const token = generateToken(user);
-
-    res.cookie("token", token, {
+    // Set cookie with JWT
+    const jwtToken = generateToken(user);
+    res.cookie("token", jwtToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Strict",
+      sameSite: "Lax",
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     });
 
@@ -58,19 +57,27 @@ export const googleLogin = async (req, res) => {
   }
 };
 
+// GET /api/auth/me
 export const getMe = (req, res) => {
-  const token = req.cookies.token;
-  if (!token) return res.status(401).json({ message: "Unauthorized" });
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    res.status(200).json(decoded);
-  } catch (err) {
-    res.status(401).json({ message: "Invalid token" });
+  if (!req.user) {
+    return res.status(401).json({ message: "Unauthorized" });
   }
+
+  res.status(200).json({
+    _id: req.user._id,
+    name: req.user.name,
+    email: req.user.email,
+    picture: req.user.picture,
+    isVerified: req.user.isVerified,
+  });
 };
 
+// POST /api/auth/logout
 export const logout = (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "Lax",
+  });
   res.status(200).json({ message: "Logged out" });
 };

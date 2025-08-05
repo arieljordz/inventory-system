@@ -4,11 +4,12 @@ import {
   getMe,
   logout,
 } from "../controllers/authController.js";
+import { authenticate } from "../middlewares/authMiddleware.js"; 
 
 const router = Router();
 
 router.post("/google-login", googleLogin);
-router.get("/me", getMe);
-router.post("/logout", logout);
+router.get("/me", authenticate, getMe);
+router.post("/logout", authenticate, logout); 
 
 export default router;

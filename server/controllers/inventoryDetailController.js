@@ -198,7 +198,7 @@ export const tagOrderForPickUp = async (req, res) => {
       description: `Tagged ${quantity} item(s) for pickup.`,
       collectionName: "Product",
       documentId: product._id,
-      before: beforeProduct,
+      before: product,
       after: updatedProduct,
       ip: req.ip,
       userAgent: req.headers["user-agent"],

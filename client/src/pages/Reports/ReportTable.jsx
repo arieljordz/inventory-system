@@ -1,5 +1,7 @@
 import React from "react";
 import { getCenteredColumns } from "../../utils/reportUtils";
+import { formatAmount, parseCurrencyToFloat } from "../../utils/commonUtils";
+import { ReportTypeEnum } from "../../enums/enums";
 
 const ReportTable = ({ formattedReport, activeReportType }) => {
   if (!formattedReport || formattedReport.length === 0) {
@@ -12,6 +14,15 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
 
   const columns = Object.keys(formattedReport[0]);
   const centerColumns = getCenteredColumns(activeReportType);
+  const isSalesReport = activeReportType.includes(ReportTypeEnum.SALES);
+
+  // Compute Grand Total if report is sales
+const grandTotal = isSalesReport
+  ? formattedReport.reduce(
+      (acc, row) => acc + parseCurrencyToFloat(row["Total Amount"]),
+      0
+    )
+  : 0;
 
   return (
     <div className="table-responsive">
@@ -21,7 +32,13 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
             {columns.map((col) => (
               <th
                 key={col}
-                className={centerColumns.includes(col) ? "text-center" : ""}
+                className={
+                  centerColumns.includes(col)
+                    ? "text-center"
+                    : col.includes("Amount") || col === "Price"
+                    ? "text-end"
+                    : ""
+                }
               >
                 {col}
               </th>
@@ -37,6 +54,8 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
                   className={
                     centerColumns.includes(col)
                       ? "text-center align-middle"
+                      : col.includes("Amount") || col === "Price"
+                      ? "text-end align-middle"
                       : ""
                   }
                 >
@@ -45,6 +64,17 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
               ))}
             </tr>
           ))}
+
+          {/* Grand total row */}
+          {isSalesReport && (
+            <tr>
+              <td colSpan={columns.length - 2} className="text-end fw-bold">
+                Grand Total:
+              </td>
+              <td className="text-end fw-bold">{formatAmount(grandTotal)}</td>
+              <td className="text-end fw-bold"></td>
+            </tr>
+          )}
         </tbody>
       </table>
     </div>

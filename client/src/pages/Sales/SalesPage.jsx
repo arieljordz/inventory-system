@@ -141,7 +141,7 @@ const SalesPage = () => {
 
   return (
     <>
-      <Navpath levelOne="Sales" levelTwo="Home" levelThree="Sales" />
+      <Navpath levelOne="Sales Management" levelTwo="Home" levelThree="Sales" />
       <section className="content">
         <div className="container-fluid">
           {/* Info Boxes */}

@@ -83,6 +83,10 @@ body.dark-mode select::placeholder {
   opacity: 1;
 }
 
+body.dark-mode .dark-mode-text-white {
+  color: #fff !important;
+}
+
 .small-badge {
   font-size: 0.55rem !important;
   padding: 2px 4px !important;

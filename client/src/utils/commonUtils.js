@@ -1,3 +1,4 @@
+
 export const formatAmount = (price) =>
   new Intl.NumberFormat("en-PH", {
     style: "currency",
@@ -5,6 +6,18 @@ export const formatAmount = (price) =>
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(price || 0);
+
+export const parseCurrencyToFloat = (amount) => {
+  if (typeof amount === "number") return amount;
+
+  if (typeof amount === "string") {
+    const cleaned = amount.replace(/[^0-9.-]+/g, "");
+    const parsed = parseFloat(cleaned);
+    return isNaN(parsed) ? 0 : parsed;
+  }
+
+  return 0;
+};
 
 export const formatDate = (date) =>
   date ? new Date(date).toLocaleDateString() : "N/A";

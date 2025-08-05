@@ -32,13 +32,13 @@ export const addProduct = async (req, res) => {
     let imageUrl = "";
     let imageId = "";
 
-    if (req.file) {
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "products",
-      });
-      imageUrl = result.secure_url;
-      imageId = result.public_id;
-    }
+    // if (req.file) {
+    //   const result = await cloudinary.uploader.upload(req.file.path, {
+    //     folder: "products",
+    //   });
+    //   imageUrl = result.secure_url;
+    //   imageId = result.public_id;
+    // }
 
     const newProduct = new Product({
       name,
@@ -278,7 +278,7 @@ export const restockProduct = async (req, res) => {
       description: `Restocked product: ${product.name} (+${quantity})`,
       collectionName: "Product",
       documentId: product._id,
-      before,
+      before: product,
       after: product.toObject(),
       ip: req.ip,
       userAgent: req.headers["user-agent"],
