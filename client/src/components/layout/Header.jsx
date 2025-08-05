@@ -18,7 +18,7 @@ const Header = () => {
 
       {/* Right navbar */}
       <ul className="navbar-nav ml-auto align-items-center">
-        <NotificationButton />
+        {/* <NotificationButton /> */}
         <li className="nav-item">
           <ThemeToggle />
         </li>

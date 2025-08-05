@@ -80,7 +80,7 @@ const SalesPage = () => {
     }));
   };
 
-  const handleFilter = async () => {
+  const fetchOrders = async () => {
     try {
       showSpinner();
       const { startDate, endDate } = dateRange;
@@ -95,6 +95,10 @@ const SalesPage = () => {
     } finally {
       hideSpinner();
     }
+  };
+
+  const handleFilter = async () => {
+    fetchOrders();
   };
 
   const handleImport = async (e) => {
@@ -125,7 +129,7 @@ const SalesPage = () => {
       await fetchOrders(); // Refresh data after import
     } catch (err) {
       console.error("Import failed:", err);
-      toast.error(err.response?.data?.message || "Failed to import orders.");
+      toast.error(err.response?.data?.message || "Failed to import sales.");
     } finally {
       hideSpinner();
       setShowImportModal(false);

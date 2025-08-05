@@ -73,11 +73,20 @@ export const importOrdersByPlatform = async (req, res) => {
       const variant = row["Variation Name"]?.trim() || "";
       const quantity = parseInt(row["Quantity"]) || 0;
 
-      if (!name || !quantity || quantity <= 0 || !courier) {
+      // Validate required fields
+      if (!platformOrderId || !name || !quantity || quantity <= 0 || !courier) {
         results.skipped.push({ platformOrderId, reason: "Invalid row data" });
         continue;
       }
 
+      // Check if order already exists
+      const existingOrder = await Order.findOne({ platformOrderId });
+      if (existingOrder) {
+        results.skipped.push({ platformOrderId, reason: "Order already exists" });
+        continue;
+      }
+
+      // Find product by name and variant
       const product = await Product.findOne({ name, variant });
       if (!product) {
         results.skipped.push({ platformOrderId, reason: "Product not found" });
@@ -89,17 +98,19 @@ export const importOrdersByPlatform = async (req, res) => {
         continue;
       }
 
+      // Create order
       const order = await Order.create({
         product: product._id,
         quantity,
         platform,
         platformOrderId,
         courier,
-        remarks: "Tagged for pickup",
+        remarks: "Tagged for pickup - imported orders",
       });
 
       const remainingQty = product.quantity - quantity;
 
+      // Update product stock
       const updatedProduct = await Product.findByIdAndUpdate(
         product._id,
         {
@@ -109,6 +120,7 @@ export const importOrdersByPlatform = async (req, res) => {
         { new: true }
       );
 
+      // Log inventory movement
       const inventoryDetail = await InventoryDetail.create({
         product: product._id,
         order: order._id,
@@ -140,4 +152,5 @@ export const importOrdersByPlatform = async (req, res) => {
     res.status(500).json({ message: "Failed to import orders" });
   }
 };
+
 

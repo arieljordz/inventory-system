@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { UnitTypeEnum } from "../../enums/enums";
-import { TextInput, TextArea, SelectInput } from "../../components/common/FormInputs";
+import {
+  TextInput,
+  TextArea,
+  SelectInput,
+} from "../../components/common/FormInputs";
 
 const ProductModal = ({
   isOpen,
@@ -141,9 +145,10 @@ const ProductModal = ({
 
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
-            Cancel
+            <i className="fas fa-times-circle mr-1"></i> Cancel
           </Button>
           <Button type="submit" variant="primary">
+            <i className="fas fa-save mr-2"></i>
             {isEditMode ? "Update" : "Save"}
           </Button>
         </Modal.Footer>

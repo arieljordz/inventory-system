@@ -39,13 +39,7 @@ const InventoryPage = () => {
         getRemainingPerProduct(),
       ]);
 
-      const totals = computeTotalsByRange(
-        movementsRes.data,
-        startDate,
-        endDate
-      );
-
-      setStats({ remaining: statsRes.data.remaining, ...totals });
+      setStats(statsRes.data);
       setFilteredData(movementsRes.data);
       setRemainingPerProduct(remainingRes.data);
     } catch (err) {
@@ -53,23 +47,6 @@ const InventoryPage = () => {
     } finally {
       hideSpinner(); // Always stop spinner
     }
-  };
-
-  const computeTotalsByRange = (filteredData, startDate, endDate) => {
-    const filtered = filteredData.filter((m) => {
-      const movementDate = new Date(m.createdAt).toISOString().split("T")[0];
-      return movementDate >= startDate && movementDate <= endDate;
-    });
-
-    let totalIn = 0;
-    let totalOut = 0;
-
-    filtered.forEach((m) => {
-      if (m.movementType === MovementTypeEnum.IN) totalIn += m.quantity;
-      else if (m.movementType === MovementTypeEnum.OUT) totalOut += m.quantity;
-    });
-
-    return { totalIn, totalOut };
   };
 
   const filteredBySearch = useMemo(() => {
@@ -117,25 +94,25 @@ const InventoryPage = () => {
             <InfoBox
               icon="fas fa-layer-group"
               label="Unique Products"
-              value={remainingPerProduct.length}
+              value={stats.availableProductCount ?? 0}
               color="primary"
             />
             <InfoBox
               icon="fas fa-boxes"
               label="Remaining Qty (Total)"
-              value={remainingPerProduct.length}
+              value={stats.totalAvailableQuantity ?? 0}
               color="info"
             />
             <InfoBox
               icon="fas fa-arrow-circle-down"
               label="Total In"
-              value={stats.totalIn}
+              value={stats.totalIn ?? 0}
               color="success"
             />
             <InfoBox
               icon="fas fa-arrow-circle-up"
               label="Total Out"
-              value={stats.totalOut}
+              value={stats.totalOut ?? 0}
               color="danger"
             />
           </div>

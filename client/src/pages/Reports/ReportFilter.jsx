@@ -12,17 +12,19 @@ const ReportFilter = ({
   const reportOptions = useMemo(
     () =>
       Object.entries(ReportTypeEnum).map(([key, value]) => ({
-        label: key,
+        label: value,
         value: value,
       })),
     []
   );
 
+  // console.log("filter reportType:", reportType);
   return (
     <div className="row mb-3">
       <div className="col-md-4">
         <SelectInput
           label="Report Type"
+          name="reportType"
           value={reportType}
           onChange={(e) => setReportType(e.target.value)}
           options={reportOptions}
@@ -31,7 +33,7 @@ const ReportFilter = ({
       </div>
 
       <div className="col-md-3">
-        <label>From</label>
+        <label>Start Date</label>
         <input
           type="date"
           className="form-control"
@@ -39,14 +41,14 @@ const ReportFilter = ({
           onChange={(e) =>
             setDateRange((prev) => ({
               ...prev,
-              from: e.target.value,
+              startDate: e.target.value,
             }))
           }
         />
       </div>
 
       <div className="col-md-3">
-        <label>To</label>
+        <label>End Date</label>
         <input
           type="date"
           className="form-control"
@@ -54,7 +56,7 @@ const ReportFilter = ({
           onChange={(e) =>
             setDateRange((prev) => ({
               ...prev,
-              to: e.target.value,
+              endDate: e.target.value,
             }))
           }
         />
@@ -65,7 +67,7 @@ const ReportFilter = ({
           className="btn btn-success btn-block mt-2"
           onClick={handleGenerateReport}
         >
-          Generate
+          <i className="fas fa-sync-alt mr-1"></i> Generate
         </button>
       </div>
     </div>

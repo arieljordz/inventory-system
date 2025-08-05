@@ -117,7 +117,7 @@ const PickupModal = ({
 
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
-            Cancel
+            <i className="fas fa-times-circle mr-1"></i> Cancel
           </Button>
           <Button
             type="submit"
@@ -131,7 +131,7 @@ const PickupModal = ({
               !form.courier.trim()
             }
           >
-            Confirm
+            <i className="fas fa-check-circle mr-1"></i> Confirm
           </Button>
         </Modal.Footer>
       </Form>

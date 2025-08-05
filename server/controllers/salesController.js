@@ -1,10 +1,7 @@
-
-import mongoose from "mongoose";
 import path from "path";
 import xlsx from "xlsx";
 import moment from "moment-timezone";
 import Order from "../models/Order.js";
-import Product from "../models/Product.js"; 
 
 export const importSalesByPlatform = async (req, res) => {
   try {
@@ -21,36 +18,31 @@ export const importSalesByPlatform = async (req, res) => {
     const ext = path
       .extname(req.file.originalname)
       .toLowerCase()
-      .replace(".", ""); // get "csv", "xlsx", etc.
+      .replace(".", "");
 
-    let rows = [];
-
-    if (ext === "csv" || ["xlsx", "xls"].includes(ext)) {
-      const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
-      const sheet =
-        workbook.Sheets["income"] || workbook.Sheets[workbook.SheetNames[0]];
-
-      if (!sheet) {
-        return res
-          .status(400)
-          .json({ message: "No readable sheet found in file." });
-      }
-
-      rows = xlsx.utils.sheet_to_json(sheet);
-    } else {
-      return res
-        .status(400)
-        .json({
-          message:
-            "Unsupported file format. Please upload .csv, .xlsx, or .xls files.",
-        });
+    if (!["csv", "xlsx", "xls"].includes(ext)) {
+      return res.status(400).json({
+        message:
+          "Unsupported file format. Please upload .csv, .xlsx, or .xls files.",
+      });
     }
 
-    const excelOrderIds = rows
-      .map((row) => String(row["Order ID"]).trim())
-      .filter((id) => id);
+    const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
+    const sheet =
+      workbook.Sheets["income"] || workbook.Sheets[workbook.SheetNames[0]];
 
-    if (excelOrderIds.length === 0) {
+    if (!sheet) {
+      return res
+        .status(400)
+        .json({ message: "No readable sheet found in file." });
+    }
+
+    const rows = xlsx.utils.sheet_to_json(sheet);
+    const platformOrderIds = rows
+      .map((row) => String(row["Order ID"]).trim())
+      .filter((id) => !!id);
+
+    if (platformOrderIds.length === 0) {
       return res
         .status(400)
         .json({ message: "No valid order IDs found in file." });
@@ -58,22 +50,43 @@ export const importSalesByPlatform = async (req, res) => {
 
     const orders = await Order.find({
       platform,
-      platformOrderId: { $in: excelOrderIds },
+      platformOrderId: { $in: platformOrderIds },
     });
 
-    const updatedOrders = [];
+    const results = {
+      updated: [],
+      alreadyPaid: [],
+      notFound: [],
+    };
 
-    for (const order of orders) {
-      if (!order.isPaid) {
-        order.isPaid = true;
-        await order.save();
-        updatedOrders.push(order._id);
+    const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
+
+    for (const id of platformOrderIds) {
+      const order = orderMap.get(id);
+
+      if (!order) {
+        results.notFound.push(id);
+        continue;
       }
+
+      if (order.isPaid) {
+        results.alreadyPaid.push(order._id);
+        continue;
+      }
+
+      order.isPaid = true;
+      await order.save();
+      results.updated.push(order._id);
     }
 
     res.json({
-      message: `${updatedOrders.length} orders marked as paid.`,
-      updatedOrderIds: updatedOrders,
+      message: `${results.updated.length} orders marked as paid.`,
+      summary: {
+        updated: results.updated.length,
+        alreadyPaid: results.alreadyPaid.length,
+        notFound: results.notFound.length,
+      },
+      details: results,
     });
   } catch (error) {
     console.error("Error checking sales from file:", error);
@@ -130,4 +143,3 @@ export const getSalesStatsByDate = async (req, res) => {
     res.status(500).json({ message: "Failed to get order stats" });
   }
 };
-

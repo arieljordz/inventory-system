@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useSpinner } from "../../context/SpinnerContext";
 import { getReports } from "../../services/reportService";
 import Navpath from "../../components/common/Navpath";
@@ -8,6 +8,7 @@ import autoTable from "jspdf-autotable";
 import * as XLSX from "xlsx";
 import { toast } from "react-toastify";
 import { getCurrentDate } from "../../utils/commonUtils";
+import { formatReportData, getCenteredColumns } from "../../utils/reportUtils";
 import ReportFilter from "./ReportFilter";
 import ReportTable from "./ReportTable";
 
@@ -15,6 +16,9 @@ const ReportsPage = () => {
   const { showSpinner, hideSpinner } = useSpinner();
 
   const [reportType, setReportType] = useState(ReportTypeEnum.INVENTORY);
+  const [activeReportType, setActiveReportType] = useState(
+    ReportTypeEnum.INVENTORY
+  );
   const [reportData, setReportData] = useState([]);
   const [dateRange, setDateRange] = useState({
     startDate: getCurrentDate(),
@@ -31,18 +35,14 @@ const ReportsPage = () => {
 
     try {
       showSpinner();
-      const res = await getReports({
-        reportType,
-        startDate,
-        endDate,
-      });
+      const res = await getReports({ reportType, startDate, endDate });
 
-      console.log(res.data);
       if (!res.data || res.data.length === 0) {
         toast.info("No records found for the selected range.");
         setReportData([]);
       } else {
         setReportData(res.data);
+        setActiveReportType(reportType); // ✅ apply current filter
         toast.success("Report generated successfully.");
       }
     } catch (err) {
@@ -53,60 +53,51 @@ const ReportsPage = () => {
     }
   };
 
-  const formatReportData = () => {
-    if (!reportData.length) return [];
-    console.log("reportType:", reportType);
-    return reportData.map((item) => {
-      const base = {
-        Product: item.product?.name || "-",
-        Quantity: item.quantity,
-        Date: new Date(item.createdAt).toLocaleDateString(),
-      };
-
-      if (reportType.includes("Inventory")) {
-        return {
-          ...base,
-          "Movement Type": item.movementType,
-          Status: item.status || "-",
-        };
-      } else {
-        return {
-          ...base,
-          Courier: item.courier || "-",
-          Platform: item.platform || "-",
-          Paid: item.isPaid ? "Yes" : "No",
-          Status: item.status || "-",
-        };
-      }
-    });
-  };
+  const formattedReport = useMemo(() => {
+    return formatReportData(reportData, activeReportType);
+  }, [reportData, activeReportType]);
 
   const handleExport = (format) => {
-    if (reportData.length === 0) {
+    if (!formattedReport.length) {
       toast.warning("No data available to export.");
       return;
     }
 
-    const data = formatReportData();
-
     try {
+      const headers = Object.keys(formattedReport[0]);
+      const body = formattedReport.map((row) => Object.values(row));
+      const centerCols = getCenteredColumns(activeReportType); // ✅ use activeReportType
+
       if (format === "pdf") {
         const doc = new jsPDF();
-        doc.text(`Report: ${reportType.toUpperCase()}`, 14, 15);
+        doc.text(`Report: ${activeReportType.toUpperCase()}`, 14, 15); // ✅ use activeReportType
+
+        const columnStyles = {};
+        headers.forEach((col, idx) => {
+          if (centerCols.includes(col)) {
+            columnStyles[idx] = { halign: "center" };
+          }
+        });
+
         autoTable(doc, {
           startY: 20,
-          head: [Object.keys(data[0])],
-          body: data.map((row) => Object.values(row)),
+          head: [headers],
+          body,
+          columnStyles,
         });
-        doc.save(`report-${reportType}-${Date.now()}.pdf`);
+
+        doc.save(`report-${activeReportType}-${Date.now()}.pdf`); // ✅ use activeReportType
         toast.success("PDF report downloaded.");
       }
 
       if (format === "excel") {
-        const worksheet = XLSX.utils.json_to_sheet(data);
+        const worksheet = XLSX.utils.json_to_sheet(formattedReport);
         const workbook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-        XLSX.writeFile(workbook, `report-${reportType}-${Date.now()}.xlsx`);
+        XLSX.writeFile(
+          workbook,
+          `report-${activeReportType}-${Date.now()}.xlsx`
+        ); // ✅ use activeReportType
         toast.success("Excel report downloaded.");
       }
     } catch (err) {
@@ -135,25 +126,28 @@ const ReportsPage = () => {
               />
 
               {/* Export Buttons */}
-              {reportData.length > 0 && (
+              {formattedReport.length > 0 && (
                 <div className="mb-3 d-flex justify-content-end">
                   <button
                     className="btn btn-outline-primary mr-2"
                     onClick={() => handleExport("excel")}
                   >
-                    Export to Excel
+                    <i className="fas fa-file-excel mr-1"></i> Export to Excel
                   </button>
                   <button
                     className="btn btn-outline-danger"
                     onClick={() => handleExport("pdf")}
                   >
-                    Export to PDF
+                    <i className="fas fa-file-pdf mr-1"></i> Export to PDF
                   </button>
                 </div>
               )}
 
               {/* Report Table */}
-              <ReportTable reportData={reportData} reportType={reportType} />
+              <ReportTable
+                formattedReport={formattedReport}
+                activeReportType={activeReportType}
+              />
             </div>
           </div>
         </div>

@@ -27,7 +27,7 @@ const DateRangeFilter = ({ dateRange, onDateChange, onFilter }) => {
       </div>
       <div className="col-md-2">
         <button className="btn btn-primary btn-block" onClick={onFilter}>
-          Filter
+          <i className="fas fa-filter mr-1"></i> Filter
         </button>
       </div>
     </div>

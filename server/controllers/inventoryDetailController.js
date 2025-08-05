@@ -67,25 +67,34 @@ export const getInventoryStats = async (req, res) => {
     const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
     const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
 
-    const products = await Product.find({});
-    const remaining = products.reduce(
+    // 1. Count and total quantity of available products
+    const availableProducts = await Product.find({ status: StatusEnum.AVAILABLE });
+
+    const availableProductCount = availableProducts.length;
+    const totalAvailableQuantity = availableProducts.reduce(
       (sum, prod) => sum + (prod.quantity || 0),
       0
     );
 
+    // 2. Inventory movements by date range
     const movements = await InventoryDetail.find({
       createdAt: { $gte: startDate, $lte: endDate },
     });
 
     const totalIn = movements
-      .filter((m) => m.type === MovementTypeEnum.IN)
+      .filter((m) => m.movementType === MovementTypeEnum.IN)
       .reduce((sum, m) => sum + m.quantity, 0);
 
     const totalOut = movements
-      .filter((m) => m.type === MovementTypeEnum.OUT)
+      .filter((m) => m.movementType === MovementTypeEnum.OUT)
       .reduce((sum, m) => sum + m.quantity, 0);
 
-    res.json({ remaining, totalIn, totalOut });
+    res.json({
+      availableProductCount,
+      totalAvailableQuantity,
+      totalIn,
+      totalOut,
+    });
   } catch (error) {
     console.error("Error getting inventory stats:", error);
     res.status(500).json({ message: "Server error" });
