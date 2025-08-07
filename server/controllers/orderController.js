@@ -6,6 +6,12 @@ import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
+import {
+  getPlatformMappings,
+  validateFile,
+  getSheetRows,
+  extractOrderIds,
+} from "../utils/importUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
@@ -42,49 +48,61 @@ export const getAllOrdersByDate = async (req, res) => {
 
 export const importOrdersByPlatform = async (req, res) => {
   try {
+    // Step 1: Validate platform presence
     const platform = req.body.platform;
     if (!platform) {
       return res.status(400).json({ message: "Platform is required" });
     }
 
-    if (!req.file?.buffer) {
-      return res.status(400).json({ message: "No valid file uploaded" });
+    // Step 2: Get field mappings for the platform
+    let mapping;
+
+    try {
+      mapping = getPlatformMappings(platform, "order");
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
     }
 
-    const ext = path
-      .extname(req.file.originalname)
-      .toLowerCase()
-      .replace(".", "");
-    if (!["csv", "xlsx", "xls"].includes(ext)) {
-      return res.status(400).json({
-        message:
-          "Unsupported file format. Please upload .csv, .xlsx, or .xls files.",
-      });
+    const { sheetName, fields: fieldMap } = mapping;
+
+    try {
+      // Step 3: Validate file format and buffer
+      validateFile(req.file);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
     }
 
-    const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
-    const sheet = workbook.Sheets[workbook.SheetNames[0]];
-    const rows = xlsx.utils.sheet_to_json(sheet);
+    // Step 4: Read and parse sheet rows from the uploaded file
+    let rows;
+    try {
+      rows = getSheetRows(req.file, sheetName);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
 
     const results = {
       imported: [],
       skipped: [],
     };
 
+    // Step 5: Loop through each row and process
     for (const row of rows) {
-      const platformOrderId = row["Order ID"]?.toString().trim();
-      const name = row["Product Name"]?.trim();
-      const courier = row["Shipping Option"]?.trim();
-      const variant = row["Variation Name"]?.trim() || "";
-      const quantity = parseInt(row["Quantity"]) || 0;
+      const platformOrderId = row[fieldMap.platformOrderId]?.toString().trim();
+      const name = row[fieldMap.name]?.trim();
+      const courier = row[fieldMap.courier]?.trim();
+      const variant = row[fieldMap.variant]?.trim() || "";
+      const quantity = parseInt(row[fieldMap.quantity]) || 0;
 
       // Validate required fields
-      if (!platformOrderId || !name || !quantity || quantity <= 0 || !courier) {
-        results.skipped.push({ platformOrderId, reason: "Invalid row data" });
+      if (!platformOrderId || !name || !courier || quantity <= 0) {
+        results.skipped.push({
+          platformOrderId: platformOrderId || "N/A",
+          reason: "Invalid row data",
+        });
         continue;
       }
 
-      // Check if order already exists
+      // Skip if order already exists
       const existingOrder = await Order.findOne({ platformOrderId });
       if (existingOrder) {
         results.skipped.push({
@@ -94,19 +112,20 @@ export const importOrdersByPlatform = async (req, res) => {
         continue;
       }
 
-      // Find product by name and variant
+      // Fetch product by name and variant
       const product = await Product.findOne({ name, variant });
       if (!product) {
         results.skipped.push({ platformOrderId, reason: "Product not found" });
         continue;
       }
 
+      // Check for sufficient stock
       if (quantity > product.quantity) {
         results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
         continue;
       }
 
-      // Create order
+      // Create new order
       const order = await Order.create({
         product: product._id,
         quantity,
@@ -116,9 +135,8 @@ export const importOrdersByPlatform = async (req, res) => {
         remarks: "Tagged for pickup - imported orders",
       });
 
-      const remainingQty = product.quantity - quantity;
-
       // Update product stock
+      const remainingQty = product.quantity - quantity;
       const updatedProduct = await Product.findByIdAndUpdate(
         product._id,
         {
@@ -128,7 +146,7 @@ export const importOrdersByPlatform = async (req, res) => {
         { new: true }
       );
 
-      // Log inventory movement
+      // Create inventory detail entry
       const inventoryDetail = await InventoryDetail.create({
         product: product._id,
         order: order._id,
@@ -146,24 +164,21 @@ export const importOrdersByPlatform = async (req, res) => {
         inventoryDetail,
       });
 
-      // ✅ Log audit
+      // Log audit
       await logAudit({
         action: "IMPORT_ORDER",
-        user: req.user?._id || null, // assumes user is attached via middleware
+        user: req.user?._id || null,
         description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
         collectionName: "Order",
         documentId: order._id,
         before: null,
-        after: {
-          order,
-          inventoryDetail,
-          product: updatedProduct,
-        },
+        after: { order, inventoryDetail, product: updatedProduct },
         ip: req.ip,
         userAgent: req.headers["user-agent"],
       });
     }
 
+    // Final response
     res.status(201).json({
       message: "Order import completed",
       summary: {

@@ -3,45 +3,50 @@ import xlsx from "xlsx";
 import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import { logAudit } from "../utils/auditLogger.js";
+import {
+  getPlatformMappings,
+  validateFile,
+  getSheetRows,
+  extractOrderIds,
+} from "../utils/importUtils.js";
 
 export const importSalesByPlatform = async (req, res) => {
   try {
+    // 1. Validate required platform
     const platform = req.body.platform;
-
     if (!platform) {
       return res.status(400).json({ message: "Platform is required" });
     }
 
-    if (!req.file?.buffer) {
-      return res.status(400).json({ message: "No file uploaded." });
+    // 2. Get platform-specific field and sheet mappings
+    let mapping;
+
+    try {
+      mapping = getPlatformMappings(platform, "sales");
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
     }
 
-    const ext = path
-      .extname(req.file.originalname)
-      .toLowerCase()
-      .replace(".", "");
+    const { sheetName, fields: fieldMap } = mapping;
 
-    if (!["csv", "xlsx", "xls"].includes(ext)) {
-      return res.status(400).json({
-        message:
-          "Unsupported file format. Please upload .csv, .xlsx, or .xls files.",
-      });
+    // 3. Validate uploaded file format and buffer
+    try {
+      validateFile(req.file);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
     }
 
-    const workbook = xlsx.read(req.file.buffer, { type: "buffer" });
-    const sheet =
-      workbook.Sheets["income"] || workbook.Sheets[workbook.SheetNames[0]];
-
-    if (!sheet) {
-      return res
-        .status(400)
-        .json({ message: "No readable sheet found in file." });
+    // 4. Read and parse the sheet rows using the mapped sheet name
+    let rows;
+    try {
+      rows = getSheetRows(req.file, sheetName);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
     }
 
-    const rows = xlsx.utils.sheet_to_json(sheet);
-    const platformOrderIds = rows
-      .map((row) => String(row["Order ID"]).trim())
-      .filter((id) => !!id);
+    // 5. Extract platformOrderIds from rows using mapped field
+    const { platformOrderId: orderIdKey } = fieldMap;
+    const platformOrderIds = extractOrderIds(rows, orderIdKey);
 
     if (platformOrderIds.length === 0) {
       return res
@@ -49,6 +54,7 @@ export const importSalesByPlatform = async (req, res) => {
         .json({ message: "No valid order IDs found in file." });
     }
 
+    // 6. Fetch matching orders from database
     const orders = await Order.find({
       platform,
       platformOrderId: { $in: platformOrderIds },
@@ -62,6 +68,7 @@ export const importSalesByPlatform = async (req, res) => {
 
     const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
 
+    // 7. Iterate through uploaded order IDs and update payment status
     for (const id of platformOrderIds) {
       const order = orderMap.get(id);
 
@@ -75,14 +82,16 @@ export const importSalesByPlatform = async (req, res) => {
         continue;
       }
 
+      const before = { isPaid: order.isPaid };
+
       order.isPaid = true;
       await order.save();
       results.updated.push(order._id);
 
-      // ✅ Log audit
+      // 8. Log audit trail for updates
       await logAudit({
         action: "UPDATE",
-        user: req.user?._id, // assuming `req.user` is populated via middleware
+        user: req.user?._id,
         description: `Marked order ${order._id} as paid via file import (${platform})`,
         collectionName: "Order",
         documentId: order._id,
@@ -93,6 +102,7 @@ export const importSalesByPlatform = async (req, res) => {
       });
     }
 
+    // 9. Send summary response
     res.json({
       message: `${results.updated.length} orders marked as paid.`,
       summary: {
@@ -103,7 +113,7 @@ export const importSalesByPlatform = async (req, res) => {
       details: results,
     });
   } catch (error) {
-    console.error("Error checking sales from file:", error);
+    console.error("Error importing sales:", error);
     res.status(500).json({ message: "Internal server error." });
   }
 };
