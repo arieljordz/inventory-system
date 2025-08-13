@@ -1,5 +1,9 @@
 import React from "react";
-import { formatAmount, formatDate } from "../../utils/commonUtils";
+import {
+  formatAmount,
+  formatDate,
+  truncateText,
+} from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
 
 const ProductTable = ({ products = [], onEdit, onDelete, onRestock }) => {
@@ -36,8 +40,11 @@ const ProductTable = ({ products = [], onEdit, onDelete, onRestock }) => {
           <td className="text-center align-middle p-2">{index + 1}</td>
           <td className="text-center align-middle">{product.sku || "N/A"}</td>
           <td className="text-center align-middle">{product.name || "N/A"}</td>
-          <td className="text-center align-middle">
-            {product.description || "-"}
+          <td
+            className="text-center align-middle"
+            title={product.description || "-"}
+          >
+            {truncateText(product.description, 30)}
           </td>
           <td className="text-center align-middle">
             {product.variant || "N/A"}

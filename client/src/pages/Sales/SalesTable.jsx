@@ -22,7 +22,7 @@ const SalesTable = ({ orders = [] }) => {
               <th className="text-center">Platform</th>
               <th className="text-center">Platform OrderId</th>
               <th className="text-center">SKU</th>
-              <th className="text-center">Name</th>
+              <th className="text-center">Product Name</th>
               <th className="text-center">Courier</th>
               <th className="text-center">Quantity</th>
               <th className="text-center">Total Price</th>

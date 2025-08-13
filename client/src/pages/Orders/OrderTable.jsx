@@ -3,6 +3,7 @@ import {
   formatAmount,
   formatDate,
   computeTotalPrice,
+  truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
 
@@ -45,8 +46,11 @@ const OrderTable = ({ orders = [], onOpenModal }) => {
                   <td className="text-center align-middle">
                     {product.name || "-"}
                   </td>
-                  <td className="text-center align-middle">
-                    {product.description || "-"}
+                  <td
+                    className="text-center align-middle"
+                    title={product.description || "-"}
+                  >
+                    {truncateText(product.description, 30)}
                   </td>
                   <td className="text-center align-middle">
                     {product.quantity || 0}
