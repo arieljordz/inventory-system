@@ -40,7 +40,7 @@ const TrackingsPage = () => {
 
   const filteredBySearch = useMemo(() => {
     return orders.filter((item) =>
-      ["name", "platform", "platfromOrderId", "courier"].some((field) =>
+      ["name", "platform", "platfromOrderId", "courier", "quantity", "price", "sku"].some((field) =>
         String(item[field] || "")
           .toLowerCase()
           .includes(searchTerm.toLowerCase())

@@ -70,7 +70,7 @@ const OrderPage = () => {
 
   const filteredBySearch = useMemo(() => {
     return orders.filter((item) =>
-      ["name", "price", "description", "variant"].some((field) =>
+      ["name", "price", "description", "variant", "quantity"].some((field) =>
         String(item[field] || "")
           .toLowerCase()
           .includes(searchTerm.toLowerCase())
