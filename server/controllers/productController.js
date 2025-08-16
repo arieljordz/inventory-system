@@ -94,8 +94,40 @@ export const addProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 });
-    res.status(200).json(products);
+    const page  = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100); // cap limit to avoid abuse
+    const search = (req.query.search || "").trim();
+
+    // Build search query (add more fields if needed)
+    const query = search
+      ? {
+          $or: [
+            { name:        { $regex: search, $options: "i" } },
+            { description: { $regex: search, $options: "i" } },
+            { variant:     { $regex: search, $options: "i" } },
+            { sku:         { $regex: search, $options: "i" } },
+            // price/quantity are numbers; only include if you store as string
+          ],
+        }
+      : {};
+
+    const skip = (page - 1) * limit;
+
+    const [products, totalProducts] = await Promise.all([
+      Product.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+      Product.countDocuments(query),
+    ]);
+
+    res.status(200).json({
+      products,
+      totalProducts,
+      totalPages: Math.max(Math.ceil(totalProducts / limit), 1),
+      currentPage: page,
+      pageSize: limit,
+    });
   } catch (error) {
     console.error("Get Products Error:", error);
     res.status(500).json({ message: "Server error" });
@@ -104,11 +136,43 @@ export const getProducts = async (req, res) => {
 
 export const getProductsByStatus = async (req, res) => {
   try {
+    const page  = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100); // cap limit
+    const search = (req.query.search || "").trim();
     const { status } = req.params;
 
-    const products = await Product.find({ status }).sort({ createdAt: -1 });
+    // Build search query with status filter
+    const query = {
+      status,
+      ...(search
+        ? {
+            $or: [
+              { name:        { $regex: search, $options: "i" } },
+              { description: { $regex: search, $options: "i" } },
+              { variant:     { $regex: search, $options: "i" } },
+              { sku:         { $regex: search, $options: "i" } },
+            ],
+          }
+        : {}),
+    };
 
-    res.status(200).json(products);
+    const skip = (page - 1) * limit;
+
+    const [products, totalProducts] = await Promise.all([
+      Product.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit),
+      Product.countDocuments(query),
+    ]);
+
+    res.status(200).json({
+      products,
+      totalProducts,
+      totalPages: Math.max(Math.ceil(totalProducts / limit), 1),
+      currentPage: page,
+      pageSize: limit,
+    });
   } catch (error) {
     console.error("Get Products by Status Error:", error);
     res.status(500).json({ message: "Server error" });

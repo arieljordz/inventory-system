@@ -19,7 +19,7 @@ export const platformMappings = {
       },
     },
     sales: {
-      sheetName: "income",
+      sheetName: "Income",
       fields: {
         platformOrderId: "Order ID",
       },
@@ -90,8 +90,20 @@ export const validateFile = (file) => {
 
 export const getSheetRows = (file, sheetName, expectedFields) => {
   const workbook = xlsx.read(file.buffer, { type: "buffer" });
-  const sheet = workbook.Sheets[sheetName] || workbook.Sheets[workbook.SheetNames[0]];
-  if (!sheet) throw new Error(`Sheet "${sheetName}" not found in uploaded file.`);
+
+  // Normalize the sheetName input
+  const targetName = sheetName.trim().toLowerCase();
+
+  // Find a matching sheet name in a case-insensitive way
+  const matchedSheetName = workbook.SheetNames.find(
+    name => name.trim().toLowerCase() === targetName
+  );
+
+  if (!matchedSheetName) {
+    throw new Error(`Sheet "${sheetName}" not found in uploaded file.`);
+  }
+
+  const sheet = workbook.Sheets[matchedSheetName];
 
   const rawRows = xlsx.utils.sheet_to_json(sheet, { header: 1 });
   let headerRowIndex = 0, bestMatchCount = -1;
@@ -201,5 +213,9 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
 
 // for sales import
 export const extractOrderIds = (rows, orderIdKey) => {
-  return rows.map((row) => String(row[orderIdKey]).trim()).filter((id) => !!id);
+  return rows
+    .map((row) => row[orderIdKey])
+    .filter((id) => typeof id === "string" && id.trim() !== "")
+    .map((id) => id.trim());
 };
+

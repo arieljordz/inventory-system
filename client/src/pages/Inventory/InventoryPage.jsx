@@ -1,92 +1,122 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { toast } from "react-toastify";
 import { useSpinner } from "../../context/SpinnerContext";
-import Navpath from "../../components/common/Navpath";
-import InventoryTable from "./InventoryTable";
+
 import {
   getInventoryStats,
   getInventoryMovements,
   getRemainingPerProduct,
 } from "../../services/inventoryDetailService";
-import { getCurrentDate } from "../../utils/commonUtils";
-import { InfoBox } from "../../components/common/FormInputs";
-import { MovementTypeEnum } from "../../enums/enums";
+
+import Navpath from "../../components/common/Navpath";
+import InventoryTable from "./InventoryTable";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
 import DateRangeFilter from "../../components/common/DateRangeFilter";
+import { InfoBox } from "../../components/common/FormInputs";
+
+import { getCurrentDate } from "../../utils/commonUtils";
+import { useDebounce } from "../../hooks/useDebounce";
 
 const InventoryPage = () => {
+  /** 🔹 Core state */
+  const [movements, setMovements] = useState([]);
+  const [remainingPerProduct, setRemainingPerProduct] = useState([]);
+  const [stats, setStats] = useState({
+    availableProductCount: 0,
+    totalAvailableQuantity: 0,
+    totalIn: 0,
+    totalOut: 0,
+  });
+  const [loading, setLoading] = useState(false);
+
+  /** 🔹 Search & pagination state */
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [totalItems, setTotalItems] = useState(0);
+
+  /** 🔹 Date filter */
   const [dateRange, setDateRange] = useState({
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
   });
-  const { showSpinner, hideSpinner } = useSpinner();
-  const [stats, setStats] = useState({ remaining: 0, totalIn: 0, totalOut: 0 });
-  const [filteredData, setFilteredData] = useState([]);
-  const [remainingPerProduct, setRemainingPerProduct] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [paginatedItems, setPaginatedItems] = useState([]);
 
-  const handleFilter = async () => {
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+
+  /** 🔹 Fetch Movements (server handles pagination + search) */
+  const fetchMovements = useCallback(async () => {
+    setLoading(true);
     try {
-      showSpinner(); // Start spinner
-
       const { startDate, endDate } = dateRange;
+
       const [statsRes, movementsRes, remainingRes] = await Promise.all([
         getInventoryStats(startDate, endDate),
-        getInventoryMovements(startDate, endDate),
+        getInventoryMovements({
+          start: startDate,
+          end: endDate,
+          page: currentPage,
+          limit: itemsPerPage,
+          search: debouncedSearchTerm,
+        }),
         getRemainingPerProduct(),
       ]);
 
+      const { movements: fetchedMovements, totalMovements, totalPages } =
+        movementsRes.data;
+
+      console.log("movementsRes.data:", movementsRes.data);
       setStats(statsRes.data);
-      setFilteredData(movementsRes.data);
-      setRemainingPerProduct(remainingRes.data);
-    } catch (err) {
-      console.error("Failed to fetch inventory data", err);
-    } finally {
-      hideSpinner(); // Always stop spinner
-    }
-  };
+      setMovements(fetchedMovements || []);
+      setRemainingPerProduct(remainingRes.data || []);
+      setTotalItems(totalMovements || 0);
 
-  const filteredBySearch = useMemo(() => {
-    const search = searchTerm.trim().toLowerCase();
-
-    return filteredData.filter((m) => {
-      const product = m.product || {};
-      const value = String(m.movementType || "").toLowerCase();
-
-      if (["in", "out"].includes(search)) {
-        return value === search; // strict match for movementType only
+      // Fix current page if overflow
+      if (currentPage > totalPages && totalPages > 0) {
+        setCurrentPage(totalPages);
       }
+    } catch (error) {
+      console.error("Failed to fetch inventory data:", error);
+      toast.error("Failed to fetch inventory data");
+      setMovements([]);
+      setRemainingPerProduct([]);
+      setStats({
+        availableProductCount: 0,
+        totalAvailableQuantity: 0,
+        totalIn: 0,
+        totalOut: 0,
+      });
+      setTotalItems(0);
+    } finally {
+      setLoading(false);
+    }
+  }, [dateRange, currentPage, itemsPerPage, debouncedSearchTerm]);
 
-      const productFields = ["name"];
-      const rootFields = ["movementType", "quantity"];
+  useEffect(() => {
+    fetchMovements();
+  }, [fetchMovements]);
 
-      const matchesProductFields = productFields.some((field) =>
-        String(product[field] || "")
-          .toLowerCase()
-          .includes(search)
-      );
+  /** 🔹 Reset page on search change */
+  useEffect(() => {
+    if (currentPage !== 1) setCurrentPage(1);
+  }, [debouncedSearchTerm]);
 
-      const matchesRootFields = rootFields.some((field) =>
-        String(m[field] || "")
-          .toLowerCase()
-          .includes(search)
-      );
-
-      return matchesProductFields || matchesRootFields;
-    });
-  }, [filteredData, searchTerm]);
-
+  /** 🔹 Event Handlers */
+  const handleSearchChange = useCallback((val) => setSearchTerm(val), []);
   const handleItemsPerPageChange = useCallback((val) => {
     setItemsPerPage(val);
     setCurrentPage(1);
   }, []);
+  const handlePageChange = useCallback((page) => setCurrentPage(page), []);
 
   return (
     <>
-      <Navpath levelOne="Inventory Management" levelTwo="Home" levelThree="Inventory" />
+      <Navpath
+        levelOne="Inventory Management"
+        levelTwo="Home"
+        levelThree="Inventory"
+      />
+
       <section className="content">
         <div className="container-fluid">
           {/* Info Boxes */}
@@ -121,31 +151,32 @@ const InventoryPage = () => {
           <DateRangeFilter
             dateRange={dateRange}
             onDateChange={setDateRange}
-            onFilter={handleFilter}
+            onFilter={fetchMovements}
           />
 
           {/* Search + Items Per Page */}
-
           <SearchBar
             searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
+            onSearchChange={handleSearchChange}
             itemsPerPage={itemsPerPage}
             onItemsPerPageChange={handleItemsPerPageChange}
+            disabled={loading}
           />
 
           {/* Inventory Table */}
           <InventoryTable
-            data={paginatedItems}
+            data={movements}
             remainingPerProduct={remainingPerProduct}
+            loading={loading}
           />
 
           {/* Pagination */}
           <PaginationControls
-            data={filteredBySearch}
             currentPage={currentPage}
+            totalItems={totalItems}
             itemsPerPage={itemsPerPage}
-            onPageChange={setCurrentPage}
-            onPaginatedDataChange={setPaginatedItems}
+            onPageChange={handlePageChange}
+            disabled={loading}
           />
         </div>
       </section>
