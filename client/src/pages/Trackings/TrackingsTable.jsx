@@ -69,7 +69,7 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
                 ? "badge-danger"
                 : order.quantity < 10
                 ? "badge-info"
-                : "badge-success"
+                : "badge-info"
             }`}
           >
             {order.quantity ?? 0} {order.unit || "pcs"}

@@ -30,7 +30,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -45,7 +45,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
     if (!orders || orders.length === 0) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-clipboard-list fa-2x mb-2 d-block"></i>
               No orders found
