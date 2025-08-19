@@ -12,6 +12,9 @@ export const getProducts = ({ page = 1, limit = 10, search = "" } = {}) =>
 export const createProduct = (formData) =>
   api.post("/api/products", formData, multipartHeaders);
 
+export const importProducts = (formData) =>
+  api.post("/api/products/import-products", formData, multipartHeaders);
+
 // Update an existing product
 export const updateProduct = (id, formData) =>
   api.put(`/api/products/${id}`, formData, multipartHeaders);

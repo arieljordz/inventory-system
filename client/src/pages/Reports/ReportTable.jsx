@@ -16,13 +16,15 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
   const centerColumns = getCenteredColumns(activeReportType);
   const isSalesReport = activeReportType.includes(ReportTypeEnum.SALES);
 
+  console.log("columns:", columns);
+  console.log("centerColumns:", centerColumns);
   // Compute Grand Total if report is sales
-const grandTotal = isSalesReport
-  ? formattedReport.reduce(
-      (acc, row) => acc + parseCurrencyToFloat(row["Total Amount"]),
-      0
-    )
-  : 0;
+  const grandTotal = isSalesReport
+    ? formattedReport.reduce(
+        (acc, row) => acc + parseCurrencyToFloat(row["Total Amount"]),
+        0
+      )
+    : 0;
 
   return (
     <div className="table-responsive">

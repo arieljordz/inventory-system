@@ -4,6 +4,7 @@ import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
+import { validateFile, getSheetRows } from "../utils/importUtils.js"; 
 
 export const addProduct = async (req, res) => {
   try {
@@ -89,6 +90,93 @@ export const addProduct = async (req, res) => {
   } catch (error) {
     console.error("Add Product Error:", error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const importProducts = async (req, res) => {
+  try {
+    // 1. Validate file
+    validateFile(req.file);
+
+    // 2. Extract rows from sheet (assume sheet has the right headers)
+    const expectedFields = ["name", "description", "price", "variant", "quantity", "sku"];
+    const rows = getSheetRows(req.file, "products", expectedFields); 
+
+    const results = { imported: [], skipped: [] };
+
+    for (const row of rows) {
+      const name = row["name"]?.toString().trim();
+      const description = row["description"]?.toString().trim();
+      const price = parseFloat(row["price"]);
+      const variant = row["variant"]?.toString().trim() || "";
+      const quantity = parseInt(row["quantity"]) || 0;
+      const sku = row["sku"]?.toString().trim();
+
+      // Validation
+      if (!name || !description || isNaN(price) || !sku) {
+        results.skipped.push({ sku: sku || "N/A", reason: "Invalid row data" });
+        continue;
+      }
+
+      // Check for duplicate SKU
+      const existingProduct = await Product.findOne({ sku });
+      if (existingProduct) {
+        results.skipped.push({ sku, reason: "SKU already exists" });
+        continue;
+      }
+
+      // Create product
+      const product = new Product({
+        name,
+        description,
+        price,
+        variant,
+        quantity,
+        sku,
+      });
+      const savedProduct = await product.save();
+
+      // Create initial inventory detail if stock > 0
+      if (quantity > 0) {
+        await InventoryDetail.create({
+          product: savedProduct._id,
+          order: null,
+          movementType: MovementTypeEnum.IN,
+          quantity,
+          remarks: "Initial stock - imported",
+          status: savedProduct.status,
+          courier: "",
+          platform: "",
+        });
+      }
+
+      results.imported.push(savedProduct);
+
+      // Audit log
+      await logAudit({
+        action: "IMPORT_PRODUCT",
+        user: req.user?._id || null,
+        description: `Imported product via Excel: ${name}`,
+        collectionName: "Product",
+        documentId: savedProduct._id,
+        before: null,
+        after: savedProduct.toObject(),
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    }
+
+    return res.status(200).json({
+      message: "Product import completed",
+      summary: {
+        imported: results.imported.length,
+        skipped: results.skipped.length,
+      },
+      details: results,
+    });
+  } catch (error) {
+    console.error("Import Products Error:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
   }
 };
 

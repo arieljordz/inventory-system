@@ -5,6 +5,7 @@ import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
+import { normalizeString } from "./commonUtils.js";
 
 export const platformMappings = {
   shopee: {
@@ -96,7 +97,7 @@ export const getSheetRows = (file, sheetName, expectedFields) => {
 
   // Find a matching sheet name in a case-insensitive way
   const matchedSheetName = workbook.SheetNames.find(
-    name => name.trim().toLowerCase() === targetName
+    (name) => name.trim().toLowerCase() === targetName
   );
 
   if (!matchedSheetName) {
@@ -106,11 +107,18 @@ export const getSheetRows = (file, sheetName, expectedFields) => {
   const sheet = workbook.Sheets[matchedSheetName];
 
   const rawRows = xlsx.utils.sheet_to_json(sheet, { header: 1 });
-  let headerRowIndex = 0, bestMatchCount = -1;
+  let headerRowIndex = 0,
+    bestMatchCount = -1;
 
   rawRows.forEach((row, idx) => {
-    const matches = expectedFields.filter(field =>
-      row.map(c => String(c || "").trim().toLowerCase()).includes(field.toLowerCase())
+    const matches = expectedFields.filter((field) =>
+      row
+        .map((c) =>
+          String(c || "")
+            .trim()
+            .toLowerCase()
+        )
+        .includes(field.toLowerCase())
     ).length;
     if (matches > bestMatchCount) {
       bestMatchCount = matches;
@@ -118,8 +126,8 @@ export const getSheetRows = (file, sheetName, expectedFields) => {
     }
   });
 
-  const headers = rawRows[headerRowIndex].map(h => String(h || "").trim());
-  return rawRows.slice(headerRowIndex + 1).map(row => {
+  const headers = rawRows[headerRowIndex].map((h) => String(h || "").trim());
+  return rawRows.slice(headerRowIndex + 1).map((row) => {
     const obj = {};
     headers.forEach((header, i) => {
       obj[header] = row[i];
@@ -140,17 +148,24 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
 
     // Validation checks
     if (!platformOrderId || !name || !courier || quantity <= 0) {
-      results.skipped.push({ platformOrderId: platformOrderId || "N/A", reason: "Invalid row data" });
+      results.skipped.push({
+        platformOrderId: platformOrderId || "N/A",
+        reason: "Invalid row data",
+      });
       continue;
     }
 
     const existingOrder = await Order.findOne({ platformOrderId });
     if (existingOrder) {
-      results.skipped.push({ platformOrderId, reason: "Order already exists" });
+      results.skipped.push({ platformOrderId, reason: "Order already imported." });
       continue;
     }
 
-    const product = await Product.findOne({ name, variant });
+    const product = await Product.findOne({
+      normalizedName: normalizeString(name),
+      normalizedVariant: normalizeString(variant || ""),
+    });
+
     if (!product) {
       results.skipped.push({ platformOrderId, reason: "Product not found" });
       continue;
@@ -173,7 +188,10 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
     const remainingQty = product.quantity - quantity;
     const updatedProduct = await Product.findByIdAndUpdate(
       product._id,
-      { quantity: remainingQty, ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }) },
+      {
+        quantity: remainingQty,
+        ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+      },
       { new: true }
     );
 
@@ -205,11 +223,13 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
 
   return {
     message: "Order import completed",
-    summary: { imported: results.imported.length, skipped: results.skipped.length },
+    summary: {
+      imported: results.imported.length,
+      skipped: results.skipped.length,
+    },
     details: results,
   };
 };
-
 
 // for sales import
 export const extractOrderIds = (rows, orderIdKey) => {
@@ -218,4 +238,3 @@ export const extractOrderIds = (rows, orderIdKey) => {
     .filter((id) => typeof id === "string" && id.trim() !== "")
     .map((id) => id.trim());
 };
-

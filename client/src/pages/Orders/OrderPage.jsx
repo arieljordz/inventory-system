@@ -40,7 +40,7 @@ const OrderPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalItems, setTotalItems] = useState(0);
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   // Pickup modal state
   const [isPickupModalOpen, setIsPickupModalOpen] = useState(false);

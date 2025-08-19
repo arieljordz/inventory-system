@@ -37,7 +37,7 @@ export const getAllOrders = async (req, res) => {
     const pipeline = [
       {
         $lookup: {
-          from: "products", // collection name in Mongo
+          from: "products", 
           localField: "product",
           foreignField: "_id",
           as: "product",

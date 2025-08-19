@@ -18,6 +18,7 @@ import PaginationControls from "../../components/common/PaginationControls";
 import RestockModal from "./RestockModal";
 
 import { useDebounce } from "../../hooks/useDebounce";
+import ProductImport from "./ProductImport";
 
 // Default form state
 const initialFormState = {
@@ -41,21 +42,21 @@ const ProductsPage = () => {
   // Core state
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
-  
+
   // Search and pagination state
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalItems, setTotalItems] = useState(0);
-  
+
   // Debounced search term
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
-  
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [form, setForm] = useState(initialFormState);
-  
+
   // Restock modal state
   const [showRestockModal, setShowRestockModal] = useState(false);
   const [restockForm, setRestockForm] = useState({
@@ -75,12 +76,16 @@ const ProductsPage = () => {
         search: debouncedSearchTerm,
       });
 
-      const { products: fetchedProducts, totalProducts, totalPages } = response.data;
-      
+      const {
+        products: fetchedProducts,
+        totalProducts,
+        totalPages,
+      } = response.data;
+
       // console.log(fetchedProducts);
       setProducts(fetchedProducts || []);
       setTotalItems(totalProducts || 0);
-      
+
       // Adjust current page if it exceeds total pages
       if (currentPage > totalPages && totalPages > 0) {
         setCurrentPage(totalPages);
@@ -105,7 +110,7 @@ const ProductsPage = () => {
     if (currentPage !== 1) {
       setCurrentPage(1);
     }
-  }, [debouncedSearchTerm]); 
+  }, [debouncedSearchTerm]);
 
   // Event handlers
   const handleSearchChange = useCallback((value) => {
@@ -148,59 +153,67 @@ const ProductsPage = () => {
     }));
   }, []);
 
-  const handleFormSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    showSpinner();
-    
-    try {
-      const formData = new FormData();
-      Object.entries(form).forEach(([key, value]) => {
-        if (value !== null && value !== undefined && value !== "") {
-          formData.append(key, value);
+  const handleFormSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      showSpinner();
+
+      try {
+        const formData = new FormData();
+        Object.entries(form).forEach(([key, value]) => {
+          if (value !== null && value !== undefined && value !== "") {
+            formData.append(key, value);
+          }
+        });
+
+        if (isEditMode) {
+          await updateProduct(form._id, formData);
+          toast.success("Product updated successfully!");
+        } else {
+          await createProduct(formData);
+          toast.success("Product created successfully!");
         }
-      });
 
-      if (isEditMode) {
-        await updateProduct(form._id, formData);
-        toast.success("Product updated successfully!");
-      } else {
-        await createProduct(formData);
-        toast.success("Product created successfully!");
+        closeModal();
+        await fetchProducts();
+      } catch (error) {
+        console.error("Error saving product:", error);
+        toast.error(
+          isEditMode ? "Failed to update product" : "Failed to create product"
+        );
+      } finally {
+        hideSpinner();
       }
-
-      closeModal();
-      await fetchProducts();
-    } catch (error) {
-      console.error("Error saving product:", error);
-      toast.error(isEditMode ? "Failed to update product" : "Failed to create product");
-    } finally {
-      hideSpinner();
-    }
-  }, [form, isEditMode, showSpinner, hideSpinner, closeModal, fetchProducts]);
+    },
+    [form, isEditMode, showSpinner, hideSpinner, closeModal, fetchProducts]
+  );
 
   // Delete handler
-  const handleDelete = useCallback(async (productId) => {
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "This action cannot be undone.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#6c757d",
-      confirmButtonText: "Yes, delete it!",
-    });
+  const handleDelete = useCallback(
+    async (productId) => {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This action cannot be undone.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#6c757d",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-    if (!result.isConfirmed) return;
+      if (!result.isConfirmed) return;
 
-    try {
-      await deleteProduct(productId);
-      toast.success("Product deleted successfully!");
-      await fetchProducts();
-    } catch (error) {
-      console.error("Failed to delete product:", error);
-      toast.error("Failed to delete product");
-    }
-  }, [fetchProducts]);
+      try {
+        await deleteProduct(productId);
+        toast.success("Product deleted successfully!");
+        await fetchProducts();
+      } catch (error) {
+        console.error("Failed to delete product:", error);
+        toast.error("Failed to delete product");
+      }
+    },
+    [fetchProducts]
+  );
 
   // Restock handlers
   const handleRestock = useCallback((product) => {
@@ -218,26 +231,29 @@ const ProductsPage = () => {
     setRestockForm((prev) => ({ ...prev, [name]: value }));
   }, []);
 
-  const handleRestockSubmit = useCallback(async (e) => {
-    e.preventDefault();
-    showSpinner();
-    
-    try {
-      await restockProduct(restockForm._id, {
-        quantity: parseInt(restockForm.quantity, 10),
-        remarks: restockForm.remarks || "Restock",
-      });
-      
-      toast.success("Product restocked successfully!");
-      setShowRestockModal(false);
-      await fetchProducts();
-    } catch (error) {
-      console.error("Restock error:", error);
-      toast.error("Failed to restock product");
-    } finally {
-      hideSpinner();
-    }
-  }, [restockForm, showSpinner, hideSpinner, fetchProducts]);
+  const handleRestockSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      showSpinner();
+
+      try {
+        await restockProduct(restockForm._id, {
+          quantity: parseInt(restockForm.quantity, 10),
+          remarks: restockForm.remarks || "Restock",
+        });
+
+        toast.success("Product restocked successfully!");
+        setShowRestockModal(false);
+        await fetchProducts();
+      } catch (error) {
+        console.error("Restock error:", error);
+        toast.error("Failed to restock product");
+      } finally {
+        hideSpinner();
+      }
+    },
+    [restockForm, showSpinner, hideSpinner, fetchProducts]
+  );
 
   const closeRestockModal = useCallback(() => {
     setShowRestockModal(false);
@@ -256,8 +272,8 @@ const ProductsPage = () => {
         <div className="container-fluid">
           {/* Add Product Button */}
           <div className="mb-3">
-            <button 
-              className="btn btn-primary" 
+            <button
+              className="btn btn-primary"
               onClick={openCreateModal}
               disabled={loading}
             >
@@ -265,6 +281,7 @@ const ProductsPage = () => {
             </button>
           </div>
 
+          <ProductImport fetchProducts={fetchProducts} />
           {/* Search and Items Per Page Controls */}
           <SearchBar
             searchTerm={searchTerm}

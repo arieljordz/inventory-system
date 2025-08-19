@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
+import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
 
 const TrackingsTable = ({ orders = [], loading = false }) => {
   const renderTableRows = () => {
@@ -49,8 +50,17 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
             {order.product?.sku || "N/A"}
           </code>
         </td>
-        <td className="align-middle" title={order.product?.name || ""}>
-          {truncateText(order.product?.name, 40) || "-"}
+        <td className="align-middle">
+          <div className="d-flex align-items-center">
+            <div
+              className="font-weight-medium"
+              title={order.product?.name || ""}
+              style={{ maxWidth: "250px" }}
+            >
+              {truncateText(order.product?.name, 40)}
+            </div>
+            <CopyToClipboardButton text={order.product?.name} />
+          </div>
         </td>
         <td className="text-center align-middle">
           {order.product?.variant ? (
@@ -121,7 +131,7 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
                 <th className="text-center" style={{ width: "180px" }}>
                   Platform Order ID
                 </th>
-                <th className="text-center" style={{ width: "120px" }}>
+                <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
                 <th>Product Name</th>

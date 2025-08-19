@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   formatAmount,
   formatDate,
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
+import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
 
 const ProductTable = ({
   products = [],
@@ -105,13 +106,15 @@ const ProductTable = ({
                 }}
               />
             )}
-            <div>
-              <div className="font-weight-medium" title={product.name || ""}>
+            <div className="d-flex align-items-center">
+              <div
+                className="font-weight-medium"
+                title={product.name || ""}
+                style={{ maxWidth: "250px" }}
+              >
                 {truncateText(product.name, 40)}
               </div>
-              {/* {product.category && (
-                <small className="text-muted">{product.category}</small>
-              )} */}
+              <CopyToClipboardButton text={product.name} />
             </div>
           </div>
         </td>
@@ -185,11 +188,11 @@ const ProductTable = ({
                 <th className="text-center" style={{ width: "50px" }}>
                   #
                 </th>
-                <th className="text-center" style={{ width: "100px" }}>
+                <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
-                <th style={{ width: "200px" }}>Product Name</th>
-                <th>Description</th>
+                <th style={{ width: "400px" }}>Product Name</th>
+                <th style={{ width: "300px" }}>Description</th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>

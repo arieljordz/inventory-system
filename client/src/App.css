@@ -110,3 +110,12 @@ body.dark-mode .dark-mode-text-white {
   justify-content: center;
 }
 
+/* Hide the element completely */
+.hide {
+  display: none !important;
+}
+
+/* Show the element normally */
+.show {
+  display: inline-block !important; /* works well for buttons */
+}

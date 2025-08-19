@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { StatusEnum } from "../enums/enums.js";
+import { normalizeString } from "../utils/commonUtils.js";
 
 const productSchema = new mongoose.Schema(
   {
@@ -57,8 +58,19 @@ const productSchema = new mongoose.Schema(
       enum: Object.values(StatusEnum),
       default: StatusEnum.AVAILABLE,
     },
+
+    // 🔹 Normalized fields for reliable lookups
+    normalizedName: { type: String, index: true },
+    normalizedVariant: { type: String, index: true },
   },
   { timestamps: true }
 );
+
+// Pre-save hook to always set normalized values
+productSchema.pre("save", function (next) {
+  this.normalizedName = normalizeString(this.name);
+  this.normalizedVariant = normalizeString(this.variant || "");
+  next();
+});
 
 export default mongoose.model("Product", productSchema);

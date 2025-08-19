@@ -23,7 +23,7 @@ const SearchBar = ({
       <div className="card-body">
         <div className="row align-items-center">
           {/* Search Input */}
-          <div className="col-md-6 mb-2 mb-md-0">
+          <div className="col-md-9 mb-2 mb-md-0">
             <div className="input-group">
               <div className="input-group-prepend">
                 <span className="input-group-text">
@@ -55,7 +55,7 @@ const SearchBar = ({
           </div>
 
           {/* Items Per Page Selector */}
-          <div className="col-md-6">
+          <div className="col-md-3">
             <div className="d-flex justify-content-md-end align-items-center">
               <label htmlFor="itemsPerPage" className="mb-0 mr-2 text-muted">
                 Show:

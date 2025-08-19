@@ -10,6 +10,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
         Date: date,
@@ -20,6 +21,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
 
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         "Platform Order ID": item.platformOrderId || "-",
         Platform: item.platform || "-",
         Courier: item.courier || "-",
@@ -41,6 +43,7 @@ export const formatExportData = (reportData = [], reportType = "") => {
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
         Date: date,
@@ -51,6 +54,7 @@ export const formatExportData = (reportData = [], reportType = "") => {
 
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         "Platform Order ID": item.platformOrderId || "-",
         Platform: item.platform || "-",
         Courier: item.courier || "-",
@@ -66,9 +70,10 @@ export const formatExportData = (reportData = [], reportType = "") => {
 export const getCenteredColumns = (reportType = "") => {
   //   console.log("reportType:", reportType);
   if (reportType.includes(ReportTypeEnum.INVENTORY)) {
-    return ["Quantity", "Type", "Date", "Status"];
+    return ["Variant", "Quantity", "Type", "Date", "Status"];
   } else {
     return [
+      "Variant",
       "Platform Order ID",
       "Quantity",
       "Platform",

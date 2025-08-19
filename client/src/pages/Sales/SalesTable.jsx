@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
+import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
 
 const SalesTable = ({ orders = [], loading = false }) => {
   const renderTableRows = () => {
@@ -49,8 +50,17 @@ const SalesTable = ({ orders = [], loading = false }) => {
             {order.product?.sku || "N/A"}
           </code>
         </td>
-        <td className="align-middle" title={order.product?.name || ""}>
-          {truncateText(order.product?.name, 40) || "-"}
+        <td className="align-middle">
+          <div className="d-flex align-items-center">
+            <div
+              className="font-weight-medium"
+              title={order.product?.name || ""}
+              style={{ maxWidth: "250px" }}
+            >
+              {truncateText(order.product?.name, 40)}
+            </div>
+            <CopyToClipboardButton text={order.product?.name} />
+          </div>
         </td>
         <td className="text-center align-middle">
           {order.product?.variant ? (
@@ -100,7 +110,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
     <div className="card">
       <div className="card-header">
         <h3 className="card-title mb-0">
-          <i className="fas fa-money-bill mr-2"></i>
+          <i className="fas fa-money-bill-wave mr-2"></i>
           Sales Orders
         </h3>
       </div>

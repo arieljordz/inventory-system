@@ -53,7 +53,7 @@ const SalesPage = () => {
     endDate: getCurrentDate(),
   });
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   /** 🔹 Import modal state */
   const [showImportModal, setShowImportModal] = useState(false);
@@ -202,7 +202,7 @@ const SalesPage = () => {
           <div className="row">
             <InfoBox
               label="Total Sales"
-              icon="fas fa-dollar-sign"
+              icon="fas fa-money-bill-wave"
               color="success"
               value={formatAmount(stats.totalSales)}
             />

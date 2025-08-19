@@ -22,7 +22,7 @@ const TrackingsPage = () => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalItems, setTotalItems] = useState(0);
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   /** 🔹 Fetch Orders (server handles pagination + search) */
   const fetchOrders = useCallback(async () => {

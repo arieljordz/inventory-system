@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/common/StatusBadge";
+import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
 
 const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
   const handleTagForPickup = (order) => {
@@ -30,7 +31,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="9" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -45,7 +46,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
     if (!orders || orders.length === 0) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="9" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-clipboard-list fa-2x mb-2 d-block"></i>
               No orders found
@@ -61,8 +62,17 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
         <td className="text-center align-middle">
           <code className="px-2 py-1 rounded">{order.sku || "N/A"}</code>
         </td>
-        <td className="align-middle" title={order.name || ""}>
-          {truncateText(order.name, 40) || "-"}
+        <td className="align-middle">
+          <div className="d-flex align-items-center">
+            <div
+              className="font-weight-medium"
+              title={order.name || ""}
+              style={{ maxWidth: "250px" }}
+            >
+              {truncateText(order.name, 40)}
+            </div>
+            <CopyToClipboardButton text={order.name} />
+          </div>
         </td>
         <td className="align-middle" title={order.description || ""}>
           {order.description ? (
@@ -111,9 +121,9 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
             }}
           />
         </td>
-        <td className="text-center align-middle">
+        {/* <td className="text-center align-middle">
           {renderActionButtons(order)}
-        </td>
+        </td> */}
       </tr>
     ));
   };
@@ -134,16 +144,16 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
                 <th className="text-center" style={{ width: "50px" }}>
                   #
                 </th>
-                <th className="text-center" style={{ width: "100px" }}>
+                <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
-                <th style={{ width: "200px" }}>Product Name</th>
-                <th>Description</th>
+                <th style={{ width: "400px" }}>Product Name</th>
+                <th style={{ width: "300px" }}>Description</th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>
                 <th className="text-center" style={{ width: "100px" }}>
-                  Quantity
+                  Stock
                 </th>
                 <th className="text-right" style={{ width: "120px" }}>
                   Total Price
@@ -154,9 +164,9 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
                 <th className="text-center" style={{ width: "120px" }}>
                   Status
                 </th>
-                <th className="text-center" style={{ width: "150px" }}>
+                {/* <th className="text-center" style={{ width: "150px" }}>
                   Actions
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>{renderTableRows()}</tbody>

@@ -1,5 +1,6 @@
 import React from "react";
 import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
+import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
 
 const InventoryTable = ({ data = [], loading = false }) => {
   const formatDate = (date) =>
@@ -91,9 +92,15 @@ const InventoryTable = ({ data = [], loading = false }) => {
           <div key={productId} className="mb-3 border rounded">
             {/* Product Header */}
             <div className="bg-primary text-white p-2 d-flex justify-content-between align-items-center">
-              <strong>
-                {index + 1}. {productName}
-              </strong>
+              <div className="d-flex align-items-center">
+                <strong>
+                  {index + 1}. {productName}
+                </strong>
+                <CopyToClipboardButton
+                  text={productName}
+                  className="ml-2 text-white"
+                />
+              </div>
               <span className="badge badge-light text-dark">
                 Remaining Qty: {remainingQty}
               </span>

@@ -55,7 +55,7 @@ export const getReportData = async (req, res) => {
       }
 
       data = await Order.find(filter)
-        .populate("product", "name serialNumber price")
+        .populate("product", "name serialNumber price variant")
         .sort({ createdAt: -1 });
     } else {
       switch (reportType) {
@@ -70,7 +70,7 @@ export const getReportData = async (req, res) => {
       }
 
       data = await InventoryDetail.find(filter)
-        .populate("product", "name serialNumber price")
+        .populate("product", "name serialNumber price variant")
         .sort({ createdAt: -1 });
     }
 
