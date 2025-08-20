@@ -6,26 +6,29 @@ import {
   getSheetRows,
   processOrderRows,
 } from "../utils/importUtils.js";
-import { normalizeString } from "../utils/commonUtils.js";
+import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
+
     const normalizedSearch = normalizeString(search);
+    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
     const skip = (page - 1) * limit;
 
-    // Build search match
+    // Build search query
     const match = search
       ? {
           $or: [
-            { status: { $regex: search, $options: "i" } }, // status can stay raw
-            { "product.normalizedName": { $regex: normalizedSearch, $options: "i" } },
-            { "product.normalizedVariant": { $regex: normalizedSearch, $options: "i" } },
-            { "product.sku": { $regex: search, $options: "i" } }, // keep raw unless you normalize SKU
-            { "product.description": { $regex: search, $options: "i" } }, // keep raw unless you add normalizedDescription
+            { status: rawSafeRegex }, // status can stay raw
+            { "product.normalizedName": safeRegex },
+            { "product.normalizedVariant": safeRegex },
+            { "product.sku": rawSafeRegex }, // keep raw unless SKU normalized
+            { "product.description": rawSafeRegex }, // keep raw unless normalizedDescription exists
           ],
         }
       : {};
@@ -124,4 +127,3 @@ export const importOrdersByPlatform = async (req, res) => {
     });
   }
 };
-

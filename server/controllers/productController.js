@@ -5,7 +5,7 @@ import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
 import { validateFile, getSheetRows } from "../utils/importUtils.js"; 
-import { normalizeString } from "../utils/commonUtils.js";
+import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -187,17 +187,23 @@ export const getProducts = async (req, res) => {
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
 
-    // Normalize the incoming search string
     const normalizedSearch = normalizeString(search);
+    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
+    console.log("search:", search);
+    console.log("normalizedSearch:", normalizedSearch);
+    console.log("safeRegex:", safeRegex);
+    console.log("rawSafeRegex:", rawSafeRegex);
+    
     // Build search query
     const query = search
       ? {
           $or: [
-            { normalizedName:    { $regex: normalizedSearch, $options: "i" } },
-            { normalizedVariant: { $regex: normalizedSearch, $options: "i" } },
-            { sku:               { $regex: search, $options: "i" } }, // SKU can stay raw
-            { description:       { $regex: search, $options: "i" } }, // description not normalized
+            { normalizedName:    safeRegex },
+            { normalizedVariant: safeRegex },
+            { sku:               rawSafeRegex }, // raw but escaped
+            { description:       rawSafeRegex }, // raw but escaped
           ],
         }
       : {};
@@ -230,19 +236,29 @@ export const getProductsByStatus = async (req, res) => {
     const page  = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
-    const normalizedSearch = normalizeString(search); // normalize user input
+    const normalizedSearch = normalizeString(search);
+    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
     const { status } = req.params;
 
-    // Build search query with status filter
+    console.log("search:", search);
+    console.log("normalizedSearch:", normalizedSearch);
+
+    // Validate status
+    if (!Object.values(StatusEnum).includes(status)) {
+      return res.status(400).json({ message: "Invalid status" });
+    }
+
+    // Build query with status filter
     const query = {
       status,
       ...(search
         ? {
             $or: [
-              { normalizedName:    { $regex: normalizedSearch, $options: "i" } },
-              { normalizedVariant: { $regex: normalizedSearch, $options: "i" } },
-              { sku:               { $regex: search, $options: "i" } }, // SKU stays raw unless normalized
-              { description:       { $regex: search, $options: "i" } }, // or use normalizedDescription if you add it
+              { normalizedName:    safeRegex },
+              { normalizedVariant: safeRegex },
+              { sku:               rawSafeRegex },
+              { description:       rawSafeRegex },
             ],
           }
         : {}),

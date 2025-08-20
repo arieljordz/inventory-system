@@ -7,7 +7,7 @@ import {
   getSheetRows,
   extractOrderIds,
 } from "../utils/importUtils.js";
-import { normalizeString } from "../utils/commonUtils.js";
+import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
 
 export const importSalesByPlatform = async (req, res) => {
   try {
@@ -44,7 +44,9 @@ export const importSalesByPlatform = async (req, res) => {
     // 4. Extract platform order IDs
     const platformOrderIds = extractOrderIds(rows, fieldMap.platformOrderId);
     if (platformOrderIds.length === 0) {
-      return res.status(400).json({ message: "No valid order IDs found in file." });
+      return res
+        .status(400)
+        .json({ message: "No valid order IDs found in file." });
     }
 
     // 5. Fetch matching orders
@@ -54,7 +56,7 @@ export const importSalesByPlatform = async (req, res) => {
     });
 
     const results = { updated: [], alreadyPaid: [], notFound: [] };
-    const orderMap = new Map(orders.map(o => [o.platformOrderId, o]));
+    const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
 
     // 6. Update payment status and log
     for (const id of platformOrderIds) {
@@ -114,31 +116,38 @@ export const getSalesStatsByDate = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    // Date range
+    /** 🔹 Date range filter */
     const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
     const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
+
+    if (isNaN(startDate) || isNaN(endDate)) {
+      return res.status(400).json({ message: "Invalid date range" });
+    }
 
     const todayStart = moment.tz("Asia/Manila").startOf("day").toDate();
     const todayEnd = moment.tz("Asia/Manila").endOf("day").toDate();
 
-    // Base filter
+    /** 🔹 Base filter */
     let match = {
       createdAt: { $gte: startDate, $lte: endDate },
     };
 
-    // Add search support
+    /** 🔹 Search filter */
     if (search) {
       const normalizedSearch = normalizeString(search);
+      const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+      const rawSafeRegex = new RegExp(escapeRegex(search), "i");
+
       match.$or = [
-        { status: { $regex: search, $options: "i" } }, // raw status search
-        { "product.normalizedName": { $regex: normalizedSearch, $options: "i" } },
-        { "product.normalizedVariant": { $regex: normalizedSearch, $options: "i" } },
-        { "product.sku": { $regex: search, $options: "i" } }, // keep raw unless you normalize SKU
-        { "product.description": { $regex: search, $options: "i" } }, // same for description
+        { status: rawSafeRegex }, // raw status search
+        { "product.normalizedName": safeRegex },
+        { "product.normalizedVariant": safeRegex },
+        { "product.sku": rawSafeRegex }, // raw but escaped
+        { "product.description": rawSafeRegex }, // raw but escaped
       ];
     }
 
-    // Pipeline
+    /** 🔹 Main aggregation pipeline */
     const pipeline = [
       {
         $lookup: {
@@ -183,7 +192,7 @@ export const getSalesStatsByDate = async (req, res) => {
     };
     const totalOrders = result[0].total[0]?.count || 0;
 
-    // Calculate today's revenue separately
+    /** 🔹 Today’s revenue aggregation */
     const todaysRevenueAgg = await Order.aggregate([
       {
         $match: { createdAt: { $gte: todayStart, $lte: todayEnd } },
@@ -200,7 +209,9 @@ export const getSalesStatsByDate = async (req, res) => {
       {
         $group: {
           _id: null,
-          revenueToday: { $sum: { $multiply: ["$quantity", "$product.price"] } },
+          revenueToday: {
+            $sum: { $multiply: ["$quantity", "$product.price"] },
+          },
         },
       },
     ]);
@@ -222,4 +233,3 @@ export const getSalesStatsByDate = async (req, res) => {
     res.status(500).json({ message: "Failed to get order stats" });
   }
 };
-

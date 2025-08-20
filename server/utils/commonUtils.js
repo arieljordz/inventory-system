@@ -1,9 +1,9 @@
-// Helper: escape regex special characters
+// utils/commonUtils.js
+
+// Escape regex special characters for queries
 export const escapeRegex = (text = "") =>
   text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-// Helper: normalize text (trim + collapse spaces + lowercase + safe for regex)
-export const normalizeString = (val = "") => {
-  const normalized = val.toString().trim().replace(/\s+/g, " ").toLowerCase();
-  return escapeRegex(normalized);
-};
+// Normalize text for storage (only trim/space/lowercase)
+export const normalizeString = (val = "") =>
+  val.toString().trim().replace(/\s+/g, " ").toLowerCase();

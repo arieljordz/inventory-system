@@ -4,7 +4,7 @@ import Order from "../models/Order.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
 import moment from "moment-timezone";
-import { normalizeString } from "../utils/commonUtils.js";
+import { normalizeString, escapeRegex  } from "../utils/commonUtils.js";
 
 export const getRemainingQuantities = async (req, res) => {
   try {
@@ -128,19 +128,20 @@ export const getInventoryMovements = async (req, res) => {
     /** 🔹 Search Filter */
     let searchFilter = {};
     if (search) {
-      const upperSearch = search.toUpperCase();
+      const normalizedSearch = normalizeString(search);
+      const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+      const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
-      if (upperSearch === "IN" || upperSearch === "OUT") {
-        // Exact match for action
-        searchFilter = { movementType: upperSearch };
+      if (["IN", "OUT"].includes(search.toUpperCase())) {
+        searchFilter = { movementType: search.toUpperCase() };
       } else {
-        const normalizedSearch = normalizeString(search);
         searchFilter = {
           $or: [
-            { remarks: { $regex: search, $options: "i" } }, // raw unless you add normalizedRemarks
-            { "product.normalizedName": { $regex: normalizedSearch, $options: "i" } },
-            { "product.normalizedVariant": { $regex: normalizedSearch, $options: "i" } },
-            { "product.sku": { $regex: search, $options: "i" } }, // raw unless normalizedSku exists
+            { "product.normalizedName": safeRegex },
+            { "product.normalizedVariant": safeRegex },
+            { "product.sku": rawSafeRegex },
+            { "product.description": rawSafeRegex },
+            { remarks: rawSafeRegex },
           ],
         };
       }
