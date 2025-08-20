@@ -31,7 +31,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="8" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -46,7 +46,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
     if (!orders || orders.length === 0) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="8" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-clipboard-list fa-2x mb-2 d-block"></i>
               No orders found
@@ -64,25 +64,23 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
-            <div
-              className="font-weight-medium"
-              title={order.name || ""}
-              style={{ maxWidth: "250px" }}
-            >
-              {truncateText(order.name, 40)}
+            <div className="font-weight-medium" title={order.name || ""}>
+              <code className="px-2 py-1 rounded">
+                {truncateText(order.name, 500)}
+              </code>
             </div>
             <CopyToClipboardButton text={order.name} />
           </div>
         </td>
-        <td className="align-middle" title={order.description || ""}>
+        {/* <td className="align-middle" title={order.description || ""}>
           {order.description ? (
-            <span className="text-muted">
+            <span className="text-muted small">
               {truncateText(order.description, 40)}
             </span>
           ) : (
             <span className="text-muted font-italic">No description</span>
           )}
-        </td>
+        </td> */}
         <td className="text-center align-middle">
           {order.variant ? (
             <span className="badge badge-secondary">{order.variant}</span>
@@ -147,8 +145,8 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
                 <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
-                <th style={{ width: "400px" }}>Product Name</th>
-                <th style={{ width: "300px" }}>Description</th>
+                <th>Product Name</th>
+                {/* <th style={{ width: "300px" }}>Description</th> */}
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>

@@ -62,7 +62,7 @@ const ProductTable = ({
     if (loading) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="9" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -77,7 +77,7 @@ const ProductTable = ({
     if (!products || products.length === 0) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="9" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
               No products found
@@ -107,26 +107,24 @@ const ProductTable = ({
               />
             )}
             <div className="d-flex align-items-center">
-              <div
-                className="font-weight-medium"
-                title={product.name || ""}
-                style={{ maxWidth: "250px" }}
-              >
-                {truncateText(product.name, 40)}
+              <div className="font-weight-medium" title={product.name || ""}>
+                <code className="px-2 py-1 rounded">
+                  {truncateText(product.name, 500)}
+                </code>
               </div>
               <CopyToClipboardButton text={product.name} />
             </div>
           </div>
         </td>
-        <td className="align-middle" title={product.description || ""}>
+        {/* <td className="align-middle" title={product.description || ""}>
           {product.description ? (
-            <span className="text-muted">
+            <span className="text-muted small">
               {truncateText(product.description, 40)}
             </span>
           ) : (
             <span className="text-muted font-italic">No description</span>
           )}
-        </td>
+        </td> */}
         <td className="text-center align-middle">
           {product.variant ? (
             <span className="badge badge-secondary">{product.variant}</span>
@@ -191,8 +189,8 @@ const ProductTable = ({
                 <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
-                <th style={{ width: "400px" }}>Product Name</th>
-                <th style={{ width: "300px" }}>Description</th>
+                <th>Product Name</th>
+                {/* <th style={{ width: "300px" }}>Description</th> */}
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>

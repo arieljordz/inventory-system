@@ -7,6 +7,7 @@ import {
   getSheetRows,
   extractOrderIds,
 } from "../utils/importUtils.js";
+import { normalizeString } from "../utils/commonUtils.js";
 
 export const importSalesByPlatform = async (req, res) => {
   try {
@@ -127,10 +128,13 @@ export const getSalesStatsByDate = async (req, res) => {
 
     // Add search support
     if (search) {
+      const normalizedSearch = normalizeString(search);
       match.$or = [
-        { status: { $regex: search, $options: "i" } },
-        { "product.name": { $regex: search, $options: "i" } },
-        { "product.sku": { $regex: search, $options: "i" } },
+        { status: { $regex: search, $options: "i" } }, // raw status search
+        { "product.normalizedName": { $regex: normalizedSearch, $options: "i" } },
+        { "product.normalizedVariant": { $regex: normalizedSearch, $options: "i" } },
+        { "product.sku": { $regex: search, $options: "i" } }, // keep raw unless you normalize SKU
+        { "product.description": { $regex: search, $options: "i" } }, // same for description
       ];
     }
 
@@ -204,7 +208,7 @@ export const getSalesStatsByDate = async (req, res) => {
     const revenueToday = todaysRevenueAgg[0]?.revenueToday || 0;
 
     res.json({
-      orders, // paginated orders list
+      orders,
       totalOrders,
       totalPages: Math.max(Math.ceil(totalOrders / limit), 1),
       currentPage: page,

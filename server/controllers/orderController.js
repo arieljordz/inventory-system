@@ -1,24 +1,19 @@
-import path from "path";
-import xlsx from "xlsx";
 import moment from "moment-timezone";
-import Product from "../models/Product.js";
 import Order from "../models/Order.js";
-import InventoryDetail from "../models/InventoryDetail.js";
-import { StatusEnum } from "../enums/enums.js";
-import { logAudit } from "../utils/auditLogger.js";
 import {
   getPlatformMappings,
   validateFile,
   getSheetRows,
   processOrderRows,
-  extractOrderIds,
 } from "../utils/importUtils.js";
+import { normalizeString } from "../utils/commonUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
+    const normalizedSearch = normalizeString(search);
 
     const skip = (page - 1) * limit;
 
@@ -26,10 +21,11 @@ export const getAllOrders = async (req, res) => {
     const match = search
       ? {
           $or: [
-            { status: { $regex: search, $options: "i" } },
-            { "product.name": { $regex: search, $options: "i" } },
-            { "product.description": { $regex: search, $options: "i" } },
-            { "product.sku": { $regex: search, $options: "i" } },
+            { status: { $regex: search, $options: "i" } }, // status can stay raw
+            { "product.normalizedName": { $regex: normalizedSearch, $options: "i" } },
+            { "product.normalizedVariant": { $regex: normalizedSearch, $options: "i" } },
+            { "product.sku": { $regex: search, $options: "i" } }, // keep raw unless you normalize SKU
+            { "product.description": { $regex: search, $options: "i" } }, // keep raw unless you add normalizedDescription
           ],
         }
       : {};
@@ -37,7 +33,7 @@ export const getAllOrders = async (req, res) => {
     const pipeline = [
       {
         $lookup: {
-          from: "products", 
+          from: "products",
           localField: "product",
           foreignField: "_id",
           as: "product",

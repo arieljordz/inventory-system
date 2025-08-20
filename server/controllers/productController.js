@@ -5,6 +5,7 @@ import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
 import { validateFile, getSheetRows } from "../utils/importUtils.js"; 
+import { normalizeString } from "../utils/commonUtils.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -183,18 +184,20 @@ export const importProducts = async (req, res) => {
 export const getProducts = async (req, res) => {
   try {
     const page  = Math.max(parseInt(req.query.page) || 1, 1);
-    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100); // cap limit to avoid abuse
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
 
-    // Build search query (add more fields if needed)
+    // Normalize the incoming search string
+    const normalizedSearch = normalizeString(search);
+
+    // Build search query
     const query = search
       ? {
           $or: [
-            { name:        { $regex: search, $options: "i" } },
-            { description: { $regex: search, $options: "i" } },
-            { variant:     { $regex: search, $options: "i" } },
-            { sku:         { $regex: search, $options: "i" } },
-            // price/quantity are numbers; only include if you store as string
+            { normalizedName:    { $regex: normalizedSearch, $options: "i" } },
+            { normalizedVariant: { $regex: normalizedSearch, $options: "i" } },
+            { sku:               { $regex: search, $options: "i" } }, // SKU can stay raw
+            { description:       { $regex: search, $options: "i" } }, // description not normalized
           ],
         }
       : {};
@@ -225,8 +228,9 @@ export const getProducts = async (req, res) => {
 export const getProductsByStatus = async (req, res) => {
   try {
     const page  = Math.max(parseInt(req.query.page) || 1, 1);
-    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100); // cap limit
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
+    const normalizedSearch = normalizeString(search); // normalize user input
     const { status } = req.params;
 
     // Build search query with status filter
@@ -235,10 +239,10 @@ export const getProductsByStatus = async (req, res) => {
       ...(search
         ? {
             $or: [
-              { name:        { $regex: search, $options: "i" } },
-              { description: { $regex: search, $options: "i" } },
-              { variant:     { $regex: search, $options: "i" } },
-              { sku:         { $regex: search, $options: "i" } },
+              { normalizedName:    { $regex: normalizedSearch, $options: "i" } },
+              { normalizedVariant: { $regex: normalizedSearch, $options: "i" } },
+              { sku:               { $regex: search, $options: "i" } }, // SKU stays raw unless normalized
+              { description:       { $regex: search, $options: "i" } }, // or use normalizedDescription if you add it
             ],
           }
         : {}),

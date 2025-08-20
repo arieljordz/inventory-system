@@ -4,8 +4,8 @@ import Order from "../models/Order.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
 import moment from "moment-timezone";
+import { normalizeString } from "../utils/commonUtils.js";
 
-// GET /api/inventory/remaining-by-product
 export const getRemainingQuantities = async (req, res) => {
   try {
     const products = await Product.find({}).select(
@@ -60,7 +60,6 @@ export const getInventoryDetailsByStatus = async (req, res) => {
   }
 };
 
-// GET /api/inventory-details/stats?start=YYYY-MM-DD&end=YYYY-MM-DD
 export const getInventoryStats = async (req, res) => {
   const { start, end } = req.query;
 
@@ -104,7 +103,6 @@ export const getInventoryStats = async (req, res) => {
   }
 };
 
-// GET /api/inventory-details/movements?start=YYYY-MM-DD&end=YYYY-MM-DD
 export const getInventoryMovements = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
@@ -131,16 +129,18 @@ export const getInventoryMovements = async (req, res) => {
     let searchFilter = {};
     if (search) {
       const upperSearch = search.toUpperCase();
+
       if (upperSearch === "IN" || upperSearch === "OUT") {
         // Exact match for action
         searchFilter = { movementType: upperSearch };
       } else {
-        // Partial match for other fields
+        const normalizedSearch = normalizeString(search);
         searchFilter = {
           $or: [
-            { remarks: { $regex: search, $options: "i" } },
-            { "product.name": { $regex: search, $options: "i" } },
-            { "product.sku": { $regex: search, $options: "i" } },
+            { remarks: { $regex: search, $options: "i" } }, // raw unless you add normalizedRemarks
+            { "product.normalizedName": { $regex: normalizedSearch, $options: "i" } },
+            { "product.normalizedVariant": { $regex: normalizedSearch, $options: "i" } },
+            { "product.sku": { $regex: search, $options: "i" } }, // raw unless normalizedSku exists
           ],
         };
       }
