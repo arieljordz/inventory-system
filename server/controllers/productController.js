@@ -191,11 +191,11 @@ export const getProducts = async (req, res) => {
     const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
     const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
-    console.log("search:", search);
-    console.log("normalizedSearch:", normalizedSearch);
-    console.log("safeRegex:", safeRegex);
-    console.log("rawSafeRegex:", rawSafeRegex);
-    
+    // console.log("search:", search);
+    // console.log("normalizedSearch:", normalizedSearch);
+    // console.log("safeRegex:", safeRegex);
+    // console.log("rawSafeRegex:", rawSafeRegex);
+
     // Build search query
     const query = search
       ? {
@@ -241,8 +241,8 @@ export const getProductsByStatus = async (req, res) => {
     const rawSafeRegex = new RegExp(escapeRegex(search), "i");
     const { status } = req.params;
 
-    console.log("search:", search);
-    console.log("normalizedSearch:", normalizedSearch);
+    // console.log("search:", search);
+    // console.log("normalizedSearch:", normalizedSearch);
 
     // Validate status
     if (!Object.values(StatusEnum).includes(status)) {
