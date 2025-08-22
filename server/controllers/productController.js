@@ -5,7 +5,11 @@ import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
 import { validateFile, getSheetRows } from "../utils/importUtils.js";
-import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
+import {
+  normalizeString,
+  escapeRegex,
+  normalizeText,
+} from "../utils/commonUtils.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -27,8 +31,8 @@ export const addProduct = async (req, res) => {
 
     // Check for duplicate Product
     const existingProduct = await Product.findOne({
-      normalizedName: normalizeString(name),
-      normalizedVariant: normalizeString(variant || ""),
+      normalizedName: normalizeString(normalizeText(name)),
+      normalizedVariant: normalizeString(normalizeText(variant) || ""),
     });
 
     if (existingProduct) {
@@ -207,16 +211,11 @@ export const getProducts = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
-    const search = (req.query.search || "").trim();
+    const search = normalizeText((req.query.search || "").trim());
 
     const normalizedSearch = normalizeString(search);
     const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
     const rawSafeRegex = new RegExp(escapeRegex(search), "i");
-
-    // console.log("search:", search);
-    // console.log("normalizedSearch:", normalizedSearch);
-    // console.log("safeRegex:", safeRegex);
-    // console.log("rawSafeRegex:", rawSafeRegex);
 
     // Build search query
     const query = search

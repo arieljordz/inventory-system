@@ -5,7 +5,7 @@ import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
-import { normalizeString } from "./commonUtils.js";
+import { normalizeString, normalizeText } from "./commonUtils.js";
 
 export const platformMappings = {
   shopee: {
@@ -141,9 +141,9 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
 
   for (const row of rows) {
     const platformOrderId = row[fieldMap.platformOrderId]?.toString().trim();
-    const name = row[fieldMap.name]?.trim();
-    const courier = row[fieldMap.courier]?.trim();
-    const variant = row[fieldMap.variant]?.trim() || "";
+    const name = normalizeText(row[fieldMap.name]?.trim() || "");
+    const courier = normalizeText(row[fieldMap.courier]?.trim() || "");
+    const variant = normalizeText(row[fieldMap.variant]?.trim() || "");
     const quantity = parseInt(row[fieldMap.quantity]) || 0;
 
     // Validation checks

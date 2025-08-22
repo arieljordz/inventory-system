@@ -6,13 +6,17 @@ import {
   getSheetRows,
   processOrderRows,
 } from "../utils/importUtils.js";
-import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
+import {
+  normalizeString,
+  escapeRegex,
+  normalizeText,
+} from "../utils/commonUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
-    const search = (req.query.search || "").trim();
+    const search = normalizeText((req.query.search || "").trim());
 
     const normalizedSearch = normalizeString(search);
     const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");

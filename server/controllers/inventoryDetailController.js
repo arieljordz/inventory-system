@@ -4,7 +4,7 @@ import Order from "../models/Order.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
 import moment from "moment-timezone";
-import { normalizeString, escapeRegex  } from "../utils/commonUtils.js";
+import { normalizeString, escapeRegex, normalizeText } from "../utils/commonUtils.js";
 
 export const getRemainingQuantities = async (req, res) => {
   try {
@@ -107,7 +107,7 @@ export const getInventoryMovements = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 100);
-    const search = (req.query.search || "").trim();
+    const search = normalizeText((req.query.search || "").trim());
     const { start, end } = req.query;
 
     const skip = (page - 1) * limit;
