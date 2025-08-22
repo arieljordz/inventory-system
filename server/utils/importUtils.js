@@ -157,7 +157,10 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
 
     const existingOrder = await Order.findOne({ platformOrderId });
     if (existingOrder) {
-      results.skipped.push({ platformOrderId, reason: "Order already imported." });
+      results.skipped.push({
+        platformOrderId,
+        reason: "Order already imported.",
+      });
       continue;
     }
 

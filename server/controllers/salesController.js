@@ -139,11 +139,12 @@ export const getSalesStatsByDate = async (req, res) => {
       const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
       match.$or = [
-        { status: rawSafeRegex }, // raw status search
+        { status: rawSafeRegex },
         { "product.normalizedName": safeRegex },
         { "product.normalizedVariant": safeRegex },
-        { "product.sku": rawSafeRegex }, // raw but escaped
-        { "product.description": rawSafeRegex }, // raw but escaped
+        { "product.sku": rawSafeRegex },
+        { "product.description": rawSafeRegex },
+        { "product.platformOrderId": rawSafeRegex },
       ];
     }
 

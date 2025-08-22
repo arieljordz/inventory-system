@@ -24,11 +24,12 @@ export const getAllOrders = async (req, res) => {
     const match = search
       ? {
           $or: [
-            { status: rawSafeRegex }, // status can stay raw
+            { status: rawSafeRegex },
             { "product.normalizedName": safeRegex },
             { "product.normalizedVariant": safeRegex },
-            { "product.sku": rawSafeRegex }, // keep raw unless SKU normalized
-            { "product.description": rawSafeRegex }, // keep raw unless normalizedDescription exists
+            { "product.sku": rawSafeRegex },
+            { "product.description": rawSafeRegex },
+            { "product.platformOrderId": rawSafeRegex },
           ],
         }
       : {};

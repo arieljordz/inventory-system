@@ -31,7 +31,7 @@ const productSchema = new mongoose.Schema(
     },
     sku: {
       type: String,
-      unique: true,
+      unique: false,
     },
     variant: {
       type: String,
@@ -62,6 +62,8 @@ const productSchema = new mongoose.Schema(
     // 🔹 Normalized fields for reliable lookups
     normalizedName: { type: String, index: true },
     normalizedVariant: { type: String, index: true },
+    normalizedSku: { type: String, index: true },
+    normalizedDescription: { type: String, index: true },
   },
   { timestamps: true }
 );
@@ -72,17 +74,20 @@ productSchema.pre("save", function (next) {
   this.name = normalizeText(this.name);
   this.description = normalizeText(this.description || "");
   this.variant = normalizeText(this.variant || "");
+  this.sku = normalizeText(this.sku || "");
 
-  // Maintain search fields
+  // Maintain normalized fields
   this.normalizedName = normalizeString(this.name);
   this.normalizedVariant = normalizeString(this.variant || "");
+  this.normalizedSku = normalizeString(this.sku || "");
+  this.normalizedDescription = normalizeString(this.description || "");
 
   next();
 });
 
-// 🔹 Compound unique index to enforce uniqueness of (name + variant)
+// 🔹 Compound unique index: (name + variant + sku)
 productSchema.index(
-  { normalizedName: 1, normalizedVariant: 1 },
+  { normalizedName: 1, normalizedVariant: 1, normalizedSku: 1 },
   { unique: true }
 );
 

@@ -117,12 +117,13 @@ export const importProducts = async (req, res) => {
     const results = { imported: [], skipped: [] };
 
     for (const row of rows) {
-      const name = row["name"]?.toString().trim();
-      const description = row["description"]?.toString().trim();
+      // inside for (const row of rows)
+      const name = normalizeText(row["name"]?.toString() || "");
+      const description = normalizeText(row["description"]?.toString() || "");
       const price = parseFloat(row["price"]);
-      const variant = row["variant"]?.toString().trim() || "";
+      const variant = normalizeText(row["variant"]?.toString() || "");
       const quantity = parseInt(row["quantity"]) || 0;
-      const sku = row["sku"]?.toString().trim();
+      const sku = normalizeText(row["sku"]?.toString() || "");
 
       // Validation
       if (!name || !description || isNaN(price) || !sku) {
@@ -130,10 +131,11 @@ export const importProducts = async (req, res) => {
         continue;
       }
 
-      // Check for duplicate Product
+      // Duplicate check using normalizedString (for search-safety)
       const existingProduct = await Product.findOne({
         normalizedName: normalizeString(name),
-        normalizedVariant: normalizeString(variant || ""),
+        normalizedVariant: normalizeString(variant),
+        normalizedSku: normalizeString(sku),
       });
 
       if (existingProduct) {
@@ -149,7 +151,12 @@ export const importProducts = async (req, res) => {
         variant,
         quantity,
         sku,
+        normalizedName: normalizeString(name),
+        normalizedDescription: normalizeString(description),
+        normalizedVariant: normalizeString(variant),
+        normalizedSku: normalizeString(sku),
       });
+
       const savedProduct = await product.save();
 
       // Create initial inventory detail if stock > 0
