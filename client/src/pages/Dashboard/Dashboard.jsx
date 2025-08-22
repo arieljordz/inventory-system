@@ -7,7 +7,7 @@ const Dashboard = () => {
   const [stats, setStats] = useState({
     totalProducts: 0,
     totalQuantity: 0,
-    forPickUp: 0,
+    needsRestock: 0,
     outOfStock: 0,
   });
 
