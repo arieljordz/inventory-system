@@ -73,4 +73,10 @@ productSchema.pre("save", function (next) {
   next();
 });
 
+// 🔹 Compound unique index to enforce uniqueness of (name + variant)
+productSchema.index(
+  { normalizedName: 1, normalizedVariant: 1 },
+  { unique: true }
+);
+
 export default mongoose.model("Product", productSchema);

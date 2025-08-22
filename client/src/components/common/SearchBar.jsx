@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 const SearchBar = ({
   searchTerm = "",
@@ -9,6 +9,15 @@ const SearchBar = ({
   placeholder = "Search products...",
   disabled = false,
 }) => {
+  const inputRef = useRef(null);
+
+  // Always focus when component mounts
+  useEffect(() => {
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [disabled]);
+
   const handleSearchInputChange = (e) => {
     onSearchChange?.(e.target.value);
   };
@@ -16,6 +25,19 @@ const SearchBar = ({
   const handleItemsPerPageSelectChange = (e) => {
     const value = parseInt(e.target.value, 10);
     onItemsPerPageChange?.(value);
+
+    // Refocus the search input after selecting items per page
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const handleClearSearch = () => {
+    onSearchChange?.("");
+    // Refocus after clearing
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   return (
@@ -31,6 +53,7 @@ const SearchBar = ({
                 </span>
               </div>
               <input
+                ref={inputRef}
                 type="text"
                 className="form-control"
                 placeholder={placeholder}
@@ -43,7 +66,7 @@ const SearchBar = ({
                   <button
                     className="btn btn-outline-secondary"
                     type="button"
-                    onClick={() => onSearchChange?.("")}
+                    onClick={handleClearSearch}
                     disabled={disabled}
                     title="Clear search"
                   >

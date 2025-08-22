@@ -4,7 +4,7 @@ import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
-import { validateFile, getSheetRows } from "../utils/importUtils.js"; 
+import { validateFile, getSheetRows } from "../utils/importUtils.js";
 import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
 
 export const addProduct = async (req, res) => {
@@ -25,10 +25,14 @@ export const addProduct = async (req, res) => {
 
     const sku = generateSKU({ name, category, variant, size });
 
-    // Check for duplicate SKU
-    const existingProduct = await Product.findOne({ sku });
+    // Check for duplicate Product
+    const existingProduct = await Product.findOne({
+      normalizedName: normalizeString(name),
+      normalizedVariant: normalizeString(variant || ""),
+    });
+
     if (existingProduct) {
-      return res.status(400).json({ message: "SKU already exists" });
+      return res.status(400).json({ message: "Product already exists" });
     }
 
     let imageUrl = "";
@@ -100,8 +104,15 @@ export const importProducts = async (req, res) => {
     validateFile(req.file);
 
     // 2. Extract rows from sheet (assume sheet has the right headers)
-    const expectedFields = ["name", "description", "price", "variant", "quantity", "sku"];
-    const rows = getSheetRows(req.file, "products", expectedFields); 
+    const expectedFields = [
+      "name",
+      "description",
+      "price",
+      "variant",
+      "quantity",
+      "sku",
+    ];
+    const rows = getSheetRows(req.file, "products", expectedFields);
 
     const results = { imported: [], skipped: [] };
 
@@ -119,10 +130,14 @@ export const importProducts = async (req, res) => {
         continue;
       }
 
-      // Check for duplicate SKU
-      const existingProduct = await Product.findOne({ sku });
+      // Check for duplicate Product
+      const existingProduct = await Product.findOne({
+        normalizedName: normalizeString(name),
+        normalizedVariant: normalizeString(variant || ""),
+      });
+
       if (existingProduct) {
-        results.skipped.push({ sku, reason: "SKU already exists" });
+        results.skipped.push({ name, reason: "Product already exists" });
         continue;
       }
 
@@ -177,13 +192,13 @@ export const importProducts = async (req, res) => {
     });
   } catch (error) {
     console.error("Import Products Error:", error);
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
 export const getProducts = async (req, res) => {
   try {
-    const page  = Math.max(parseInt(req.query.page) || 1, 1);
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
 
@@ -200,10 +215,10 @@ export const getProducts = async (req, res) => {
     const query = search
       ? {
           $or: [
-            { normalizedName:    safeRegex },
+            { normalizedName: safeRegex },
             { normalizedVariant: safeRegex },
-            { sku:               rawSafeRegex }, // raw but escaped
-            { description:       rawSafeRegex }, // raw but escaped
+            { sku: rawSafeRegex }, // raw but escaped
+            { description: rawSafeRegex }, // raw but escaped
           ],
         }
       : {};
@@ -211,10 +226,7 @@ export const getProducts = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const [products, totalProducts] = await Promise.all([
-      Product.find(query)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit),
+      Product.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
       Product.countDocuments(query),
     ]);
 
@@ -233,7 +245,7 @@ export const getProducts = async (req, res) => {
 
 export const getProductsByStatus = async (req, res) => {
   try {
-    const page  = Math.max(parseInt(req.query.page) || 1, 1);
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
     const search = (req.query.search || "").trim();
     const normalizedSearch = normalizeString(search);
@@ -255,10 +267,10 @@ export const getProductsByStatus = async (req, res) => {
       ...(search
         ? {
             $or: [
-              { normalizedName:    safeRegex },
+              { normalizedName: safeRegex },
               { normalizedVariant: safeRegex },
-              { sku:               rawSafeRegex },
-              { description:       rawSafeRegex },
+              { sku: rawSafeRegex },
+              { description: rawSafeRegex },
             ],
           }
         : {}),
@@ -267,10 +279,7 @@ export const getProductsByStatus = async (req, res) => {
     const skip = (page - 1) * limit;
 
     const [products, totalProducts] = await Promise.all([
-      Product.find(query)
-        .sort({ createdAt: -1 })
-        .skip(skip)
-        .limit(limit),
+      Product.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
       Product.countDocuments(query),
     ]);
 

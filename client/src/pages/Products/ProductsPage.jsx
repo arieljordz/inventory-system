@@ -179,7 +179,9 @@ const ProductsPage = () => {
       } catch (error) {
         console.error("Error saving product:", error);
         toast.error(
-          isEditMode ? "Failed to update product" : "Failed to create product"
+          isEditMode
+            ? error.response?.data?.message || "Failed to update product"
+            : error.response?.data?.message || "Failed to create product"
         );
       } finally {
         hideSpinner();
