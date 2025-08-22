@@ -86,6 +86,7 @@ const InventoryTable = ({ data = [], loading = false }) => {
     return Object.entries(groupedByProduct).map(
       ([productId, { product, movements }], index) => {
         const productName = product?.name || "-";
+        const variant = product?.variant || "Default";
         const remainingQty = product?.quantity ?? 0;
 
         return (
@@ -98,9 +99,15 @@ const InventoryTable = ({ data = [], loading = false }) => {
                 </strong>
                 <CopyToClipboardButton
                   text={productName}
-                  className="ml-2 text-white"
+                  className="ml-2 mr-3 text-white"
                 />
+                <span className="badge badge-light text-dark mr-3">
+                  {"("}
+                  {variant}
+                  {")"}
+                </span>
               </div>
+
               <span className="badge badge-light text-dark">
                 Remaining Qty: {remainingQty}
               </span>

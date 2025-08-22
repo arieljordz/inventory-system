@@ -21,7 +21,7 @@ const CopyToClipboardButton = ({
 
   return (
     <button
-      className={`btn btn-link btn-sm p-0 ml-2 ${className}`}
+      className={`btn btn-link btn-sm p-0 ${className}`}
       onClick={handleCopy}
       title={copied ? "Copied!" : tooltip}
       disabled={!text}

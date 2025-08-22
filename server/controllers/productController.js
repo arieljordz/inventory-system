@@ -23,7 +23,7 @@ export const addProduct = async (req, res) => {
       supplier = "",
       location = "Main Warehouse",
       status = StatusEnum.AVAILABLE,
-      variant = "",
+      variant = "Default",
       size = "",
     } = req.body;
 
@@ -125,7 +125,7 @@ export const importProducts = async (req, res) => {
       const name = normalizeText(row["name"]?.toString() || "");
       const description = normalizeText(row["description"]?.toString() || "");
       const price = parseFloat(row["price"]);
-      const variant = normalizeText(row["variant"]?.toString() || "");
+      const variant = normalizeText(row["variant"]?.toString() || "Default");
       const quantity = parseInt(row["quantity"]) || 0;
       const sku = normalizeText(row["sku"]?.toString() || "");
 
@@ -488,19 +488,17 @@ export const getProductStats = async (req, res) => {
       { $group: { _id: null, total: { $sum: "$quantity" } } },
     ]);
 
-    // Count inventory records with "FOR_PICKUP" status
-    const forPickUp = await InventoryDetail.countDocuments({
-      status: StatusEnum.FOR_PICK_UP,
-    });
+    // Count products that need restock (e.g. quantity <= 5)
+    const needsRestock = await Product.countDocuments({ quantity: { $lte: 5 } });
 
-    // ✅ Count products with quantity <= 0 (out of stock)
+    // Count products with quantity <= 0 (out of stock)
     const outOfStock = await Product.countDocuments({ quantity: { $lte: 0 } });
 
     res.json({
       totalProducts,
       totalQuantity: totalQuantityResult[0]?.total || 0,
-      forPickUp,
-      outOfStock, // ✅ Added to response
+      needsRestock,
+      outOfStock,
     });
   } catch (error) {
     console.error("Get Product Stats Error:", error);

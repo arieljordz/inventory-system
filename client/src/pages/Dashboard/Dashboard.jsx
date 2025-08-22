@@ -43,12 +43,12 @@ const Dashboard = () => {
       label: "Total Stock",
       icon: "ion ion-archive",
     },
-    {
-      color: "warning",
-      count: stats.forPickUp,
-      label: "For Pick Up",
-      icon: "ion ion-log-out",
-    },
+  {
+    color: "warning",
+    count: stats.needsRestock,
+    label: "Needs Restock",
+    icon: "ion ion-alert-circled",
+  },
     {
       color: "danger",
       count: stats.outOfStock,
