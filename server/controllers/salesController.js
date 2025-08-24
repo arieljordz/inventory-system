@@ -2,111 +2,12 @@ import ExcelJS from "exceljs";
 import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import { logAudit } from "../utils/auditLogger.js";
+import { getPlatformMappings, validateFile } from "../utils/importUtils.js";
 import {
-  getPlatformMappings,
-  validateFile,
-  getSheetRows,
-  extractOrderIds,
-} from "../utils/importUtils.js";
-import { normalizeString, escapeRegex, normalizeText } from "../utils/commonUtils.js";
-
-// export const importSalesByPlatform = async (req, res) => {
-//   try {
-//     // 1. Validate platform and get mapping
-//     const platform = req.body.platform;
-//     if (!platform) {
-//       return res.status(400).json({ message: "Platform is required" });
-//     }
-
-//     let mapping;
-//     try {
-//       mapping = getPlatformMappings(platform, "sales");
-//     } catch (err) {
-//       return res.status(400).json({ message: err.message });
-//     }
-
-//     const { sheetName, fields: fieldMap } = mapping;
-
-//     // 2. Validate uploaded file
-//     try {
-//       validateFile(req.file);
-//     } catch (err) {
-//       return res.status(400).json({ message: err.message });
-//     }
-
-//     // 3. Auto-detect header row & parse sheet
-//     let rows;
-//     try {
-//       rows = getSheetRows(req.file, sheetName, Object.values(fieldMap));
-//     } catch (err) {
-//       return res.status(400).json({ message: err.message });
-//     }
-
-//     // 4. Extract platform order IDs
-//     const platformOrderIds = extractOrderIds(rows, fieldMap.platformOrderId);
-//     if (platformOrderIds.length === 0) {
-//       return res
-//         .status(400)
-//         .json({ message: "No valid order IDs found in file." });
-//     }
-
-//     // 5. Fetch matching orders
-//     const orders = await Order.find({
-//       platform: platform.toLowerCase(),
-//       platformOrderId: { $in: platformOrderIds },
-//     });
-
-//     const results = { updated: [], alreadyPaid: [], notFound: [] };
-//     const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
-
-//     // 6. Update payment status and log
-//     for (const id of platformOrderIds) {
-//       const order = orderMap.get(id);
-
-//       if (!order) {
-//         results.notFound.push(id);
-//         continue;
-//       }
-
-//       if (order.isPaid) {
-//         results.alreadyPaid.push(order._id);
-//         continue;
-//       }
-
-//       const before = { isPaid: order.isPaid };
-//       order.isPaid = true;
-//       await order.save();
-
-//       results.updated.push(order._id);
-
-//       await logAudit({
-//         action: "UPDATE",
-//         user: req.user?._id,
-//         description: `Marked order ${order._id} as paid via file import (${platform})`,
-//         collectionName: "Order",
-//         documentId: order._id,
-//         before,
-//         after: { isPaid: true },
-//         ip: req.ip,
-//         userAgent: req.get("User-Agent"),
-//       });
-//     }
-
-//     // 7. Send summary
-//     res.json({
-//       message: `${results.updated.length} orders marked as paid.`,
-//       summary: {
-//         updated: results.updated.length,
-//         alreadyPaid: results.alreadyPaid.length,
-//         notFound: results.notFound.length,
-//       },
-//       details: results,
-//     });
-//   } catch (error) {
-//     console.error("Error importing sales:", error);
-//     res.status(500).json({ message: "Internal server error." });
-//   }
-// };
+  normalizeString,
+  escapeRegex,
+  normalizeText,
+} from "../utils/commonUtils.js";
 
 export const getSalesStatsByDate = async (req, res) => {
   try {
@@ -141,7 +42,7 @@ export const getSalesStatsByDate = async (req, res) => {
 
       match.$or = [
         { status: rawSafeRegex },
-        { platformOrderId: rawSafeRegex }, 
+        { platformOrderId: rawSafeRegex },
         { "product.normalizedName": safeRegex },
         { "product.normalizedVariant": safeRegex },
         { "product.sku": rawSafeRegex },
@@ -267,44 +168,60 @@ export const importSalesByPlatform = async (req, res) => {
       (sheet) => sheet.name.trim().toLowerCase() === sheetName.toLowerCase()
     );
     if (!targetSheet) {
-      return res.status(400).json({ message: `Sheet "${sheetName}" not found.` });
+      return res
+        .status(400)
+        .json({ message: `Sheet "${sheetName}" not found.` });
     }
 
-    // Auto-detect header row (assume first row with matching fields)
+    // Detect header row (first row that matches expected fields)
     let headerRowIndex = 1;
     targetSheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-      const rowValues = row.values.slice(1).map((v) => String(v || "").trim().toLowerCase());
+      const rowValues = row.values.slice(1).map((v) =>
+        String(v || "")
+          .trim()
+          .toLowerCase()
+      );
       const matchCount = Object.values(fieldMap).filter((f) =>
         rowValues.includes(f.toLowerCase())
       ).length;
-      if (matchCount === Object.values(fieldMap).length && rowNumber < rowNumber) {
+      if (matchCount === Object.values(fieldMap).length) {
         headerRowIndex = rowNumber;
       }
     });
 
+    // Get headers & map column indexes
     const headerRow = targetSheet.getRow(headerRowIndex);
-    const headers = headerRow.values.slice(1).map((h) => String(h || "").trim());
+    const headers = headerRow.values
+      .slice(1)
+      .map((h) => String(h || "").trim());
 
-    // Map column indexes
     const columnMap = {};
     Object.entries(fieldMap).forEach(([key, fieldName]) => {
-      const idx = headers.findIndex((h) => h.toLowerCase() === fieldName.toLowerCase());
-      if (idx >= 0) columnMap[key] = idx + 1;
+      const idx = headers.findIndex(
+        (h) => h.toLowerCase() === fieldName.toLowerCase()
+      );
+      if (idx >= 0) columnMap[key] = idx + 1; // +1 because ExcelJS is 1-based
     });
 
-    // Read order IDs from rows after header
+    // Collect platform order IDs
     const platformOrderIds = [];
-    targetSheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-      if (rowNumber <= headerRowIndex) return;
+    for (
+      let rowNumber = headerRowIndex + 1;
+      rowNumber <= targetSheet.rowCount;
+      rowNumber++
+    ) {
+      const row = targetSheet.getRow(rowNumber);
       const orderId = row.getCell(columnMap.platformOrderId)?.text?.trim();
       if (orderId) platformOrderIds.push(orderId);
-    });
-
-    if (platformOrderIds.length === 0) {
-      return res.status(400).json({ message: "No valid order IDs found in file." });
     }
 
-    // Fetch matching orders
+    if (platformOrderIds.length === 0) {
+      return res
+        .status(400)
+        .json({ message: "No valid order IDs found in file." });
+    }
+
+    // Fetch matching orders in one query
     const orders = await Order.find({
       platform,
       platformOrderId: { $in: platformOrderIds },
@@ -313,7 +230,7 @@ export const importSalesByPlatform = async (req, res) => {
 
     const results = { updated: [], alreadyPaid: [], notFound: [] };
 
-    // Update orders
+    // Process each order sequentially
     for (const id of platformOrderIds) {
       const order = orderMap.get(id);
       if (!order) {
@@ -329,6 +246,7 @@ export const importSalesByPlatform = async (req, res) => {
       const before = { isPaid: order.isPaid };
       order.isPaid = true;
       await order.save();
+
       results.updated.push(order._id);
 
       await logAudit({
@@ -358,4 +276,3 @@ export const importSalesByPlatform = async (req, res) => {
     res.status(500).json({ message: "Internal server error." });
   }
 };
-

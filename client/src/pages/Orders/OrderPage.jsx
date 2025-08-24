@@ -173,28 +173,50 @@ const OrderPage = () => {
         const res = await importOrdersByPlatform(formData);
         const { details } = res.data;
 
-        if (details?.skipped?.length) {
-          const skippedMessages = details.skipped.map((item, idx) => {
-            const reason =
-              item.reason === "Product not found"
-                ? `<span style="color:red">${item.reason}</span>`
-                : item.reason;
-
+        if (details) {
+          const buildMessage = (item, idx, type = "imported") => {
+            let reason = "";
+            if (type === "imported") {
+              reason = `<span style="color:green">Imported Order</span>`;
+            } else {
+              switch (item.reason) {
+                case "Product not found":
+                  reason = `<span style="color:red">${item.reason}</span>`;
+                  break;
+                case "Order already imported":
+                  reason = `<span style="color:blue">${item.reason}</span>`;
+                  break;
+                case "Insufficient stock":
+                  reason = `<span style="color:orange">${item.reason}</span>`;
+                  break;
+                default:
+                  reason = item.reason;
+              }
+            }
             return `#${idx + 1} (${item.platformOrderId}): ${reason}`;
-          });
+          };
 
-          Swal.fire({
-            icon: "warning",
-            title: "Import Completed with Issues",
-            html: `<div style="max-height:300px; overflow:auto; text-align:left">${skippedMessages.join(
-              "<br>"
-            )}</div>`,
-            width: "40em",
-          });
-        } else {
-          toast.success("Orders imported successfully!");
+          const importedMessages = (details.imported || []).map((item, idx) =>
+            buildMessage(item, idx, "imported")
+          );
+
+          const skippedMessages = (details.skipped || []).map((item, idx) =>
+            buildMessage(item, importedMessages.length + idx, "skipped")
+          );
+
+          const allMessages = [...importedMessages, ...skippedMessages];
+
+          if (allMessages.length > 0) {
+            Swal.fire({
+              icon: "info",
+              title: "Import Results",
+              html: `<div style="max-height:300px; overflow:auto; text-align:left">${allMessages.join(
+                "<br>"
+              )}</div>`,
+              width: "40em",
+            });
+          }
         }
-
         await fetchOrders();
       } catch (err) {
         console.error("Import failed:", err);

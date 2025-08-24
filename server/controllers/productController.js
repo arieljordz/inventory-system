@@ -4,7 +4,6 @@ import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
-import { validateFile, getSheetRows } from "../utils/importUtils.js";
 import {
   normalizeString,
   escapeRegex,
