@@ -27,6 +27,7 @@ const LogoutButton = () => {
 
   return (
     <div className="d-flex flex-column align-items-start">
+      {user?.name && <span className="small text-white">{user.name}</span>}
       {user?.email && (
         <span className="small mb-2 text-white">{user.email}</span>
       )}
