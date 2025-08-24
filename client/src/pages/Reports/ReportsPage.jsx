@@ -10,7 +10,6 @@ import {
   formatReportData,
   formatExportData,
   getReportFileName,
-  getReportTitleText,
 } from "../../utils/reportUtils";
 import { getReports, exportReport } from "../../services/reportService";
 
@@ -139,15 +138,15 @@ const ReportsPage = () => {
                   <div className="mb-3 d-flex justify-content-end gap-2">
                     <button
                       className="btn btn-outline-primary"
-                      onClick={() => handleExport("excel")}
+                      onClick={() => handleExport("xlsx")}
                     >
-                      <i className="fas fa-file-excel mr-1"></i> Excel
+                      <i className="fas fa-file-excel mr-1"></i> Export Excel
                     </button>
                     <button
                       className="btn btn-outline-danger"
                       onClick={() => handleExport("pdf")}
                     >
-                      <i className="fas fa-file-pdf mr-1"></i> PDF
+                      <i className="fas fa-file-pdf mr-1"></i> Export PDF
                     </button>
                   </div>
 

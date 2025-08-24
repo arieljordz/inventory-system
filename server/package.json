@@ -23,6 +23,7 @@
     "moment-timezone": "^0.6.0",
     "mongoose": "^8.16.4",
     "multer": "^2.0.2",
-    "multer-storage-cloudinary": "^4.0.0"
+    "multer-storage-cloudinary": "^4.0.0",
+    "pdf-lib": "^1.17.1"
   }
 }

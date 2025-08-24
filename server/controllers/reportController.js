@@ -1,113 +1,6 @@
-// import moment from "moment-timezone";
-// import InventoryDetail from "../models/InventoryDetail.js";
-// import Order from "../models/Order.js";
-// import {
-//   ReportTypeEnum,
-//   MovementTypeEnum,
-//   StatusEnum,
-// } from "../enums/enums.js";
-
-// export const getReportData = async (req, res) => {
-//   try {
-//     const {
-//       reportType = ReportTypeEnum.INVENTORY,
-//       startDate,
-//       endDate,
-//     } = req.query;
-
-//     const dateFilter = {};
-//     if (startDate || endDate) {
-//       dateFilter.createdAt = {};
-//       if (startDate) {
-//         dateFilter.createdAt.$gte = moment
-//           .tz(startDate, "Asia/Manila")
-//           .startOf("day")
-//           .toDate();
-//       }
-//       if (endDate) {
-//         dateFilter.createdAt.$lte = moment
-//           .tz(endDate, "Asia/Manila")
-//           .endOf("day")
-//           .toDate();
-//       }
-//     }
-
-//     let filter = { ...dateFilter };
-//     let data = [];
-//     let isSalesReport = false;
-
-//     if (
-//       reportType === ReportTypeEnum.SALES ||
-//       reportType === ReportTypeEnum.SALES_PAID ||
-//       reportType === ReportTypeEnum.SALES_UNPAID
-//     ) {
-//       isSalesReport = true;
-
-//       switch (reportType) {
-//         case ReportTypeEnum.SALES_PAID:
-//           filter.isPaid = true;
-//           break;
-//         case ReportTypeEnum.SALES_UNPAID:
-//           filter.isPaid = false;
-//           break;
-//         default:
-//           break;
-//       }
-
-//       data = await Order.find(filter)
-//         .populate("product", "name serialNumber price variant")
-//         .sort({ createdAt: -1 });
-//     } else {
-//       switch (reportType) {
-//         case ReportTypeEnum.INVENTORY_IN:
-//           filter.movementType = MovementTypeEnum.IN;
-//           break;
-//         case ReportTypeEnum.INVENTORY_OUT:
-//           filter.movementType = MovementTypeEnum.OUT;
-//           break;
-//         default:
-//           break;
-//       }
-
-//       data = await InventoryDetail.find(filter)
-//         .populate("product", "name serialNumber price variant")
-//         .sort({ createdAt: -1 });
-//     }
-
-//     // Compute totalAmount per item
-//     const tempFormattedData = data.map((item) => {
-//       const price = item.product?.price || 0;
-//       const quantity = item.quantity || 0;
-//       const totalAmount = isSalesReport ? price * quantity : 0;
-
-//       return {
-//         ...item.toObject(),
-//         totalAmount,
-//       };
-//     });
-
-//     // Calculate the grand total for sales report
-//     const grandTotalAmount = isSalesReport
-//       ? tempFormattedData.reduce((sum, item) => sum + item.totalAmount, 0)
-//       : 0;
-
-//     // Attach grandTotalAmount to each item
-//     const formattedData = tempFormattedData.map((item) => ({
-//       ...item,
-//       grandTotalAmount,
-//     }));
-
-//     res.json({ data: formattedData });
-//   } catch (error) {
-//     console.error("Error generating report:", error);
-//     res.status(500).json({ error: "Failed to generate report" });
-//   }
-// };
-
 import moment from "moment-timezone";
 import ExcelJS from "exceljs";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
 import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
@@ -115,11 +8,13 @@ import {
   formatExportData,
   getReportFileName,
   getReportTitleText,
+  buildDateFilter,
+  fetchReportData,
+  wrapTextByWidth,
+  sanitizeText,
 } from "../utils/reportUtils.js";
 
-/**
- * Get report data for frontend display
- */
+/** Get report data for frontend display */
 export const getReportData = async (req, res) => {
   try {
     const {
@@ -127,10 +22,10 @@ export const getReportData = async (req, res) => {
       startDate,
       endDate,
     } = req.query;
-
     const filter = buildDateFilter(startDate, endDate);
-
     const { data, isSalesReport } = await fetchReportData(reportType, filter);
+
+    // console.log("isSalesReport:", isSalesReport);
 
     const formattedData = data.map((item) => {
       const price = item.product?.price || 0;
@@ -142,6 +37,8 @@ export const getReportData = async (req, res) => {
     const grandTotalAmount = isSalesReport
       ? formattedData.reduce((sum, item) => sum + item.totalAmount, 0)
       : 0;
+
+    // console.log("grandTotalAmount:", grandTotalAmount);
 
     const finalData = formattedData.map((item) => ({
       ...item,
@@ -155,9 +52,7 @@ export const getReportData = async (req, res) => {
   }
 };
 
-/**
- * Export report to Excel or PDF
- */
+/** Export report to Excel or PDF with Legal landscape and adjusted column widths */
 export const exportReport = async (req, res) => {
   try {
     const {
@@ -167,63 +62,78 @@ export const exportReport = async (req, res) => {
       format,
     } = req.body;
 
-    const filter = buildDateFilter(startDate, endDate);
+    const filter = {};
+    if (startDate)
+      filter.createdAt = { $gte: moment(startDate).startOf("day").toDate() };
+    if (endDate)
+      filter.createdAt = {
+        ...filter.createdAt,
+        $lte: moment(endDate).endOf("day").toDate(),
+      };
 
-    const { data, isSalesReport } = await fetchReportData(reportType, filter);
+    let data = [];
+    let isSalesReport = false;
 
-    if (!data.length)
+    // 🔹 Determine report type
+    if (
+      [
+        ReportTypeEnum.SALES,
+        ReportTypeEnum.SALES_PAID,
+        ReportTypeEnum.SALES_UNPAID,
+      ].includes(reportType)
+    ) {
+      isSalesReport = true;
+
+      if (reportType === ReportTypeEnum.SALES_PAID) filter.isPaid = true;
+      if (reportType === ReportTypeEnum.SALES_UNPAID) filter.isPaid = false;
+
+      data = await Order.find(filter)
+        .populate("product", "name price variant")
+        .sort({ createdAt: -1 })
+        .lean();
+    } else {
+      if (reportType === ReportTypeEnum.INVENTORY_IN)
+        filter.movementType = MovementTypeEnum.IN;
+      if (reportType === ReportTypeEnum.INVENTORY_OUT)
+        filter.movementType = MovementTypeEnum.OUT;
+
+      data = await InventoryDetail.find(filter)
+        .populate("product", "name price variant")
+        .sort({ createdAt: -1 })
+        .lean();
+    }
+
+    if (!data.length) {
       return res.status(400).json({ message: "No data to export" });
+    }
+
+    // 🔹 Always map with totalAmount logic
+    data = data.map((item) => ({
+      ...item,
+      totalAmount: isSalesReport
+        ? item.product?.price && item.quantity
+          ? item.product.price * item.quantity
+          : 0
+        : 0, // Inventory reports always return 0
+    }));
+
+    // console.log("data to export:", data[0]);
 
     const exportData = formatExportData(data, reportType);
     const filename = getReportFileName(reportType, startDate, endDate, format);
 
-    if (format === "excel") {
-      const workbook = new ExcelJS.Workbook();
-      const sheet = workbook.addWorksheet("Report");
-
-      // Add header row
-      sheet.addRow(Object.keys(exportData[0]));
-
-      // Add data rows
-      exportData.forEach((row) => sheet.addRow(Object.values(row)));
-
-      res.setHeader(
-        "Content-Type",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-      );
-      res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
-
-      await workbook.xlsx.write(res);
-      res.end();
+    if (format === "xlsx") {
+      await exportXLSX(res, filename, exportData, isSalesReport);
     } else if (format === "pdf") {
-      const doc = new jsPDF();
-      const headers = Object.keys(exportData[0]);
-      const body = exportData.map((row) => Object.values(row));
-
-      // Optional: Compute grand total for sales
-      if (isSalesReport) {
-        const totalAmount = exportData.reduce(
-          (acc, row) => acc + (row["Total Amount"] || 0),
-          0
-        );
-        const totalRow = headers.map((h) =>
-          h === "Total Amount" ? totalAmount : ""
-        );
-        body.push(totalRow);
-      }
-
-      doc.text(getReportTitleText(reportType, startDate, endDate), 14, 15);
-      autoTable(doc, {
-        startY: 20,
-        head: [headers],
-        body,
-      });
-
-      res.setHeader("Content-Type", "application/pdf");
-      res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
-
-      const pdfBuffer = doc.output("arraybuffer");
-      res.send(Buffer.from(pdfBuffer));
+      await exportPDF(
+        res,
+        filename,
+        exportData,
+        isSalesReport,
+        reportType,
+        startDate,
+        endDate
+      );
     } else {
       return res.status(400).json({ message: "Invalid export format" });
     }
@@ -233,53 +143,218 @@ export const exportReport = async (req, res) => {
   }
 };
 
-/** Helper: build date filter for Mongoose */
-const buildDateFilter = (startDate, endDate) => {
-  if (!startDate && !endDate) return {};
+const exportXLSX = async (res, filename, exportData, isSalesReport = false) => {
+  const workbook = new ExcelJS.Workbook();
+  const sheet = workbook.addWorksheet("Report");
 
-  const dateFilter = { createdAt: {} };
-  if (startDate) {
-    dateFilter.createdAt.$gte = moment
-      .tz(startDate, "Asia/Manila")
-      .startOf("day")
-      .toDate();
+  // Add header row
+  const headers = Object.keys(exportData[0]);
+  sheet.addRow(headers);
+
+  // Add data rows
+  exportData.forEach((row) => sheet.addRow(Object.values(row)));
+
+  // If it's a sales report, compute and add Grand Total
+  if (isSalesReport) {
+    // Find index of "Total Amount" column
+    const totalAmountIndex = headers.findIndex((h) =>
+      h.toLowerCase().includes("total amount")
+    );
+
+    if (totalAmountIndex >= 0) {
+      const grandTotal = exportData.reduce((sum, row) => {
+        const raw = row["Total Amount"] || "0";
+        const numeric = parseFloat(raw.toString().replace(/[^\d.-]/g, ""));
+        return sum + (isNaN(numeric) ? 0 : numeric);
+      }, 0);
+
+      // console.log("grandTotal:", grandTotal);
+      // Add an empty row as spacer
+      sheet.addRow([]);
+
+      // Add Grand Total row
+      const totalRowValues = Array(headers.length).fill("");
+      totalRowValues[
+        totalAmountIndex
+      ] = `Grand Total: ${grandTotal.toLocaleString()}`;
+      const totalRow = sheet.addRow(totalRowValues);
+
+      // Bold the Grand Total row
+      totalRow.font = { bold: true };
+    }
   }
-  if (endDate) {
-    dateFilter.createdAt.$lte = moment
-      .tz(endDate, "Asia/Manila")
-      .endOf("day")
-      .toDate();
-  }
-  return dateFilter;
+
+  // Send response
+  res.setHeader(
+    "Content-Type",
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+  );
+  res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
+  await workbook.xlsx.write(res);
+  res.end();
 };
 
-/** Helper: fetch data based on report type */
-const fetchReportData = async (reportType, filter) => {
-  let data = [];
-  let isSalesReport = false;
+const exportPDF = async (
+  res,
+  filename,
+  exportData,
+  isSalesReport = false,
+  reportType,
+  startDate,
+  endDate
+) => {
+  const pdfDoc = await PDFDocument.create();
+  const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
 
-  if (
-    reportType === ReportTypeEnum.SALES ||
-    reportType === ReportTypeEnum.SALES_PAID ||
-    reportType === ReportTypeEnum.SALES_UNPAID
-  ) {
-    isSalesReport = true;
-    if (reportType === ReportTypeEnum.SALES_PAID) filter.isPaid = true;
-    if (reportType === ReportTypeEnum.SALES_UNPAID) filter.isPaid = false;
+  // Legal Landscape: 14in x 8.5in in points
+  const legalWidth = 1008;
+  const legalHeight = 612;
+  const margin = 40;
+  const fontSize = 9;
+  let page = pdfDoc.addPage([legalWidth, legalHeight]);
+  let yPos = legalHeight - margin;
 
-    data = await Order.find(filter)
-      .populate("product", "name serialNumber price variant")
-      .sort({ createdAt: -1 });
-  } else {
-    if (reportType === ReportTypeEnum.INVENTORY_IN)
-      filter.movementType = MovementTypeEnum.IN;
-    if (reportType === ReportTypeEnum.INVENTORY_OUT)
-      filter.movementType = MovementTypeEnum.OUT;
+  const headers = Object.keys(exportData[0]);
 
-    data = await InventoryDetail.find(filter)
-      .populate("product", "name serialNumber price variant")
-      .sort({ createdAt: -1 });
+  // Calculate column widths
+  const calculateColumnWidths = () => {
+    const widths = headers.map((header, i) => {
+      // For Product Name column, reserve more space
+      if (header.toLowerCase().includes("product")) return legalWidth * 0.4;
+
+      let maxWidth = font.widthOfTextAtSize(header, fontSize);
+      for (const row of exportData) {
+        const cellLines = wrapTextByWidth(
+          sanitizeText(row[header]?.toString()),
+          font,
+          fontSize,
+          legalWidth * 0.3
+        );
+        cellLines.forEach((line) => {
+          maxWidth = Math.max(maxWidth, font.widthOfTextAtSize(line, fontSize));
+        });
+      }
+      return maxWidth + 10; // padding
+    });
+
+    // Adjust remaining width for product name column
+    const totalWidth = widths.reduce((a, b) => a + b, 0);
+    const remaining = legalWidth - 2 * margin - totalWidth;
+    const productIndex = headers.findIndex((h) =>
+      h.toLowerCase().includes("product")
+    );
+    if (productIndex >= 0) widths[productIndex] += remaining;
+    return widths;
+  };
+  const columnWidths = calculateColumnWidths();
+
+  // Title
+  const titleLines = wrapTextByWidth(
+    sanitizeText(getReportTitleText(reportType, startDate, endDate)),
+    font,
+    fontSize,
+    legalWidth - 2 * margin
+  );
+  titleLines.forEach((line) => {
+    page.drawText(line, {
+      x: margin,
+      y: yPos,
+      size: fontSize + 2,
+      font,
+      color: rgb(0, 0, 0),
+    });
+    yPos -= fontSize + 6;
+  });
+  yPos -= 10;
+
+  // Draw header with background
+  const drawHeader = () => {
+    let xPos = margin;
+    headers.forEach((header, i) => {
+      const width = columnWidths[i];
+      page.drawRectangle({
+        x: xPos,
+        y: yPos - 4,
+        width,
+        height: fontSize + 6,
+        color: rgb(0.8, 0.8, 0.8),
+      });
+      page.drawText(sanitizeText(header), {
+        x: xPos + 2,
+        y: yPos,
+        size: fontSize,
+        font,
+      });
+      xPos += width;
+    });
+    yPos -= fontSize + 10;
+  };
+  drawHeader();
+
+  // Table body
+  for (const row of exportData) {
+    const cellLinesList = Object.values(row).map((val, i) =>
+      wrapTextByWidth(
+        sanitizeText(val?.toString()),
+        font,
+        fontSize,
+        columnWidths[i] - 4
+      )
+    );
+    const rowHeight =
+      Math.max(...cellLinesList.map((lines) => lines.length * (fontSize + 2))) +
+      4;
+
+    let xPos = margin;
+    cellLinesList.forEach((cellLines, i) => {
+      const width = columnWidths[i];
+      cellLines.forEach((line, idx) => {
+        page.drawText(line, {
+          x: xPos + 2,
+          y: yPos - idx * (fontSize + 2),
+          size: fontSize,
+          font,
+        });
+      });
+      xPos += width;
+    });
+
+    yPos -= rowHeight;
+
+    if (yPos < margin + 40) {
+      page = pdfDoc.addPage([legalWidth, legalHeight]);
+      yPos = legalHeight - margin;
+      drawHeader();
+    }
   }
 
-  return { data, isSalesReport };
+  // Grand total at end
+  if (isSalesReport) {
+    // console.log("exportData:", exportData[0]);
+    const totalAmount = exportData.reduce((acc, row) => {
+      const raw = row["Total Amount"] || "0";
+      const numeric = parseFloat(raw.toString().replace(/[^\d.-]/g, "")); // strip ₱ and commas
+      return acc + (isNaN(numeric) ? 0 : numeric);
+    }, 0);
+
+    // console.log("totalAmount:", totalAmount);
+
+    if (yPos < margin + 20) {
+      page = pdfDoc.addPage([legalWidth, legalHeight]);
+      yPos = legalHeight - margin;
+      drawHeader();
+    }
+
+    page.drawText(`Grand Total: PHP ${totalAmount.toLocaleString()}`, {
+      x: margin,
+      y: yPos - 10,
+      size: fontSize + 1,
+      font,
+    });
+  }
+
+  const pdfBytes = await pdfDoc.save();
+  res.setHeader("Content-Type", "application/pdf");
+  res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
+  res.send(Buffer.from(pdfBytes));
 };

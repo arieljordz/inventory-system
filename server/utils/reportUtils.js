@@ -1,9 +1,12 @@
-import { ReportTypeEnum } from "../enums/enums";
-import { formatAmount } from "../utils/commonUtils";
+import moment from "moment-timezone";
+import { ReportTypeEnum } from "../enums/enums.js";
+import { formatAmount } from "../utils/commonUtils.js";
+import InventoryDetail from "../models/InventoryDetail.js";
+import Order from "../models/Order.js";
 
 export const formatReportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
-  console.log("reportData:", reportData);
+  // console.log("reportData:", reportData);
 
   return reportData.map((item) => {
     const date = new Date(item.createdAt).toLocaleDateString();
@@ -106,4 +109,79 @@ export const getReportFileName = (
 
 export const getReportTitleText = (reportType, startDate, endDate) => {
   return `REPORT: ${reportType.toUpperCase()} ${startDate} - ${endDate}`;
+};
+
+/** Helper: build date filter for Mongoose */
+export const buildDateFilter = (startDate, endDate) => {
+  if (!startDate && !endDate) return {};
+  const dateFilter = { createdAt: {} };
+  if (startDate)
+    dateFilter.createdAt.$gte = moment
+      .tz(startDate, "Asia/Manila")
+      .startOf("day")
+      .toDate();
+  if (endDate)
+    dateFilter.createdAt.$lte = moment
+      .tz(endDate, "Asia/Manila")
+      .endOf("day")
+      .toDate();
+  return dateFilter;
+};
+
+/** Helper: fetch data based on report type */
+export const fetchReportData = async (reportType, filter) => {
+  let data = [];
+  let isSalesReport = false;
+
+  if (
+    reportType === ReportTypeEnum.SALES ||
+    reportType === ReportTypeEnum.SALES_PAID ||
+    reportType === ReportTypeEnum.SALES_UNPAID
+  ) {
+    isSalesReport = true;
+    if (reportType === ReportTypeEnum.SALES_PAID) filter.isPaid = true;
+    if (reportType === ReportTypeEnum.SALES_UNPAID) filter.isPaid = false;
+
+    data = await Order.find(filter)
+      .populate("product", "name price variant")
+      .sort({ createdAt: -1 });
+  } else {
+    if (reportType === ReportTypeEnum.INVENTORY_IN)
+      filter.movementType = MovementTypeEnum.IN;
+    if (reportType === ReportTypeEnum.INVENTORY_OUT)
+      filter.movementType = MovementTypeEnum.OUT;
+
+    data = await InventoryDetail.find(filter)
+      .populate("product", "name price variant")
+      .sort({ createdAt: -1 });
+  }
+
+  return { data, isSalesReport };
+};
+
+/** Wrap text by column width in points */
+export const wrapTextByWidth = (text, font, fontSize, maxWidth) => {
+  if (!text) return [];
+  const words = text.split(" ");
+  const lines = [];
+  let currentLine = "";
+
+  words.forEach((word) => {
+    const testLine = currentLine ? currentLine + " " + word : word;
+    const lineWidth = font.widthOfTextAtSize(testLine, fontSize);
+    if (lineWidth > maxWidth) {
+      if (currentLine) lines.push(currentLine);
+      currentLine = word;
+    } else {
+      currentLine = testLine;
+    }
+  });
+
+  if (currentLine) lines.push(currentLine);
+  return lines;
+};
+
+/** Helper: sanitize text for built-in font */
+export const sanitizeText = (text = "") => {
+  return text.replace(/[^\x00-\xFF]/g, "");
 };
