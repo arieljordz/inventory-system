@@ -1,8 +1,12 @@
-import ExcelJS from "exceljs";
+import * as XLSX from "xlsx";
 import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import { logAudit } from "../utils/auditLogger.js";
-import { getPlatformMappings, validateFile } from "../utils/importUtils.js";
+import {
+  salesPlatformConfigs,
+  normalizeHeader,
+  validateFile,
+} from "../utils/importUtils.js";
 import {
   normalizeString,
   escapeRegex,
@@ -137,81 +141,73 @@ export const getSalesStatsByDate = async (req, res) => {
   }
 };
 
+// --- Import sales handler ---
 export const importSalesByPlatform = async (req, res) => {
   try {
-    const platform = req.body.platform?.toLowerCase();
-    if (!platform) {
-      return res.status(400).json({ message: "Platform is required" });
-    }
+    const platform = (req.body.platform || "").toLowerCase();
+    if (!platform || !salesPlatformConfigs[platform])
+      return res.status(400).json({ message: "Invalid platform" });
 
-    let mapping;
-    try {
-      mapping = getPlatformMappings(platform, "sales");
-    } catch (err) {
-      return res.status(400).json({ message: err.message });
-    }
+    const { sheetName, fields: rawFieldMap } = salesPlatformConfigs[platform];
+    const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
 
-    const { sheetName, fields: fieldMap } = mapping;
-
-    // Validate uploaded file
+    // --- Validate uploaded file ---
     try {
       validateFile(req.file);
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
 
-    // Load workbook
-    const workbook = new ExcelJS.Workbook();
-    await workbook.xlsx.load(req.file.buffer);
+    // --- Load workbook ---
+    const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
+    const targetSheetName =
+      workbook.SheetNames.find(
+        (s) => normalizeHeader(s) === normalizeHeader(sheetName)
+      ) || workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[targetSheetName];
+    const sheetData = XLSX.utils.sheet_to_json(worksheet, {
+      header: 1,
+      raw: false,
+    });
 
-    const targetSheet = workbook.worksheets.find(
-      (sheet) => sheet.name.trim().toLowerCase() === sheetName.toLowerCase()
-    );
-    if (!targetSheet) {
-      return res
-        .status(400)
-        .json({ message: `Sheet "${sheetName}" not found.` });
+    // --- Detect header row dynamically ---
+    let headerRowIndex = -1;
+    let columnIndexMap = {};
+    let bestMatchCount = 0;
+
+    for (let r = 0; r < sheetData.length; r++) {
+      const row = sheetData[r] || [];
+      const headersInRow = {};
+      row.forEach((cellValue, colNumber) => {
+        if (cellValue) headersInRow[normalizeHeader(cellValue)] = colNumber;
+      });
+
+      const matches = expectedHeaders.filter(
+        (h) => headersInRow[h] !== undefined
+      );
+      if (matches.length > bestMatchCount) {
+        bestMatchCount = matches.length;
+        headerRowIndex = r;
+        columnIndexMap = headersInRow;
+      }
     }
 
-    // Detect header row (first row that matches expected fields)
-    let headerRowIndex = 1;
-    targetSheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-      const rowValues = row.values.slice(1).map((v) =>
-        String(v || "")
-          .trim()
-          .toLowerCase()
-      );
-      const matchCount = Object.values(fieldMap).filter((f) =>
-        rowValues.includes(f.toLowerCase())
-      ).length;
-      if (matchCount === Object.values(fieldMap).length) {
-        headerRowIndex = rowNumber;
-      }
+    if (headerRowIndex === -1) headerRowIndex = 0;
+
+    // --- Build final field map (key -> column index) ---
+    const finalFieldMap = {};
+    Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
+      const colIndex = columnIndexMap[normalizeHeader(fieldName)];
+      if (colIndex !== undefined) finalFieldMap[key] = colIndex;
     });
 
-    // Get headers & map column indexes
-    const headerRow = targetSheet.getRow(headerRowIndex);
-    const headers = headerRow.values
-      .slice(1)
-      .map((h) => String(h || "").trim());
-
-    const columnMap = {};
-    Object.entries(fieldMap).forEach(([key, fieldName]) => {
-      const idx = headers.findIndex(
-        (h) => h.toLowerCase() === fieldName.toLowerCase()
-      );
-      if (idx >= 0) columnMap[key] = idx + 1; // +1 because ExcelJS is 1-based
-    });
-
-    // Collect platform order IDs
+    // --- Extract platform order IDs from sheet ---
     const platformOrderIds = [];
-    for (
-      let rowNumber = headerRowIndex + 1;
-      rowNumber <= targetSheet.rowCount;
-      rowNumber++
-    ) {
-      const row = targetSheet.getRow(rowNumber);
-      const orderId = row.getCell(columnMap.platformOrderId)?.text?.trim();
+    for (let r = headerRowIndex + 1; r < sheetData.length; r++) {
+      const row = sheetData[r] || [];
+      const orderId = (row[finalFieldMap.platformOrderId] || "")
+        .toString()
+        .trim();
       if (orderId) platformOrderIds.push(orderId);
     }
 
@@ -221,7 +217,7 @@ export const importSalesByPlatform = async (req, res) => {
         .json({ message: "No valid order IDs found in file." });
     }
 
-    // Fetch matching orders in one query
+    // --- Fetch matching orders ---
     const orders = await Order.find({
       platform,
       platformOrderId: { $in: platformOrderIds },
@@ -230,7 +226,7 @@ export const importSalesByPlatform = async (req, res) => {
 
     const results = { updated: [], alreadyPaid: [], notFound: [] };
 
-    // Process each order sequentially
+    // --- Process each order ---
     for (const id of platformOrderIds) {
       const order = orderMap.get(id);
       if (!order) {

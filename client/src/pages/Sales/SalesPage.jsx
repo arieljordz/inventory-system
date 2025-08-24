@@ -158,20 +158,41 @@ const SalesPage = () => {
         const { message, details } = res.data;
 
         console.log("res.data:", res.data);
-        if (details?.alreadyPaid?.length || details?.notFound?.length) {
-          const warningMessages = [
-            ...(details.alreadyPaid || []).map(
-              (id, idx) => `#${idx + 1} (Order ID: ${id}): Already Paid`
-            ),
-            ...(details.notFound || []).map(
-              (id, idx) => `#${idx + 1} (Order ID: ${id}): Not Found`
-            ),
-          ];
 
+        const rows = [];
+
+        // --- Helper to build span message with color ---
+        const buildMessage = (id, idx, type = "paid") => {
+          let reason = "";
+          if (type === "paid") {
+            reason = `<span style="color:green">Paid Successfully</span>`;
+          } else {
+            reason = `<span style="color:red">Not Found / Unpaid</span>`;
+          }
+          return `#${idx + 1} (Order ID: ${id}): ${reason}`;
+        };
+
+        // --- Add paid (success) rows ---
+        if (details?.alreadyPaid?.length) {
+          details.alreadyPaid.forEach((id, idx) => {
+            rows.push(buildMessage(id, idx, "paid"));
+          });
+        }
+
+        // --- Add unpaid (not found / not paid) rows ---
+        if (details?.notFound?.length) {
+          details.notFound.forEach((id, idx) => {
+            rows.push(
+              buildMessage(id, details.alreadyPaid?.length + idx, "unpaid")
+            );
+          });
+        }
+
+        if (rows.length > 0) {
           Swal.fire({
-            icon: "warning",
-            title: "Import Completed with Issues",
-            html: `<div style="max-height:300px; overflow:auto">${warningMessages.join(
+            icon: "info",
+            title: "Import Results",
+            html: `<div style="max-height:300px; overflow:auto; text-align:left">${rows.join(
               "<br>"
             )}</div>`,
             width: "40em",

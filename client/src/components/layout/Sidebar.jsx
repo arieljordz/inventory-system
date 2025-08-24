@@ -1,51 +1,23 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import LogoutButton from "../common/LogoutButton";
 
 const menuItems = [
-  {
-    path: "/dashboard",
-    label: "Dashboard",
-    icon: "fas fa-tachometer-alt",
-  },
-  {
-    path: "/products",
-    label: "Products",
-    icon: "fas fa-boxes", // Inventory items
-  },
-  {
-    path: "/orders",
-    label: "Orders",
-    icon: "fas fa-shopping-cart", // Order cart icon
-  },
-  {
-    path: "/trackings",
-    label: "Trackings",
-    icon: "fas fa-map-marker-alt", // Location/Tracking
-  },
-  {
-    path: "/inventory",
-    label: "Inventory",
-    icon: "fas fa-warehouse", // Warehouse
-  },
-  {
-    path: "/sales",
-    label: "Sales",
-    icon: "fas fa-cash-register", // Cash register
-  },
-  {
-    path: "/reports",
-    label: "Reports",
-    icon: "fas fa-chart-bar", // Report chart
-  },
+  { path: "/dashboard", label: "Dashboard", icon: "fas fa-tachometer-alt" },
+  { path: "/products", label: "Products", icon: "fas fa-boxes" },
+  { path: "/orders", label: "Orders", icon: "fas fa-shopping-cart" },
+  { path: "/trackings", label: "Trackings", icon: "fas fa-map-marker-alt" },
+  { path: "/inventory", label: "Inventory", icon: "fas fa-warehouse" },
+  { path: "/sales", label: "Sales", icon: "fas fa-cash-register" },
+  { path: "/reports", label: "Reports", icon: "fas fa-chart-bar" },
 ];
 
 const Sidebar = () => {
   const location = useLocation();
-
   const isActive = (path) => location.pathname.startsWith(path);
 
   return (
-    <aside className="main-sidebar sidebar-dark-primary elevation-4">
+    <aside className="main-sidebar sidebar-dark-primary elevation-4 d-flex flex-column">
       {/* Brand Logo */}
       <div className="brand-link d-flex align-items-center">
         <img
@@ -57,13 +29,17 @@ const Sidebar = () => {
         <span className="brand-text ml-2 font-weight-light">INVENTORY</span>
       </div>
 
-      {/* Sidebar Menu */}
-      <div className="sidebar">
-        <nav className="mt-2">
+      {/* Sidebar Content Wrapper (Flex column with grow) */}
+      <div className="d-flex flex-column flex-grow-1">
+        {/* Menu Items */}
+        <nav className="mt-2 flex-grow-1">
           <ul className="nav nav-pills nav-sidebar flex-column" role="menu">
             {menuItems.map(({ path, label, icon }) => (
               <li className="nav-item" key={path}>
-                <Link to={path} className={`nav-link ${isActive(path) ? "active" : ""}`}>
+                <Link
+                  to={path}
+                  className={`nav-link ${isActive(path) ? "active" : ""}`}
+                >
                   <i className={`nav-icon ${icon}`}></i>
                   <p>{label}</p>
                 </Link>
@@ -71,6 +47,11 @@ const Sidebar = () => {
             ))}
           </ul>
         </nav>
+
+        {/* Logout at Bottom */}
+        <div className="mt-auto pr-3">
+          <LogoutButton />
+        </div>
       </div>
     </aside>
   );

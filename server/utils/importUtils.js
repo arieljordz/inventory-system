@@ -57,17 +57,6 @@ export const platformMappings = {
   },
 };
 
-// order: {
-//   sheetName: "OrderSKUList",
-//   fields: {
-//     platformOrderId: "Platform unique order ID.",
-//     name: "Platform product name.",
-//     courier: "The order's delivery option.",
-//     variant: "Platform SKU variation",
-//     quantity: "SKU sold quantity in the order.",
-//   },
-// },
-
 export const getPlatformMappings = (platform, type) => {
   const platformMap = platformMappings[platform.toLowerCase()];
   console.log("Looking for mapping:", { platform, type, platformMap });
@@ -91,4 +80,69 @@ export const validateFile = (file) => {
       "Unsupported file format. Please upload .csv, .xlsx, or .xls files."
     );
   }
+};
+
+export const normalizeHeader = (str) =>
+  str
+    ?.toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ") // collapse multiple spaces
+    .replace(/[_\-\/]/g, " "); // treat _, -, / as spaces
+
+// --- Platform configuration ---
+export const orderPlatformConfigs = {
+  shopee: {
+    sheetName: "orders",
+    fieldMap: {
+      platformOrderId: "Order ID",
+      name: "Product Name",
+      courier: "Shipping Option",
+      variant: "Variation Name",
+      quantity: "Quantity",
+    },
+  },
+  tiktok: {
+    sheetName: "OrderSKUList",
+    fieldMap: {
+      platformOrderId: "Order ID",
+      name: "Product Name",
+      courier: "Delivery Option",
+      variant: "Variation",
+      quantity: "Quantity",
+    },
+  },
+  lazada: {
+    sheetName: "sheet1",
+    fieldMap: {
+      platformOrderId: "orderItemId",
+      name: "itemName",
+      courier: "shippingProviderType",
+      variant: "variation",
+      quantity: "Quantity",
+    },
+  },
+};
+
+
+// --- Platform configuration for sales ---
+export const salesPlatformConfigs = {
+  shopee: {
+    sheetName: "Income",
+    fields: {
+      platformOrderId: "Order ID",
+    },
+  },
+  tiktok: {
+    sheetName: "Order details",
+    fields: {
+      platformOrderId: "Order/adjustment ID",
+    },
+  },
+  lazada: {
+    sheetName: "Income Overview",
+    fields: {
+      platformOrderId: "Order Number",
+    },
+  },
 };
