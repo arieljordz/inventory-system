@@ -10,6 +10,7 @@ import {
   escapeRegex,
   normalizeText,
 } from "../utils/commonUtils.js";
+import ExcelJS from "exceljs";
 
 export const addProduct = async (req, res) => {
   try {
@@ -99,111 +100,6 @@ export const addProduct = async (req, res) => {
   } catch (error) {
     console.error("Add Product Error:", error);
     res.status(500).json({ message: "Server error" });
-  }
-};
-
-export const importProducts = async (req, res) => {
-  try {
-    // 1. Validate file
-    validateFile(req.file);
-
-    // 2. Extract rows from sheet (assume sheet has the right headers)
-    const expectedFields = [
-      "name",
-      "description",
-      "price",
-      "variant",
-      "quantity",
-      "sku",
-    ];
-    const rows = getSheetRows(req.file, "products", expectedFields);
-
-    const results = { imported: [], skipped: [] };
-
-    for (const row of rows) {
-      // inside for (const row of rows)
-      const name = normalizeText(row["name"]?.toString() || "");
-      const description = normalizeText(row["description"]?.toString() || "");
-      const price = parseFloat(row["price"]);
-      const variant = normalizeText(row["variant"]?.toString() || "Default");
-      const quantity = parseInt(row["quantity"]) || 0;
-      const sku = normalizeText(row["sku"]?.toString() || "");
-
-      // Validation
-      if (!name || !description || isNaN(price) || !sku) {
-        results.skipped.push({ sku: sku || "N/A", reason: "Invalid row data" });
-        continue;
-      }
-
-      // Duplicate check using normalizedString (for search-safety)
-      const existingProduct = await Product.findOne({
-        normalizedName: normalizeString(name),
-        normalizedVariant: normalizeString(variant),
-        normalizedSku: normalizeString(sku),
-      });
-
-      if (existingProduct) {
-        results.skipped.push({ name, reason: "Product already exists" });
-        continue;
-      }
-
-      // Create product
-      const product = new Product({
-        name,
-        description,
-        price,
-        variant,
-        quantity,
-        sku,
-        normalizedName: normalizeString(name),
-        normalizedDescription: normalizeString(description),
-        normalizedVariant: normalizeString(variant),
-        normalizedSku: normalizeString(sku),
-      });
-
-      const savedProduct = await product.save();
-
-      // Create initial inventory detail if stock > 0
-      if (quantity > 0) {
-        await InventoryDetail.create({
-          product: savedProduct._id,
-          order: null,
-          movementType: MovementTypeEnum.IN,
-          quantity,
-          remarks: "Initial stock - imported",
-          status: savedProduct.status,
-          courier: "",
-          platform: "",
-        });
-      }
-
-      results.imported.push(savedProduct);
-
-      // Audit log
-      await logAudit({
-        action: "IMPORT_PRODUCT",
-        user: req.user?._id || null,
-        description: `Imported product via Excel: ${name}`,
-        collectionName: "Product",
-        documentId: savedProduct._id,
-        before: null,
-        after: savedProduct.toObject(),
-        ip: req.ip,
-        userAgent: req.headers["user-agent"],
-      });
-    }
-
-    return res.status(200).json({
-      message: "Product import completed",
-      summary: {
-        imported: results.imported.length,
-        skipped: results.skipped.length,
-      },
-      details: results,
-    });
-  } catch (error) {
-    console.error("Import Products Error:", error);
-    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -489,7 +385,9 @@ export const getProductStats = async (req, res) => {
     ]);
 
     // Count products that need restock (e.g. quantity <= 5)
-    const needsRestock = await Product.countDocuments({ quantity: { $lte: 5 } });
+    const needsRestock = await Product.countDocuments({
+      quantity: { $lte: 5 },
+    });
 
     // Count products with quantity <= 0 (out of stock)
     const outOfStock = await Product.countDocuments({ quantity: { $lte: 0 } });
@@ -505,3 +403,182 @@ export const getProductStats = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const importProducts = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(req.file.buffer);
+
+    // Assuming exported file uses "Products" sheet
+    const worksheet = workbook.getWorksheet("Products");
+    if (!worksheet) {
+      return res.status(400).json({ message: 'Sheet "Products" not found' });
+    }
+
+    const results = { imported: [], skipped: [] };
+
+    // Iterate rows, skip header row (first row)
+    worksheet.eachRow({ includeEmpty: false }, async (row, rowNumber) => {
+      if (rowNumber === 1) return; // skip header
+
+      // Map columns according to your export
+      const [
+        name,
+        variant,
+        sku,
+        category,
+        unit,
+        supplier,
+        location,
+        quantity,
+        price,
+        status,
+        description,
+        createdAt,
+        updatedAt,
+      ] = row.values.slice(1); // slice(1) because ExcelJS rows are 1-based with first element empty
+
+      const normalizedName = normalizeString(normalizeText(name || ""));
+      const normalizedVariant = normalizeString(normalizeText(variant || "Default"));
+      const normalizedSku = normalizeString(normalizeText(sku || ""));
+      const normalizedDescription = normalizeString(normalizeText(description || ""));
+
+      // Validation
+      if (!name || !sku || isNaN(price)) {
+        results.skipped.push({ name: name || "N/A", reason: "Invalid row data" });
+        return;
+      }
+
+      // Check duplicates
+      const existingProduct = await Product.findOne({
+        normalizedName,
+        normalizedVariant,
+        normalizedSku,
+      });
+      if (existingProduct) {
+        results.skipped.push({ name, reason: "Product already exists" });
+        return;
+      }
+
+      // Create product
+      const product = new Product({
+        name,
+        variant: variant || "Default",
+        sku,
+        category: category || "",
+        unit: unit || "pcs",
+        supplier: supplier || "",
+        location: location || "Main Warehouse",
+        quantity: parseInt(quantity) || 0,
+        price: parseFloat(price),
+        status: status || "AVAILABLE",
+        description: description || "",
+        normalizedName,
+        normalizedVariant,
+        normalizedSku,
+        normalizedDescription,
+      });
+
+      const savedProduct = await product.save();
+      results.imported.push(savedProduct);
+
+      // Add initial inventory if quantity > 0
+      if (savedProduct.quantity > 0) {
+        await InventoryDetail.create({
+          product: savedProduct._id,
+          order: null,
+          movementType: MovementTypeEnum.IN,
+          quantity: savedProduct.quantity,
+          remarks: "Initial stock - imported",
+          status: savedProduct.status,
+          courier: "",
+          platform: "",
+        });
+      }
+
+      // Audit log
+      await logAudit({
+        action: "IMPORT_PRODUCT",
+        user: req.user?._id || null,
+        description: `Imported product via Excel: ${name}`,
+        collectionName: "Product",
+        documentId: savedProduct._id,
+        before: null,
+        after: savedProduct.toObject(),
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    });
+
+    res.status(200).json({
+      message: "Product import completed",
+      summary: { imported: results.imported.length, skipped: results.skipped.length },
+      details: results,
+    });
+  } catch (error) {
+    console.error("Import Products Error:", error);
+    res.status(500).json({ message: error.message || "Failed to import products" });
+  }
+};
+
+export const exportProducts = async (req, res) => {
+  try {
+    const products = await Product.find().lean();
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Products");
+
+    // Columns
+    worksheet.columns = [
+      { header: "Name", key: "name", width: 30 },
+      { header: "Variant", key: "variant", width: 20 },
+      { header: "SKU", key: "sku", width: 20 },
+      { header: "Category", key: "category", width: 20 },
+      { header: "Unit", key: "unit", width: 10 },
+      { header: "Supplier", key: "supplier", width: 25 },
+      { header: "Location", key: "location", width: 20 },
+      { header: "Quantity", key: "quantity", width: 10 },
+      { header: "Price", key: "price", width: 15 },
+      { header: "Status", key: "status", width: 15 },
+      { header: "Description", key: "description", width: 40 },
+      { header: "Created At", key: "createdAt", width: 20 },
+      { header: "Updated At", key: "updatedAt", width: 20 },
+    ];
+
+    // Header style & wrap text
+    worksheet.getRow(1).font = { bold: true };
+    ["name", "variant", "description"].forEach((col) => {
+      worksheet.getColumn(col).alignment = { wrapText: true };
+    });
+    ["createdAt", "updatedAt"].forEach((col) => {
+      worksheet.getColumn(col).numFmt = "yyyy-mm-dd hh:mm:ss";
+    });
+
+    // Add rows
+    products.forEach((p) => {
+      worksheet.addRow({
+        ...p,
+        createdAt: p.createdAt || null,
+        updatedAt: p.updatedAt || null,
+      });
+    });
+
+    // Response headers
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader("Content-Disposition", "attachment; filename=products.xlsx");
+
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (error) {
+    console.error("Export Products Error:", error);
+    res.status(500).json({ message: "Failed to export products" });
+  }
+};
+

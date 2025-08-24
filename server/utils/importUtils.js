@@ -136,92 +136,272 @@ export const getSheetRows = (file, sheetName, expectedFields) => {
   });
 };
 
+// export const processOrderRows = async (rows, fieldMap, platform, req) => {
+//   const results = { imported: [], skipped: [] };
+
+//   for (const row of rows) {
+//     try {
+//       const platformOrderId = row[fieldMap.platformOrderId]?.toString().trim();
+//       const name = normalizeText(row[fieldMap.name]?.trim() || "");
+//       const courier = normalizeText(row[fieldMap.courier]?.trim() || "");
+//       let variant = normalizeText(row[fieldMap.variant]?.trim() || "");
+//       const quantity = parseInt(row[fieldMap.quantity]) || 0;
+
+//       // ✅ Treat empty variant as "Default"
+//       if (!variant) {
+//         variant = "Default";
+//       }
+
+//       // --- Validation checks ---
+//       if (!platformOrderId || !name || !courier || quantity <= 0) {
+//         results.skipped.push({
+//           platformOrderId: platformOrderId || "N/A",
+//           reason: "Invalid row data",
+//         });
+//         continue;
+//       }
+
+//       // --- Find the product ---
+//       const product = await Product.findOne({
+//         normalizedName: normalizeString(name),
+//         normalizedVariant: normalizeString(variant),
+//       });
+
+//       if (!product) {
+//         results.skipped.push({ platformOrderId, reason: "Product not found" });
+//         continue;
+//       }
+
+//       // --- Check for duplicate order ---
+//       const existingOrder = await Order.findOne({
+//         product: product._id,
+//         platformOrderId,
+//         platform,
+//       });
+
+//       if (existingOrder) {
+//         results.skipped.push({
+//           platformOrderId,
+//           reason: "Order already imported",
+//         });
+//         continue;
+//       }
+
+//       // --- Stock validation ---
+//       if (quantity > product.quantity) {
+//         results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
+//         continue;
+//       }
+
+//       // --- Create new order ---
+//       const order = await Order.create({
+//         product: product._id,
+//         quantity,
+//         platform,
+//         platformOrderId,
+//         courier,
+//         remarks: "Tagged for pickup - imported orders",
+//       });
+
+//       // --- Update product stock ---
+//       const remainingQty = product.quantity - quantity;
+//       const updatedProduct = await Product.findByIdAndUpdate(
+//         product._id,
+//         {
+//           quantity: remainingQty,
+//           ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+//         },
+//         { new: true }
+//       );
+
+//       // --- Record inventory movement ---
+//       const inventoryDetail = await InventoryDetail.create({
+//         product: product._id,
+//         order: order._id,
+//         movementType: "OUT",
+//         quantity,
+//         courier,
+//         platform,
+//         status: StatusEnum.FOR_PICK_UP,
+//         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
+//       });
+
+//       // ✅ Push imported with reason
+//       results.imported.push({
+//         platformOrderId,
+//         reason: "Order imported successfully",
+//         product: updatedProduct,
+//         order,
+//         inventoryDetail,
+//       });
+
+//       // --- Audit log ---
+//       await logAudit({
+//         action: "IMPORT_ORDER",
+//         user: req.user?._id || null,
+//         description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
+//         collectionName: "Order",
+//         documentId: order._id,
+//         before: null,
+//         after: { order, inventoryDetail, product: updatedProduct },
+//         ip: req.ip,
+//         userAgent: req.headers["user-agent"],
+//       });
+//     } catch (err) {
+//       // ✅ Catch unexpected errors
+//       results.skipped.push({
+//         platformOrderId: row[fieldMap.platformOrderId] || "N/A",
+//         reason: `Error processing row: ${err.message}`,
+//       });
+//     }
+//   }
+
+//   return {
+//     message: "Order import completed",
+//     summary: {
+//       imported: results.imported.length,
+//       skipped: results.skipped.length,
+//     },
+//     details: results,
+//   };
+// };
+
+// for sales import
+export const extractOrderIds = (rows, orderIdKey) => {
+  return rows
+    .map((row) => row[orderIdKey])
+    .filter((id) => typeof id === "string" && id.trim() !== "")
+    .map((id) => id.trim());
+};
+
 export const processOrderRows = async (rows, fieldMap, platform, req) => {
   const results = { imported: [], skipped: [] };
 
-  for (const row of rows) {
-    const platformOrderId = row[fieldMap.platformOrderId]?.toString().trim();
-    const name = normalizeText(row[fieldMap.name]?.trim() || "");
-    const courier = normalizeText(row[fieldMap.courier]?.trim() || "");
-    const variant = normalizeText(row[fieldMap.variant]?.trim() || "");
-    const quantity = parseInt(row[fieldMap.quantity]) || 0;
+  // ✅ Skip metadata/header rows depending on platform
+  let startIndex = 0;
+  if (platform.toLowerCase() === "tiktok") {
+    startIndex = 2; // skip 2 rows
+  } else if (["shopee", "lazada"].includes(platform.toLowerCase())) {
+    startIndex = 1; // skip 1 row
+  }
 
-    // Validation checks
-    if (!platformOrderId || !name || !courier || quantity <= 0) {
-      results.skipped.push({
-        platformOrderId: platformOrderId || "N/A",
-        reason: "Invalid row data",
+  const actualRows = rows.slice(startIndex);
+
+  for (const row of actualRows) {
+    try {
+      const platformOrderId = row[fieldMap.platformOrderId]?.toString().trim();
+      const name = normalizeText(row[fieldMap.name]?.trim() || "");
+      const courier = normalizeText(row[fieldMap.courier]?.trim() || "");
+      let variant = normalizeText(row[fieldMap.variant]?.trim() || "");
+      const quantity = parseInt(row[fieldMap.quantity]) || 0;
+
+      // ✅ Treat empty variant as "Default"
+      if (!variant) {
+        variant = "Default";
+      }
+
+      // --- Validation checks ---
+      if (!platformOrderId || !name || !courier || quantity <= 0) {
+        results.skipped.push({
+          platformOrderId: platformOrderId || "N/A",
+          reason: "Invalid row data",
+        });
+        continue;
+      }
+
+      // --- Find the product ---
+      const product = await Product.findOne({
+        normalizedName: normalizeString(name),
+        normalizedVariant: normalizeString(variant),
       });
-      continue;
-    }
 
-    const existingOrder = await Order.findOne({ platformOrderId });
-    if (existingOrder) {
-      results.skipped.push({
+      if (!product) {
+        results.skipped.push({ platformOrderId, reason: "Product not found" });
+        continue;
+      }
+
+      // --- Check for duplicate order ---
+      const existingOrder = await Order.findOne({
+        product: product._id,
         platformOrderId,
-        reason: "Order already imported.",
+        platform,
       });
-      continue;
+
+      if (existingOrder) {
+        results.skipped.push({
+          platformOrderId,
+          reason: "Order already imported",
+        });
+        continue;
+      }
+
+      // --- Stock validation ---
+      if (quantity > product.quantity) {
+        results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
+        continue;
+      }
+
+      // --- Create new order ---
+      const order = await Order.create({
+        product: product._id,
+        quantity,
+        platform,
+        platformOrderId,
+        courier,
+        remarks: "Tagged for pickup - imported orders",
+      });
+
+      // --- Update product stock ---
+      const remainingQty = product.quantity - quantity;
+      const updatedProduct = await Product.findByIdAndUpdate(
+        product._id,
+        {
+          quantity: remainingQty,
+          ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+        },
+        { new: true }
+      );
+
+      // --- Record inventory movement ---
+      const inventoryDetail = await InventoryDetail.create({
+        product: product._id,
+        order: order._id,
+        movementType: "OUT",
+        quantity,
+        courier,
+        platform,
+        status: StatusEnum.FOR_PICK_UP,
+        remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
+      });
+
+      // ✅ Push imported with reason
+      results.imported.push({
+        platformOrderId,
+        reason: "Order imported successfully",
+        product: updatedProduct,
+        order,
+        inventoryDetail,
+      });
+
+      // --- Audit log ---
+      await logAudit({
+        action: "IMPORT_ORDER",
+        user: req.user?._id || null,
+        description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
+        collectionName: "Order",
+        documentId: order._id,
+        before: null,
+        after: { order, inventoryDetail, product: updatedProduct },
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    } catch (err) {
+      // ✅ Catch unexpected errors
+      results.skipped.push({
+        platformOrderId: row[fieldMap.platformOrderId] || "N/A",
+        reason: `Error processing row: ${err.message}`,
+      });
     }
-
-    const product = await Product.findOne({
-      normalizedName: normalizeString(name),
-      normalizedVariant: normalizeString(variant || ""),
-    });
-
-    if (!product) {
-      results.skipped.push({ platformOrderId, reason: "Product not found" });
-      continue;
-    }
-
-    if (quantity > product.quantity) {
-      results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
-      continue;
-    }
-
-    const order = await Order.create({
-      product: product._id,
-      quantity,
-      platform,
-      platformOrderId,
-      courier,
-      remarks: "Tagged for pickup - imported orders",
-    });
-
-    const remainingQty = product.quantity - quantity;
-    const updatedProduct = await Product.findByIdAndUpdate(
-      product._id,
-      {
-        quantity: remainingQty,
-        ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
-      },
-      { new: true }
-    );
-
-    const inventoryDetail = await InventoryDetail.create({
-      product: product._id,
-      order: order._id,
-      movementType: "OUT",
-      quantity,
-      courier,
-      platform,
-      status: StatusEnum.FOR_PICK_UP,
-      remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
-    });
-
-    results.imported.push({ product: updatedProduct, order, inventoryDetail });
-
-    await logAudit({
-      action: "IMPORT_ORDER",
-      user: req.user?._id || null,
-      description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
-      collectionName: "Order",
-      documentId: order._id,
-      before: null,
-      after: { order, inventoryDetail, product: updatedProduct },
-      ip: req.ip,
-      userAgent: req.headers["user-agent"],
-    });
   }
 
   return {
@@ -232,12 +412,4 @@ export const processOrderRows = async (rows, fieldMap, platform, req) => {
     },
     details: results,
   };
-};
-
-// for sales import
-export const extractOrderIds = (rows, orderIdKey) => {
-  return rows
-    .map((row) => row[orderIdKey])
-    .filter((id) => typeof id === "string" && id.trim() !== "")
-    .map((id) => id.trim());
 };

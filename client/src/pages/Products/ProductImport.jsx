@@ -82,7 +82,7 @@ function ProductImport({ fetchProducts }) {
           variant="success"
           onClick={() => fileInputRef.current?.click()}
         >
-          <i className="fas fa-file-import mr-1"></i> Choose File
+          <i className="fas fa-file-import mr-1"></i> Import Products
         </Button>
       </div>
     </div>

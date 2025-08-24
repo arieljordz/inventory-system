@@ -144,7 +144,14 @@ const OrderPage = () => {
     } finally {
       hideSpinner();
     }
-  }, [pickupForm, selectedProduct, fetchOrders, closePickupModal, showSpinner, hideSpinner]);
+  }, [
+    pickupForm,
+    selectedProduct,
+    fetchOrders,
+    closePickupModal,
+    showSpinner,
+    hideSpinner,
+  ]);
 
   /** 🔹 Import Modal Handlers */
   const openImportModal = useCallback(() => setShowImportModal(true), []);
@@ -167,15 +174,19 @@ const OrderPage = () => {
         const { details } = res.data;
 
         if (details?.skipped?.length) {
-          const skippedMessages = details.skipped.map(
-            (item, idx) =>
-              `#${idx + 1} (${item.platformOrderId}): ${item.reason}`
-          );
+          const skippedMessages = details.skipped.map((item, idx) => {
+            const reason =
+              item.reason === "Product not found"
+                ? `<span style="color:red">${item.reason}</span>`
+                : item.reason;
+
+            return `#${idx + 1} (${item.platformOrderId}): ${reason}`;
+          });
 
           Swal.fire({
             icon: "warning",
             title: "Import Completed with Issues",
-            html: `<div style="max-height:300px; overflow:auto">${skippedMessages.join(
+            html: `<div style="max-height:300px; overflow:auto; text-align:left">${skippedMessages.join(
               "<br>"
             )}</div>`,
             width: "40em",
@@ -198,7 +209,11 @@ const OrderPage = () => {
 
   return (
     <>
-      <Navpath levelOne="Order Management" levelTwo="Home" levelThree="Orders" />
+      <Navpath
+        levelOne="Order Management"
+        levelTwo="Home"
+        levelThree="Orders"
+      />
 
       <section className="content">
         <div className="container-fluid">

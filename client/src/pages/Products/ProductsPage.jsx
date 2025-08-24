@@ -19,6 +19,7 @@ import RestockModal from "./RestockModal";
 
 import { useDebounce } from "../../hooks/useDebounce";
 import ProductImport from "./ProductImport";
+import ProductExport from "./ProductExport";
 
 // Default form state
 const initialFormState = {
@@ -284,6 +285,7 @@ const ProductsPage = () => {
           </div>
 
           <ProductImport fetchProducts={fetchProducts} />
+          <ProductExport fetchProducts={fetchProducts} />
           {/* Search and Items Per Page Controls */}
           <SearchBar
             searchTerm={searchTerm}

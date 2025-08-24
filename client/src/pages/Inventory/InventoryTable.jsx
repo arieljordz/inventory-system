@@ -91,23 +91,23 @@ const InventoryTable = ({ data = [], loading = false }) => {
 
         return (
           <div key={productId} className="mb-3 border rounded">
-            {/* Product Header */}
-            <div className="bg-primary text-white p-2 d-flex justify-content-between align-items-center">
-              <div className="d-flex align-items-center">
-                <strong>
+            {/* ✅ Responsive Product Header */}
+            <div className="bg-primary text-white p-2 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-2">
+              {/* Left side: Product Name + Copy Button + Variant */}
+              <div className="d-flex flex-wrap align-items-center">
+                <strong className="me-2">
                   {index + 1}. {productName}
                 </strong>
                 <CopyToClipboardButton
                   text={productName}
-                  className="ml-2 mr-3 text-white"
+                  className="me-2 text-white"
                 />
-                <span className="badge badge-light text-dark mr-3">
-                  {"("}
-                  {variant}
-                  {")"}
+                <span className="badge badge-light text-dark mb-1 mb-md-0">
+                  ({variant})
                 </span>
               </div>
 
+              {/* Right side: Remaining Quantity */}
               <span className="badge badge-light text-dark">
                 Remaining Qty: {remainingQty}
               </span>

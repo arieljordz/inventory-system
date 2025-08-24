@@ -12,9 +12,6 @@ export const getProducts = ({ page = 1, limit = 10, search = "" } = {}) =>
 export const createProduct = (formData) =>
   api.post("/api/products", formData, multipartHeaders);
 
-export const importProducts = (formData) =>
-  api.post("/api/products/import-products", formData, multipartHeaders);
-
 // Update an existing product
 export const updateProduct = (id, formData) =>
   api.put(`/api/products/${id}`, formData, multipartHeaders);
@@ -41,3 +38,9 @@ export const restockProduct = (productId, data) =>
   api.post(`/api/products/${productId}/restock`, data);
 
 export const getProductStats = () => api.get("/api/products/stats");
+
+export const importProducts = (formData) =>
+  api.post("/api/products/import-products", formData, multipartHeaders);
+
+export const exportProducts = () =>
+  api.get("/api/products/export-products", { responseType: "arraybuffer" });
