@@ -49,7 +49,7 @@ const Sidebar = () => {
         </nav>
 
         {/* Logout at Bottom */}
-        <div className="mt-auto pr-3">
+        <div className="mt-auto p-3">
           <LogoutButton />
         </div>
       </div>

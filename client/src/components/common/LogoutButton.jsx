@@ -33,7 +33,7 @@ const LogoutButton = () => {
       )}
       <button
         type="button"
-        className="btn btn-outline-primary btn-md btn-block d-flex align-items-center justify-content-start gap-2"
+        className="btn btn-outline-primary btn-sm btn-block d-flex align-items-center justify-content-start gap-2"
         onClick={handleLogout}
       >
         <i className="fas fa-sign-out-alt"></i>
