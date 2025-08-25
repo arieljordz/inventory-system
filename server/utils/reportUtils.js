@@ -1,5 +1,5 @@
 import moment from "moment-timezone";
-import { ReportTypeEnum } from "../enums/enums.js";
+import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
 import { formatAmount } from "../utils/commonUtils.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
