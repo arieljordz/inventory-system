@@ -1,4 +1,5 @@
-import { MongoClient } from "mongodb";
+// backupCollections.js
+import { MongoClient, ObjectId, Binary, Decimal128, Long, Double, Int32 } from "mongodb";
 import fs from "fs";
 import dotenv from "dotenv";
 import readline from "readline";
@@ -6,7 +7,7 @@ import readline from "readline";
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI;
-const BACKUP_DIR = "./backups"; // folder to save backups
+const BACKUP_DIR = "./backups";
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -56,6 +57,57 @@ function formatTimestampToDateTime(timestamp) {
   return `${month}${day}${year}_${hours}${minutes}${seconds}`;
 }
 
+/**
+ * Recursively transform MongoDB values into Extended JSON format
+ */
+function transformToExtendedJSON(value) {
+  if (value instanceof ObjectId) {
+    return { $oid: value.toString() };
+  }
+  if (value instanceof Date) {
+    return { $date: value.toISOString() };
+  }
+  if (value instanceof Int32) {
+    return { $numberInt: value.toString() };
+  }
+  if (value instanceof Long) {
+    return { $numberLong: value.toString() };
+  }
+  if (value instanceof Double) {
+    return { $numberDouble: value.valueOf().toString() };
+  }
+  if (value instanceof Decimal128) {
+    return { $numberDecimal: value.toString() };
+  }
+  if (value instanceof Binary) {
+    return {
+      $binary: {
+        base64: value.buffer.toString("base64"),
+        subType: value.sub_type.toString(16).padStart(2, "0"),
+      },
+    };
+  }
+  if (value instanceof RegExp) {
+    return {
+      $regex: {
+        pattern: value.source,
+        options: value.flags,
+      },
+    };
+  }
+  if (Array.isArray(value)) {
+    return value.map(transformToExtendedJSON);
+  }
+  if (value && typeof value === "object") {
+    const transformed = {};
+    for (const key in value) {
+      transformed[key] = transformToExtendedJSON(value[key]);
+    }
+    return transformed;
+  }
+  return value;
+}
+
 async function backupCollections() {
   const client = new MongoClient(MONGO_URI);
 
@@ -67,7 +119,7 @@ async function backupCollections() {
     const collectionNames = allCollections.map((c) => c.name);
 
     const confirmed = await askConfirmation(
-      "⚠️  Do you want to proceed with backing up collections?"
+      `⚠️  Do you want to proceed with backing up collections?\nBackup from: ${MONGO_URI}`
     );
     if (!confirmed) {
       console.log("Backup cancelled.");
@@ -82,7 +134,6 @@ async function backupCollections() {
       return;
     }
 
-    // Create backup directory if it doesn't exist
     if (!fs.existsSync(BACKUP_DIR)) {
       fs.mkdirSync(BACKUP_DIR);
     }
@@ -91,11 +142,18 @@ async function backupCollections() {
       const collection = db.collection(name);
       const documents = await collection.find({}).toArray();
 
+      // Transform recursively into Extended JSON
+      const transformedDocs = documents.map(transformToExtendedJSON);
+
       const filePath = `${BACKUP_DIR}/${name}_${formatTimestampToDateTime(
         Date.now()
       )}.json`;
 
-      fs.writeFileSync(filePath, JSON.stringify(documents, null, 2), "utf-8");
+      fs.writeFileSync(
+        filePath,
+        JSON.stringify(transformedDocs, null, 2),
+        "utf-8"
+      );
 
       console.log(
         `✅ Backed up ${documents.length} documents from ${name} to ${filePath}`

@@ -1,4 +1,5 @@
-import { MongoClient } from "mongodb";
+// restoreCollections.js
+import { MongoClient, ObjectId, Binary, Decimal128, Long, Double, Int32 } from "mongodb";
 import fs from "fs";
 import dotenv from "dotenv";
 import readline from "readline";
@@ -7,14 +8,14 @@ import path from "path";
 dotenv.config();
 
 const MONGO_URI = process.env.MONGO_URI;
-const BACKUP_DIR = "./backups"; // folder where backups are stored
+const BACKUP_DIR = "./backups";
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-async function askConfirmation(message) {
+function askConfirmation(message) {
   return new Promise((resolve) => {
     rl.question(`${message} (yes/no): `, (answer) => {
       resolve(answer.toLowerCase() === "yes");
@@ -45,7 +46,7 @@ async function selectBackupFiles() {
         } else {
           selected = answer
             .split(",")
-            .map((x) => parseInt(x.trim()) - 1)
+            .map((x) => parseInt(x.trim(), 10) - 1)
             .filter((i) => i >= 0 && i < files.length)
             .map((i) => files[i]);
         }
@@ -55,12 +56,40 @@ async function selectBackupFiles() {
   });
 }
 
+// Reviver for MongoDB Extended JSON
+function reviveDocument(doc) {
+  if (Array.isArray(doc)) {
+    return doc.map((item) => reviveDocument(item));
+  } else if (doc && typeof doc === "object") {
+    // Extended JSON conversions
+    if (doc.$oid) return new ObjectId(doc.$oid);
+    if (doc.$date) return new Date(doc.$date);
+    if (doc.$numberInt) return new Int32(doc.$numberInt); // <-- Int32 support
+    if (doc.$numberLong) return Long.fromString(doc.$numberLong);
+    if (doc.$numberDouble) return new Double(parseFloat(doc.$numberDouble));
+    if (doc.$numberDecimal) return Decimal128.fromString(doc.$numberDecimal);
+    if (doc.$binary)
+      return new Binary(
+        Buffer.from(doc.$binary.base64, "base64"),
+        doc.$binary.subType || 0
+      );
+    if (doc.$regex) return new RegExp(doc.$regex.pattern, doc.$regex.options || "");
+
+    const revived = {};
+    for (const key in doc) {
+      revived[key] = reviveDocument(doc[key]);
+    }
+    return revived;
+  }
+  return doc;
+}
+
 async function restoreCollections() {
   const client = new MongoClient(MONGO_URI);
 
   try {
     const confirmed = await askConfirmation(
-      "⚠️  Are you sure you want to restore collections? This will overwrite existing data."
+      `⚠️  Are you sure you want to restore collections? This will overwrite existing data.\nRestored to: ${MONGO_URI}`
     );
     if (!confirmed) {
       console.log("Restore cancelled.");
@@ -80,10 +109,12 @@ async function restoreCollections() {
 
     for (const file of backupFiles) {
       const filePath = path.join(BACKUP_DIR, file);
-      const collectionName = file.split("_")[0]; // assumes format: collectionname_timestamp.json
-      const data = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+      const collectionName = file.split("_")[0]; // assumes: collectionname_timestamp.json
+      const rawData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-      // Confirm before wiping existing collection
+      // Convert extended JSON back to MongoDB objects
+      const data = rawData.map((doc) => reviveDocument(doc));
+
       const overwrite = await askConfirmation(
         `Do you want to overwrite the collection '${collectionName}'?`
       );
@@ -94,7 +125,6 @@ async function restoreCollections() {
 
       const collection = db.collection(collectionName);
 
-      // Clear existing documents
       await collection.deleteMany({});
       if (data.length > 0) {
         await collection.insertMany(data);

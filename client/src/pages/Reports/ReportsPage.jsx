@@ -38,14 +38,14 @@ const ReportsPage = () => {
       const data = res.data?.data || [];
 
       if (!data.length) {
-        toast.info("No records found.");
+        // toast.info("No records found.");
         setReportData([]);
         setIsReportGenerated(false);
       } else {
         setReportData(data);
         setActiveReportType(reportType);
         setIsReportGenerated(true);
-        toast.success("Report generated successfully.");
+        // toast.success("Report generated successfully.");
       }
     } catch (err) {
       console.error(err);
