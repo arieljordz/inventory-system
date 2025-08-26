@@ -49,7 +49,7 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
         </td>
         {/* <td className="text-center align-middle">
           <code className="px-2 py-1 rounded">
-            {order.product?.sku || "N/A"}
+            {order.product?.sku.toUpperCase() || "N/A"}
           </code>
         </td> */}
         <td className="align-middle">

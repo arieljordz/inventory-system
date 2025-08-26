@@ -60,13 +60,13 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
       <tr key={order._id || index} className={loading ? "table-secondary" : ""}>
         <td className="text-center align-middle">{index + 1}</td>
         <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">{order.sku || "N/A"}</code>
+          <code className="px-2 py-1 rounded">{order.sku.toUpperCase() || "N/A"}</code>
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
             <div className="font-weight-medium" title={order.name || ""}>
               <code className="px-2 py-1 rounded">
-                {truncateText(order.name, 500)}
+                {truncateText(order.name, 80)}
               </code>
             </div>
             <CopyToClipboardButton text={order.name} />

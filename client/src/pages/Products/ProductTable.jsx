@@ -91,7 +91,7 @@ const ProductTable = ({
       <tr key={product._id} className={loading ? "table-secondary" : ""}>
         <td className="text-center align-middle">{index + 1}</td>
         <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">{product.sku || "N/A"}</code>
+          <code className="px-2 py-1 rounded">{product.sku.toUpperCase() || "N/A"}</code>
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
@@ -109,7 +109,7 @@ const ProductTable = ({
             <div className="d-flex align-items-center">
               <div className="font-weight-medium" title={product.name || ""}>
                 <code className="px-2 py-1 rounded">
-                  {truncateText(product.name, 500)}
+                  {truncateText(product.name, 70)}
                 </code>
               </div>
               <CopyToClipboardButton text={product.name} />

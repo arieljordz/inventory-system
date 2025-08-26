@@ -90,7 +90,7 @@ export const normalizeHeader = (str) =>
     .replace(/\s+/g, " ") // collapse multiple spaces
     .replace(/[_\-\/]/g, " "); // treat _, -, / as spaces
 
-// --- Platform configuration ---
+// --- Platform configuration for orders---
 export const orderPlatformConfigs = {
   shopee: {
     sheetName: "orders",
@@ -100,6 +100,7 @@ export const orderPlatformConfigs = {
       courier: "Shipping Option",
       variant: "Variation Name",
       quantity: "Quantity",
+      orderDate: "Order Creation Date",
     },
   },
   tiktok: {
@@ -110,6 +111,7 @@ export const orderPlatformConfigs = {
       courier: "Delivery Option",
       variant: "Variation",
       quantity: "Quantity",
+      orderDate: "Created Time",
     },
   },
   lazada: {
@@ -120,6 +122,7 @@ export const orderPlatformConfigs = {
       courier: "shippingProviderType",
       variant: "variation",
       quantity: "Quantity",
+      orderDate: "createTime",
     },
   },
 };
