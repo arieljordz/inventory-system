@@ -22,30 +22,26 @@ export const getReportData = async (req, res) => {
       startDate,
       endDate,
     } = req.query;
+
     const filter = buildDateFilter(startDate, endDate);
     const { data, isSalesReport } = await fetchReportData(reportType, filter);
 
-    // console.log("isSalesReport:", isSalesReport);
+    let grandTotalAmount = 0;
 
     const formattedData = data.map((item) => {
-      const price = item.product?.price || 0;
-      const quantity = item.quantity || 0;
+      const obj = typeof item.toObject === "function" ? item.toObject() : item;
+      const price = obj.product?.price || 0;
+      const quantity = obj.quantity || 0;
       const totalAmount = isSalesReport ? price * quantity : 0;
-      return { ...item.toObject(), totalAmount };
+
+      if (isSalesReport) {
+        grandTotalAmount += totalAmount;
+      }
+
+      return { ...obj, totalAmount };
     });
 
-    const grandTotalAmount = isSalesReport
-      ? formattedData.reduce((sum, item) => sum + item.totalAmount, 0)
-      : 0;
-
-    // console.log("grandTotalAmount:", grandTotalAmount);
-
-    const finalData = formattedData.map((item) => ({
-      ...item,
-      grandTotalAmount,
-    }));
-
-    res.json({ data: finalData });
+    res.json({ data: formattedData, grandTotalAmount });
   } catch (err) {
     console.error("Error generating report:", err);
     res.status(500).json({ error: "Failed to generate report" });
