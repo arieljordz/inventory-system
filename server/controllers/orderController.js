@@ -216,6 +216,15 @@ export const processOrderRows = async (rows, platform, req) => {
         normalizedName: normalizeString(name),
         normalizedVariant: normalizeString(variant),
       });
+
+      // if (platformOrderId === "1025971831720381") {
+      //   console.log("Debug row:", row);
+      //   console.log("Found product in OrderID 1025971831720381:", product);
+      //   console.log("Name:", name, "Variant:", variant);
+      //   console.log("Normalized Name:", normalizeString(name));
+      //   console.log("Normalized Variant:", normalizeString(variant));
+      // }
+
       if (!product) {
         results.skipped.push({ platformOrderId, reason: "Product not found" });
         continue;

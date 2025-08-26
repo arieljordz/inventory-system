@@ -70,17 +70,45 @@ const productSchema = new mongoose.Schema(
 
 // Pre-save hook to always set normalized values
 productSchema.pre("save", function (next) {
-  // Clean display fields
   this.name = normalizeText(this.name);
   this.description = normalizeText(this.description || "");
   this.variant = normalizeText(this.variant || "");
   this.sku = normalizeText(this.sku || "");
 
-  // Maintain normalized fields
   this.normalizedName = normalizeString(this.name);
   this.normalizedVariant = normalizeString(this.variant || "");
   this.normalizedSku = normalizeString(this.sku || "");
   this.normalizedDescription = normalizeString(this.description || "");
+
+  next();
+});
+
+// 🔹 Pre-update hook for findOneAndUpdate / findByIdAndUpdate
+productSchema.pre("findOneAndUpdate", function (next) {
+  const update = this.getUpdate();
+
+  if (!update) return next();
+
+  // Normalize any updated fields
+  if (update.name) {
+    update.name = normalizeText(update.name);
+    update.normalizedName = normalizeString(update.name);
+  }
+
+  if (update.variant) {
+    update.variant = normalizeText(update.variant);
+    update.normalizedVariant = normalizeString(update.variant);
+  }
+
+  if (update.sku) {
+    update.sku = normalizeText(update.sku);
+    update.normalizedSku = normalizeString(update.sku);
+  }
+
+  if (update.description) {
+    update.description = normalizeText(update.description);
+    update.normalizedDescription = normalizeString(update.description);
+  }
 
   next();
 });
