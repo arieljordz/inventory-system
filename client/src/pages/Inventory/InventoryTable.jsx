@@ -1,4 +1,5 @@
 import React from "react";
+import { truncateText } from "../../utils/commonUtils";
 import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
 import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
 
@@ -96,7 +97,7 @@ const InventoryTable = ({ data = [], loading = false }) => {
               {/* Left side: Product Name + Copy Button + Variant */}
               <div className="d-flex flex-wrap align-items-center">
                 <strong className="me-2">
-                  {index + 1}. {productName}
+                  {index + 1}. {truncateText(productName, 100)}
                 </strong>
                 <CopyToClipboardButton
                   text={productName}

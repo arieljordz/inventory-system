@@ -59,7 +59,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
               title={order.product?.name || ""}
             >
               <code className="px-2 py-1 rounded">
-                {truncateText(order.product?.name, 500)}
+                {truncateText(order.product?.name, 50)}
               </code>
             </div>
             <CopyToClipboardButton text={order.product?.name} />
