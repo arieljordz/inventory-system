@@ -60,7 +60,9 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
       <tr key={order._id || index} className={loading ? "table-secondary" : ""}>
         <td className="text-center align-middle">{index + 1}</td>
         <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">{order.sku.toUpperCase() || "N/A"}</code>
+          <code className="px-2 py-1 rounded">
+            {order.sku.toUpperCase() || "N/A"}
+          </code>
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
@@ -107,7 +109,9 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
           </span>
         </td>
         <td className="text-center align-middle">
-          <small className="text-muted">{formatDate(order.createdAt)}</small>
+          <small className="text-muted">
+            {formatDate(order.orderDate ?? order.createdAt)}
+          </small>
         </td>
         <td className="text-center align-middle">
           <StatusBadge
@@ -157,7 +161,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
                   Total Price
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
-                  Added
+                  Order Date
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
                   Status

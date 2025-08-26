@@ -98,7 +98,9 @@ const SalesTable = ({ orders = [], loading = false }) => {
           </span>
         </td>
         <td className="text-center align-middle">
-          <small className="text-muted">{formatDate(order.createdAt)}</small>
+          <small className="text-muted">
+            {formatDate(order.orderDate ?? order.createdAt)}
+          </small>
         </td>
         <td className="text-center align-middle">
           <StatusBadge
@@ -150,7 +152,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
                   Total Price
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
-                  Ordered At
+                  Ordere Date
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
                   Payment Status

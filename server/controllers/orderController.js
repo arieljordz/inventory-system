@@ -9,6 +9,7 @@ import {
   normalizeString,
   escapeRegex,
   normalizeText,
+  parseOrderDate,
 } from "../utils/commonUtils.js";
 import {
   orderPlatformConfigs,
@@ -203,6 +204,7 @@ export const processOrderRows = async (rows, platform, req) => {
       const courier = normalizeText(row.courier);
       const variant = normalizeText(row.variant || "Default");
       const quantity = parseInt(row.quantity) || 0;
+      const orderDate = parseOrderDate(row.orderDate);
 
       if (!platformOrderId || !name || !courier || quantity <= 0) {
         results.skipped.push({
@@ -216,14 +218,6 @@ export const processOrderRows = async (rows, platform, req) => {
         normalizedName: normalizeString(name),
         normalizedVariant: normalizeString(variant),
       });
-
-      // if (platformOrderId === "1025971831720381") {
-      //   console.log("Debug row:", row);
-      //   console.log("Found product in OrderID 1025971831720381:", product);
-      //   console.log("Name:", name, "Variant:", variant);
-      //   console.log("Normalized Name:", normalizeString(name));
-      //   console.log("Normalized Variant:", normalizeString(variant));
-      // }
 
       if (!product) {
         results.skipped.push({ platformOrderId, reason: "Product not found" });
@@ -254,6 +248,7 @@ export const processOrderRows = async (rows, platform, req) => {
         platform,
         platformOrderId,
         courier,
+        orderDate,
         remarks: "Tagged for pickup - imported orders",
       });
 

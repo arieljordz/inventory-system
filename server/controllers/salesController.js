@@ -12,6 +12,7 @@ import {
   escapeRegex,
   normalizeText,
 } from "../utils/commonUtils.js";
+import { StatusEnum } from "../enums/enums.js";
 
 export const getSalesStatsByDate = async (req, res) => {
   try {
@@ -241,6 +242,7 @@ export const importSalesByPlatform = async (req, res) => {
 
       const before = { isPaid: order.isPaid };
       order.isPaid = true;
+      order.status = StatusEnum.COMPLETED;
       await order.save();
 
       results.updated.push(order._id);

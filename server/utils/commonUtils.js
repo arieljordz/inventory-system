@@ -60,3 +60,28 @@ export const getCurrentDate = () => {
   return dateNow;
 };
 
+export function parseOrderDate(orderDate) {
+  if (!orderDate) {
+    return new Date(); // fallback to now if missing
+  }
+
+  // If it's a number → Excel serial number
+  if (!isNaN(orderDate)) {
+    const serial = Number(orderDate);
+    const utcDays = Math.floor(serial - 25569); // days since 1970-01-01
+    const utcValue = utcDays * 86400; // seconds
+    const dateInfo = new Date(utcValue * 1000);
+
+    // Handle fractional day (time of day)
+    const fractionalDay = serial - Math.floor(serial);
+    if (fractionalDay > 0) {
+      const msInDay = 24 * 60 * 60 * 1000;
+      dateInfo.setTime(dateInfo.getTime() + fractionalDay * msInDay);
+    }
+
+    return dateInfo;
+  }
+
+  // Otherwise assume it's a string that JS can parse
+  return new Date(orderDate);
+}

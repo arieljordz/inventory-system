@@ -57,7 +57,9 @@ const InventoryTable = ({ data = [], loading = false }) => {
         </td>
         <td className="text-center align-middle">{m.quantity}</td>
         <td className="align-middle">{m.remarks || "-"}</td>
-        <td className="text-center align-middle">{formatDate(m.createdAt)}</td>
+        <td className="text-center align-middle">
+          {formatDate(m.orderDate ?? m.createdAt)}
+        </td>
       </tr>
     ));
   };
