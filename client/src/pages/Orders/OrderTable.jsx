@@ -66,7 +66,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
           <div className="d-flex align-items-center">
             <div className="font-weight-medium" title={order.name || ""}>
               <code className="px-2 py-1 rounded">
-                {truncateText(order.name, 80)}
+                {truncateText(order.name, 70)}
               </code>
             </div>
             <CopyToClipboardButton text={order.name} />

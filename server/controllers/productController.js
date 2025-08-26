@@ -218,21 +218,21 @@ export const updateProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    // const { sku, quantity, ...updateFields } = req.body;
+    const { sku, quantity, ...updateFields } = req.body;
 
     // Check for duplicate SKU if sku is being changed
-    // if (sku && sku !== product.sku) {
-    //   const existing = await Product.findOne({ sku, _id: { $ne: productId } });
-    //   if (existing) {
-    //     return res.status(400).json({ message: "SKU already exists" });
-    //   }
-    //   updateFields.sku = sku;
-    // }
+    if (sku && sku !== product.sku) {
+      const existing = await Product.findOne({ sku, _id: { $ne: productId } });
+      if (existing) {
+        return res.status(400).json({ message: "SKU already exists" });
+      }
+      updateFields.sku = sku;
+    }
 
-    const { name, category, variant, size, sku, quantity, ...updateFields } = req.body;
-
-    const newSku = generateSKU({ name, category, variant, size });
-    updateFields.sku = newSku;
+    // This is to update SKU once
+    // const { name, category, variant, size, sku, quantity, ...updateFields } = req.body;
+    // const newSku = generateSKU({ name, category, variant, size });
+    // updateFields.sku = newSku;
 
     const requiredFields = ["name", "price", "description"];
     for (const field of requiredFields) {

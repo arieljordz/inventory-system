@@ -109,7 +109,7 @@ const ProductTable = ({
             <div className="d-flex align-items-center">
               <div className="font-weight-medium" title={product.name || ""}>
                 <code className="px-2 py-1 rounded">
-                  {truncateText(product.name, 70)}
+                  {truncateText(product.name, 60)}
                 </code>
               </div>
               <CopyToClipboardButton text={product.name} />
