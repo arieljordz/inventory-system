@@ -213,14 +213,12 @@ export const importSalesByPlatform = async (req, res) => {
     }
 
     if (platformOrderIds.length === 0) {
-      return res
-        .status(400)
-        .json({ message: "No valid order IDs found in file." });
+      return res.status(400).json({ message: "No valid order IDs found in file." });
     }
 
     // --- Fetch matching orders ---
     const orders = await Order.find({
-      platform,
+      platform: platform.toLowerCase(),
       platformOrderId: { $in: platformOrderIds },
     });
     const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
