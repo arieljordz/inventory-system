@@ -1,24 +1,22 @@
-import React, {
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Swal from "sweetalert2";
-import * as XLSX from "xlsx";
 import { toast } from "react-toastify";
 import { useSpinner } from "../../context/SpinnerContext";
+
 import { getProductsByStatus } from "../../services/productService";
 import { tagInventoryForPickUp } from "../../services/inventoryDetailService";
 import { importOrdersByPlatform } from "../../services/orderService";
+
 import { StatusEnum, PlatformEnum, CourierEnum } from "../../enums/enums";
+
 import OrderTable from "./OrderTable";
 import PickupModal from "./PickupModal";
 import ImportModal from "./ImportModal";
 import Navpath from "../../components/common/Navpath";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
+
+import { useDebounce } from "../../hooks/useDebounce";
 
 const initialFormState = {
   quantity: "",
@@ -31,134 +29,95 @@ const initialFormState = {
 
 const OrderPage = () => {
   const { showSpinner, hideSpinner } = useSpinner();
+
+  // Core state
   const [orders, setOrders] = useState([]);
-  const [form, setForm] = useState(initialFormState);
+  const [loading, setLoading] = useState(false);
+
+  // Search & pagination state
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [paginatedItems, setPaginatedItems] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
 
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
+  // Pickup modal state
+  const [isPickupModalOpen, setIsPickupModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [showPickupModal, setShowPickupModal] = useState(false);
+  const [pickupForm, setPickupForm] = useState(initialFormState);
+
+  // Import modal state
   const [showImportModal, setShowImportModal] = useState(false);
-  const fileInputRef = useRef(null);
 
-  const platformOptions = useMemo(
-    () =>
-      Object.entries(PlatformEnum).map(([key, value]) => ({
-        label: value,
-        value: key,
-      })),
-    []
-  );
+  // Platform options
+  const platformOptions = Object.entries(PlatformEnum).map(([key, value]) => ({
+    label: value,
+    value: key,
+  }));
 
-  const fetchOrders = async () => {
+  /** 🔹 Fetch Orders */
+  const fetchOrders = useCallback(async () => {
+    setLoading(true);
     try {
-      showSpinner();
-      const res = await getProductsByStatus(StatusEnum.AVAILABLE);
-      setOrders(res.data);
+      const res = await getProductsByStatus({
+        status: StatusEnum.AVAILABLE,
+        page: currentPage,
+        limit: itemsPerPage,
+        search: debouncedSearchTerm,
+      });
+      const { products: fetchedOrders, totalProducts, totalPages } = res.data;
+
+      setOrders(fetchedOrders || []);
+      setTotalItems(totalProducts || 0);
+
+      if (currentPage > totalPages && totalPages > 0) {
+        setCurrentPage(totalPages);
+      }
     } catch (error) {
-      console.error("Failed to fetch orders", error);
+      console.error("Failed to fetch orders:", error);
+      toast.error("Failed to fetch orders");
+      setOrders([]);
+      setTotalItems(0);
     } finally {
-      hideSpinner();
+      setLoading(false);
     }
-  };
+  }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [fetchOrders]);
 
-  const filteredBySearch = useMemo(() => {
-    return orders.filter((item) =>
-      ["name", "price", "description", "variant"].some((field) =>
-        String(item[field] || "")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      )
-    );
-  }, [orders, searchTerm]);
+  // Reset page on search change
+  useEffect(() => {
+    if (currentPage !== 1) setCurrentPage(1);
+  }, [debouncedSearchTerm]);
 
+  /** 🔹 Event Handlers */
+  const handleSearchChange = useCallback((val) => setSearchTerm(val), []);
   const handleItemsPerPageChange = useCallback((val) => {
     setItemsPerPage(val);
     setCurrentPage(1);
   }, []);
+  const handlePageChange = useCallback((page) => setCurrentPage(page), []);
 
-  const openModal = (product) => {
+  /** 🔹 Pickup Modal Handlers */
+  const openPickupModal = useCallback((product) => {
     setSelectedProduct(product);
-    setForm(initialFormState);
-    setShowPickupModal(true);
-  };
-
-  const closeModal = () => {
+    setPickupForm(initialFormState);
+    setIsPickupModalOpen(true);
+  }, []);
+  const closePickupModal = useCallback(() => {
     setSelectedProduct(null);
-    setForm(initialFormState);
-    setShowPickupModal(false);
-  };
-
-  const handleChange = (e) => {
+    setPickupForm(initialFormState);
+    setIsPickupModalOpen(false);
+  }, []);
+  const handlePickupChange = useCallback((e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleImport = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const platform = form.platform?.trim();
-    if (!platform) {
-      toast.error("Please select a platform before uploading.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("platform", platform);
-    formData.append("file", file);
-
-    try {
-      showSpinner();
-
-      const response = await importOrdersByPlatform(formData);
-
-    //   console.log("response:", response);
-      const { summary, details } = response.data;
-
-      if (details.skipped.length) {
-        const skippedMessages = details.skipped.map(
-          (item, idx) => `#${idx + 1} (${item.platformOrderId}): ${item.reason}`
-        );
-
-        Swal.fire({
-          icon: "warning",
-          title: "Import Completed with Issues",
-          html: `<div style="max-height:300px; overflow:auto">${skippedMessages.join(
-            "<br>"
-          )}</div>`,
-          width: "40em",
-        });
-      } else {
-        toast.success("All orders imported successfully!");
-      }
-
-      await fetchOrders();
-    } catch (err) {
-      console.error("Import failed:", err);
-      toast.error(err.response?.data?.message || "Failed to import orders.");
-    } finally {
-      hideSpinner();
-      setShowImportModal(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = null; // Reset file input
-      }
-    }
-  };
-
-  const handleConfirmPickup = async () => {
-    const qty = Number(form.quantity);
-    const courier = form.courier?.trim();
-
+    setPickupForm((prev) => ({ ...prev, [name]: value }));
+  }, []);
+  const handleConfirmPickup = useCallback(async () => {
+    const qty = Number(pickupForm.quantity);
     if (!qty || qty <= 0 || qty > selectedProduct.quantity) {
       toast.error("Invalid quantity.");
       return;
@@ -166,26 +125,109 @@ const OrderPage = () => {
 
     try {
       showSpinner();
+      await tagInventoryForPickUp(
+        {
+          quantity: qty,
+          platform: pickupForm.platform,
+          platformOrderId: pickupForm.platformOrderId,
+          courier: pickupForm.courier,
+          remarks: pickupForm.remarks,
+        },
+        selectedProduct._id
+      );
 
-      const data = {
-        quantity: qty,
-        platform: form.platform?.trim() || "",
-        platformOrderId: form.platformOrderId?.trim() || "",
-        courier,
-        remarks: form.remarks?.trim() || "",
-      };
-
-      await tagInventoryForPickUp(data, selectedProduct._id);
-
-      toast.success("Product tagged for pick up!");
-      closeModal();
+      toast.success("Product tagged for pickup!");
+      closePickupModal();
       await fetchOrders();
     } catch (err) {
       toast.error(err.response?.data?.message || "Failed to tag product.");
     } finally {
       hideSpinner();
     }
-  };
+  }, [
+    pickupForm,
+    selectedProduct,
+    fetchOrders,
+    closePickupModal,
+    showSpinner,
+    hideSpinner,
+  ]);
+
+  /** 🔹 Import Modal Handlers */
+  const openImportModal = useCallback(() => setShowImportModal(true), []);
+  const closeImportModal = useCallback(() => setShowImportModal(false), []);
+
+  const handleImport = useCallback(
+    async (file, platform) => {
+      if (!file || !platform) {
+        toast.error("Please select a platform and file.");
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append("platform", platform);
+      formData.append("file", file);
+
+      try {
+        showSpinner();
+        const res = await importOrdersByPlatform(formData);
+        const { details } = res.data;
+
+        if (details) {
+          const buildMessage = (item, idx, type = "imported") => {
+            let reason = "";
+            if (type === "imported") {
+              reason = `<span style="color:green">Imported Order</span>`;
+            } else {
+              switch (item.reason) {
+                case "Product not found":
+                  reason = `<span style="color:red">${item.reason}</span>`;
+                  break;
+                case "Order already imported":
+                  reason = `<span style="color:blue">${item.reason}</span>`;
+                  break;
+                case "Insufficient stock":
+                  reason = `<span style="color:orange">${item.reason}</span>`;
+                  break;
+                default:
+                  reason = item.reason;
+              }
+            }
+            return `#${idx + 1} (${item.platformOrderId}): ${reason}`;
+          };
+
+          const importedMessages = (details.imported || []).map((item, idx) =>
+            buildMessage(item, idx, "imported")
+          );
+
+          const skippedMessages = (details.skipped || []).map((item, idx) =>
+            buildMessage(item, importedMessages.length + idx, "skipped")
+          );
+
+          const allMessages = [...importedMessages, ...skippedMessages];
+
+          if (allMessages.length > 0) {
+            Swal.fire({
+              icon: "info",
+              title: "Import Results",
+              html: `<div style="max-height:300px; overflow:auto; text-align:left">${allMessages.join(
+                "<br>"
+              )}</div>`,
+              width: "40em",
+            });
+          }
+        }
+        await fetchOrders();
+      } catch (err) {
+        console.error("Import failed:", err);
+        toast.error(err.response?.data?.message || "Failed to import orders.");
+      } finally {
+        hideSpinner();
+        closeImportModal();
+      }
+    },
+    [fetchOrders, showSpinner, hideSpinner]
+  );
 
   return (
     <>
@@ -197,46 +239,59 @@ const OrderPage = () => {
 
       <section className="content">
         <div className="container-fluid">
-          <button
-            className="btn btn-success mb-3"
-            onClick={() => setShowImportModal(true)}
-          >
-            <i className="fas fa-file-import mr-1"></i> Import Orders
-          </button>
+          {/* Import Button */}
+          <div className="mb-3">
+            <button
+              className="btn btn-success"
+              onClick={openImportModal}
+              disabled={loading}
+            >
+              <i className="fas fa-file-import mr-1"></i> Import Orders
+            </button>
+          </div>
 
+          {/* Search & Items Per Page */}
           <SearchBar
             searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
+            onSearchChange={handleSearchChange}
             itemsPerPage={itemsPerPage}
             onItemsPerPageChange={handleItemsPerPageChange}
+            disabled={loading}
           />
 
-          <OrderTable orders={paginatedItems} onOpenModal={openModal} />
+          {/* Orders Table */}
+          <OrderTable
+            orders={orders}
+            onOpenModal={openPickupModal}
+            loading={loading}
+          />
 
+          {/* Pagination */}
           <PaginationControls
-            data={filteredBySearch}
             currentPage={currentPage}
+            totalItems={totalItems}
             itemsPerPage={itemsPerPage}
-            onPageChange={setCurrentPage}
-            onPaginatedDataChange={setPaginatedItems}
+            onPageChange={handlePageChange}
+            disabled={loading}
           />
 
+          {/* Pickup Modal */}
           <PickupModal
-            show={showPickupModal}
+            show={isPickupModalOpen}
             selectedProduct={selectedProduct}
-            form={form}
+            form={pickupForm}
             getQuantity={() => selectedProduct?.quantity || 0}
-            onClose={closeModal}
-            onChange={handleChange}
+            onClose={closePickupModal}
+            onChange={handlePickupChange}
             handleConfirmPickup={handleConfirmPickup}
           />
 
+          {/* Import Modal */}
           <ImportModal
             show={showImportModal}
-            onClose={() => setShowImportModal(false)}
-            form={form}
-            handleChange={handleChange}
-            fileInputRef={fileInputRef}
+            onClose={closeImportModal}
+            form={pickupForm}
+            handleChange={handlePickupChange}
             handleImport={handleImport}
             platformOptions={platformOptions}
           />

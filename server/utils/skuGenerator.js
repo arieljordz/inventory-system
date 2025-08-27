@@ -10,7 +10,7 @@ export const generateSKU = ({ name, category = '', variant = '', size = '' }) =>
   const parts = [
     slug(category),
     slug(name.toString().slice(0, 5)), // get first 5 characters
-    slug(variant),
+    slug(variant.toString().slice(0, 5)),
     slug(size),
     Date.now().toString().slice(-5) // to help with uniqueness
   ].filter(Boolean); // remove empty strings

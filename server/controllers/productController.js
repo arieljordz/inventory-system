@@ -4,6 +4,12 @@ import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import cloudinary from "../config/cloudinary.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
+import {
+  normalizeString,
+  escapeRegex,
+  normalizeText,
+} from "../utils/commonUtils.js";
+import ExcelJS from "exceljs";
 
 export const addProduct = async (req, res) => {
   try {
@@ -17,16 +23,20 @@ export const addProduct = async (req, res) => {
       supplier = "",
       location = "Main Warehouse",
       status = StatusEnum.AVAILABLE,
-      variant = "",
+      variant = "Default",
       size = "",
     } = req.body;
 
     const sku = generateSKU({ name, category, variant, size });
 
-    // Check for duplicate SKU
-    const existingProduct = await Product.findOne({ sku });
+    // Check for duplicate Product
+    const existingProduct = await Product.findOne({
+      normalizedName: normalizeString(normalizeText(name)),
+      normalizedVariant: normalizeString(normalizeText(variant) || ""),
+    });
+
     if (existingProduct) {
-      return res.status(400).json({ message: "SKU already exists" });
+      return res.status(400).json({ message: "Product already exists" });
     }
 
     let imageUrl = "";
@@ -94,8 +104,40 @@ export const addProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 });
-    res.status(200).json(products);
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
+    const search = normalizeText((req.query.search || "").trim());
+
+    const normalizedSearch = normalizeString(search);
+    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
+
+    // Build search query
+    const query = search
+      ? {
+          $or: [
+            { normalizedName: safeRegex },
+            { normalizedVariant: safeRegex },
+            { sku: rawSafeRegex }, // raw but escaped
+            { description: rawSafeRegex }, // raw but escaped
+          ],
+        }
+      : {};
+
+    const skip = (page - 1) * limit;
+
+    const [products, totalProducts] = await Promise.all([
+      Product.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
+      Product.countDocuments(query),
+    ]);
+
+    res.status(200).json({
+      products,
+      totalProducts,
+      totalPages: Math.max(Math.ceil(totalProducts / limit), 1),
+      currentPage: page,
+      pageSize: limit,
+    });
   } catch (error) {
     console.error("Get Products Error:", error);
     res.status(500).json({ message: "Server error" });
@@ -104,11 +146,51 @@ export const getProducts = async (req, res) => {
 
 export const getProductsByStatus = async (req, res) => {
   try {
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
+    const search = (req.query.search || "").trim();
+    const normalizedSearch = normalizeString(search);
+    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
     const { status } = req.params;
 
-    const products = await Product.find({ status }).sort({ createdAt: -1 });
+    // console.log("search:", search);
+    // console.log("normalizedSearch:", normalizedSearch);
 
-    res.status(200).json(products);
+    // Validate status
+    if (!Object.values(StatusEnum).includes(status)) {
+      return res.status(400).json({ message: "Invalid status" });
+    }
+
+    // Build query with status filter
+    const query = {
+      status,
+      ...(search
+        ? {
+            $or: [
+              { normalizedName: safeRegex },
+              { normalizedVariant: safeRegex },
+              { sku: rawSafeRegex },
+              { description: rawSafeRegex },
+            ],
+          }
+        : {}),
+    };
+
+    const skip = (page - 1) * limit;
+
+    const [products, totalProducts] = await Promise.all([
+      Product.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
+      Product.countDocuments(query),
+    ]);
+
+    res.status(200).json({
+      products,
+      totalProducts,
+      totalPages: Math.max(Math.ceil(totalProducts / limit), 1),
+      currentPage: page,
+      pageSize: limit,
+    });
   } catch (error) {
     console.error("Get Products by Status Error:", error);
     res.status(500).json({ message: "Server error" });
@@ -146,6 +228,11 @@ export const updateProduct = async (req, res) => {
       }
       updateFields.sku = sku;
     }
+
+    // This is to update SKU once
+    // const { name, category, variant, size, sku, quantity, ...updateFields } = req.body;
+    // const newSku = generateSKU({ name, category, variant, size });
+    // updateFields.sku = newSku;
 
     const requiredFields = ["name", "price", "description"];
     for (const field of requiredFields) {
@@ -301,22 +388,201 @@ export const getProductStats = async (req, res) => {
       { $group: { _id: null, total: { $sum: "$quantity" } } },
     ]);
 
-    // Count inventory records with "FOR_PICKUP" status
-    const forPickUp = await InventoryDetail.countDocuments({
-      status: StatusEnum.FOR_PICK_UP,
+    // Count products that need restock (e.g. quantity <= 5)
+    const needsRestock = await Product.countDocuments({
+      quantity: { $lte: 5 },
     });
 
-    // ✅ Count products with quantity <= 0 (out of stock)
+    // Count products with quantity <= 0 (out of stock)
     const outOfStock = await Product.countDocuments({ quantity: { $lte: 0 } });
 
     res.json({
       totalProducts,
       totalQuantity: totalQuantityResult[0]?.total || 0,
-      forPickUp,
-      outOfStock, // ✅ Added to response
+      needsRestock,
+      outOfStock,
     });
   } catch (error) {
     console.error("Get Product Stats Error:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
+
+export const importProducts = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ message: "No file uploaded" });
+    }
+
+    const workbook = new ExcelJS.Workbook();
+    await workbook.xlsx.load(req.file.buffer);
+
+    // Assuming exported file uses "Products" sheet
+    const worksheet = workbook.getWorksheet("Products");
+    if (!worksheet) {
+      return res.status(400).json({ message: 'Sheet "Products" not found' });
+    }
+
+    const results = { imported: [], skipped: [] };
+
+    // Iterate rows, skip header row (first row)
+    worksheet.eachRow({ includeEmpty: false }, async (row, rowNumber) => {
+      if (rowNumber === 1) return; // skip header
+
+      // Map columns according to your export
+      const [
+        name,
+        variant,
+        sku,
+        category,
+        unit,
+        supplier,
+        location,
+        quantity,
+        price,
+        status,
+        description,
+        createdAt,
+        updatedAt,
+      ] = row.values.slice(1); // slice(1) because ExcelJS rows are 1-based with first element empty
+
+      const normalizedName = normalizeString(normalizeText(name || ""));
+      const normalizedVariant = normalizeString(normalizeText(variant || "Default"));
+      const normalizedSku = normalizeString(normalizeText(sku || ""));
+      const normalizedDescription = normalizeString(normalizeText(description || ""));
+
+      // Validation
+      if (!name || !sku || isNaN(price)) {
+        results.skipped.push({ name: name || "N/A", reason: "Invalid row data" });
+        return;
+      }
+
+      // Check duplicates
+      const existingProduct = await Product.findOne({
+        normalizedName,
+        normalizedVariant,
+        normalizedSku,
+      });
+      if (existingProduct) {
+        results.skipped.push({ name, reason: "Product already exists" });
+        return;
+      }
+
+      // Create product
+      const product = new Product({
+        name,
+        variant: variant || "Default",
+        sku,
+        category: category || "",
+        unit: unit || "pcs",
+        supplier: supplier || "",
+        location: location || "Main Warehouse",
+        quantity: parseInt(quantity) || 0,
+        price: parseFloat(price),
+        status: status || "AVAILABLE",
+        description: description || "",
+        normalizedName,
+        normalizedVariant,
+        normalizedSku,
+        normalizedDescription,
+      });
+
+      const savedProduct = await product.save();
+      results.imported.push(savedProduct);
+
+      // Add initial inventory if quantity > 0
+      if (savedProduct.quantity > 0) {
+        await InventoryDetail.create({
+          product: savedProduct._id,
+          order: null,
+          movementType: MovementTypeEnum.IN,
+          quantity: savedProduct.quantity,
+          remarks: "Initial stock - imported",
+          status: savedProduct.status,
+          courier: "",
+          platform: "",
+        });
+      }
+
+      // Audit log
+      await logAudit({
+        action: "IMPORT_PRODUCT",
+        user: req.user?._id || null,
+        description: `Imported product via Excel: ${name}`,
+        collectionName: "Product",
+        documentId: savedProduct._id,
+        before: null,
+        after: savedProduct.toObject(),
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    });
+
+    res.status(200).json({
+      message: "Product import completed",
+      summary: { imported: results.imported.length, skipped: results.skipped.length },
+      details: results,
+    });
+  } catch (error) {
+    console.error("Import Products Error:", error);
+    res.status(500).json({ message: error.message || "Failed to import products" });
+  }
+};
+
+export const exportProducts = async (req, res) => {
+  try {
+    const products = await Product.find().lean();
+
+    const workbook = new ExcelJS.Workbook();
+    const worksheet = workbook.addWorksheet("Products");
+
+    // Columns
+    worksheet.columns = [
+      { header: "Name", key: "name", width: 30 },
+      { header: "Variant", key: "variant", width: 20 },
+      { header: "SKU", key: "sku", width: 20 },
+      { header: "Category", key: "category", width: 20 },
+      { header: "Unit", key: "unit", width: 10 },
+      { header: "Supplier", key: "supplier", width: 25 },
+      { header: "Location", key: "location", width: 20 },
+      { header: "Quantity", key: "quantity", width: 10 },
+      { header: "Price", key: "price", width: 15 },
+      { header: "Status", key: "status", width: 15 },
+      { header: "Description", key: "description", width: 40 },
+      { header: "Created At", key: "createdAt", width: 20 },
+      { header: "Updated At", key: "updatedAt", width: 20 },
+    ];
+
+    // Header style & wrap text
+    worksheet.getRow(1).font = { bold: true };
+    ["name", "variant", "description"].forEach((col) => {
+      worksheet.getColumn(col).alignment = { wrapText: true };
+    });
+    ["createdAt", "updatedAt"].forEach((col) => {
+      worksheet.getColumn(col).numFmt = "yyyy-mm-dd hh:mm:ss";
+    });
+
+    // Add rows
+    products.forEach((p) => {
+      worksheet.addRow({
+        ...p,
+        createdAt: p.createdAt || null,
+        updatedAt: p.updatedAt || null,
+      });
+    });
+
+    // Response headers
+    res.setHeader(
+      "Content-Type",
+      "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    );
+    res.setHeader("Content-Disposition", "attachment; filename=products.xlsx");
+
+    await workbook.xlsx.write(res);
+    res.end();
+  } catch (error) {
+    console.error("Export Products Error:", error);
+    res.status(500).json({ message: "Failed to export products" });
+  }
+};
+

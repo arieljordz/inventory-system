@@ -4,6 +4,7 @@ dotenv.config(); // Load env variables early
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import multer from "multer";
 import connectDB from "./config/db.js";
 
 // Route imports

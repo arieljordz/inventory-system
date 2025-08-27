@@ -1,0 +1,133 @@
+[
+  {
+    "_id": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "name": "Ariel Sueno",
+    "email": "arieljordz@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocKxuJ_PmdxYOOQLuZeGSplZ5nTMNiCxdsAji7BclFeaLsC7jHuK=s96-c",
+    "password": "DefaultPass123!",
+    "isVerified": true,
+    "createdAt": {
+      "$date": "2025-07-21T04:34:28.329Z"
+    },
+    "updatedAt": {
+      "$date": "2025-07-21T04:34:28.329Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68809e5402d0150075c6b3d1"
+    },
+    "name": "Arnold Durias",
+    "email": "velqingd@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLFbn9OiueFgnPenVXglRZLSuRsV1MRjoadMXuD9XVU2k-yh5Q=s96-c",
+    "password": "DefaultPass123!",
+    "isVerified": true,
+    "createdAt": {
+      "$date": "2025-07-23T08:33:24.362Z"
+    },
+    "updatedAt": {
+      "$date": "2025-07-23T08:33:24.362Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "name": "joy cerbolles",
+    "email": "joycerbolles29@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocJCtHwxLEHFBv0MOKfth3-bgT2dzh9L2Xgd5DwRFeHBqFozCw=s96-c",
+    "password": "DefaultPass123!",
+    "isVerified": true,
+    "createdAt": {
+      "$date": "2025-07-26T03:48:23.034Z"
+    },
+    "updatedAt": {
+      "$date": "2025-07-26T03:48:23.034Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68924731171ea4729f89b99d"
+    },
+    "name": "Ariel Sueno",
+    "email": "suenoariel@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocJ8EKEKj2xEkN31WLnNYERD7xrKtfgvafy3lQqkLsxksK3nGfYg=s96-c",
+    "isVerified": true,
+    "createdAt": {
+      "$date": "2025-08-05T18:02:25.912Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-05T18:02:25.912Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68a3f8ac11a772447f18b126"
+    },
+    "name": "Velqing Kris Durias",
+    "email": "duriasvelqingkris@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocJYlsdWrPEH2rXn1QST1fQx001YVkXrnki7fa8__1cOMpj1DQ=s96-c",
+    "isVerified": true,
+    "createdAt": {
+      "$date": "2025-08-19T04:08:12.410Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-19T04:08:12.410Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68a3f8c111a772447f18b12c"
+    },
+    "name": "LHANZ TV",
+    "email": "veqqeve.0819@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocKa4MSNbfGgMhofmgunfdnfccX1dpr_ZZEgEOay-ifum-YfLAU=s96-c",
+    "isVerified": true,
+    "createdAt": {
+      "$date": "2025-08-19T04:08:33.191Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-19T04:08:33.191Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68a6ffe4661d80259c279f45"
+    },
+    "name": "ariel sueno",
+    "email": "apsueno@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLoAFArNTOWSbO7dEWOwrU70G31C1rNck8_3sQB3jFzb1zWrtZl=s96-c",
+    "isVerified": false,
+    "createdAt": {
+      "$date": "2025-08-21T11:15:48.649Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-21T11:15:48.649Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68a76f99f8ed01f9f4528e95"
+    },
+    "name": "Benciel Cabutin",
+    "email": "cabutinb@gmail.com",
+    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIa8RJ5mK7gRa0gcr1tYSn8UOdxxoVbgeZsQAsq_F31Ll_ABL6-=s96-c",
+    "isVerified": false,
+    "createdAt": {
+      "$date": "2025-08-21T19:12:25.131Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-21T19:12:25.131Z"
+    },
+    "__v": 0
+  }
+]

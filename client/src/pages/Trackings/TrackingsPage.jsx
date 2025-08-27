@@ -1,57 +1,74 @@
-import React, {
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-  useRef,
-} from "react";
-import Swal from "sweetalert2";
+import React, { useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import { useSpinner } from "../../context/SpinnerContext";
+
 import { getAllOrders } from "../../services/orderService";
+
 import TrackingsTable from "./TrackingsTable";
 import Navpath from "../../components/common/Navpath";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
 
+import { useDebounce } from "../../hooks/useDebounce";
+
 const TrackingsPage = () => {
-  const { showSpinner, hideSpinner } = useSpinner();
+  /** 🔹 Core state */
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  /** 🔹 Search & pagination state */
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [paginatedItems, setPaginatedItems] = useState([]);
+  const [totalItems, setTotalItems] = useState(0);
 
-  const fetchOrders = async () => {
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
+  /** 🔹 Fetch Orders (server handles pagination + search) */
+  const fetchOrders = useCallback(async () => {
+    setLoading(true);
     try {
-      showSpinner();
-      const res = await getAllOrders();
-      setOrders(res.data);
+      const res = await getAllOrders({
+        page: currentPage,
+        limit: itemsPerPage,
+        search: debouncedSearchTerm,
+      });
+
+      const { orders: fetchedOrders, totalOrders, totalPages } = res.data;
+
+      setOrders(fetchedOrders || []);
+      setTotalItems(totalOrders || 0);
+
+      // Fix current page if overflow
+      if (currentPage > totalPages && totalPages > 0) {
+        setCurrentPage(totalPages);
+      }
     } catch (error) {
-      console.error("Failed to fetch orders", error);
+      console.error("Failed to fetch orders:", error);
+      toast.error("Failed to fetch orders");
+      setOrders([]);
+      setTotalItems(0);
     } finally {
-      hideSpinner();
+      setLoading(false);
     }
-  };
+  }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [fetchOrders]);
 
-  const filteredBySearch = useMemo(() => {
-    return orders.filter((item) =>
-      ["name", "platform", "platfromOrderId", "courier"].some((field) =>
-        String(item[field] || "")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      )
-    );
-  }, [orders, searchTerm]);
+  /** 🔹 Reset page on search change */
+  useEffect(() => {
+    if (currentPage !== 1) setCurrentPage(1);
+  }, [debouncedSearchTerm]);
 
+  /** 🔹 Event Handlers */
+  const handleSearchChange = useCallback((val) => setSearchTerm(val), []);
   const handleItemsPerPageChange = useCallback((val) => {
     setItemsPerPage(val);
     setCurrentPage(1);
   }, []);
+  const handlePageChange = useCallback((page) => setCurrentPage(page), []);
 
   return (
     <>
@@ -63,21 +80,25 @@ const TrackingsPage = () => {
 
       <section className="content">
         <div className="container-fluid">
+          {/* Search & Items Per Page */}
           <SearchBar
             searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
+            onSearchChange={handleSearchChange}
             itemsPerPage={itemsPerPage}
             onItemsPerPageChange={handleItemsPerPageChange}
+            disabled={loading}
           />
 
-          <TrackingsTable orders={paginatedItems} />
+          {/* Tracking Table */}
+          <TrackingsTable orders={orders} loading={loading} />
 
+          {/* Pagination */}
           <PaginationControls
-            data={filteredBySearch}
             currentPage={currentPage}
+            totalItems={totalItems}
             itemsPerPage={itemsPerPage}
-            onPageChange={setCurrentPage}
-            onPaginatedDataChange={setPaginatedItems}
+            onPageChange={handlePageChange}
+            disabled={loading}
           />
         </div>
       </section>

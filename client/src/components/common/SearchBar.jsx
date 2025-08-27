@@ -1,47 +1,104 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 
 const SearchBar = ({
-  searchTerm,
+  searchTerm = "",
   onSearchChange,
-  itemsPerPage,
+  itemsPerPage = 10,
   onItemsPerPageChange,
-  itemsPerPageOptions = [5, 10, 20, 50, "All"],
-  icon = "🔍",
+  itemsPerPageOptions = [5, 10, 20, 50],
+  placeholder = "Search products...",
+  disabled = false,
 }) => {
-  return (
-    <div className="row mb-3 align-items-center">
-      <div className="col-md-4 mb-2 mb-md-0">
-        <div className="input-group">
-          <div className="input-group-prepend">
-            <span className="input-group-text">{icon}</span>
-          </div>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => onSearchChange(e.target.value)}
-          />
-        </div>
-      </div>
+  const inputRef = useRef(null);
 
-      <div className="col-md-8 text-md-right">
-        <div className="form-group mb-0 ml-auto" style={{ maxWidth: "150px" }}>
-          <select
-            className="form-control"
-            value={itemsPerPage}
-            onChange={(e) =>
-              onItemsPerPageChange(
-                e.target.value === "All" ? "All" : parseInt(e.target.value, 10)
-              )
-            }
-          >
-            {itemsPerPageOptions.map((opt) => (
-              <option key={opt} value={opt}>
-                Show {opt}
-              </option>
-            ))}
-          </select>
+  // Always focus when component mounts
+  useEffect(() => {
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [disabled]);
+
+  const handleSearchInputChange = (e) => {
+    onSearchChange?.(e.target.value);
+  };
+
+  const handleItemsPerPageSelectChange = (e) => {
+    const value = parseInt(e.target.value, 10);
+    onItemsPerPageChange?.(value);
+
+    // Refocus the search input after selecting items per page
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  const handleClearSearch = () => {
+    onSearchChange?.("");
+    // Refocus after clearing
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
+
+  return (
+    <div className="card mb-3">
+      <div className="card-body">
+        <div className="row align-items-center">
+          {/* Search Input */}
+          <div className="col-md-9 mb-2 mb-md-0">
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <span className="input-group-text">
+                  <i className="fas fa-search"></i>
+                </span>
+              </div>
+              <input
+                ref={inputRef}
+                type="text"
+                className="form-control"
+                placeholder={placeholder}
+                value={searchTerm}
+                onChange={handleSearchInputChange}
+                disabled={disabled}
+              />
+              {searchTerm && (
+                <div className="input-group-append">
+                  <button
+                    className="btn btn-outline-secondary"
+                    type="button"
+                    onClick={handleClearSearch}
+                    disabled={disabled}
+                    title="Clear search"
+                  >
+                    <i className="fas fa-times"></i>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Items Per Page Selector */}
+          <div className="col-md-3">
+            <div className="d-flex justify-content-md-end align-items-center">
+              <label htmlFor="itemsPerPage" className="mb-0 mr-2 text-muted">
+                Show:
+              </label>
+              <select
+                id="itemsPerPage"
+                className="form-control"
+                style={{ width: "auto" }}
+                value={itemsPerPage}
+                onChange={handleItemsPerPageSelectChange}
+                disabled={disabled}
+              >
+                {itemsPerPageOptions.map((option) => (
+                  <option key={option} value={option}>
+                    {option} items
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </div>

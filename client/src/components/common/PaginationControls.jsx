@@ -1,119 +1,207 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 
 const PaginationControls = ({
-  data = [],
-  itemsPerPage = 5,
-  currentPage,
+  currentPage = 1,
+  totalItems = 0,
+  itemsPerPage = 10,
   onPageChange,
-  onPaginatedDataChange,
+  disabled = false,
+  maxVisiblePages = 5,
 }) => {
-  const totalItems = data.length;
-  const effectiveItemsPerPage =
-    itemsPerPage === "All" ? totalItems || 1 : itemsPerPage;
-  const totalPages = Math.ceil(totalItems / effectiveItemsPerPage) || 1;
+  const paginationData = useMemo(() => {
+    const totalPages = Math.max(Math.ceil(totalItems / itemsPerPage), 1);
+    const startItem =
+      totalItems === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+    const endItem = Math.min(currentPage * itemsPerPage, totalItems);
 
-  const indexOfFirstItem = (currentPage - 1) * effectiveItemsPerPage;
-  const indexOfLastItem = Math.min(
-    indexOfFirstItem + effectiveItemsPerPage,
-    totalItems
-  );
-  const start = totalItems === 1 ? 1 : indexOfFirstItem + 1;
-  const end = totalItems === 1 ? 1 : indexOfLastItem;
+    return {
+      totalPages,
+      startItem,
+      endItem,
+      hasItems: totalItems > 0,
+      hasPagination: totalPages > 1,
+    };
+  }, [currentPage, totalItems, itemsPerPage]);
 
-  const currentPageData = useMemo(() => {
-    return data.slice(indexOfFirstItem, indexOfLastItem);
-  }, [data, indexOfFirstItem, indexOfLastItem]);
-
-  useEffect(() => {
-    onPaginatedDataChange?.(currentPageData);
-  }, [currentPageData, onPaginatedDataChange]);
-
-  if (totalItems === 0) return null;
-
-  const getPageNumbers = () => {
-    const pageButtons = [];
-    const maxVisiblePages = 5;
+  const pageNumbers = useMemo(() => {
+    const { totalPages } = paginationData;
 
     if (totalPages <= maxVisiblePages) {
-      for (let i = 1; i <= totalPages; i++) {
-        pageButtons.push(i);
-      }
-    } else {
-      const left = Math.max(2, currentPage - 1);
-      const right = Math.min(totalPages - 1, currentPage + 1);
-
-      pageButtons.push(1); // First page
-
-      if (left > 2) {
-        pageButtons.push("...");
-      }
-
-      for (let i = left; i <= right; i++) {
-        pageButtons.push(i);
-      }
-
-      if (right < totalPages - 1) {
-        pageButtons.push("...");
-      }
-
-      pageButtons.push(totalPages); // Last page
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
     }
 
-    return pageButtons;
+    const pages = [];
+    const leftOffset = Math.floor(maxVisiblePages / 2);
+    const rightOffset = maxVisiblePages - leftOffset - 1;
+
+    let start = Math.max(1, currentPage - leftOffset);
+    let end = Math.min(totalPages, currentPage + rightOffset);
+
+    if (end - start + 1 < maxVisiblePages) {
+      if (start === 1) {
+        end = Math.min(totalPages, start + maxVisiblePages - 1);
+      } else if (end === totalPages) {
+        start = Math.max(1, end - maxVisiblePages + 1);
+      }
+    }
+
+    if (start > 1) {
+      pages.push(1);
+      if (start > 2) pages.push("...");
+    }
+
+    for (let i = start; i <= end; i++) pages.push(i);
+
+    if (end < totalPages) {
+      if (end < totalPages - 1) pages.push("...");
+      pages.push(totalPages);
+    }
+
+    return pages;
+  }, [currentPage, paginationData.totalPages, maxVisiblePages]);
+
+  const handlePageChange = (page) => {
+    if (
+      disabled ||
+      page === currentPage ||
+      page < 1 ||
+      page > paginationData.totalPages
+    ) {
+      return;
+    }
+    onPageChange?.(page);
   };
 
+  if (!paginationData.hasItems) return null;
+
   return (
-    <div className="d-flex justify-content-between align-items-center mt-3 flex-wrap gap-2">
-      <div className="text-muted">
-        Showing {totalItems === 1 ? "1 row" : `${start}–${end} rows`} out of{" "}
-        {totalItems === 1 ? "1 entry" : `${totalItems} entries`}
-      </div>
+    <div className="card mt-3">
+      <div className="card-body py-3">
+        <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+          {/* Items Info */}
+          <div className="text-muted small">
+            Showing{" "}
+            <strong>
+              {paginationData.startItem}–{paginationData.endItem}
+            </strong>{" "}
+            of <strong>{totalItems.toLocaleString()}</strong> entries
+          </div>
 
-      {totalPages > 1 && (
-        <ul className="pagination mb-0 flex-wrap">
-          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
-            <button
-              className="page-link"
-              onClick={() => onPageChange(currentPage - 1)}
+          {/* Pagination */}
+          {paginationData.hasPagination && (
+            <div
+              className="d-flex overflow-auto"
+              style={{ maxWidth: "100%" }}
             >
-              Previous
-            </button>
-          </li>
+              <nav aria-label="Page navigation" className="mx-auto">
+                <ul className="pagination pagination-sm mb-0 flex-nowrap">
+                  {/* First */}
+                  <li
+                    className={`page-item ${
+                      currentPage === 1 || disabled ? "disabled" : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageChange(1)}
+                      disabled={currentPage === 1 || disabled}
+                    >
+                      <i className="fas fa-angle-double-left"></i>
+                    </button>
+                  </li>
 
-          {getPageNumbers().map((page, index) =>
-            page === "..." ? (
-              <li key={`ellipsis-${index}`} className="page-item disabled">
-                <span className="page-link">...</span>
-              </li>
-            ) : (
-              <li
-                key={page}
-                className={`page-item ${currentPage === page ? "active" : ""}`}
-              >
-                <button
-                  className="page-link"
-                  onClick={() => onPageChange(page)}
-                >
-                  {page}
-                </button>
-              </li>
-            )
+                  {/* Prev */}
+                  <li
+                    className={`page-item ${
+                      currentPage === 1 || disabled ? "disabled" : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageChange(currentPage - 1)}
+                      disabled={currentPage === 1 || disabled}
+                    >
+                      <i className="fas fa-angle-left"></i>
+                    </button>
+                  </li>
+
+                  {/* Pages */}
+                  {pageNumbers.map((page, index) =>
+                    page === "..." ? (
+                      <li key={`ellipsis-${index}`} className="page-item disabled">
+                        <span className="page-link">...</span>
+                      </li>
+                    ) : (
+                      <li
+                        key={page}
+                        className={`page-item ${
+                          currentPage === page ? "active" : ""
+                        } ${disabled ? "disabled" : ""}`}
+                      >
+                        <button
+                          className="page-link"
+                          onClick={() => handlePageChange(page)}
+                          disabled={disabled}
+                        >
+                          {page}
+                        </button>
+                      </li>
+                    )
+                  )}
+
+                  {/* Next */}
+                  <li
+                    className={`page-item ${
+                      currentPage === paginationData.totalPages || disabled
+                        ? "disabled"
+                        : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => handlePageChange(currentPage + 1)}
+                      disabled={
+                        currentPage === paginationData.totalPages || disabled
+                      }
+                    >
+                      <i className="fas fa-angle-right"></i>
+                    </button>
+                  </li>
+
+                  {/* Last */}
+                  <li
+                    className={`page-item ${
+                      currentPage === paginationData.totalPages || disabled
+                        ? "disabled"
+                        : ""
+                    }`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() =>
+                        handlePageChange(paginationData.totalPages)
+                      }
+                      disabled={
+                        currentPage === paginationData.totalPages || disabled
+                      }
+                    >
+                      <i className="fas fa-angle-double-right"></i>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           )}
 
-          <li
-            className={`page-item ${
-              currentPage === totalPages ? "disabled" : ""
-            }`}
-          >
-            <button
-              className="page-link"
-              onClick={() => onPageChange(currentPage + 1)}
-            >
-              Next
-            </button>
-          </li>
-        </ul>
-      )}
+          {/* Page Info */}
+          {paginationData.hasPagination && (
+            <div className="text-muted small">
+              Page <strong>{currentPage}</strong> of{" "}
+              <strong>{paginationData.totalPages}</strong>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };

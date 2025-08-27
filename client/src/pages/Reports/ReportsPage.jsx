@@ -1,26 +1,17 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { useSpinner } from "../../context/SpinnerContext";
-import { getReports } from "../../services/reportService";
-import Navpath from "../../components/common/Navpath";
-import { ReportTypeEnum } from "../../enums/enums";
-import { jsPDF } from "jspdf";
-import autoTable from "jspdf-autotable";
-import * as XLSX from "xlsx";
+import React, { useState, useMemo } from "react";
 import { toast } from "react-toastify";
-import {
-  getCurrentDate,
-  parseCurrencyToFloat,
-  formatAmount,
-} from "../../utils/commonUtils";
+import Navpath from "../../components/common/Navpath";
+import ReportFilter from "./ReportFilter";
+import ReportTable from "./ReportTable";
+import { useSpinner } from "../../context/SpinnerContext";
+import { ReportTypeEnum } from "../../enums/enums";
+import { getCurrentDate, parseCurrencyToFloat } from "../../utils/commonUtils";
 import {
   formatReportData,
   formatExportData,
-  getCenteredColumns,
   getReportFileName,
-  getReportTitleText,
 } from "../../utils/reportUtils";
-import ReportFilter from "./ReportFilter";
-import ReportTable from "./ReportTable";
+import { getReports, exportReport } from "../../services/reportService";
 
 const ReportsPage = () => {
   const { showSpinner, hideSpinner } = useSpinner();
@@ -36,147 +27,86 @@ const ReportsPage = () => {
   });
   const [isReportGenerated, setIsReportGenerated] = useState(false);
 
+  /** Fetch report from backend */
   const handleGenerateReport = async () => {
     const { startDate, endDate } = dateRange;
-
-    if (!startDate || !endDate) {
-      toast.error("Please select both start and end dates.");
-      return;
-    }
+    if (!startDate || !endDate) return toast.error("Select start and end dates.");
 
     try {
       showSpinner();
       const res = await getReports({ reportType, startDate, endDate });
+      const data = res.data?.data || [];
 
-      // console.log("res.data:", res.data);
-      if (!res.data?.data || res.data?.data.length === 0) {
-        toast.info("No records found for the selected range.");
+      if (!data.length) {
+        // toast.info("No records found.");
         setReportData([]);
         setIsReportGenerated(false);
       } else {
-        setReportData(res.data?.data);
+        setReportData(data);
         setActiveReportType(reportType);
         setIsReportGenerated(true);
-        toast.success("Report generated successfully.");
+        // toast.success("Report generated successfully.");
       }
     } catch (err) {
-      console.error("Failed to fetch report:", err);
+      console.error(err);
       toast.error("Error generating report.");
     } finally {
       hideSpinner();
     }
   };
 
-  const formattedReport = useMemo(() => {
-    return formatReportData(reportData, activeReportType);
-  }, [reportData, activeReportType]);
-
-  const formattedExportReport = useMemo(() => {
-    return formatExportData(reportData, activeReportType);
-  }, [reportData, activeReportType]);
-
-  const handleExport = (format) => {
-    if (!formattedExportReport.length) {
-      toast.warning("No data available to export.");
-      return;
-    }
+  /** Export report (Excel or PDF) */
+  const handleExport = async (format) => {
+    if (!reportData.length) return toast.warning("No data to export.");
 
     try {
-      const isSalesReport = activeReportType.includes(ReportTypeEnum.SALES);
-      const headers = Object.keys(formattedExportReport[0]);
-      const centerCols = getCenteredColumns(activeReportType);
-      const { startDate, endDate } = dateRange;
+      showSpinner();
+      const payload = {
+        reportType: activeReportType,
+        startDate: dateRange.startDate,
+        endDate: dateRange.endDate,
+        format,
+      };
 
-      // Prepare body
-      const body = formattedExportReport.map((row) => Object.values(row));
+      const res = await exportReport(payload);
 
-      // Compute grand total for sales
-      let grandTotal = 0;
-      if (isSalesReport) {
-        grandTotal = formattedExportReport.reduce(
-          (acc, row) => acc + parseCurrencyToFloat(row["Total Amount"]),
-          0
-        );
-
-        // Append grand total row
-        const totalRow = headers.map((header) =>
-          header === "Total Amount" ? `${grandTotal}` : ""
-        );
-        body.push(totalRow);
-      }
-
+      // Create Blob and download file
       const filename = getReportFileName(
         activeReportType,
-        startDate,
-        endDate,
-        format === "pdf" ? "pdf" : "xlsx"
+        dateRange.startDate,
+        dateRange.endDate,
+        format
       );
+      const blobType =
+        format === "pdf"
+          ? "application/pdf"
+          : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
 
-      if (format === "pdf") {
-        exportToPDF({
-          headers,
-          body,
-          centerCols,
-          startDate,
-          endDate,
-          activeReportType,
-          filename,
-        });
-      }
-
-      if (format === "excel") {
-        exportToExcel({
-          headers,
-          body,
-          filename,
-        });
-      }
+      const blob = new Blob([res.data], { type: blobType });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      toast.success(`${format.toUpperCase()} report downloaded.`);
     } catch (err) {
-      console.error("Export failed:", err);
-      toast.error("Failed to export report.");
+      console.error(err);
+      toast.error("Export failed.");
+    } finally {
+      hideSpinner();
     }
   };
 
-  const exportToPDF = ({
-    headers,
-    body,
-    centerCols,
-    startDate,
-    endDate,
-    activeReportType,
-    filename,
-  }) => {
-    const doc = new jsPDF();
+  /** Formatted data for table display */
+  const formattedReport = useMemo(
+    () => formatReportData(reportData, activeReportType),
+    [reportData, activeReportType]
+  );
 
-    doc.text(getReportTitleText(activeReportType, startDate, endDate), 14, 15);
-
-    const columnStyles = {};
-    headers.forEach((col, idx) => {
-      if (centerCols.includes(col)) {
-        columnStyles[idx] = { halign: "center" };
-      }
-    });
-
-    autoTable(doc, {
-      startY: 20,
-      head: [headers],
-      body,
-      columnStyles,
-    });
-
-    doc.save(filename);
-    toast.success("PDF report downloaded.");
-  };
-
-  const exportToExcel = ({ headers, body, filename }) => {
-    const exportData = [headers, ...body];
-    const worksheet = XLSX.utils.aoa_to_sheet(exportData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
-
-    XLSX.writeFile(workbook, filename);
-    toast.success("Excel report downloaded.");
-  };
+  /** Formatted data for export (optional if needed) */
+  const formattedExportReport = useMemo(
+    () => formatExportData(reportData, activeReportType),
+    [reportData, activeReportType]
+  );
 
   return (
     <>
@@ -192,12 +122,11 @@ const ReportsPage = () => {
               <h3 className="card-title">Generate Report</h3>
             </div>
             <div className="card-body">
-              {/* Filter Inputs */}
               <ReportFilter
                 reportType={reportType}
                 setReportType={(value) => {
                   setReportType(value);
-                  setIsReportGenerated(false); // hide the table on change
+                  setIsReportGenerated(false);
                 }}
                 dateRange={dateRange}
                 setDateRange={setDateRange}
@@ -206,23 +135,21 @@ const ReportsPage = () => {
 
               {isReportGenerated && (
                 <>
-                  {/* Export Buttons */}
-                  <div className="mb-3 d-flex justify-content-end">
+                  <div className="mb-3 d-flex justify-content-end gap-2">
                     <button
-                      className="btn btn-outline-primary mr-2"
-                      onClick={() => handleExport("excel")}
+                      className="btn btn-outline-primary"
+                      onClick={() => handleExport("xlsx")}
                     >
-                      <i className="fas fa-file-excel mr-1"></i> Export to Excel
+                      <i className="fas fa-file-excel mr-1"></i> Export Excel
                     </button>
                     <button
                       className="btn btn-outline-danger"
                       onClick={() => handleExport("pdf")}
                     >
-                      <i className="fas fa-file-pdf mr-1"></i> Export to PDF
+                      <i className="fas fa-file-pdf mr-1"></i> Export PDF
                     </button>
                   </div>
 
-                  {/* Report Table */}
                   <ReportTable
                     formattedReport={formattedReport}
                     activeReportType={activeReportType}

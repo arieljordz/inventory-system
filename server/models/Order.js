@@ -28,6 +28,10 @@ const orderSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    orderDate: {
+      type: Date,
+      default: Date.now, 
+    },
     status: {
       type: String,
       enum: Object.values(StatusEnum),

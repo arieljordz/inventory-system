@@ -22,9 +22,9 @@ const Header = () => {
         <li className="nav-item">
           <ThemeToggle />
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <LogoutButton />
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

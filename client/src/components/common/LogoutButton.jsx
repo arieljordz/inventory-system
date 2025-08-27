@@ -4,7 +4,7 @@ import { useAuth } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 
 const LogoutButton = () => {
-  const { logout, user } = useAuth(); 
+  const { logout, user } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
@@ -26,19 +26,19 @@ const LogoutButton = () => {
   };
 
   return (
-    <div className="d-flex align-items-center">
+    <div className="d-flex flex-column align-items-start">
+      {user?.name && <span className="small text-white">{user.name}</span>}
       {user?.email && (
-        <span className="small mb-1 dark-mode-text-white">{user.email}</span>
+        <span className="small mb-2 text-white">{user.email}</span>
       )}
-      <a
-        href="#"
-        className="nav-link btn btn-link"
+      <button
+        type="button"
+        className="btn btn-outline-primary btn-sm btn-block d-flex align-items-center justify-content-start gap-2"
         onClick={handleLogout}
-        role="button"
-        title="Logout"
       >
         <i className="fas fa-sign-out-alt"></i>
-      </a>
+        <span>Logout</span>
+      </button>
     </div>
   );
 };

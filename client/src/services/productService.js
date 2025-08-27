@@ -5,7 +5,8 @@ const multipartHeaders = {
 };
 
 // Get all products
-export const getProducts = () => api.get("/api/products");
+export const getProducts = ({ page = 1, limit = 10, search = "" } = {}) =>
+  api.get("/api/products", { params: { page, limit, search } });
 
 // Create a new product
 export const createProduct = (formData) =>
@@ -16,12 +17,18 @@ export const updateProduct = (id, formData) =>
   api.put(`/api/products/${id}`, formData, multipartHeaders);
 
 // Delete a product
-export const deleteProduct = (id) =>
-  api.delete(`/api/products/${id}`);
+export const deleteProduct = (id) => api.delete(`/api/products/${id}`);
 
 // Get products by status
-export const getProductsByStatus = (status) =>
-  api.get(`/api/products/status/${encodeURIComponent(status)}`);
+export const getProductsByStatus = ({
+  status,
+  page = 1,
+  limit = 10,
+  search = "",
+} = {}) =>
+  api.get(`/api/products/status/${encodeURIComponent(status)}`, {
+    params: { page, limit, search },
+  });
 
 // PUT /api/products/:id
 export const tagProductForPickup = (id, pickupQty) =>
@@ -32,3 +39,8 @@ export const restockProduct = (productId, data) =>
 
 export const getProductStats = () => api.get("/api/products/stats");
 
+export const importProducts = (formData) =>
+  api.post("/api/products/import-products", formData, multipartHeaders);
+
+export const exportProducts = () =>
+  api.get("/api/products/export-products", { responseType: "arraybuffer" });

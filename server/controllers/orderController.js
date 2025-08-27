@@ -1,29 +1,82 @@
-import path from "path";
-import xlsx from "xlsx";
 import moment from "moment-timezone";
+import XLSX from "xlsx";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
 import {
-  getPlatformMappings,
+  normalizeString,
+  escapeRegex,
+  normalizeText,
+  parseOrderDate,
+} from "../utils/commonUtils.js";
+import {
+  orderPlatformConfigs,
+  normalizeHeader,
   validateFile,
-  getSheetRows,
-  processOrderRows,
-  extractOrderIds,
 } from "../utils/importUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find()
-      .populate("product", "name sku price image description") // Select only key fields
-      .sort({ createdAt: -1 }); // Latest orders first
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
+    const search = normalizeText((req.query.search || "").trim());
 
-    res.status(200).json(orders);
+    const normalizedSearch = normalizeString(search);
+    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
+
+    const skip = (page - 1) * limit;
+
+    // Build search query
+    const match = search
+      ? {
+          $or: [
+            { status: rawSafeRegex },
+            { platformOrderId: rawSafeRegex },
+            { "product.normalizedName": safeRegex },
+            { "product.normalizedVariant": safeRegex },
+            { "product.sku": rawSafeRegex },
+            { "product.description": rawSafeRegex },
+          ],
+        }
+      : {};
+
+    const pipeline = [
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
+      { $unwind: "$product" },
+      { $match: match },
+      { $sort: { createdAt: -1 } },
+      {
+        $facet: {
+          data: [{ $skip: skip }, { $limit: limit }],
+          total: [{ $count: "count" }],
+        },
+      },
+    ];
+
+    const result = await Order.aggregate(pipeline);
+    const orders = result[0].data;
+    const totalOrders = result[0].total[0]?.count || 0;
+
+    res.status(200).json({
+      orders,
+      totalOrders,
+      totalPages: Math.max(Math.ceil(totalOrders / limit), 1),
+      currentPage: page,
+      pageSize: limit,
+    });
   } catch (error) {
     console.error("Get Orders Error:", error);
-    res.status(500).json({ message: "Failed to fetch orders." });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -47,188 +100,212 @@ export const getAllOrdersByDate = async (req, res) => {
   }
 };
 
-// export const importOrdersByPlatform = async (req, res) => {
-//   try {
-//     // Step 1: Validate platform presence
-//     const platform = req.body.platform;
-//     if (!platform) {
-//       return res.status(400).json({ message: "Platform is required" });
-//     }
-
-//     // Step 2: Get field mappings for the platform
-//     let mapping;
-
-//     try {
-//       mapping = getPlatformMappings(platform, "order");
-//     } catch (err) {
-//       return res.status(400).json({ message: err.message });
-//     }
-
-//     const { sheetName, fields: fieldMap } = mapping;
-
-//     try {
-//       // Step 3: Validate file format and buffer
-//       validateFile(req.file);
-//     } catch (err) {
-//       return res.status(400).json({ message: err.message });
-//     }
-
-//     // Step 4: Read and parse sheet rows from the uploaded file
-//     let rows;
-//     try {
-//       rows = getSheetRows(req.file, sheetName);
-//     } catch (err) {
-//       return res.status(400).json({ message: err.message });
-//     }
-
-//     const results = {
-//       imported: [],
-//       skipped: [],
-//     };
-
-//     // Step 5: Loop through each row and process
-//     for (const row of rows) {
-//       const platformOrderId = row[fieldMap.platformOrderId]?.toString().trim();
-//       const name = row[fieldMap.name]?.trim();
-//       const courier = row[fieldMap.courier]?.trim();
-//       const variant = row[fieldMap.variant]?.trim() || "";
-//       const quantity = parseInt(row[fieldMap.quantity]) || 0;
-
-//       // Validate required fields
-//       if (!platformOrderId || !name || !courier || quantity <= 0) {
-//         results.skipped.push({
-//           platformOrderId: platformOrderId || "N/A",
-//           reason: "Invalid row data",
-//         });
-//         continue;
-//       }
-
-//       // Skip if order already exists
-//       const existingOrder = await Order.findOne({ platformOrderId });
-//       if (existingOrder) {
-//         results.skipped.push({
-//           platformOrderId,
-//           reason: "Order already exists",
-//         });
-//         continue;
-//       }
-
-//       // Fetch product by name and variant
-//       const product = await Product.findOne({ name, variant });
-//       if (!product) {
-//         results.skipped.push({ platformOrderId, reason: "Product not found" });
-//         continue;
-//       }
-
-//       // Check for sufficient stock
-//       if (quantity > product.quantity) {
-//         results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
-//         continue;
-//       }
-
-//       // Create new order
-//       const order = await Order.create({
-//         product: product._id,
-//         quantity,
-//         platform,
-//         platformOrderId,
-//         courier,
-//         remarks: "Tagged for pickup - imported orders",
-//       });
-
-//       // Update product stock
-//       const remainingQty = product.quantity - quantity;
-//       const updatedProduct = await Product.findByIdAndUpdate(
-//         product._id,
-//         {
-//           quantity: remainingQty,
-//           ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
-//         },
-//         { new: true }
-//       );
-
-//       // Create inventory detail entry
-//       const inventoryDetail = await InventoryDetail.create({
-//         product: product._id,
-//         order: order._id,
-//         movementType: "OUT",
-//         quantity,
-//         courier,
-//         platform,
-//         status: StatusEnum.FOR_PICK_UP,
-//         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
-//       });
-
-//       results.imported.push({
-//         product: updatedProduct,
-//         order,
-//         inventoryDetail,
-//       });
-
-//       // Log audit
-//       await logAudit({
-//         action: "IMPORT_ORDER",
-//         user: req.user?._id || null,
-//         description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
-//         collectionName: "Order",
-//         documentId: order._id,
-//         before: null,
-//         after: { order, inventoryDetail, product: updatedProduct },
-//         ip: req.ip,
-//         userAgent: req.headers["user-agent"],
-//       });
-//     }
-
-//     // Final response
-//     res.status(201).json({
-//       message: "Order import completed",
-//       summary: {
-//         imported: results.imported.length,
-//         skipped: results.skipped.length,
-//       },
-//       details: results,
-//     });
-//   } catch (error) {
-//     console.error("Import error:", error);
-//     res.status(500).json({ message: "Failed to import orders" });
-//   }
-// };
-
+// --- Import handler ---
 export const importOrdersByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
-    if (!platform) {
-      return res.status(400).json({ message: "Platform is required" });
-    }
+    if (!platform || !orderPlatformConfigs[platform])
+      return res.status(400).json({ message: "Invalid platform" });
 
-    // Validate platform and get mapping
-    let mapping;
+    const { fieldMap: rawFieldMap, sheetName } = orderPlatformConfigs[platform];
+    const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
+
+    // Validate file
     try {
-      mapping = getPlatformMappings(platform, "order");
+      validateFile(req.file);
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
 
-    // Step 1: Validate file
-    validateFile(req.file);
-
-    // Step 2: Read rows (with auto header detection)
-    const rows = getSheetRows(
-      req.file,
-      mapping.sheetName,
-      Object.values(mapping.fields)
-    );
-
-    // Step 3: Process rows
-    const results = await processOrderRows(rows, mapping.fields, platform, req);
-
-    // Step 4: Send response
-    res.status(201).json(results);
-  } catch (error) {
-    console.error("Import error:", error);
-    res.status(500).json({
-      message: error.message || "Failed to import orders",
+    // Load workbook
+    const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
+    const targetSheetName = sheetName || workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[targetSheetName];
+    const sheetData = XLSX.utils.sheet_to_json(worksheet, {
+      header: 1,
+      raw: false,
     });
+
+    // --- Detect header row dynamically ---
+    let headerRowIndex = -1;
+    let columnIndexMap = {};
+    let bestMatchCount = 0;
+
+    for (let r = 0; r < sheetData.length; r++) {
+      const row = sheetData[r] || [];
+      const headersInRow = {};
+      row.forEach((cellValue, colNumber) => {
+        if (cellValue) headersInRow[normalizeHeader(cellValue)] = colNumber;
+      });
+
+      const matches = expectedHeaders.filter(
+        (h) => headersInRow[h] !== undefined
+      );
+
+      if (matches.length > bestMatchCount) {
+        bestMatchCount = matches.length;
+        headerRowIndex = r;
+        columnIndexMap = headersInRow;
+      }
+    }
+
+    if (headerRowIndex === -1) headerRowIndex = 0; // fallback
+
+    // Build final field map (header name -> column index)
+    const finalFieldMap = {};
+    Object.entries(rawFieldMap).forEach(([key, headerName]) => {
+      const colIndex = columnIndexMap[normalizeHeader(headerName)];
+      if (colIndex !== undefined) finalFieldMap[key] = colIndex;
+    });
+
+    // Check missing fields
+    const missingFields = Object.keys(rawFieldMap).filter(
+      (k) => !(k in finalFieldMap)
+    );
+    if (missingFields.length > 0) {
+      return res.status(400).json({
+        message: `Missing required columns: ${missingFields.join(", ")}`,
+      });
+    }
+
+    // Extract rows
+    const rows = [];
+    for (let r = headerRowIndex + 1; r < sheetData.length; r++) {
+      const row = sheetData[r];
+      if (!row || !row.some((cell) => String(cell || "").trim())) continue;
+
+      const rowData = {};
+      Object.entries(finalFieldMap).forEach(([key, colIndex]) => {
+        rowData[key] = (row[colIndex] || "").toString().trim();
+      });
+      rows.push(rowData);
+    }
+
+    console.log(`🚀 Processing ${rows.length} rows for ${platform}`);
+
+    const processResults = await processOrderRows(rows, platform, req);
+    res.status(201).json(processResults);
+  } catch (error) {
+    console.error("🔥 Import error:", error);
+    res
+      .status(500)
+      .json({ message: error.message || "Failed to import orders" });
   }
+};
+
+// --- Modular row processor (platform-agnostic) ---
+export const processOrderRows = async (rows, platform, req) => {
+  const results = { imported: [], skipped: [] };
+
+  for (const row of rows) {
+    try {
+      const platformOrderId = row.platformOrderId;
+      const name = normalizeText(row.name);
+      const courier = normalizeText(row.courier);
+      const variant = normalizeText(row.variant || "Default");
+      const quantity = parseInt(row.quantity) || 0;
+      const orderDate = parseOrderDate(row.orderDate);
+
+      if (!platformOrderId || !name || !courier || quantity <= 0) {
+        results.skipped.push({
+          platformOrderId: platformOrderId || "N/A",
+          reason: "Invalid row data",
+        });
+        continue;
+      }
+
+      const product = await Product.findOne({
+        normalizedName: normalizeString(name),
+        normalizedVariant: normalizeString(variant),
+      });
+
+      if (!product) {
+        results.skipped.push({ platformOrderId, reason: "Product not found" });
+        continue;
+      }
+
+      const existingOrder = await Order.findOne({
+        product: product._id,
+        platform,
+        platformOrderId,
+      });
+      if (existingOrder) {
+        results.skipped.push({
+          platformOrderId,
+          reason: "Order already imported",
+        });
+        continue;
+      }
+
+      if (quantity > product.quantity) {
+        results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
+        continue;
+      }
+
+      const order = await Order.create({
+        product: product._id,
+        quantity,
+        platform,
+        platformOrderId,
+        courier,
+        orderDate,
+        remarks: "Tagged for pickup - imported orders",
+      });
+
+      const remainingQty = product.quantity - quantity;
+      const updatedProduct = await Product.findByIdAndUpdate(
+        product._id,
+        {
+          quantity: remainingQty,
+          ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+        },
+        { new: true }
+      );
+
+      const inventoryDetail = await InventoryDetail.create({
+        product: product._id,
+        order: order._id,
+        movementType: "OUT",
+        quantity,
+        courier,
+        platform,
+        status: StatusEnum.FOR_PICK_UP,
+        remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
+      });
+
+      results.imported.push({
+        platformOrderId,
+        product: updatedProduct,
+        order,
+        inventoryDetail,
+      });
+
+      await logAudit({
+        action: "IMPORT_ORDER",
+        user: req.user?._id || null,
+        description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
+        collectionName: "Order",
+        documentId: order._id,
+        before: null,
+        after: { order, inventoryDetail, product: updatedProduct },
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    } catch (err) {
+      results.skipped.push({
+        platformOrderId: row.platformOrderId || "N/A",
+        reason: `Error: ${err.message}`,
+      });
+    }
+  }
+
+  return {
+    message: "Order import completed",
+    summary: {
+      imported: results.imported.length,
+      skipped: results.skipped.length,
+    },
+    details: results,
+  };
 };
 

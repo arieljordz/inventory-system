@@ -1,26 +1,24 @@
-import React, {
-  useEffect,
-  useState,
-  useMemo,
-  useCallback,
-  useRef,
-} from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import { InfoBox } from "../../components/common/FormInputs";
 import { useSpinner } from "../../context/SpinnerContext";
-import { getAllOrdersByDate } from "../../services/orderService";
-import { getCurrentDate, formatAmount } from "../../utils/commonUtils";
+
 import {
-  importSalesByPlatform,
   getSalesStatsByDate,
+  importSalesByPlatform,
 } from "../../services/salesService";
-import { PlatformEnum, CourierEnum } from "../../enums/enums";
+import { getCurrentDate, formatAmount } from "../../utils/commonUtils";
+
 import Navpath from "../../components/common/Navpath";
+import { InfoBox } from "../../components/common/FormInputs";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
 import DateRangeFilter from "../../components/common/DateRangeFilter";
 import SalesTable from "./SalesTable";
 import ImportModal from "./ImportModal";
+
+import { PlatformEnum, CourierEnum } from "../../enums/enums";
+import { useDebounce } from "../../hooks/useDebounce";
 
 const initialFormState = {
   quantity: "",
@@ -32,45 +30,104 @@ const initialFormState = {
 };
 
 const SalesPage = () => {
+  const { showSpinner, hideSpinner } = useSpinner();
+  /** 🔹 Core state */
+  const [orders, setOrders] = useState([]);
+  const [stats, setStats] = useState({
+    totalOrders: 0,
+    totalSales: 0,
+    revenueToday: 0,
+    unpaidOrders: 0,
+  });
+  const [loading, setLoading] = useState(false);
+
+  /** 🔹 Search & pagination state */
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [totalItems, setTotalItems] = useState(0);
+
+  /** 🔹 Date filter */
   const [dateRange, setDateRange] = useState({
     startDate: getCurrentDate(),
     endDate: getCurrentDate(),
   });
-  const { showSpinner, hideSpinner } = useSpinner();
-  const [orders, setOrders] = useState([]);
-  const [stats, setStats] = useState([]);
-  const [form, setForm] = useState(initialFormState);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [paginatedItems, setPaginatedItems] = useState([]);
 
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
+  /** 🔹 Import modal state */
   const [showImportModal, setShowImportModal] = useState(false);
-  const fileInputRef = useRef(null);
+  const [form, setForm] = useState(initialFormState);
 
-  const platformOptions = useMemo(
-    () =>
-      Object.entries(PlatformEnum).map(([key, value]) => ({
-        label: value,
-        value: key,
-      })),
-    []
-  );
+  // Platform options
+  const platformOptions = Object.entries(PlatformEnum).map(([key, value]) => ({
+    label: value,
+    value: key,
+  }));
 
-  const filteredBySearch = useMemo(() => {
-    return orders.filter((item) =>
-      ["name", "platform", "platfromOrderId", "courier"].some((field) =>
-        String(item[field] || "")
-          .toLowerCase()
-          .includes(searchTerm.toLowerCase())
-      )
-    );
-  }, [orders, searchTerm]);
+  /** 🔹 Fetch sales (server handles pagination + search) */
+  const fetchSales = useCallback(async () => {
+    setLoading(true);
+    try {
+      const { startDate, endDate } = dateRange;
 
+      const res = await getSalesStatsByDate({
+        start: startDate,
+        end: endDate,
+        page: currentPage,
+        limit: itemsPerPage,
+        search: debouncedSearchTerm,
+      });
+
+      const {
+        orders: fetchedOrders,
+        totalOrders,
+        totalPages,
+        totalSales,
+        unpaidOrders,
+        revenueToday,
+      } = res.data;
+
+      setOrders(fetchedOrders || []);
+      setStats({
+        totalOrders: totalOrders ?? 0,
+        totalSales: totalSales ?? 0,
+        unpaidOrders: unpaidOrders ?? 0,
+        revenueToday: revenueToday ?? 0,
+      });
+      setTotalItems(totalOrders || 0);
+
+      // Fix current page if overflow
+      if (currentPage > totalPages && totalPages > 0) {
+        setCurrentPage(totalPages);
+      }
+    } catch (error) {
+      console.error("Failed to fetch sales data:", error);
+      toast.error("Failed to fetch sales data");
+      setOrders([]);
+      setStats({});
+      setTotalItems(0);
+    } finally {
+      setLoading(false);
+    }
+  }, [dateRange, currentPage, itemsPerPage, debouncedSearchTerm]);
+
+  useEffect(() => {
+    fetchSales();
+  }, [fetchSales]);
+
+  /** 🔹 Reset page on search change */
+  useEffect(() => {
+    if (currentPage !== 1) setCurrentPage(1);
+  }, [debouncedSearchTerm]);
+
+  /** 🔹 Event Handlers */
+  const handleSearchChange = useCallback((val) => setSearchTerm(val), []);
   const handleItemsPerPageChange = useCallback((val) => {
     setItemsPerPage(val);
     setCurrentPage(1);
   }, []);
+  const handlePageChange = useCallback((page) => setCurrentPage(page), []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -80,134 +137,159 @@ const SalesPage = () => {
     }));
   };
 
-  const fetchOrders = async () => {
-    try {
-      showSpinner();
-      const { startDate, endDate } = dateRange;
-      const [statsRes, ordersRes] = await Promise.all([
-        getSalesStatsByDate(startDate, endDate),
-        getAllOrdersByDate(startDate, endDate),
-      ]);
-      setOrders(ordersRes.data);
-      setStats(statsRes.data);
-    } catch (error) {
-      console.error("Failed to fetch orders", error);
-    } finally {
-      hideSpinner();
-    }
-  };
+  /** 🔹 Import Modal Handlers */
+  const openImportModal = useCallback(() => setShowImportModal(true), []);
+  const closeImportModal = useCallback(() => setShowImportModal(false), []);
 
-  const handleFilter = async () => {
-    fetchOrders();
-  };
-
-  const handleImport = async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const platform = form.platform?.trim();
-    if (!platform) {
-      toast.error("Please select a platform before uploading.");
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("platform", platform);
-    formData.append("file", file);
-
-    try {
-      showSpinner();
-
-      const response = await importSalesByPlatform(formData);
-      const { message, updatedOrderIds } = response.data;
-
-      toast.success(message || "Import successful.");
-      if (updatedOrderIds?.length) {
-        console.log("Updated Orders:", updatedOrderIds);
+  const handleImport = useCallback(
+    async (file, platform) => {
+      if (!file || !platform) {
+        toast.error("Please select a platform and file.");
+        return;
       }
 
-      await fetchOrders(); // Refresh data after import
-    } catch (err) {
-      console.error("Import failed:", err);
-      toast.error(err.response?.data?.message || "Failed to import sales.");
-    } finally {
-      hideSpinner();
-      setShowImportModal(false);
-      if (fileInputRef.current) {
-        fileInputRef.current.value = null; // Reset file input
+      const formData = new FormData();
+      formData.append("platform", platform);
+      formData.append("file", file);
+
+      try {
+        showSpinner();
+        const res = await importSalesByPlatform(formData);
+        const { message, details } = res.data;
+
+        console.log("res.data:", res.data);
+
+        const rows = [];
+
+        // --- Helper to build span message with color ---
+        const buildMessage = (id, idx, type = "paid") => {
+          let reason = "";
+          if (type === "paid") {
+            reason = `<span style="color:green">Paid Successfully</span>`;
+          } else {
+            reason = `<span style="color:red">Not Found / Unpaid</span>`;
+          }
+          return `#${idx + 1} (Order ID: ${id}): ${reason}`;
+        };
+
+        // --- Add paid (success) rows ---
+        if (details?.alreadyPaid?.length) {
+          details.alreadyPaid.forEach((id, idx) => {
+            rows.push(buildMessage(id, idx, "paid"));
+          });
+        }
+
+        // --- Add unpaid (not found / not paid) rows ---
+        if (details?.notFound?.length) {
+          details.notFound.forEach((id, idx) => {
+            rows.push(
+              buildMessage(id, details.alreadyPaid?.length + idx, "unpaid")
+            );
+          });
+        }
+
+        if (rows.length > 0) {
+          Swal.fire({
+            icon: "info",
+            title: "Import Results",
+            html: `<div style="max-height:300px; overflow:auto; text-align:left">${rows.join(
+              "<br>"
+            )}</div>`,
+            width: "40em",
+          });
+        } else {
+          toast.success(message || "Sales imported successfully!");
+        }
+
+        await fetchSales();
+      } catch (err) {
+        console.error("Sales import failed:", err);
+        toast.error(err.response?.data?.message || "Failed to import sales.");
+      } finally {
+        hideSpinner();
+        closeImportModal();
       }
-    }
-  };
+    },
+    [fetchSales, showSpinner, hideSpinner, closeImportModal]
+  );
 
   return (
     <>
       <Navpath levelOne="Sales Management" levelTwo="Home" levelThree="Sales" />
+
       <section className="content">
         <div className="container-fluid">
           {/* Info Boxes */}
           <div className="row">
             <InfoBox
               label="Total Sales"
-              icon="fas fa-dollar-sign"
+              icon="fas fa-money-bill-wave"
               color="success"
-              value={formatAmount(stats.totalSales || 0)}
+              value={formatAmount(stats.totalSales)}
             />
             <InfoBox
               label="Total Orders"
               icon="fas fa-receipt"
               color="primary"
-              value={stats.totalOrders || 0}
+              value={stats.totalOrders}
             />
             <InfoBox
               label="Revenue Today"
               icon="fas fa-calendar-day"
               color="info"
-              value={formatAmount(stats.revenue || 0)}
+              value={formatAmount(stats.revenueToday)}
             />
             <InfoBox
               label="Unpaid Orders"
               icon="fas fa-clock"
               color="danger"
-              value={stats.unpaidOrders || 0}
+              value={stats.unpaidOrders}
             />
           </div>
 
-          {/* Filters */}
+          {/* Date Filter */}
           <DateRangeFilter
             dateRange={dateRange}
             onDateChange={setDateRange}
-            onFilter={handleFilter}
+            onFilter={fetchSales}
           />
 
+          {/* Import button */}
           <button
             className="btn btn-success mb-3"
-            onClick={() => setShowImportModal(true)}
+            onClick={openImportModal}
+            disabled={loading}
           >
             <i className="fas fa-file-import mr-1"></i> Import Sales
           </button>
+
+          {/* Search + Items Per Page */}
           <SearchBar
             searchTerm={searchTerm}
-            onSearchChange={setSearchTerm}
+            onSearchChange={handleSearchChange}
             itemsPerPage={itemsPerPage}
             onItemsPerPageChange={handleItemsPerPageChange}
+            disabled={loading}
           />
 
-          <SalesTable orders={paginatedItems} />
+          {/* Sales Table */}
+          <SalesTable orders={orders} loading={loading} />
 
+          {/* Pagination */}
           <PaginationControls
-            data={filteredBySearch}
             currentPage={currentPage}
+            totalItems={totalItems}
             itemsPerPage={itemsPerPage}
-            onPageChange={setCurrentPage}
-            onPaginatedDataChange={setPaginatedItems}
+            onPageChange={handlePageChange}
+            disabled={loading}
           />
 
+          {/* Import Modal */}
           <ImportModal
             show={showImportModal}
-            onClose={() => setShowImportModal(false)}
+            onClose={closeImportModal}
             form={form}
             handleChange={handleChange}
-            fileInputRef={fileInputRef}
             handleImport={handleImport}
             platformOptions={platformOptions}
           />

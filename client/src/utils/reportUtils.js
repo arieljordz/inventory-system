@@ -10,18 +10,33 @@ export const formatReportData = (reportData = [], reportType = "") => {
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
         Date: date,
         Status: item.status || "-",
       };
-    } else {
-      const price = item.product?.price || 0;
-
+    } else if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType.startsWith("ORDERS_")
+    ) {
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         "Platform Order ID": item.platformOrderId || "-",
-        Platform: item.platform || "-",
+        Platform: item.platform?.toUpperCase() || "-",
+        Courier: item.courier || "-",
+        Quantity: item.quantity,
+        Date: date,
+        "Payment Status": item.isPaid ? "Paid" : "Unpaid",
+      };
+    } else {
+      const price = item.product?.price || 0;
+      return {
+        "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
+        "Platform Order ID": item.platformOrderId || "-",
+        Platform: item.platform?.toUpperCase() || "-",
         Courier: item.courier || "-",
         Quantity: item.quantity,
         Price: formatAmount(price),
@@ -41,18 +56,33 @@ export const formatExportData = (reportData = [], reportType = "") => {
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
         Date: date,
         Status: item.status || "-",
       };
-    } else {
-      const price = item.product?.price || 0;
-
+    } else if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType.startsWith("ORDERS_")
+    ) {
       return {
         "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
         "Platform Order ID": item.platformOrderId || "-",
-        Platform: item.platform || "-",
+        Platform: item.platform?.toUpperCase() || "-",
+        Courier: item.courier || "-",
+        Quantity: item.quantity,
+        Date: date,
+        "Payment Status": item.isPaid ? "Paid" : "Unpaid",
+      };
+    } else {
+      const price = item.product?.price || 0;
+      return {
+        "Product Name": item.product?.name || "-",
+        Variant: item.product?.variant || "-",
+        "Platform Order ID": item.platformOrderId || "-",
+        Platform: item.platform?.toUpperCase() || "-",
         Courier: item.courier || "-",
         Quantity: item.quantity,
         Price: price,
@@ -64,11 +94,24 @@ export const formatExportData = (reportData = [], reportType = "") => {
 };
 
 export const getCenteredColumns = (reportType = "") => {
-  //   console.log("reportType:", reportType);
   if (reportType.includes(ReportTypeEnum.INVENTORY)) {
-    return ["Quantity", "Type", "Date", "Status"];
+    return ["Variant", "Quantity", "Type", "Date", "Status"];
+  } else if (
+    reportType === ReportTypeEnum.ORDERS ||
+    reportType.startsWith("ORDERS_")
+  ) {
+    return [
+      "Variant",
+      "Platform Order ID",
+      "Quantity",
+      "Platform",
+      "Courier",
+      "Date",
+      "Payment Status",
+    ];
   } else {
     return [
+      "Variant",
       "Platform Order ID",
       "Quantity",
       "Platform",

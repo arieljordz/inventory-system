@@ -6,7 +6,7 @@ import cloudinary from "../config/cloudinary.js";
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder: "qr_codes", // optional folder in your Cloudinary
+    folder: "products", // optional folder in your Cloudinary
     allowed_formats: ["jpg", "jpeg", "png", "gif"],
     public_id: (req, file) => `${Date.now()}-${file.originalname.split('.')[0]}`,
   },

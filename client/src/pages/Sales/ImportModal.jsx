@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { SelectInput } from "../../components/common/FormInputs";
 
@@ -7,10 +7,19 @@ const ImportModal = ({
   onClose,
   form,
   handleChange,
-  fileInputRef,
   handleImport,
   platformOptions,
 }) => {
+  const fileInputRef = useRef(null);
+
+  const onFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      handleImport(file, form.platform);
+      e.target.value = ""; // reset file input
+    }
+  };
+
   return (
     <Modal show={show} onHide={onClose} backdrop="static" size="md">
       <Modal.Header closeButton className="bg-primary text-white">
@@ -31,23 +40,18 @@ const ImportModal = ({
           accept=".xlsx, .xls, .csv"
           ref={fileInputRef}
           style={{ display: "none" }}
-          onChange={handleImport}
+          onChange={onFileChange}
         />
 
         <div className="d-flex justify-content-end mt-3">
           <Button
             variant="success"
-            onClick={() => fileInputRef.current.click()}
+            onClick={() => fileInputRef.current?.click()}
           >
             <i className="fas fa-file-import mr-1"></i> Choose File
           </Button>
         </div>
       </Modal.Body>
-      <Modal.Footer>
-        {/* <Button variant="secondary" onClick={onClose}>
-          Close
-        </Button> */}
-      </Modal.Footer>
     </Modal>
   );
 };

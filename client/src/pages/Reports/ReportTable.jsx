@@ -1,29 +1,29 @@
 import React from "react";
 import { getCenteredColumns } from "../../utils/reportUtils";
-import { formatAmount, parseCurrencyToFloat } from "../../utils/commonUtils";
 import { ReportTypeEnum } from "../../enums/enums";
+import { formatAmount } from "../../utils/commonUtils";
 
 const ReportTable = ({ formattedReport, activeReportType }) => {
-  if (!formattedReport || formattedReport.length === 0) {
+  if (!formattedReport?.length)
     return (
       <div className="text-center text-muted mt-4">
         <i>No report generated yet.</i>
       </div>
     );
-  }
 
   const columns = Object.keys(formattedReport[0]);
   const centerColumns = getCenteredColumns(activeReportType);
   const isSalesReport = activeReportType.includes(ReportTypeEnum.SALES);
+  const grandTotal = isSalesReport
+    ? formattedReport.reduce((sum, row) => {
+        const raw = row["Total Amount"] || "0";
+        const numeric = parseFloat(raw.replace(/[^\d.-]/g, "")); // remove ₱ and commas
+        return sum + (isNaN(numeric) ? 0 : numeric);
+      }, 0)
+    : 0;
 
-  // Compute Grand Total if report is sales
-const grandTotal = isSalesReport
-  ? formattedReport.reduce(
-      (acc, row) => acc + parseCurrencyToFloat(row["Total Amount"]),
-      0
-    )
-  : 0;
-
+  // console.log("formattedReport", formattedReport);
+  // console.log("isSalesReport", isSalesReport);
   return (
     <div className="table-responsive">
       <table className="table table-bordered table-striped table-hover">
@@ -64,15 +64,13 @@ const grandTotal = isSalesReport
               ))}
             </tr>
           ))}
-
-          {/* Grand total row */}
           {isSalesReport && (
             <tr>
               <td colSpan={columns.length - 2} className="text-end fw-bold">
                 Grand Total:
               </td>
               <td className="text-end fw-bold">{formatAmount(grandTotal)}</td>
-              <td className="text-end fw-bold"></td>
+              <td colSpan={1}></td>
             </tr>
           )}
         </tbody>

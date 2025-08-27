@@ -5,6 +5,7 @@ export const authenticate = async (req, res, next) => {
   try {
     const token = req.cookies?.token; // or whatever you named your cookie
 
+    // console.log("cookies:", req.cookies);
     // console.log("token:", token);
     if (!token) {
       return res.status(401).json({ message: "No token, unauthorized" });
@@ -12,7 +13,12 @@ export const authenticate = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET); // use your actual secret
     // console.log("decoded:", decoded);
+
+    // const users = await User.find().select("-password");
+    // console.log("users:", users);
+
     const user = await User.findById(decoded.userId).select("-password");
+    // const user = await User.findOne({ email: decoded.email }).select("-password");
     // console.log("user:", user);
     if (!user) {
       return res.status(401).json({ message: "User not found" });

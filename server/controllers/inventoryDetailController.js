@@ -4,8 +4,8 @@ import Order from "../models/Order.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
 import moment from "moment-timezone";
+import { normalizeString, escapeRegex, normalizeText } from "../utils/commonUtils.js";
 
-// GET /api/inventory/remaining-by-product
 export const getRemainingQuantities = async (req, res) => {
   try {
     const products = await Product.find({}).select(
@@ -60,7 +60,6 @@ export const getInventoryDetailsByStatus = async (req, res) => {
   }
 };
 
-// GET /api/inventory-details/stats?start=YYYY-MM-DD&end=YYYY-MM-DD
 export const getInventoryStats = async (req, res) => {
   const { start, end } = req.query;
 
@@ -104,28 +103,85 @@ export const getInventoryStats = async (req, res) => {
   }
 };
 
-// GET /api/inventory-details/movements?start=YYYY-MM-DD&end=YYYY-MM-DD
 export const getInventoryMovements = async (req, res) => {
-  const { start, end } = req.query;
-
   try {
-    // Convert PH time (Asia/Manila) to UTC
-    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
-    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
+    const page = Math.max(parseInt(req.query.page) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 100);
+    const search = normalizeText((req.query.search || "").trim());
+    const { start, end } = req.query;
 
-    if (isNaN(startDate) || isNaN(endDate)) {
-      return res.status(400).json({ message: "Invalid date range" });
+    const skip = (page - 1) * limit;
+
+    /** 🔹 Date Filter */
+    let dateFilter = {};
+    if (start && end) {
+      const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
+      const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
+
+      if (isNaN(startDate) || isNaN(endDate)) {
+        return res.status(400).json({ message: "Invalid date range" });
+      }
+
+      dateFilter = { createdAt: { $gte: startDate, $lte: endDate } };
     }
 
-    const movements = await InventoryDetail.find({
-      createdAt: { $gte: startDate, $lte: endDate },
-    })
-      .populate("product")
-      .sort({ createdAt: -1 });
+    /** 🔹 Search Filter */
+    let searchFilter = {};
+    if (search) {
+      const normalizedSearch = normalizeString(search);
+      const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
+      const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
-    res.json(movements);
+      if (["IN", "OUT"].includes(search.toUpperCase())) {
+        searchFilter = { movementType: search.toUpperCase() };
+      } else {
+        searchFilter = {
+          $or: [
+            { "product.normalizedName": safeRegex },
+            { "product.normalizedVariant": safeRegex },
+            { "product.sku": rawSafeRegex },
+            { "product.description": rawSafeRegex },
+            { remarks: rawSafeRegex },
+          ],
+        };
+      }
+    }
+
+    /** 🔹 Aggregation Pipeline */
+    const pipeline = [
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
+      { $unwind: "$product" },
+      { $match: { ...dateFilter, ...searchFilter } },
+      { $sort: { createdAt: -1 } },
+      {
+        $facet: {
+          data: [{ $skip: skip }, { $limit: limit }],
+          total: [{ $count: "count" }],
+        },
+      },
+    ];
+
+    const result = await InventoryDetail.aggregate(pipeline);
+
+    const movements = result[0].data || [];
+    const totalMovements = result[0].total[0]?.count || 0;
+
+    res.status(200).json({
+      movements,
+      totalMovements,
+      totalPages: Math.max(Math.ceil(totalMovements / limit), 1),
+      currentPage: page,
+      pageSize: limit,
+    });
   } catch (error) {
-    console.error("Error fetching movements:", error);
+    console.error("Error fetching inventory movements:", error);
     res.status(500).json({ message: "Server error" });
   }
 };

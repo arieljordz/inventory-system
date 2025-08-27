@@ -1,3 +1,4 @@
+import { StatusEnum } from "../enums/enums";
 
 export const formatAmount = (price) =>
   new Intl.NumberFormat("en-PH", {
@@ -48,14 +49,27 @@ export const getStatusBadgeData = (
   const statusKey = typeof status === "boolean" ? String(status) : status;
 
   const defaultColorMap = {
-    Available: "success",
-    "For Pick Up": "warning",
-    "Out of Stock": "danger",
+    [StatusEnum.AVAILABLE]: "success",
+    [StatusEnum.OUT_OF_STOCK]: "danger",
+    [StatusEnum.FOR_PICK_UP]: "warning",
+    [StatusEnum.TO_SHIP]: "info",
+    [StatusEnum.SHIPPING]: "primary",
+    [StatusEnum.RETURNED]: "dark",
+    [StatusEnum.DELIVERED]: "success",
+    [StatusEnum.COMPLETED]: "secondary",
     true: "success",
     false: "secondary",
   };
 
   const defaultLabelMap = {
+    [StatusEnum.AVAILABLE]: "In Stock",
+    [StatusEnum.OUT_OF_STOCK]: "No Stock",
+    [StatusEnum.FOR_PICK_UP]: "On Process",
+    [StatusEnum.TO_SHIP]: "To Ship",
+    [StatusEnum.SHIPPING]: "Shipping",
+    [StatusEnum.RETURNED]: "Returned",
+    [StatusEnum.DELIVERED]: "Delivered",
+    [StatusEnum.COMPLETED]: "Completed",
     true: "Paid",
     false: "Unpaid",
   };
@@ -79,3 +93,9 @@ export const computeTotalPrice = (quantity, price) => {
 
   return qty * unitPrice;
 };
+
+export const truncateText = (text, limit = 30) => {
+  if (!text) return "-";
+  return text.length > limit ? text.slice(0, limit) + "..." : text;
+};
+
