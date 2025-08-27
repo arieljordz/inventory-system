@@ -65,7 +65,7 @@ const InventoryPage = () => {
       const { movements: fetchedMovements, totalMovements, totalPages } =
         movementsRes.data;
 
-      console.log("movementsRes.data:", movementsRes.data);
+      // console.log("movementsRes.data:", movementsRes.data);
       setStats(statsRes.data);
       setMovements(fetchedMovements || []);
       setRemainingPerProduct(remainingRes.data || []);

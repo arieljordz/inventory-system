@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import { useAxiosInterceptor } from "./hooks/useAxiosInterceptor";
+import PWAInstallButton from "./components/common/PWAInstallButton";
 
 // Layout
 import MainLayout from "./layouts/MainLayout";
@@ -26,6 +27,7 @@ function App() {
   return (
     <GoogleOAuthProvider clientId={API_KEY}>
       <BrowserRouter>
+        <PWAInstallButton />
         <Routes>
           {/* Login page without layout */}
           <Route path="/" element={<LoginPage />} />
