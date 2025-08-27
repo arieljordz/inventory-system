@@ -52,23 +52,6 @@ app.use("/api/sales", salesRoutes);
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));
 
-// ===== Serve React Frontend for PWA =====
-const buildPath = path.join(__dirname, "../client/build");
-
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from build
-  app.use(express.static(buildPath));
-
-  // All non-API requests go to React
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(buildPath, "index.html"));
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("🚀 Backend API is running (dev mode)");
-  });
-}
-
 // ===== Error Handler =====
 app.use((err, req, res, next) => {
   if (

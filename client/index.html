@@ -9,7 +9,7 @@
     <!-- PWA Manifest -->
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/png" href="/images/is-icon.png" />
-    <link rel="apple-touch-icon" href="/images/is-icon-192.png" />
+    <link rel="apple-touch-icon" href="/images/is-icon.png" />
     <meta name="theme-color" content="#007bff" />
 
     <!-- Google Fonts -->
@@ -63,16 +63,5 @@
     <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="/adminlte/js/adminlte.min.js"></script>
 
-    <!-- Service Worker -->
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("load", () => {
-          navigator.serviceWorker
-            .register("/service-worker.js")
-            .then((reg) => console.log("SW registered:", reg))
-            .catch((err) => console.error("SW registration failed:", err));
-        });
-      }
-    </script>
   </body>
 </html>
