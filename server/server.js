@@ -41,12 +41,17 @@ app.get("/api", (req, res) => {
   res.send("🚀 Backend API is running");
 });
 
-app.use("/api/auth", authRoutes);
-app.use("/api/products", productRoutes);
-app.use("/api/inventory-details", inventoryDetailRoutes);
-app.use("/api/reports", reportRoutes);
-app.use("/api/orders", orderRoutes);
-app.use("/api/sales", salesRoutes);
+// Register routes safely
+try {
+  app.use("/api/auth", authRoutes);
+  app.use("/api/products", productRoutes);
+  app.use("/api/inventory-details", inventoryDetailRoutes);
+  app.use("/api/reports", reportRoutes);
+  app.use("/api/orders", orderRoutes);
+  app.use("/api/sales", salesRoutes);
+} catch (err) {
+  console.error("Error registering routes:", err);
+}
 
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));
