@@ -8,6 +8,7 @@ import {
   importSalesByPlatform,
 } from "../../services/salesService";
 import { getCurrentDate, formatAmount } from "../../utils/commonUtils";
+import { showSalesImportResults } from "../../utils/importUtils";
 
 import Navpath from "../../components/common/Navpath";
 import { InfoBox } from "../../components/common/FormInputs";
@@ -159,47 +160,8 @@ const SalesPage = () => {
 
         console.log("res.data:", res.data);
 
-        const rows = [];
-
-        // --- Helper to build span message with color ---
-        const buildMessage = (id, idx, type = "paid") => {
-          let reason = "";
-          if (type === "paid") {
-            reason = `<span style="color:green">Paid Successfully</span>`;
-          } else {
-            reason = `<span style="color:red">Not Found / Unpaid</span>`;
-          }
-          return `#${idx + 1} (Order ID: ${id}): ${reason}`;
-        };
-
-        // --- Add paid (success) rows ---
-        if (details?.alreadyPaid?.length) {
-          details.alreadyPaid.forEach((id, idx) => {
-            rows.push(buildMessage(id, idx, "paid"));
-          });
-        }
-
-        // --- Add unpaid (not found / not paid) rows ---
-        if (details?.notFound?.length) {
-          details.notFound.forEach((id, idx) => {
-            rows.push(
-              buildMessage(id, details.alreadyPaid?.length + idx, "unpaid")
-            );
-          });
-        }
-
-        if (rows.length > 0) {
-          Swal.fire({
-            icon: "info",
-            title: "Import Results",
-            html: `<div style="max-height:300px; overflow:auto; text-align:left">${rows.join(
-              "<br>"
-            )}</div>`,
-            width: "40em",
-          });
-        } else {
-          toast.success(message || "Sales imported successfully!");
-        }
+        // ✅ Use helper
+        showSalesImportResults(details, message);
 
         await fetchSales();
       } catch (err) {

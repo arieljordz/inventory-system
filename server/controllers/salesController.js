@@ -146,8 +146,9 @@ export const getSalesStatsByDate = async (req, res) => {
 export const importSalesByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
-    if (!platform || !salesPlatformConfigs[platform])
+    if (!platform || !salesPlatformConfigs[platform]) {
       return res.status(400).json({ message: "Invalid platform" });
+    }
 
     const { sheetName, fields: rawFieldMap } = salesPlatformConfigs[platform];
     const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
@@ -171,7 +172,10 @@ export const importSalesByPlatform = async (req, res) => {
       raw: false,
     });
 
-    // --- Detect header row dynamically ---
+    console.log("Expected headers:", expectedHeaders);
+    sheetData.slice(0, 6).forEach((row, i) => console.log("Row", i, row));
+
+    // --- Find the header row dynamically ---
     let headerRowIndex = -1;
     let columnIndexMap = {};
     let bestMatchCount = 0;
@@ -179,13 +183,18 @@ export const importSalesByPlatform = async (req, res) => {
     for (let r = 0; r < sheetData.length; r++) {
       const row = sheetData[r] || [];
       const headersInRow = {};
+
       row.forEach((cellValue, colNumber) => {
-        if (cellValue) headersInRow[normalizeHeader(cellValue)] = colNumber;
+        if (cellValue) {
+          headersInRow[normalizeHeader(cellValue)] = colNumber;
+        }
       });
 
       const matches = expectedHeaders.filter(
         (h) => headersInRow[h] !== undefined
       );
+
+      // pick row with the *most* matching headers
       if (matches.length > bestMatchCount) {
         bestMatchCount = matches.length;
         headerRowIndex = r;
@@ -193,70 +202,32 @@ export const importSalesByPlatform = async (req, res) => {
       }
     }
 
-    if (headerRowIndex === -1) headerRowIndex = 0;
+    if (headerRowIndex === -1 || bestMatchCount === 0) {
+      return res.status(400).json({
+        message:
+          "No valid header row found in the uploaded file. Please check the template.",
+      });
+    }
 
-    // --- Build final field map (key -> column index) ---
+    console.log(`Detected header row at index: ${headerRowIndex}`);
+
+    // --- Build final field map ---
     const finalFieldMap = {};
     Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
       const colIndex = columnIndexMap[normalizeHeader(fieldName)];
-      if (colIndex !== undefined) finalFieldMap[key] = colIndex;
+      if (colIndex !== undefined) {
+        finalFieldMap[key] = colIndex;
+      }
     });
 
-    // --- Extract platform order IDs from sheet ---
-    const platformOrderIds = [];
-    for (let r = headerRowIndex + 1; r < sheetData.length; r++) {
-      const row = sheetData[r] || [];
-      const orderId = (row[finalFieldMap.platformOrderId] || "")
-        .toString()
-        .trim();
-      if (orderId) platformOrderIds.push(orderId);
-    }
-
-    if (platformOrderIds.length === 0) {
-      return res.status(400).json({ message: "No valid order IDs found in file." });
-    }
-
-    // --- Fetch matching orders ---
-    const orders = await Order.find({
-      platform: platform.toLowerCase(),
-      platformOrderId: { $in: platformOrderIds },
+    // --- Delegate to helper ---
+    const results = await processSalesImport({
+      sheetData,
+      headerRowIndex,
+      finalFieldMap,
+      platform,
+      req,
     });
-    const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
-
-    const results = { updated: [], alreadyPaid: [], notFound: [] };
-
-    // --- Process each order ---
-    for (const id of platformOrderIds) {
-      const order = orderMap.get(id);
-      if (!order) {
-        results.notFound.push(id);
-        continue;
-      }
-
-      if (order.isPaid) {
-        results.alreadyPaid.push(order._id);
-        continue;
-      }
-
-      const before = { isPaid: order.isPaid };
-      order.isPaid = true;
-      order.status = StatusEnum.COMPLETED;
-      await order.save();
-
-      results.updated.push(order._id);
-
-      await logAudit({
-        action: "UPDATE",
-        user: req.user?._id,
-        description: `Marked order ${order._id} as paid via file import (${platform})`,
-        collectionName: "Order",
-        documentId: order._id,
-        before,
-        after: { isPaid: true },
-        ip: req.ip,
-        userAgent: req.get("User-Agent"),
-      });
-    }
 
     res.json({
       message: `${results.updated.length} orders marked as paid.`,
@@ -271,4 +242,69 @@ export const importSalesByPlatform = async (req, res) => {
     console.error("Error importing sales:", error);
     res.status(500).json({ message: "Internal server error." });
   }
+};
+
+//Process imported sales, mark orders as paid.
+export const processSalesImport = async ({
+  sheetData,
+  headerRowIndex,
+  finalFieldMap,
+  platform,
+  req,
+}) => {
+  // --- Extract order IDs (start after headerRowIndex automatically) ---
+  const platformOrderIds = sheetData
+    .slice(headerRowIndex + 1) // skip header row
+    .map((row) =>
+      (row?.[finalFieldMap.platformOrderId] || "").toString().trim()
+    )
+    .filter((id) => id); // keep only non-empty
+
+  if (platformOrderIds.length === 0) {
+    throw new Error("No valid order IDs found in file.");
+  }
+
+  // --- Fetch matching orders ---
+  const orders = await Order.find({
+    platform: platform.toLowerCase(),
+    platformOrderId: { $in: platformOrderIds },
+  });
+  const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
+
+  const results = { updated: [], alreadyPaid: [], notFound: [] };
+
+  // --- Process each order ---
+  for (const id of platformOrderIds) {
+    const order = orderMap.get(id);
+    if (!order) {
+      results.notFound.push(id);
+      continue;
+    }
+
+    if (order.isPaid) {
+      results.alreadyPaid.push(order._id);
+      continue;
+    }
+
+    const before = { isPaid: order.isPaid };
+    order.isPaid = true;
+    order.status = StatusEnum.COMPLETED;
+    await order.save();
+
+    results.updated.push(order._id);
+
+    await logAudit({
+      action: "UPDATE",
+      user: req.user?._id,
+      description: `Marked order ${order._id} as paid via file import (${platform})`,
+      collectionName: "Order",
+      documentId: order._id,
+      before,
+      after: { isPaid: true },
+      ip: req.ip,
+      userAgent: req.get("User-Agent"),
+    });
+  }
+
+  return results;
 };

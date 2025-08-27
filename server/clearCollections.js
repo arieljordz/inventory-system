@@ -4,7 +4,7 @@ import readline from "readline";
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI;
+const CLEAR_URI = process.env.CLEAR_URI;
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -46,7 +46,7 @@ async function selectCollections(allCollections) {
 }
 
 async function clearCollections() {
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(CLEAR_URI);
 
   try {
     await client.connect();
@@ -62,7 +62,7 @@ async function clearCollections() {
     ];
 
     const confirmed = await askConfirmation(
-      `⚠️  Do you want to proceed with clearing collections?\nDatabase: ${MONGO_URI}`
+      `⚠️  Do you want to proceed with clearing collections?\nDatabase: ${CLEAR_URI}`
     );
     if (!confirmed) {
       console.log("Operation cancelled.");

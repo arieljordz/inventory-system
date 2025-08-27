@@ -6,7 +6,7 @@ import readline from "readline";
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI;
+const BACKUP_URI = process.env.BACKUP_URI;
 const BACKUP_DIR = "./backups";
 
 const rl = readline.createInterface({
@@ -109,7 +109,7 @@ function transformToExtendedJSON(value) {
 }
 
 async function backupCollections() {
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(BACKUP_URI);
 
   try {
     await client.connect();
@@ -119,7 +119,7 @@ async function backupCollections() {
     const collectionNames = allCollections.map((c) => c.name);
 
     const confirmed = await askConfirmation(
-      `⚠️  Do you want to proceed with backing up collections?\nBackup from: ${MONGO_URI}`
+      `⚠️  Do you want to proceed with backing up collections?\nBackup from: ${BACKUP_URI}`
     );
     if (!confirmed) {
       console.log("Backup cancelled.");

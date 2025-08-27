@@ -8,6 +8,7 @@ import { tagInventoryForPickUp } from "../../services/inventoryDetailService";
 import { importOrdersByPlatform } from "../../services/orderService";
 
 import { StatusEnum, PlatformEnum, CourierEnum } from "../../enums/enums";
+import { showOrderImportResults } from "../../utils/importUtils";
 
 import OrderTable from "./OrderTable";
 import PickupModal from "./PickupModal";
@@ -174,49 +175,10 @@ const OrderPage = () => {
         const { details } = res.data;
 
         if (details) {
-          const buildMessage = (item, idx, type = "imported") => {
-            let reason = "";
-            if (type === "imported") {
-              reason = `<span style="color:green">Imported Order</span>`;
-            } else {
-              switch (item.reason) {
-                case "Product not found":
-                  reason = `<span style="color:red">${item.reason}</span>`;
-                  break;
-                case "Order already imported":
-                  reason = `<span style="color:blue">${item.reason}</span>`;
-                  break;
-                case "Insufficient stock":
-                  reason = `<span style="color:orange">${item.reason}</span>`;
-                  break;
-                default:
-                  reason = item.reason;
-              }
-            }
-            return `#${idx + 1} (${item.platformOrderId}): ${reason}`;
-          };
-
-          const importedMessages = (details.imported || []).map((item, idx) =>
-            buildMessage(item, idx, "imported")
-          );
-
-          const skippedMessages = (details.skipped || []).map((item, idx) =>
-            buildMessage(item, importedMessages.length + idx, "skipped")
-          );
-
-          const allMessages = [...importedMessages, ...skippedMessages];
-
-          if (allMessages.length > 0) {
-            Swal.fire({
-              icon: "info",
-              title: "Import Results",
-              html: `<div style="max-height:300px; overflow:auto; text-align:left">${allMessages.join(
-                "<br>"
-              )}</div>`,
-              width: "40em",
-            });
-          }
+          // ✅ Use helper
+          showOrderImportResults(details);
         }
+
         await fetchOrders();
       } catch (err) {
         console.error("Import failed:", err);

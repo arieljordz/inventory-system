@@ -7,7 +7,7 @@ import path from "path";
 
 dotenv.config();
 
-const MONGO_URI = process.env.MONGO_URI;
+const RESTORE_URI = process.env.RESTORE_URI;
 const BACKUP_DIR = "./backups";
 
 const rl = readline.createInterface({
@@ -85,11 +85,11 @@ function reviveDocument(doc) {
 }
 
 async function restoreCollections() {
-  const client = new MongoClient(MONGO_URI);
+  const client = new MongoClient(RESTORE_URI);
 
   try {
     const confirmed = await askConfirmation(
-      `⚠️  Are you sure you want to restore collections? This will overwrite existing data.\nRestored to: ${MONGO_URI}`
+      `⚠️  Are you sure you want to restore collections? This will overwrite existing data.\nRestored to: ${RESTORE_URI}`
     );
     if (!confirmed) {
       console.log("Restore cancelled.");
