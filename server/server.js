@@ -28,7 +28,7 @@ connectDB();
 // ===== Middleware =====
 app.use(
   cors({
-    origin: process.env.BASE_URL, // e.g., http://localhost:5173
+    origin: process.env.BASE_URL, // only for CORS from frontend
     credentials: true,
   })
 );
@@ -41,29 +41,25 @@ app.get("/api", (req, res) => {
   res.send("🚀 Backend API is running");
 });
 
-// Register routes safely
-try {
-  app.use("/api/auth", authRoutes);
-  app.use("/api/products", productRoutes);
-  app.use("/api/inventory-details", inventoryDetailRoutes);
-  app.use("/api/reports", reportRoutes);
-  app.use("/api/orders", orderRoutes);
-  app.use("/api/sales", salesRoutes);
-} catch (err) {
-  console.error("Error registering routes:", err);
-}
+// ✅ Use only relative paths for routers
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/inventory-details", inventoryDetailRoutes);
+app.use("/api/reports", reportRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/sales", salesRoutes);
 
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));
 
-// ===== Serve React Frontend =====
+// ===== Serve React Frontend for PWA =====
 const buildPath = path.join(__dirname, "../client/build");
 
 if (process.env.NODE_ENV === "production") {
   // Serve static files from build
   app.use(express.static(buildPath));
 
-  // Handle React Router routes
+  // All non-API requests go to React
   app.get("*", (req, res) => {
     res.sendFile(path.join(buildPath, "index.html"));
   });
