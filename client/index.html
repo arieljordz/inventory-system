@@ -37,9 +37,6 @@
     />
     <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css" />
     <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.min.css" />
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/src/index.css" />
   </head>
 
   <body class="hold-transition sidebar-mini layout-fixed">
@@ -65,5 +62,17 @@
     <script src="/plugins/summernote/summernote-bs4.min.js"></script>
     <script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
     <script src="/adminlte/js/adminlte.min.js"></script>
+
+    <!-- Service Worker -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((reg) => console.log("SW registered:", reg))
+            .catch((err) => console.error("SW registration failed:", err));
+        });
+      }
+    </script>
   </body>
 </html>
