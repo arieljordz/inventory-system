@@ -9,9 +9,11 @@ const ImportModal = ({
   handleChange,
   handleImport,
   platformOptions,
+  importType,
 }) => {
   const fileInputRef = useRef(null);
 
+  const acceptedFileTypes = ".xlsx, .xls, .csv";
   const onFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -23,7 +25,9 @@ const ImportModal = ({
   return (
     <Modal show={show} onHide={onClose} backdrop="static" size="md">
       <Modal.Header closeButton className="bg-primary text-white">
-        <Modal.Title>Import Sales</Modal.Title>
+        <Modal.Title>
+          {importType === "returned" ? "Import Returned" : "Import Sales"}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <SelectInput
@@ -37,7 +41,7 @@ const ImportModal = ({
 
         <input
           type="file"
-          accept=".xlsx, .xls, .csv"
+          accept={acceptedFileTypes}
           ref={fileInputRef}
           style={{ display: "none" }}
           onChange={onFileChange}

@@ -4,9 +4,6 @@ const multipartHeaders = {
   headers: { "Content-Type": "multipart/form-data" },
 };
 
-export const importSalesByPlatform = (formData) =>
-  api.post("/api/sales/import-sales", formData, multipartHeaders);
-
 export const getSalesStatsByDate = ({
   start,
   end,
@@ -18,3 +15,10 @@ export const getSalesStatsByDate = ({
     params: { start, end, page, limit, search },
   });
 };
+
+export const importSalesByPlatform = (formData) =>
+  api.post("/api/sales/import-sales", formData, multipartHeaders);
+
+
+export const importReturnsByPlatform = (formData) =>
+  api.post("/api/sales/import-returns", formData, multipartHeaders);

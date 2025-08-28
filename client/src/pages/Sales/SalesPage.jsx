@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useCallback } from "react";
-import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { useSpinner } from "../../context/SpinnerContext";
 
@@ -8,7 +7,7 @@ import {
   importSalesByPlatform,
 } from "../../services/salesService";
 import { getCurrentDate, formatAmount } from "../../utils/commonUtils";
-import { showSalesImportResults } from "../../utils/importUtils";
+import { importHandlers } from "../../utils/importUtils";
 
 import Navpath from "../../components/common/Navpath";
 import { InfoBox } from "../../components/common/FormInputs";
@@ -20,6 +19,7 @@ import ImportModal from "./ImportModal";
 
 import { PlatformEnum, CourierEnum } from "../../enums/enums";
 import { useDebounce } from "../../hooks/useDebounce";
+import ImportButtons from "./ImportButtons";
 
 const initialFormState = {
   quantity: "",
@@ -58,6 +58,7 @@ const SalesPage = () => {
 
   /** 🔹 Import modal state */
   const [showImportModal, setShowImportModal] = useState(false);
+  const [importType, setImportType] = useState(""); // "sales" or "returned"
   const [form, setForm] = useState(initialFormState);
 
   // Platform options
@@ -139,13 +140,26 @@ const SalesPage = () => {
   };
 
   /** 🔹 Import Modal Handlers */
-  const openImportModal = useCallback(() => setShowImportModal(true), []);
-  const closeImportModal = useCallback(() => setShowImportModal(false), []);
+  const openImportModal = useCallback((type) => {
+    setImportType(type);
+    setShowImportModal(true);
+  }, []);
+  const closeImportModal = useCallback(() => {
+    setShowImportModal(false);
+    setImportType("");
+  }, []);
 
   const handleImport = useCallback(
-    async (file, platform) => {
+    async (file, platform, importType) => {
       if (!file || !platform) {
         toast.error("Please select a platform and file.");
+        return;
+      }
+      console.log("Import Type:", importType);
+
+      const handler = importHandlers[importType];
+      if (!handler) {
+        toast.error(`Unsupported import type: ${importType}`);
         return;
       }
 
@@ -155,18 +169,23 @@ const SalesPage = () => {
 
       try {
         showSpinner();
-        const res = await importSalesByPlatform(formData);
+
+        // 🔑 Call the correct API
+        const res = await handler.api(formData);
         const { details } = res.data;
 
-        console.log("res.data:", res.data);
+        // console.log(`${importType} res.data:`, res.data);
 
-        // ✅ Use helper
-        showSalesImportResults(details);
+        // ✅ Show results
+        handler.showResults(details, platform);
 
+        // 🔑 Refresh data only if needed
         await fetchSales();
       } catch (err) {
-        console.error("Sales import failed:", err);
-        toast.error(err.response?.data?.message || "Failed to import sales.");
+        console.error(`${importType} import failed:`, err);
+        toast.error(
+          err.response?.data?.message || `Failed to import ${importType}.`
+        );
       } finally {
         hideSpinner();
         closeImportModal();
@@ -216,14 +235,11 @@ const SalesPage = () => {
             onFilter={fetchSales}
           />
 
-          {/* Import button */}
-          <button
-            className="btn btn-success mb-3"
-            onClick={openImportModal}
-            disabled={loading}
-          >
-            <i className="fas fa-file-import mr-1"></i> Import Sales
-          </button>
+          <ImportButtons
+            loading={loading}
+            onImportSales={() => openImportModal("sales")}
+            onImportReturned={() => openImportModal("returned")}
+          />
 
           {/* Search + Items Per Page */}
           <SearchBar
@@ -252,8 +268,11 @@ const SalesPage = () => {
             onClose={closeImportModal}
             form={form}
             handleChange={handleChange}
-            handleImport={handleImport}
+            handleImport={(file, platform) =>
+              handleImport(file, platform, importType)
+            }
             platformOptions={platformOptions}
+            importType={importType}
           />
         </div>
       </section>

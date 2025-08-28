@@ -4,6 +4,7 @@ import Order from "../models/Order.js";
 import { logAudit } from "../utils/auditLogger.js";
 import {
   salesPlatformConfigs,
+  returnPlatformConfigs,
   normalizeHeader,
   validateFile,
 } from "../utils/importUtils.js";
@@ -172,8 +173,9 @@ export const importSalesByPlatform = async (req, res) => {
       raw: false,
     });
 
+    console.log("Import Sales");
     console.log("Expected headers:", expectedHeaders);
-    sheetData.slice(0, 6).forEach((row, i) => console.log("Row", i, row));
+    // sheetData.slice(0, 6).forEach((row, i) => console.log("Row", i, row));
 
     // --- Find the header row dynamically ---
     let headerRowIndex = -1;
@@ -320,3 +322,104 @@ export const processSalesImport = async ({
   return results;
 };
 
+// --- Import returns handler ---
+export const importReturnsByPlatform = async (req, res) => {
+  try {
+    const platform = (req.body.platform || "").toLowerCase();
+    if (!platform || !returnPlatformConfigs[platform]) {
+      return res.status(400).json({ message: "Invalid platform" });
+    }
+
+    const { sheetName, fields: rawFieldMap } = returnPlatformConfigs[platform];
+    const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
+
+    // --- Validate uploaded file ---
+    try {
+      validateFile(req.file);
+    } catch (err) {
+      return res.status(400).json({ message: err.message });
+    }
+
+    // --- Load workbook ---
+    const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
+    const targetSheetName =
+      workbook.SheetNames.find(
+        (s) => normalizeHeader(s) === normalizeHeader(sheetName)
+      ) || workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[targetSheetName];
+    const sheetData = XLSX.utils.sheet_to_json(worksheet, {
+      header: 1,
+      raw: false,
+    });
+
+    console.log("Import Returns");
+    console.log("Expected headers:", expectedHeaders);
+    // sheetData.slice(0, 6).forEach((row, i) => console.log("Row", i, row));
+
+    // --- Find the header row dynamically ---
+    let headerRowIndex = -1;
+    let columnIndexMap = {};
+    let bestMatchCount = 0;
+
+    for (let r = 0; r < sheetData.length; r++) {
+      const row = sheetData[r] || [];
+      const headersInRow = {};
+
+      row.forEach((cellValue, colNumber) => {
+        if (cellValue) {
+          headersInRow[normalizeHeader(cellValue)] = colNumber;
+        }
+      });
+
+      const matches = expectedHeaders.filter(
+        (h) => headersInRow[h] !== undefined
+      );
+
+      // pick row with the *most* matching headers
+      if (matches.length > bestMatchCount) {
+        bestMatchCount = matches.length;
+        headerRowIndex = r;
+        columnIndexMap = headersInRow;
+      }
+    }
+
+    if (headerRowIndex === -1 || bestMatchCount === 0) {
+      return res.status(400).json({
+        message:
+          "No valid header row found in the uploaded file. Please check the template.",
+      });
+    }
+
+    console.log(`Detected header row at index: ${headerRowIndex}`);
+
+    // --- Build final field map ---
+    const finalFieldMap = {};
+    Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
+      const colIndex = columnIndexMap[normalizeHeader(fieldName)];
+      if (colIndex !== undefined) {
+        finalFieldMap[key] = colIndex;
+      }
+    });
+
+    // --- Delegate to helper ---
+    const results = await processSalesImport({
+      sheetData,
+      headerRowIndex,
+      finalFieldMap,
+      platform,
+      req,
+    });
+
+    res.json({
+      summary: {
+        updated: results.updated.length,
+        alreadyPaid: results.alreadyPaid.length,
+        notFound: results.notFound.length,
+      },
+      details: results,
+    });
+  } catch (error) {
+    console.error("Error importing sales:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+};

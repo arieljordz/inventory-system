@@ -3,6 +3,7 @@ import React from "react";
 import ThemeToggle from "../common/ThemeToggle";
 import LogoutButton from "../common/LogoutButton";
 import NotificationButton from "../common/NotificationButton";
+import UserDropdown from "../common/UserDropdown";
 
 const Header = () => {
   return (
@@ -19,12 +20,15 @@ const Header = () => {
       {/* Right navbar */}
       <ul className="navbar-nav ml-auto align-items-center">
         {/* <NotificationButton /> */}
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <ThemeToggle />
-        </li>
+        </li> */}
         {/* <li className="nav-item">
           <LogoutButton />
         </li> */}
+        <li className="nav-item">
+          <UserDropdown />
+        </li>
       </ul>
     </nav>
   );

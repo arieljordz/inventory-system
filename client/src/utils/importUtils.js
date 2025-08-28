@@ -1,6 +1,10 @@
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 import { toProperCase } from "./commonUtils";
+import {
+  importSalesByPlatform,
+  importReturnsByPlatform,
+} from "../services/salesService";
 
 // Copy button builder
 const buildCopyButton = (platformOrderId) => {
@@ -170,12 +174,11 @@ export const showOrderImportResults = (details, platform) => {
   showImportResults(
     rows,
     `${toProperCase(platform)} Import Results`,
-    "Orders imported successfully!"
+    "Orders imported successfullys!"
   );
 };
 
 // Show Sales Import Results
-
 export const showSalesImportResults = (details, platform) => {
   const rows = [];
 
@@ -198,4 +201,47 @@ export const showSalesImportResults = (details, platform) => {
     `${toProperCase(platform)} Import Results`,
     "Sales imported successfully!"
   );
+};
+
+// Show Returned Import Results
+export const showReturnImportResults = (details, platform) => {
+  const rows = [];
+
+  if (details?.alreadyPaid?.length) {
+    details.alreadyPaid.forEach((item, idx) => {
+      rows.push(buildSalesRow(idx, item, "paid"));
+    });
+  }
+
+  if (details?.notFound?.length) {
+    details.notFound.forEach((item, idx) => {
+      rows.push(
+        buildSalesRow(details.alreadyPaid?.length + idx, item, "unpaid")
+      );
+    });
+  }
+
+  showImportResults(
+    rows,
+    `${toProperCase(platform)} Import Results`,
+    "Sales imported successfully!"
+  );
+};
+
+//    =========================================================================
+//    Import Handlers Configuration
+//    =========================================================================
+
+export const importHandlers = {
+  sales: {
+    api: importSalesByPlatform,
+    showResults: showSalesImportResults,
+    successMessage: "Sales imported successfully!",
+  },
+  returned: {
+    api: importReturnsByPlatform,
+    showResults: showReturnImportResults,
+    successMessage: "Returned Orders imported successfully!",
+  },
+  // 👉 add more later if needed
 };
