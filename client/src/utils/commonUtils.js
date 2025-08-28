@@ -99,3 +99,8 @@ export const truncateText = (text, limit = 30) => {
   return text.length > limit ? text.slice(0, limit) + "..." : text;
 };
 
+export const toProperCase = (text) => {
+  if (!text) return "";
+  return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
+};
+

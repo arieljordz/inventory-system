@@ -300,7 +300,6 @@ export const processOrderRows = async (rows, platform, req) => {
   }
 
   return {
-    message: "Order import completed",
     summary: {
       imported: results.imported.length,
       skipped: results.skipped.length,
@@ -308,4 +307,3 @@ export const processOrderRows = async (rows, platform, req) => {
     details: results,
   };
 };
-

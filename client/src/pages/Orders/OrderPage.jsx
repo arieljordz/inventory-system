@@ -176,7 +176,7 @@ const OrderPage = () => {
 
         if (details) {
           // ✅ Use helper
-          showOrderImportResults(details);
+          showOrderImportResults(details, platform);
         }
 
         await fetchOrders();

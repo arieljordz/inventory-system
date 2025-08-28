@@ -156,12 +156,12 @@ const SalesPage = () => {
       try {
         showSpinner();
         const res = await importSalesByPlatform(formData);
-        const { message, details } = res.data;
+        const { details } = res.data;
 
         console.log("res.data:", res.data);
 
         // ✅ Use helper
-        showSalesImportResults(details, message);
+        showSalesImportResults(details);
 
         await fetchSales();
       } catch (err) {

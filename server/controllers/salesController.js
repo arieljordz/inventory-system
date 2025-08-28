@@ -230,7 +230,6 @@ export const importSalesByPlatform = async (req, res) => {
     });
 
     res.json({
-      message: `${results.updated.length} orders marked as paid.`,
       summary: {
         updated: results.updated.length,
         alreadyPaid: results.alreadyPaid.length,
@@ -253,16 +252,19 @@ export const processSalesImport = async ({
   req,
 }) => {
   // --- Extract order IDs (start after headerRowIndex automatically) ---
-  const platformOrderIds = sheetData
+  const rawPlatformOrderIds = sheetData
     .slice(headerRowIndex + 1) // skip header row
     .map((row) =>
       (row?.[finalFieldMap.platformOrderId] || "").toString().trim()
     )
     .filter((id) => id); // keep only non-empty
 
-  if (platformOrderIds.length === 0) {
+  if (rawPlatformOrderIds.length === 0) {
     throw new Error("No valid order IDs found in file.");
   }
+
+  // --- Deduplicate IDs while preserving order ---
+  const platformOrderIds = [...new Set(rawPlatformOrderIds)];
 
   // --- Fetch matching orders ---
   const orders = await Order.find({
@@ -273,16 +275,22 @@ export const processSalesImport = async ({
 
   const results = { updated: [], alreadyPaid: [], notFound: [] };
 
-  // --- Process each order ---
-  for (const id of platformOrderIds) {
-    const order = orderMap.get(id);
+  // --- Process each unique order ---
+  for (const platformOrderId of platformOrderIds) {
+    const order = orderMap.get(platformOrderId);
     if (!order) {
-      results.notFound.push(id);
+      results.notFound.push({
+        platformOrderId: platformOrderId || "N/A",
+        reason: "Order not found",
+      });
       continue;
     }
 
     if (order.isPaid) {
-      results.alreadyPaid.push(order._id);
+      results.alreadyPaid.push({
+        platformOrderId: order.platformOrderId || "N/A",
+        reason: "Order is already paid",
+      });
       continue;
     }
 
@@ -291,12 +299,15 @@ export const processSalesImport = async ({
     order.status = StatusEnum.COMPLETED;
     await order.save();
 
-    results.updated.push(order._id);
+    results.updated.push({
+      platformOrderId: order.platformOrderId || "N/A",
+      reason: "Order is now paid",
+    });
 
     await logAudit({
       action: "UPDATE",
       user: req.user?._id,
-      description: `Marked order ${order._id} as paid via file import (${platform})`,
+      description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
       collectionName: "Order",
       documentId: order._id,
       before,
@@ -308,3 +319,4 @@ export const processSalesImport = async ({
 
   return results;
 };
+

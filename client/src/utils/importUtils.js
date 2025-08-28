@@ -1,7 +1,21 @@
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
+import { toProperCase } from "./commonUtils";
 
-// Build one table row
+// Copy button builder
+const buildCopyButton = (platformOrderId) => {
+  return `
+    <button 
+      class="copy-btn" 
+      data-order-id="${platformOrderId}"
+      title="Copy Order ID"
+      style="margin-left:6px; background:none; border:none; cursor:pointer; font-size:14px; color:#3886fcff;">
+      <i class="fa fa-copy"></i>
+    </button>
+  `;
+};
+
+// Build a single Order row for the result table
 const buildOrderRow = (idx, item, type = "imported") => {
   let remarks = "";
   let color = "black";
@@ -30,15 +44,115 @@ const buildOrderRow = (idx, item, type = "imported") => {
 
   return `
     <tr>
-      <td style="padding:4px; border:1px solid #ccc; text-align:center;">${idx + 1}</td>
-      <td style="padding:4px; border:1px solid #ccc;">${item.platformOrderId}</td>
-      <td style="padding:4px; border:1px solid #ccc; color:${color}">${remarks}</td>
+      <td style="padding:6px; border:1px solid #ccc; text-align:center;">${
+        idx + 1
+      }</td>
+      <td style="padding:6px; border:1px solid #ccc;">
+        ${item.platformOrderId}
+        ${buildCopyButton(item.platformOrderId)}
+      </td>
+      <td style="padding:6px; border:1px solid #ccc; color:${color}">${remarks}</td>
     </tr>
   `;
 };
 
-// Main helper
-export const showOrderImportResults = (details) => {
+// Build a single Sales row for the result table
+
+const buildSalesRow = (idx, item, type = "paid") => {
+  let remarks = "";
+  let color = "black";
+
+  if (type === "paid") {
+    remarks = "Order is now paid";
+    color = "green";
+  } else {
+    switch (item.reason) {
+      case "Order not found":
+        remarks = item.reason;
+        color = "red";
+        break;
+      case "Order is already paid":
+        remarks = item.reason;
+        color = "blue";
+        break;
+      case "Order is now paid":
+        remarks = item.reason;
+        color = "orange";
+        break;
+      default:
+        remarks = item.reason || "Skipped";
+    }
+  }
+
+  return `
+    <tr>
+      <td style="padding:6px; border:1px solid #ccc; text-align:center;">${
+        idx + 1
+      }</td>
+      <td style="padding:6px; border:1px solid #ccc;">
+        ${item.platformOrderId}
+        ${buildCopyButton(item.platformOrderId)}
+      </td>
+      <td style="padding:6px; border:1px solid #ccc; color:${color}">${remarks}</td>
+    </tr>
+  `;
+};
+
+//    =========================================================================
+//    Generic SweetAlert2 Table Renderer
+//    =========================================================================
+const showImportResults = (rows, title, successMessage) => {
+  if (rows.length > 0) {
+    Swal.fire({
+      title,
+      html: `
+        <div style="max-height:300px; overflow:auto; text-align:left">
+          <table style="border-collapse: collapse; width:100%; font-size:14px;">
+            <thead>
+              <tr>
+                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; text-align:center; color:white;">#</th>
+                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Order ID</th>
+                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Remarks</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${rows.join("")}
+            </tbody>
+          </table>
+        </div>
+      `,
+      width: "40em",
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      didOpen: () => {
+        document.querySelectorAll(".copy-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const orderId = btn.getAttribute("data-order-id");
+            navigator.clipboard.writeText(orderId).then(() => {
+              // highlight by changing color
+              const originalColor = btn.style.color;
+              btn.style.color = "green";
+
+              // revert back after 2 seconds
+              setTimeout(() => {
+                btn.style.color = originalColor;
+              }, 2000);
+            });
+          });
+        });
+      },
+    });
+  } else {
+    toast.success(successMessage);
+  }
+};
+
+//    =========================================================================
+//    Public Exports
+//    =========================================================================
+
+// Show Order Import Results
+export const showOrderImportResults = (details, platform) => {
   const rows = [];
 
   if (details?.imported?.length) {
@@ -53,217 +167,35 @@ export const showOrderImportResults = (details) => {
     });
   }
 
-  if (rows.length > 0) {
-    Swal.fire({
-      icon: "info",
-      title: "Import Results",
-      html: `
-        <div style="max-height:300px; overflow:auto; text-align:left">
-          <table style="border-collapse: collapse; width:100%; font-size:14px;">
-            <thead>
-              <tr>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; text-align:center; color:white;">#</th>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Order ID</th>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Remarks</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rows.join("")}
-            </tbody>
-          </table>
-        </div>
-      `,
-      width: "40em",
-    });
-  } else {
-    toast.success("Orders imported successfully!");
-  }
+  showImportResults(
+    rows,
+    `${toProperCase(platform)} Import Results`,
+    "Orders imported successfully!"
+  );
 };
 
+// Show Sales Import Results
 
-// Build one table row
-const buildSalesRow = (idx, id, type = "paid") => {
-  let remarks = "";
-  let color = "green";
-
-  if (type === "paid") {
-    remarks = "Paid Successfully";
-    color = "green";
-  } else {
-    remarks = "Not Found / Unpaid";
-    color = "red";
-  }
-
-  return `
-    <tr>
-      <td style="padding:4px; border:1px solid #ccc; text-align:center;">${idx + 1}</td>
-      <td style="padding:4px; border:1px solid #ccc;">${id}</td>
-      <td style="padding:4px; border:1px solid #ccc; color:${color}">${remarks}</td>
-    </tr>
-  `;
-};
-
-// Main helper
-export const showSalesImportResults = (details, message) => {
+export const showSalesImportResults = (details, platform) => {
   const rows = [];
 
   if (details?.alreadyPaid?.length) {
-    details.alreadyPaid.forEach((id, idx) => {
-      rows.push(buildSalesRow(idx, id, "paid"));
+    details.alreadyPaid.forEach((item, idx) => {
+      rows.push(buildSalesRow(idx, item, "paid"));
     });
   }
 
   if (details?.notFound?.length) {
-    details.notFound.forEach((id, idx) => {
-      rows.push(buildSalesRow(details.alreadyPaid?.length + idx, id, "unpaid"));
+    details.notFound.forEach((item, idx) => {
+      rows.push(
+        buildSalesRow(details.alreadyPaid?.length + idx, item, "unpaid")
+      );
     });
   }
 
-  if (rows.length > 0) {
-    Swal.fire({
-      icon: "info",
-      title: "Import Results",
-      html: `
-        <div style="max-height:300px; overflow:auto; text-align:left">
-          <table style="border-collapse: collapse; width:100%; font-size:14px;">
-            <thead>
-              <tr>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; text-align:center; color:white;">#</th>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Order ID</th>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Remarks</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${rows.join("")}
-            </tbody>
-          </table>
-        </div>
-      `,
-      width: "40em",
-    });
-  } else {
-    toast.success(message || "Sales imported successfully!");
-  }
+  showImportResults(
+    rows,
+    `${toProperCase(platform)} Import Results`,
+    "Sales imported successfully!"
+  );
 };
-
-// Merged code from both helpers above
-// import Swal from "sweetalert2";
-// import { toast } from "react-toastify";
-
-// const buildRow = (idx, item, type, context = "sales") => {
-//   let remarks = "";
-//   let color = "black";
-
-//   if (context === "sales") {
-//     if (type === "paid") {
-//       remarks = "Paid Successfully";
-//       color = "green";
-//     } else {
-//       remarks = "Not Found / Unpaid";
-//       color = "red";
-//     }
-//     return `
-//       <tr>
-//         <td style="padding:4px; border:1px solid #ccc; text-align:center;">${idx + 1}</td>
-//         <td style="padding:4px; border:1px solid #ccc;">${item}</td>
-//         <td style="padding:4px; border:1px solid #ccc; color:${color}">${remarks}</td>
-//       </tr>
-//     `;
-//   }
-
-//   if (context === "orders") {
-//     if (type === "imported") {
-//       remarks = "Imported Order";
-//       color = "green";
-//     } else {
-//       switch (item.reason) {
-//         case "Product not found":
-//           remarks = item.reason;
-//           color = "red";
-//           break;
-//         case "Order already imported":
-//           remarks = item.reason;
-//           color = "blue";
-//           break;
-//         case "Insufficient stock":
-//           remarks = item.reason;
-//           color = "orange";
-//           break;
-//         default:
-//           remarks = item.reason || "Skipped";
-//       }
-//     }
-//     return `
-//       <tr>
-//         <td style="padding:4px; border:1px solid #ccc; text-align:center;">${idx + 1}</td>
-//         <td style="padding:4px; border:1px solid #ccc;">${item.platformOrderId}</td>
-//         <td style="padding:4px; border:1px solid #ccc; color:${color}">${remarks}</td>
-//       </tr>
-//     `;
-//   }
-// };
-
-// // --- Main helper ---
-// export const showImportResults = (context, details, message) => {
-//   const rows = [];
-
-//   if (context === "sales") {
-//     if (details?.alreadyPaid?.length) {
-//       details.alreadyPaid.forEach((id, idx) => {
-//         rows.push(buildRow(idx, id, "paid", "sales"));
-//       });
-//     }
-
-//     if (details?.notFound?.length) {
-//       details.notFound.forEach((id, idx) => {
-//         rows.push(buildRow(details.alreadyPaid?.length + idx, id, "unpaid", "sales"));
-//       });
-//     }
-//   }
-
-//   if (context === "orders") {
-//     if (details?.imported?.length) {
-//       details.imported.forEach((item, idx) => {
-//         rows.push(buildRow(idx, item, "imported", "orders"));
-//       });
-//     }
-
-//     if (details?.skipped?.length) {
-//       details.skipped.forEach((item, idx) => {
-//         rows.push(buildRow(details.imported?.length + idx, item, "skipped", "orders"));
-//       });
-//     }
-//   }
-
-//   if (rows.length > 0) {
-//     Swal.fire({
-//       icon: "info",
-//       title: "Import Results",
-//       html: `
-//         <div style="max-height:300px; overflow:auto; text-align:left">
-//           <table style="border-collapse: collapse; width:100%; font-size:14px;">
-//             <thead>
-//               <tr>
-//                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; text-align:center; color:white;">#</th>
-//                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">
-//                   ${context === "sales" ? "Sales ID" : "Order ID"}
-//                 </th>
-//                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Remarks</th>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               ${rows.join("")}
-//             </tbody>
-//           </table>
-//         </div>
-//       `,
-//       width: "40em",
-//     });
-//   } else {
-//     toast.success(message || `${context === "sales" ? "Sales" : "Orders"} imported successfully!`);
-//   }
-// };
-
-// import { showImportResults } from "./importHelpers";
-// showImportResults("sales", details, message);
-// showImportResults("orders", details);
