@@ -62,12 +62,12 @@ export const getStatusBadgeData = (
   const defaultColorMap = {
     [StatusEnum.AVAILABLE]: "success",
     [StatusEnum.OUT_OF_STOCK]: "danger",
-    [StatusEnum.FOR_PICK_UP]: "warning",
-    [StatusEnum.TO_SHIP]: "info",
+    [StatusEnum.FOR_PICK_UP]: "info",
+    [StatusEnum.TO_SHIP]: "warning",
     [StatusEnum.SHIPPING]: "primary",
     [StatusEnum.RETURNED]: "dark",
-    [StatusEnum.DELIVERED]: "success",
-    [StatusEnum.COMPLETED]: "secondary",
+    [StatusEnum.DELIVERED]: "secondary",
+    [StatusEnum.COMPLETED]: "success",
     true: "success",
     false: "secondary",
   };

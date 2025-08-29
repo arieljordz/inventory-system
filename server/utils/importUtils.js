@@ -153,21 +153,21 @@ export const salesPlatformConfigs = {
 // --- Platform configuration for return ---
 export const returnPlatformConfigs = {
   shopee: {
-    sheetName: "Income",
+    sheetName: "orders",
     fields: {
       platformOrderId: "Order ID",
     },
   },
   tiktok: {
-    sheetName: "Order details",
+    sheetName: "OrderSKUList",
     fields: {
-      platformOrderId: "Order/adjustment ID",
+      platformOrderId: "Order ID",
     },
   },
   lazada: {
-    sheetName: "Income Overview",
+    sheetName: "sheet1",
     fields: {
-      platformOrderId: "Order Number",
+      platformOrderId: "Order ID",
     },
   },
 };

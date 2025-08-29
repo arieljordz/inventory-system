@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import AuditLog from "../models/AuditLog.js";
 import { normalizeString, escapeRegex } from "../utils/commonUtils.js";
 
@@ -6,11 +7,19 @@ export const getAllAuditLogs = async (req, res) => {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 100);
     const search = (req.query.search || "").trim();
+
+    const skip = (page - 1) * limit;
+
+    // Prepare search regex
     const normalizedSearch = normalizeString(search);
     const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
     const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
-    const skip = (page - 1) * limit;
+    // Try to convert search to ObjectId if valid
+    let searchObjectId = null;
+    if (mongoose.Types.ObjectId.isValid(search)) {
+      searchObjectId = new mongoose.Types.ObjectId(search);
+    }
 
     // Build search query
     const match = search
@@ -21,6 +30,11 @@ export const getAllAuditLogs = async (req, res) => {
             { collectionName: rawSafeRegex },
             { ip: rawSafeRegex },
             { userAgent: rawSafeRegex },
+            { "user.name": rawSafeRegex }, // search by user name
+            { "user.email": rawSafeRegex }, // search by user email
+            ...(searchObjectId
+              ? [{ documentId: searchObjectId }]
+              : [{ documentId: { $regex: rawSafeRegex } }]),
           ],
         }
       : {};

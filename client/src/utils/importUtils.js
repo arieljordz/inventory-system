@@ -61,7 +61,6 @@ const buildOrderRow = (idx, item, type = "imported") => {
 };
 
 // Build a single Sales row for the result table
-
 const buildSalesRow = (idx, item, type = "paid") => {
   let remarks = "";
   let color = "black";
@@ -79,7 +78,44 @@ const buildSalesRow = (idx, item, type = "paid") => {
         remarks = item.reason;
         color = "blue";
         break;
-      case "Order is now paid":
+      default:
+        remarks = item.reason || "Skipped";
+    }
+  }
+
+  return `
+    <tr>
+      <td style="padding:6px; border:1px solid #ccc; text-align:center;">${
+        idx + 1
+      }</td>
+      <td style="padding:6px; border:1px solid #ccc;">
+        ${item.platformOrderId}
+        ${buildCopyButton(item.platformOrderId)}
+      </td>
+      <td style="padding:6px; border:1px solid #ccc; color:${color}">${remarks}</td>
+    </tr>
+  `;
+};
+
+// Build a single Returns row for the result table
+const buildReturnsRow = (idx, item, type = "returned") => {
+  let remarks = "";
+  let color = "black";
+
+  if (type === "returned") {
+    remarks = "Order is now returned";
+    color = "green";
+  } else {
+    switch (item.reason) {
+      case "Order not found":
+        remarks = item.reason;
+        color = "red";
+        break;
+      case "Order is already returned":
+        remarks = item.reason;
+        color = "blue";
+        break;
+      case "Failed to restock returned product":
         remarks = item.reason;
         color = "orange";
         break;
@@ -207,16 +243,20 @@ export const showSalesImportResults = (details, platform) => {
 export const showReturnImportResults = (details, platform) => {
   const rows = [];
 
-  if (details?.alreadyPaid?.length) {
-    details.alreadyPaid.forEach((item, idx) => {
-      rows.push(buildSalesRow(idx, item, "paid"));
+  if (details?.returned?.length) {
+    details.returned.forEach((item, idx) => {
+      rows.push(buildReturnsRow(idx, item, "returned"));
     });
   }
 
   if (details?.notFound?.length) {
     details.notFound.forEach((item, idx) => {
       rows.push(
-        buildSalesRow(details.alreadyPaid?.length + idx, item, "unpaid")
+        buildReturnsRow(
+          details.alreadyReturned?.length + idx,
+          item,
+          "alreadyReturned"
+        )
       );
     });
   }

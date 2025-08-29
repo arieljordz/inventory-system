@@ -1,3 +1,48 @@
+import { StatusEnum } from "../enums/enums.js";
+
+export const getStatusBadgeData = (
+  status,
+  customColorMap = {},
+  customLabelMap = {}
+) => {
+  // Normalize status to string
+  const statusKey = typeof status === "boolean" ? String(status) : status;
+
+  const defaultColorMap = {
+    [StatusEnum.AVAILABLE]: "success",
+    [StatusEnum.OUT_OF_STOCK]: "danger",
+    [StatusEnum.FOR_PICK_UP]: "info",
+    [StatusEnum.TO_SHIP]: "warning",
+    [StatusEnum.SHIPPING]: "primary",
+    [StatusEnum.RETURNED]: "dark",
+    [StatusEnum.DELIVERED]: "secondary",
+    [StatusEnum.COMPLETED]: "success",
+    true: "success",
+    false: "secondary",
+  };
+
+  const defaultLabelMap = {
+    [StatusEnum.AVAILABLE]: "In Stock",
+    [StatusEnum.OUT_OF_STOCK]: "No Stock",
+    [StatusEnum.FOR_PICK_UP]: "On Process",
+    [StatusEnum.TO_SHIP]: "To Ship",
+    [StatusEnum.SHIPPING]: "Shipping",
+    [StatusEnum.RETURNED]: "Returned",
+    [StatusEnum.DELIVERED]: "Delivered",
+    [StatusEnum.COMPLETED]: "Completed",
+    true: "Paid",
+    false: "Unpaid",
+  };
+
+  const colorMap = { ...defaultColorMap, ...customColorMap };
+  const labelMap = { ...defaultLabelMap, ...customLabelMap };
+
+  return {
+    label: labelMap[statusKey] ?? statusKey,
+    color: colorMap[statusKey] ?? "secondary",
+  };
+};
+
 // Escape regex special characters for queries
 export const escapeRegex = (text = "") =>
   text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");

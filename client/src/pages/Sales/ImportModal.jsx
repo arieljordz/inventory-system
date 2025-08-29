@@ -24,11 +24,19 @@ const ImportModal = ({
 
   return (
     <Modal show={show} onHide={onClose} backdrop="static" size="md">
-      <Modal.Header closeButton className="bg-primary text-white">
+      <Modal.Header
+        closeButton
+        className={
+          importType === "returned"
+            ? "bg-warning text-dark"
+            : "bg-success text-dark"
+        }
+      >
         <Modal.Title>
           {importType === "returned" ? "Import Returned" : "Import Sales"}
         </Modal.Title>
       </Modal.Header>
+
       <Modal.Body>
         <SelectInput
           label="Platform"
@@ -49,7 +57,7 @@ const ImportModal = ({
 
         <div className="d-flex justify-content-end mt-3">
           <Button
-            variant="success"
+            variant={importType === "returned" ? "warning" : "success"}
             onClick={() => fileInputRef.current?.click()}
           >
             <i className="fas fa-file-import mr-1"></i> Choose File

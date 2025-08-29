@@ -1,6 +1,6 @@
 import moment from "moment-timezone";
 import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
-import { formatAmount } from "../utils/commonUtils.js";
+import { formatAmount, getStatusBadgeData } from "../utils/commonUtils.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
 
@@ -9,6 +9,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
 
   return reportData.map((item) => {
     const date = new Date(item.createdAt).toLocaleDateString();
+    const { label } = getStatusBadgeData(item.status);
 
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       return {
@@ -17,7 +18,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
         Quantity: item.quantity,
         Type: item.movementType || "-",
         Date: date,
-        Status: item.status || "-",
+        Status: label,
       };
     } else if (
       reportType === ReportTypeEnum.ORDERS ||
@@ -31,7 +32,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
         Courier: item.courier || "-",
         Quantity: item.quantity,
         Date: date,
-        "Payment Status": item.isPaid ? "Paid" : "Unpaid",
+        "Payment": item.isPaid ? "Paid" : "Unpaid",
       };
     } else {
       const price = item.product?.price || 0;
@@ -44,7 +45,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
         Quantity: item.quantity,
         Price: formatAmount(price),
         "Total Amount": formatAmount(item.totalAmount),
-        "Payment Status": item.isPaid ? "Paid" : "Unpaid",
+        "Payment": item.isPaid ? "Paid" : "Unpaid",
       };
     }
   });
@@ -55,6 +56,7 @@ export const formatExportData = (reportData = [], reportType = "") => {
 
   return reportData.map((item) => {
     const date = new Date(item.createdAt).toLocaleDateString();
+    const { label } = getStatusBadgeData(item.status);
 
     if (reportType.includes(ReportTypeEnum.INVENTORY)) {
       return {
@@ -63,7 +65,7 @@ export const formatExportData = (reportData = [], reportType = "") => {
         Quantity: item.quantity,
         Type: item.movementType || "-",
         Date: date,
-        Status: item.status || "-",
+        Status: label,
       };
     } else if (
       reportType === ReportTypeEnum.ORDERS ||
@@ -77,7 +79,7 @@ export const formatExportData = (reportData = [], reportType = "") => {
         Courier: item.courier || "-",
         Quantity: item.quantity,
         Date: date,
-        "Payment Status": item.isPaid ? "Paid" : "Unpaid",
+        Payment: item.isPaid ? "Paid" : "Unpaid",
       };
     } else {
       const price = item.product?.price || 0;
@@ -90,7 +92,7 @@ export const formatExportData = (reportData = [], reportType = "") => {
         Quantity: item.quantity,
         Price: price,
         "Total Amount": item.totalAmount,
-        "Payment Status": item.isPaid ? "Paid" : "Unpaid",
+        Payment: item.isPaid ? "Paid" : "Unpaid",
       };
     }
   });
@@ -110,7 +112,7 @@ export const getCenteredColumns = (reportType = "") => {
       "Platform",
       "Courier",
       "Date",
-      "Payment Status",
+      "Payment",
     ];
   } else {
     return [
@@ -120,7 +122,7 @@ export const getCenteredColumns = (reportType = "") => {
       "Platform",
       "Courier",
       "Date",
-      "Payment Status",
+      "Payment",
     ];
   }
 };

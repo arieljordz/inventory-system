@@ -43821,5 +43821,4798 @@
       "$date": "2025-08-28T05:27:31.660Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13608fcac7c6d18772c35"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508281WCWW2QB",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13607fcac7c6d18772c30"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508281WCWW2QB",
+        "platform": "shopee",
+        "courier": "Standard Local-J&T Express",
+        "orderDate": {
+          "$date": "2025-08-28T15:38:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13607fcac7c6d18772c30"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:27.823Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:27.823Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "order": {
+          "$oid": "68b13607fcac7c6d18772c30"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-J&T Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508281WCWW2QB",
+        "_id": {
+          "$oid": "68b13608fcac7c6d18772c33"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:28.246Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:28.246Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 90,
+        "sku": "10-ME-ARMY-80989",
+        "variant": "Army Green",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "army green",
+        "normalizedSku": "10-me-army-80989",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.393Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:27.888Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:28.446Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:28.446Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13608fcac7c6d18772c3e"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508281Y4YSKED",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13608fcac7c6d18772c39"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508281Y4YSKED",
+        "platform": "shopee",
+        "courier": "Standard Local-Flash Express",
+        "orderDate": {
+          "$date": "2025-08-28T16:10:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13608fcac7c6d18772c39"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:28.582Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:28.582Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "order": {
+          "$oid": "68b13608fcac7c6d18772c39"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-Flash Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508281Y4YSKED",
+        "_id": {
+          "$oid": "68b13608fcac7c6d18772c3c"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:28.786Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:28.786Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 77,
+        "sku": "10-ME-BLACK-26170",
+        "variant": "Black",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "black",
+        "normalizedSku": "10-me-black-26170",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.304Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:28.684Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:28.826Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:28.826Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13609fcac7c6d18772c47"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 25082822VA7AF1",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13608fcac7c6d18772c42"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cc2"
+        },
+        "quantity": 1,
+        "platformOrderId": "25082822VA7AF1",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T17:16:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13608fcac7c6d18772c42"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:28.946Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:28.946Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cc2"
+        },
+        "order": {
+          "$oid": "68b13608fcac7c6d18772c42"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 25082822VA7AF1",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c45"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.029Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.029Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cc2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 379,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 94,
+        "sku": "10-ME-ORANG-10112",
+        "variant": "Orange",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "orange",
+        "normalizedSku": "10-me-orang-10112",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.398Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:28.986Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:29.070Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:29.070Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13609fcac7c6d18772c50"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508282383V0MK",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13609fcac7c6d18772c4b"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508282383V0MK",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T17:23:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c4b"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.184Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.184Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "order": {
+          "$oid": "68b13609fcac7c6d18772c4b"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508282383V0MK",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c4e"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.265Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.265Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 89,
+        "sku": "10-ME-ARMY-80989",
+        "variant": "Army Green",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "army green",
+        "normalizedSku": "10-me-army-80989",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.393Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.224Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:29.307Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:29.307Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13609fcac7c6d18772c59"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508282561N04C",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13609fcac7c6d18772c54"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508282561N04C",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T17:58:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c54"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.424Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.424Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "order": {
+          "$oid": "68b13609fcac7c6d18772c54"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508282561N04C",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c57"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.507Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.507Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 76,
+        "sku": "10-ME-BLACK-26170",
+        "variant": "Black",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "black",
+        "normalizedSku": "10-me-black-26170",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.304Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.465Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:29.547Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:29.547Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13609fcac7c6d18772c62"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 250828275Y89C1",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13609fcac7c6d18772c5d"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ad6ac3917fe15f5a6d607d"
+        },
+        "quantity": 1,
+        "platformOrderId": "250828275Y89C1",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T18:33:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c5d"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.663Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.663Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ad6ac3917fe15f5a6d607d"
+        },
+        "order": {
+          "$oid": "68b13609fcac7c6d18772c5d"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 250828275Y89C1",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c60"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.747Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.747Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ad6ac3917fe15f5a6d607d"
+        },
+        "name": "Avocado Seeds Fresh from the Farm sold per piece - Lowest price online",
+        "price": 39,
+        "description": "Avocado Seeds Fresh from the Farm sold per piece - Lowest price online",
+        "image": "",
+        "imageId": "",
+        "quantity": 98,
+        "sku": "AVOCA-DEFAU-07213",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-26T08:05:23.688Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.704Z"
+        },
+        "normalizedName": "avocado seeds fresh from the farm sold per piece - lowest price online",
+        "normalizedVariant": "default",
+        "normalizedSku": "avoca-defau-07213",
+        "normalizedDescription": "avocado seeds fresh from the farm sold per piece - lowest price online",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:29.788Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:29.788Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360afcac7c6d18772c6b"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 25082828XVTBAT",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13609fcac7c6d18772c66"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca8"
+        },
+        "quantity": 1,
+        "platformOrderId": "25082828XVTBAT",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T19:05:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c66"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.902Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.902Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca8"
+        },
+        "order": {
+          "$oid": "68b13609fcac7c6d18772c66"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 25082828XVTBAT",
+        "_id": {
+          "$oid": "68b13609fcac7c6d18772c69"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:29.983Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.983Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca8"
+        },
+        "name": "Stainless Ring 2 Pieces for Hammocks / Duyan - Open for resellers, Big Discounts for repeat buyers",
+        "price": 199,
+        "description": "Stainless Ring 2 Pieces for Hammocks / Duyan - Open for resellers, Big Discounts for repeat buyers",
+        "image": "",
+        "imageId": "",
+        "quantity": 91,
+        "sku": "STAIN-DEFAU-57138",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "stainless ring 2 pieces for hammocks / duyan - open for resellers, big discounts for repeat buyers",
+        "normalizedVariant": "default",
+        "normalizedSku": "stain-defau-57138",
+        "normalizedDescription": "stainless ring 2 pieces for hammocks / duyan - open for resellers, big discounts for repeat buyers",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.199Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:29.942Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:30.024Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:30.024Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360afcac7c6d18772c74"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508282CRQDTBX",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360afcac7c6d18772c6f"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508282CRQDTBX",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T20:13:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c6f"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.137Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.137Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "order": {
+          "$oid": "68b1360afcac7c6d18772c6f"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508282CRQDTBX",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c72"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.217Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.217Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 88,
+        "sku": "10-ME-ARMY-80989",
+        "variant": "Army Green",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "army green",
+        "normalizedSku": "10-me-army-80989",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.393Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.177Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:30.258Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:30.258Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360afcac7c6d18772c7d"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508282P1NSM4F",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360afcac7c6d18772c78"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "quantity": 2,
+        "platformOrderId": "2508282P1NSM4F",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T22:59:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c78"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.373Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.373Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "order": {
+          "$oid": "68b1360afcac7c6d18772c78"
+        },
+        "movementType": "OUT",
+        "quantity": 2,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508282P1NSM4F",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c7b"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.454Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.454Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 74,
+        "sku": "10-ME-BLACK-26170",
+        "variant": "Black",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "black",
+        "normalizedSku": "10-me-black-26170",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.304Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.413Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:30.494Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:30.494Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360afcac7c6d18772c86"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508292UP49KP1",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360afcac7c6d18772c81"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "quantity": 10,
+        "platformOrderId": "2508292UP49KP1",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T00:40:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c81"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.607Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.607Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "order": {
+          "$oid": "68b1360afcac7c6d18772c81"
+        },
+        "movementType": "OUT",
+        "quantity": 10,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508292UP49KP1",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c84"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.687Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.687Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "price": 269,
+        "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "image": "",
+        "imageId": "",
+        "quantity": 21,
+        "sku": "DUYAN-DEFAU-51336",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-51336",
+        "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.294Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.647Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:30.727Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:30.727Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360afcac7c6d18772c90"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293A6EJADX",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360afcac7c6d18772c8b"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "quantity": 20,
+        "platformOrderId": "2508293A6EJADX",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T05:00:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c8b"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.876Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.876Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "order": {
+          "$oid": "68b1360afcac7c6d18772c8b"
+        },
+        "movementType": "OUT",
+        "quantity": 20,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293A6EJADX",
+        "_id": {
+          "$oid": "68b1360afcac7c6d18772c8e"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:30.957Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.957Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "price": 269,
+        "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "image": "",
+        "imageId": "",
+        "quantity": 1,
+        "sku": "DUYAN-DEFAU-51336",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-51336",
+        "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.294Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:30.916Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:30.997Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:30.997Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360bfcac7c6d18772c9b"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293DGNFQKS",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360bfcac7c6d18772c96"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293DGNFQKS",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T05:59:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360bfcac7c6d18772c96"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:31.186Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.186Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "order": {
+          "$oid": "68b1360bfcac7c6d18772c96"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293DGNFQKS",
+        "_id": {
+          "$oid": "68b1360bfcac7c6d18772c99"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:31.266Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.266Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb8"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 87,
+        "sku": "10-ME-ARMY-80989",
+        "variant": "Army Green",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "army green",
+        "normalizedSku": "10-me-army-80989",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.393Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.226Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:31.306Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:31.306Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360bfcac7c6d18772ca8"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293J42BCBV",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360bfcac7c6d18772ca3"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293J42BCBV",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T07:22:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360bfcac7c6d18772ca3"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:31.563Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.563Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "order": {
+          "$oid": "68b1360bfcac7c6d18772ca3"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293J42BCBV",
+        "_id": {
+          "$oid": "68b1360bfcac7c6d18772ca6"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:31.644Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.644Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "price": 269,
+        "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "image": "",
+        "imageId": "",
+        "quantity": 0,
+        "sku": "DUYAN-DEFAU-51336",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Out of Stock",
+        "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-51336",
+        "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.294Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.604Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:31.684Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:31.684Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360bfcac7c6d18772cb3"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293JUKQU82",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360bfcac7c6d18772cae"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293JUKQU82",
+        "platform": "shopee",
+        "courier": "Standard Local-Flash Express",
+        "orderDate": {
+          "$date": "2025-08-29T07:35:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360bfcac7c6d18772cae"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:31.869Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.869Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "order": {
+          "$oid": "68b1360bfcac7c6d18772cae"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-Flash Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293JUKQU82",
+        "_id": {
+          "$oid": "68b1360bfcac7c6d18772cb1"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:31.950Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.950Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 73,
+        "sku": "10-ME-BLACK-26170",
+        "variant": "Black",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "black",
+        "normalizedSku": "10-me-black-26170",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.304Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:31.910Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:31.990Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:31.990Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360cfcac7c6d18772cbc"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293MB9KQ40",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360cfcac7c6d18772cb7"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293MB9KQ40",
+        "platform": "shopee",
+        "courier": "Standard Local-J&T Express",
+        "orderDate": {
+          "$date": "2025-08-29T08:02:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360cfcac7c6d18772cb7"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:32.103Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:32.103Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "order": {
+          "$oid": "68b1360cfcac7c6d18772cb7"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-J&T Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293MB9KQ40",
+        "_id": {
+          "$oid": "68b1360cfcac7c6d18772cba"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:32.183Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:32.183Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cb2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 489,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 72,
+        "sku": "10-ME-BLACK-26170",
+        "variant": "Black",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "black",
+        "normalizedSku": "10-me-black-26170",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.304Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:32.142Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:32.222Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:32.222Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1360cfcac7c6d18772cc5"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293QQUTHCE",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1360cfcac7c6d18772cc0"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cc2"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293QQUTHCE",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T09:02:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1360cfcac7c6d18772cc0"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:32.335Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:32.335Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cc2"
+        },
+        "order": {
+          "$oid": "68b1360cfcac7c6d18772cc0"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293QQUTHCE",
+        "_id": {
+          "$oid": "68b1360cfcac7c6d18772cc3"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:09:32.414Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:32.414Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cc2"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 379,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 93,
+        "sku": "10-ME-ORANG-10112",
+        "variant": "Orange",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "orange",
+        "normalizedSku": "10-me-orang-10112",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.398Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:09:32.374Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:09:32.454Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:09:32.454Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13728fcac7c6d18772cea"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293TD2D3MK",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13727fcac7c6d18772ce5"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68aed53092b53ade0d5edf8f"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293TD2D3MK",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T09:50:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13727fcac7c6d18772ce5"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:14:15.938Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:15.938Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68aed53092b53ade0d5edf8f"
+        },
+        "order": {
+          "$oid": "68b13727fcac7c6d18772ce5"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293TD2D3MK",
+        "_id": {
+          "$oid": "68b13728fcac7c6d18772ce8"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:14:16.024Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.024Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68aed53092b53ade0d5edf8f"
+        },
+        "name": "1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor",
+        "price": 189,
+        "description": "1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor",
+        "image": "",
+        "imageId": "",
+        "quantity": 98,
+        "sku": "1-SET-RING-04712",
+        "variant": "Ring Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-27T09:51:44.793Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:15.983Z"
+        },
+        "normalizedName": "1 set already 2 pcs ring & 2 pcs heavy duty carabiner direct supplier snap clip for hammocks outdoor",
+        "normalizedVariant": "ring only",
+        "normalizedSku": "1-set-ring-04712",
+        "normalizedDescription": "1 set already 2 pcs ring & 2 pcs heavy duty carabiner direct supplier snap clip for hammocks outdoor",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:14:16.065Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:14:16.065Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13728fcac7c6d18772cf3"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293UPPP0RT",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13728fcac7c6d18772cee"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ad6942917fe15f5a6d5fea"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293UPPP0RT",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T10:13:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13728fcac7c6d18772cee"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:14:16.178Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.178Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ad6942917fe15f5a6d5fea"
+        },
+        "order": {
+          "$oid": "68b13728fcac7c6d18772cee"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293UPPP0RT",
+        "_id": {
+          "$oid": "68b13728fcac7c6d18772cf1"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:14:16.258Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.258Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ad6942917fe15f5a6d5fea"
+        },
+        "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "price": 469,
+        "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+        "image": "",
+        "imageId": "",
+        "quantity": 97,
+        "sku": "10-ME-AZURE-23811",
+        "variant": "Azure Blue",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-26T07:58:58.926Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.218Z"
+        },
+        "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "normalizedVariant": "azure blue",
+        "normalizedSku": "10-me-azure-23811",
+        "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:14:16.297Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:14:16.297Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13728fcac7c6d18772cfc"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293VQHN89R",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b13728fcac7c6d18772cf7"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5c9c"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293VQHN89R",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T10:32:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b13728fcac7c6d18772cf7"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:14:16.411Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.411Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5c9c"
+        },
+        "order": {
+          "$oid": "68b13728fcac7c6d18772cf7"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293VQHN89R",
+        "_id": {
+          "$oid": "68b13728fcac7c6d18772cfa"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:14:16.492Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.492Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5c9c"
+        },
+        "name": "THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner",
+        "price": 259,
+        "description": "THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner",
+        "image": "",
+        "imageId": "",
+        "quantity": 96,
+        "sku": "THICK-RING-94537",
+        "variant": "Ring Pair Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "thick (makapal) stainless ring for duyan 2 pcs w/ or w/o carabiner",
+        "normalizedVariant": "ring pair only",
+        "normalizedSku": "thick-ring-94537",
+        "normalizedDescription": "thick (makapal) stainless ring for duyan 2 pcs w/ or w/o carabiner",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.192Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:14:16.451Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:14:16.532Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:14:16.532Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b137e6fcac7c6d18772d2e"
+    },
+    "action": "create",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Added new product: Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b137e6fcac7c6d18772d2a"
+    },
+    "before": null,
+    "after": {
+      "name": "Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks",
+      "price": 569,
+      "description": "Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "STATI-BLACK-46492",
+      "variant": "Black",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "_id": {
+        "$oid": "68b137e6fcac7c6d18772d2a"
+      },
+      "createdAt": {
+        "$date": "2025-08-29T05:17:26.530Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:17:26.530Z"
+      },
+      "normalizedName": "static utility rope w/ makapal 1/4 stainless ring for hammocks",
+      "normalizedVariant": "black",
+      "normalizedSku": "stati-black-46492",
+      "normalizedDescription": "static utility rope w/ makapal 1/4 stainless ring for hammocks",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:17:26.617Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:17:26.617Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b137f3fcac7c6d18772d4c"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 250829305YR41Q",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b137f3fcac7c6d18772d47"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68b137e6fcac7c6d18772d2a"
+        },
+        "quantity": 1,
+        "platformOrderId": "250829305YR41Q",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T02:01:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b137f3fcac7c6d18772d47"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:17:39.738Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:17:39.738Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68b137e6fcac7c6d18772d2a"
+        },
+        "order": {
+          "$oid": "68b137f3fcac7c6d18772d47"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 250829305YR41Q",
+        "_id": {
+          "$oid": "68b137f3fcac7c6d18772d4a"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:17:39.821Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:17:39.821Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68b137e6fcac7c6d18772d2a"
+        },
+        "name": "Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks",
+        "price": 569,
+        "description": "Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks",
+        "image": "",
+        "imageId": "",
+        "quantity": 99,
+        "sku": "STATI-BLACK-46492",
+        "variant": "Black",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-29T05:17:26.530Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:17:39.780Z"
+        },
+        "normalizedName": "static utility rope w/ makapal 1/4 stainless ring for hammocks",
+        "normalizedVariant": "black",
+        "normalizedSku": "stati-black-46492",
+        "normalizedDescription": "static utility rope w/ makapal 1/4 stainless ring for hammocks",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:17:39.862Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:17:39.862Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382bfcac7c6d18772d8a"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580162287752873287",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382bfcac7c6d18772d85"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541d4534336e7e1c5d34"
+        },
+        "quantity": 1,
+        "platformOrderId": "580162287752873287",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T16:25:25.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772d85"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.218Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.218Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541d4534336e7e1c5d34"
+        },
+        "order": {
+          "$oid": "68b1382bfcac7c6d18772d85"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580162287752873287",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772d88"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.300Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.300Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541d4534336e7e1c5d34"
+        },
+        "name": "Duyan Stainless Ring ( 2 PCS )",
+        "price": 189,
+        "description": "Duyan Stainless Ring ( 2 PCS )",
+        "image": "",
+        "imageId": "",
+        "quantity": 75,
+        "sku": "DUYAN-DEFAU-53766",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan stainless ring ( 2 pcs )",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-53766",
+        "normalizedDescription": "duyan stainless ring ( 2 pcs )",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:13.224Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.259Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:35.340Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:35.340Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382bfcac7c6d18772d93"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580163303874135213",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382bfcac7c6d18772d8e"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "quantity": 1,
+        "platformOrderId": "580163303874135213",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T18:08:32.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772d8e"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.454Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.454Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "order": {
+          "$oid": "68b1382bfcac7c6d18772d8e"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580163303874135213",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772d91"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.534Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.534Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "price": 49,
+        "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "image": "",
+        "imageId": "",
+        "quantity": 63,
+        "sku": "STAIN-2-FEE-77290",
+        "variant": "2 Feet",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "normalizedVariant": "2 feet",
+        "normalizedSku": "stain-2-fee-77290",
+        "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.196Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.494Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:35.574Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:35.574Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382bfcac7c6d18772d9c"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580163892421231959",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382bfcac7c6d18772d97"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5c9e"
+        },
+        "quantity": 1,
+        "platformOrderId": "580163892421231959",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T19:07:57.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772d97"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.689Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.689Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5c9e"
+        },
+        "order": {
+          "$oid": "68b1382bfcac7c6d18772d97"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580163892421231959",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772d9a"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.770Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.770Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5c9e"
+        },
+        "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "price": 89,
+        "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "image": "",
+        "imageId": "",
+        "quantity": 20,
+        "sku": "STAIN-4-FEE-91451",
+        "variant": "4 Feet",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "normalizedVariant": "4 feet",
+        "normalizedSku": "stain-4-fee-91451",
+        "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.193Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.729Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:35.810Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:35.810Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382cfcac7c6d18772da5"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580164004781589873",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382bfcac7c6d18772da0"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5c9e"
+        },
+        "quantity": 1,
+        "platformOrderId": "580164004781589873",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T19:15:19.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382bfcac7c6d18772da0"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:35.927Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.927Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5c9e"
+        },
+        "order": {
+          "$oid": "68b1382bfcac7c6d18772da0"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580164004781589873",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772da3"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.014Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.014Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5c9e"
+        },
+        "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "price": 89,
+        "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "image": "",
+        "imageId": "",
+        "quantity": 19,
+        "sku": "STAIN-4-FEE-91451",
+        "variant": "4 Feet",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "normalizedVariant": "4 feet",
+        "normalizedSku": "stain-4-fee-91451",
+        "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.193Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:35.969Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:36.052Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:36.052Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382cfcac7c6d18772dae"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580164207733409124",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382cfcac7c6d18772da9"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68aecaa492b53ade0d5eddac"
+        },
+        "quantity": 1,
+        "platformOrderId": "580164207733409124",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T19:34:14.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772da9"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.165Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.165Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68aecaa492b53ade0d5eddac"
+        },
+        "order": {
+          "$oid": "68b1382cfcac7c6d18772da9"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580164207733409124",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772dac"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.246Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.246Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68aecaa492b53ade0d5eddac"
+        },
+        "name": "Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects",
+        "price": 49,
+        "description": "Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects",
+        "image": "",
+        "imageId": "",
+        "quantity": 98,
+        "sku": "STAIN-2-FEE-04005",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-27T09:06:44.099Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.205Z"
+        },
+        "normalizedName": "stainless steel shafting round bar 3/16\" x 2 feet cuttings - 304 high-quality steel for industrial & diy projects",
+        "normalizedVariant": "default",
+        "normalizedSku": "stain-2-fee-04005",
+        "normalizedDescription": "stainless steel shafting round bar 3/16\" x 2 feet cuttings - 304 high-quality steel for industrial & diy projects",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:36.287Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:36.287Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382cfcac7c6d18772db7"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580164997830706568",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382cfcac7c6d18772db2"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "quantity": 1,
+        "platformOrderId": "580164997830706568",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T20:41:10.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772db2"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.401Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.401Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "order": {
+          "$oid": "68b1382cfcac7c6d18772db2"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580164997830706568",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772db5"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.482Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.482Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "price": 49,
+        "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "image": "",
+        "imageId": "",
+        "quantity": 62,
+        "sku": "STAIN-2-FEE-77290",
+        "variant": "2 Feet",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "normalizedVariant": "2 feet",
+        "normalizedSku": "stain-2-fee-77290",
+        "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.196Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.441Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:36.522Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:36.522Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382cfcac7c6d18772dc0"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580165486662091866",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382cfcac7c6d18772dbb"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68aecaa492b53ade0d5eddac"
+        },
+        "quantity": 1,
+        "platformOrderId": "580165486662091866",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T21:23:48.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772dbb"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.638Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.638Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68aecaa492b53ade0d5eddac"
+        },
+        "order": {
+          "$oid": "68b1382cfcac7c6d18772dbb"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580165486662091866",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772dbe"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.719Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.719Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68aecaa492b53ade0d5eddac"
+        },
+        "name": "Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects",
+        "price": 49,
+        "description": "Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects",
+        "image": "",
+        "imageId": "",
+        "quantity": 97,
+        "sku": "STAIN-2-FEE-04005",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-27T09:06:44.099Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.678Z"
+        },
+        "normalizedName": "stainless steel shafting round bar 3/16\" x 2 feet cuttings - 304 high-quality steel for industrial & diy projects",
+        "normalizedVariant": "default",
+        "normalizedSku": "stain-2-fee-04005",
+        "normalizedDescription": "stainless steel shafting round bar 3/16\" x 2 feet cuttings - 304 high-quality steel for industrial & diy projects",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:36.761Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:36.761Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1382dfcac7c6d18772dca"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580168795116176775",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1382cfcac7c6d18772dc5"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "quantity": 1,
+        "platformOrderId": "580168795116176775",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-29T06:00:53.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772dc5"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.909Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.909Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "order": {
+          "$oid": "68b1382cfcac7c6d18772dc5"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580168795116176775",
+        "_id": {
+          "$oid": "68b1382cfcac7c6d18772dc8"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:18:36.990Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.990Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca2"
+        },
+        "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "price": 49,
+        "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+        "image": "",
+        "imageId": "",
+        "quantity": 61,
+        "sku": "STAIN-2-FEE-77290",
+        "variant": "2 Feet",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "normalizedVariant": "2 feet",
+        "normalizedSku": "stain-2-fee-77290",
+        "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.196Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:18:36.950Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:18:37.030Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:18:37.030Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b13941fcac7c6d18772dde"
+    },
+    "action": "create",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Added new product: 10 PAIR DUYAN RING BIGGER VERSION (Stainless 304) INDOOR/OUTDOOR | SUPER STABLE DURABILITY TESTED | 1 Year Warranty hammock",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b13941fcac7c6d18772dda"
+    },
+    "before": null,
+    "after": {
+      "name": "10 PAIR DUYAN RING BIGGER VERSION (Stainless 304) INDOOR/OUTDOOR | SUPER STABLE DURABILITY TESTED | 1 Year Warranty hammock",
+      "price": 2399,
+      "description": "10 PAIR DUYAN RING BIGGER VERSION (Stainless 304) INDOOR/OUTDOOR | SUPER STABLE DURABILITY TESTED | 1 Year Warranty hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "10-PA-DEFAU-93855",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "_id": {
+        "$oid": "68b13941fcac7c6d18772dda"
+      },
+      "createdAt": {
+        "$date": "2025-08-29T05:23:13.892Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:23:13.892Z"
+      },
+      "normalizedName": "10 pair duyan ring bigger version (stainless 304) indoor/outdoor | super stable durability tested | 1 year warranty hammock",
+      "normalizedVariant": "default",
+      "normalizedSku": "10-pa-defau-93855",
+      "normalizedDescription": "10 pair duyan ring bigger version (stainless 304) indoor/outdoor | super stable durability tested | 1 year warranty hammock",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:23:13.982Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:23:13.982Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b139c7fcac7c6d18772dec"
+    },
+    "action": "create",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Added new product: DUYAN Detachable Frame for Hammocks - Black Iron Pipe, Versatile and Convenient",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b139c7fcac7c6d18772de8"
+    },
+    "before": null,
+    "after": {
+      "name": "DUYAN Detachable Frame for Hammocks - Black Iron Pipe, Versatile and Convenient",
+      "price": 1769,
+      "description": "DUYAN Detachable Frame for Hammocks - Black Iron Pipe, Versatile and Convenient",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "DUYAN-DEFAU-26967",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "_id": {
+        "$oid": "68b139c7fcac7c6d18772de8"
+      },
+      "createdAt": {
+        "$date": "2025-08-29T05:25:27.004Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:25:27.004Z"
+      },
+      "normalizedName": "duyan detachable frame for hammocks - black iron pipe, versatile and convenient",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-26967",
+      "normalizedDescription": "duyan detachable frame for hammocks - black iron pipe, versatile and convenient",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:25:27.090Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:25:27.090Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b139ddfcac7c6d18772dfa"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580161364523844832",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b139ddfcac7c6d18772df5"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68b13941fcac7c6d18772dda"
+        },
+        "quantity": 1,
+        "platformOrderId": "580161364523844832",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T14:56:09.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b139ddfcac7c6d18772df5"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:25:49.444Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:25:49.444Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68b13941fcac7c6d18772dda"
+        },
+        "order": {
+          "$oid": "68b139ddfcac7c6d18772df5"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580161364523844832",
+        "_id": {
+          "$oid": "68b139ddfcac7c6d18772df8"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:25:49.528Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:25:49.528Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68b13941fcac7c6d18772dda"
+        },
+        "name": "10 PAIR DUYAN RING BIGGER VERSION (Stainless 304) INDOOR/OUTDOOR | SUPER STABLE DURABILITY TESTED | 1 Year Warranty hammock",
+        "price": 2399,
+        "description": "10 PAIR DUYAN RING BIGGER VERSION (Stainless 304) INDOOR/OUTDOOR | SUPER STABLE DURABILITY TESTED | 1 Year Warranty hammock",
+        "image": "",
+        "imageId": "",
+        "quantity": 99,
+        "sku": "10-PA-DEFAU-93855",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-29T05:23:13.892Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:25:49.485Z"
+        },
+        "normalizedName": "10 pair duyan ring bigger version (stainless 304) indoor/outdoor | super stable durability tested | 1 year warranty hammock",
+        "normalizedVariant": "default",
+        "normalizedSku": "10-pa-defau-93855",
+        "normalizedDescription": "10 pair duyan ring bigger version (stainless 304) indoor/outdoor | super stable durability tested | 1 year warranty hammock",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:25:49.569Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:25:49.569Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b139defcac7c6d18772e11"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from tiktok with Order ID: 580165582988674683",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b139defcac7c6d18772e0c"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68b139c7fcac7c6d18772de8"
+        },
+        "quantity": 3,
+        "platformOrderId": "580165582988674683",
+        "platform": "tiktok",
+        "courier": "Standard shipping",
+        "orderDate": {
+          "$date": "2025-08-28T21:26:28.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b139defcac7c6d18772e0c"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:25:50.209Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:25:50.209Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68b139c7fcac7c6d18772de8"
+        },
+        "order": {
+          "$oid": "68b139defcac7c6d18772e0c"
+        },
+        "movementType": "OUT",
+        "quantity": 3,
+        "courier": "Standard shipping",
+        "platform": "tiktok",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 580165582988674683",
+        "_id": {
+          "$oid": "68b139defcac7c6d18772e0f"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:25:50.291Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:25:50.291Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68b139c7fcac7c6d18772de8"
+        },
+        "name": "DUYAN Detachable Frame for Hammocks - Black Iron Pipe, Versatile and Convenient",
+        "price": 1769,
+        "description": "DUYAN Detachable Frame for Hammocks - Black Iron Pipe, Versatile and Convenient",
+        "image": "",
+        "imageId": "",
+        "quantity": 97,
+        "sku": "DUYAN-DEFAU-26967",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-29T05:25:27.004Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:25:50.250Z"
+        },
+        "normalizedName": "duyan detachable frame for hammocks - black iron pipe, versatile and convenient",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-26967",
+        "normalizedDescription": "duyan detachable frame for hammocks - black iron pipe, versatile and convenient",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:25:50.331Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:25:50.331Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b139effcac7c6d18772e1f"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from lazada with Order ID: 1027072257380990",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b139effcac7c6d18772e1a"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ad628d917fe15f5a6d5df8"
+        },
+        "quantity": 1,
+        "platformOrderId": "1027072257380990",
+        "platform": "lazada",
+        "courier": "STANDARD",
+        "orderDate": {
+          "$date": "2025-08-29T06:36:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b139effcac7c6d18772e1a"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:26:07.024Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:26:07.024Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ad628d917fe15f5a6d5df8"
+        },
+        "order": {
+          "$oid": "68b139effcac7c6d18772e1a"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "STANDARD",
+        "platform": "lazada",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 1027072257380990",
+        "_id": {
+          "$oid": "68b139effcac7c6d18772e1d"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:26:07.105Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:26:07.105Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ad628d917fe15f5a6d5df8"
+        },
+        "name": "Duyan Frame Foldable (Indoor & outdoor)",
+        "price": 1599,
+        "description": "Duyan Frame Foldable (Indoor & outdoor)",
+        "image": "",
+        "imageId": "",
+        "quantity": 97,
+        "sku": "DUYAN-DEFAU-27539",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "createdAt": {
+          "$date": "2025-08-26T07:30:21.354Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:26:07.064Z"
+        },
+        "normalizedName": "duyan frame foldable (indoor & outdoor)",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-27539",
+        "normalizedDescription": "duyan frame foldable (indoor & outdoor)",
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:26:07.146Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:26:07.146Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14008c72707e46e24afa5"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508281Y7A42FV",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afa0"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508281Y7A42FV",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T16:11:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afa0"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.173Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.173Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "order": {
+          "$oid": "68b14008c72707e46e24afa0"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508281Y7A42FV",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afa3"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.272Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.272Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 199,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 78,
+        "sku": "DUYAN-RING-44307",
+        "variant": "Ring Pair Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring pair only",
+        "normalizedSku": "duyan-ring-44307",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.301Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.224Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:08.316Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:08.316Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14008c72707e46e24afae"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 250828250K43DS",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afa9"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cc8"
+        },
+        "quantity": 1,
+        "platformOrderId": "250828250K43DS",
+        "platform": "shopee",
+        "courier": "Standard Local-J&T Express",
+        "orderDate": {
+          "$date": "2025-08-28T17:55:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afa9"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.436Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.436Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cc8"
+        },
+        "order": {
+          "$oid": "68b14008c72707e46e24afa9"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-J&T Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 250828250K43DS",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afac"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.521Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.521Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cc8"
+        },
+        "name": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+        "price": 469,
+        "description": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+        "image": "",
+        "imageId": "",
+        "quantity": 97,
+        "sku": "DUYAN-ARMY-64960",
+        "variant": "Army Green",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
+        "normalizedVariant": "army green",
+        "normalizedSku": "duyan-army-64960",
+        "normalizedDescription": "duyan ring w/ static utility rope set 10mm, 10meters",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.494Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.478Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:08.564Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:08.564Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14008c72707e46e24afb7"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508282EC5EFDD",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afb2"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cac"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508282EC5EFDD",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-28T20:42:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afb2"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.684Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.684Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cac"
+        },
+        "order": {
+          "$oid": "68b14008c72707e46e24afb2"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508282EC5EFDD",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afb5"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.769Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.769Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cac"
+        },
+        "name": "Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability",
+        "price": 189,
+        "description": "Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability",
+        "image": "",
+        "imageId": "",
+        "quantity": 89,
+        "sku": "DUYAN-2-PCS-47197",
+        "variant": "2 pcs ring only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan stainless ring pair for hammocks different sizes, anchors w/ rope to post for better stability",
+        "normalizedVariant": "2 pcs ring only",
+        "normalizedSku": "duyan-2-pcs-47197",
+        "normalizedDescription": "duyan stainless ring pair for hammocks different sizes, anchors w/ rope to post for better stability",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.296Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.726Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:08.811Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:08.811Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14009c72707e46e24afc0"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293JT40WVU",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afbb"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293JT40WVU",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T07:34:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14008c72707e46e24afbb"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:08.931Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.931Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "order": {
+          "$oid": "68b14008c72707e46e24afbb"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293JT40WVU",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afbe"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.015Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.015Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 299,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 78,
+        "sku": "DUYAN-RING-73158",
+        "variant": "Ring w/ Carabiner",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring w/ carabiner",
+        "normalizedSku": "duyan-ring-73158",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.197Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:08.973Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:09.057Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:09.057Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14009c72707e46e24afc9"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293PSAB2P9",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afc4"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293PSAB2P9",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T08:45:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afc4"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.180Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.180Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "order": {
+          "$oid": "68b14009c72707e46e24afc4"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293PSAB2P9",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afc7"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.270Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.270Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 299,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 77,
+        "sku": "DUYAN-RING-73158",
+        "variant": "Ring w/ Carabiner",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring w/ carabiner",
+        "normalizedSku": "duyan-ring-73158",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.197Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.228Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:09.313Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:09.313Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14009c72707e46e24afd2"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293QQXQETE",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afcd"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293QQXQETE",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T09:03:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afcd"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.433Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.433Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "order": {
+          "$oid": "68b14009c72707e46e24afcd"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293QQXQETE",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afd0"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.517Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.517Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 199,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 77,
+        "sku": "DUYAN-RING-44307",
+        "variant": "Ring Pair Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring pair only",
+        "normalizedSku": "duyan-ring-44307",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.301Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.474Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:09.559Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:09.559Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14009c72707e46e24afdb"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293VC1HPRN",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afd6"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "quantity": 1,
+        "platformOrderId": "2508293VC1HPRN",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T10:25:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afd6"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.677Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.677Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "order": {
+          "$oid": "68b14009c72707e46e24afd6"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293VC1HPRN",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afd9"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.762Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.762Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 199,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 76,
+        "sku": "DUYAN-RING-44307",
+        "variant": "Ring Pair Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring pair only",
+        "normalizedSku": "duyan-ring-44307",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.301Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.719Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:09.805Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:09.805Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1400ac72707e46e24afe4"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508293W4N9Y5C",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afdf"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "quantity": 25,
+        "platformOrderId": "2508293W4N9Y5C",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T10:39:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14009c72707e46e24afdf"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:09.924Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.924Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "order": {
+          "$oid": "68b14009c72707e46e24afdf"
+        },
+        "movementType": "OUT",
+        "quantity": 25,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508293W4N9Y5C",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24afe2"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.010Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.010Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 199,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 51,
+        "sku": "DUYAN-RING-44307",
+        "variant": "Ring Pair Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring pair only",
+        "normalizedSku": "duyan-ring-44307",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.301Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:09.966Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:10.054Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:10.054Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1400ac72707e46e24afed"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 2508294050FH92",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1400ac72707e46e24afe8"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "quantity": 10,
+        "platformOrderId": "2508294050FH92",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T11:33:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24afe8"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.172Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.172Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "order": {
+          "$oid": "68b1400ac72707e46e24afe8"
+        },
+        "movementType": "OUT",
+        "quantity": 10,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 2508294050FH92",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24afeb"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.257Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.257Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5ca4"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 299,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 67,
+        "sku": "DUYAN-RING-73158",
+        "variant": "Ring w/ Carabiner",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring w/ carabiner",
+        "normalizedSku": "duyan-ring-73158",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.197Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.214Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:10.305Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:10.305Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1400ac72707e46e24aff6"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 250829437SX8GH",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1400ac72707e46e24aff1"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "quantity": 1,
+        "platformOrderId": "250829437SX8GH",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T12:28:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24aff1"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.430Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.430Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "order": {
+          "$oid": "68b1400ac72707e46e24aff1"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 250829437SX8GH",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24aff4"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.513Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.513Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cae"
+        },
+        "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "price": 199,
+        "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+        "image": "",
+        "imageId": "",
+        "quantity": 50,
+        "sku": "DUYAN-RING-44307",
+        "variant": "Ring Pair Only",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "normalizedVariant": "ring pair only",
+        "normalizedSku": "duyan-ring-44307",
+        "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.301Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.471Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:10.555Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:10.555Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1400ac72707e46e24afff"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 250829439J50GX",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1400ac72707e46e24affa"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cca"
+        },
+        "quantity": 1,
+        "platformOrderId": "250829439J50GX",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T12:29:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24affa"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.674Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.674Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5cca"
+        },
+        "order": {
+          "$oid": "68b1400ac72707e46e24affa"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 250829439J50GX",
+        "_id": {
+          "$oid": "68b1400ac72707e46e24affd"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:52:10.764Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.764Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5cca"
+        },
+        "name": "Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability",
+        "price": 289,
+        "description": "Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability",
+        "image": "",
+        "imageId": "",
+        "quantity": 96,
+        "sku": "DUYAN-2-RIN-81623",
+        "variant": "2 ring w/ carabiner",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan stainless ring pair for hammocks different sizes, anchors w/ rope to post for better stability",
+        "normalizedVariant": "2 ring w/ carabiner",
+        "normalizedSku": "duyan-2-rin-81623",
+        "normalizedDescription": "duyan stainless ring pair for hammocks different sizes, anchors w/ rope to post for better stability",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.494Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:52:10.721Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:52:10.805Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:52:10.805Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b1413ac72707e46e24b033"
+    },
+    "action": "update",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "price": 269,
+      "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 0,
+      "sku": "DUYAN-DEFAU-51336",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Out of Stock",
+      "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-51336",
+      "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.294Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:09:31.604Z"
+      },
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "price": 269,
+      "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 0,
+      "sku": "DUYAN-DEFAU-51336",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Out of Stock",
+      "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-51336",
+      "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.294Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:57:14.344Z"
+      },
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:57:14.397Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:57:14.397Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14144c72707e46e24b03c"
+    },
+    "action": "restock",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Restocked product: Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock (+100)",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "price": 269,
+      "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "DUYAN-DEFAU-51336",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-51336",
+      "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.294Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:57:23.952Z"
+      },
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "price": 269,
+      "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "DUYAN-DEFAU-51336",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-51336",
+      "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.294Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-29T05:57:23.952Z"
+      },
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:57:24.040Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:57:24.040Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b14154c72707e46e24b06a"
+    },
+    "action": "IMPORT_ORDER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Imported order from shopee with Order ID: 25082945W0EKFT",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14153c72707e46e24b065"
+    },
+    "before": null,
+    "after": {
+      "order": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "quantity": 1,
+        "platformOrderId": "25082945W0EKFT",
+        "platform": "shopee",
+        "courier": "Standard Local-SPX Express",
+        "orderDate": {
+          "$date": "2025-08-29T13:16:00.000Z"
+        },
+        "status": "For Pick Up",
+        "isPaid": false,
+        "remarks": "Tagged for pickup - imported orders",
+        "_id": {
+          "$oid": "68b14153c72707e46e24b065"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:57:39.922Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:57:39.922Z"
+        },
+        "__v": 0
+      },
+      "inventoryDetail": {
+        "product": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "order": {
+          "$oid": "68b14153c72707e46e24b065"
+        },
+        "movementType": "OUT",
+        "quantity": 1,
+        "courier": "Standard Local-SPX Express",
+        "platform": "shopee",
+        "status": "For Pick Up",
+        "remarks": "Tagged for pickup - Order ID: 25082945W0EKFT",
+        "_id": {
+          "$oid": "68b14154c72707e46e24b068"
+        },
+        "createdAt": {
+          "$date": "2025-08-29T05:57:40.006Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:57:40.006Z"
+        },
+        "__v": 0
+      },
+      "product": {
+        "_id": {
+          "$oid": "68ab541c4534336e7e1c5caa"
+        },
+        "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "price": 269,
+        "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+        "image": "",
+        "imageId": "",
+        "quantity": 99,
+        "sku": "DUYAN-DEFAU-51336",
+        "variant": "Default",
+        "category": "",
+        "unit": "pcs",
+        "supplier": "",
+        "location": "Main Warehouse",
+        "status": "Available",
+        "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "normalizedVariant": "default",
+        "normalizedSku": "duyan-defau-51336",
+        "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+        "createdAt": {
+          "$date": "2025-08-24T18:04:12.294Z"
+        },
+        "updatedAt": {
+          "$date": "2025-08-29T05:57:39.963Z"
+        },
+        "__v": 0
+      }
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-29T05:57:40.050Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-29T05:57:40.050Z"
+    },
+    "__v": 0
   }
 ]

@@ -14,6 +14,7 @@ import {
   normalizeText,
 } from "../utils/commonUtils.js";
 import { StatusEnum } from "../enums/enums.js";
+import { restockProductHelper } from "../utils/inventoryUtils.js";
 
 export const getSalesStatsByDate = async (req, res) => {
   try {
@@ -46,6 +47,11 @@ export const getSalesStatsByDate = async (req, res) => {
       const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
       const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
+      // Handle paid/unpaid
+      let isPaidFilter;
+      if (search.toLowerCase() === "paid") isPaidFilter = true;
+      else if (search.toLowerCase() === "unpaid") isPaidFilter = false;
+
       match.$or = [
         { status: rawSafeRegex },
         { platformOrderId: rawSafeRegex },
@@ -54,6 +60,10 @@ export const getSalesStatsByDate = async (req, res) => {
         { "product.sku": rawSafeRegex },
         { "product.description": rawSafeRegex },
       ];
+
+      if (isPaidFilter !== undefined) {
+        match.$or.push({ isPaid: isPaidFilter });
+      }
     }
 
     /** 🔹 Main aggregation pipeline */
@@ -307,7 +317,7 @@ export const processSalesImport = async ({
     });
 
     await logAudit({
-      action: "UPDATE_SALES_PAYMENT",
+      action: "UPDATE_PAYMENT",
       user: req.user?._id,
       description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
       collectionName: "Order",
@@ -315,7 +325,7 @@ export const processSalesImport = async ({
       before,
       after: { isPaid: true },
       ip: req.ip,
-      userAgent: req.get("User-Agent"),
+      userAgent: req.headers["user-agent"],
     });
   }
 
@@ -413,8 +423,9 @@ export const importReturnsByPlatform = async (req, res) => {
     res.json({
       summary: {
         updated: results.updated.length,
-        alreadyPaid: results.alreadyPaid.length,
+        alreadyReturned: results.alreadyReturned.length,
         notFound: results.notFound.length,
+        failedRestocks: results.failedRestocks.length,
       },
       details: results,
     });
@@ -424,7 +435,7 @@ export const importReturnsByPlatform = async (req, res) => {
   }
 };
 
-//Process imported sales, mark orders as paid.
+// Process imported returns, mark orders as returned.
 export const processReturnsImport = async ({
   sheetData,
   headerRowIndex,
@@ -454,7 +465,12 @@ export const processReturnsImport = async ({
   });
   const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
 
-  const results = { updated: [], alreadyPaid: [], notFound: [] };
+  const results = {
+    updated: [],
+    alreadyReturned: [],
+    notFound: [],
+    failedRestocks: [],
+  };
 
   // --- Process each unique order ---
   for (const platformOrderId of platformOrderIds) {
@@ -467,34 +483,74 @@ export const processReturnsImport = async ({
       continue;
     }
 
-    if (order.isPaid) {
-      results.alreadyPaid.push({
+    if (order.status === StatusEnum.RETURNED) {
+      results.alreadyReturned.push({
         platformOrderId: order.platformOrderId || "N/A",
-        reason: "Order is already paid",
+        reason: "Order is already returned",
       });
       continue;
     }
 
-    const before = { isPaid: order.isPaid };
-    order.isPaid = true;
-    order.status = StatusEnum.COMPLETED;
+    if (!order) {
+      results.failedRestocks.push({
+        platformOrderId: platformOrderId || "N/A",
+        reason: "Failed to restock returned product",
+      });
+      continue;
+    }
+
+    const before = order.toObject();
+    order.status = StatusEnum.RETURNED;
     await order.save();
+
+    if (order.products && order.products.length > 0) {
+      for (const item of order.products) {
+        try {
+          await restockProductHelper(item, req);
+        } catch (err) {
+          results.failedRestocks.push({
+            platformOrderId: order.platformOrderId,
+            productId: item.product,
+            quantity: item.quantity,
+            reason: err.message,
+          });
+
+          // Log failed restock in audit
+          await logAudit({
+            action: "FAILED_RESTOCK_RETURNED_PRODUCT",
+            user: req.user?._id,
+            description: `Failed to restock product ${item.product} (quantity: ${item.quantity}) for order ${order.platformOrderId}: ${err.message}`,
+            collectionName: "Product",
+            documentId: item.product,
+            before: null,
+            after: null,
+            ip: req.ip,
+            userAgent: req.headers["user-agent"],
+          });
+
+          console.error(
+            `Failed to restock product ${item.product}:`,
+            err.message
+          );
+        }
+      }
+    }
 
     results.updated.push({
       platformOrderId: order.platformOrderId || "N/A",
-      reason: "Order is now paid",
+      reason: "Order status set to returned",
     });
 
     await logAudit({
-      action: "UPDATE_SALES_STATUS",
+      action: "UPDATE_RETURN_STATUS",
       user: req.user?._id,
-      description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
+      description: `Marked order ${platformOrderId} as returned via file import (${platform})`,
       collectionName: "Order",
       documentId: order._id,
       before,
-      after: { isPaid: true },
+      after: { status: StatusEnum.RETURNED },
       ip: req.ip,
-      userAgent: req.get("User-Agent"),
+      userAgent: req.headers["user-agent"],
     });
   }
 

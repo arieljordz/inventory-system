@@ -13,7 +13,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="11" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -28,7 +28,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
     if (!orders || orders.length === 0) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="11" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-receipt fa-2x mb-2 d-block"></i>
               No sales orders found
@@ -44,8 +44,17 @@ const SalesTable = ({ orders = [], loading = false }) => {
         <td className="text-center align-middle small">
           {order.platform.toUpperCase() || "-"}
         </td>
-        <td className="text-center align-middle small">
-          {order.platformOrderId || "-"}
+        <td className="text-center align-middle">
+          {order.platformOrderId ? (
+            <div className="d-flex align-items-center justify-content-center">
+              <code className="pr-2" title={order.platformOrderId}>
+                {truncateText(order.platformOrderId, 80)}
+              </code>
+              <CopyToClipboardButton text={order.platformOrderId} />
+            </div>
+          ) : (
+            "-"
+          )}
         </td>
         {/* <td className="text-center align-middle">
           <code className="px-2 py-1 rounded">
@@ -59,7 +68,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
               title={order.product?.name || ""}
             >
               <code className="px-2 py-1 rounded">
-                {truncateText(order.product?.name, 50)}
+                {truncateText(order.product?.name, 35)}
               </code>
             </div>
             <CopyToClipboardButton text={order.product?.name} />
@@ -101,6 +110,16 @@ const SalesTable = ({ orders = [], loading = false }) => {
           <small className="text-muted">
             {formatDate(order.orderDate ?? order.createdAt)}
           </small>
+        </td>
+        <td className="text-center align-middle">
+          <StatusBadge
+            status={order.status}
+            customLabelMap={{
+              Available: "In Stock",
+              "For Pick Up": "On Process",
+              "Out of Stock": "No Stock",
+            }}
+          />
         </td>
         <td className="text-center align-middle">
           <StatusBadge
@@ -152,10 +171,13 @@ const SalesTable = ({ orders = [], loading = false }) => {
                   Total Price
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
-                  Ordere Date
+                  Order Date
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
-                  Payment Status
+                  Status
+                </th>
+                <th className="text-center" style={{ width: "120px" }}>
+                  Payment
                 </th>
               </tr>
             </thead>

@@ -339,6 +339,8 @@ export const restockProduct = async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
+    const before = product.toObject();
+
     // Update quantity
     product.quantity += quantity;
 
@@ -365,7 +367,7 @@ export const restockProduct = async (req, res) => {
       description: `Restocked product: ${product.name}, quantity: ${quantity}, variant: ${product.variant}`,
       collectionName: "Product",
       documentId: product._id,
-      before: product,
+      before,
       after: product.toObject(),
       ip: req.ip,
       userAgent: req.headers["user-agent"],

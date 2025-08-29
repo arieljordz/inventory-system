@@ -34,12 +34,14 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
 
     return auditLogs.map((log, index) => (
       <tr key={log._id || index} className={loading ? "table-secondary" : ""}>
-        <td className="text-center align-middle">{index + 1}</td>
-        <td className="text-center align-middle">{log.action || "-"}</td>
-        <td className="text-center align-middle">
+        <td className="text-center align-middle small">{index + 1}</td>
+        <td className="text-center align-middle small">{log.action || "-"}</td>
+        <td className="text-center align-middle small">
           {log.user ? log.user.name.toUpperCase() : "-"}
         </td>
-        <td className="text-center align-middle">{log.collectionName || "-"}</td>
+        <td className="text-center align-middle">
+          {log.collectionName || "-"}
+        </td>
         <td className="text-center align-middle">
           {log.documentId ? (
             <div className="d-flex align-items-center justify-content-center">
@@ -52,12 +54,14 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
             "-"
           )}
         </td>
-        <td className="align-middle">
+        <td className="align-middle small">
           <div className="d-flex align-items-center">
             <div className="pr-2" title={log.description || ""}>
               {truncateText(log.description, 80)}
             </div>
-            {log.description && <CopyToClipboardButton text={log.description} />}
+            {log.description && (
+              <CopyToClipboardButton text={log.description} />
+            )}
           </div>
         </td>
         <td className="text-center align-middle">{log.ip || "-"}</td>
@@ -81,14 +85,28 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
           <table className="table table-hover table-striped mb-0">
             <thead className="thead-light">
               <tr>
-                <th className="text-center" style={{ width: "50px" }}>#</th>
-                <th className="text-center" style={{ width: "120px" }}>Action</th>
-                <th className="text-center" style={{ width: "150px" }}>User</th>
-                <th className="text-center" style={{ width: "150px" }}>Collection</th>
-                <th className="text-center" style={{ width: "150px" }}>Document ID</th>
+                <th className="text-center" style={{ width: "50px" }}>
+                  #
+                </th>
+                <th className="text-center" style={{ width: "120px" }}>
+                  Action
+                </th>
+                <th className="text-center" style={{ width: "150px" }}>
+                  User
+                </th>
+                <th className="text-center" style={{ width: "150px" }}>
+                  Collection
+                </th>
+                <th className="text-center" style={{ width: "150px" }}>
+                  Document ID
+                </th>
                 <th>Description</th>
-                <th className="text-center" style={{ width: "120px" }}>IP</th>
-                <th className="text-center" style={{ width: "150px" }}>Date</th>
+                <th className="text-center" style={{ width: "120px" }}>
+                  IP
+                </th>
+                <th className="text-center" style={{ width: "220px" }}>
+                  Date
+                </th>
               </tr>
             </thead>
             <tbody>{renderTableRows()}</tbody>
