@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import { formatDate } from "../../utils/commonUtils";
+import { formatDateString } from "../../utils/commonUtils";
 
 const ProfileModal = ({ user, show, onClose }) => {
   if (!user) return null;
@@ -47,11 +47,11 @@ const ProfileModal = ({ user, show, onClose }) => {
         <div className="mb-3">
           <div className="d-flex justify-content-between py-2 border-bottom">
             <strong>Joined</strong>
-            <span>{formatDate(user?.createdAt)}</span>
+            <span>{formatDateString(user?.createdAt)}</span>
           </div>
           <div className="d-flex justify-content-between py-2 border-bottom">
             <strong>Last Updated</strong>
-            <span>{formatDate(user?.updatedAt)}</span>
+            <span>{formatDateString(user?.updatedAt)}</span>
           </div>
         </div>
       </Modal.Body>

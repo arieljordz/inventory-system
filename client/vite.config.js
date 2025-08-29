@@ -1,21 +1,25 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { resolve } from "path";
 
 export default defineConfig({
-  base: '/',
   plugins: [react()],
-  publicDir: 'public',
+  publicDir: "public",
   build: {
-    outDir: 'dist',
-    copyPublicDir: true,
-    rollupOptions: {
-      external: [
-        // Tell Vite to ignore these scripts (don't try to bundle them)
-        '/plugins/jquery/jquery.min.js',
-        '/adminlte/js/adminlte.min.js',
-        '/plugins/bootstrap/js/bootstrap.bundle.min.js',
-        // Add other AdminLTE scripts if needed
-      ]
-    }
-  }
-})
+    outDir: "dist",
+    emptyOutDir: true,
+  },
+  resolve: {
+    alias: {
+      "@": resolve(__dirname, "src"),
+    },
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://localhost:5000",
+        changeOrigin: true,
+      },
+    },
+  },
+});

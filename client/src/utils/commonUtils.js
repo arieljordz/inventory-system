@@ -32,6 +32,17 @@ export const formatDateTime = (dateTime) => {
   })}`;
 };
 
+export const formatDateString = (dateTime) => {
+  if (!dateTime) return "N/A";
+  const date = new Date(dateTime);
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+};
+
+
 export const getCurrentDate = () => {
   const now = new Date();
   const dateNow = new Intl.DateTimeFormat("en-CA", {
