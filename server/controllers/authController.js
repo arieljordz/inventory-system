@@ -57,6 +57,8 @@ export const googleLogin = async (req, res) => {
       email: user.email,
       picture: user.picture,
       isVerified: user.isVerified,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
     });
   } catch (error) {
     console.error("Google login error:", error);
@@ -76,6 +78,8 @@ export const getMe = (req, res) => {
     email: req.user.email,
     picture: req.user.picture,
     isVerified: req.user.isVerified,
+    createdAt: req.user.createdAt,
+    updatedAt: req.user.updatedAt,
   });
 };
 
