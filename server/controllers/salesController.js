@@ -307,7 +307,7 @@ export const processSalesImport = async ({
     });
 
     await logAudit({
-      action: "UPDATE",
+      action: "UPDATE_SALES_PAYMENT",
       user: req.user?._id,
       description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
       collectionName: "Order",
@@ -402,7 +402,7 @@ export const importReturnsByPlatform = async (req, res) => {
     });
 
     // --- Delegate to helper ---
-    const results = await processSalesImport({
+    const results = await processReturnsImport({
       sheetData,
       headerRowIndex,
       finalFieldMap,
@@ -422,4 +422,81 @@ export const importReturnsByPlatform = async (req, res) => {
     console.error("Error importing sales:", error);
     res.status(500).json({ message: "Internal server error." });
   }
+};
+
+//Process imported sales, mark orders as paid.
+export const processReturnsImport = async ({
+  sheetData,
+  headerRowIndex,
+  finalFieldMap,
+  platform,
+  req,
+}) => {
+  // --- Extract order IDs (start after headerRowIndex automatically) ---
+  const rawPlatformOrderIds = sheetData
+    .slice(headerRowIndex + 1) // skip header row
+    .map((row) =>
+      (row?.[finalFieldMap.platformOrderId] || "").toString().trim()
+    )
+    .filter((id) => id); // keep only non-empty
+
+  if (rawPlatformOrderIds.length === 0) {
+    throw new Error("No valid order IDs found in file.");
+  }
+
+  // --- Deduplicate IDs while preserving order ---
+  const platformOrderIds = [...new Set(rawPlatformOrderIds)];
+
+  // --- Fetch matching orders ---
+  const orders = await Order.find({
+    platform: platform.toLowerCase(),
+    platformOrderId: { $in: platformOrderIds },
+  });
+  const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
+
+  const results = { updated: [], alreadyPaid: [], notFound: [] };
+
+  // --- Process each unique order ---
+  for (const platformOrderId of platformOrderIds) {
+    const order = orderMap.get(platformOrderId);
+    if (!order) {
+      results.notFound.push({
+        platformOrderId: platformOrderId || "N/A",
+        reason: "Order not found",
+      });
+      continue;
+    }
+
+    if (order.isPaid) {
+      results.alreadyPaid.push({
+        platformOrderId: order.platformOrderId || "N/A",
+        reason: "Order is already paid",
+      });
+      continue;
+    }
+
+    const before = { isPaid: order.isPaid };
+    order.isPaid = true;
+    order.status = StatusEnum.COMPLETED;
+    await order.save();
+
+    results.updated.push({
+      platformOrderId: order.platformOrderId || "N/A",
+      reason: "Order is now paid",
+    });
+
+    await logAudit({
+      action: "UPDATE_SALES_STATUS",
+      user: req.user?._id,
+      description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
+      collectionName: "Order",
+      documentId: order._id,
+      before,
+      after: { isPaid: true },
+      ip: req.ip,
+      userAgent: req.get("User-Agent"),
+    });
+  }
+
+  return results;
 };

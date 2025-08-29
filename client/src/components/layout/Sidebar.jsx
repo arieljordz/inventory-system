@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import LogoutButton from "../common/LogoutButton";
 
 const menuItems = [
   { path: "/dashboard", label: "Dashboard", icon: "fas fa-tachometer-alt" },
@@ -10,6 +9,7 @@ const menuItems = [
   { path: "/inventory", label: "Inventory", icon: "fas fa-warehouse" },
   { path: "/sales", label: "Sales", icon: "fas fa-cash-register" },
   { path: "/reports", label: "Reports", icon: "fas fa-chart-bar" },
+  { path: "/auditlogs", label: "Audit Logs", icon: "fas fa-clipboard-list" },
 ];
 
 const Sidebar = () => {
@@ -33,7 +33,12 @@ const Sidebar = () => {
       <div className="d-flex flex-column flex-grow-1">
         {/* Menu Items */}
         <nav className="mt-2 flex-grow-1">
-          <ul className="nav nav-pills nav-sidebar flex-column" role="menu">
+          <ul
+            className="nav nav-pills nav-sidebar flex-column"
+            role="menu"
+            data-widget="treeview"
+            data-accordion="false"
+          >
             {menuItems.map(({ path, label, icon }) => (
               <li className="nav-item" key={path}>
                 <Link
@@ -41,17 +46,13 @@ const Sidebar = () => {
                   className={`nav-link ${isActive(path) ? "active" : ""}`}
                 >
                   <i className={`nav-icon ${icon}`}></i>
-                  <p>{label}</p>
+                  {/* Preserve this line for label */}
+                  <p className="flex-fill">{label}</p>
                 </Link>
               </li>
             ))}
           </ul>
         </nav>
-
-        {/* Logout at Bottom */}
-        {/* <div className="mt-auto p-3">
-          <LogoutButton />
-        </div> */}
       </div>
     </aside>
   );

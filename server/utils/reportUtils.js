@@ -217,6 +217,12 @@ export const fetchReportData = async (reportType, filter) => {
       break;
 
     // --- INVENTORY REPORTS ---
+    case ReportTypeEnum.INVENTORY:
+      data = await InventoryDetail.find()
+        .populate("product", "name price variant")
+        .sort({ createdAt: -1 });
+      break;
+
     case ReportTypeEnum.INVENTORY_IN:
       filter.movementType = MovementTypeEnum.IN;
       data = await InventoryDetail.find(filter)

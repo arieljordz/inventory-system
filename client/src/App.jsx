@@ -15,9 +15,10 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductsPage from "./pages/Products/ProductsPage";
 import OrderPage from "./pages/Orders/OrderPage";
 import TrackingsPage from "./pages/Trackings/TrackingsPage";
+import InventoryPage from "./pages/Inventory/InventoryPage";
 import SalesPage from "./pages/Sales/SalesPage";
 import ReportsPage from "./pages/Reports/ReportsPage";
-import InventoryPage from "./pages/Inventory/InventoryPage";
+import AuditLogPage from "./pages/AuditLogs/AuditLogPage";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -39,6 +40,7 @@ function App() {
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/sales" element={<SalesPage />} />
             <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/auditlogs" element={<AuditLogPage />} />
           </Route>
         </Routes>
 

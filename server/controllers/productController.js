@@ -85,9 +85,9 @@ export const addProduct = async (req, res) => {
 
     // ✅ Log audit
     await logAudit({
-      action: "create",
+      action: "CREATE_PRODUCT",
       user: req.user?._id, // assumes you're using auth middleware
-      description: `Added new product: ${name}`,
+      description: `Added new product: ${name}, variant: ${variant}`,
       collectionName: "Product",
       documentId: savedProduct._id,
       after: savedProduct.toObject(),
@@ -266,9 +266,9 @@ export const updateProduct = async (req, res) => {
 
     // ✅ Log audit
     await logAudit({
-      action: "update",
+      action: "UPDATE_PRODUCT",
       user: req.user?._id,
-      description: `Updated product: ${updatedProduct.name}`,
+      description: `Updated product: ${updatedProduct.name} , variant: ${updatedProduct.variant}`,
       collectionName: "Product",
       documentId: updatedProduct._id,
       before: product.toObject(),
@@ -304,9 +304,9 @@ export const deleteProduct = async (req, res) => {
 
     // ✅ Log audit
     await logAudit({
-      action: "delete",
+      action: "DELETE_PRODUCT",
       user: req.user?._id,
-      description: `Deleted product: ${product.name}`,
+      description: `Deleted product: ${product.name}, variant: ${product.variant}`,
       collectionName: "Product",
       documentId: product._id,
       before: product.toObject(),
@@ -360,9 +360,9 @@ export const restockProduct = async (req, res) => {
 
     // ✅ Log audit
     await logAudit({
-      action: "restock",
+      action: "RESTOCK_PRODUCT",
       user: req.user?._id,
-      description: `Restocked product: ${product.name} (+${quantity})`,
+      description: `Restocked product: ${product.name}, quantity: ${quantity}, variant: ${product.variant}`,
       collectionName: "Product",
       documentId: product._id,
       before: product,
@@ -447,13 +447,20 @@ export const importProducts = async (req, res) => {
       ] = row.values.slice(1); // slice(1) because ExcelJS rows are 1-based with first element empty
 
       const normalizedName = normalizeString(normalizeText(name || ""));
-      const normalizedVariant = normalizeString(normalizeText(variant || "Default"));
+      const normalizedVariant = normalizeString(
+        normalizeText(variant || "Default")
+      );
       const normalizedSku = normalizeString(normalizeText(sku || ""));
-      const normalizedDescription = normalizeString(normalizeText(description || ""));
+      const normalizedDescription = normalizeString(
+        normalizeText(description || "")
+      );
 
       // Validation
       if (!name || !sku || isNaN(price)) {
-        results.skipped.push({ name: name || "N/A", reason: "Invalid row data" });
+        results.skipped.push({
+          name: name || "N/A",
+          reason: "Invalid row data",
+        });
         return;
       }
 
@@ -520,12 +527,17 @@ export const importProducts = async (req, res) => {
 
     res.status(200).json({
       message: "Product import completed",
-      summary: { imported: results.imported.length, skipped: results.skipped.length },
+      summary: {
+        imported: results.imported.length,
+        skipped: results.skipped.length,
+      },
       details: results,
     });
   } catch (error) {
     console.error("Import Products Error:", error);
-    res.status(500).json({ message: error.message || "Failed to import products" });
+    res
+      .status(500)
+      .json({ message: error.message || "Failed to import products" });
   }
 };
 
@@ -585,4 +597,3 @@ export const exportProducts = async (req, res) => {
     res.status(500).json({ message: "Failed to export products" });
   }
 };
-

@@ -16,6 +16,7 @@ import inventoryDetailRoutes from "./routes/inventoryDetailRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
+import auditLogsRoutes from "./routes/auditLogsRoutes.js";
 
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
@@ -48,6 +49,7 @@ app.use("/api/inventory-details", inventoryDetailRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/sales", salesRoutes);
+app.use("/api/auditlogs", auditLogsRoutes);
 
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));

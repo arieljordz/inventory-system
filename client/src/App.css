@@ -59,9 +59,9 @@ body.dark-mode select.form-control {
 }
 
 select.form-control {
-  appearance: auto;
   -webkit-appearance: auto;
   -moz-appearance: auto;
+  appearance: auto;
   background-color: #ffffff;
   color: #212529;
   border: 1px solid #ced4da;
@@ -118,4 +118,7 @@ body.dark-mode .dark-mode-text-white {
 /* Show the element normally */
 .show {
   display: inline-block !important; /* works well for buttons */
+}
+.sidebar-mini.sidebar-collapse .nav-sidebar > .nav-item > .nav-link > p {
+  display: none !important;
 }

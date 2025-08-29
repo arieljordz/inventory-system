@@ -105,13 +105,13 @@ const InventoryTable = ({ data = [], loading = false }) => {
                   text={productName}
                   className="me-2 text-white"
                 />
-                <span className="badge badge-light text-dark mb-1 mb-md-0">
+                <span className="badge badge-secondary text-dark mb-1 mb-md-0">
                   ({variant})
                 </span>
               </div>
 
               {/* Right side: Remaining Quantity */}
-              <span className="badge badge-light text-dark">
+              <span className="badge badge-secondary text-dark">
                 Remaining Qty: {remainingQty}
               </span>
             </div>

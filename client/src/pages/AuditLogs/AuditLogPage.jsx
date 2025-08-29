@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { toast } from "react-toastify";
 
-import { getAllOrders } from "../../services/orderService";
+import { getAllAuditLogs } from "../../services/auditlogsService";
 
-import TrackingsTable from "./TrackingsTable";
+import AuditLogsTable from "./AuditLogsTable";
 import Navpath from "../../components/common/Navpath";
 import SearchBar from "../../components/common/SearchBar";
 import PaginationControls from "../../components/common/PaginationControls";
 
 import { useDebounce } from "../../hooks/useDebounce";
 
-const TrackingsPage = () => {
+const AuditLogPage = () => {
   /** 🔹 Core state */
-  const [orders, setOrders] = useState([]);
+  const [auditLogs, setAuditLogs] = useState([]);
   const [loading, setLoading] = useState(false);
 
   /** 🔹 Search & pagination state */
@@ -23,28 +23,28 @@ const TrackingsPage = () => {
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
-  /** 🔹 Fetch Orders (server handles pagination + search) */
-  const fetchOrders = useCallback(async () => {
+  /** 🔹 Fetch Audit Logs (server handles pagination + search) */
+  const fetchAuditLogs = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getAllOrders({
+      const res = await getAllAuditLogs({
         page: currentPage,
         limit: itemsPerPage,
         search: debouncedSearchTerm,
       });
 
-      const { orders: fetchedOrders, totalOrders, totalPages } = res.data;
+      const { logs: fetchedLogs, totalLogs, totalPages } = res.data;
 
-      setOrders(fetchedOrders || []);
-      setTotalItems(totalOrders || 0);
+      setAuditLogs(fetchedLogs || []);
+      setTotalItems(totalLogs || 0);
 
       // Fix current page if overflow
       if (currentPage > totalPages && totalPages > 0) {
         setCurrentPage(totalPages);
       }
     } catch (error) {
-      console.error("Failed to fetch orders:", error);
-      setOrders([]);
+      console.error("Failed to fetch audit logs:", error);
+      setAuditLogs([]);
       setTotalItems(0);
     } finally {
       setLoading(false);
@@ -52,8 +52,8 @@ const TrackingsPage = () => {
   }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
   useEffect(() => {
-    fetchOrders();
-  }, [fetchOrders]);
+    fetchAuditLogs();
+  }, [fetchAuditLogs]);
 
   /** 🔹 Reset page on search change */
   useEffect(() => {
@@ -71,9 +71,9 @@ const TrackingsPage = () => {
   return (
     <>
       <Navpath
-        levelOne="Tracking Management"
+        levelOne="Audit Management"
         levelTwo="Home"
-        levelThree="Trackings"
+        levelThree="Audit Logs"
       />
 
       <section className="content">
@@ -87,8 +87,8 @@ const TrackingsPage = () => {
             disabled={loading}
           />
 
-          {/* Tracking Table */}
-          <TrackingsTable orders={orders} loading={loading} />
+          {/* Audit Logs Table */}
+          <AuditLogsTable auditLogs={auditLogs} loading={loading} />
 
           {/* Pagination */}
           <PaginationControls
@@ -104,4 +104,4 @@ const TrackingsPage = () => {
   );
 };
 
-export default TrackingsPage;
+export default AuditLogPage;
