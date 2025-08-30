@@ -1,11 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { UnitTypeEnum } from "../../enums/enums";
-import {
-  TextInput,
-  TextArea,
-  SelectInput,
-} from "../../components/FormInputs";
+import { TextInput, TextArea, SelectInput } from "../../components/FormInputs";
 
 const ProductModal = ({
   isOpen,
@@ -26,6 +22,12 @@ const ProductModal = ({
     []
   );
 
+  /** 🔹 Header style based on mode */
+  const headerClass = isEditMode
+    ? "bg-warning text-dark"
+    : "bg-success text-white";
+  const modalTitle = isEditMode ? "Edit Product" : "Add Product";
+
   useEffect(() => {
     if (form.image && typeof form.image === "object") {
       setImagePreview(URL.createObjectURL(form.image));
@@ -39,9 +41,9 @@ const ProductModal = ({
   return (
     <Modal show={isOpen} onHide={onClose} backdrop="static" size="lg">
       <Form onSubmit={onSubmit} encType="multipart/form-data">
-        <Modal.Header closeButton className="bg-primary text-white">
+        <Modal.Header closeButton className={headerClass}>
           <Modal.Title>
-            {isEditMode ? "Edit Product" : "Add Product"}
+            <Modal.Title>{modalTitle}</Modal.Title>
           </Modal.Title>
         </Modal.Header>
 
