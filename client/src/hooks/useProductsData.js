@@ -23,6 +23,7 @@ export const useProductsData = (initialItemsPerPage = 5) => {
         search: debouncedSearchTerm,
       });
 
+      console.log("Fetched products data:", data);
       setProducts(data.products || []);
       setTotalItems(data.totalProducts || 0);
 

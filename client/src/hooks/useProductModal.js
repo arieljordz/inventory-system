@@ -1,4 +1,3 @@
-// src/hooks/useProductModal.js
 import { useState, useCallback } from "react";
 import { toast } from "react-toastify";
 import { createProduct, updateProduct } from "../services/productService";
@@ -8,71 +7,94 @@ import { StatusEnum } from "../enums/enums";
 const initialFormState = {
   name: "",
   price: "",
-  quantity: "",
+  quantity: 0,
   description: "",
-  sku: "",
   category: "",
   unit: "pcs",
-  supplier: "",
-  location: "Main Warehouse",
   status: StatusEnum.AVAILABLE,
   variant: "",
+  type: "bundle",
   image: null,
+  components: [], // ✅ single source of truth for bundle components
 };
 
 export const useProductModal = (refreshProducts) => {
   const { showSpinner, hideSpinner } = useSpinner();
-
   const [isOpen, setIsOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [form, setForm] = useState(initialFormState);
 
+  // Open Create
   const openCreate = useCallback(() => {
     setForm(initialFormState);
     setIsEditMode(false);
     setIsOpen(true);
   }, []);
 
+  // Open Edit
   const openEdit = useCallback((product) => {
-    setForm({ ...product, image: product.image || null });
+    setForm({
+      ...initialFormState,
+      ...product,
+      components: product.components || [], // ✅ load existing components
+      image: product.image || null,
+    });
     setIsEditMode(true);
     setIsOpen(true);
   }, []);
 
+  // Close Modal
   const close = useCallback(() => {
     setForm(initialFormState);
     setIsOpen(false);
+    setIsEditMode(false);
   }, []);
 
+  // Handle field change
   const handleChange = useCallback((e) => {
     const { name, value, files } = e.target;
-    setForm((prev) => ({
-      ...prev,
-      [name]: files ? files[0] : value,
-    }));
+
+    if (name.includes("components")) {
+      // handle nested components updates (not really needed anymore, since BundleSelector will handle updates)
+      const [_, index, field] = name.split(".");
+      setForm((prev) => {
+        const newComponents = [...(prev.components || [])];
+        newComponents[index] = { ...newComponents[index], [field]: value };
+        return { ...prev, components: newComponents };
+      });
+    } else {
+      setForm((prev) => ({ ...prev, [name]: files ? files[0] : value }));
+    }
   }, []);
 
+  // Submit product
   const handleSubmit = useCallback(
-    async (e) => {
-      e.preventDefault();
+    async (overrideForm) => {
+      const dataToSubmit = overrideForm || form;
+
+      console.log("handleSubmit data:", dataToSubmit);
       showSpinner();
       try {
         const formData = new FormData();
-        Object.entries(form).forEach(([key, value]) => {
+        Object.entries(dataToSubmit).forEach(([key, value]) => {
           if (value !== null && value !== "") {
-            formData.append(key, value);
+            if (key === "components") {
+              formData.append(key, JSON.stringify(value)); // ✅ send bundle components
+            } else {
+              formData.append(key, value);
+            }
           }
         });
 
         if (isEditMode) {
-          await updateProduct(form._id, formData);
+          await updateProduct(dataToSubmit._id, formData);
           toast.success("Product updated successfully!");
         } else {
           await createProduct(formData);
           toast.success("Product created successfully!");
         }
 
-        close();
+        close(); // ✅ reset after save
         await refreshProducts();
       } catch (err) {
         console.error("Save product error:", err);
@@ -90,6 +112,7 @@ export const useProductModal = (refreshProducts) => {
     isOpen,
     isEditMode,
     form,
+    setForm, // exposed for BundleSelector
     openCreate,
     openEdit,
     close,

@@ -1,4 +1,5 @@
 import Product from "../models/Product.js";
+import Item from "../models/Item.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import cloudinary from "../config/cloudinary.js";
@@ -10,84 +11,93 @@ import {
   normalizeText,
 } from "../utils/commonUtils.js";
 import ExcelJS from "exceljs";
+import {
+  deductBundleComponents,
+  updateBundleComponents,
+  validateComponents,
+} from "../utils/itemUtils.js";
 
 export const addProduct = async (req, res) => {
   try {
-    const {
+    let {
       name,
       price,
-      description,
+      description = "",
       quantity = 0,
       category = "",
       unit = "pcs",
-      supplier = "",
-      location = "Main Warehouse",
       status = StatusEnum.AVAILABLE,
       variant = "Default",
-      size = "",
+      type = "bundle",
+      components = "[]",
     } = req.body;
 
-    const sku = generateSKU({ name, category: "", variant, size: "" });
+    // Normalize fields
+    const normalizedName = normalizeString(normalizeText(name));
+    const normalizedVariant = normalizeString(normalizeText(variant));
 
-    // Check for duplicate Product
+    // Check for duplicate product
     const existingProduct = await Product.findOne({
-      normalizedName: normalizeString(normalizeText(name)),
-      normalizedVariant: normalizeString(normalizeText(variant) || ""),
+      normalizedName,
+      normalizedVariant,
     });
-
     if (existingProduct) {
       return res.status(400).json({ message: "Product already exists" });
     }
 
-    let imageUrl = "";
-    let imageId = "";
+    // Generate SKU
+    const sku = generateSKU({ name, category, variant });
 
-    // if (req.file) {
-    //   const result = await cloudinary.uploader.upload(req.file.path, {
-    //     folder: "products",
-    //   });
-    //   imageUrl = result.secure_url;
-    //   imageId = result.public_id;
+    let newComponents = components;
+
+    // Validate components
+    const validComponents = await validateComponents(newComponents);
+
+    // Deduct item quantities if it's a bundle
+    // if (type === "bundle" && validComponents.length > 0 && quantity > 0) {
+    //   try {
+    //     await deductBundleComponents(validComponents, quantity);
+    //   } catch (err) {
+    //     return res.status(400).json({ message: err.message });
+    //   }
     // }
 
+    // Create product
     const newProduct = new Product({
       name,
       price,
       description,
-      sku,
       quantity,
       category,
       unit,
-      supplier,
-      location,
       status,
       variant,
-      size,
-      image: imageUrl,
-      imageId,
+      type,
+      sku,
+      components: validComponents,
     });
 
     const savedProduct = await newProduct.save();
 
-    // Create an initial inventory record if quantity > 0
+    // Create initial inventory record
     if (quantity > 0) {
       await InventoryDetail.create({
         product: savedProduct._id,
         order: null,
         movementType: MovementTypeEnum.IN,
         quantity,
-        remarks: "Initial stock",
+        remarks: type === "bundle" ? "Initial bundle stock" : "Initial stock",
         status: savedProduct.status,
         courier: "",
         platform: "",
       });
     }
 
-    // ✅ Log audit
+    // Audit log
     await logAudit({
       action: "CREATE_PRODUCT",
-      user: req.user?._id, // assumes you're using auth middleware
-      description: `Added new product: ${name}, variant: ${variant}`,
+      user: req.user?._id,
+      description: `Added new product: ${name}, variant: ${variant}, type: ${type}`,
       collectionName: "Product",
       documentId: savedProduct._id,
       after: savedProduct.toObject(),
@@ -102,6 +112,7 @@ export const addProduct = async (req, res) => {
   }
 };
 
+
 export const getProducts = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
@@ -112,22 +123,32 @@ export const getProducts = async (req, res) => {
     const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
     const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
-    // Build search query
+    // 🔍 Build search query
     const query = search
       ? {
           $or: [
             { normalizedName: safeRegex },
             { normalizedVariant: safeRegex },
-            { sku: rawSafeRegex }, // raw but escaped
-            { description: rawSafeRegex }, // raw but escaped
+            { sku: rawSafeRegex },
+            { description: rawSafeRegex },
           ],
         }
       : {};
 
     const skip = (page - 1) * limit;
 
+    // ✅ Fetch products with pagination
     const [products, totalProducts] = await Promise.all([
-      Product.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
+      Product.find(query)
+        .sort({ createdAt: -1 })
+        .skip(skip)
+        .limit(limit)
+        // 👇 populate bundle components
+        .populate({
+          path: "components.item",
+          model: Item,
+          select: "name price unit category", // only return needed fields
+        }),
       Product.countDocuments(query),
     ]);
 
@@ -214,47 +235,44 @@ export const updateProduct = async (req, res) => {
     const productId = req.params.id;
 
     const product = await Product.findById(productId);
-    if (!product) {
-      return res.status(404).json({ message: "Product not found" });
-    }
+    if (!product) return res.status(404).json({ message: "Product not found" });
 
-    const { sku, quantity, ...updateFields } = req.body;
+    const { sku, quantity, components = [], ...updateFields } = req.body;
 
-    // Check for duplicate SKU if sku is being changed
+    // console.log("components from req.body:", components);
+    // Handle SKU change
     if (sku && sku !== product.sku) {
       const existing = await Product.findOne({ sku, _id: { $ne: productId } });
-      if (existing) {
+      if (existing)
         return res.status(400).json({ message: "SKU already exists" });
-      }
       updateFields.sku = sku;
     }
 
-    // This is to update SKU once
-    // const { name, category, variant, size, sku, quantity, ...updateFields } = req.body;
-    // const newSku = generateSKU({ name, category, variant, size });
-    // updateFields.sku = newSku;
-
-    const requiredFields = ["name", "price", "description"];
-    for (const field of requiredFields) {
+    // Validate required fields
+    ["name", "price", "description"].forEach((field) => {
       if (field in updateFields && !updateFields[field]) {
         return res.status(400).json({ message: `${field} is required` });
       }
-    }
+    });
 
-    // Handle new image upload
-    // if (req.file) {
-    //   if (product.imageId) {
-    //     await cloudinary.uploader.destroy(product.imageId);
+    let newComponents = components;
+
+    // Validate components
+    const validComponents = await validateComponents(newComponents);
+
+    // Update bundle components if type is bundle
+    // if (product.type === "bundle" && validComponents.length > 0 && quantity !== undefined) {
+    //   try {
+    //     await updateBundleComponents(product.components, validComponents, product.quantity, quantity);
+    //   } catch (err) {
+    //     return res.status(400).json({ message: err.message });
     //   }
-
-    //   const result = await cloudinary.uploader.upload(req.file.path, {
-    //     folder: "products",
-    //   });
-
-    //   updateFields.image = result.secure_url;
-    //   updateFields.imageId = result.public_id;
     // }
 
+    updateFields.components = validComponents;
+    if (quantity !== undefined) updateFields.quantity = quantity;
+
+    // console.log("updateFields:", updateFields);
     const updatedProduct = await Product.findByIdAndUpdate(
       productId,
       updateFields,
@@ -264,11 +282,11 @@ export const updateProduct = async (req, res) => {
       }
     );
 
-    // ✅ Log audit
+    // Log audit
     await logAudit({
       action: "UPDATE_PRODUCT",
       user: req.user?._id,
-      description: `Updated product: ${updatedProduct.name} , variant: ${updatedProduct.variant}`,
+      description: `Updated product: ${updatedProduct.name}, variant: ${updatedProduct.variant}`,
       collectionName: "Product",
       documentId: updatedProduct._id,
       before: product.toObject(),

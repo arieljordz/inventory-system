@@ -48,7 +48,7 @@ const productSchema = new mongoose.Schema(
     type: {
       type: String,
       enum: ["single", "bundle"],
-      default: "single",
+      default: "bundle",
     },
     components: [
       {
@@ -56,14 +56,6 @@ const productSchema = new mongoose.Schema(
         qty: { type: Number, required: true },
       },
     ],
-    supplier: {
-      type: String,
-      default: "",
-    },
-    location: {
-      type: String,
-      default: "Main Warehouse",
-    },
     status: {
       type: String,
       enum: Object.values(StatusEnum),

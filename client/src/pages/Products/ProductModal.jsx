@@ -1,18 +1,18 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-import { UnitTypeEnum } from "../../enums/enums";
+import { UnitTypeEnum, StatusEnum } from "../../enums/enums";
 import { TextInput, TextArea, SelectInput } from "../../components/FormInputs";
+import BundleSelector from "./BundleSelector";
 
 const ProductModal = ({
   isOpen,
   onClose,
   form,
+  setForm,
   onChange,
   onSubmit,
   isEditMode,
 }) => {
-  const [imagePreview, setImagePreview] = useState(null);
-
   const unitOptions = useMemo(
     () =>
       Object.entries(UnitTypeEnum).map(([key, value]) => ({
@@ -22,29 +22,22 @@ const ProductModal = ({
     []
   );
 
-  /** 🔹 Header style based on mode */
   const headerClass = isEditMode
     ? "bg-warning text-dark"
     : "bg-success text-white";
   const modalTitle = isEditMode ? "Edit Product" : "Add Product";
 
-  useEffect(() => {
-    if (form.image && typeof form.image === "object") {
-      setImagePreview(URL.createObjectURL(form.image));
-    } else if (typeof form.image === "string") {
-      setImagePreview(form.image);
-    } else {
-      setImagePreview(null);
-    }
-  }, [form.image]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Submitting form with components:", form.components);
+    onSubmit();
+  };
 
   return (
     <Modal show={isOpen} onHide={onClose} backdrop="static" size="lg">
-      <Form onSubmit={onSubmit} encType="multipart/form-data">
+      <Form onSubmit={handleSubmit} encType="multipart/form-data">
         <Modal.Header closeButton className={headerClass}>
-          <Modal.Title>
-            <Modal.Title>{modalTitle}</Modal.Title>
-          </Modal.Title>
+          <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -63,7 +56,6 @@ const ProductModal = ({
             value={form.description}
             onChange={onChange}
             placeholder="Enter product description"
-            required
           />
 
           <Row>
@@ -113,42 +105,34 @@ const ProductModal = ({
               />
             </Col>
             <Col md={6}>
-              <TextInput
-                label="Supplier"
-                name="supplier"
-                value={form.supplier}
+              <SelectInput
+                label="Status"
+                name="status"
+                value={form.status}
                 onChange={onChange}
-                placeholder="Enter supplier (optional)"
+                options={Object.entries(StatusEnum).map(([key, value]) => ({
+                  label: value,
+                  value: key,
+                }))}
               />
             </Col>
           </Row>
 
-          <Form.Group controlId="productImage" className="mb-2">
-            <Form.Label>Image</Form.Label>
-            <Form.Control
-              type="file"
-              name="image"
-              onChange={onChange}
-              accept="image/*"
-            />
-            {imagePreview && (
-              <div className="text-center mt-2">
-                <img
-                  src={imagePreview}
-                  alt="Preview"
-                  className="img-thumbnail"
-                  style={{ maxWidth: "200px", maxHeight: "150px" }}
-                />
-              </div>
-            )}
-          </Form.Group>
+          {/* Bundle Selector → directly syncs form.components */}
+          <BundleSelector
+            isEditMode={isEditMode}
+            components={form.components}
+            setComponents={(comps) =>
+              setForm((prev) => ({ ...prev, components: comps }))
+            }
+          />
         </Modal.Body>
 
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
             <i className="fas fa-times-circle mr-1"></i> Cancel
           </Button>
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant={isEditMode ? "warning" : "success"}>
             <i className="fas fa-save mr-2"></i>
             {isEditMode ? "Update" : "Save"}
           </Button>

@@ -68,7 +68,6 @@ export const useSalesData = (initialItemsPerPage = 5) => {
       }
     } catch (error) {
       console.error("Failed to fetch sales:", error);
-      toast.error("Failed to fetch sales data");
       setOrders([]);
       setStats({});
       setTotalItems(0);

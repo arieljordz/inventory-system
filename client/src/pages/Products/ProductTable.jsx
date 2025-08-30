@@ -14,6 +14,7 @@ const ProductTable = ({
   onRestock,
   loading = false,
 }) => {
+  // console.log("Rendering ProductTable with products:", products);
   const handleEdit = (product) => {
     if (loading) return;
     onEdit?.(product);

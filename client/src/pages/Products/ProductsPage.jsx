@@ -1,4 +1,3 @@
-import React from "react";
 import Navpath from "../../components/Navpath";
 import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
@@ -56,13 +55,21 @@ const ProductsPage = () => {
 
   return (
     <>
-      <Navpath levelOne="Product Management" levelTwo="Home" levelThree="Products" />
+      <Navpath
+        levelOne="Product Management"
+        levelTwo="Home"
+        levelThree="Products"
+      />
 
       <section className="content">
         <div className="container-fluid">
           {/* Add Product Button */}
           <div className="mb-3">
-            <button className="btn btn-primary" onClick={productModal.openCreate} disabled={loading}>
+            <button
+              className="btn btn-primary"
+              onClick={productModal.openCreate}
+              disabled={loading}
+            >
               <i className="fas fa-plus mr-1"></i> Add Product
             </button>
           </div>
@@ -76,7 +83,10 @@ const ProductsPage = () => {
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             itemsPerPage={itemsPerPage}
-            onItemsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
+            onItemsPerPageChange={(val) => {
+              setItemsPerPage(val);
+              setCurrentPage(1);
+            }}
             disabled={loading}
           />
 
@@ -98,16 +108,18 @@ const ProductsPage = () => {
             disabled={loading}
           />
 
-          {/* Modals */}
+          {/* Product Modal */}
           <ProductModal
             isOpen={productModal.isOpen}
             onClose={productModal.close}
             form={productModal.form}
+            setForm={productModal.setForm}
             onChange={productModal.handleChange}
             onSubmit={productModal.handleSubmit}
             isEditMode={productModal.isEditMode}
           />
 
+          {/* Restock Modal */}
           <RestockModal
             show={restockModal.isOpen}
             onClose={restockModal.close}

@@ -58,7 +58,9 @@ async function clearCollections() {
       "inventorydetails",
       "orders",
       "products",
-      "users",
+      "items",
+      "inventorymovements",
+      // "users",
     ];
 
     const confirmed = await askConfirmation(
