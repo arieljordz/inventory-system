@@ -13,9 +13,9 @@ import { showOrderImportResults } from "../../utils/importUtils";
 import OrderTable from "./OrderTable";
 import PickupModal from "./PickupModal";
 import ImportModal from "./ImportModal";
-import Navpath from "../../components/common/Navpath";
-import SearchBar from "../../components/common/SearchBar";
-import PaginationControls from "../../components/common/PaginationControls";
+import Navpath from "../../components/Navpath";
+import SearchBar from "../../components/SearchBar";
+import PaginationControls from "../../components/PaginationControls";
 
 import { useDebounce } from "../../hooks/useDebounce";
 

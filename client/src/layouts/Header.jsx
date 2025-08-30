@@ -1,6 +1,6 @@
 import React from "react";
-import NotificationButton from "../common/NotificationButton";
-import UserDropdown from "../common/UserDropdown";
+import NotificationButton from "../components/NotificationButton";
+import UserDropdown from "../components/UserDropdown";
 
 const Header = () => {
   return (

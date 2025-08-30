@@ -27,7 +27,7 @@ export const addProduct = async (req, res) => {
       size = "",
     } = req.body;
 
-    const sku = generateSKU({ name, category, variant, size });
+    const sku = generateSKU({ name, category: "", variant, size: "" });
 
     // Check for duplicate Product
     const existingProduct = await Product.findOne({

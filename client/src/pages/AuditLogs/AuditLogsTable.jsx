@@ -1,6 +1,6 @@
 import React from "react";
 import { formatDateTime, truncateText } from "../../utils/commonUtils";
-import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
   const renderTableRows = () => {

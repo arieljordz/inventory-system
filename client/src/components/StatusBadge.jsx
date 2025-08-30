@@ -1,5 +1,5 @@
 import React from "react";
-import { getStatusBadgeData } from "../../utils/commonUtils";
+import { getStatusBadgeData } from "../utils/commonUtils";
 
 const StatusBadge = ({ status, customColorMap = {}, customLabelMap = {} }) => {
   const { label, color } = getStatusBadgeData(status, customColorMap, customLabelMap);

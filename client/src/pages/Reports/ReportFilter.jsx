@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { SelectInput } from "../../components/common/FormInputs";
+import { SelectInput } from "../../components/FormInputs";
 import { ReportTypeEnum } from "../../enums/enums";
 
 const ReportFilter = ({ reportType, setReportType, dateRange, setDateRange, handleGenerateReport }) => {

@@ -8,17 +8,17 @@ import {
   getRemainingPerProduct,
 } from "../../services/inventoryDetailService";
 
-import Navpath from "../../components/common/Navpath";
-import InventoryTable from "./InventoryTable";
-import SearchBar from "../../components/common/SearchBar";
-import PaginationControls from "../../components/common/PaginationControls";
-import DateRangeFilter from "../../components/common/DateRangeFilter";
-import { InfoBox } from "../../components/common/FormInputs";
+import Navpath from "../../components/Navpath";
+import OrderInventoryTable from "./OrderInventoryTable";
+import SearchBar from "../../components/SearchBar";
+import PaginationControls from "../../components/PaginationControls";
+import DateRangeFilter from "../../components/DateRangeFilter";
+import { InfoBox } from "../../components/FormInputs";
 
 import { getCurrentDate } from "../../utils/commonUtils";
 import { useDebounce } from "../../hooks/useDebounce";
 
-const InventoryPage = () => {
+const OrderInventoryPage = () => {
   /** 🔹 Core state */
   const [movements, setMovements] = useState([]);
   const [remainingPerProduct, setRemainingPerProduct] = useState([]);
@@ -112,7 +112,7 @@ const InventoryPage = () => {
   return (
     <>
       <Navpath
-        levelOne="Inventory Management"
+        levelOne="Order Inventory Management"
         levelTwo="Home"
         levelThree="Inventory"
       />
@@ -164,7 +164,7 @@ const InventoryPage = () => {
           />
 
           {/* Inventory Table */}
-          <InventoryTable
+          <OrderInventoryTable
             data={movements}
             remainingPerProduct={remainingPerProduct}
             loading={loading}
@@ -184,4 +184,4 @@ const InventoryPage = () => {
   );
 };
 
-export default InventoryPage;
+export default OrderInventoryPage;

@@ -9,11 +9,11 @@ import {
 import { getCurrentDate, formatAmount } from "../../utils/commonUtils";
 import { importHandlers } from "../../utils/importUtils";
 
-import Navpath from "../../components/common/Navpath";
-import { InfoBox } from "../../components/common/FormInputs";
-import SearchBar from "../../components/common/SearchBar";
-import PaginationControls from "../../components/common/PaginationControls";
-import DateRangeFilter from "../../components/common/DateRangeFilter";
+import Navpath from "../../components/Navpath";
+import { InfoBox } from "../../components/FormInputs";
+import SearchBar from "../../components/SearchBar";
+import PaginationControls from "../../components/PaginationControls";
+import DateRangeFilter from "../../components/DateRangeFilter";
 import SalesTable from "./SalesTable";
 import ImportModal from "./ImportModal";
 

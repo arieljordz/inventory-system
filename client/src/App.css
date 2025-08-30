@@ -119,6 +119,57 @@ body.dark-mode .dark-mode-text-white {
 .show {
   display: inline-block !important; /* works well for buttons */
 }
+
+/* Sidebar link text hidden when sidebar is collapsed */
 .sidebar-mini.sidebar-collapse .nav-sidebar > .nav-item > .nav-link > p {
   display: none !important;
+}
+
+/* Fix for autofill background in dark mode */
+.dark-mode input:-webkit-autofill,
+.dark-mode input:-webkit-autofill:hover,
+.dark-mode input:-webkit-autofill:focus,
+.dark-mode input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #343a40 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    background-color: transparent !important;
+}
+
+/* Alternative using CSS custom properties for AdminLTE 3 */
+[data-theme="dark"] input:-webkit-autofill,
+[data-theme="dark"] input:-webkit-autofill:hover,
+[data-theme="dark"] input:-webkit-autofill:focus,
+[data-theme="dark"] input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px var(--bs-dark) inset !important;
+    -webkit-text-fill-color: var(--bs-light) !important;
+}
+
+/* For form controls specifically */
+.dark-mode .form-control:-webkit-autofill,
+.dark-mode .form-control:-webkit-autofill:hover,
+.dark-mode .form-control:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #495057 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    border-color: #6c757d !important;
+}
+
+/* Transition for smoother effect */
+.dark-mode input:-webkit-autofill {
+    -webkit-transition: background-color 5000s ease-in-out 0s;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Alternative approach using transparent background */
+.dark-mode input:-webkit-autofill {
+    background-color: transparent !important;
+    background-image: none !important;
+    -webkit-box-shadow: 0 0 0px 1000px #495057 inset !important;
+}
+
+/* For select elements */
+.dark-mode select:-webkit-autofill,
+.dark-mode select:-webkit-autofill:hover,
+.dark-mode select:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px #495057 inset !important;
+    -webkit-text-fill-color: #ffffff !important;
 }

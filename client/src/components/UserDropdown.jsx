@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useTheme } from "../../context/ThemeContext";
+import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 import Swal from "sweetalert2";
 import ProfileModal from "./ProfileModal";
 

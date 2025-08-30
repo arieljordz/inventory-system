@@ -12,9 +12,9 @@ import {
 import { StatusEnum } from "../../enums/enums";
 import ProductTable from "./ProductTable";
 import ProductModal from "./ProductModal";
-import Navpath from "../../components/common/Navpath";
-import SearchBar from "../../components/common/SearchBar";
-import PaginationControls from "../../components/common/PaginationControls";
+import Navpath from "../../components/Navpath";
+import SearchBar from "../../components/SearchBar";
+import PaginationControls from "../../components/PaginationControls";
 import RestockModal from "./RestockModal";
 
 import { useDebounce } from "../../hooks/useDebounce";
@@ -93,7 +93,6 @@ const ProductsPage = () => {
       }
     } catch (error) {
       console.error("Failed to fetch products:", error);
-      toast.error("Failed to fetch products");
       setProducts([]);
       setTotalItems(0);
     } finally {

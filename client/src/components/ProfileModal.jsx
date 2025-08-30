@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
-import { formatDateString } from "../../utils/commonUtils";
+import { formatDateString } from "../utils/commonUtils";
 
 const ProfileModal = ({ user, show, onClose }) => {
   if (!user) return null;

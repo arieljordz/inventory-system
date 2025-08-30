@@ -5,8 +5,8 @@ import {
   computeTotalPrice,
   truncateText,
 } from "../../utils/commonUtils";
-import StatusBadge from "../../components/common/StatusBadge";
-import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
+import StatusBadge from "../../components/StatusBadge";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const TrackingsTable = ({ orders = [], loading = false }) => {
   const renderTableRows = () => {

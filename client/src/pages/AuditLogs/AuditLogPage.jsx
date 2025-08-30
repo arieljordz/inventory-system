@@ -4,9 +4,9 @@ import { toast } from "react-toastify";
 import { getAllAuditLogs } from "../../services/auditlogsService";
 
 import AuditLogsTable from "./AuditLogsTable";
-import Navpath from "../../components/common/Navpath";
-import SearchBar from "../../components/common/SearchBar";
-import PaginationControls from "../../components/common/PaginationControls";
+import Navpath from "../../components/Navpath";
+import SearchBar from "../../components/SearchBar";
+import PaginationControls from "../../components/PaginationControls";
 
 import { useDebounce } from "../../hooks/useDebounce";
 

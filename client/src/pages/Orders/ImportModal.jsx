@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { SelectInput } from "../../components/common/FormInputs";
+import { SelectInput } from "../../components/FormInputs";
 
 const ImportModal = ({
   show,

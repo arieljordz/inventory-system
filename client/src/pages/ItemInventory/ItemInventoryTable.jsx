@@ -7,50 +7,51 @@ import {
 import StatusBadge from "../../components/StatusBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
-const ProductTable = ({
-  products = [],
+const ItemInventoryTable = ({
+  items = [],
   onEdit,
   onDelete,
   onRestock,
   loading = false,
 }) => {
-  const handleEdit = (product) => {
+  console.log("Rendering ItemInventoryTable with items:", items);
+  const handleEdit = (item) => {
     if (loading) return;
-    onEdit?.(product);
+    onEdit?.(item);
   };
 
-  const handleDelete = (productId) => {
+  const handleDelete = (itemId) => {
     if (loading) return;
-    onDelete?.(productId);
+    onDelete?.(itemId);
   };
 
-  const handleRestock = (product) => {
+  const handleRestock = (item) => {
     if (loading) return;
-    onRestock?.(product);
+    onRestock?.(item);
   };
 
-  const renderActionButtons = (product) => (
+  const renderActionButtons = (item) => (
     <div className="btn-group" role="group">
       <button
         className="btn btn-sm btn-info"
-        title="Restock Product"
-        onClick={() => handleRestock(product)}
+        title="Restock Item"
+        onClick={() => handleRestock(item)}
         disabled={loading}
       >
         <i className="fas fa-plus"></i>
       </button>
       <button
         className="btn btn-sm btn-warning"
-        title="Edit Product"
-        onClick={() => handleEdit(product)}
+        title="Edit Item"
+        onClick={() => handleEdit(item)}
         disabled={loading}
       >
         <i className="fas fa-edit"></i>
       </button>
       <button
         className="btn btn-sm btn-danger"
-        title="Delete Product"
-        onClick={() => handleDelete(product._id)}
+        title="Delete Item"
+        onClick={() => handleDelete(item._id)}
         disabled={loading}
       >
         <i className="fas fa-trash-alt"></i>
@@ -67,38 +68,40 @@ const ProductTable = ({
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
               </div>
-              <span className="text-muted">Loading products...</span>
+              <span className="text-muted">Loading items...</span>
             </div>
           </td>
         </tr>
       );
     }
 
-    if (!products || products.length === 0) {
+    if (!items || items.length === 0) {
       return (
         <tr>
           <td colSpan="9" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
-              No products found
+              No items found
             </div>
           </td>
         </tr>
       );
     }
 
-    return products.map((product, index) => (
-      <tr key={product._id} className={loading ? "table-secondary" : ""}>
+    return items.map((item, index) => (
+      <tr key={item._id} className={loading ? "table-secondary" : ""}>
         <td className="text-center align-middle">{index + 1}</td>
         <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">{product.sku.toUpperCase() || "N/A"}</code>
+          <code className="px-2 py-1 rounded">
+            {item.sku.toUpperCase() || "N/A"}
+          </code>
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
-            {product.image && (
+            {item.image && (
               <img
-                src={product.image}
-                alt={product.name}
+                src={item.image}
+                alt={item.name}
                 className="rounded mr-2"
                 style={{ width: "32px", height: "32px", objectFit: "cover" }}
                 onError={(e) => {
@@ -107,27 +110,18 @@ const ProductTable = ({
               />
             )}
             <div className="d-flex align-items-center">
-              <div className="font-weight-medium" title={product.name || ""}>
+              <div className="font-weight-medium" title={item.name || ""}>
                 <code className="px-2 py-1 rounded">
-                  {truncateText(product.name, 60)}
+                  {truncateText(item.name, 60)}
                 </code>
               </div>
-              <CopyToClipboardButton text={product.name} />
+              <CopyToClipboardButton text={item.name} />
             </div>
           </div>
         </td>
-        {/* <td className="align-middle" title={product.description || ""}>
-          {product.description ? (
-            <span className="text-muted small">
-              {truncateText(product.description, 40)}
-            </span>
-          ) : (
-            <span className="text-muted font-italic">No description</span>
-          )}
-        </td> */}
         <td className="text-center align-middle">
-          {product.variant ? (
-            <span className="badge badge-secondary">{product.variant}</span>
+          {item.variant ? (
+            <span className="badge badge-secondary">{item.variant}</span>
           ) : (
             <span className="text-muted">-</span>
           )}
@@ -135,24 +129,22 @@ const ProductTable = ({
         <td className="text-center align-middle">
           <span
             className={`badge ${
-              product.quantity === 0
+              item.quantity === 0
                 ? "badge-danger"
-                : product.quantity < 10
+                : item.quantity < 10
                 ? "badge-warning"
                 : "badge-success"
             }`}
           >
-            {product.quantity ?? 0} {product.unit || "pcs"}
+            {item.quantity ?? 0} {item.unit || "pcs"}
           </span>
         </td>
         <td className="text-right align-middle">
-          <span className="font-weight-bold">
-            {formatAmount(product.price)}
-          </span>
+          <span className="font-weight-bold">{formatAmount(item.price)}</span>
         </td>
         <td className="text-center align-middle">
           <StatusBadge
-            status={product.status}
+            status={item.status}
             customLabelMap={{
               Available: "In Stock",
               "For Pick Up": "Awaiting Pickup",
@@ -161,10 +153,10 @@ const ProductTable = ({
           />
         </td>
         <td className="text-center align-middle">
-          <small className="text-muted">{formatDate(product.createdAt)}</small>
+          <small className="text-muted">{formatDate(item.createdAt)}</small>
         </td>
         <td className="text-center align-middle">
-          {renderActionButtons(product)}
+          {renderActionButtons(item)}
         </td>
       </tr>
     ));
@@ -175,7 +167,7 @@ const ProductTable = ({
       <div className="card-header">
         <h3 className="card-title mb-0">
           <i className="fas fa-boxes mr-2"></i>
-          Products
+          Items
         </h3>
       </div>
       <div className="card-body p-0">
@@ -189,8 +181,7 @@ const ProductTable = ({
                 <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
-                <th>Product Name</th>
-                {/* <th style={{ width: "300px" }}>Description</th> */}
+                <th>Item Name</th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>
@@ -219,4 +210,4 @@ const ProductTable = ({
   );
 };
 
-export default ProductTable;
+export default ItemInventoryTable;

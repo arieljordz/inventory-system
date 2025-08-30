@@ -12,6 +12,7 @@ import { fileURLToPath } from "url";
 // ===== Routes =====
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import itemRoutes from "./routes/itemRoutes.js";
 import inventoryDetailRoutes from "./routes/inventoryDetailRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
@@ -45,6 +46,7 @@ app.get("/api", (req, res) => {
 // ✅ Use only relative paths for routers
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/items", itemRoutes);
 app.use("/api/inventory-details", inventoryDetailRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/orders", orderRoutes);

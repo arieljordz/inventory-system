@@ -1,9 +1,9 @@
 import React from "react";
 import { truncateText } from "../../utils/commonUtils";
 import { StatusEnum, MovementTypeEnum } from "../../enums/enums";
-import CopyToClipboardButton from "../../components/common/CopyToClipboardButton";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
-const InventoryTable = ({ data = [], loading = false }) => {
+const OrderInventoryTable = ({ data = [], loading = false }) => {
   const formatDate = (date) =>
     new Date(date).toLocaleDateString("en-PH", {
       year: "numeric",
@@ -158,4 +158,4 @@ const InventoryTable = ({ data = [], loading = false }) => {
   );
 };
 
-export default InventoryTable;
+export default OrderInventoryTable;

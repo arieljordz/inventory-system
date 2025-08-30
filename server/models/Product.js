@@ -45,6 +45,17 @@ const productSchema = new mongoose.Schema(
       type: String,
       default: "pcs",
     },
+    type: {
+      type: String,
+      enum: ["single", "bundle"],
+      default: "single",
+    },
+    components: [
+      {
+        item: { type: mongoose.Schema.Types.ObjectId, ref: "Item" },
+        qty: { type: Number, required: true },
+      },
+    ],
     supplier: {
       type: String,
       default: "",

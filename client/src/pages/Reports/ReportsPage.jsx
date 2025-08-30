@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { toast } from "react-toastify";
-import Navpath from "../../components/common/Navpath";
+import Navpath from "../../components/Navpath";
 import ReportFilter from "./ReportFilter";
 import ReportTable from "./ReportTable";
 import { useSpinner } from "../../context/SpinnerContext";

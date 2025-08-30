@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useMemo } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { PlatformEnum, CourierEnum } from "../../enums/enums";
-import { TextInput, SelectInput } from "../../components/common/FormInputs";
+import { TextInput, SelectInput } from "../../components/FormInputs";
 
 const PickupModal = ({
   show,

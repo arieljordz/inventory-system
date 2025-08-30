@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSpinner } from "../../context/SpinnerContext";
-import Navpath from "../../components/common/Navpath";
+import Navpath from "../../components/Navpath";
 import { getProductStats } from "../../services/productService";
 
 const Dashboard = () => {

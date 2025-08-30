@@ -5,7 +5,7 @@ import {
   TextInput,
   TextArea,
   SelectInput,
-} from "../../components/common/FormInputs";
+} from "../../components/FormInputs";
 
 const ProductModal = ({
   isOpen,
