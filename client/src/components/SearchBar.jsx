@@ -5,7 +5,7 @@ const SearchBar = ({
   onSearchChange,
   itemsPerPage = 10,
   onItemsPerPageChange,
-  itemsPerPageOptions = [5, 10, 20, 50],
+  itemsPerPageOptions = [5, 10, 20, 50, 100],
   placeholder = "Search products...",
   disabled = false,
 }) => {

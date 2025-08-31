@@ -16,9 +16,9 @@ import { getReports, exportReport } from "../../services/reportService";
 const ReportsPage = () => {
   const { showSpinner, hideSpinner } = useSpinner();
 
-  const [reportType, setReportType] = useState(ReportTypeEnum.INVENTORY);
+  const [reportType, setReportType] = useState(ReportTypeEnum.ORDERS);
   const [activeReportType, setActiveReportType] = useState(
-    ReportTypeEnum.INVENTORY
+    ReportTypeEnum.ORDERS
   );
   const [reportData, setReportData] = useState([]);
   const [dateRange, setDateRange] = useState({
@@ -87,7 +87,7 @@ const ReportsPage = () => {
       link.href = URL.createObjectURL(blob);
       link.download = filename;
       link.click();
-      toast.success(`${format.toUpperCase()} report downloaded.`);
+      // toast.success(`${format.toUpperCase()} report downloaded.`);
     } catch (err) {
       console.error(err);
       toast.error("Export failed.");

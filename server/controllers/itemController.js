@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
+import moment from "moment-timezone";
 import Item from "../models/Item.js";
-import InventoryMovement from "../models/inventoryMovement.js";
+import InventoryMovement from "../models/InventoryMovement.js";
 import {
   normalizeText,
   normalizeString,
@@ -8,6 +9,7 @@ import {
 } from "../utils/commonUtils.js";
 import { generateSKU } from "../utils/skuGenerator.js";
 import { logAudit } from "../utils/auditLogger.js";
+import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 
 export const getAllItems = async (req, res) => {
   try {
@@ -331,3 +333,41 @@ export const deleteItem = async (req, res) => {
   }
 };
 
+export const getInventoryStats = async (req, res) => {
+  try {
+    // Today's start and end
+    const startOfDay = moment.tz("Asia/Manila").startOf("day").toDate();
+    const endOfDay = moment.tz("Asia/Manila").endOf("day").toDate();
+
+    // 1. Count and total quantity of available items (current stock)
+    const availableItems = await Item.find({ status: StatusEnum.AVAILABLE });
+    const availableItemCount = availableItems.length;
+    const totalAvailableQuantity = availableItems.reduce(
+      (sum, item) => sum + (item.quantity || 0),
+      0
+    );
+
+    // 2. Inventory movements for today
+    const todaysMovements = await InventoryMovement.find({
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
+    });
+
+    const totalInToday = todaysMovements
+      .filter((m) => m.type === MovementTypeEnum.IN)
+      .reduce((sum, m) => sum + m.quantity, 0);
+
+    const totalOutToday = todaysMovements
+      .filter((m) => m.type === MovementTypeEnum.OUT)
+      .reduce((sum, m) => sum + m.quantity, 0);
+
+    res.json({
+      availableItemCount,
+      totalAvailableQuantity,
+      totalInToday,
+      totalOutToday,
+    });
+  } catch (error) {
+    console.error("Error getting inventory stats:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};

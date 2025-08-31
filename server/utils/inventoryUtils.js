@@ -1,55 +1,175 @@
 // helpers/inventoryUtils.js
 import Product from "../models/Product.js";
 import InventoryDetail from "../models/InventoryDetail.js";
+import Item from "../models/Item.js";
+import InventoryMovement from "../models/InventoryMovement.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "./auditLogger.js";
 
-export const restockProductHelper = async (item, req) => {
-  if (!item || !item.product || !item.quantity) {
-    throw new Error("Invalid item: missing product or quantity");
+// update items quantity
+export const updateItemQuantities = async (product, orderQty, options = {}) => {
+  const { userId, platformOrderId, platform, courier } = options;
+
+  if (product.type === "single") {
+    // Product is directly tied to an Item
+    const item = await Item.findOne({
+      normalizedName: product.normalizedName,
+      normalizedVariant: product.normalizedVariant,
+    });
+
+    if (!item) throw new Error("Item not found for single product");
+
+    const newItemQty = item.quantity - orderQty;
+    if (newItemQty < 0) throw new Error("Insufficient stock for item");
+
+    // Update Item
+    await Item.findByIdAndUpdate(item._id, {
+      quantity: newItemQty,
+      ...(newItemQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+    });
+
+    // Update Product
+    const newProductQty = product.quantity - orderQty;
+    await Product.findByIdAndUpdate(product._id, {
+      quantity: newProductQty,
+      ...(newProductQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+    });
+
+    // Record Movement
+    await InventoryMovement.create({
+      item: item._id,
+      type: "OUT",
+      quantity: orderQty,
+      price: item.price,
+      balanceAfter: newItemQty,
+      reference: platformOrderId,
+      remarks: `Order from ${platform} - ${courier}`,
+      createdBy: userId || null,
+    });
   }
 
-  const quantity = parseInt(item.quantity, 10);
-  if (!quantity || quantity <= 0) {
-    throw new Error("Quantity must be a number greater than zero");
+  if (product.type === "bundle") {
+    // Reduce stock for each component item
+    for (const comp of product.components) {
+      const item = await Item.findById(comp.item);
+      if (!item) continue;
+
+      const totalQty = comp.qty * orderQty;
+      const newItemQty = item.quantity - totalQty;
+      if (newItemQty < 0)
+        throw new Error(
+          `Insufficient stock for item: ${item.name} (bundle component)`
+        );
+
+      // Update Item
+      await Item.findByIdAndUpdate(item._id, {
+        quantity: newItemQty,
+        ...(newItemQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+      });
+
+      // Record Movement
+      await InventoryMovement.create({
+        item: item._id,
+        type: "OUT",
+        quantity: totalQty,
+        price: item.price,
+        balanceAfter: newItemQty,
+        reference: platformOrderId,
+        remarks: `Bundle component for ${product.name} - ${platform}`,
+        createdBy: userId || null,
+      });
+    }
+
+    // Update Product after processing all components
+    const newProductQty = product.quantity - orderQty;
+    await Product.findByIdAndUpdate(product._id, {
+      quantity: newProductQty,
+      ...(newProductQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+    });
+  }
+};
+
+// Restock items if returned
+export const restockItemQuantities = async (
+  product,
+  orderQty,
+  options = {}
+) => {
+  const { userId, platformOrderId, platform, courier } = options;
+
+  if (product.type === "single") {
+    const item = await Item.findOne({
+      normalizedName: product.normalizedName,
+      normalizedVariant: product.normalizedVariant,
+    });
+
+    if (!item) throw new Error("Item not found for single product");
+
+    const newItemQty = item.quantity + orderQty;
+    const newProductQty = product.quantity + orderQty;
+
+    // Update item
+    await Item.findByIdAndUpdate(item._id, {
+      quantity: newItemQty,
+      status: StatusEnum.AVAILABLE, // since restock always makes available
+    });
+
+    // Update product
+    await Product.findByIdAndUpdate(product._id, {
+      quantity: newProductQty,
+      status: StatusEnum.AVAILABLE,
+    });
+
+    // Movement log
+    await InventoryMovement.create({
+      item: item._id,
+      type: "IN",
+      quantity: orderQty,
+      price: item.price,
+      balanceAfter: newItemQty,
+      reference: platformOrderId,
+      remarks: `Returned order restocked from ${platform} - ${courier}`,
+      createdBy: userId || null,
+    });
   }
 
-  const product = await Product.findById(item.product);
-  if (!product) throw new Error("Product not found");
+  if (product.type === "bundle") {
+    let totalAddedToProduct = 0;
 
-  const before = product.toObject();
+    for (const comp of product.components) {
+      const item = await Item.findById(comp.item);
+      if (!item) continue;
 
-  // Update quantity
-  product.quantity += quantity;
+      const totalQty = comp.qty * orderQty;
+      const newItemQty = item.quantity + totalQty;
 
-  // Update status if quantity >= 1
-  if (product.quantity >= 1 && product.status !== StatusEnum.AVAILABLE) {
-    product.status = StatusEnum.AVAILABLE;
+      totalAddedToProduct += totalQty;
+
+      // Update item
+      await Item.findByIdAndUpdate(item._id, {
+        quantity: newItemQty,
+        status: StatusEnum.AVAILABLE,
+      });
+
+      // Movement log
+      await InventoryMovement.create({
+        item: item._id,
+        type: "IN",
+        quantity: totalQty,
+        price: item.price,
+        balanceAfter: newItemQty,
+        reference: platformOrderId,
+        remarks: `Returned bundle component for ${product.name} - ${platform}`,
+        createdBy: userId || null,
+      });
+    }
+
+    // Update bundle product quantity (based on orders returned)
+    const newProductQty = product.quantity + orderQty;
+
+    await Product.findByIdAndUpdate(product._id, {
+      quantity: newProductQty,
+      status: StatusEnum.AVAILABLE,
+    });
   }
-
-  await product.save();
-
-  // Log inventory detail
-  await InventoryDetail.create({
-    product: product._id,
-    movementType: MovementTypeEnum.IN,
-    quantity,
-    remarks: "Returned product restock",
-    status: StatusEnum.AVAILABLE,
-  });
-
-  // Log audit if user/ip info is provided in the item
-  await logAudit({
-    action: "RESTOCK_RETURNED_PRODUCT",
-    user: req.user?._id,
-    description: `Restocked product: ${product.name}, quantity: ${quantity}, variant: ${product.variant}`,
-    collectionName: "Product",
-    documentId: product._id,
-    before,
-    after: product.toObject(),
-    ip: req.ip,
-    userAgent: req.headers["user-agent"],
-  });
-
-  return product;
 };

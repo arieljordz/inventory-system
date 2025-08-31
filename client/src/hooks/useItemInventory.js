@@ -8,6 +8,7 @@ import {
   updateItem,
   deleteItem,
   restockItem,
+  getInventoryStats,
 } from "../services/itemService";
 
 import { useDebounce } from "./useDebounce";
@@ -19,6 +20,12 @@ export const useItemInventory = (initialPagination) => {
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
   const [pagination, setPagination] = useState(initialPagination);
+  const [stats, setStats] = useState({
+    availableItemCount: 0,
+    totalAvailableQuantity: 0,
+    totalInToday: 0,
+    totalOutToday: 0,
+  });
 
   const debouncedSearch = useDebounce(pagination.searchTerm, 500);
   const { showSpinner, hideSpinner } = useSpinner();
@@ -62,6 +69,24 @@ export const useItemInventory = (initialPagination) => {
     setPagination((prev) => ({ ...prev, currentPage: 1 }));
   }, [debouncedSearch]);
 
+  const fetchItemStats = useCallback(async () => {
+    try {
+      const res = await getInventoryStats();
+      setStats(res.data); // Use res.data from Axios
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setStats({
+        availableItemCount: 0,
+        totalAvailableQuantity: 0,
+        totalInToday: 0,
+        totalOutToday: 0,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchItemStats();
+  }, [fetchItemStats]);
   /** ---------------------------
    * Actions
    ---------------------------- */
@@ -148,5 +173,6 @@ export const useItemInventory = (initialPagination) => {
     saveItem,
     removeItem,
     restock,
+    stats,
   };
 };

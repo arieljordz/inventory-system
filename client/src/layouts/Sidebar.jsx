@@ -27,7 +27,7 @@ const Sidebar = () => {
           className="brand-image img-circle elevation-3"
           style={{ opacity: 0.9, width: "35px", height: "35px" }}
         />
-        <span className="brand-text ml-2 font-weight-light">INVENTORY</span>
+        <span className="brand-text ml-2 font-weight-light">ORDERS</span>
       </div>
 
       {/* Sidebar Content Wrapper (Flex column with grow) */}

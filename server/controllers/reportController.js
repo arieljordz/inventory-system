@@ -3,6 +3,8 @@ import ExcelJS from "exceljs";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
+import InventoryMovement from "../models/InventoryMovement.js";
+import Item from "../models/Item.js";
 import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
 import {
   formatExportData,
@@ -18,7 +20,7 @@ import {
 export const getReportData = async (req, res) => {
   try {
     const {
-      reportType = ReportTypeEnum.INVENTORY,
+      reportType = ReportTypeEnum.ORDERS,
       startDate,
       endDate,
     } = req.query;
@@ -52,7 +54,7 @@ export const getReportData = async (req, res) => {
 export const exportReport = async (req, res) => {
   try {
     const {
-      reportType = ReportTypeEnum.INVENTORY,
+      reportType = ReportTypeEnum.ORDERS,
       startDate,
       endDate,
       format,
@@ -78,6 +80,7 @@ export const exportReport = async (req, res) => {
         ReportTypeEnum.SALES_UNPAID,
       ].includes(reportType)
     ) {
+      // Sales report
       isSalesReport = true;
 
       if (reportType === ReportTypeEnum.SALES_PAID) filter.isPaid = true;
@@ -87,14 +90,21 @@ export const exportReport = async (req, res) => {
         .populate("product", "name price variant")
         .sort({ createdAt: -1 })
         .lean();
-    } else {
-      if (reportType === ReportTypeEnum.INVENTORY_IN)
-        filter.movementType = MovementTypeEnum.IN;
-      if (reportType === ReportTypeEnum.INVENTORY_OUT)
-        filter.movementType = MovementTypeEnum.OUT;
+    } else if (
+      [
+        ReportTypeEnum.ITEMS,
+        ReportTypeEnum.ITEMS_IN,
+        ReportTypeEnum.ITEMS_OUT,
+      ].includes(reportType)
+    ) {
+      // Inventory / Items report
+      if (reportType === ReportTypeEnum.ITEMS_IN)
+        filter.type = MovementTypeEnum.IN;
+      if (reportType === ReportTypeEnum.ITEMS_OUT)
+        filter.type = MovementTypeEnum.OUT;
 
-      data = await InventoryDetail.find(filter)
-        .populate("product", "name price variant")
+      data = await InventoryMovement.find(filter)
+        .populate("item", "name price variant status location")
         .sort({ createdAt: -1 })
         .lean();
     }
@@ -103,7 +113,7 @@ export const exportReport = async (req, res) => {
       return res.status(400).json({ message: "No data to export" });
     }
 
-    // 🔹 Always map with totalAmount logic
+    // 🔹 Map totalAmount for sales, 0 for inventory
     data = data.map((item) => ({
       ...item,
       totalAmount: isSalesReport
@@ -112,8 +122,6 @@ export const exportReport = async (req, res) => {
           : 0
         : 0, // Inventory reports always return 0
     }));
-
-    // console.log("data to export:", data[0]);
 
     const exportData = formatExportData(data, reportType);
     const filename = getReportFileName(reportType, startDate, endDate, format);
@@ -236,8 +244,9 @@ const exportPDF = async (
     // Adjust remaining width for product name column
     const totalWidth = widths.reduce((a, b) => a + b, 0);
     const remaining = legalWidth - 2 * margin - totalWidth;
-    const productIndex = headers.findIndex((h) =>
-      h.toLowerCase().includes("product")
+    const productIndex = headers.findIndex(
+      (h) =>
+        h.toLowerCase().includes("product") || h.toLowerCase().includes("item")
     );
     if (productIndex >= 0) widths[productIndex] += remaining;
     return widths;

@@ -16,6 +16,7 @@ import {
   normalizeHeader,
   validateFile,
 } from "../utils/importUtils.js";
+import { updateItemQuantities } from "../utils/inventoryUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
@@ -183,7 +184,7 @@ export const importOrdersByPlatform = async (req, res) => {
 
     console.log(`🚀 Processing ${rows.length} rows for ${platform}`);
 
-    const processResults = await processOrderRows(rows, platform, req);
+    const processResults = await processOrdersImport(rows, platform, req);
     res.status(201).json(processResults);
   } catch (error) {
     console.error("🔥 Import error:", error);
@@ -194,7 +195,7 @@ export const importOrdersByPlatform = async (req, res) => {
 };
 
 // --- Modular row processor (platform-agnostic) ---
-export const processOrderRows = async (rows, platform, req) => {
+export const processOrdersImport = async (rows, platform, req) => {
   const results = { imported: [], skipped: [] };
 
   for (const row of rows) {
@@ -252,15 +253,21 @@ export const processOrderRows = async (rows, platform, req) => {
         remarks: "Tagged for pickup - imported orders",
       });
 
-      const remainingQty = product.quantity - quantity;
-      const updatedProduct = await Product.findByIdAndUpdate(
-        product._id,
-        {
-          quantity: remainingQty,
-          ...(remainingQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
-        },
-        { new: true }
-      );
+      try {
+        // Update item quantities
+        await updateItemQuantities(product, quantity, {
+          userId: req.user?._id,
+          platformOrderId,
+          platform,
+          courier,
+        });
+      } catch (err) {
+        results.skipped.push({
+          platformOrderId,
+          reason: `Stock update failed: ${err.message}`,
+        });
+        continue;
+      }
 
       const inventoryDetail = await InventoryDetail.create({
         product: product._id,
@@ -272,6 +279,9 @@ export const processOrderRows = async (rows, platform, req) => {
         status: StatusEnum.FOR_PICK_UP,
         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
       });
+
+      // refresh product so it has the latest quantity/status
+      const updatedProduct = await Product.findById(product._id);
 
       results.imported.push({
         platformOrderId,

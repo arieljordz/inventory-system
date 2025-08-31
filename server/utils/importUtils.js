@@ -127,7 +127,6 @@ export const orderPlatformConfigs = {
   },
 };
 
-
 // --- Platform configuration for sales ---
 export const salesPlatformConfigs = {
   shopee: {
@@ -170,4 +169,40 @@ export const returnPlatformConfigs = {
       platformOrderId: "Order ID",
     },
   },
+};
+
+// --- Detect Header Row Helper ---
+export const detectHeaderRow = (sheetData, expectedHeaders) => {
+  let headerRowIndex = -1;
+  let columnIndexMap = {};
+  let bestMatchCount = 0;
+
+  for (let r = 0; r < sheetData.length; r++) {
+    const row = sheetData[r] || [];
+    const headersInRow = {};
+    row.forEach((cellValue, colNumber) => {
+      if (cellValue) headersInRow[normalizeHeader(cellValue)] = colNumber;
+    });
+
+    const matches = expectedHeaders.filter(
+      (h) => headersInRow[h] !== undefined
+    );
+    if (matches.length > bestMatchCount) {
+      bestMatchCount = matches.length;
+      headerRowIndex = r;
+      columnIndexMap = headersInRow;
+    }
+  }
+
+  return { headerRowIndex, columnIndexMap };
+};
+
+// --- Build Field Map Helper ---
+export const buildFinalFieldMap = (rawFieldMap, columnIndexMap) => {
+  const finalFieldMap = {};
+  Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
+    const colIndex = columnIndexMap[normalizeHeader(fieldName)];
+    if (colIndex !== undefined) finalFieldMap[key] = colIndex;
+  });
+  return finalFieldMap;
 };

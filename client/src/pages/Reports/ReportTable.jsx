@@ -35,7 +35,7 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
                 className={
                   centerColumns.includes(col)
                     ? "text-center"
-                    : col.includes("Amount") || col === "Price"
+                    : col.includes("Amount") || col.includes("Price")
                     ? "text-end"
                     : ""
                 }
@@ -54,7 +54,7 @@ const ReportTable = ({ formattedReport, activeReportType }) => {
                   className={
                     centerColumns.includes(col)
                       ? "text-center align-middle"
-                      : col.includes("Amount") || col === "Price"
+                      : col.includes("Amount") || col.includes("Price")
                       ? "text-end align-middle"
                       : ""
                   }

@@ -2,13 +2,14 @@ import React from "react";
 import { InfoBox } from "../../components/FormInputs";
 
 function InfoDashboard({ stats }) {
+  // console.log("Stats:", stats);
   return (
     <div>
       <div className="row">
         <InfoBox
           icon="fas fa-layer-group"
-          label="Unique Products"
-          value={stats.availableProductCount ?? 0}
+          label="Unique Items"
+          value={stats.availableItemCount ?? 0}
           color="primary"
         />
         <InfoBox
@@ -19,14 +20,14 @@ function InfoDashboard({ stats }) {
         />
         <InfoBox
           icon="fas fa-arrow-circle-down"
-          label="Total In"
-          value={stats.totalIn ?? 0}
+          label="Total In (Today)"
+          value={stats.totalInToday ?? 0}
           color="success"
         />
         <InfoBox
           icon="fas fa-arrow-circle-up"
-          label="Total Out"
-          value={stats.totalOut ?? 0}
+          label="Total Out (Today)"
+          value={stats.totalOutToday ?? 0}
           color="danger"
         />
       </div>

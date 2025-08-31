@@ -15,7 +15,7 @@ const ItemInventoryTable = ({
   onRestock,
   loading = false,
 }) => {
-  console.log("Rendering ItemInventoryTable with items:", items);
+  // console.log("Rendering ItemInventoryTable with items:", items);
   const handleEdit = (item) => {
     if (loading) return;
     onEdit?.(item);

@@ -45,6 +45,7 @@ const ItemInventoryPage = () => {
     saveItem,
     removeItem,
     restock,
+    stats,
   } = useItemInventory({
     currentPage: 1,
     itemsPerPage: 5,
@@ -117,7 +118,7 @@ const ItemInventoryPage = () => {
       <section className="content">
         <div className="container-fluid">
           {/* 🔹 Dashboard */}
-          <InfoDashboard stats={{}} />
+          <InfoDashboard stats={stats} />
 
           {/* 🔹 Add Item */}
           <div className="mb-3">

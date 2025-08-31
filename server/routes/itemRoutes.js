@@ -3,6 +3,7 @@ import {
   addItem,
   getAllItems,
   getItemById,
+  getInventoryStats,
   updateItem,
   deleteItem,
   restockItem,
@@ -15,6 +16,7 @@ const router = express.Router();
 
 // 📦 Public Routes
 router.get("/", getAllItems);
+router.get("/stats", getInventoryStats); 
 router.get("/:id", getItemById);
 
 // 🔐 Protected Routes

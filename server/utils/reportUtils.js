@@ -3,15 +3,36 @@ import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
 import { formatAmount, getStatusBadgeData } from "../utils/commonUtils.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
+import InventoryMovement from "../models/InventoryMovement.js";
 
 export const formatReportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
 
   return reportData.map((item) => {
     const date = new Date(item.createdAt).toLocaleDateString();
-    const { label } = getStatusBadgeData(item.status);
+    const { label } = getStatusBadgeData(item.item?.status);
 
-    if (reportType.includes(ReportTypeEnum.INVENTORY)) {
+    // --- ITEMS REPORTS ---
+    if (
+      reportType === ReportTypeEnum.ITEMS ||
+      reportType === ReportTypeEnum.ITEMS_IN ||
+      reportType === ReportTypeEnum.ITEMS_OUT
+    ) {
+      return {
+        "Item Name": item.item?.name || "-",
+        Variant: item.item?.variant || "-",
+        Quantity: item.quantity,
+        Type: item.type || "-",
+        Price: formatAmount(item.item?.price || 0),
+        "Total Price": formatAmount(item.totalValue || 0),
+        Status: label,
+        Location: item.location || "-",
+        Date: date,
+      };
+    }
+
+    // --- ORDERS REPORTS ---
+    if (reportType.includes(ReportTypeEnum.ORDERS)) {
       return {
         "Product Name": item.product?.name || "-",
         Variant: item.product?.variant || "-",
@@ -32,7 +53,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
         Courier: item.courier || "-",
         Quantity: item.quantity,
         Date: date,
-        "Payment": item.isPaid ? "Paid" : "Unpaid",
+        Payment: item.isPaid ? "Paid" : "Unpaid",
       };
     } else {
       const price = item.product?.price || 0;
@@ -45,7 +66,7 @@ export const formatReportData = (reportData = [], reportType = "") => {
         Quantity: item.quantity,
         Price: formatAmount(price),
         "Total Amount": formatAmount(item.totalAmount),
-        "Payment": item.isPaid ? "Paid" : "Unpaid",
+        Payment: item.isPaid ? "Paid" : "Unpaid",
       };
     }
   });
@@ -56,9 +77,29 @@ export const formatExportData = (reportData = [], reportType = "") => {
 
   return reportData.map((item) => {
     const date = new Date(item.createdAt).toLocaleDateString();
-    const { label } = getStatusBadgeData(item.status);
+    const { label } = getStatusBadgeData(item.item?.status);
 
-    if (reportType.includes(ReportTypeEnum.INVENTORY)) {
+    // --- ITEMS REPORTS ---
+    if (
+      reportType === ReportTypeEnum.ITEMS ||
+      reportType === ReportTypeEnum.ITEMS_IN ||
+      reportType === ReportTypeEnum.ITEMS_OUT
+    ) {
+      return {
+        "Item Name": item.item?.name || "-",
+        Variant: item.item?.variant || "-",
+        Quantity: item.quantity,
+        Type: item.type || "-",
+        Price: item.item?.price || 0,
+        "Total Price": item.totalValue || 0,
+        Status: label,
+        Location: item.location || "-",
+        Date: date,
+      };
+    }
+
+    // --- ORDERS REPORTS ---
+    if (reportType.includes(ReportTypeEnum.ORDERS)) {
       return {
         "Product Name": item.product?.name || "-",
         Variant: item.product?.variant || "-",
@@ -99,7 +140,24 @@ export const formatExportData = (reportData = [], reportType = "") => {
 };
 
 export const getCenteredColumns = (reportType = "") => {
-  if (reportType.includes(ReportTypeEnum.INVENTORY)) {
+  // --- ITEMS REPORTS ---
+  if (
+    reportType === ReportTypeEnum.ITEMS ||
+    reportType === ReportTypeEnum.ITEMS_IN ||
+    reportType === ReportTypeEnum.ITEMS_OUT
+  ) {
+    return [
+      "Variant",
+      "Quantity",
+      "Type",
+      "Status",
+      "Location",
+      "Date",
+    ];
+  }
+
+  // --- ORDERS REPORTS ---
+  if (reportType.includes(ReportTypeEnum.ORDERS)) {
     return ["Variant", "Quantity", "Type", "Date", "Status"];
   } else if (
     reportType === ReportTypeEnum.ORDERS ||
@@ -218,24 +276,54 @@ export const fetchReportData = async (reportType, filter) => {
         .sort({ createdAt: -1 });
       break;
 
-    // --- INVENTORY REPORTS ---
-    case ReportTypeEnum.INVENTORY:
+    // --- ORDERS REPORTS ---
+    case ReportTypeEnum.ORDERS:
       data = await InventoryDetail.find()
         .populate("product", "name price variant")
         .sort({ createdAt: -1 });
       break;
 
-    case ReportTypeEnum.INVENTORY_IN:
+    case ReportTypeEnum.PRODUCTS_IN:
       filter.movementType = MovementTypeEnum.IN;
       data = await InventoryDetail.find(filter)
         .populate("product", "name price variant")
         .sort({ createdAt: -1 });
       break;
 
-    case ReportTypeEnum.INVENTORY_OUT:
+    case ReportTypeEnum.PRODUCTS_OUT:
       filter.movementType = MovementTypeEnum.OUT;
       data = await InventoryDetail.find(filter)
         .populate("product", "name price variant")
+        .sort({ createdAt: -1 });
+      break;
+
+    // --- ITEMS REPORTS ---
+    case ReportTypeEnum.ITEMS:
+      data = await InventoryMovement.find()
+        .populate(
+          "item",
+          "name price sku variant unit quantity status location supplier"
+        )
+        .sort({ createdAt: -1 });
+      break;
+
+    case ReportTypeEnum.ITEMS_IN:
+      filter.type = "IN";
+      data = await InventoryMovement.find(filter)
+        .populate(
+          "item",
+          "name price sku variant unit quantity status location supplier"
+        )
+        .sort({ createdAt: -1 });
+      break;
+
+    case ReportTypeEnum.ITEMS_OUT:
+      filter.type = "OUT";
+      data = await InventoryMovement.find(filter)
+        .populate(
+          "item",
+          "name price sku variant unit quantity status location supplier"
+        )
         .sort({ createdAt: -1 });
       break;
 

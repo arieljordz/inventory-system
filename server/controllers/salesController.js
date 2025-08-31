@@ -7,6 +7,8 @@ import {
   returnPlatformConfigs,
   normalizeHeader,
   validateFile,
+  detectHeaderRow,
+  buildFinalFieldMap,
 } from "../utils/importUtils.js";
 import {
   normalizeString,
@@ -14,7 +16,7 @@ import {
   normalizeText,
 } from "../utils/commonUtils.js";
 import { StatusEnum } from "../enums/enums.js";
-import { restockProductHelper } from "../utils/inventoryUtils.js";
+import { restockItemQuantities } from "../utils/inventoryUtils.js";
 
 export const getSalesStatsByDate = async (req, res) => {
   try {
@@ -153,7 +155,7 @@ export const getSalesStatsByDate = async (req, res) => {
   }
 };
 
-// --- Import sales handler ---
+// --- Import Sales Handler ---
 export const importSalesByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
@@ -178,61 +180,21 @@ export const importSalesByPlatform = async (req, res) => {
         (s) => normalizeHeader(s) === normalizeHeader(sheetName)
       ) || workbook.SheetNames[0];
     const worksheet = workbook.Sheets[targetSheetName];
-    const sheetData = XLSX.utils.sheet_to_json(worksheet, {
-      header: 1,
-      raw: false,
-    });
+    const sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: false });
 
-    console.log("Import Sales");
-    console.log("Expected headers:", expectedHeaders);
-    // sheetData.slice(0, 6).forEach((row, i) => console.log("Row", i, row));
+    // --- Detect header row ---
+    let { headerRowIndex, columnIndexMap } = detectHeaderRow(sheetData, expectedHeaders);
 
-    // --- Find the header row dynamically ---
-    let headerRowIndex = -1;
-    let columnIndexMap = {};
-    let bestMatchCount = 0;
-
-    for (let r = 0; r < sheetData.length; r++) {
-      const row = sheetData[r] || [];
-      const headersInRow = {};
-
-      row.forEach((cellValue, colNumber) => {
-        if (cellValue) {
-          headersInRow[normalizeHeader(cellValue)] = colNumber;
-        }
-      });
-
-      const matches = expectedHeaders.filter(
-        (h) => headersInRow[h] !== undefined
-      );
-
-      // pick row with the *most* matching headers
-      if (matches.length > bestMatchCount) {
-        bestMatchCount = matches.length;
-        headerRowIndex = r;
-        columnIndexMap = headersInRow;
-      }
-    }
-
-    if (headerRowIndex === -1 || bestMatchCount === 0) {
+    if (headerRowIndex === -1) {
       return res.status(400).json({
-        message:
-          "No valid header row found in the uploaded file. Please check the template.",
+        message: "No valid header row found. Check the template.",
       });
     }
-
-    console.log(`Detected header row at index: ${headerRowIndex}`);
 
     // --- Build final field map ---
-    const finalFieldMap = {};
-    Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
-      const colIndex = columnIndexMap[normalizeHeader(fieldName)];
-      if (colIndex !== undefined) {
-        finalFieldMap[key] = colIndex;
-      }
-    });
+    const finalFieldMap = buildFinalFieldMap(rawFieldMap, columnIndexMap);
 
-    // --- Delegate to helper ---
+    // --- Process rows ---
     const results = await processSalesImport({
       sheetData,
       headerRowIndex,
@@ -246,6 +208,7 @@ export const importSalesByPlatform = async (req, res) => {
         updated: results.updated.length,
         alreadyPaid: results.alreadyPaid.length,
         notFound: results.notFound.length,
+        skipped: results.skipped.length,
       },
       details: results,
     });
@@ -255,7 +218,7 @@ export const importSalesByPlatform = async (req, res) => {
   }
 };
 
-//Process imported sales, mark orders as paid.
+// --- Process Sales Import with skipped rows ---
 export const processSalesImport = async ({
   sheetData,
   headerRowIndex,
@@ -263,76 +226,71 @@ export const processSalesImport = async ({
   platform,
   req,
 }) => {
-  // --- Extract order IDs (start after headerRowIndex automatically) ---
-  const rawPlatformOrderIds = sheetData
-    .slice(headerRowIndex + 1) // skip header row
-    .map((row) =>
-      (row?.[finalFieldMap.platformOrderId] || "").toString().trim()
-    )
-    .filter((id) => id); // keep only non-empty
+  const results = {
+    updated: [],
+    alreadyPaid: [],
+    notFound: [],
+    skipped: [],
+  };
 
-  if (rawPlatformOrderIds.length === 0) {
-    throw new Error("No valid order IDs found in file.");
-  }
+  const rows = sheetData.slice(headerRowIndex + 1);
 
-  // --- Deduplicate IDs while preserving order ---
-  const platformOrderIds = [...new Set(rawPlatformOrderIds)];
+  for (const row of rows) {
+    if (!row || !row.some((c) => String(c || "").trim())) continue;
 
-  // --- Fetch matching orders ---
-  const orders = await Order.find({
-    platform: platform.toLowerCase(),
-    platformOrderId: { $in: platformOrderIds },
-  });
-  const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
+    const platformOrderId = (row[finalFieldMap.platformOrderId] || "").toString().trim();
 
-  const results = { updated: [], alreadyPaid: [], notFound: [] };
-
-  // --- Process each unique order ---
-  for (const platformOrderId of platformOrderIds) {
-    const order = orderMap.get(platformOrderId);
-    if (!order) {
-      results.notFound.push({
-        platformOrderId: platformOrderId || "N/A",
-        reason: "Order not found",
-      });
+    if (!platformOrderId) {
+      results.skipped.push({ reason: "Missing platformOrderId", row });
       continue;
     }
 
-    if (order.isPaid) {
-      results.alreadyPaid.push({
-        platformOrderId: order.platformOrderId || "N/A",
-        reason: "Order is already paid",
+    try {
+      const order = await Order.findOne({
+        platform: platform.toLowerCase(),
+        platformOrderId,
       });
-      continue;
+
+      if (!order) {
+        results.notFound.push({ platformOrderId, reason: "Order not found" });
+        continue;
+      }
+
+      if (order.isPaid) {
+        results.alreadyPaid.push({ platformOrderId, reason: "Already paid" });
+        continue;
+      }
+
+      const before = { isPaid: order.isPaid };
+      order.isPaid = true;
+      order.status = StatusEnum.COMPLETED;
+      await order.save();
+
+      results.updated.push({ platformOrderId, reason: "Order is now paid" });
+
+      await logAudit({
+        action: "UPDATE_PAYMENT",
+        user: req.user?._id,
+        description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
+        collectionName: "Order",
+        documentId: order._id,
+        before,
+        after: { isPaid: true },
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    } catch (err) {
+      results.skipped.push({
+        platformOrderId,
+        reason: `Error processing order: ${err.message}`,
+      });
     }
-
-    const before = { isPaid: order.isPaid };
-    order.isPaid = true;
-    order.status = StatusEnum.COMPLETED;
-    await order.save();
-
-    results.updated.push({
-      platformOrderId: order.platformOrderId || "N/A",
-      reason: "Order is now paid",
-    });
-
-    await logAudit({
-      action: "UPDATE_PAYMENT",
-      user: req.user?._id,
-      description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
-      collectionName: "Order",
-      documentId: order._id,
-      before,
-      after: { isPaid: true },
-      ip: req.ip,
-      userAgent: req.headers["user-agent"],
-    });
   }
 
   return results;
 };
 
-// --- Import returns handler ---
+// --- Import Returns Handler ---
 export const importReturnsByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
@@ -343,75 +301,42 @@ export const importReturnsByPlatform = async (req, res) => {
     const { sheetName, fields: rawFieldMap } = returnPlatformConfigs[platform];
     const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
 
-    // --- Validate uploaded file ---
+    // Validate file
     try {
       validateFile(req.file);
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
 
-    // --- Load workbook ---
+    // Load workbook
     const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
     const targetSheetName =
       workbook.SheetNames.find(
         (s) => normalizeHeader(s) === normalizeHeader(sheetName)
       ) || workbook.SheetNames[0];
+
     const worksheet = workbook.Sheets[targetSheetName];
     const sheetData = XLSX.utils.sheet_to_json(worksheet, {
       header: 1,
       raw: false,
     });
 
-    console.log("Import Returns");
-    console.log("Expected headers:", expectedHeaders);
-    // sheetData.slice(0, 6).forEach((row, i) => console.log("Row", i, row));
+    // Detect header row
+    let { headerRowIndex, columnIndexMap } = detectHeaderRow(
+      sheetData,
+      expectedHeaders
+    );
 
-    // --- Find the header row dynamically ---
-    let headerRowIndex = -1;
-    let columnIndexMap = {};
-    let bestMatchCount = 0;
-
-    for (let r = 0; r < sheetData.length; r++) {
-      const row = sheetData[r] || [];
-      const headersInRow = {};
-
-      row.forEach((cellValue, colNumber) => {
-        if (cellValue) {
-          headersInRow[normalizeHeader(cellValue)] = colNumber;
-        }
-      });
-
-      const matches = expectedHeaders.filter(
-        (h) => headersInRow[h] !== undefined
-      );
-
-      // pick row with the *most* matching headers
-      if (matches.length > bestMatchCount) {
-        bestMatchCount = matches.length;
-        headerRowIndex = r;
-        columnIndexMap = headersInRow;
-      }
-    }
-
-    if (headerRowIndex === -1 || bestMatchCount === 0) {
+    if (headerRowIndex === -1) {
       return res.status(400).json({
-        message:
-          "No valid header row found in the uploaded file. Please check the template.",
+        message: "No valid header row found. Check the template.",
       });
     }
 
-    console.log(`Detected header row at index: ${headerRowIndex}`);
+    // Build final field map
+    const finalFieldMap = buildFinalFieldMap(rawFieldMap, columnIndexMap);
 
-    // --- Build final field map ---
-    const finalFieldMap = {};
-    Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
-      const colIndex = columnIndexMap[normalizeHeader(fieldName)];
-      if (colIndex !== undefined) {
-        finalFieldMap[key] = colIndex;
-      }
-    });
-
-    // --- Delegate to helper ---
+    // Process rows
     const results = await processReturnsImport({
       sheetData,
       headerRowIndex,
@@ -426,16 +351,17 @@ export const importReturnsByPlatform = async (req, res) => {
         alreadyReturned: results.alreadyReturned.length,
         notFound: results.notFound.length,
         failedRestocks: results.failedRestocks.length,
+        skipped: results.skipped.length,
       },
       details: results,
     });
   } catch (error) {
-    console.error("Error importing sales:", error);
+    console.error("Error importing returns:", error);
     res.status(500).json({ message: "Internal server error." });
   }
 };
 
-// Process imported returns, mark orders as returned.
+// --- Process Returns ---
 export const processReturnsImport = async ({
   sheetData,
   headerRowIndex,
@@ -443,115 +369,90 @@ export const processReturnsImport = async ({
   platform,
   req,
 }) => {
-  // --- Extract order IDs (start after headerRowIndex automatically) ---
-  const rawPlatformOrderIds = sheetData
-    .slice(headerRowIndex + 1) // skip header row
-    .map((row) =>
-      (row?.[finalFieldMap.platformOrderId] || "").toString().trim()
-    )
-    .filter((id) => id); // keep only non-empty
-
-  if (rawPlatformOrderIds.length === 0) {
-    throw new Error("No valid order IDs found in file.");
-  }
-
-  // --- Deduplicate IDs while preserving order ---
-  const platformOrderIds = [...new Set(rawPlatformOrderIds)];
-
-  // --- Fetch matching orders ---
-  const orders = await Order.find({
-    platform: platform.toLowerCase(),
-    platformOrderId: { $in: platformOrderIds },
-  });
-  const orderMap = new Map(orders.map((o) => [o.platformOrderId, o]));
-
   const results = {
     updated: [],
     alreadyReturned: [],
     notFound: [],
     failedRestocks: [],
+    skipped: [],
   };
 
-  // --- Process each unique order ---
-  for (const platformOrderId of platformOrderIds) {
-    const order = orderMap.get(platformOrderId);
-    if (!order) {
-      results.notFound.push({
-        platformOrderId: platformOrderId || "N/A",
-        reason: "Order not found",
-      });
+  const rows = sheetData.slice(headerRowIndex + 1);
+
+  for (const row of rows) {
+    if (!row || !row.some((c) => String(c || "").trim())) continue;
+
+    const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
+      .toString()
+      .trim();
+    if (!platformOrderId) {
+      results.skipped.push({ reason: "Missing platformOrderId", row });
       continue;
     }
 
-    if (order.status === StatusEnum.RETURNED) {
-      results.alreadyReturned.push({
-        platformOrderId: order.platformOrderId || "N/A",
-        reason: "Order is already returned",
+    try {
+      const order = await Order.findOne({
+        platform: platform.toLowerCase(),
+        platformOrderId,
       });
-      continue;
-    }
 
-    if (!order) {
-      results.failedRestocks.push({
-        platformOrderId: platformOrderId || "N/A",
-        reason: "Failed to restock returned product",
-      });
-      continue;
-    }
+      if (!order) {
+        results.notFound.push({ platformOrderId, reason: "Order not found" });
+        continue;
+      }
 
-    const before = order.toObject();
-    order.status = StatusEnum.RETURNED;
-    await order.save();
+      if (order.status === StatusEnum.RETURNED) {
+        results.alreadyReturned.push({
+          platformOrderId,
+          reason: "Already returned",
+        });
+        continue;
+      }
 
-    if (order.products && order.products.length > 0) {
-      for (const item of order.products) {
-        try {
-          await restockProductHelper(item, req);
-        } catch (err) {
-          results.failedRestocks.push({
-            platformOrderId: order.platformOrderId,
-            productId: item.product,
-            quantity: item.quantity,
-            reason: err.message,
-          });
+      const before = order.toObject();
+      order.status = StatusEnum.RETURNED;
+      await order.save();
 
-          // Log failed restock in audit
-          await logAudit({
-            action: "FAILED_RESTOCK_RETURNED_PRODUCT",
-            user: req.user?._id,
-            description: `Failed to restock product ${item.product} (quantity: ${item.quantity}) for order ${order.platformOrderId}: ${err.message}`,
-            collectionName: "Product",
-            documentId: item.product,
-            before: null,
-            after: null,
-            ip: req.ip,
-            userAgent: req.headers["user-agent"],
-          });
-
-          console.error(
-            `Failed to restock product ${item.product}:`,
-            err.message
-          );
+      // Restock products
+      if (order.products?.length) {
+        for (const item of order.products) {
+          try {
+            await restockItemQuantities(item.product, item.quantity, {
+              userId: req.user?._id,
+              platformOrderId: order.platformOrderId,
+              platform,
+              courier: order.courier,
+            });
+          } catch (err) {
+            results.failedRestocks.push({
+              platformOrderId: order.platformOrderId,
+              productId: item.product,
+              quantity: item.quantity,
+              reason: err.message,
+            });
+          }
         }
       }
+
+      results.updated.push({ platformOrderId, reason: "Marked as returned" });
+
+      await logAudit({
+        action: "UPDATE_RETURN_STATUS",
+        user: req.user?._id,
+        description: `Marked order ${platformOrderId} as returned via import (${platform})`,
+        collectionName: "Order",
+        documentId: order._id,
+        before,
+        after: { status: StatusEnum.RETURNED },
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      });
+    } catch (err) {
+      results.skipped.push({
+        platformOrderId,
+        reason: `Error processing order: ${err.message}`,
+      });
     }
-
-    results.updated.push({
-      platformOrderId: order.platformOrderId || "N/A",
-      reason: "Order status set to returned",
-    });
-
-    await logAudit({
-      action: "UPDATE_RETURN_STATUS",
-      user: req.user?._id,
-      description: `Marked order ${platformOrderId} as returned via file import (${platform})`,
-      collectionName: "Order",
-      documentId: order._id,
-      before,
-      after: { status: StatusEnum.RETURNED },
-      ip: req.ip,
-      userAgent: req.headers["user-agent"],
-    });
   }
 
   return results;

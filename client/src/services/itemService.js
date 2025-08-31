@@ -26,3 +26,7 @@ export const deleteItem = (id) => api.delete(`/api/items/${id}`);
 // ✅ Restock an item (IN movement)
 export const restockItem = (itemId, data) =>
   api.post(`/api/items/${itemId}/restock`, data);
+
+// Fetch inventory stats for a date range
+export const getInventoryStats = () =>
+  api.get(`/api/items/stats`);

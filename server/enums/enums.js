@@ -23,15 +23,18 @@ export const UnitTypeEnum = Object.freeze({
 });
 
 export const ReportTypeEnum = Object.freeze({
-  INVENTORY: "INVENTORY",
-  INVENTORY_IN: "INVENTORY_IN",
-  INVENTORY_OUT: "INVENTORY_OUT",
+  ORDERS: "ORDERS",
+  PRODUCTS_IN: "PRODUCTS_IN",
+  PRODUCTS_OUT: "PRODUCTS_OUT",
   SALES: "SALES",
   SALES_PAID: "SALES_PAID",
   SALES_UNPAID: "SALES_UNPAID",
   SALES_SHOPEE: "SALES_SHOPEE",
   SALES_TIKTOK: "SALES_TIKTOK",
   SALES_LAZADA: "SALES_LAZADA",
+  ITEMS: "ITEMS",
+  ITEMS_IN: "ITEMS_IN",
+  ITEMS_OUT: "ITEMS_OUT",
 });
 
 export const PlatformEnum = Object.freeze({
