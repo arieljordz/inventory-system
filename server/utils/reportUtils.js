@@ -1,6 +1,10 @@
 import moment from "moment-timezone";
 import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
-import { formatAmount, getStatusBadgeData } from "../utils/commonUtils.js";
+import {
+  formatAmount,
+  getStatusBadgeData,
+  formatDate,
+} from "../utils/commonUtils.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
 import ItemMovement from "../models/ItemMovement.js";
@@ -9,15 +13,13 @@ export const formatReportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
 
   return reportData.map((item) => {
-    const date = new Date(item.createdAt).toLocaleDateString();
-    const { label } = getStatusBadgeData(item.item?.status);
-
     // --- ITEMS REPORTS ---
     if (
       reportType === ReportTypeEnum.ITEMS ||
       reportType === ReportTypeEnum.ITEMS_IN ||
       reportType === ReportTypeEnum.ITEMS_OUT
     ) {
+      const { label } = getStatusBadgeData(item.item.status);
       return {
         "Item Name": item.item?.name || "-",
         Variant: item.item?.variant || "-",
@@ -27,35 +29,35 @@ export const formatReportData = (reportData = [], reportType = "") => {
         "Total Price": formatAmount(item.totalValue || 0),
         Status: label,
         Location: item.location || "-",
-        Date: date,
+        Date: formatDate(item.item.createdAt),
       };
     }
 
     // --- ORDERS REPORTS ---
-    if (reportType.includes(ReportTypeEnum.ORDERS)) {
+    if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType === ReportTypeEnum.PRODUCTS_IN ||
+      reportType === ReportTypeEnum.PRODUCTS_OUT
+    ) {
+      const { label } = getStatusBadgeData(item.status);
       return {
         "Product Name": item.product?.name || "-",
         Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
-        Date: date,
+        Date: formatDate(item.orderDate),
         Status: label,
       };
-    } else if (
-      reportType === ReportTypeEnum.ORDERS ||
-      reportType.startsWith("ORDERS_")
+    }
+    // --- SALES REPORTS ---
+    if (
+      reportType === ReportTypeEnum.SALES ||
+      reportType === ReportTypeEnum.SALES_PAID ||
+      reportType === ReportTypeEnum.SALES_UNPAID ||
+      reportType === ReportTypeEnum.SALES_SHOPEE ||
+      reportType === ReportTypeEnum.SALES_TIKTOK ||
+      reportType === ReportTypeEnum.SALES_LAZADA
     ) {
-      return {
-        "Product Name": item.product?.name || "-",
-        Variant: item.product?.variant || "-",
-        "Platform Order ID": item.platformOrderId || "-",
-        Platform: item.platform?.toUpperCase() || "-",
-        Courier: item.courier || "-",
-        Quantity: item.quantity,
-        Date: date,
-        Payment: item.isPaid ? "Paid" : "Unpaid",
-      };
-    } else {
       const price = item.product?.price || 0;
       return {
         "Product Name": item.product?.name || "-",
@@ -74,17 +76,14 @@ export const formatReportData = (reportData = [], reportType = "") => {
 
 export const formatExportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
-
   return reportData.map((item) => {
-    const date = new Date(item.createdAt).toLocaleDateString();
-    const { label } = getStatusBadgeData(item.item?.status);
-
     // --- ITEMS REPORTS ---
     if (
       reportType === ReportTypeEnum.ITEMS ||
       reportType === ReportTypeEnum.ITEMS_IN ||
       reportType === ReportTypeEnum.ITEMS_OUT
     ) {
+      const { label } = getStatusBadgeData(item.item.status);
       return {
         "Item Name": item.item?.name || "-",
         Variant: item.item?.variant || "-",
@@ -94,35 +93,34 @@ export const formatExportData = (reportData = [], reportType = "") => {
         "Total Price": item.totalValue || 0,
         Status: label,
         Location: item.location || "-",
-        Date: date,
+        Date: formatDate(item.item.createdAt),
       };
     }
 
     // --- ORDERS REPORTS ---
-    if (reportType.includes(ReportTypeEnum.ORDERS)) {
+    if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType === ReportTypeEnum.PRODUCTS_IN ||
+      reportType === ReportTypeEnum.PRODUCTS_OUT
+    ) {
+      const { label } = getStatusBadgeData(item.status);
       return {
         "Product Name": item.product?.name || "-",
         Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
-        Date: date,
+        Date: formatDate(item.orderDate),
         Status: label,
       };
-    } else if (
-      reportType === ReportTypeEnum.ORDERS ||
-      reportType.startsWith("ORDERS_")
+    }
+    if (
+      reportType === ReportTypeEnum.SALES ||
+      reportType === ReportTypeEnum.SALES_PAID ||
+      reportType === ReportTypeEnum.SALES_UNPAID ||
+      reportType === ReportTypeEnum.SALES_SHOPEE ||
+      reportType === ReportTypeEnum.SALES_TIKTOK ||
+      reportType === ReportTypeEnum.SALES_LAZADA
     ) {
-      return {
-        "Product Name": item.product?.name || "-",
-        Variant: item.product?.variant || "-",
-        "Platform Order ID": item.platformOrderId || "-",
-        Platform: item.platform?.toUpperCase() || "-",
-        Courier: item.courier || "-",
-        Quantity: item.quantity,
-        Date: date,
-        Payment: item.isPaid ? "Paid" : "Unpaid",
-      };
-    } else {
       const price = item.product?.price || 0;
       return {
         "Product Name": item.product?.name || "-",
@@ -131,8 +129,8 @@ export const formatExportData = (reportData = [], reportType = "") => {
         Platform: item.platform?.toUpperCase() || "-",
         Courier: item.courier || "-",
         Quantity: item.quantity,
-        Price: price,
-        "Total Amount": item.totalAmount,
+        Price: formatAmount(price),
+        "Total Amount": formatAmount(item.totalAmount),
         Payment: item.isPaid ? "Paid" : "Unpaid",
       };
     }
@@ -146,33 +144,25 @@ export const getCenteredColumns = (reportType = "") => {
     reportType === ReportTypeEnum.ITEMS_IN ||
     reportType === ReportTypeEnum.ITEMS_OUT
   ) {
-    return [
-      "Variant",
-      "Quantity",
-      "Type",
-      "Status",
-      "Location",
-      "Date",
-    ];
+    return ["Variant", "Quantity", "Type", "Status", "Location", "Date"];
   }
 
   // --- ORDERS REPORTS ---
-  if (reportType.includes(ReportTypeEnum.ORDERS)) {
-    return ["Variant", "Quantity", "Type", "Date", "Status"];
-  } else if (
+  if (
     reportType === ReportTypeEnum.ORDERS ||
-    reportType.startsWith("ORDERS_")
+    reportType === ReportTypeEnum.PRODUCTS_IN ||
+    reportType === ReportTypeEnum.PRODUCTS_OUT
   ) {
-    return [
-      "Variant",
-      "Platform Order ID",
-      "Quantity",
-      "Platform",
-      "Courier",
-      "Date",
-      "Payment",
-    ];
-  } else {
+    return ["Variant", "Quantity", "Type", "Date", "Status"];
+  }
+  if (
+    reportType === ReportTypeEnum.SALES ||
+    reportType === ReportTypeEnum.SALES_PAID ||
+    reportType === ReportTypeEnum.SALES_UNPAID ||
+    reportType === ReportTypeEnum.SALES_SHOPEE ||
+    reportType === ReportTypeEnum.SALES_TIKTOK ||
+    reportType === ReportTypeEnum.SALES_LAZADA
+  ) {
     return [
       "Variant",
       "Platform Order ID",
@@ -235,7 +225,7 @@ export const fetchReportData = async (reportType, filter) => {
     case ReportTypeEnum.SALES:
       isSalesReport = true;
       data = await Order.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
@@ -243,7 +233,7 @@ export const fetchReportData = async (reportType, filter) => {
       isSalesReport = true;
       filter.isPaid = true;
       data = await Order.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
@@ -251,49 +241,49 @@ export const fetchReportData = async (reportType, filter) => {
       isSalesReport = true;
       filter.isPaid = false;
       data = await Order.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
     case ReportTypeEnum.SALES_SHOPEE:
       filter.platform = "shopee";
       data = await Order.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
     case ReportTypeEnum.SALES_TIKTOK:
       filter.platform = "tiktok";
       data = await Order.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
     case ReportTypeEnum.SALES_LAZADA:
       filter.platform = "lazada";
       data = await Order.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
     // --- ORDERS REPORTS ---
     case ReportTypeEnum.ORDERS:
       data = await InventoryDetail.find()
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
     case ReportTypeEnum.PRODUCTS_IN:
       filter.movementType = MovementTypeEnum.IN;
       data = await InventoryDetail.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
     case ReportTypeEnum.PRODUCTS_OUT:
       filter.movementType = MovementTypeEnum.OUT;
       data = await InventoryDetail.find(filter)
-        .populate("product", "name price variant")
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 });
       break;
 
@@ -302,7 +292,7 @@ export const fetchReportData = async (reportType, filter) => {
       data = await ItemMovement.find()
         .populate(
           "item",
-          "name price sku variant unit quantity status location supplier"
+          "name price sku variant unit quantity status location supplier createdAt"
         )
         .sort({ createdAt: -1 });
       break;
@@ -312,7 +302,7 @@ export const fetchReportData = async (reportType, filter) => {
       data = await ItemMovement.find(filter)
         .populate(
           "item",
-          "name price sku variant unit quantity status location supplier"
+          "name price sku variant unit quantity status location supplier createdAt"
         )
         .sort({ createdAt: -1 });
       break;
@@ -322,7 +312,7 @@ export const fetchReportData = async (reportType, filter) => {
       data = await ItemMovement.find(filter)
         .populate(
           "item",
-          "name price sku variant unit quantity status location supplier"
+          "name price sku variant unit quantity status location supplier createdAt"
         )
         .sort({ createdAt: -1 });
       break;

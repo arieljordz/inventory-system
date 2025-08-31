@@ -72,39 +72,56 @@ export const exportReport = async (req, res) => {
     let data = [];
     let isSalesReport = false;
 
-    // 🔹 Determine report type
+    // --- ITEMS REPORTS ---
     if (
-      [
-        ReportTypeEnum.SALES,
-        ReportTypeEnum.SALES_PAID,
-        ReportTypeEnum.SALES_UNPAID,
-      ].includes(reportType)
+      reportType === ReportTypeEnum.ITEMS ||
+      reportType === ReportTypeEnum.ITEMS_IN ||
+      reportType === ReportTypeEnum.ITEMS_OUT
     ) {
-      // Sales report
-      isSalesReport = true;
-
-      if (reportType === ReportTypeEnum.SALES_PAID) filter.isPaid = true;
-      if (reportType === ReportTypeEnum.SALES_UNPAID) filter.isPaid = false;
-
-      data = await Order.find(filter)
-        .populate("product", "name price variant")
-        .sort({ createdAt: -1 })
-        .lean();
-    } else if (
-      [
-        ReportTypeEnum.ITEMS,
-        ReportTypeEnum.ITEMS_IN,
-        ReportTypeEnum.ITEMS_OUT,
-      ].includes(reportType)
-    ) {
-      // Inventory / Items report
       if (reportType === ReportTypeEnum.ITEMS_IN)
         filter.type = MovementTypeEnum.IN;
       if (reportType === ReportTypeEnum.ITEMS_OUT)
         filter.type = MovementTypeEnum.OUT;
 
       data = await ItemMovement.find(filter)
-        .populate("item", "name price variant status location")
+        .populate("item", "name price variant status location createdAt")
+        .sort({ createdAt: -1 })
+        .lean();
+    }
+
+    // --- ORDERS REPORTS ---
+    if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType === ReportTypeEnum.PRODUCTS_IN ||
+      reportType === ReportTypeEnum.PRODUCTS_OUT
+    ) {
+      if (reportType === ReportTypeEnum.ITEMS_IN)
+        filter.type = MovementTypeEnum.IN;
+      if (reportType === ReportTypeEnum.ITEMS_OUT)
+        filter.type = MovementTypeEnum.OUT;
+
+      data = await InventoryDetail.find(filter)
+        .populate("product", "name price variant createdAt")
+        .sort({ createdAt: -1 })
+        .lean();
+    }
+
+    // --- SALES REPORTS ---
+    if (
+      reportType === ReportTypeEnum.SALES ||
+      reportType === ReportTypeEnum.SALES_PAID ||
+      reportType === ReportTypeEnum.SALES_UNPAID ||
+      reportType === ReportTypeEnum.SALES_SHOPEE ||
+      reportType === ReportTypeEnum.SALES_TIKTOK ||
+      reportType === ReportTypeEnum.SALES_LAZADA
+    ) {
+      isSalesReport = true;
+
+      if (reportType === ReportTypeEnum.SALES_PAID) filter.isPaid = true;
+      if (reportType === ReportTypeEnum.SALES_UNPAID) filter.isPaid = false;
+
+      data = await Order.find(filter)
+        .populate("product", "name price variant createdAt")
         .sort({ createdAt: -1 })
         .lean();
     }

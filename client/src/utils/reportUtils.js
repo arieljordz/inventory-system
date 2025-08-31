@@ -1,19 +1,21 @@
 import { ReportTypeEnum } from "../enums/enums";
-import { formatAmount, getStatusBadgeData } from "../utils/commonUtils";
+import {
+  formatAmount,
+  getStatusBadgeData,
+  formatDate,
+} from "../utils/commonUtils";
 
 export const formatReportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
 
   return reportData.map((item) => {
-    const date = new Date(item.createdAt).toLocaleDateString();
-    const { label } = getStatusBadgeData(item.item?.status);
-
     // --- ITEMS REPORTS ---
     if (
       reportType === ReportTypeEnum.ITEMS ||
       reportType === ReportTypeEnum.ITEMS_IN ||
       reportType === ReportTypeEnum.ITEMS_OUT
     ) {
+      const { label } = getStatusBadgeData(item.item.status);
       return {
         "Item Name": item.item?.name || "-",
         Variant: item.item?.variant || "-",
@@ -23,35 +25,35 @@ export const formatReportData = (reportData = [], reportType = "") => {
         "Total Price": formatAmount(item.totalValue || 0),
         Status: label,
         Location: item.location || "-",
-        Date: date,
+        Date: formatDate(item.item.createdAt),
       };
     }
 
     // --- ORDERS REPORTS ---
-    if (reportType.includes(ReportTypeEnum.ORDERS)) {
+    if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType === ReportTypeEnum.PRODUCTS_IN ||
+      reportType === ReportTypeEnum.PRODUCTS_OUT
+    ) {
+      const { label } = getStatusBadgeData(item.status);
       return {
         "Product Name": item.product?.name || "-",
         Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
-        Date: date,
+        Date: formatDate(item.orderDate),
         Status: label,
       };
-    } else if (
-      reportType === ReportTypeEnum.ORDERS ||
-      reportType.startsWith("ORDERS_")
+    }
+    // --- SALES REPORTS ---
+    if (
+      reportType === ReportTypeEnum.SALES ||
+      reportType === ReportTypeEnum.SALES_PAID ||
+      reportType === ReportTypeEnum.SALES_UNPAID ||
+      reportType === ReportTypeEnum.SALES_SHOPEE ||
+      reportType === ReportTypeEnum.SALES_TIKTOK ||
+      reportType === ReportTypeEnum.SALES_LAZADA
     ) {
-      return {
-        "Product Name": item.product?.name || "-",
-        Variant: item.product?.variant || "-",
-        "Platform Order ID": item.platformOrderId || "-",
-        Platform: item.platform?.toUpperCase() || "-",
-        Courier: item.courier || "-",
-        Quantity: item.quantity,
-        Date: date,
-        Payment: item.isPaid ? "Paid" : "Unpaid",
-      };
-    } else {
       const price = item.product?.price || 0;
       return {
         "Product Name": item.product?.name || "-",
@@ -70,17 +72,14 @@ export const formatReportData = (reportData = [], reportType = "") => {
 
 export const formatExportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
-
   return reportData.map((item) => {
-    const date = new Date(item.createdAt).toLocaleDateString();
-    const { label } = getStatusBadgeData(item.item?.status);
-
     // --- ITEMS REPORTS ---
     if (
       reportType === ReportTypeEnum.ITEMS ||
       reportType === ReportTypeEnum.ITEMS_IN ||
       reportType === ReportTypeEnum.ITEMS_OUT
     ) {
+      const { label } = getStatusBadgeData(item.item.status);
       return {
         "Item Name": item.item?.name || "-",
         Variant: item.item?.variant || "-",
@@ -90,35 +89,34 @@ export const formatExportData = (reportData = [], reportType = "") => {
         "Total Price": item.totalValue || 0,
         Status: label,
         Location: item.location || "-",
-        Date: date,
+        Date: formatDate(item.item.createdAt),
       };
     }
 
     // --- ORDERS REPORTS ---
-    if (reportType.includes(ReportTypeEnum.ORDERS)) {
+    if (
+      reportType === ReportTypeEnum.ORDERS ||
+      reportType === ReportTypeEnum.PRODUCTS_IN ||
+      reportType === ReportTypeEnum.PRODUCTS_OUT
+    ) {
+      const { label } = getStatusBadgeData(item.status);
       return {
         "Product Name": item.product?.name || "-",
         Variant: item.product?.variant || "-",
         Quantity: item.quantity,
         Type: item.movementType || "-",
-        Date: date,
+        Date: formatDate(item.orderDate),
         Status: label,
       };
-    } else if (
-      reportType === ReportTypeEnum.ORDERS ||
-      reportType.startsWith("ORDERS_")
+    }
+    if (
+      reportType === ReportTypeEnum.SALES ||
+      reportType === ReportTypeEnum.SALES_PAID ||
+      reportType === ReportTypeEnum.SALES_UNPAID ||
+      reportType === ReportTypeEnum.SALES_SHOPEE ||
+      reportType === ReportTypeEnum.SALES_TIKTOK ||
+      reportType === ReportTypeEnum.SALES_LAZADA
     ) {
-      return {
-        "Product Name": item.product?.name || "-",
-        Variant: item.product?.variant || "-",
-        "Platform Order ID": item.platformOrderId || "-",
-        Platform: item.platform?.toUpperCase() || "-",
-        Courier: item.courier || "-",
-        Quantity: item.quantity,
-        Date: date,
-        Payment: item.isPaid ? "Paid" : "Unpaid",
-      };
-    } else {
       const price = item.product?.price || 0;
       return {
         "Product Name": item.product?.name || "-",
@@ -127,8 +125,8 @@ export const formatExportData = (reportData = [], reportType = "") => {
         Platform: item.platform?.toUpperCase() || "-",
         Courier: item.courier || "-",
         Quantity: item.quantity,
-        Price: price,
-        "Total Amount": item.totalAmount,
+        Price: formatAmount(price),
+        "Total Amount": formatAmount(item.totalAmount),
         Payment: item.isPaid ? "Paid" : "Unpaid",
       };
     }
@@ -142,33 +140,25 @@ export const getCenteredColumns = (reportType = "") => {
     reportType === ReportTypeEnum.ITEMS_IN ||
     reportType === ReportTypeEnum.ITEMS_OUT
   ) {
-    return [
-      "Variant",
-      "Quantity",
-      "Type",
-      "Status",
-      "Location",
-      "Date",
-    ];
+    return ["Variant", "Quantity", "Type", "Status", "Location", "Date"];
   }
 
   // --- ORDERS REPORTS ---
-  if (reportType.includes(ReportTypeEnum.ORDERS)) {
-    return ["Variant", "Quantity", "Type", "Date", "Status"];
-  } else if (
+  if (
     reportType === ReportTypeEnum.ORDERS ||
-    reportType.startsWith("ORDERS_")
+    reportType === ReportTypeEnum.PRODUCTS_IN ||
+    reportType === ReportTypeEnum.PRODUCTS_OUT
   ) {
-    return [
-      "Variant",
-      "Platform Order ID",
-      "Quantity",
-      "Platform",
-      "Courier",
-      "Date",
-      "Payment",
-    ];
-  } else {
+    return ["Variant", "Quantity", "Type", "Date", "Status"];
+  }
+  if (
+    reportType === ReportTypeEnum.SALES ||
+    reportType === ReportTypeEnum.SALES_PAID ||
+    reportType === ReportTypeEnum.SALES_UNPAID ||
+    reportType === ReportTypeEnum.SALES_SHOPEE ||
+    reportType === ReportTypeEnum.SALES_TIKTOK ||
+    reportType === ReportTypeEnum.SALES_LAZADA
+  ) {
     return [
       "Variant",
       "Platform Order ID",
