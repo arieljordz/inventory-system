@@ -103,7 +103,7 @@ export const getInventoryStats = async (req, res) => {
   }
 };
 
-export const getInventoryMovements = async (req, res) => {
+export const getItemMovements = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 100);

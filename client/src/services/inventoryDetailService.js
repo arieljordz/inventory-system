@@ -12,7 +12,7 @@ export const getInventoryStats = (startDate, endDate) =>
   api.get(`/api/inventory-details/stats?start=${startDate}&end=${endDate}`);
 
 // Fetch inventory movements for a date range
-export const getInventoryMovements = ({
+export const getItemMovements = ({
   startDate,
   endDate,
   page = 1,

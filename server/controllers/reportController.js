@@ -3,7 +3,7 @@ import ExcelJS from "exceljs";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
-import InventoryMovement from "../models/InventoryMovement.js";
+import ItemMovement from "../models/ItemMovement.js";
 import Item from "../models/Item.js";
 import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
 import {
@@ -103,7 +103,7 @@ export const exportReport = async (req, res) => {
       if (reportType === ReportTypeEnum.ITEMS_OUT)
         filter.type = MovementTypeEnum.OUT;
 
-      data = await InventoryMovement.find(filter)
+      data = await ItemMovement.find(filter)
         .populate("item", "name price variant status location")
         .sort({ createdAt: -1 })
         .lean();

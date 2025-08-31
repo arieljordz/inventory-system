@@ -59,7 +59,7 @@ async function clearCollections() {
       "orders",
       "products",
       "items",
-      "inventorymovements",
+      "ItemMovements",
       // "users",
     ];
 

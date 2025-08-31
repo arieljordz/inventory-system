@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import moment from "moment-timezone";
 import Item from "../models/Item.js";
-import InventoryMovement from "../models/InventoryMovement.js";
+import ItemMovement from "../models/ItemMovement.js";
 import {
   normalizeText,
   normalizeString,
@@ -144,7 +144,7 @@ export const addItem = async (req, res) => {
 
     // ✅ If there's an initial quantity, log an IN movement
     if (quantity > 0) {
-      await InventoryMovement.create({
+      await ItemMovement.create({
         item: newItem._id,
         type: "IN",
         quantity,
@@ -205,7 +205,7 @@ export const restockItem = async (req, res) => {
     await item.save();
 
     // Create movement log
-    await InventoryMovement.create({
+    await ItemMovement.create({
       item: item._id,
       type: "IN",
       quantity,
@@ -308,7 +308,7 @@ export const deleteItem = async (req, res) => {
     const before = item.toObject();
 
     // Cleanup related inventory movements
-    await InventoryMovement.deleteMany({ item: id });
+    await ItemMovement.deleteMany({ item: id });
 
     // Delete item
     await item.deleteOne();
@@ -348,7 +348,7 @@ export const getInventoryStats = async (req, res) => {
     );
 
     // 2. Inventory movements for today
-    const todaysMovements = await InventoryMovement.find({
+    const todaysMovements = await ItemMovement.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay },
     });
 

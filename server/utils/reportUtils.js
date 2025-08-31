@@ -3,7 +3,7 @@ import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
 import { formatAmount, getStatusBadgeData } from "../utils/commonUtils.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
-import InventoryMovement from "../models/InventoryMovement.js";
+import ItemMovement from "../models/ItemMovement.js";
 
 export const formatReportData = (reportData = [], reportType = "") => {
   if (!reportData.length) return [];
@@ -299,7 +299,7 @@ export const fetchReportData = async (reportType, filter) => {
 
     // --- ITEMS REPORTS ---
     case ReportTypeEnum.ITEMS:
-      data = await InventoryMovement.find()
+      data = await ItemMovement.find()
         .populate(
           "item",
           "name price sku variant unit quantity status location supplier"
@@ -309,7 +309,7 @@ export const fetchReportData = async (reportType, filter) => {
 
     case ReportTypeEnum.ITEMS_IN:
       filter.type = "IN";
-      data = await InventoryMovement.find(filter)
+      data = await ItemMovement.find(filter)
         .populate(
           "item",
           "name price sku variant unit quantity status location supplier"
@@ -319,7 +319,7 @@ export const fetchReportData = async (reportType, filter) => {
 
     case ReportTypeEnum.ITEMS_OUT:
       filter.type = "OUT";
-      data = await InventoryMovement.find(filter)
+      data = await ItemMovement.find(filter)
         .populate(
           "item",
           "name price sku variant unit quantity status location supplier"

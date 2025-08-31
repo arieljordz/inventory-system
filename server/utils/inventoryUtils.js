@@ -2,7 +2,7 @@
 import Product from "../models/Product.js";
 import InventoryDetail from "../models/InventoryDetail.js";
 import Item from "../models/Item.js";
-import InventoryMovement from "../models/InventoryMovement.js";
+import ItemMovement from "../models/ItemMovement.js";
 import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "./auditLogger.js";
 
@@ -36,7 +36,7 @@ export const updateItemQuantities = async (product, orderQty, options = {}) => {
     });
 
     // Record Movement
-    await InventoryMovement.create({
+    await ItemMovement.create({
       item: item._id,
       type: "OUT",
       quantity: orderQty,
@@ -68,7 +68,7 @@ export const updateItemQuantities = async (product, orderQty, options = {}) => {
       });
 
       // Record Movement
-      await InventoryMovement.create({
+      await ItemMovement.create({
         item: item._id,
         type: "OUT",
         quantity: totalQty,
@@ -121,7 +121,7 @@ export const restockItemQuantities = async (
     });
 
     // Movement log
-    await InventoryMovement.create({
+    await ItemMovement.create({
       item: item._id,
       type: "IN",
       quantity: orderQty,
@@ -152,7 +152,7 @@ export const restockItemQuantities = async (
       });
 
       // Movement log
-      await InventoryMovement.create({
+      await ItemMovement.create({
         item: item._id,
         type: "IN",
         quantity: totalQty,

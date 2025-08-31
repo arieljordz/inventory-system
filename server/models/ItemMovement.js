@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { normalizeText } from "../utils/commonUtils.js";
 
-const inventoryMovementSchema = new mongoose.Schema(
+const itemMovementSchema = new mongoose.Schema(
   {
     item: {
       type: mongoose.Schema.Types.ObjectId,
@@ -53,7 +53,7 @@ const inventoryMovementSchema = new mongoose.Schema(
 );
 
 // Auto-calc total value
-inventoryMovementSchema.pre("save", function (next) {
+itemMovementSchema.pre("save", function (next) {
   if (this.reference) {
     this.normalizedReference = normalizeText(this.reference);
   }
@@ -62,4 +62,4 @@ inventoryMovementSchema.pre("save", function (next) {
   next();
 });
 
-export default mongoose.model("InventoryMovement", inventoryMovementSchema);
+export default mongoose.model("ItemMovement", itemMovementSchema);

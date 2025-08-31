@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import {
   getInventoryStats,
-  getInventoryMovements,
+  getItemMovements,
   getRemainingPerProduct,
 } from "../services/inventoryDetailService";
 import { useDebounce } from "./useDebounce";
@@ -39,7 +39,7 @@ export const useOrderInventory = (initialItemsPerPage = 5) => {
 
       const [statsRes, movementsRes, remainingRes] = await Promise.all([
         getInventoryStats(startDate, endDate),
-        getInventoryMovements({
+        getItemMovements({
           start: startDate,
           end: endDate,
           page: currentPage,
