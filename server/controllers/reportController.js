@@ -5,7 +5,11 @@ import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
 import ItemMovement from "../models/ItemMovement.js";
 import Item from "../models/Item.js";
-import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
+import {
+  ReportTypeEnum,
+  MovementTypeEnum,
+  NewReportTypeEnum,
+} from "../enums/enums.js";
 import {
   formatExportData,
   getReportFileName,
@@ -14,7 +18,12 @@ import {
   fetchReportData,
   wrapTextByWidth,
   sanitizeText,
+  reportColumnsConfig,
+  flattenReportData,
 } from "../utils/reportUtils.js";
+import Product from "../models/Product.js";
+import { StatusEnum } from "../enums/enums.js";
+import mongoose from "mongoose";
 
 /** Get report data for frontend display */
 export const getReportData = async (req, res) => {
@@ -379,4 +388,234 @@ const exportPDF = async (
   res.setHeader("Content-Type", "application/pdf");
   res.setHeader("Content-Disposition", `attachment; filename=${filename}`);
   res.send(Buffer.from(pdfBytes));
+};
+
+// New Report Controllers
+// --- 1. Orders Report ---
+export const getOrdersReport = async (filters = {}) => {
+  console.log("OrdersReportfilters:", filters);
+  const { startDate, endDate, paymentStatus, platform } = filters;
+
+  // date filter on orderDate
+  const filter = buildDateFilter(startDate, endDate, "orderDate");
+
+  // --- integrate paymentStatus ---
+  if (paymentStatus && paymentStatus !== "All") {
+    if (paymentStatus === "paid") {
+      filter.isPaid = true;
+    } else if (paymentStatus === "unpaid") {
+      filter.isPaid = false;
+    }
+  }
+
+  // --- integrate platform ---
+  if (platform && platform !== "All") {
+    filter.platform = platform.trim().toLowerCase();
+  }
+
+  console.log("OrdersReportfilter:", filter);
+
+  const rows = await Order.find(filter)
+    .populate({
+      path: "product",
+      populate: { path: "components.item", model: "Item" },
+    })
+    .lean();
+
+  return flattenReportData(
+    rows,
+    reportColumnsConfig[NewReportTypeEnum.ORDERS_REPORT]
+  );
+};
+
+// --- 2. Products Report ---
+export const getProductsReport = async (filters = {}) => {
+  console.log("ProductsReportfilters:", filters);
+  const { startDate, endDate, status, category, type } = filters;
+
+  // Always apply date filter
+  const filter = buildDateFilter(startDate, endDate, "createdAt");
+
+  // Apply optional filters
+  if (status && status !== "All") {
+    filter.status = status;
+  }
+  if (type && type !== "All") {
+    filter.type = type;
+  }
+
+  console.log("ProductsReportfilter:", filter);
+
+  const rows = await Product.find(filter).lean();
+
+  return flattenReportData(
+    rows,
+    reportColumnsConfig[NewReportTypeEnum.PRODUCTS_REPORT]
+  );
+};
+
+// --- 3. Items Report ---
+export const getItemsReport = async (filters = {}) => {
+  console.log("ItemsReportfilters:", filters);
+  const { startDate, endDate, status, supplier, location } = filters;
+
+  // Start with date filter
+  const filter = buildDateFilter(startDate, endDate, "createdAt");
+
+  // Add optional filters
+  if (status && status !== "All") {
+    filter.status = status;
+  }
+
+  console.log("ItemsReportfilter:", filter);
+
+  const rows = await Item.find(filter).lean();
+
+  return flattenReportData(
+    rows,
+    reportColumnsConfig[NewReportTypeEnum.ITEMS_REPORT]
+  );
+};
+
+// --- 4. Item Movements Report ---
+export const getItemMovementsReport = async (filters = {}) => {
+  console.log("ItemMovementsReport filters:", filters);
+
+  const { startDate, endDate, type, location, createdBy } = filters;
+
+  // --- Build base filter ---
+  const filter = buildDateFilter(startDate, endDate, "updatedAt");
+
+  // --- Optional filters ---
+  if (type && type !== "All") {
+    filter.type = type; // must be "IN" or "OUT"
+  }
+
+  if (location && location !== "All") {
+    filter.location = location;
+  }
+
+  if (createdBy && createdBy !== "All") {
+    filter.createdBy = createdBy;
+  }
+
+  console.log("ItemMovementsReport final filter:", filter);
+
+  // --- Query with population ---
+  const rows = await ItemMovement.find(filter).populate("item").lean();
+
+  return flattenReportData(
+    rows,
+    reportColumnsConfig[NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]
+  );
+};
+
+// --- 5. Inventory Details Report ---
+export const getInventoryDetailsReport = async (filters = {}) => {
+  console.log("InventoryDetailsReport filters:", filters);
+
+  const { startDate, endDate, movementType, platform, status, courier } =
+    filters;
+
+  // --- Base filter ---
+  const filter = buildDateFilter(startDate, endDate, "updatedAt");
+
+  // --- Optional filters ---
+  if (movementType && movementType !== "All") {
+    filter.movementType = movementType;
+  }
+
+  if (platform && platform !== "All") {
+    filter.platform = platform;
+  }
+
+  if (status && status !== "All") {
+    filter.status = status;
+  }
+
+  console.log("InventoryDetailsReport final filter:", filter);
+
+  // --- Query with population ---
+  const rows = await InventoryDetail.find(filter)
+    .populate("product")
+    .populate("order")
+    .lean();
+
+  return flattenReportData(
+    rows,
+    reportColumnsConfig[NewReportTypeEnum.INVENTORY_DETAILS_REPORT]
+  );
+};
+
+// --- General Controller to call the right report ---
+export const generateReport = async (req, res) => {
+  try {
+    const {
+      reportType,
+      startDate,
+      endDate,
+      filters: { platform, paymentStatus, movementType, status },
+    } = req.body;
+
+    console.log("req.body:", req.body);
+    let data;
+
+    switch (reportType) {
+      case NewReportTypeEnum.ORDERS_REPORT:
+        data = await getOrdersReport({
+          startDate,
+          endDate,
+          platform,
+          paymentStatus,
+          movementType,
+          status,
+        });
+        // console.log("ORDERS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.PRODUCTS_REPORT:
+        data = await getProductsReport({
+          startDate,
+          endDate,
+          status,
+          movementType,
+        });
+        // console.log("PRODUCTS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.ITEMS_REPORT:
+        data = await getItemsReport({
+          startDate,
+          endDate,
+          status,
+        });
+        // console.log("ITEMS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.ITEM_MOVEMENTS_REPORT:
+        data = await getItemMovementsReport({
+          startDate,
+          endDate,
+          movementType,
+        });
+        // console.log("ITEM_MOVEMENTS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.INVENTORY_DETAILS_REPORT:
+        data = await getInventoryDetailsReport({
+          startDate,
+          endDate,
+          platform,
+          status,
+          movementType,
+        });
+        // console.log("INVENTORY_DETAILS_REPORT:", data);
+        break;
+      default:
+        return res.status(400).json({ message: "Invalid report type" });
+    }
+
+    res.json({ success: true, data });
+  } catch (error) {
+    console.error("Generate Report Error:", error);
+    res
+      .status(500)
+      .json({ success: false, message: "Server error generating report" });
+  }
 };

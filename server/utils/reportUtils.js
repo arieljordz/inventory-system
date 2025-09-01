@@ -1,5 +1,9 @@
 import moment from "moment-timezone";
-import { ReportTypeEnum, MovementTypeEnum } from "../enums/enums.js";
+import {
+  ReportTypeEnum,
+  MovementTypeEnum,
+  NewReportTypeEnum,
+} from "../enums/enums.js";
 import {
   formatAmount,
   getStatusBadgeData,
@@ -199,20 +203,32 @@ export const getReportTitleText = (reportType, startDate, endDate) => {
 };
 
 /** Helper: build date filter for Mongoose */
-export const buildDateFilter = (startDate, endDate) => {
-  if (!startDate && !endDate) return {};
-  const dateFilter = { createdAt: {} };
+// export const buildDateFilter = (startDate, endDate) => {
+//   if (!startDate && !endDate) return {};
+//   const dateFilter = { createdAt: {} };
+//   if (startDate)
+//     dateFilter.createdAt.$gte = moment
+//       .tz(startDate, "Asia/Manila")
+//       .startOf("day")
+//       .toDate();
+//   if (endDate)
+//     dateFilter.createdAt.$lte = moment
+//       .tz(endDate, "Asia/Manila")
+//       .endOf("day")
+//       .toDate();
+//   return dateFilter;
+// };
+
+export const buildDateFilter = (startDate, endDate, field = "createdAt") => {
+  const filter = {};
   if (startDate)
-    dateFilter.createdAt.$gte = moment
-      .tz(startDate, "Asia/Manila")
-      .startOf("day")
-      .toDate();
+    filter[field] = { $gte: moment(startDate).startOf("day").toDate() };
   if (endDate)
-    dateFilter.createdAt.$lte = moment
-      .tz(endDate, "Asia/Manila")
-      .endOf("day")
-      .toDate();
-  return dateFilter;
+    filter[field] = {
+      ...filter[field],
+      $lte: moment(endDate).endOf("day").toDate(),
+    };
+  return filter;
 };
 
 /** Helper: fetch data based on report type */
@@ -350,4 +366,259 @@ export const wrapTextByWidth = (text, font, fontSize, maxWidth) => {
 /** Helper: sanitize text for built-in font */
 export const sanitizeText = (text = "") => {
   return text.replace(/[^\x00-\xFF]/g, "");
+};
+
+/**
+ * Flattens nested mongoose docs into a row of report data
+ * according to the given report columns config.
+ */
+export const flattenReportData = (rows, columns) => {
+  return rows.map((row) => {
+    const flatRow = {};
+    columns.forEach(({ key }) => {
+      let value;
+
+      switch (key) {
+        // --- Common fields ---
+        case "product":
+          value = row.product?.name;
+          break;
+        case "variant":
+          value =
+            row.product?.variant ||
+            row.item?.variant ||
+            row.variant ||
+            row.productVariant;
+          break;
+        case "item":
+          value = row.item?.name;
+          break;
+        case "order":
+        case "platformOrderId":
+          value = row.order?.platformOrderId || row.platformOrderId;
+          break;
+
+        // --- Price handling ---
+        case "price":
+          if (row.product?.price) {
+            value = row.product.price; // Orders / InventoryDetails
+          } else if (row.price) {
+            value = row.price; // Products / Items / ItemMovements
+          }
+          break;
+
+        case "totalPrice":
+          if (row.product?.price && row.quantity) {
+            value = row.product.price * row.quantity; // Orders / InventoryDetails
+          } else if (row.price && row.quantity) {
+            value = row.price * row.quantity; // Products
+          } else {
+            value = 0;
+          }
+          break;
+
+        case "totalValue":
+          if (row.totalValue) {
+            value = row.totalValue; // ItemMovement (pre-calculated)
+          } else if (row.price && row.quantity) {
+            value = row.price * row.quantity; // Items
+          } else {
+            value = 0;
+          }
+          break;
+
+        // --- Movement Type ---
+        case "movementType":
+        case "type":
+          value = row.movementType || row.type;
+          break;
+
+        case "quantity":
+          value = row.quantity;
+          break;
+
+        // --- Dates ---
+        case "createdAt":
+        case "updatedAt":
+        case "orderDate":
+        case "movementDate":
+          value = row[key] ? moment(row[key]).format("YYYY-MM-DD") : "";
+          break;
+
+        // --- Default ---
+        default:
+          value = row[key];
+      }
+
+      flatRow[key] = value ?? "";
+    });
+
+    return flatRow;
+  });
+};
+
+export const reportColumnsConfig = {
+  [NewReportTypeEnum.ORDERS_REPORT]: [
+    { key: "product", label: "Product Name", format: "proper", align: "left" },
+    { key: "variant", label: "Variant", format: "proper", align: "center" },
+    {
+      key: "platform",
+      label: "Platform",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "platformOrderId",
+      label: "Order ID",
+      format: "uppercase",
+      align: "center",
+    },
+    { key: "quantity", label: "Quantity", format: "number", align: "center" },
+    {
+      key: "price",
+      label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "totalPrice",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "courier", label: "Courier", align: "center" },
+    { key: "status", label: "Status", format: "proper", align: "center" },
+    { key: "isPaid", label: "Paid", format: "proper", align: "center" },
+    { key: "orderDate", label: "Order Date", format: "date", align: "center" },
+  ],
+
+  [NewReportTypeEnum.PRODUCTS_REPORT]: [
+    { key: "name", label: "Product Name", format: "proper", align: "left" },
+    { key: "sku", label: "SKU", format: "uppercase", align: "center" },
+    { key: "variant", label: "Variant", format: "proper", align: "center" },
+    { key: "quantity", label: "Stock", format: "number", align: "center" },
+    { key: "unit", label: "Unit", format: "lowercase", align: "center" },
+    {
+      key: "price",
+      label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "totalPrice",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "status", label: "Status", format: "proper", align: "center" },
+    { key: "createdAt", label: "Date Added", format: "date", align: "center" },
+  ],
+
+  [NewReportTypeEnum.ITEMS_REPORT]: [
+    { key: "name", label: "Item Name", format: "proper", align: "left" },
+    { key: "sku", label: "SKU", format: "uppercase", align: "center" },
+    { key: "variant", label: "Variant", format: "proper", align: "center" },
+    { key: "quantity", label: "Quantity", format: "number", align: "center" },
+    { key: "unit", label: "Unit", format: "lowercase", align: "center" },
+    {
+      key: "price",
+      label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "totalValue",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "status", label: "Status", format: "proper", align: "center" },
+    { key: "createdAt", label: "Date Added", format: "date", align: "center" },
+  ],
+
+  [NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]: [
+    { key: "item", label: "Item Name", format: "proper", align: "left" },
+    { key: "variant", label: "Variant", format: "proper", align: "center" },
+    {
+      key: "type",
+      label: "Movement Type",
+      format: "uppercase",
+      align: "center",
+    },
+    { key: "quantity", label: "Quantity", format: "number", align: "center" },
+    {
+      key: "price",
+      label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "totalValue",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "balanceAfter",
+      label: "Balance After",
+      format: "number",
+      align: "center",
+    },
+    {
+      key: "createdAt",
+      label: "Transaction Date",
+      format: "date",
+      align: "center",
+    },
+  ],
+
+  [NewReportTypeEnum.INVENTORY_DETAILS_REPORT]: [
+    { key: "product", label: "Product Name", format: "proper", align: "left" },
+    { key: "variant", label: "Variant", format: "proper", align: "center" },
+    {
+      key: "platform",
+      label: "Platform",
+      format: "uppercase",
+      align: "center",
+    },
+    { key: "order", label: "Order ID", format: "uppercase", align: "center" },
+    { key: "order", label: "Order ID", format: "uppercase", align: "center" },
+    {
+      key: "movementType",
+      label: "Movement Type",
+      format: "uppercase",
+      align: "center",
+    },
+    { key: "quantity", label: "Quantity", format: "number", align: "center" },
+    {
+      key: "price",
+      label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "totalPrice",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "courier", label: "Courier", align: "center" },
+    { key: "status", label: "Status", format: "proper", align: "center" },
+    {
+      key: "createdAt",
+      label: "Transaction Date",
+      format: "date",
+      align: "center",
+    },
+  ],
 };

@@ -18,6 +18,11 @@ export const MovementTypeEnum = Object.freeze({
   OUT: "OUT",
 });
 
+export const PaymentStatusEnum = Object.freeze({
+  PAID: "Paid",
+  UNPAID: "Unpaid",
+});
+
 export const UnitTypeEnum = Object.freeze({
   PIECE: "pcs",
 });
@@ -35,6 +40,14 @@ export const ReportTypeEnum = Object.freeze({
   ITEMS: "ITEMS",
   ITEMS_IN: "ITEMS_IN",
   ITEMS_OUT: "ITEMS_OUT",
+});
+
+export const NewReportTypeEnum = Object.freeze({
+  ORDERS_REPORT: "Orders Report",
+  PRODUCTS_REPORT: "Products Report",
+  ITEMS_REPORT: "Items Report",
+  ITEM_MOVEMENTS_REPORT: "Item Movements Report",
+  INVENTORY_DETAILS_REPORT: "Inventory Details Report",
 });
 
 export const PlatformEnum = Object.freeze({
