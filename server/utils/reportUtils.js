@@ -400,10 +400,17 @@ export const flattenReportData = (rows, columns) => {
 
         // --- Price handling ---
         case "price":
+          // Orders / InventoryDetails
           if (row.product?.price) {
-            value = row.product.price; // Orders / InventoryDetails
-          } else if (row.price) {
-            value = row.price; // Products / Items / ItemMovements
+            value = row.product.price;
+          }
+          // Products / Items
+          else if (row.price) {
+            value = row.price;
+          }
+          // ItemMovements (price from item reference)
+          else if (row.item?.price) {
+            value = row.item.price;
           }
           break;
 
@@ -499,7 +506,6 @@ export const reportColumnsConfig = {
     { key: "sku", label: "SKU", format: "uppercase", align: "center" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
     { key: "quantity", label: "Stock", format: "number", align: "center" },
-    { key: "unit", label: "Unit", format: "lowercase", align: "center" },
     {
       key: "price",
       label: "Price",
@@ -520,10 +526,8 @@ export const reportColumnsConfig = {
 
   [NewReportTypeEnum.ITEMS_REPORT]: [
     { key: "name", label: "Item Name", format: "proper", align: "left" },
-    { key: "sku", label: "SKU", format: "uppercase", align: "center" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
     { key: "quantity", label: "Quantity", format: "number", align: "center" },
-    { key: "unit", label: "Unit", format: "lowercase", align: "center" },
     {
       key: "price",
       label: "Price",

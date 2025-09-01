@@ -196,6 +196,7 @@ export const getReportTitleText = (reportType, startDate, endDate) => {
 };
 
 // utils/reportColumnsConfig.js
+
 export const reportColumnsConfig = {
   [NewReportTypeEnum.ORDERS_REPORT]: [
     { key: "product", label: "Product Name", format: "proper", align: "left" },
@@ -238,7 +239,6 @@ export const reportColumnsConfig = {
     { key: "sku", label: "SKU", format: "uppercase", align: "center" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
     { key: "quantity", label: "Stock", format: "number", align: "center" },
-    { key: "unit", label: "Unit", format: "lowercase", align: "center" },
     {
       key: "price",
       label: "Price",
@@ -259,10 +259,8 @@ export const reportColumnsConfig = {
 
   [NewReportTypeEnum.ITEMS_REPORT]: [
     { key: "name", label: "Item Name", format: "proper", align: "left" },
-    { key: "sku", label: "SKU", format: "uppercase", align: "center" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
     { key: "quantity", label: "Quantity", format: "number", align: "center" },
-    { key: "unit", label: "Unit", format: "lowercase", align: "center" },
     {
       key: "price",
       label: "Price",

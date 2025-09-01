@@ -2,67 +2,43 @@ import mongoose from "mongoose";
 import Item from "./models/Item.js";
 import ItemMovement from "./models/ItemMovement.js";
 
-async function run() {
-  const mongoUri = "mongodb://127.0.0.1:27017/inventory-db"; // replace if needed
+async function syncItemMovementPrices() {
+  const mongoUri = "mongodb://127.0.0.1:27017/inventory-db"; // replace with your DB
 
   try {
-    // Connect to MongoDB
     await mongoose.connect(mongoUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
     console.log("✅ MongoDB connected");
 
-    // --- 1️⃣ Find items without movements ---
-    const itemsWithoutMovement = await Item.aggregate([
-      {
-        $lookup: {
-          from: "itemmovements", // make sure this matches your collection name
-          localField: "_id",
-          foreignField: "item",
-          as: "movements",
-        },
-      },
-      {
-        $match: { movements: { $size: 0 } },
-      },
-    ]);
+    // Fetch all item movements with the related item
+    const movements = await ItemMovement.find().populate("item");
 
-    console.log(`\n🟢 Items without movements (${itemsWithoutMovement.length}):`);
-    itemsWithoutMovement.forEach((item) => console.log(item._id, item.name));
+    console.log(`Found ${movements.length} item movements.`);
 
-    // --- 2️⃣ Find items with duplicate movements ---
-    const duplicateMovements = await ItemMovement.aggregate([
-      {
-        $group: {
-          _id: "$item",
-          count: { $sum: 1 },
-        },
-      },
-      {
-        $match: { count: { $gt: 1 } },
-      },
-      {
-        $lookup: {
-          from: "items",
-          localField: "_id",
-          foreignField: "_id",
-          as: "itemDetails",
-        },
-      },
-      { $unwind: "$itemDetails" },
-    ]);
+    let updatedCount = 0;
 
-    console.log(`\n🔴 Items with duplicate movements (${duplicateMovements.length}):`);
-    duplicateMovements.forEach((dup) =>
-      console.log(dup._id, dup.itemDetails.name, "Movements:", dup.count)
-    );
+    for (const movement of movements) {
+      if (!movement.item) continue; // skip if item reference is missing
+
+      // Update price if different
+      if (movement.price !== movement.item.price) {
+        movement.price = movement.item.price;
+        movement.totalValue = movement.quantity * movement.price; // recalc totalValue
+        await movement.save();
+        updatedCount++;
+        console.log(`Updated movement ${movement._id} with new price: ${movement.price}`);
+      }
+    }
+
+    console.log(`\n✅ Finished. Updated ${updatedCount} item movements.`);
   } catch (err) {
     console.error("❌ Error:", err);
   } finally {
     await mongoose.connection.close();
-    console.log("\n✅ MongoDB connection closed");
+    console.log("✅ MongoDB connection closed");
   }
 }
 
-run();
+syncItemMovementPrices();
