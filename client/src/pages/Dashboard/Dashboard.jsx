@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSpinner } from "../../context/SpinnerContext";
 import Navpath from "../../components/Navpath";
 import { getProductStats } from "../../services/productService";
+import DashboardCharts from "./DashboardCharts";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -43,12 +44,12 @@ const Dashboard = () => {
       label: "Total Stock",
       icon: "ion ion-archive",
     },
-  {
-    color: "warning",
-    count: stats.needsRestock,
-    label: "Needs Restock",
-    icon: "ion ion-alert-circled",
-  },
+    {
+      color: "warning",
+      count: stats.needsRestock,
+      label: "Needs Restock",
+      icon: "ion ion-alert-circled",
+    },
     {
       color: "danger",
       count: stats.outOfStock,
@@ -97,6 +98,9 @@ const Dashboard = () => {
                 </div>
               );
             })}
+          </div>
+          <div className="row">
+            <DashboardCharts />
           </div>
         </div>
       </section>
