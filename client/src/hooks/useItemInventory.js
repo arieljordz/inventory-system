@@ -93,11 +93,14 @@ export const useItemInventory = (initialPagination) => {
   const saveItem = async (form, isEditMode, onClose) => {
     showSpinner();
     try {
+      console.log("form:", form);
       const formData = new FormData();
       Object.entries(form).forEach(([key, value]) => {
         if (value !== null && value !== undefined && value !== "")
           formData.append(key, value);
       });
+
+      console.log("formData:", formData);
 
       if (isEditMode) {
         await updateItem(form._id, formData);

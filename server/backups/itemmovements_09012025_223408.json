@@ -1,0 +1,260 @@
+[
+  {
+    "_id": {
+      "$oid": "68b563f4650c74e5be32382d"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 100,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:14:29.016Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T09:14:29.016Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 10000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56427650c74e5be323836"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:15:19.545Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T09:15:19.545Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56475650c74e5be323846"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 50,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:16:37.287Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T09:16:37.287Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 5000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b564a9650c74e5be32384f"
+    },
+    "item": {
+      "$oid": "68b564a9650c74e5be32384d"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 489,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:17:29.417Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T09:17:29.417Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 48900,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56a9d650c74e5be3238c3"
+    },
+    "item": {
+      "$oid": "68b569d1650c74e5be3238bb"
+    },
+    "type": "IN",
+    "quantity": 2,
+    "price": 1500,
+    "balanceAfter": 2,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T09:42:53.238Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T09:42:53.238Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 3000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5787105bc2b256f1ce902"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 40,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:41:53.277Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:41:53.277Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 4000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578af05bc2b256f1ce914"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 20,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:42:55.621Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:42:55.621Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578b905bc2b256f1ce91c"
+    },
+    "item": {
+      "$oid": "68b5729205bc2b256f1ce842"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:05.050Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:05.050Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578c105bc2b256f1ce924"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:13.004Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:13.004Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578c705bc2b256f1ce92c"
+    },
+    "item": {
+      "$oid": "68b5720e05bc2b256f1ce82c"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:19.195Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:19.195Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  }
+]

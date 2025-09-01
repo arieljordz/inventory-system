@@ -8,6 +8,38 @@ import {
   StatusEnum,
 } from "../../enums/enums";
 
+// Mapping report type → filters
+const SHOW_FILTERS = {
+  [NewReportTypeEnum.ORDERS_REPORT]: [
+    "platform",
+    "paymentStatus",
+    "status",
+  ],
+  [NewReportTypeEnum.PRODUCTS_REPORT]: ["status"],
+  [NewReportTypeEnum.ITEMS_REPORT]: ["status"],
+  [NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]: ["movementType"],
+  [NewReportTypeEnum.INVENTORY_DETAILS_REPORT]: [
+    "platform",
+    "paymentStatus",
+    "movementType",
+    "status",
+  ],
+};
+
+const FILTER_OPTIONS = {
+  platform: Object.values(PlatformEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
+  paymentStatus: Object.values(PaymentStatusEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
+  movementType: Object.values(MovementTypeEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
+  status: Object.values(StatusEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
+};
+
+const FILTER_LABELS = {
+  platform: "Platform",
+  paymentStatus: "Payment Status",
+  movementType: "Movement Type",
+  status: "Status",
+};
+
 const ReportFilters = ({
   reportType,
   setReportType,
@@ -18,37 +50,17 @@ const ReportFilters = ({
   filters,
   handleFilterChange,
   onGenerate,
+  onResetFilters,
   loading,
 }) => {
+  // Options for report type dropdown
   const reportOptions = useMemo(
-    () =>
-      Object.values(NewReportTypeEnum).map((value) => ({
-        label: value,
-        value,
-      })),
+    () => Object.values(NewReportTypeEnum).map((v) => ({ label: v, value: v })),
     []
   );
-  const paymentStatusOptions = useMemo(
-    () =>
-      Object.values(PaymentStatusEnum).map((value) => ({
-        label: value,
-        value,
-      })),
-    []
-  );
-  const movementOptions = useMemo(
-    () =>
-      Object.values(MovementTypeEnum).map((value) => ({ label: value, value })),
-    []
-  );
-  const platformOptions = useMemo(
-    () => Object.values(PlatformEnum).map((value) => ({ label: value, value })),
-    []
-  );
-  const statusOptions = useMemo(
-    () => Object.values(StatusEnum).map((value) => ({ label: value, value })),
-    []
-  );
+
+  // Determine which filters to show for the selected report
+  const activeFilters = SHOW_FILTERS[reportType] || [];
 
   return (
     <>
@@ -85,79 +97,38 @@ const ReportFilters = ({
         </div>
       </div>
 
-      {/* Optional Filters + Generate */}
+      {/* Dynamic Filters + Buttons */}
       <div className="row g-3 mt-1">
-        <div className="col-md-2">
-          <SelectInput
-            label="Platform"
-            name="platform"
-            value={filters.platform || ""}
-            onChange={handleFilterChange}
-            options={[
-              { label: "All", value: "" },
-              ...platformOptions.map((p) => ({
-                label: p.label,
-                value: p.value.toLowerCase(),
-              })),
-            ]}
-          />
-        </div>
+        {activeFilters.map((key) => (
+          <div className="col-md-2" key={key}>
+            <SelectInput
+              label={FILTER_LABELS[key]}
+              name={key}
+              value={filters[key] || ""}
+              onChange={handleFilterChange}
+              options={[{ label: "All", value: "" }, ...(FILTER_OPTIONS[key] || [])]}
+            />
+          </div>
+        ))}
 
-        <div className="col-md-2">
-          <SelectInput
-            label="Payment Status"
-            name="paymentStatus"
-            value={filters.paymentStatus || ""}
-            onChange={handleFilterChange}
-            options={[
-              { label: "All", value: "" },
-              ...paymentStatusOptions.map((p) => ({
-                label: p.label,
-                value: p.value.toLowerCase(),
-              })),
-            ]}
-          />
+        {/* Buttons */}
+        <div className="col-md-2 pt-4">
+          <button
+            className="btn btn-secondary btn-block mt-2"
+            onClick={onResetFilters}
+            disabled={loading}
+          >
+            <i className="fas fa-undo mr-1"></i>
+            Reset Filters
+          </button>
         </div>
-
-        <div className="col-md-2">
-          <SelectInput
-            label="Movement Type"
-            name="movementType"
-            value={filters.movementType || ""}
-            onChange={handleFilterChange}
-            options={[
-              { label: "All", value: "" },
-              ...movementOptions.map((p) => ({
-                label: p.label,
-                value: p.value.toLowerCase(),
-              })),
-            ]}
-          />
-        </div>
-
-        <div className="col-md-2">
-          <SelectInput
-            label="Status"
-            name="status"
-            value={filters.status || ""}
-            onChange={handleFilterChange}
-            options={[
-              { label: "All", value: "" },
-              ...statusOptions.map((p) => ({
-                label: p.label,
-                value: p.value.toLowerCase(),
-              })),
-            ]}
-          />
-        </div>
-
         <div className="col-md-2 pt-4">
           <button
             className="btn btn-success btn-block mt-2"
             onClick={onGenerate}
             disabled={loading}
           >
-            <i className="fas fa-sync-alt mr-1"></i>{" "}
+            <i className="fas fa-sync-alt mr-1"></i>
             {loading ? "Generating..." : "Generate"}
           </button>
         </div>

@@ -34,32 +34,36 @@ const ProductModal = ({
   };
 
   return (
-    <Modal show={isOpen} onHide={onClose} backdrop="static" size="lg">
+    <Modal show={isOpen} onHide={onClose} backdrop="static" size="xl">
       <Form onSubmit={handleSubmit} encType="multipart/form-data">
         <Modal.Header closeButton className={headerClass}>
           <Modal.Title>{modalTitle}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          <TextArea
-            label="Product Name"
-            name="name"
-            value={form.name}
-            onChange={onChange}
-            placeholder="Enter product name"
-            required
-          />
-
-          <TextArea
-            label="Product Description"
-            name="description"
-            value={form.description}
-            onChange={onChange}
-            placeholder="Enter product description"
-          />
-
           <Row>
-            <Col md={4}>
+            <Col md={6}>
+              <TextArea
+                label="Product Name"
+                name="name"
+                value={form.name}
+                onChange={onChange}
+                placeholder="Enter product name"
+                required
+              />
+            </Col>
+            <Col md={6}>
+              <TextArea
+                label="Product Description"
+                name="description"
+                value={form.description}
+                onChange={onChange}
+                placeholder="Enter product description"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={3}>
               <TextInput
                 label="Price"
                 name="price"
@@ -70,7 +74,7 @@ const ProductModal = ({
                 type="number"
               />
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <TextInput
                 label="Quantity"
                 name="quantity"
@@ -82,7 +86,7 @@ const ProductModal = ({
                 disabled={isEditMode}
               />
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <SelectInput
                 label="Unit"
                 name="unit"
@@ -92,28 +96,13 @@ const ProductModal = ({
                 required
               />
             </Col>
-          </Row>
-
-          <Row>
-            <Col md={6}>
+            <Col md={3}>
               <TextInput
                 label="Variant"
                 name="variant"
                 value={form.variant}
                 onChange={onChange}
                 placeholder="Enter variant (optional)"
-              />
-            </Col>
-            <Col md={6}>
-              <SelectInput
-                label="Status"
-                name="status"
-                value={form.status}
-                onChange={onChange}
-                options={Object.entries(StatusEnum).map(([key, value]) => ({
-                  label: value,
-                  value: key,
-                }))}
               />
             </Col>
           </Row>

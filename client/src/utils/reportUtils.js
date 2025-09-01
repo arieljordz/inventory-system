@@ -329,7 +329,6 @@ export const reportColumnsConfig = {
       align: "center",
     },
     { key: "order", label: "Order ID", format: "uppercase", align: "center" },
-    { key: "order", label: "Order ID", format: "uppercase", align: "center" },
     {
       key: "movementType",
       label: "Movement Type",

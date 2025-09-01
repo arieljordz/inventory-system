@@ -112,7 +112,6 @@ export const addProduct = async (req, res) => {
   }
 };
 
-
 export const getProducts = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
@@ -147,7 +146,7 @@ export const getProducts = async (req, res) => {
         .populate({
           path: "components.item",
           model: Item,
-          select: "name price unit category", // only return needed fields
+          select: "name variant price unit category", // only return needed fields
         }),
       Product.countDocuments(query),
     ]);

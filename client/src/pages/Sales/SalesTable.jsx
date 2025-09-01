@@ -116,7 +116,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
             status={order.status}
             customLabelMap={{
               Available: "In Stock",
-              "For Pick Up": "On Process",
+              "On Process": "On Process",
               "Out of Stock": "No Stock",
             }}
           />

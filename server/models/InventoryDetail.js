@@ -33,7 +33,7 @@ const inventoryDetailSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: Object.values(StatusEnum),
-      default: StatusEnum.FOR_PICK_UP,
+      default: StatusEnum.ON_PROCESS,
     },
     remarks: {
       type: String,

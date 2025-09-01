@@ -13,32 +13,50 @@ import { useDebounce } from "../../hooks/useDebounce";
 const BundleSelector = ({ components, setComponents }) => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+
   const debouncedSearch = useDebounce(search, 800);
 
   console.log("BundleSelector render with components:", components);
 
-  const loadItems = useCallback(async (searchTerm = "") => {
+  const loadItems = useCallback(async (searchTerm = "", pageNum = 1) => {
     try {
-      const res = await getAllItems({ search: searchTerm, page: 1, limit: 3 });
+      const limit = 5;
+      const res = await getAllItems({
+        search: searchTerm,
+        page: pageNum,
+        limit,
+      });
+
       setItems(res.data?.items || []);
+      setTotalPages(res.data?.totalPages || 1); // <-- correct field
+      setPage(res.data?.currentPage || pageNum);
     } catch (err) {
       console.error("Failed to fetch items:", err);
       setItems([]);
+      setTotalPages(1);
     }
   }, []);
 
   useEffect(() => {
-    loadItems(debouncedSearch);
-  }, [debouncedSearch, loadItems]);
+    setPage(1); // reset to first page when search changes
+  }, [debouncedSearch]);
+
+  useEffect(() => {
+    loadItems(debouncedSearch, page);
+  }, [debouncedSearch, page, loadItems]);
 
   const addItem = (item) => {
     if (!item._id) return;
-    if (components.find((c) => {
-      const id = typeof c.item === "object" ? c.item._id : c.item;
-      return id === item._id;
-    })) return;
+    if (
+      components.find((c) => {
+        const id = typeof c.item === "object" ? c.item._id : c.item;
+        return id === item._id;
+      })
+    )
+      return;
 
-    // Always store with full item object for consistency
     setComponents([...components, { item, qty: 1 }]);
   };
 
@@ -64,6 +82,7 @@ const BundleSelector = ({ components, setComponents }) => {
     <div className="mt-2">
       <h6>Bundle Components</h6>
 
+      {/* Search input */}
       <InputGroup className="mb-3">
         <FormControl
           placeholder="Search items..."
@@ -84,7 +103,7 @@ const BundleSelector = ({ components, setComponents }) => {
             <Table bordered size="sm" className="mb-0 table-sm text-center">
               <thead>
                 <tr>
-                  <th>Name</th>
+                  <th>Item Name</th>
                   <th>Stock</th>
                   <th>Add</th>
                 </tr>
@@ -98,7 +117,7 @@ const BundleSelector = ({ components, setComponents }) => {
 
                   return (
                     <tr key={item._id || index}>
-                      <td>{item.name}</td>
+                      <td>{`${item.name} (${item.variant})`}</td>
                       <td>{item.quantity}</td>
                       <td>
                         <Button
@@ -122,6 +141,29 @@ const BundleSelector = ({ components, setComponents }) => {
               </tbody>
             </Table>
           </div>
+
+          {/* Pagination Controls */}
+          <div className="d-flex justify-content-center align-items-center mt-2">
+            <Button
+              size="sm"
+              variant="secondary"
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+            >
+              Prev
+            </Button>
+            <span className="mx-2">
+              Page {page} of {totalPages}
+            </span>
+            <Button
+              size="sm"
+              variant="secondary"
+              disabled={page >= totalPages}
+              onClick={() => setPage((p) => p + 1)}
+            >
+              Next
+            </Button>
+          </div>
         </Col>
 
         {/* Selected Components */}
@@ -130,7 +172,7 @@ const BundleSelector = ({ components, setComponents }) => {
             <Table bordered size="sm" className="mb-0 table-sm text-center">
               <thead>
                 <tr>
-                  <th style={{ width: "170px" }}>Name</th>
+                  <th style={{ width: "340px" }}>Item Name</th>
                   <th>Qty per Bundle</th>
                   <th>Remove</th>
                 </tr>
@@ -146,8 +188,11 @@ const BundleSelector = ({ components, setComponents }) => {
                   components.map((comp, index) => {
                     const itemId =
                       typeof comp.item === "object" ? comp.item._id : comp.item;
+
                     const itemName =
-                      typeof comp.item === "object" ? comp.item.name : comp.name;
+                      typeof comp.item === "object"
+                        ? `${comp.item.name} (${comp.item.variant})` // 👈 concat name + variant
+                        : `${comp.name} (${comp.variant})`;
 
                     return (
                       <tr key={itemId || index}>

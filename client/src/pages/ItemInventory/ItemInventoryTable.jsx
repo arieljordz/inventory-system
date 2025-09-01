@@ -153,7 +153,7 @@ const ItemInventoryTable = ({
             status={item.status}
             customLabelMap={{
               Available: "In Stock",
-              "For Pick Up": "Awaiting Pickup",
+              "On Process": "Awaiting Pickup",
               "Out of Stock": "No Stock",
             }}
           />

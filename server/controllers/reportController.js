@@ -393,13 +393,10 @@ const exportPDF = async (
 // New Report Controllers
 // --- 1. Orders Report ---
 export const getOrdersReport = async (filters = {}) => {
-  console.log("OrdersReportfilters:", filters);
-  const { startDate, endDate, paymentStatus, platform } = filters;
+  const { startDate, endDate, paymentStatus, platform, status } = filters;
 
-  // date filter on orderDate
   const filter = buildDateFilter(startDate, endDate, "orderDate");
 
-  // --- integrate paymentStatus ---
   if (paymentStatus && paymentStatus !== "All") {
     if (paymentStatus === "paid") {
       filter.isPaid = true;
@@ -408,12 +405,15 @@ export const getOrdersReport = async (filters = {}) => {
     }
   }
 
-  // --- integrate platform ---
   if (platform && platform !== "All") {
-    filter.platform = platform.trim().toLowerCase();
+    filter.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
   }
 
-  console.log("OrdersReportfilter:", filter);
+  if (status && status !== "All") {
+    filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
+  }
+
+  // console.log("OrdersReportfilter:", filter);
 
   const rows = await Order.find(filter)
     .populate({
@@ -430,21 +430,15 @@ export const getOrdersReport = async (filters = {}) => {
 
 // --- 2. Products Report ---
 export const getProductsReport = async (filters = {}) => {
-  console.log("ProductsReportfilters:", filters);
-  const { startDate, endDate, status, category, type } = filters;
+  const { startDate, endDate, status } = filters;
 
-  // Always apply date filter
   const filter = buildDateFilter(startDate, endDate, "createdAt");
 
-  // Apply optional filters
   if (status && status !== "All") {
-    filter.status = status;
-  }
-  if (type && type !== "All") {
-    filter.type = type;
+    filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
   }
 
-  console.log("ProductsReportfilter:", filter);
+  // console.log("ProductsReportfilter:", filter);
 
   const rows = await Product.find(filter).lean();
 
@@ -456,18 +450,15 @@ export const getProductsReport = async (filters = {}) => {
 
 // --- 3. Items Report ---
 export const getItemsReport = async (filters = {}) => {
-  console.log("ItemsReportfilters:", filters);
-  const { startDate, endDate, status, supplier, location } = filters;
+  const { startDate, endDate, status } = filters;
 
-  // Start with date filter
   const filter = buildDateFilter(startDate, endDate, "createdAt");
 
-  // Add optional filters
   if (status && status !== "All") {
-    filter.status = status;
+    filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
   }
 
-  console.log("ItemsReportfilter:", filter);
+  // console.log("ItemsReportfilter:", filter);
 
   const rows = await Item.find(filter).lean();
 
@@ -479,29 +470,16 @@ export const getItemsReport = async (filters = {}) => {
 
 // --- 4. Item Movements Report ---
 export const getItemMovementsReport = async (filters = {}) => {
-  console.log("ItemMovementsReport filters:", filters);
+  const { startDate, endDate, movementType } = filters;
 
-  const { startDate, endDate, type, location, createdBy } = filters;
-
-  // --- Build base filter ---
   const filter = buildDateFilter(startDate, endDate, "updatedAt");
 
-  // --- Optional filters ---
-  if (type && type !== "All") {
-    filter.type = type; // must be "IN" or "OUT"
+  if (movementType && movementType !== "All") {
+    filter.type = { $regex: `^${movementType.trim()}$`, $options: "i" };
   }
 
-  if (location && location !== "All") {
-    filter.location = location;
-  }
+  // console.log("ItemMovementsReport final filter:", filter);
 
-  if (createdBy && createdBy !== "All") {
-    filter.createdBy = createdBy;
-  }
-
-  console.log("ItemMovementsReport final filter:", filter);
-
-  // --- Query with population ---
   const rows = await ItemMovement.find(filter).populate("item").lean();
 
   return flattenReportData(
@@ -512,30 +490,33 @@ export const getItemMovementsReport = async (filters = {}) => {
 
 // --- 5. Inventory Details Report ---
 export const getInventoryDetailsReport = async (filters = {}) => {
-  console.log("InventoryDetailsReport filters:", filters);
-
-  const { startDate, endDate, movementType, platform, status, courier } =
+  const { startDate, endDate, paymentStatus, movementType, platform, status } =
     filters;
 
-  // --- Base filter ---
   const filter = buildDateFilter(startDate, endDate, "updatedAt");
 
-  // --- Optional filters ---
+  if (paymentStatus && paymentStatus !== "All") {
+    if (paymentStatus === "paid") {
+      filter.isPaid = true;
+    } else if (paymentStatus === "unpaid") {
+      filter.isPaid = false;
+    }
+  }
+
   if (movementType && movementType !== "All") {
-    filter.movementType = movementType;
+    filter.movementType = { $regex: `^${movementType.trim()}$`, $options: "i" };
   }
 
   if (platform && platform !== "All") {
-    filter.platform = platform;
+    filter.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
   }
 
   if (status && status !== "All") {
-    filter.status = status;
+    filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
   }
 
-  console.log("InventoryDetailsReport final filter:", filter);
+  // console.log("InventoryDetailsReport final filter:", filter);
 
-  // --- Query with population ---
   const rows = await InventoryDetail.find(filter)
     .populate("product")
     .populate("order")
@@ -565,9 +546,8 @@ export const generateReport = async (req, res) => {
         data = await getOrdersReport({
           startDate,
           endDate,
-          platform,
           paymentStatus,
-          movementType,
+          platform,
           status,
         });
         // console.log("ORDERS_REPORT:", data);
@@ -577,7 +557,6 @@ export const generateReport = async (req, res) => {
           startDate,
           endDate,
           status,
-          movementType,
         });
         // console.log("PRODUCTS_REPORT:", data);
         break;
@@ -601,9 +580,10 @@ export const generateReport = async (req, res) => {
         data = await getInventoryDetailsReport({
           startDate,
           endDate,
+          paymentStatus,
+          movementType,
           platform,
           status,
-          movementType,
         });
         // console.log("INVENTORY_DETAILS_REPORT:", data);
         break;

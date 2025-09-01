@@ -35,7 +35,7 @@ const orderSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: Object.values(StatusEnum),
-      default: StatusEnum.FOR_PICK_UP,
+      default: StatusEnum.ON_PROCESS,
     },
     isPaid: {
       type: Boolean,

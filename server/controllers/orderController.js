@@ -276,7 +276,7 @@ export const processOrdersImport = async (rows, platform, req) => {
         quantity,
         courier,
         platform,
-        status: StatusEnum.FOR_PICK_UP,
+        status: StatusEnum.ON_PROCESS,
         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
       });
 

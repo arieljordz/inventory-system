@@ -45,7 +45,7 @@ export const getInventoryDetailsByStatus = async (req, res) => {
       return res.status(200).json(result);
     }
 
-    // Flat list for other statuses (FOR_PICK_UP, SHIPPING, etc.)
+    // Flat list for other statuses (ON_PROCESS, SHIPPING, etc.)
     const flatDetails = await InventoryDetail.find({ status })
       .populate("product")
       .sort({ createdAt: -1 });
@@ -243,7 +243,7 @@ export const tagOrderForPickUp = async (req, res) => {
       quantity,
       courier,
       platform,
-      status: StatusEnum.FOR_PICK_UP,
+      status: StatusEnum.ON_PROCESS,
       remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
     });
 

@@ -118,7 +118,7 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
             status={order.status}
             customLabelMap={{
               Available: "In Stock",
-              "For Pick Up": "Awaiting Pickup",
+              "On Process": "Awaiting Pickup",
               "Out of Stock": "No Stock",
             }}
           />

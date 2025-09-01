@@ -117,7 +117,9 @@ export const addItem = async (req, res) => {
 
     if (existingItem) {
       return res.status(400).json({
-        message: `Item with name "${name}" and variant "${variant || "N/A"}" already exists.`,
+        message: `Item with name "${name}" and variant "${
+          variant || "N/A"
+        }" already exists.`,
       });
     }
 
@@ -161,7 +163,9 @@ export const addItem = async (req, res) => {
     await logAudit({
       action: "ADD_ITEM",
       user: req.user?._id,
-      description: `Added new item: ${newItem.name}, Variant: ${newItem.variant || "N/A"}, SKU: ${newItem.sku}, quantity: ${quantity}`,
+      description: `Added new item: ${newItem.name}, Variant: ${
+        newItem.variant || "N/A"
+      }, SKU: ${newItem.sku}, quantity: ${quantity}`,
       collectionName: "Item",
       documentId: newItem._id,
       before: null,
@@ -247,7 +251,7 @@ export const restockItem = async (req, res) => {
 export const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, price, location, status } = req.body;
+    const { name, variant, description, price, location, status } = req.body;
 
     const item = await Item.findById(id);
     if (!item) {
@@ -262,6 +266,7 @@ export const updateItem = async (req, res) => {
       item.image = req.file.path; // handled by multer/cloudinary
     }
     if (name !== undefined) item.name = name;
+    if (variant !== undefined) item.variant = variant;
     if (description !== undefined) item.description = description;
     if (price !== undefined) item.price = price;
     if (location !== undefined) item.location = location;
@@ -317,7 +322,9 @@ export const deleteItem = async (req, res) => {
     await logAudit({
       action: "DELETE_ITEM",
       user: req.user?._id,
-      description: `Deleted item: ${before.name} (${before.variant || "No Variant"})`,
+      description: `Deleted item: ${before.name} (${
+        before.variant || "No Variant"
+      })`,
       collectionName: "Item",
       documentId: id,
       before,
@@ -329,7 +336,9 @@ export const deleteItem = async (req, res) => {
     res.status(200).json({ message: "Item deleted successfully" });
   } catch (error) {
     console.error("Delete Item Error:", error);
-    res.status(500).json({ message: "Failed to delete item", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Failed to delete item", error: error.message });
   }
 };
 

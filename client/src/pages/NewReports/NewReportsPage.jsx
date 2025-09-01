@@ -22,7 +22,9 @@ const NewReportsPage = () => {
     endDate,
     setEndDate,
     filters,
+    setFilters,
     handleFilterChange,
+    handleResetFilters,
     columns,
   } = useReportFilters(NewReportTypeEnum.ORDERS_REPORT);
 
@@ -30,7 +32,7 @@ const NewReportsPage = () => {
 
   const handleGenerateReport = async () => {
     if (!startDate || !endDate) {
-      toast.error("Date range is required");
+      toast.info("Date range is required");
       return;
     }
     try {
@@ -74,6 +76,7 @@ const NewReportsPage = () => {
                 filters={filters}
                 handleFilterChange={handleFilterChange}
                 onGenerate={handleGenerateReport}
+                onResetFilters={handleResetFilters}
                 loading={loading}
               />
 
@@ -86,7 +89,13 @@ const NewReportsPage = () => {
                       <button
                         className="btn btn-success"
                         onClick={() =>
-                          exportToExcel(reportData, columns, reportType, startDate, endDate)
+                          exportToExcel(
+                            reportData,
+                            columns,
+                            reportType,
+                            startDate,
+                            endDate
+                          )
                         }
                       >
                         <i className="fas fa-file-excel mr-1"></i> Export Excel
@@ -94,7 +103,13 @@ const NewReportsPage = () => {
                       <button
                         className="btn btn-danger"
                         onClick={() =>
-                          exportToPDF(reportData, columns, reportType, startDate, endDate)
+                          exportToPDF(
+                            reportData,
+                            columns,
+                            reportType,
+                            startDate,
+                            endDate
+                          )
                         }
                       >
                         <i className="fas fa-file-pdf mr-1"></i> Export PDF

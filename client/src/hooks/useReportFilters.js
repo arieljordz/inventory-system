@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { reportColumnsConfig } from "../utils/reportUtils";
 import { getCurrentDate } from "../utils/commonUtils";
+import { NewReportTypeEnum } from "../enums/enums";
 
 export const useReportFilters = (initialReportType) => {
   const [reportType, setReportType] = useState(initialReportType);
@@ -23,6 +24,17 @@ export const useReportFilters = (initialReportType) => {
 
   const columns = reportColumnsConfig[reportType] || [];
 
+  const handleResetFilters = () => {
+    setFilters({
+      paymentStatus: "All",
+      movementType: "All",
+      platform: "All",
+      status: "All",
+    });
+    setStartDate(etCurrentDate());
+    setEndDate(etCurrentDate());
+  };
+
   return {
     reportType,
     setReportType,
@@ -31,7 +43,9 @@ export const useReportFilters = (initialReportType) => {
     endDate,
     setEndDate,
     filters,
+    setFilters,
     handleFilterChange,
+    handleResetFilters,
     columns,
   };
 };

@@ -11,7 +11,7 @@ export const getStatusBadgeData = (
   const defaultColorMap = {
     [StatusEnum.AVAILABLE]: "success",
     [StatusEnum.OUT_OF_STOCK]: "danger",
-    [StatusEnum.FOR_PICK_UP]: "info",
+    [StatusEnum.ON_PROCESS]: "info",
     [StatusEnum.TO_SHIP]: "warning",
     [StatusEnum.SHIPPING]: "primary",
     [StatusEnum.RETURNED]: "dark",
@@ -24,7 +24,7 @@ export const getStatusBadgeData = (
   const defaultLabelMap = {
     [StatusEnum.AVAILABLE]: "In Stock",
     [StatusEnum.OUT_OF_STOCK]: "No Stock",
-    [StatusEnum.FOR_PICK_UP]: "On Process",
+    [StatusEnum.ON_PROCESS]: "On Process",
     [StatusEnum.TO_SHIP]: "To Ship",
     [StatusEnum.SHIPPING]: "Shipping",
     [StatusEnum.RETURNED]: "Returned",
