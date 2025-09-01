@@ -63,7 +63,18 @@ const ProductModal = ({
             </Col>
           </Row>
           <Row>
-            <Col md={3}>
+            <Col md={12}>
+              <TextInput
+                label="Variant"
+                name="variant"
+                value={form.variant}
+                onChange={onChange}
+                placeholder="Enter variant (optional)"
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Col md={4}>
               <TextInput
                 label="Price"
                 name="price"
@@ -74,7 +85,7 @@ const ProductModal = ({
                 type="number"
               />
             </Col>
-            <Col md={3}>
+            <Col md={4}>
               <TextInput
                 label="Quantity"
                 name="quantity"
@@ -86,7 +97,7 @@ const ProductModal = ({
                 disabled={isEditMode}
               />
             </Col>
-            <Col md={3}>
+            <Col md={4}>
               <SelectInput
                 label="Unit"
                 name="unit"
@@ -94,15 +105,6 @@ const ProductModal = ({
                 onChange={onChange}
                 options={unitOptions}
                 required
-              />
-            </Col>
-            <Col md={3}>
-              <TextInput
-                label="Variant"
-                name="variant"
-                value={form.variant}
-                onChange={onChange}
-                placeholder="Enter variant (optional)"
               />
             </Col>
           </Row>

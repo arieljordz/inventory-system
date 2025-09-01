@@ -532,7 +532,7 @@ export const reportColumnsConfig = {
       total: true,
     },
     {
-      key: "totalValue",
+      key: "totalPrice",
       label: "Total Price",
       format: "money",
       align: "right",
@@ -560,7 +560,7 @@ export const reportColumnsConfig = {
       total: true,
     },
     {
-      key: "totalValue",
+      key: "totalPrice",
       label: "Total Price",
       format: "money",
       align: "right",
