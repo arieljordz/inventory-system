@@ -25,51 +25,34 @@ const ReportTable = ({ reportData, columns, reportType }) => {
             <h5 className="mb-0">{reportType}</h5>
           </div>
         )}
+
         <div className="card-body p-0">
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover table-striped mb-0">
+          <div className="report-table-container">
+            <table className="table table-bordered table-hover table-striped mb-0 report-table">
               <thead className="table-light">
                 <tr>
                   {columns.map((col) => (
-                    <th
-                      key={col.key}
-                      style={{
-                        whiteSpace: "nowrap",
-                        position: "sticky",
-                        top: 0,
-                        zIndex: 2, // keeps header above body
-                        background: "#f8f9fa", // Bootstrap light gray
-                      }}
-                    >
+                    <th key={col.key} style={{ whiteSpace: "nowrap" }}>
                       {col.label}
                     </th>
                   ))}
                 </tr>
               </thead>
+
               <tbody>
                 {reportData.map((row, idx) => (
                   <tr key={idx}>
                     {columns.map((col) => (
-                      <td
-                        key={col.key}
-                        className={`text-${col.align || "left"}`}
-                      >
+                      <td key={col.key} className={`text-${col.align || "left"}`}>
                         {formatCellValue(row[col.key], col.format)}
                       </td>
                     ))}
                   </tr>
                 ))}
               </tbody>
+
               <tfoot>
-                <tr
-                  style={{
-                    position: "sticky",
-                    bottom: 0,
-                    background: "#e9ecef", // Bootstrap footer color
-                    fontWeight: "bold",
-                    zIndex: 1,
-                  }}
-                >
+                <tr>
                   {columns.map((col, idx) => (
                     <td key={col.key} className={`text-${col.align || "left"}`}>
                       {col.total

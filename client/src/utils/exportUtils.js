@@ -31,7 +31,13 @@ const buildFileName = (reportName, startDate, endDate, extension) => {
 /**
  * Export to Excel
  */
-export const exportToExcel = async (data, columns, reportName = "Report", startDate, endDate) => {
+export const exportToExcel = async (
+  data,
+  columns,
+  reportName = "Report",
+  startDate,
+  endDate
+) => {
   if (!data || data.length === 0 || !columns) return;
 
   const workbook = new ExcelJS.Workbook();
@@ -74,10 +80,19 @@ export const exportToExcel = async (data, columns, reportName = "Report", startD
 /**
  * Export to PDF
  */
-export const exportToPDF = (data, columns, reportName = "Report", startDate, endDate) => {
+export const exportToPDF = (
+  data,
+  columns,
+  reportName = "Report",
+  startDate,
+  endDate
+) => {
   if (!data || data.length === 0 || !columns) return;
 
-  const doc = new jsPDF();
+  const orientation = "landscape";
+
+  // Create PDF with orientation
+  const doc = new jsPDF({ orientation });
 
   // Map headers
   const pdfColumns = columns.map((col) => ({
@@ -91,7 +106,6 @@ export const exportToPDF = (data, columns, reportName = "Report", startDate, end
     columns.forEach((col) => {
       let value = formatCellValue(row[col.key], col.format);
 
-      // If it's a string, remove peso sign (₱) and trim spaces
       if (typeof value === "string") {
         value = value.replace(/₱/g, "").trim();
       }
@@ -101,8 +115,10 @@ export const exportToPDF = (data, columns, reportName = "Report", startDate, end
     return formattedRow;
   });
 
+  // Add title
   doc.text(reportName, 14, 15);
 
+  // Add table
   autoTable(doc, {
     startY: 20,
     columns: pdfColumns,
@@ -111,5 +127,6 @@ export const exportToPDF = (data, columns, reportName = "Report", startDate, end
     headStyles: { fillColor: [22, 160, 133] },
   });
 
+  // Save file
   doc.save(buildFileName(reportName, startDate, endDate, "pdf"));
 };

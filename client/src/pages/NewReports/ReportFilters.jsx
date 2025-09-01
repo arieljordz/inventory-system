@@ -98,7 +98,7 @@ const ReportFilters = ({
       </div>
 
       {/* Dynamic Filters + Buttons */}
-      <div className="row g-3 mt-1">
+      <div className="row g-3">
         {activeFilters.map((key) => (
           <div className="col-md-2" key={key}>
             <SelectInput

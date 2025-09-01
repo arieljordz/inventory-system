@@ -173,3 +173,24 @@ body.dark-mode .dark-mode-text-white {
     -webkit-box-shadow: 0 0 0 30px #495057 inset !important;
     -webkit-text-fill-color: #ffffff !important;
 }
+
+.report-table-container {
+  max-height: 400px !important;
+  overflow-y: auto !important;
+  position: relative !important;
+}
+
+.report-table thead {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 2 !important;
+  background: #a7a8a8 !important;
+}
+
+.report-table tfoot {
+  position: sticky !important;
+  bottom: 0 !important;
+  z-index: 1 !important;
+  background: #a7a8a8 !important;
+  font-weight: bold !important;
+}
