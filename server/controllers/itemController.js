@@ -260,11 +260,9 @@ export const updateItem = async (req, res) => {
 
     // ✅ Snapshot before changes for audit
     const before = item.toObject();
+    const oldPrice = item.price; // remember the old price
 
     // Update fields
-    if (req.file) {
-      item.image = req.file.path; // handled by multer/cloudinary
-    }
     if (name !== undefined) item.name = name;
     if (variant !== undefined) item.variant = variant;
     if (description !== undefined) item.description = description;
@@ -273,6 +271,17 @@ export const updateItem = async (req, res) => {
     if (status !== undefined) item.status = status;
 
     const updatedItem = await item.save();
+
+    // ✅ If price changed, update all related ItemMovements
+    if (price !== undefined && price !== oldPrice) {
+      const movements = await ItemMovement.find({ item: item._id });
+
+      for (const movement of movements) {
+        movement.price = price;
+        movement.totalValue = movement.quantity * price;
+        await movement.save();
+      }
+    }
 
     // ✅ Audit log after save
     await logAudit({
