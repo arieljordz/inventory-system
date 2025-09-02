@@ -17,7 +17,7 @@ const ImportModal = ({
   const onFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      handleImport(file, form.platform);
+      handleImport(file, form.platform, importType);
       e.target.value = ""; // reset file input
     }
   };

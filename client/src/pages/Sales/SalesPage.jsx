@@ -94,7 +94,7 @@ const SalesPage = () => {
             onClose={closeImportModal}
             form={form}
             handleChange={handleChange}
-            handleImport={(file, platform) => handleImport(file, platform, importType)}
+            handleImport={(file, platform, importType) => handleImport(file, platform, importType)}
             platformOptions={platformOptions}
             importType={importType}
           />

@@ -142,6 +142,7 @@ const buildReturnsRow = (idx, item, type = "returned") => {
 //    Generic SweetAlert2 Table Renderer
 //    =========================================================================
 const showImportResults = (rows, title, successMessage) => {
+  // console.log("rows:", rows);
   if (rows.length > 0) {
     Swal.fire({
       title,
@@ -242,29 +243,44 @@ export const showSalesImportResults = (details, platform) => {
 // Show Returned Import Results
 export const showReturnImportResults = (details, platform) => {
   const rows = [];
+  // console.log("details:", details);
+  
+  if (details?.updated?.length) {
+    details.updated.forEach((item, idx) => {
+      rows.push(buildOrderRow(details.updated?.length + idx, item, "returned"));
+    });
+  }
 
-  if (details?.returned?.length) {
-    details.returned.forEach((item, idx) => {
-      rows.push(buildReturnsRow(idx, item, "returned"));
+  if (details?.alreadyReturned?.length) {
+    details.alreadyReturned.forEach((item, idx) => {
+      rows.push(buildReturnsRow(idx, item, "alreadyReturned"));
     });
   }
 
   if (details?.notFound?.length) {
     details.notFound.forEach((item, idx) => {
       rows.push(
-        buildReturnsRow(
-          details.alreadyReturned?.length + idx,
-          item,
-          "alreadyReturned"
-        )
+        buildReturnsRow(details.alreadyReturned?.length + idx, item, "notFound")
       );
+    });
+  }
+
+  if (details?.skipped?.length) {
+    details.skipped.forEach((item, idx) => {
+      rows.push(buildOrderRow(details.updated?.length + idx, item, "skipped"));
+    });
+  }
+
+  if (details?.failedRestocks?.length) {
+    details.failedRestocks.forEach((item, idx) => {
+      rows.push(buildOrderRow(details.failedRestocks?.length + idx, item, "failed restock"));
     });
   }
 
   showImportResults(
     rows,
     `${toProperCase(platform)} Import Results`,
-    "Sales imported successfully!"
+    "Returned Orders imported successfully!"
   );
 };
 

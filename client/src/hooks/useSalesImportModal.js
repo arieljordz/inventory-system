@@ -16,7 +16,6 @@ const initialFormState = {
 
 export const useSalesImportModal = (refreshData) => {
   const { showSpinner, hideSpinner } = useSpinner();
-
   const [showImportModal, setShowImportModal] = useState(false);
   const [importType, setImportType] = useState("");
   const [form, setForm] = useState(initialFormState);

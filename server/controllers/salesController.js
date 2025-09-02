@@ -155,7 +155,6 @@ export const getSalesStatsByDate = async (req, res) => {
   }
 };
 
-// --- Import Sales Handler ---
 export const importSalesByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
@@ -163,7 +162,11 @@ export const importSalesByPlatform = async (req, res) => {
       return res.status(400).json({ message: "Invalid platform" });
     }
 
-    const { sheetName, fields: rawFieldMap } = salesPlatformConfigs[platform];
+    const {
+      sheetName,
+      fields: rawFieldMap,
+      requiredHeaders,
+    } = salesPlatformConfigs[platform];
     const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
 
     // --- Validate uploaded file ---
@@ -175,19 +178,45 @@ export const importSalesByPlatform = async (req, res) => {
 
     // --- Load workbook ---
     const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
-    const targetSheetName =
-      workbook.SheetNames.find(
-        (s) => normalizeHeader(s) === normalizeHeader(sheetName)
-      ) || workbook.SheetNames[0];
+
+    // ✅ Strict sheet validation (no fallback)
+    const targetSheetName = workbook.SheetNames.find(
+      (s) => normalizeHeader(s) === normalizeHeader(sheetName)
+    );
+
+    if (!targetSheetName) {
+      return res.status(400).json({
+        message: `Invalid file. Expected sheet "${sheetName}" for ${platform} sales import.`,
+      });
+    }
+
     const worksheet = workbook.Sheets[targetSheetName];
-    const sheetData = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: false });
+    const sheetData = XLSX.utils.sheet_to_json(worksheet, {
+      header: 1,
+      raw: false,
+    });
 
     // --- Detect header row ---
-    let { headerRowIndex, columnIndexMap } = detectHeaderRow(sheetData, expectedHeaders);
+    let { headerRowIndex, columnIndexMap } = detectHeaderRow(
+      sheetData,
+      expectedHeaders
+    );
 
     if (headerRowIndex === -1) {
       return res.status(400).json({
         message: "No valid header row found. Check the template.",
+      });
+    }
+
+    // ✅ Validate required headers
+    const fileHeaders = sheetData[headerRowIndex].map(normalizeHeader);
+    const missingHeaders = requiredHeaders.filter(
+      (reqHeader) => !fileHeaders.includes(normalizeHeader(reqHeader))
+    );
+
+    if (missingHeaders.length > 0) {
+      return res.status(400).json({
+        message: `Missing required headers: ${missingHeaders.join(", ")}.`,
       });
     }
 
@@ -218,7 +247,6 @@ export const importSalesByPlatform = async (req, res) => {
   }
 };
 
-// --- Process Sales Import with skipped rows ---
 export const processSalesImport = async ({
   sheetData,
   headerRowIndex,
@@ -238,7 +266,9 @@ export const processSalesImport = async ({
   for (const row of rows) {
     if (!row || !row.some((c) => String(c || "").trim())) continue;
 
-    const platformOrderId = (row[finalFieldMap.platformOrderId] || "").toString().trim();
+    const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
+      .toString()
+      .trim();
 
     if (!platformOrderId) {
       results.skipped.push({ reason: "Missing platformOrderId", row });
@@ -290,30 +320,38 @@ export const processSalesImport = async ({
   return results;
 };
 
-// --- Import Returns Handler ---
 export const importReturnsByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
-    if (!platform || !returnPlatformConfigs[platform]) {
+    const config = returnPlatformConfigs[platform];
+
+    if (!platform || !config) {
       return res.status(400).json({ message: "Invalid platform" });
     }
 
-    const { sheetName, fields: rawFieldMap } = returnPlatformConfigs[platform];
+    const { sheetName, fields: rawFieldMap, requiredHeaders = [] } = config;
     const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
 
-    // Validate file
+    // --- Validate file ---
     try {
       validateFile(req.file);
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
 
-    // Load workbook
+    // --- Load workbook ---
     const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
-    const targetSheetName =
-      workbook.SheetNames.find(
-        (s) => normalizeHeader(s) === normalizeHeader(sheetName)
-      ) || workbook.SheetNames[0];
+
+    // ✅ Strict sheet validation (no fallback)
+    const targetSheetName = workbook.SheetNames.find(
+      (s) => normalizeHeader(s) === normalizeHeader(sheetName)
+    );
+
+    if (!targetSheetName) {
+      return res.status(400).json({
+        message: `Invalid file. Expected sheet "${sheetName}" for ${platform} returns import.`,
+      });
+    }
 
     const worksheet = workbook.Sheets[targetSheetName];
     const sheetData = XLSX.utils.sheet_to_json(worksheet, {
@@ -321,7 +359,7 @@ export const importReturnsByPlatform = async (req, res) => {
       raw: false,
     });
 
-    // Detect header row
+    // --- Detect header row ---
     let { headerRowIndex, columnIndexMap } = detectHeaderRow(
       sheetData,
       expectedHeaders
@@ -333,10 +371,24 @@ export const importReturnsByPlatform = async (req, res) => {
       });
     }
 
-    // Build final field map
+    // ✅ Required header validation
+    const normalizedHeaders = sheetData[headerRowIndex].map(normalizeHeader);
+    const missingHeaders = requiredHeaders
+      .map(normalizeHeader)
+      .filter((h) => !normalizedHeaders.includes(h));
+
+    if (missingHeaders.length > 0) {
+      return res.status(400).json({
+        message: `Invalid file. Missing required headers: ${missingHeaders.join(
+          ", "
+        )}.`,
+      });
+    }
+
+    // --- Build final field map ---
     const finalFieldMap = buildFinalFieldMap(rawFieldMap, columnIndexMap);
 
-    // Process rows
+    // --- Process rows ---
     const results = await processReturnsImport({
       sheetData,
       headerRowIndex,
@@ -361,7 +413,6 @@ export const importReturnsByPlatform = async (req, res) => {
   }
 };
 
-// --- Process Returns ---
 export const processReturnsImport = async ({
   sheetData,
   headerRowIndex,
@@ -404,13 +455,16 @@ export const processReturnsImport = async ({
       if (order.status === StatusEnum.RETURNED) {
         results.alreadyReturned.push({
           platformOrderId,
-          reason: "Already returned",
+          reason: "Order is already returned",
         });
+        order.isPaid = false;
+        await order.save();
         continue;
       }
 
       const before = order.toObject();
       order.status = StatusEnum.RETURNED;
+      order.isPaid = false;
       await order.save();
 
       // Restock products

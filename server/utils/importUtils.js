@@ -134,18 +134,21 @@ export const salesPlatformConfigs = {
     fields: {
       platformOrderId: "Order ID",
     },
+    requiredHeaders: ["Order ID", "Buyer Payment Method"],
   },
   tiktok: {
     sheetName: "Order details",
     fields: {
       platformOrderId: "Order/adjustment ID",
     },
+    requiredHeaders: ["Order/adjustment ID", "Order settled time"],
   },
   lazada: {
     sheetName: "Income Overview",
     fields: {
       platformOrderId: "Order Number",
     },
+    requiredHeaders: ["Order Number", "Statement Period"],
   },
 };
 
@@ -156,18 +159,21 @@ export const returnPlatformConfigs = {
     fields: {
       platformOrderId: "Order ID",
     },
+    requiredHeaders: ["Order ID", "Adjustment Amount"],
   },
   tiktok: {
     sheetName: "OrderSKUList",
     fields: {
       platformOrderId: "Order ID",
     },
+    requiredHeaders: ["Order ID", "Sku Quantity of return"],
   },
   lazada: {
     sheetName: "sheet1",
     fields: {
       platformOrderId: "Order ID",
     },
+    requiredHeaders: ["Order ID", "Return Order ID"],
   },
 };
 

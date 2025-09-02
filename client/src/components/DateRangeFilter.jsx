@@ -1,8 +1,8 @@
 import React from "react";
 
 const DateRangeFilter = ({ dateRange, onDateChange, onFilter }) => {
-  console.log("startDate:", dateRange.startDate);
-  console.log("endDate:", dateRange.endDate);
+  // console.log("startDate:", dateRange.startDate);
+  // console.log("endDate:", dateRange.endDate);
   return (
     <div className="row mb-3 align-items-end">
       <div className="col-md-3">
