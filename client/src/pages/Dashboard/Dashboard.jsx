@@ -99,7 +99,7 @@ const Dashboard = () => {
               );
             })}
           </div>
-          <div className="row">
+          <div>
             <DashboardCharts />
           </div>
         </div>

@@ -10,6 +10,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 // ===== Routes =====
+import getDashboardCharts from "./routes/dashboardRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import itemRoutes from "./routes/itemRoutes.js";
@@ -44,6 +45,7 @@ app.get("/api", (req, res) => {
 });
 
 // ✅ Use only relative paths for routers
+app.use("/api/dashboard", getDashboardCharts);
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/items", itemRoutes);

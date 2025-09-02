@@ -3,37 +3,37 @@ import Chart from "chart.js/auto";
 import { useChartsData } from "../../hooks/useChartsData";
 
 function DashboardCharts() {
-  const { areaChartData, donutChartData, lineChartData } = useChartsData();
+  const { areaChartData, donutChartData, monthlyDonutChartData } = useChartsData();
 
   const revenueRef = useRef(null);
   const salesRef = useRef(null);
-  const lineRef = useRef(null);
+  const salesPerMonthRef = useRef(null);
 
-  // Keep chart instances to destroy before re-creating
   const revenueChartRef = useRef(null);
   const salesChartRef = useRef(null);
-  const lineChartRef = useRef(null);
+  const salesPerMonthChartRef = useRef(null);
 
   useEffect(() => {
-    // Destroy previous chart if exists
+    // Destroy previous charts to prevent "Canvas already in use" error
     if (revenueChartRef.current) revenueChartRef.current.destroy();
     if (salesChartRef.current) salesChartRef.current.destroy();
-    if (lineChartRef.current) lineChartRef.current.destroy();
+    if (salesPerMonthChartRef.current) salesPerMonthChartRef.current.destroy();
 
-    // Revenue (Area) Chart
-    if (revenueRef.current) {
+    // ✅ Revenue Line Chart
+    if (revenueRef.current && areaChartData?.length) {
       revenueChartRef.current = new Chart(revenueRef.current, {
         type: "line",
         data: {
-          labels: areaChartData.map(d => d.month),
+          labels: areaChartData.map((d) => d.month || "N/A"),
           datasets: [
             {
               label: "Revenue",
-              data: areaChartData.map(d => d.revenue),
+              data: areaChartData.map((d) => d.revenue),
               backgroundColor: "rgba(60,141,188,0.2)",
               borderColor: "rgba(60,141,188,1)",
               borderWidth: 2,
               fill: true,
+              tension: 0.3,
             },
           ],
         },
@@ -41,16 +41,16 @@ function DashboardCharts() {
       });
     }
 
-    // Donut Chart
-    if (salesRef.current) {
+    // ✅ Sales Donut Chart
+    if (salesRef.current && donutChartData?.length) {
       salesChartRef.current = new Chart(salesRef.current, {
         type: "doughnut",
         data: {
-          labels: donutChartData.map(d => d.label),
+          labels: donutChartData.map((d) => d.label || "N/A"),
           datasets: [
             {
-              data: donutChartData.map(d => d.value),
-              backgroundColor: ["#f56954", "#00a65a", "#f39c12"],
+              data: donutChartData.map((d) => d.value),
+              backgroundColor: ["#f56954", "#00a65a", "#f39c12", "#3c8dbc", "#d2d6de"],
             },
           ],
         },
@@ -58,93 +58,69 @@ function DashboardCharts() {
       });
     }
 
-    // Line Chart
-    if (lineRef.current) {
-      lineChartRef.current = new Chart(lineRef.current, {
-        type: "line",
+    // ✅ Sales Per Month Donut Chart
+    if (salesPerMonthRef.current && monthlyDonutChartData?.length) {
+      salesPerMonthChartRef.current = new Chart(salesPerMonthRef.current, {
+        type: "doughnut",
         data: {
-          labels: lineChartData.map(d => d.month),
+          labels: monthlyDonutChartData.map((d) => d.platform || "N/A"),
           datasets: [
             {
-              label: "Mail-Orders",
-              data: lineChartData.map(d => d.mailOrders),
-              borderColor: "#f56954",
-              fill: false,
-            },
-            {
-              label: "Online",
-              data: lineChartData.map(d => d.online),
-              borderColor: "#00a65a",
-              fill: false,
-            },
-            {
-              label: "In-Store",
-              data: lineChartData.map(d => d.inStore),
-              borderColor: "#f39c12",
-              fill: false,
+              data: monthlyDonutChartData.map((d) => d.value),
+              backgroundColor: ["#00c0ef", "#3c8dbc", "#f39c12", "#d81b60", "#605ca8"],
             },
           ],
         },
         options: { responsive: true, maintainAspectRatio: false },
       });
     }
-  }, [areaChartData, donutChartData, lineChartData]);
+  }, [areaChartData, donutChartData, monthlyDonutChartData]);
 
   return (
-    <div>
-      <div className="row">
-        <div className="col-6">
-          {/* Sales Card with Tabs */}
-          <div className="card">
-            <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
-              <h3 className="card-title">
-                <i className="fas fa-chart-pie mr-1" /> Sales
-              </h3>
-              <div className="card-tools">
-                <ul className="nav nav-pills ml-auto">
-                  <li className="nav-item">
-                    <a className="nav-link active" href="#revenue-chart" data-toggle="tab">
-                      Area
-                    </a>
-                  </li>
-                  <li className="nav-item">
-                    <a className="nav-link" href="#sales-chart" data-toggle="tab">
-                      Donut
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="card-body">
-              <div className="tab-content p-0">
-                <div className="chart tab-pane active" id="revenue-chart" style={{ position: "relative", height: 300 }}>
-                  <canvas ref={revenueRef} style={{ height: "300px", width: "100%" }} />
-                </div>
-                <div className="chart tab-pane" id="sales-chart" style={{ position: "relative", height: 300 }}>
-                  <canvas ref={salesRef} style={{ height: "300px", width: "100%" }} />
-                </div>
-              </div>
+    <div className="row">
+      {/* Revenue Area Chart */}
+      <div className="col-6">
+        <div className="card">
+          <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
+            <h3 className="card-title">
+              <i className="fas fa-chart-line mr-1" /> Revenue
+            </h3>
+          </div>
+          <div className="card-body">
+            <div style={{ position: "relative", height: 300 }}>
+              <canvas ref={revenueRef} style={{ height: "300px", width: "100%" }} />
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="col-6">
-          {/* Sales Graph Card */}
-          <div className="card bg-gradient-info">
-            <div className="card-header border-0 ui-sortable-handle" style={{ cursor: "move" }}>
-              <h3 className="card-title">
-                <i className="fas fa-th mr-1" /> Sales Graph
-              </h3>
+      {/* Sales Donut Chart */}
+      <div className="col-3">
+        <div className="card">
+          <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
+            <h3 className="card-title">
+              <i className="fas fa-chart-pie mr-1" /> Sales by Platform
+            </h3>
+          </div>
+          <div className="card-body">
+            <div style={{ position: "relative", height: 300 }}>
+              <canvas ref={salesRef} style={{ height: "300px", width: "100%" }} />
             </div>
-            <div className="card-body">
-              <canvas ref={lineRef} style={{ minHeight: 250, height: 250, maxHeight: 250, width: "100%" }} />
-            </div>
-            <div className="card-footer bg-transparent">
-              <div className="row">
-                <div className="col-4 text-center text-white">Mail-Orders</div>
-                <div className="col-4 text-center text-white">Online</div>
-                <div className="col-4 text-center text-white">In-Store</div>
-              </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sales Per Month Donut Chart */}
+      <div className="col-3">
+        <div className="card">
+          <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
+            <h3 className="card-title">
+              <i className="fas fa-chart-pie mr-1" /> Sales Per Month
+            </h3>
+          </div>
+          <div className="card-body">
+            <div style={{ position: "relative", height: 300 }}>
+              <canvas ref={salesPerMonthRef} style={{ height: "300px", width: "100%" }} />
             </div>
           </div>
         </div>

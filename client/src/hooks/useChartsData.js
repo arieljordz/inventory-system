@@ -1,42 +1,39 @@
-// src/hooks/useChartsData.jsx
+// src/hooks/useChartsData.js
 import { useState, useEffect } from "react";
-
-// Helper to generate random integers
-const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1));
+import { getDashboardCharts } from "../services/dashboardService";
 
 export const useChartsData = () => {
   const [areaChartData, setAreaChartData] = useState([]);
   const [donutChartData, setDonutChartData] = useState([]);
-  const [lineChartData, setLineChartData] = useState([]);
+  const [monthlyDonutChartData, setMonthlyDonutChartData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Mock Area Chart (Revenue over time)
-    const area = [];
-    for (let i = 1; i <= 12; i++) {
-      area.push({ month: `Month ${i}`, revenue: randomInt(5000, 20000) });
-    }
-    setAreaChartData(area);
+    const fetchDashboardData = async () => {
+      try {
+        setLoading(true);
 
-    // Mock Donut Chart (Sales distribution)
-    const donut = [
-      { label: "Online", value: randomInt(50, 200) },
-      { label: "Mail-Orders", value: randomInt(50, 200) },
-      { label: "In-Store", value: randomInt(50, 200) },
-    ];
-    setDonutChartData(donut);
+        const { data } = await getDashboardCharts();
+        console.log("charts response:", data);
 
-    // Mock Line Chart (Sales graph over months)
-    const line = [];
-    for (let i = 1; i <= 12; i++) {
-      line.push({
-        month: `Month ${i}`,
-        mailOrders: randomInt(20, 100),
-        online: randomInt(50, 200),
-        inStore: randomInt(10, 80),
-      });
-    }
-    setLineChartData(line);
+        // ✅ Data already structured in backend
+        setAreaChartData(data.areaChartData ?? []);
+        setDonutChartData(data.donutChartData ?? []);
+        setMonthlyDonutChartData(data.monthlyDonutChartData ?? []);
+      } catch (error) {
+        console.error("Error fetching dashboard charts:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
   }, []);
 
-  return { areaChartData, donutChartData, lineChartData };
+  return {
+    loading,
+    areaChartData,
+    donutChartData,
+    monthlyDonutChartData,
+  };
 };
