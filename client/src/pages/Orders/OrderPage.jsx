@@ -3,11 +3,8 @@ import Navpath from "../../components/Navpath";
 import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
 import OrderTable from "./OrderTable";
-import PickupModal from "./PickupModal";
 import ImportModal from "./ImportModal";
-
 import { useOrdersData } from "../../hooks/useOrdersData";
-import { usePickupModal } from "../../hooks/usePickupModal";
 import { useOrderImportModal } from "../../hooks/useOrderImportModal";
 
 const OrderPage = () => {
@@ -24,7 +21,6 @@ const OrderPage = () => {
     fetchOrders,
   } = useOrdersData(5);
 
-  const pickup = usePickupModal(fetchOrders);
   const imp = useOrderImportModal(fetchOrders);
 
   return (
@@ -50,7 +46,7 @@ const OrderPage = () => {
           />
 
           {/* Orders Table */}
-          <OrderTable orders={orders} onOpenModal={pickup.openModal} loading={loading} />
+          <OrderTable orders={orders} loading={loading} />
 
           {/* Pagination */}
           <PaginationControls
@@ -59,17 +55,6 @@ const OrderPage = () => {
             itemsPerPage={itemsPerPage}
             onPageChange={setCurrentPage}
             disabled={loading}
-          />
-
-          {/* Pickup Modal */}
-          <PickupModal
-            show={pickup.isOpen}
-            selectedProduct={pickup.selectedProduct}
-            form={pickup.form}
-            getQuantity={() => pickup.selectedProduct?.quantity || 0}
-            onClose={pickup.closeModal}
-            onChange={pickup.handleChange}
-            handleConfirmPickup={pickup.handleConfirmPickup}
           />
 
           {/* Import Modal */}

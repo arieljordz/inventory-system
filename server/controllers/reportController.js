@@ -472,7 +472,7 @@ export const getItemsReport = async (filters = {}) => {
 export const getItemMovementsReport = async (filters = {}) => {
   const { startDate, endDate, movementType } = filters;
 
-  const filter = buildDateFilter(startDate, endDate, "updatedAt");
+  const filter = buildDateFilter(startDate, endDate, "createdAt");
 
   if (movementType && movementType !== "All") {
     filter.type = { $regex: `^${movementType.trim()}$`, $options: "i" };
@@ -493,7 +493,7 @@ export const getInventoryDetailsReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, movementType, platform, status } =
     filters;
 
-  const filter = buildDateFilter(startDate, endDate, "updatedAt");
+  const filter = buildDateFilter(startDate, endDate, "createdAt");
 
   if (paymentStatus && paymentStatus !== "All") {
     if (paymentStatus === "paid") {

@@ -8,25 +8,7 @@ import {
 import StatusBadge from "../../components/StatusBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
-const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
-  const handleTagForPickup = (order) => {
-    if (loading) return;
-    onOpenModal?.(order);
-  };
-
-  const renderActionButtons = (order) => (
-    <div className="btn-group" role="group">
-      <button
-        className="btn btn-sm btn-primary"
-        title="Tag for Pick Up"
-        onClick={() => handleTagForPickup(order)}
-        disabled={loading}
-      >
-        <i className="fas fa-truck-loading"></i>
-      </button>
-    </div>
-  );
-
+const OrderTable = ({ orders = [], loading = false }) => {
   const renderTableRows = () => {
     if (loading) {
       return (
@@ -74,15 +56,6 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
             <CopyToClipboardButton text={order.name} />
           </div>
         </td>
-        {/* <td className="align-middle" title={order.description || ""}>
-          {order.description ? (
-            <span className="text-muted small">
-              {truncateText(order.description, 40)}
-            </span>
-          ) : (
-            <span className="text-muted font-italic">No description</span>
-          )}
-        </td> */}
         <td className="text-center align-middle">
           {order.variant ? (
             <span className="badge badge-secondary">{order.variant}</span>
@@ -114,18 +87,8 @@ const OrderTable = ({ orders = [], onOpenModal, loading = false }) => {
           </small>
         </td>
         <td className="text-center align-middle">
-          <StatusBadge
-            status={order.status}
-            customLabelMap={{
-              Available: "In Stock",
-              "On Process": "Awaiting Pickup",
-              "Out of Stock": "No Stock",
-            }}
-          />
+          <StatusBadge status={order.status} />
         </td>
-        {/* <td className="text-center align-middle">
-          {renderActionButtons(order)}
-        </td> */}
       </tr>
     ));
   };

@@ -56,11 +56,6 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
             "-"
           )}
         </td>
-        {/* <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">
-            {order.product?.sku.toUpperCase() || "N/A"}
-          </code>
-        </td> */}
         <td className="align-middle">
           <div className="d-flex align-items-center">
             <div
@@ -112,14 +107,7 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
           </small>
         </td>
         <td className="text-center align-middle">
-          <StatusBadge
-            status={order.status}
-            customLabelMap={{
-              Available: "In Stock",
-              "On Process": "On Process",
-              "Out of Stock": "No Stock",
-            }}
-          />
+          <StatusBadge status={order.status} />
         </td>
       </tr>
     ));
@@ -147,9 +135,6 @@ const TrackingsTable = ({ orders = [], loading = false }) => {
                 <th className="text-center" style={{ width: "180px" }}>
                   Platform Order ID
                 </th>
-                {/* <th className="text-center" style={{ width: "200px" }}>
-                  SKU
-                </th> */}
                 <th>Product Name</th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant

@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
+import PaymentBadge from "../../components/PaymentBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const SalesTable = ({ orders = [], loading = false }) => {
@@ -56,11 +57,6 @@ const SalesTable = ({ orders = [], loading = false }) => {
             "-"
           )}
         </td>
-        {/* <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">
-            {order.product?.sku.toUpperCase() || "N/A"}
-          </code>
-        </td> */}
         <td className="align-middle">
           <div className="d-flex align-items-center">
             <div
@@ -112,21 +108,10 @@ const SalesTable = ({ orders = [], loading = false }) => {
           </small>
         </td>
         <td className="text-center align-middle">
-          <StatusBadge
-            status={order.status}
-            customLabelMap={{
-              Available: "In Stock",
-              "On Process": "On Process",
-              "Out of Stock": "No Stock",
-            }}
-          />
+          <StatusBadge status={order.status} />
         </td>
         <td className="text-center align-middle">
-          <StatusBadge
-            status={order.isPaid}
-            customColorMap={{ true: "success", false: "danger" }}
-            customLabelMap={{ true: "Paid", false: "Unpaid" }}
-          />
+          <PaymentBadge status={order.isPaid} />
         </td>
       </tr>
     ));

@@ -92,7 +92,9 @@ const ProductTable = ({
       <tr key={product._id} className={loading ? "table-secondary" : ""}>
         <td className="text-center align-middle">{index + 1}</td>
         <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">{product.sku.toUpperCase() || "N/A"}</code>
+          <code className="px-2 py-1 rounded">
+            {product.sku.toUpperCase() || "N/A"}
+          </code>
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
@@ -117,15 +119,6 @@ const ProductTable = ({
             </div>
           </div>
         </td>
-        {/* <td className="align-middle" title={product.description || ""}>
-          {product.description ? (
-            <span className="text-muted small">
-              {truncateText(product.description, 40)}
-            </span>
-          ) : (
-            <span className="text-muted font-italic">No description</span>
-          )}
-        </td> */}
         <td className="text-center align-middle">
           {product.variant ? (
             <span className="badge badge-secondary">{product.variant}</span>
@@ -152,14 +145,7 @@ const ProductTable = ({
           </span>
         </td>
         <td className="text-center align-middle">
-          <StatusBadge
-            status={product.status}
-            customLabelMap={{
-              Available: "In Stock",
-              "On Process": "Awaiting Pickup",
-              "Out of Stock": "No Stock",
-            }}
-          />
+          <StatusBadge status={product.status} />
         </td>
         <td className="text-center align-middle">
           <small className="text-muted">{formatDate(product.createdAt)}</small>
@@ -191,7 +177,6 @@ const ProductTable = ({
                   SKU
                 </th>
                 <th>Product Name</th>
-                {/* <th style={{ width: "300px" }}>Description</th> */}
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>
