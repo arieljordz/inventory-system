@@ -107,7 +107,7 @@
     "price": 1200,
     "sku": "FRAME-8-FEE-10691",
     "description": "",
-    "quantity": 0,
+    "quantity": 100,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -132,7 +132,7 @@
     "price": 2000,
     "sku": "FRAME-8-FEE-26175",
     "description": "",
-    "quantity": 0,
+    "quantity": 100,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -157,7 +157,7 @@
     "price": 1700,
     "sku": "FRAME-10-FE-69282",
     "description": "",
-    "quantity": 2,
+    "quantity": 100,
     "unit": "pcs",
     "variant": "10 feet",
     "supplier": "",
@@ -182,7 +182,7 @@
     "price": 200,
     "sku": "ROPE-RED-89314",
     "description": "",
-    "quantity": 0,
+    "quantity": 100,
     "unit": "pcs",
     "variant": "Red",
     "supplier": "",
@@ -207,7 +207,7 @@
     "price": 200,
     "sku": "ROPE-ORANG-57725",
     "description": "",
-    "quantity": 0,
+    "quantity": 100,
     "unit": "pcs",
     "variant": "Orange",
     "supplier": "",
@@ -234,20 +234,21 @@
     "description": "",
     "quantity": 100,
     "unit": "pcs",
-    "variant": "DefWhiteault",
+    "variant": "White",
     "supplier": "",
     "location": "Main Warehouse",
     "status": "Available",
     "normalizedName": "rope",
-    "normalizedVariant": "defwhiteault",
+    "normalizedVariant": "white",
     "createdAt": {
       "$date": "2025-09-01T10:14:38.420Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:43:19.157Z"
+      "$date": "2025-09-01T19:28:20.190Z"
     },
     "normalizedSku": "rope-defwh-78420",
-    "__v": 0
+    "__v": 0,
+    "normalizedDescription": ""
   },
   {
     "_id": {
@@ -334,19 +335,98 @@
     "description": "",
     "quantity": 100,
     "unit": "pcs",
-    "variant": "Default4 feet",
+    "variant": "4 feet",
     "supplier": "",
     "location": "Main Warehouse",
     "status": "Available",
     "normalizedName": "roundbar",
-    "normalizedVariant": "default4 feet",
+    "normalizedVariant": "4 feet",
     "createdAt": {
       "$date": "2025-09-01T10:18:09.656Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:41:53.239Z"
+      "$date": "2025-09-01T19:28:10.135Z"
     },
     "normalizedSku": "round-defau-89656",
+    "__v": 0,
+    "normalizedDescription": ""
+  },
+  {
+    "_id": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb3"
+    },
+    "name": "Hammock",
+    "price": 330,
+    "sku": "HAMMO-DEFAU-76676",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "Default",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "hammock",
+    "normalizedVariant": "default",
+    "createdAt": {
+      "$date": "2025-09-02T05:34:36.683Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T05:34:36.683Z"
+    },
+    "normalizedSku": "hammo-defau-76676",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb5"
+    },
+    "name": "Hammock",
+    "price": 330,
+    "sku": "HAMMO-DEFAU-76689",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "Default",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "hammock",
+    "normalizedVariant": "default",
+    "createdAt": {
+      "$date": "2025-09-02T05:34:36.690Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T05:34:36.690Z"
+    },
+    "normalizedSku": "hammo-defau-76689",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-BLACK-39060",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "Black",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "black",
+    "createdAt": {
+      "$date": "2025-09-02T05:47:19.061Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T05:47:19.061Z"
+    },
+    "normalizedSku": "rope-black-39060",
+    "normalizedDescription": "",
     "__v": 0
   }
 ]

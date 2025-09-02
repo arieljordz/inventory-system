@@ -111,32 +111,35 @@ export const getInventoryDetailsReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, movementType, platform, status } =
     filters;
 
-  const filter = buildDateFilter(startDate, endDate, "createdAt");
+  const query = buildDateFilter(startDate, endDate, "createdAt");
 
   if (movementType && movementType !== "All") {
-    filter.movementType = { $regex: `^${movementType.trim()}$`, $options: "i" };
+    query.movementType = { $regex: `^${movementType.trim()}$`, $options: "i" };
   }
 
   if (platform && platform !== "All") {
-    filter.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
+    query.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
   }
 
-  if (status && status !== "All") {
-    filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
-  }
-
-  let rows = await InventoryDetail.find(filter)
+  let rows = await InventoryDetail.find(query)
     .populate("product")
     .populate("order")
     .lean();
 
+  // Filter by paymentStatus if needed
   if (paymentStatus && paymentStatus !== "All") {
-    rows = rows.filter((row) => {
-      if (!row.order) return false;
-      if (paymentStatus === "paid") return row.order.isPaid === true;
-      if (paymentStatus === "unpaid") return row.order.isPaid === false;
-      return true;
-    });
+    rows = rows.filter(
+      (row) =>
+        row.order &&
+        ((paymentStatus === "paid" && row.order.isPaid) ||
+          (paymentStatus === "unpaid" && !row.order.isPaid))
+    );
+  }
+
+  // Filter by Order status
+  if (status && status !== "All") {
+    const statusRegex = new RegExp(`^${status.trim()}$`, "i");
+    rows = rows.filter((row) => row.order && statusRegex.test(row.order.status));
   }
 
   return flattenReportData(

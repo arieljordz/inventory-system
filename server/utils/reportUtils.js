@@ -55,6 +55,8 @@ const columnHandlers = {
 
   quantity: (row) => row.quantity,
 
+  status: (row) => row.order?.status || row.status,
+   
   createdAt: (row) => (row.createdAt ? moment(row.createdAt).format("YYYY-MM-DD") : ""),
   updatedAt: (row) => (row.updatedAt ? moment(row.updatedAt).format("YYYY-MM-DD") : ""),
   orderDate: (row) => (row.orderDate ? moment(row.orderDate).format("YYYY-MM-DD") : ""),
