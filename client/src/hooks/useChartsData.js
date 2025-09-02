@@ -14,7 +14,7 @@ export const useChartsData = () => {
         setLoading(true);
 
         const { data } = await getDashboardCharts();
-        console.log("charts response:", data);
+        // console.log("charts response:", data);
 
         // ✅ Data already structured in backend
         setAreaChartData(data.areaChartData ?? []);

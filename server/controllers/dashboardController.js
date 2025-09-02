@@ -77,7 +77,7 @@ export const getDashboardCharts = async (req, res) => {
       value: d.totalSales,
     }));
 
-    console.log("monthlyDonutChartData:", monthlyDonutChartData);
+    // console.log("monthlyDonutChartData:", monthlyDonutChartData);
 
     return res.json({
       areaChartData,

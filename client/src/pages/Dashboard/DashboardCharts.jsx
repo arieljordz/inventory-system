@@ -14,7 +14,7 @@ function DashboardCharts() {
   const salesPerMonthChartRef = useRef(null);
 
   useEffect(() => {
-    // Destroy previous charts to prevent "Canvas already in use" error
+    // Destroy previous charts
     if (revenueChartRef.current) revenueChartRef.current.destroy();
     if (salesChartRef.current) salesChartRef.current.destroy();
     if (salesPerMonthChartRef.current) salesPerMonthChartRef.current.destroy();
@@ -79,48 +79,48 @@ function DashboardCharts() {
   return (
     <div className="row">
       {/* Revenue Area Chart */}
-      <div className="col-6">
-        <div className="card">
-          <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
+      <div className="col-12 col-lg-6 mb-4">
+        <div className="card h-100">
+          <div className="card-header">
             <h3 className="card-title">
               <i className="fas fa-chart-line mr-1" /> Revenue
             </h3>
           </div>
           <div className="card-body">
             <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={revenueRef} style={{ height: "300px", width: "100%" }} />
+              <canvas ref={revenueRef} />
             </div>
           </div>
         </div>
       </div>
 
       {/* Sales Donut Chart */}
-      <div className="col-3">
-        <div className="card">
-          <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
+      <div className="col-12 col-md-6 col-lg-3 mb-4">
+        <div className="card h-100">
+          <div className="card-header">
             <h3 className="card-title">
               <i className="fas fa-chart-pie mr-1" /> Sales by Platform
             </h3>
           </div>
           <div className="card-body">
             <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={salesRef} style={{ height: "300px", width: "100%" }} />
+              <canvas ref={salesRef} />
             </div>
           </div>
         </div>
       </div>
 
       {/* Sales Per Month Donut Chart */}
-      <div className="col-3">
-        <div className="card">
-          <div className="card-header ui-sortable-handle" style={{ cursor: "move" }}>
+      <div className="col-12 col-md-6 col-lg-3 mb-4">
+        <div className="card h-100">
+          <div className="card-header">
             <h3 className="card-title">
               <i className="fas fa-chart-pie mr-1" /> Sales Per Month
             </h3>
           </div>
           <div className="card-body">
             <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={salesPerMonthRef} style={{ height: "300px", width: "100%" }} />
+              <canvas ref={salesPerMonthRef} />
             </div>
           </div>
         </div>
