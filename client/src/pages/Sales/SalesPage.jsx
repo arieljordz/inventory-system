@@ -7,7 +7,6 @@ import DateRangeFilter from "../../components/DateRangeFilter";
 import SalesTable from "./SalesTable";
 import ImportModal from "./ImportModal";
 import ImportButtons from "./ImportButtons";
-
 import { formatAmount } from "../../utils/commonUtils";
 import { useSalesData } from "../../hooks/useSalesData";
 import { useSalesImportModal } from "../../hooks/useSalesImportModal";

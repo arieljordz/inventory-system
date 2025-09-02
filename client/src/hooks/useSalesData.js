@@ -1,8 +1,7 @@
 // src/hooks/useSalesData.js
 import { useState, useEffect, useCallback } from "react";
-import { toast } from "react-toastify";
 import { getSalesStatsByDate } from "../services/salesService";
-import { getCurrentDate } from "../utils/commonUtils";
+import { getCurrentDate, getPastWeekDate } from "../utils/commonUtils";
 import { useDebounce } from "./useDebounce";
 
 export const useSalesData = (initialItemsPerPage = 5) => {
@@ -24,11 +23,13 @@ export const useSalesData = (initialItemsPerPage = 5) => {
 
   /** Date filter */
   const [dateRange, setDateRange] = useState({
-    startDate: getCurrentDate(),
+    startDate: getPastWeekDate(),
     endDate: getCurrentDate(),
   });
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+
+  // console.log("dateRange:", dateRange);
 
   /** Fetch sales */
   const fetchSales = useCallback(async () => {

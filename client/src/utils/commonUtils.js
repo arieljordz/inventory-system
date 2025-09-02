@@ -1,5 +1,3 @@
-import { StatusEnum } from "../enums/enums";
-
 export const formatAmount = (price) =>
   new Intl.NumberFormat("en-PH", {
     style: "currency",
@@ -37,61 +35,53 @@ export const formatDateString = (dateTime) => {
   const date = new Date(dateTime);
   return date.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "long",
+    month: "long", // e.g., "September"
     day: "numeric",
+    timeZone: "Asia/Manila",
   });
 };
 
-
 export const getCurrentDate = () => {
   const now = new Date();
-  const dateNow = new Intl.DateTimeFormat("en-CA", {
+
+  const options = {
     timeZone: "Asia/Manila",
-  }).format(now); // "en-CA" gives YYYY-MM-DD format
-  return dateNow;
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+
+  const formatter = new Intl.DateTimeFormat("en-US", options);
+  const parts = formatter.formatToParts(now);
+
+  const year = parts.find((p) => p.type === "year").value;
+  const month = parts.find((p) => p.type === "month").value;
+  const day = parts.find((p) => p.type === "day").value;
+
+  return `${year}-${month}-${day}`; // ✅ YYYY-MM-DD
 };
 
-export const getStatusBadgeData = (
-  status,
-  customColorMap = {},
-  customLabelMap = {}
-) => {
-  // Normalize status to string
-  const statusKey = typeof status === "boolean" ? String(status) : status;
+export const getPastWeekDate = () => {
+  const now = new Date();
 
-  const defaultColorMap = {
-    [StatusEnum.AVAILABLE]: "success",
-    [StatusEnum.OUT_OF_STOCK]: "danger",
-    [StatusEnum.ON_PROCESS]: "info",
-    [StatusEnum.TO_SHIP]: "warning",
-    [StatusEnum.SHIPPING]: "primary",
-    [StatusEnum.RETURNED]: "dark",
-    [StatusEnum.DELIVERED]: "secondary",
-    [StatusEnum.COMPLETED]: "success",
-    true: "success",
-    false: "secondary",
+  // Subtract 7 days
+  now.setDate(now.getDate() - 7);
+
+  const options = {
+    timeZone: "Asia/Manila",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   };
 
-  const defaultLabelMap = {
-    [StatusEnum.AVAILABLE]: "In Stock",
-    [StatusEnum.OUT_OF_STOCK]: "No Stock",
-    [StatusEnum.ON_PROCESS]: "On Process",
-    [StatusEnum.TO_SHIP]: "To Ship",
-    [StatusEnum.SHIPPING]: "Shipping",
-    [StatusEnum.RETURNED]: "Returned",
-    [StatusEnum.DELIVERED]: "Delivered",
-    [StatusEnum.COMPLETED]: "Completed",
-    true: "Paid",
-    false: "Unpaid",
-  };
+  const formatter = new Intl.DateTimeFormat("en-US", options);
+  const parts = formatter.formatToParts(now);
 
-  const colorMap = { ...defaultColorMap, ...customColorMap };
-  const labelMap = { ...defaultLabelMap, ...customLabelMap };
+  const year = parts.find((p) => p.type === "year").value;
+  const month = parts.find((p) => p.type === "month").value;
+  const day = parts.find((p) => p.type === "day").value;
 
-  return {
-    label: labelMap[statusKey] ?? statusKey,
-    color: colorMap[statusKey] ?? "secondary",
-  };
+  return `${year}-${month}-${day}`; // ✅ YYYY-MM-DD
 };
 
 export const computeTotalPrice = (quantity, price) => {
@@ -114,4 +104,3 @@ export const toProperCase = (text) => {
   if (!text) return "";
   return text.charAt(0).toUpperCase() + text.slice(1).toLowerCase();
 };
-

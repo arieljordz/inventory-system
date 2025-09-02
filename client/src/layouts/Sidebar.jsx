@@ -5,12 +5,12 @@ const menuItems = [
   { path: "/dashboard", label: "Dashboard", icon: "fas fa-tachometer-alt" },
   { path: "/products", label: "Products", icon: "fas fa-box" },
   { path: "/orders", label: "Orders", icon: "fas fa-shopping-cart" },
-  { path: "/trackings", label: "Trackings", icon: "fas fa-shipping-fast" },
+  // { path: "/trackings", label: "Trackings", icon: "fas fa-shipping-fast" },
   // { path: "/order-inventory", label: "Order Inventory", icon: "fas fa-clipboard-check" },
   { path: "/item-inventory", label: "Item Inventory", icon: "fas fa-boxes" },
   { path: "/sales", label: "Sales", icon: "fas fa-receipt" },
-  // { path: "/reports", label: "Reports", icon: "fas fa-chart-line" },
-  { path: "/new-reports", label: "Reports", icon: "fas fa-chart-line" },
+  { path: "/reports", label: "Reports", icon: "fas fa-chart-line" },
+  // { path: "/new-reports", label: "Reports", icon: "fas fa-chart-line" },
   { path: "/auditlogs", label: "Audit Logs", icon: "fas fa-file-alt" },
 ];
 

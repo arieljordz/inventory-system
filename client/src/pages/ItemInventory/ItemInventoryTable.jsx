@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
+import QuantityBadge from "../../components/QuantityBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const ItemInventoryTable = ({
@@ -128,17 +129,7 @@ const ItemInventoryTable = ({
           )}
         </td>
         <td className="text-center align-middle">
-          <span
-            className={`badge ${
-              item.quantity === 0
-                ? "badge-danger"
-                : item.quantity < 10
-                ? "badge-warning"
-                : "badge-success"
-            }`}
-          >
-            {item.quantity ?? 0} {item.unit || "pcs"}
-          </span>
+          <QuantityBadge quantity={item.quantity} unit={item.unit} />
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">{formatAmount(item.price)}</span>
@@ -149,14 +140,7 @@ const ItemInventoryTable = ({
           </span>
         </td>
         <td className="text-center align-middle">
-          <StatusBadge
-            status={item.status}
-            customLabelMap={{
-              Available: "In Stock",
-              "On Process": "Awaiting Pickup",
-              "Out of Stock": "No Stock",
-            }}
-          />
+          <StatusBadge status={item.status} />
         </td>
         <td className="text-center align-middle">
           <small className="text-muted">{formatDate(item.createdAt)}</small>

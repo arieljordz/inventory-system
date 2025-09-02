@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
+import QuantityBadge from "../../components/QuantityBadge";
 import PaymentBadge from "../../components/PaymentBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
@@ -83,17 +84,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
           {order.courier || "-"}
         </td>
         <td className="text-center align-middle">
-          <span
-            className={`badge ${
-              order.quantity === 0
-                ? "badge-danger"
-                : order.quantity < 10
-                ? "badge-info"
-                : "badge-success"
-            }`}
-          >
-            {order.quantity ?? 0} {order.unit || "pcs"}
-          </span>
+          <QuantityBadge quantity={order.quantity} unit={order.unit} />
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">

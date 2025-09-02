@@ -5,6 +5,7 @@ import { generateReport } from "../services/reportService.js";
 
 export const useReportData = (reportType) => {
   const [reportData, setReportData] = useState([]);
+  const [dataCount, setDataCount] = useState(0);
   const [loading, setLoading] = useState(false);
 
   const fetchReportData = useCallback(
@@ -24,8 +25,10 @@ export const useReportData = (reportType) => {
 
         if (response?.data?.success) {
           setReportData(response.data.data || []);
+          setDataCount(response.data.data.length);
         } else {
           setReportData([]);
+          setDataCount(0);
           toast.error("Failed to fetch report data");
         }
       } catch (err) {
@@ -43,5 +46,5 @@ export const useReportData = (reportType) => {
     setReportData([]);
   }, [reportType]);
 
-  return { reportData, loading, fetchReportData };
+  return { reportData, dataCount, loading, fetchReportData };
 };

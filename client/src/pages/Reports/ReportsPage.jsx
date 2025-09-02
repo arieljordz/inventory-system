@@ -1,112 +1,56 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import Navpath from "../../components/Navpath";
-import ReportFilter from "./ReportFilter";
-import ReportTable from "./ReportTable";
 import { useSpinner } from "../../context/SpinnerContext";
-import { ReportTypeEnum } from "../../enums/enums";
-import { getCurrentDate, parseCurrencyToFloat } from "../../utils/commonUtils";
-import {
-  formatReportData,
-  formatExportData,
-  getReportFileName,
-} from "../../utils/reportUtils";
-import { getReports, exportReport } from "../../services/reportService";
+import { exportToExcel, exportToPDF } from "../../utils/exportUtils";
+import { useReportData } from "../../hooks/useReportData";
+import ReportFilters from "./ReportFilters";
+import { useReportFilters } from "../../hooks/useReportFilters";
+import { NewReportTypeEnum } from "../../enums/enums";
+import ReportTable from "./ReportTable";
 
 const ReportsPage = () => {
   const { showSpinner, hideSpinner } = useSpinner();
+  const [activeColumns, setActiveColumns] = useState([]);
 
-  const [reportType, setReportType] = useState(ReportTypeEnum.ORDERS);
-  const [activeReportType, setActiveReportType] = useState(
-    ReportTypeEnum.ORDERS
-  );
-  const [reportData, setReportData] = useState([]);
-  const [dateRange, setDateRange] = useState({
-    startDate: getCurrentDate(),
-    endDate: getCurrentDate(),
-  });
-  const [isReportGenerated, setIsReportGenerated] = useState(false);
+  const {
+    reportType,
+    setReportType,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    filters,
+    setFilters,
+    handleFilterChange,
+    handleResetFilters,
+    columns,
+  } = useReportFilters(NewReportTypeEnum.ORDERS_REPORT);
 
-  /** Fetch report from backend */
+  const { reportData, dataCount, loading, fetchReportData } =
+    useReportData(reportType);
+
   const handleGenerateReport = async () => {
-    const { startDate, endDate } = dateRange;
-    if (!startDate || !endDate) return toast.error("Select start and end dates.");
-
+    if (!startDate || !endDate) {
+      toast.info("Date range is required");
+      return;
+    }
     try {
       showSpinner();
-      const res = await getReports({ reportType, startDate, endDate });
-      const data = res.data?.data || [];
-
-      if (!data.length) {
-        // toast.info("No records found.");
-        setReportData([]);
-        setIsReportGenerated(false);
-      } else {
-        setReportData(data);
-        setActiveReportType(reportType);
-        setIsReportGenerated(true);
-        // toast.success("Report generated successfully.");
-      }
+      await fetchReportData({
+        reportType,
+        startDate,
+        endDate,
+        filters,
+      });
+      setActiveColumns(columns);
     } catch (err) {
       console.error(err);
-      toast.error("Error generating report.");
+      toast.error("Failed to fetch report data");
     } finally {
       hideSpinner();
     }
   };
-
-  /** Export report (Excel or PDF) */
-  const handleExport = async (format) => {
-    if (!reportData.length) return toast.warning("No data to export.");
-
-    try {
-      showSpinner();
-      const payload = {
-        reportType: activeReportType,
-        startDate: dateRange.startDate,
-        endDate: dateRange.endDate,
-        format,
-      };
-
-      const res = await exportReport(payload);
-
-      // Create Blob and download file
-      const filename = getReportFileName(
-        activeReportType,
-        dateRange.startDate,
-        dateRange.endDate,
-        format
-      );
-      const blobType =
-        format === "pdf"
-          ? "application/pdf"
-          : "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-
-      const blob = new Blob([res.data], { type: blobType });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = filename;
-      link.click();
-      // toast.success(`${format.toUpperCase()} report downloaded.`);
-    } catch (err) {
-      console.error(err);
-      toast.error("Export failed.");
-    } finally {
-      hideSpinner();
-    }
-  };
-
-  /** Formatted data for table display */
-  const formattedReport = useMemo(
-    () => formatReportData(reportData, activeReportType),
-    [reportData, activeReportType]
-  );
-
-  /** Formatted data for export (optional if needed) */
-  const formattedExportReport = useMemo(
-    () => formatExportData(reportData, activeReportType),
-    [reportData, activeReportType]
-  );
 
   return (
     <>
@@ -122,40 +66,71 @@ const ReportsPage = () => {
               <h3 className="card-title">Generate Report</h3>
             </div>
             <div className="card-body">
-              <ReportFilter
+              <ReportFilters
                 reportType={reportType}
-                setReportType={(value) => {
-                  setReportType(value);
-                  setIsReportGenerated(false);
-                }}
-                dateRange={dateRange}
-                setDateRange={setDateRange}
-                handleGenerateReport={handleGenerateReport}
+                setReportType={setReportType}
+                startDate={startDate}
+                setStartDate={setStartDate}
+                endDate={endDate}
+                setEndDate={setEndDate}
+                filters={filters}
+                handleFilterChange={handleFilterChange}
+                onGenerate={handleGenerateReport}
+                onResetFilters={handleResetFilters}
+                loading={loading}
               />
 
-              {isReportGenerated && (
-                <>
-                  <div className="mb-3 d-flex justify-content-end gap-2">
-                    <button
-                      className="btn btn-outline-primary"
-                      onClick={() => handleExport("xlsx")}
-                    >
-                      <i className="fas fa-file-excel mr-1"></i> Export Excel
-                    </button>
-                    <button
-                      className="btn btn-outline-danger"
-                      onClick={() => handleExport("pdf")}
-                    >
-                      <i className="fas fa-file-pdf mr-1"></i> Export PDF
-                    </button>
-                  </div>
+              <div className="mt-4">
+                {reportData &&
+                reportData.length > 0 &&
+                activeColumns.length > 0 ? (
+                  <>
+                    <div className="d-flex gap-2 mb-2">
+                      <button
+                        className="btn btn-success"
+                        onClick={() =>
+                          exportToExcel(
+                            reportData,
+                            columns,
+                            reportType,
+                            startDate,
+                            endDate
+                          )
+                        }
+                      >
+                        <i className="fas fa-file-excel mr-1"></i> Export Excel
+                      </button>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() =>
+                          exportToPDF(
+                            reportData,
+                            columns,
+                            reportType,
+                            startDate,
+                            endDate
+                          )
+                        }
+                      >
+                        <i className="fas fa-file-pdf mr-1"></i> Export PDF
+                      </button>
+                    </div>
 
-                  <ReportTable
-                    formattedReport={formattedReport}
-                    activeReportType={activeReportType}
-                  />
-                </>
-              )}
+                    <ReportTable
+                      reportData={reportData}
+                      dataCount={dataCount}
+                      columns={activeColumns}
+                      reportType={reportType}
+                    />
+                  </>
+                ) : (
+                  <p>
+                    {loading
+                      ? "Loading report..."
+                      : "No report data to display"}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>

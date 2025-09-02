@@ -5,6 +5,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
+import QuantityBadge from "../../components/QuantityBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const ProductTable = ({
@@ -127,17 +128,7 @@ const ProductTable = ({
           )}
         </td>
         <td className="text-center align-middle">
-          <span
-            className={`badge ${
-              product.quantity === 0
-                ? "badge-danger"
-                : product.quantity < 10
-                ? "badge-warning"
-                : "badge-success"
-            }`}
-          >
-            {product.quantity ?? 0} {product.unit || "pcs"}
-          </span>
+          <QuantityBadge quantity={product.quantity} unit={product.unit} />
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">
@@ -161,7 +152,7 @@ const ProductTable = ({
     <div className="card">
       <div className="card-header">
         <h3 className="card-title mb-0">
-          <i className="fas fa-boxes mr-2"></i>
+          <i className="fas fa-box mr-2"></i>
           Products
         </h3>
       </div>

@@ -6,6 +6,7 @@ import {
   truncateText,
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
+import QuantityBadge from "../../components/QuantityBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const OrderTable = ({ orders = [], loading = false }) => {
@@ -13,7 +14,7 @@ const OrderTable = ({ orders = [], loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="8" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -28,10 +29,10 @@ const OrderTable = ({ orders = [], loading = false }) => {
     if (!orders || orders.length === 0) {
       return (
         <tr>
-          <td colSpan="8" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="text-muted">
-              <i className="fas fa-clipboard-list fa-2x mb-2 d-block"></i>
-              No orders found
+              <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
+              No imported orders found
             </div>
           </td>
         </tr>
@@ -41,44 +42,54 @@ const OrderTable = ({ orders = [], loading = false }) => {
     return orders.map((order, index) => (
       <tr key={order._id || index} className={loading ? "table-secondary" : ""}>
         <td className="text-center align-middle">{index + 1}</td>
+        <td className="text-center align-middle small">
+          {order.platform.toUpperCase() || "-"}
+        </td>
         <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">
-            {order.sku.toUpperCase() || "N/A"}
-          </code>
+          {order.platformOrderId ? (
+            <div className="d-flex align-items-center justify-content-center">
+              <code className="pr-2" title={order.platformOrderId}>
+                {truncateText(order.platformOrderId, 80)}
+              </code>
+              <CopyToClipboardButton text={order.platformOrderId} />
+            </div>
+          ) : (
+            "-"
+          )}
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
-            <div className="font-weight-medium" title={order.name || ""}>
+            <div
+              className="font-weight-medium"
+              title={order.product?.name || ""}
+            >
               <code className="px-2 py-1 rounded">
-                {truncateText(order.name, 70)}
+                {truncateText(order.product?.name, 50)}
               </code>
             </div>
-            <CopyToClipboardButton text={order.name} />
+            <CopyToClipboardButton text={order.product?.name} />
           </div>
         </td>
         <td className="text-center align-middle">
-          {order.variant ? (
-            <span className="badge badge-secondary">{order.variant}</span>
+          {order.product?.variant ? (
+            <span className="badge badge-secondary">
+              {order.product?.variant}
+            </span>
           ) : (
             <span className="text-muted">-</span>
           )}
         </td>
+        <td className="text-center align-middle small">
+          {order.courier || "-"}
+        </td>
         <td className="text-center align-middle">
-          <span
-            className={`badge ${
-              order.quantity === 0
-                ? "badge-danger"
-                : order.quantity < 10
-                ? "badge-warning"
-                : "badge-success"
-            }`}
-          >
-            {order.quantity ?? 0} {order.unit || "pcs"}
-          </span>
+          <QuantityBadge quantity={order.quantity} unit={order.unit} />
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">
-            {formatAmount(computeTotalPrice(order.quantity, order.price))}
+            {formatAmount(
+              computeTotalPrice(order.quantity, order.product?.price)
+            )}
           </span>
         </td>
         <td className="text-center align-middle">
@@ -97,8 +108,8 @@ const OrderTable = ({ orders = [], loading = false }) => {
     <div className="card">
       <div className="card-header">
         <h3 className="card-title mb-0">
-          <i className="fas fa-clipboard-list mr-2"></i>
-          Orders
+          <i className="fas fa-shopping-cart mr-2"></i>
+          Imported Orders
         </h3>
       </div>
       <div className="card-body p-0">
@@ -109,29 +120,31 @@ const OrderTable = ({ orders = [], loading = false }) => {
                 <th className="text-center" style={{ width: "50px" }}>
                   #
                 </th>
-                <th className="text-center" style={{ width: "200px" }}>
-                  SKU
+                <th className="text-center" style={{ width: "120px" }}>
+                  Platform
+                </th>
+                <th className="text-center" style={{ width: "180px" }}>
+                  Platform Order ID
                 </th>
                 <th>Product Name</th>
-                {/* <th style={{ width: "300px" }}>Description</th> */}
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>
+                <th className="text-center" style={{ width: "150px" }}>
+                  Courier
+                </th>
                 <th className="text-center" style={{ width: "100px" }}>
-                  Stock
+                  Quantity
                 </th>
                 <th className="text-right" style={{ width: "120px" }}>
                   Total Price
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
-                  Order Date
+                  Ordere Date
                 </th>
                 <th className="text-center" style={{ width: "120px" }}>
                   Status
                 </th>
-                {/* <th className="text-center" style={{ width: "150px" }}>
-                  Actions
-                </th> */}
               </tr>
             </thead>
             <tbody>{renderTableRows()}</tbody>

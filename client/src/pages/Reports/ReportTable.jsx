@@ -1,82 +1,85 @@
-import React from "react";
-import { getCenteredColumns } from "../../utils/reportUtils";
-import { ReportTypeEnum } from "../../enums/enums";
-import { formatAmount } from "../../utils/commonUtils";
+import React, { useMemo } from "react";
+import { formatCellValue } from "../../utils/reportUtils";
 
-const ReportTable = ({ formattedReport, activeReportType }) => {
-  if (!formattedReport?.length)
+const ReportTable = ({ reportData, dataCount, columns, reportType }) => {
+  const memoizedTable = useMemo(() => {
+    if (!reportData || reportData.length === 0 || !columns) {
+      return <p className="text-muted text-center mt-3">No data available</p>;
+    }
+
+    // --- Compute totals for columns with "total: true" ---
+    const totals = {};
+    columns.forEach((col) => {
+      if (col.total) {
+        totals[col.key] = reportData.reduce(
+          (sum, row) => sum + (Number(row[col.key]) || 0),
+          0
+        );
+      }
+    });
+
     return (
-      <div className="text-center text-muted mt-4">
-        <i>No report generated yet.</i>
+      <div className="card mt-3 shadow-sm">
+        {reportType && (
+          <div className="card-header bg-primary text-white d-flex align-items-center">
+            <h5 className="mb-0">{reportType}</h5>
+
+            {/* Pushes to the right */}
+            <span className="badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm ms-auto">
+              {dataCount} Records
+            </span>
+          </div>
+        )}
+
+        <div className="card-body p-0">
+          <div className="report-table-container">
+            <table className="table table-bordered table-hover table-striped mb-0 report-table">
+              <thead className="table-light">
+                <tr>
+                  {columns.map((col) => (
+                    <th key={col.key} style={{ whiteSpace: "nowrap" }}>
+                      {col.label}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+
+              <tbody>
+                {reportData.map((row, idx) => (
+                  <tr key={idx}>
+                    {columns.map((col) => (
+                      <td
+                        key={col.key}
+                        className={`text-${col.align || "left"}`}
+                      >
+                        {formatCellValue(row[col.key], col.format)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+
+              <tfoot>
+                <tr>
+                  {columns.map((col, idx) => (
+                    <td key={col.key} className={`text-${col.align || "left"}`}>
+                      {col.total
+                        ? formatCellValue(totals[col.key], col.format)
+                        : idx === 0
+                        ? "Grand Total"
+                        : ""}
+                    </td>
+                  ))}
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
       </div>
     );
+  }, [reportData, columns, reportType, dataCount]);
 
-  const columns = Object.keys(formattedReport[0]);
-  const centerColumns = getCenteredColumns(activeReportType);
-  const isSalesReport = activeReportType.includes(ReportTypeEnum.SALES);
-  const grandTotal = isSalesReport
-    ? formattedReport.reduce((sum, row) => {
-        const raw = row["Total Amount"] || "0";
-        const numeric = parseFloat(raw.replace(/[^\d.-]/g, "")); // remove ₱ and commas
-        return sum + (isNaN(numeric) ? 0 : numeric);
-      }, 0)
-    : 0;
-
-  // console.log("formattedReport", formattedReport);
-  // console.log("isSalesReport", isSalesReport);
-  return (
-    <div className="table-responsive">
-      <table className="table table-bordered table-striped table-hover">
-        <thead className="thead-dark">
-          <tr>
-            {columns.map((col) => (
-              <th
-                key={col}
-                className={
-                  centerColumns.includes(col)
-                    ? "text-center"
-                    : col.includes("Amount") || col.includes("Price")
-                    ? "text-end"
-                    : ""
-                }
-              >
-                {col}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {formattedReport.map((row, idx) => (
-            <tr key={idx}>
-              {columns.map((col) => (
-                <td
-                  key={col}
-                  className={
-                    centerColumns.includes(col)
-                      ? "text-center align-middle"
-                      : col.includes("Amount") || col.includes("Price")
-                      ? "text-end align-middle"
-                      : ""
-                  }
-                >
-                  {row[col]}
-                </td>
-              ))}
-            </tr>
-          ))}
-          {isSalesReport && (
-            <tr>
-              <td colSpan={columns.length - 2} className="text-end fw-bold">
-                Grand Total:
-              </td>
-              <td className="text-end fw-bold">{formatAmount(grandTotal)}</td>
-              <td colSpan={1}></td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  );
+  return memoizedTable;
 };
 
 export default ReportTable;

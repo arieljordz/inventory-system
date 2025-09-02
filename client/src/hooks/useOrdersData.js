@@ -1,9 +1,7 @@
 // src/hooks/useOrdersData.js
 import { useState, useEffect, useCallback } from "react";
-import { toast } from "react-toastify";
-import { getProductsByStatus } from "../services/productService";
+import { getAllOrders } from "../services/orderService";
 import { useDebounce } from "./useDebounce";
-import { StatusEnum } from "../enums/enums";
 
 export const useOrdersData = (initialItemsPerPage = 5) => {
   const [orders, setOrders] = useState([]);
@@ -19,16 +17,16 @@ export const useOrdersData = (initialItemsPerPage = 5) => {
   const fetchOrders = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await getProductsByStatus({
-        status: StatusEnum.AVAILABLE,
+      const res = await getAllOrders({
         page: currentPage,
         limit: itemsPerPage,
         search: debouncedSearchTerm,
       });
 
-      const { products: fetchedOrders, totalProducts, totalPages } = res.data;
+      const { orders: fetchedOrders, totalOrders, totalPages } = res.data;
+
       setOrders(fetchedOrders || []);
-      setTotalItems(totalProducts || 0);
+      setTotalItems(totalOrders || 0);
 
       if (currentPage > totalPages && totalPages > 0) {
         setCurrentPage(totalPages);
