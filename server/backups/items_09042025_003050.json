@@ -7,7 +7,7 @@
     "price": 100,
     "sku": "RING-SMALL-68944",
     "description": "",
-    "quantity": 100,
+    "quantity": 69,
     "unit": "pcs",
     "variant": "Small",
     "supplier": "",
@@ -19,7 +19,7 @@
       "$date": "2025-09-01T09:14:28.945Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T09:14:28.945Z"
+      "$date": "2025-09-03T09:53:42.958Z"
     },
     "normalizedSku": "ring-small-68944",
     "__v": 0
@@ -32,7 +32,7 @@
     "price": 110,
     "sku": "RING-BIG-19502",
     "description": "",
-    "quantity": 100,
+    "quantity": 99,
     "unit": "pcs",
     "variant": "Big",
     "supplier": "",
@@ -44,7 +44,7 @@
       "$date": "2025-09-01T09:15:19.503Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:10:39.821Z"
+      "$date": "2025-09-03T03:50:38.477Z"
     },
     "normalizedSku": "ring-big-19502",
     "__v": 0
@@ -57,7 +57,7 @@
     "price": 60,
     "sku": "CARAB-DEFAU-97240",
     "description": "",
-    "quantity": 100,
+    "quantity": 74,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -69,7 +69,7 @@
       "$date": "2025-09-01T09:16:37.241Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:11:18.825Z"
+      "$date": "2025-09-03T09:53:43.086Z"
     },
     "normalizedSku": "carab-defau-97240",
     "__v": 0
@@ -207,7 +207,7 @@
     "price": 200,
     "sku": "ROPE-ORANG-57725",
     "description": "",
-    "quantity": 100,
+    "quantity": 99,
     "unit": "pcs",
     "variant": "Orange",
     "supplier": "",
@@ -219,7 +219,7 @@
       "$date": "2025-09-01T10:14:17.725Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:14:17.725Z"
+      "$date": "2025-09-03T03:27:29.723Z"
     },
     "normalizedSku": "rope-orang-57725",
     "__v": 0
@@ -411,7 +411,7 @@
     "price": 200,
     "sku": "ROPE-BLACK-39060",
     "description": "",
-    "quantity": 100,
+    "quantity": 96,
     "unit": "pcs",
     "variant": "Black",
     "supplier": "",
@@ -423,9 +423,35 @@
       "$date": "2025-09-02T05:47:19.061Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T05:47:19.061Z"
+      "$date": "2025-09-03T03:27:35.394Z"
     },
     "normalizedSku": "rope-black-39060",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7ae5a905e371d38cb14ab"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-AZURE-86402",
+    "description": "",
+    "quantity": 99,
+    "unit": "pcs",
+    "variant": "Azure blue",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "azure blue",
+    "createdAt": {
+      "$date": "2025-09-03T02:56:26.403Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:34.573Z"
+    },
+    "normalizedSku": "rope-azure-86402",
     "normalizedDescription": "",
     "__v": 0
   }

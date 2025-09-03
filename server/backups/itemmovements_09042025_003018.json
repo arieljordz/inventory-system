@@ -1,0 +1,1382 @@
+[
+  {
+    "_id": {
+      "$oid": "68b578c705bc2b256f1ce92c"
+    },
+    "item": {
+      "$oid": "68b5720e05bc2b256f1ce82c"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:19.195Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:19.195Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5b77fbb6afdb60842de57"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 1200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restocking",
+    "createdBy": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T15:10:55.004Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T15:10:55.004Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 120000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56475650c74e5be323846"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 60,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:16:37.287Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T19:35:32.696Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 6000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578b905bc2b256f1ce91c"
+    },
+    "item": {
+      "$oid": "68b5729205bc2b256f1ce842"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:05.050Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:05.050Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b563f4650c74e5be32382d"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 100,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:14:29.016Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T09:14:29.016Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 10000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56427650c74e5be323836"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 110,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:15:19.545Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T19:35:32.684Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 11000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b564a9650c74e5be32384f"
+    },
+    "item": {
+      "$oid": "68b564a9650c74e5be32384d"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:17:29.417Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T19:35:32.699Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5787105bc2b256f1ce902"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 40,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:41:53.277Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:41:53.277Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 4000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578af05bc2b256f1ce914"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 20,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:42:55.621Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:42:55.621Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578c105bc2b256f1ce924"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:13.004Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:13.004Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5b772bb6afdb60842de47"
+    },
+    "item": {
+      "$oid": "68b569d1650c74e5be3238bb"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 1700,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restocking",
+    "createdBy": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T15:10:42.942Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T15:10:42.942Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 170000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5b764bb6afdb60842de37"
+    },
+    "item": {
+      "$oid": "68b571f905bc2b256f1ce825"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restocking",
+    "createdBy": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T15:10:28.318Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T15:10:28.318Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5b76bbb6afdb60842de3f"
+    },
+    "item": {
+      "$oid": "68b571b505bc2b256f1ce81e"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restocking",
+    "createdBy": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T15:10:35.473Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T15:10:35.473Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5b778bb6afdb60842de4f"
+    },
+    "item": {
+      "$oid": "68b569a6650c74e5be3238b4"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 2000,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restocking",
+    "createdBy": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T15:10:48.638Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T15:10:48.638Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 200000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb7"
+    },
+    "item": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb5"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 330,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-02T05:34:36.750Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T05:34:36.750Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 33000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb9"
+    },
+    "item": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb3"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 330,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-02T05:34:36.752Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T05:34:36.752Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 33000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b684e7c3bcfc9ab3c8202a"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-02T05:47:19.104Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T05:47:19.104Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7ae5a905e371d38cb14ad"
+    },
+    "item": {
+      "$oid": "68b7ae5a905e371d38cb14ab"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-03T02:56:26.457Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T02:56:26.457Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a1905e371d38cb1781"
+    },
+    "item": {
+      "$oid": "68b571f905bc2b256f1ce825"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 99,
+    "reference": "250901BXGXGD3G",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:29.765Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:29.765Z"
+    },
+    "normalizedReference": "250901BXGXGD3G",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a1905e371d38cb1785"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 99,
+    "reference": "250901BXGXGD3G",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:29.882Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:29.882Z"
+    },
+    "normalizedReference": "250901BXGXGD3G",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a2905e371d38cb17a3"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 99,
+    "reference": "250901C63Q3G15",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:30.556Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:30.556Z"
+    },
+    "normalizedReference": "250901C63Q3G15",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a2905e371d38cb17a7"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 98,
+    "reference": "250901C63Q3G15",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:30.675Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:30.675Z"
+    },
+    "normalizedReference": "250901C63Q3G15",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a5905e371d38cb180b"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 98,
+    "reference": "250902DQREH11H",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:33.294Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:33.294Z"
+    },
+    "normalizedReference": "250902DQREH11H",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a5905e371d38cb180f"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 97,
+    "reference": "250902DQREH11H",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:33.414Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:33.414Z"
+    },
+    "normalizedReference": "250902DQREH11H",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a6905e371d38cb1841"
+    },
+    "item": {
+      "$oid": "68b7ae5a905e371d38cb14ab"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 99,
+    "reference": "250902E146K4RB",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:34.613Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:34.613Z"
+    },
+    "normalizedReference": "250902E146K4RB",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a6905e371d38cb1845"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 96,
+    "reference": "250902E146K4RB",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:34.729Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:34.729Z"
+    },
+    "normalizedReference": "250902E146K4RB",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a7905e371d38cb1864"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 200,
+    "balanceAfter": 96,
+    "reference": "250902E6D50B9K",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:35.434Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:35.434Z"
+    },
+    "normalizedReference": "250902E6D50B9K",
+    "totalValue": 400,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7b5a7905e371d38cb1868"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 100,
+    "balanceAfter": 94,
+    "reference": "250902E6D50B9K",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:27:35.553Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:35.553Z"
+    },
+    "normalizedReference": "250902E6D50B9K",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7bab9905e371d38cb19de"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 93,
+    "reference": "250901C5Q3QX7R",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:13.798Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:13.798Z"
+    },
+    "normalizedReference": "250901C5Q3QX7R",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7bab9905e371d38cb19e2"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 99,
+    "reference": "250901C5Q3QX7R",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:13.921Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:13.921Z"
+    },
+    "normalizedReference": "250901C5Q3QX7R",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7baba905e371d38cb19f6"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 100,
+    "balanceAfter": 91,
+    "reference": "250901CAS3WGMT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:14.351Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:14.351Z"
+    },
+    "normalizedReference": "250901CAS3WGMT",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7baba905e371d38cb19fa"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 60,
+    "balanceAfter": 97,
+    "reference": "250901CAS3WGMT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:14.475Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:14.475Z"
+    },
+    "normalizedReference": "250901CAS3WGMT",
+    "totalValue": 120,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7baba905e371d38cb1a0e"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 90,
+    "reference": "250901CD1HA03D",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:14.884Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:14.884Z"
+    },
+    "normalizedReference": "250901CD1HA03D",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7babb905e371d38cb1a12"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 96,
+    "reference": "250901CD1HA03D",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:15.014Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:15.014Z"
+    },
+    "normalizedReference": "250901CD1HA03D",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7babb905e371d38cb1a26"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 89,
+    "reference": "250902DT4N37K3",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:15.423Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:15.423Z"
+    },
+    "normalizedReference": "250902DT4N37K3",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7babb905e371d38cb1a2a"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 95,
+    "reference": "250902DT4N37K3",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:15.548Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:15.548Z"
+    },
+    "normalizedReference": "250902DT4N37K3",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7babb905e371d38cb1a3e"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 5,
+    "price": 100,
+    "balanceAfter": 84,
+    "reference": "250902E0RRDH21",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:15.956Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:15.956Z"
+    },
+    "normalizedReference": "250902E0RRDH21",
+    "totalValue": 500,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7babc905e371d38cb1a42"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 5,
+    "price": 60,
+    "balanceAfter": 90,
+    "reference": "250902E0RRDH21",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:49:16.079Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:49:16.079Z"
+    },
+    "normalizedReference": "250902E0RRDH21",
+    "totalValue": 300,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7bb0e905e371d38cb1ab5"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 99,
+    "reference": "580224140980684132",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Makapal Ring Set w/ 2 Carabiner - 1/4\" Diameter 304 Material Heavy-Duty Balancing & Stability for Duyan or Hammocks - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:50:38.521Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:50:38.521Z"
+    },
+    "normalizedReference": "580224140980684132",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7bb0e905e371d38cb1ab9"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 89,
+    "reference": "580224140980684132",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Makapal Ring Set w/ 2 Carabiner - 1/4\" Diameter 304 Material Heavy-Duty Balancing & Stability for Duyan or Hammocks - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T03:50:38.646Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:50:38.646Z"
+    },
+    "normalizedReference": "580224140980684132",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81024fe19b07adad92d75"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 10,
+    "price": 100,
+    "balanceAfter": 74,
+    "reference": "250902ECAA052X",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:40.177Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:40.177Z"
+    },
+    "normalizedReference": "250902ECAA052X",
+    "totalValue": 1000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81024fe19b07adad92d79"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 10,
+    "price": 60,
+    "balanceAfter": 79,
+    "reference": "250902ECAA052X",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:40.305Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:40.305Z"
+    },
+    "normalizedReference": "250902ECAA052X",
+    "totalValue": 600,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81024fe19b07adad92d8e"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 73,
+    "reference": "250903GP5AUJNT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:40.767Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:40.767Z"
+    },
+    "normalizedReference": "250903GP5AUJNT",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81024fe19b07adad92d92"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 78,
+    "reference": "250903GP5AUJNT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:40.893Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:40.893Z"
+    },
+    "normalizedReference": "250903GP5AUJNT",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81025fe19b07adad92da7"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 72,
+    "reference": "250902EXUX8DNE",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:41.354Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:41.354Z"
+    },
+    "normalizedReference": "250902EXUX8DNE",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81025fe19b07adad92dab"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 77,
+    "reference": "250902EXUX8DNE",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:41.482Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:41.482Z"
+    },
+    "normalizedReference": "250902EXUX8DNE",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81025fe19b07adad92dbf"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 71,
+    "reference": "250903FHAAHC9D",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:41.904Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:41.904Z"
+    },
+    "normalizedReference": "250903FHAAHC9D",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81026fe19b07adad92dc3"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 76,
+    "reference": "250903FHAAHC9D",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:42.030Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:42.030Z"
+    },
+    "normalizedReference": "250903FHAAHC9D",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81026fe19b07adad92dd7"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 70,
+    "reference": "250902EQRKM895",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:42.454Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:42.454Z"
+    },
+    "normalizedReference": "250902EQRKM895",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81026fe19b07adad92ddb"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 75,
+    "reference": "250902EQRKM895",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:42.580Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:42.580Z"
+    },
+    "normalizedReference": "250902EQRKM895",
+    "totalValue": 60,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81027fe19b07adad92def"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 69,
+    "reference": "250903GH93P3DM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:43.003Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:43.003Z"
+    },
+    "normalizedReference": "250903GH93P3DM",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b81027fe19b07adad92df3"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 60,
+    "balanceAfter": 74,
+    "reference": "250903GH93P3DM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-03T09:53:43.131Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T09:53:43.131Z"
+    },
+    "normalizedReference": "250903GH93P3DM",
+    "totalValue": 60,
+    "__v": 0
+  }
+]
