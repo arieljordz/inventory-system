@@ -301,7 +301,7 @@ export const processSalesImport = async ({
       await logAudit({
         action: "UPDATE_PAYMENT",
         user: req.user?._id,
-        description: `Marked order ${platformOrderId} as paid via file import (${platform})`,
+        description: `Paid order from ${platform} with Order ID:  ${platformOrderId}`,
         collectionName: "Order",
         documentId: order._id,
         before,
@@ -493,7 +493,7 @@ export const processReturnsImport = async ({
       await logAudit({
         action: "UPDATE_RETURN_STATUS",
         user: req.user?._id,
-        description: `Marked order ${platformOrderId} as returned via import (${platform})`,
+        description: `Returned order from ${platform} with Order ID:  ${platformOrderId}`,
         collectionName: "Order",
         documentId: order._id,
         before,

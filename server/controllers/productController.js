@@ -97,7 +97,7 @@ export const addProduct = async (req, res) => {
     await logAudit({
       action: "CREATE_PRODUCT",
       user: req.user?._id,
-      description: `Added new product: ${name}, variant: ${variant}, type: ${type}`,
+      description: `Added new product: ${name}, variant: ${variant}`,
       collectionName: "Product",
       documentId: savedProduct._id,
       after: savedProduct.toObject(),
