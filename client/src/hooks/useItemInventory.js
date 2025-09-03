@@ -15,7 +15,6 @@ import { useDebounce } from "./useDebounce";
 import { useSpinner } from "../context/SpinnerContext";
 
 export const useItemInventory = (initialPagination) => {
-  /** 🔹 States */
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -30,9 +29,6 @@ export const useItemInventory = (initialPagination) => {
   const debouncedSearch = useDebounce(pagination.searchTerm, 500);
   const { showSpinner, hideSpinner } = useSpinner();
 
-  /** ---------------------------
-   * Fetch Items
-   ---------------------------- */
   const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
@@ -47,7 +43,6 @@ export const useItemInventory = (initialPagination) => {
       setItems(items);
       setTotalItems(totalItems);
 
-      // Adjust if page exceeds total pages
       const totalPages = Math.ceil(totalItems / itemsPerPage);
       if (currentPage > totalPages && totalPages > 0) {
         setPagination((prev) => ({ ...prev, currentPage: totalPages }));
@@ -72,7 +67,7 @@ export const useItemInventory = (initialPagination) => {
   const fetchItemStats = useCallback(async () => {
     try {
       const res = await getInventoryStats();
-      setStats(res.data); // Use res.data from Axios
+      setStats(res.data);
     } catch (error) {
       console.error("Fetch error:", error);
       setStats({
@@ -87,9 +82,7 @@ export const useItemInventory = (initialPagination) => {
   useEffect(() => {
     fetchItemStats();
   }, [fetchItemStats]);
-  /** ---------------------------
-   * Actions
-   ---------------------------- */
+
   const saveItem = async (form, isEditMode, onClose) => {
     showSpinner();
     try {
@@ -123,8 +116,8 @@ export const useItemInventory = (initialPagination) => {
       hideSpinner();
     }
   };
+
   const removeItem = async (itemId) => {
-    // Step 1: Verification Code Modal
     const verificationResult = await Swal.fire({
       title: "Verification Required",
       text: "Please enter the verification code to proceed with deletion:",
@@ -135,33 +128,34 @@ export const useItemInventory = (initialPagination) => {
       cancelButtonColor: "#6c757d",
       confirmButtonText: "Verify",
       cancelButtonText: "Cancel",
-      inputValidator: (value) => {
-        if (!value) {
-          return "Please enter a verification code";
-        }
-        if (value !== "1234") {
-          return "Invalid verification code";
-        }
-      },
       allowOutsideClick: false,
       allowEscapeKey: false,
       didOpen: () => {
         const input = Swal.getInput();
         if (input) {
-          input.style.textAlign = "center"; // Centers the text
-          input.style.fontSize = "18px"; // Makes text larger
-          input.style.fontWeight = "bold"; // Makes text bold
-          input.style.letterSpacing = "2px"; // Adds space between characters
+          input.style.textAlign = "center";
+          input.style.fontSize = "18px";
+          input.style.fontWeight = "bold";
+          input.style.letterSpacing = "2px";
         }
+      },
+      preConfirm: (value) => {
+        if (!value) {
+          Swal.showValidationMessage("Please enter a verification code");
+          return false;
+        }
+        if (value !== "1234") {
+          Swal.showValidationMessage("Invalid verification code");
+          return false;
+        }
+        return true;
       },
     });
 
-    // If verification failed or was cancelled
     if (!verificationResult.isConfirmed) {
       return;
     }
 
-    // Step 2: Delete Confirmation Modal (only shows if verification passed)
     const confirmResult = await Swal.fire({
       title: "Are you sure?",
       text: "This action cannot be undone.",
@@ -173,12 +167,10 @@ export const useItemInventory = (initialPagination) => {
       cancelButtonText: "Cancel",
     });
 
-    // If delete confirmation was cancelled
     if (!confirmResult.isConfirmed) {
       return;
     }
 
-    // Proceed with deletion
     try {
       await deleteItem(itemId);
       toast.success("Item deleted successfully!");

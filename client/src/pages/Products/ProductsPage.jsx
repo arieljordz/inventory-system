@@ -32,7 +32,6 @@ const ProductsPage = () => {
   const restockModal = useProductRestockModal(fetchProducts);
 
   const handleDelete = async (productId) => {
-    // Step 1: Verification Code Modal
     const verificationResult = await Swal.fire({
       title: "Verification Required",
       text: "Please enter the verification code to proceed with deletion:",
@@ -43,33 +42,34 @@ const ProductsPage = () => {
       cancelButtonColor: "#6c757d",
       confirmButtonText: "Verify",
       cancelButtonText: "Cancel",
-      inputValidator: (value) => {
-        if (!value) {
-          return "Please enter a verification code";
-        }
-        if (value !== "1234") {
-          return "Invalid verification code";
-        }
-      },
       allowOutsideClick: false,
       allowEscapeKey: false,
       didOpen: () => {
         const input = Swal.getInput();
         if (input) {
-          input.style.textAlign = "center"; // Centers the text
-          input.style.fontSize = "18px"; // Makes text larger
-          input.style.fontWeight = "bold"; // Makes text bold
-          input.style.letterSpacing = "2px"; // Adds space between characters
+          input.style.textAlign = "center";
+          input.style.fontSize = "18px";
+          input.style.fontWeight = "bold";
+          input.style.letterSpacing = "2px";
         }
+      },
+      preConfirm: (value) => {
+        if (!value) {
+          Swal.showValidationMessage("Please enter a verification code");
+          return false;
+        }
+        if (value !== "1234") {
+          Swal.showValidationMessage("Invalid verification code");
+          return false;
+        }
+        return true;
       },
     });
 
-    // If verification failed or was cancelled
     if (!verificationResult.isConfirmed) {
       return;
     }
 
-    // Step 2: Delete Confirmation Modal (only shows if verification passed)
     const confirmResult = await Swal.fire({
       title: "Are you sure?",
       text: "This action cannot be undone.",
@@ -81,12 +81,10 @@ const ProductsPage = () => {
       cancelButtonText: "Cancel",
     });
 
-    // If delete confirmation was cancelled
     if (!confirmResult.isConfirmed) {
       return;
     }
 
-    // Proceed with deletion
     try {
       await deleteProduct(productId);
       toast.success("Product deleted successfully!");

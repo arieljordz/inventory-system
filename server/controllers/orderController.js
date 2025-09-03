@@ -264,7 +264,7 @@ export const processOrdersImport = async (rows, platform, req) => {
       } catch (err) {
         results.skipped.push({
           platformOrderId,
-          reason: `Stock update failed: ${err.message}`,
+          reason: `Stock Item update failed: ${err.message}`,
         });
         continue;
       }

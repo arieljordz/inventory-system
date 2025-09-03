@@ -10,7 +10,7 @@ const menuItems = [
   { path: "/item-inventory", label: "Item Inventory", icon: "fas fa-boxes" },
   { path: "/sales", label: "Sales", icon: "fas fa-receipt" },
   { path: "/reports", label: "Reports", icon: "fas fa-chart-line" },
-  // { path: "/new-reports", label: "Reports", icon: "fas fa-chart-line" },
+  // { path: "/users", label: "Users", icon: "fas fa-users" },
   { path: "/auditlogs", label: "Audit Logs", icon: "fas fa-file-alt" },
 ];
 
