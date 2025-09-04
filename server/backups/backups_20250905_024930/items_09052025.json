@@ -7,7 +7,7 @@
     "price": 100,
     "sku": "RING-SMALL-68944",
     "description": "",
-    "quantity": 69,
+    "quantity": 39,
     "unit": "pcs",
     "variant": "Small",
     "supplier": "",
@@ -19,7 +19,7 @@
       "$date": "2025-09-01T09:14:28.945Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T09:53:42.958Z"
+      "$date": "2025-09-04T06:41:12.113Z"
     },
     "normalizedSku": "ring-small-68944",
     "__v": 0
@@ -32,7 +32,7 @@
     "price": 110,
     "sku": "RING-BIG-19502",
     "description": "",
-    "quantity": 99,
+    "quantity": 98,
     "unit": "pcs",
     "variant": "Big",
     "supplier": "",
@@ -44,7 +44,7 @@
       "$date": "2025-09-01T09:15:19.503Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T03:50:38.477Z"
+      "$date": "2025-09-04T03:06:02.088Z"
     },
     "normalizedSku": "ring-big-19502",
     "__v": 0
@@ -57,7 +57,7 @@
     "price": 60,
     "sku": "CARAB-DEFAU-97240",
     "description": "",
-    "quantity": 74,
+    "quantity": 65,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -69,7 +69,7 @@
       "$date": "2025-09-01T09:16:37.241Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T09:53:43.086Z"
+      "$date": "2025-09-04T06:41:12.243Z"
     },
     "normalizedSku": "carab-defau-97240",
     "__v": 0
@@ -132,7 +132,7 @@
     "price": 2000,
     "sku": "FRAME-8-FEE-26175",
     "description": "",
-    "quantity": 100,
+    "quantity": 99,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -144,7 +144,7 @@
       "$date": "2025-09-01T09:38:46.176Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:09:56.145Z"
+      "$date": "2025-09-04T03:06:01.870Z"
     },
     "normalizedSku": "frame-8-fee-26175",
     "__v": 0
@@ -207,7 +207,7 @@
     "price": 200,
     "sku": "ROPE-ORANG-57725",
     "description": "",
-    "quantity": 99,
+    "quantity": 94,
     "unit": "pcs",
     "variant": "Orange",
     "supplier": "",
@@ -219,7 +219,7 @@
       "$date": "2025-09-01T10:14:17.725Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T03:27:29.723Z"
+      "$date": "2025-09-04T06:34:28.333Z"
     },
     "normalizedSku": "rope-orang-57725",
     "__v": 0
@@ -258,7 +258,7 @@
     "price": 200,
     "sku": "ROPE-DARK-86140",
     "description": "",
-    "quantity": 100,
+    "quantity": 95,
     "unit": "pcs",
     "variant": "Dark Green",
     "supplier": "",
@@ -270,7 +270,7 @@
       "$date": "2025-09-01T10:16:26.140Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:43:12.965Z"
+      "$date": "2025-09-04T06:34:35.801Z"
     },
     "normalizedSku": "rope-dark-86140",
     "__v": 0
@@ -283,7 +283,7 @@
     "price": 200,
     "sku": "ROPE-GREEN-10873",
     "description": "",
-    "quantity": 100,
+    "quantity": 98,
     "unit": "pcs",
     "variant": "Green",
     "supplier": "",
@@ -295,7 +295,7 @@
       "$date": "2025-09-01T10:16:50.873Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:43:05.008Z"
+      "$date": "2025-09-04T06:40:43.618Z"
     },
     "normalizedSku": "rope-green-10873",
     "__v": 0
@@ -359,7 +359,7 @@
     "price": 330,
     "sku": "HAMMO-DEFAU-76676",
     "description": "",
-    "quantity": 100,
+    "quantity": 99,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -371,35 +371,9 @@
       "$date": "2025-09-02T05:34:36.683Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T05:34:36.683Z"
+      "$date": "2025-09-04T03:06:01.979Z"
     },
     "normalizedSku": "hammo-defau-76676",
-    "normalizedDescription": "",
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b681ecc3bcfc9ab3c81fb5"
-    },
-    "name": "Hammock",
-    "price": 330,
-    "sku": "HAMMO-DEFAU-76689",
-    "description": "",
-    "quantity": 100,
-    "unit": "pcs",
-    "variant": "Default",
-    "supplier": "",
-    "location": "Main Warehouse",
-    "status": "Available",
-    "normalizedName": "hammock",
-    "normalizedVariant": "default",
-    "createdAt": {
-      "$date": "2025-09-02T05:34:36.690Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T05:34:36.690Z"
-    },
-    "normalizedSku": "hammo-defau-76689",
     "normalizedDescription": "",
     "__v": 0
   },
@@ -411,7 +385,7 @@
     "price": 200,
     "sku": "ROPE-BLACK-39060",
     "description": "",
-    "quantity": 96,
+    "quantity": 86,
     "unit": "pcs",
     "variant": "Black",
     "supplier": "",
@@ -423,7 +397,7 @@
       "$date": "2025-09-02T05:47:19.061Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T03:27:35.394Z"
+      "$date": "2025-09-04T06:34:36.724Z"
     },
     "normalizedSku": "rope-black-39060",
     "normalizedDescription": "",

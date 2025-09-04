@@ -68,7 +68,6 @@ export const getAllItems = async (req, res) => {
   }
 };
 
-// ✅ Get single item by ID
 export const getItemById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -87,7 +86,6 @@ export const getItemById = async (req, res) => {
   }
 };
 
-// ADD ITEM (with initial inventory movement)
 export const addItem = async (req, res) => {
   try {
     const {
@@ -105,11 +103,9 @@ export const addItem = async (req, res) => {
       createdBy,
     } = req.body;
 
-    // ✅ Normalize inputs for duplicate check
     const normalizedName = normalizeString(normalizeText(name));
     const normalizedVariant = normalizeString(normalizeText(variant || ""));
 
-    // ✅ Check if item with same name + variant already exists
     const existingItem = await Item.findOne({
       normalizedName,
       normalizedVariant,
@@ -123,10 +119,8 @@ export const addItem = async (req, res) => {
       });
     }
 
-    // ✅ Generate SKU
     const sku = generateSKU({ name, category: "", variant, size: "" });
 
-    // ✅ Create Item
     const newItem = new Item({
       name,
       price,
@@ -144,7 +138,6 @@ export const addItem = async (req, res) => {
 
     await newItem.save();
 
-    // ✅ If there's an initial quantity, log an IN movement
     if (quantity > 0) {
       await ItemMovement.create({
         item: newItem._id,
@@ -159,7 +152,6 @@ export const addItem = async (req, res) => {
       });
     }
 
-    // ✅ Log audit (separate call, doesn’t affect item creation)
     await logAudit({
       action: "ADD_ITEM",
       user: req.user?._id,
@@ -180,7 +172,6 @@ export const addItem = async (req, res) => {
   }
 };
 
-// RESTOCK ITEM (add inventory movement IN)
 export const restockItem = async (req, res) => {
   try {
     const { itemId } = req.params;
@@ -192,23 +183,19 @@ export const restockItem = async (req, res) => {
         .json({ message: "Quantity must be greater than 0" });
     }
 
-    // 🔎 Find item
     const item = await Item.findById(itemId);
     if (!item) {
       return res.status(404).json({ message: "Item not found" });
     }
 
-    // Save "before" snapshot for audit
     const before = item.toObject();
 
-    // Update item
     item.quantity += quantity;
     if (price) {
-      item.price = price; // Update latest price if provided
+      item.price = price;
     }
     await item.save();
 
-    // Create movement log
     await ItemMovement.create({
       item: item._id,
       type: "IN",
@@ -221,7 +208,6 @@ export const restockItem = async (req, res) => {
       createdBy: req.user?._id || null,
     });
 
-    // ✅ Log audit
     await logAudit({
       action: "RESTOCK_ITEM",
       user: req.user?._id,
@@ -247,7 +233,6 @@ export const restockItem = async (req, res) => {
   }
 };
 
-// ✅ Update item
 export const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -258,11 +243,9 @@ export const updateItem = async (req, res) => {
       return res.status(404).json({ message: "Item not found" });
     }
 
-    // ✅ Snapshot before changes for audit
     const before = item.toObject();
-    const oldPrice = item.price; // remember the old price
+    const oldPrice = item.price;
 
-    // Update fields
     if (name !== undefined) item.name = name;
     if (variant !== undefined) item.variant = variant;
     if (description !== undefined) item.description = description;
@@ -272,7 +255,6 @@ export const updateItem = async (req, res) => {
 
     const updatedItem = await item.save();
 
-    // ✅ If price changed, update all related ItemMovements
     if (price !== undefined && price !== oldPrice) {
       const movements = await ItemMovement.find({ item: item._id });
 
@@ -283,7 +265,6 @@ export const updateItem = async (req, res) => {
       }
     }
 
-    // ✅ Audit log after save
     await logAudit({
       action: "UPDATE_ITEM",
       user: req.user?._id,
@@ -308,7 +289,6 @@ export const updateItem = async (req, res) => {
   }
 };
 
-// ✅ Delete item
 export const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
@@ -318,16 +298,12 @@ export const deleteItem = async (req, res) => {
       return res.status(404).json({ message: "Item not found" });
     }
 
-    // ✅ Snapshot before deleting
     const before = item.toObject();
 
-    // Cleanup related inventory movements
     await ItemMovement.deleteMany({ item: id });
 
-    // Delete item
     await item.deleteOne();
 
-    // ✅ Audit log after delete
     await logAudit({
       action: "DELETE_ITEM",
       user: req.user?._id,
@@ -337,7 +313,7 @@ export const deleteItem = async (req, res) => {
       collectionName: "Item",
       documentId: id,
       before,
-      after: null, // since deleted
+      after: null,
       ip: req.ip,
       userAgent: req.headers["user-agent"],
     });
@@ -353,11 +329,9 @@ export const deleteItem = async (req, res) => {
 
 export const getInventoryStats = async (req, res) => {
   try {
-    // Today's start and end
     const startOfDay = moment.tz("Asia/Manila").startOf("day").toDate();
     const endOfDay = moment.tz("Asia/Manila").endOf("day").toDate();
 
-    // 1. Count and total quantity of available items (current stock)
     const availableItems = await Item.find({ status: StatusEnum.AVAILABLE });
     const availableItemCount = availableItems.length;
     const totalAvailableQuantity = availableItems.reduce(
@@ -365,7 +339,6 @@ export const getInventoryStats = async (req, res) => {
       0
     );
 
-    // 2. Inventory movements for today
     const todaysMovements = await ItemMovement.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay },
     });

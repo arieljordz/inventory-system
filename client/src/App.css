@@ -194,3 +194,13 @@ body.dark-mode .dark-mode-text-white {
   background: #a7a8a8 !important;
   font-weight: bold !important;
 }
+
+/* default = light mode */
+.text-adaptive {
+  color: var(--bs-body-color); /* Bootstrap body text variable */
+}
+
+/* when dark mode is enabled */
+body.dark-mode .text-adaptive {
+  color: #f8f9fa !important; /* light text */
+}

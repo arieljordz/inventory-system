@@ -6,8 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import connectDB from "./config/db.js";
-import path from "path";
-import { fileURLToPath } from "url";
+import { startCronJobs } from "./cron/index.js";
 
 // ===== Routes =====
 import getDashboardCharts from "./routes/dashboardRoutes.js";
@@ -19,10 +18,8 @@ import reportRoutes from "./routes/reportRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import settingsRoutes from "./routes/settingsRoutes.js";
 import auditLogsRoutes from "./routes/auditLogsRoutes.js";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -55,7 +52,10 @@ app.use("/api/reports", reportRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/sales", salesRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/settings", settingsRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
+
+startCronJobs();
 
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));
