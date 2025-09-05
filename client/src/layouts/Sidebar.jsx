@@ -5,6 +5,7 @@ const menuItems = [
   { path: "/dashboard", label: "Dashboard", icon: "fas fa-tachometer-alt" },
   { path: "/products", label: "Products", icon: "fas fa-box" },
   { path: "/orders", label: "Orders", icon: "fas fa-shopping-cart" },
+  { path: "/walk-ins", label: "Walk Ins", icon: "fas fa-shopping-basket" },
   // { path: "/trackings", label: "Trackings", icon: "fas fa-shipping-fast" },
   // { path: "/order-inventory", label: "Order Inventory", icon: "fas fa-clipboard-check" },
   { path: "/item-inventory", label: "Item Inventory", icon: "fas fa-boxes" },

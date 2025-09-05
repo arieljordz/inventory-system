@@ -14,6 +14,7 @@ import LoginPage from "./pages/Login/LoginPage";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductsPage from "./pages/Products/ProductsPage";
 import OrderPage from "./pages/Orders/OrderPage";
+import WalkInsPage from "./pages/WalkIns/WalkInsPage";
 // import TrackingsPage from "./pages/Trackings/TrackingsPage";
 // import OrderInventoryPage from "./pages/OrderInventory/OrderInventoryPage";
 import ItemInventoryPage from "./pages/ItemInventory/ItemInventoryPage";
@@ -39,6 +40,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/orders" element={<OrderPage />} />
+            <Route path="/walk-ins" element={<WalkInsPage />} />
             {/* <Route path="/trackings" element={<TrackingsPage />} /> */}
             {/* <Route path="/order-inventory" element={<OrderInventoryPage />} /> */}
             <Route path="/item-inventory" element={<ItemInventoryPage />} />

@@ -171,9 +171,9 @@ export const returnPlatformConfigs = {
   lazada: {
     sheetName: "sheet1",
     fields: {
-      platformOrderId: "Order ID",
+      platformOrderId: "orderItemId",
     },
-    requiredHeaders: ["Order ID", "Return Order ID"],
+    requiredHeaders: ["orderItemId", "Guarantee"],
   },
 };
 

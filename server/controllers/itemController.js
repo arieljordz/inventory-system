@@ -191,6 +191,7 @@ export const restockItem = async (req, res) => {
     const before = item.toObject();
 
     item.quantity += quantity;
+    item.status = StatusEnum.AVAILABLE;
     if (price) {
       item.price = price;
     }

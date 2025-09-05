@@ -16,6 +16,7 @@ import itemRoutes from "./routes/itemRoutes.js";
 import inventoryDetailRoutes from "./routes/inventoryDetailRoutes.js";
 import reportRoutes from "./routes/reportRoutes.js";
 import orderRoutes from "./routes/orderRoutes.js";
+import walkInRoutes from "./routes/walkInRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
@@ -50,12 +51,13 @@ app.use("/api/items", itemRoutes);
 app.use("/api/inventory-details", inventoryDetailRoutes);
 app.use("/api/reports", reportRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/walk-ins", walkInRoutes);
 app.use("/api/sales", salesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 
-startCronJobs();
+// startCronJobs();
 
 // Optional: Serve static files if you're storing images locally
 // app.use("/uploads", express.static("uploads"));
