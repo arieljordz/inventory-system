@@ -52,22 +52,6 @@
   },
   {
     "_id": {
-      "$oid": "68924731171ea4729f89b99d"
-    },
-    "name": "Ariel Sueno",
-    "email": "suenoariel@gmail.com",
-    "picture": "https://lh3.googleusercontent.com/a/ACg8ocJ8EKEKj2xEkN31WLnNYERD7xrKtfgvafy3lQqkLsxksK3nGfYg=s96-c",
-    "isVerified": true,
-    "createdAt": {
-      "$date": "2025-08-05T18:02:25.912Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-05T18:02:25.912Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68a3f8ac11a772447f18b126"
     },
     "name": "Velqing Kris Durias",
@@ -95,22 +79,6 @@
     },
     "updatedAt": {
       "$date": "2025-08-19T04:08:33.191Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68a6ffe4661d80259c279f45"
-    },
-    "name": "ariel sueno",
-    "email": "apsueno@gmail.com",
-    "picture": "https://lh3.googleusercontent.com/a/ACg8ocLoAFArNTOWSbO7dEWOwrU70G31C1rNck8_3sQB3jFzb1zWrtZl=s96-c",
-    "isVerified": false,
-    "createdAt": {
-      "$date": "2025-08-21T11:15:48.649Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-21T11:15:48.649Z"
     },
     "__v": 0
   },

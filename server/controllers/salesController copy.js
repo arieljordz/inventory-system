@@ -259,11 +259,9 @@ export const processSalesImport = async ({
     alreadyPaid: [],
     notFound: [],
     skipped: [],
-    duplicates: [],
   };
 
   const rows = sheetData.slice(headerRowIndex + 1);
-  const seenOrderIds = new Set();
 
   for (const row of rows) {
     if (!row || !row.some((c) => String(c || "").trim())) continue;
@@ -276,16 +274,6 @@ export const processSalesImport = async ({
       results.skipped.push({ reason: "Missing platformOrderId", row });
       continue;
     }
-
-    // ✅ Detect duplicates in the same file
-    if (seenOrderIds.has(platformOrderId)) {
-      results.duplicates.push({
-        platformOrderId,
-        reason: "Duplicate in uploaded file",
-      });
-      continue;
-    }
-    seenOrderIds.add(platformOrderId);
 
     try {
       const order = await Order.findOne({
@@ -313,7 +301,7 @@ export const processSalesImport = async ({
       await logAudit({
         action: "UPDATE_PAYMENT",
         user: req.user?._id,
-        description: `Paid order from ${platform} with Order ID: ${platformOrderId}`,
+        description: `Paid order from ${platform} with Order ID:  ${platformOrderId}`,
         collectionName: "Order",
         documentId: order._id,
         before,
@@ -438,11 +426,9 @@ export const processReturnsImport = async ({
     notFound: [],
     failedRestocks: [],
     skipped: [],
-    duplicates: [],
   };
 
   const rows = sheetData.slice(headerRowIndex + 1);
-  const seenOrderIds = new Set();
 
   for (const row of rows) {
     if (!row || !row.some((c) => String(c || "").trim())) continue;
@@ -454,16 +440,6 @@ export const processReturnsImport = async ({
       results.skipped.push({ reason: "Missing platformOrderId", row });
       continue;
     }
-
-    // ✅ Skip duplicates within this file
-    if (seenOrderIds.has(platformOrderId)) {
-      results.duplicates.push({
-        platformOrderId,
-        reason: "Duplicate in uploaded file - skipped",
-      });
-      continue;
-    }
-    seenOrderIds.add(platformOrderId);
 
     try {
       const order = await Order.findOne({
@@ -481,6 +457,8 @@ export const processReturnsImport = async ({
           platformOrderId,
           reason: "Order is already returned",
         });
+        order.isPaid = false;
+        await order.save();
         continue;
       }
 
@@ -515,7 +493,7 @@ export const processReturnsImport = async ({
       await logAudit({
         action: "UPDATE_RETURN_STATUS",
         user: req.user?._id,
-        description: `Returned order from ${platform} with Order ID: ${platformOrderId}`,
+        description: `Returned order from ${platform} with Order ID:  ${platformOrderId}`,
         collectionName: "Order",
         documentId: order._id,
         before,

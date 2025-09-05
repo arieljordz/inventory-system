@@ -1,0 +1,432 @@
+[
+  {
+    "_id": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "name": "Ring",
+    "price": 100,
+    "sku": "RING-SMALL-68944",
+    "description": "",
+    "quantity": 21,
+    "unit": "pcs",
+    "variant": "Small",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "ring",
+    "normalizedVariant": "small",
+    "createdAt": {
+      "$date": "2025-09-01T09:14:28.945Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-05T07:21:40.977Z"
+    },
+    "normalizedSku": "ring-small-68944",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "name": "Ring",
+    "price": 110,
+    "sku": "RING-BIG-19502",
+    "description": "",
+    "quantity": 96,
+    "unit": "pcs",
+    "variant": "Big",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "ring",
+    "normalizedVariant": "big",
+    "createdAt": {
+      "$date": "2025-09-01T09:15:19.503Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-05T07:15:19.011Z"
+    },
+    "normalizedSku": "ring-big-19502",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "name": "Carabiner",
+    "price": 60,
+    "sku": "CARAB-DEFAU-97240",
+    "description": "",
+    "quantity": 56,
+    "unit": "pcs",
+    "variant": "Default",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "carabiner",
+    "normalizedVariant": "default",
+    "createdAt": {
+      "$date": "2025-09-01T09:16:37.241Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-05T07:21:41.108Z"
+    },
+    "normalizedSku": "carab-defau-97240",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b564a9650c74e5be32384d"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-BLUE-49374",
+    "description": "",
+    "quantity": 99,
+    "unit": "pcs",
+    "variant": "Blue",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "blue",
+    "createdAt": {
+      "$date": "2025-09-01T09:17:29.374Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-05T07:15:02.324Z"
+    },
+    "normalizedSku": "rope-blue-49374",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "name": "Frame Ordinary",
+    "price": 1200,
+    "sku": "FRAME-8-FEE-10691",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "8 feet",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "frame ordinary",
+    "normalizedVariant": "8 feet",
+    "createdAt": {
+      "$date": "2025-09-01T09:36:50.692Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:10:09.468Z"
+    },
+    "normalizedSku": "frame-8-fee-10691",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b569a6650c74e5be3238b4"
+    },
+    "name": "Frame Stainless",
+    "price": 2000,
+    "sku": "FRAME-8-FEE-26175",
+    "description": "",
+    "quantity": 99,
+    "unit": "pcs",
+    "variant": "8 feet",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "frame stainless",
+    "normalizedVariant": "8 feet",
+    "createdAt": {
+      "$date": "2025-09-01T09:38:46.176Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-04T03:06:01.870Z"
+    },
+    "normalizedSku": "frame-8-fee-26175",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b569d1650c74e5be3238bb"
+    },
+    "name": "Frame",
+    "price": 1700,
+    "sku": "FRAME-10-FE-69282",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "10 feet",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "frame",
+    "normalizedVariant": "10 feet",
+    "createdAt": {
+      "$date": "2025-09-01T09:39:29.282Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:09:19.537Z"
+    },
+    "normalizedSku": "frame-10-fe-69282",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b571b505bc2b256f1ce81e"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-RED-89314",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "Red",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "red",
+    "createdAt": {
+      "$date": "2025-09-01T10:13:09.315Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:13:09.315Z"
+    },
+    "normalizedSku": "rope-red-89314",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b571f905bc2b256f1ce825"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-ORANG-57725",
+    "description": "",
+    "quantity": 94,
+    "unit": "pcs",
+    "variant": "Orange",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "orange",
+    "createdAt": {
+      "$date": "2025-09-01T10:14:17.725Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-04T06:34:28.333Z"
+    },
+    "normalizedSku": "rope-orang-57725",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5720e05bc2b256f1ce82c"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-DEFWH-78420",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "White",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "white",
+    "createdAt": {
+      "$date": "2025-09-01T10:14:38.420Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T19:28:20.190Z"
+    },
+    "normalizedSku": "rope-defwh-78420",
+    "__v": 0,
+    "normalizedDescription": ""
+  },
+  {
+    "_id": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-DARK-86140",
+    "description": "",
+    "quantity": 91,
+    "unit": "pcs",
+    "variant": "Dark Green",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "dark green",
+    "createdAt": {
+      "$date": "2025-09-01T10:16:26.140Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-05T07:08:03.172Z"
+    },
+    "normalizedSku": "rope-dark-86140",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5729205bc2b256f1ce842"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-GREEN-10873",
+    "description": "",
+    "quantity": 98,
+    "unit": "pcs",
+    "variant": "Green",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "green",
+    "createdAt": {
+      "$date": "2025-09-01T10:16:50.873Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-04T06:40:43.618Z"
+    },
+    "normalizedSku": "rope-green-10873",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "name": "RoundBar",
+    "price": 20,
+    "sku": "ROUND-2-FEE-53108",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "2 feet",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "roundbar",
+    "normalizedVariant": "2 feet",
+    "createdAt": {
+      "$date": "2025-09-01T10:17:33.109Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:42:55.578Z"
+    },
+    "normalizedSku": "round-2-fee-53108",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "name": "RoundBar",
+    "price": 40,
+    "sku": "ROUND-DEFAU-89656",
+    "description": "",
+    "quantity": 100,
+    "unit": "pcs",
+    "variant": "4 feet",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "roundbar",
+    "normalizedVariant": "4 feet",
+    "createdAt": {
+      "$date": "2025-09-01T10:18:09.656Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T19:28:10.135Z"
+    },
+    "normalizedSku": "round-defau-89656",
+    "__v": 0,
+    "normalizedDescription": ""
+  },
+  {
+    "_id": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb3"
+    },
+    "name": "Hammock",
+    "price": 330,
+    "sku": "HAMMO-DEFAU-76676",
+    "description": "",
+    "quantity": 99,
+    "unit": "pcs",
+    "variant": "Default",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "hammock",
+    "normalizedVariant": "default",
+    "createdAt": {
+      "$date": "2025-09-02T05:34:36.683Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-04T03:06:01.979Z"
+    },
+    "normalizedSku": "hammo-defau-76676",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-BLACK-39060",
+    "description": "",
+    "quantity": 80,
+    "unit": "pcs",
+    "variant": "Black",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "black",
+    "createdAt": {
+      "$date": "2025-09-02T05:47:19.061Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-05T07:15:16.650Z"
+    },
+    "normalizedSku": "rope-black-39060",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b7ae5a905e371d38cb14ab"
+    },
+    "name": "Rope",
+    "price": 200,
+    "sku": "ROPE-AZURE-86402",
+    "description": "",
+    "quantity": 99,
+    "unit": "pcs",
+    "variant": "Azure blue",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "rope",
+    "normalizedVariant": "azure blue",
+    "createdAt": {
+      "$date": "2025-09-03T02:56:26.403Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-03T03:27:34.573Z"
+    },
+    "normalizedSku": "rope-azure-86402",
+    "normalizedDescription": "",
+    "__v": 0
+  }
+]
