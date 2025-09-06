@@ -240,7 +240,7 @@ export const restockItem = async (req, res) => {
 export const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, variant, description, price, retailPrice, location, status } = req.body;
+    const { name, variant, description, price, retailPrice, location, status, quantity } = req.body;
 
     const item = await Item.findById(id);
     if (!item) {
@@ -257,6 +257,7 @@ export const updateItem = async (req, res) => {
     if (retailPrice !== undefined) item.retailPrice = retailPrice;
     if (location !== undefined) item.location = location;
     if (status !== undefined) item.status = status;
+    if (quantity !== undefined) item.quantity = quantity;
 
     const updatedItem = await item.save();
 

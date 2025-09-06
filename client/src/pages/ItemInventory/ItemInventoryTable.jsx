@@ -112,12 +112,11 @@ const ItemInventoryTable = ({
               />
             )}
             <div className="d-flex align-items-center">
-              <div className="font-weight-medium" title={item.name || ""}>
+              <div className="font-weight-medium">
                 <code className="px-2 py-1 rounded">
-                  {truncateText(item.name, 60)}
+                  {truncateText(item.name, 60)} {item.variant && `(${item.variant})`}
                 </code>
               </div>
-              <CopyToClipboardButton text={item.name} />
             </div>
           </div>
         </td>
