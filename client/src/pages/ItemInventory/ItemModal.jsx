@@ -2,11 +2,7 @@
 import React, { useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { UnitTypeEnum } from "../../enums/enums";
-import {
-  TextInput,
-  TextArea,
-  SelectInput,
-} from "../../components/FormInputs";
+import { TextInput, TextArea, SelectInput } from "../../components/FormInputs";
 
 const ItemModal = ({
   isOpen,
@@ -66,7 +62,7 @@ const ItemModal = ({
 
           {/* 🔹 Price & Quantity */}
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <TextInput
                 label="Price"
                 name="price"
@@ -77,7 +73,18 @@ const ItemModal = ({
                 required
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
+              <TextInput
+                label="Retail Price"
+                name="retailPrice"
+                type="number"
+                value={form.retailPrice}
+                onChange={onChange}
+                placeholder="Enter item retail price"
+                required
+              />
+            </Col>
+            <Col md={4}>
               <TextInput
                 label="Quantity"
                 name="quantity"
@@ -86,7 +93,7 @@ const ItemModal = ({
                 onChange={onChange}
                 placeholder="Enter quantity"
                 required
-                disabled={isEditMode} // prevent changing initial stock
+                disabled={isEditMode}
               />
             </Col>
           </Row>

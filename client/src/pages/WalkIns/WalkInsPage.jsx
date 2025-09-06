@@ -67,6 +67,7 @@ const WalkInsPage = () => {
         name: item.name,
         variant: item.variant || "",
         price: item.price,
+        retailPrice: item.retailPrice,
         quantity: 1,
         stock: item.quantity,
       },
@@ -93,7 +94,7 @@ const WalkInsPage = () => {
     setCart((prev) => prev.filter((c) => c.itemId !== itemId));
   };
 
-  const totalAmount = cart.reduce((sum, c) => sum + c.price * c.quantity, 0);
+  const totalAmount = cart.reduce((sum, c) => sum + c.retailPrice * c.quantity, 0);
 
   // --- Submit transaction ---
   const handleSubmit = async () => {
@@ -125,9 +126,9 @@ const WalkInsPage = () => {
   return (
     <>
       <Navpath
-        levelOne="Walk In Transactions"
-        levelTwo="Walk Ins"
-        levelThree="Walk Ins"
+        levelOne="Walk-In Transactions"
+        levelTwo="Walk-Ins"
+        levelThree="Walk-Ins"
       />
 
       <section className="content">

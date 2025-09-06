@@ -41,6 +41,7 @@ export const ReportTypeEnum = Object.freeze({
 
 export const NewReportTypeEnum = Object.freeze({
   ORDERS_REPORT: "Orders Report",
+  WALK_INS_REPORT: "Walk-Ins Report",
   PRODUCTS_REPORT: "Products Report",
   ITEMS_REPORT: "Items Report",
   ITEM_MOVEMENTS_REPORT: "Item Movements Report",
@@ -57,4 +58,10 @@ export const CourierEnum = Object.freeze({
   SPX: "Standard Local-SPX Express",
   JNT: "Standard Local-J&T Express",
   LBC: "Standard Local-LBC Express",
+});
+
+export const PaymentMethodEnum = Object.freeze({
+  CASH: "Cash",
+  GCASH: "GCash",
+  BANK_TRANSFER: "Bank Transfer",
 });

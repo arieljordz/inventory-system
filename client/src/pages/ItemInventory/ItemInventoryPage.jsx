@@ -16,6 +16,7 @@ import { useItemInventory } from "../../hooks/useItemInventory";
 const INITIAL_FORM = {
   name: "",
   price: "",
+  retailPrice: "",
   quantity: 0,
   variant: "Default",
   unit: "pcs",
@@ -28,6 +29,7 @@ const INITIAL_RESTOCK_FORM = {
   _id: "",
   name: "",
   price: 0,
+  retailPrice: 0,
   quantity: 1,
   remarks: "",
 };

@@ -6,15 +6,13 @@ import {
   MovementTypeEnum,
   PlatformEnum,
   StatusEnum,
+  PaymentMethodEnum,
 } from "../../enums/enums";
 
 // Mapping report type → filters
 const SHOW_FILTERS = {
-  [NewReportTypeEnum.ORDERS_REPORT]: [
-    "platform",
-    "paymentStatus",
-    "status",
-  ],
+  [NewReportTypeEnum.ORDERS_REPORT]: ["platform", "paymentStatus", "status"],
+  [NewReportTypeEnum.WALK_INS_REPORT]: ["buyerName", "paymentMethod"],
   [NewReportTypeEnum.PRODUCTS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEMS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]: ["movementType"],
@@ -27,10 +25,26 @@ const SHOW_FILTERS = {
 };
 
 const FILTER_OPTIONS = {
-  platform: Object.values(PlatformEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
-  paymentStatus: Object.values(PaymentStatusEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
-  movementType: Object.values(MovementTypeEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
-  status: Object.values(StatusEnum).map((v) => ({ label: v, value: v.toLowerCase() })),
+  platform: Object.values(PlatformEnum).map((v) => ({
+    label: v,
+    value: v.toLowerCase(),
+  })),
+  paymentStatus: Object.values(PaymentStatusEnum).map((v) => ({
+    label: v,
+    value: v.toLowerCase(),
+  })),
+  movementType: Object.values(MovementTypeEnum).map((v) => ({
+    label: v,
+    value: v.toLowerCase(),
+  })),
+  status: Object.values(StatusEnum).map((v) => ({
+    label: v,
+    value: v.toLowerCase(),
+  })),
+  paymentMethod: Object.values(PaymentMethodEnum).map((v) => ({
+    label: v,
+    value: v.toLowerCase(),
+  })),
 };
 
 const FILTER_LABELS = {
@@ -38,6 +52,8 @@ const FILTER_LABELS = {
   paymentStatus: "Payment Status",
   movementType: "Movement Type",
   status: "Status",
+  buyerName: "Buyer Name",
+  paymentMethod: "Payment Method",
 };
 
 const ReportFilters = ({
@@ -53,13 +69,11 @@ const ReportFilters = ({
   onResetFilters,
   loading,
 }) => {
-  // Options for report type dropdown
   const reportOptions = useMemo(
     () => Object.values(NewReportTypeEnum).map((v) => ({ label: v, value: v })),
     []
   );
 
-  // Determine which filters to show for the selected report
   const activeFilters = SHOW_FILTERS[reportType] || [];
 
   return (
@@ -101,13 +115,23 @@ const ReportFilters = ({
       <div className="row g-3">
         {activeFilters.map((key) => (
           <div className="col-md-2" key={key}>
-            <SelectInput
-              label={FILTER_LABELS[key]}
-              name={key}
-              value={filters[key] || ""}
-              onChange={handleFilterChange}
-              options={[{ label: "All", value: "" }, ...(FILTER_OPTIONS[key] || [])]}
-            />
+            {key === "buyerName" ? (
+              <TextInput
+                label={FILTER_LABELS[key]}
+                name={key}
+                value={filters[key] || ""}
+                onChange={handleFilterChange}
+                placeholder={"Enter buyer name"}
+              />
+            ) : (
+              <SelectInput
+                label={FILTER_LABELS[key]}
+                name={key}
+                value={filters[key] || ""}
+                onChange={handleFilterChange}
+                options={[{ label: "All", value: "" }, ...(FILTER_OPTIONS[key] || [])]}
+              />
+            )}
           </div>
         ))}
 

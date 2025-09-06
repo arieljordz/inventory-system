@@ -28,8 +28,7 @@ const columnHandlers = {
   order: (row) => row.order?.platformOrderId || row.platformOrderId,
   platformOrderId: (row) => row.order?.platformOrderId || row.platformOrderId,
 
-  price: (row) =>
-    row.product?.price || row.price || row.item?.price || 0,
+  price: (row) => row.product?.price || row.price || row.item?.price || 0,
 
   totalPrice: (row) => {
     if (row.product?.price && row.quantity) {
@@ -47,8 +46,7 @@ const columnHandlers = {
     return 0;
   },
 
-  payment: (row) =>
-    row.order?.isPaid || row?.isPaid ? "Paid" : "Unpaid",
+  payment: (row) => (row.order?.isPaid || row?.isPaid ? "Paid" : "Unpaid"),
 
   movementType: (row) => row.movementType || row.type,
   type: (row) => row.movementType || row.type,
@@ -56,11 +54,15 @@ const columnHandlers = {
   quantity: (row) => row.quantity,
 
   status: (row) => row.order?.status || row.status,
-   
-  createdAt: (row) => (row.createdAt ? moment(row.createdAt).format("YYYY-MM-DD") : ""),
-  updatedAt: (row) => (row.updatedAt ? moment(row.updatedAt).format("YYYY-MM-DD") : ""),
-  orderDate: (row) => (row.orderDate ? moment(row.orderDate).format("YYYY-MM-DD") : ""),
-  movementDate: (row) => (row.movementDate ? moment(row.movementDate).format("YYYY-MM-DD") : ""),
+
+  createdAt: (row) =>
+    row.createdAt ? moment(row.createdAt).format("YYYY-MM-DD") : "",
+  updatedAt: (row) =>
+    row.updatedAt ? moment(row.updatedAt).format("YYYY-MM-DD") : "",
+  orderDate: (row) =>
+    row.orderDate ? moment(row.orderDate).format("YYYY-MM-DD") : "",
+  movementDate: (row) =>
+    row.movementDate ? moment(row.movementDate).format("YYYY-MM-DD") : "",
 };
 
 // ✅ Generic flattener
@@ -115,6 +117,30 @@ export const reportColumnsConfig = {
     { key: "orderDate", label: "Order Date", format: "date", align: "center" },
   ],
 
+  [NewReportTypeEnum.WALK_INS_REPORT]: [
+    { key: "itemName", label: "Items", format: "proper", align: "left" },
+    {
+      key: "total",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "buyerName", label: "Buyer", format: "proper", align: "center" },
+    {
+      key: "paymentMethod",
+      label: "Payment",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "createdAt",
+      label: "Transaction Date",
+      format: "date",
+      align: "center",
+    },
+  ],
+
   [NewReportTypeEnum.PRODUCTS_REPORT]: [
     { key: "name", label: "Product Name", format: "proper", align: "left" },
     { key: "sku", label: "SKU", format: "uppercase", align: "center" },
@@ -144,7 +170,14 @@ export const reportColumnsConfig = {
     { key: "quantity", label: "Quantity", format: "number", align: "center" },
     {
       key: "price",
-      label: "Price",
+      label: "Original Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "retailPrice",
+      label: "Retail Price",
       format: "money",
       align: "right",
       total: true,
@@ -173,6 +206,13 @@ export const reportColumnsConfig = {
     {
       key: "price",
       label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "retailPrice",
+      label: "Retail Price",
       format: "money",
       align: "right",
       total: true,

@@ -91,6 +91,7 @@ export const addItem = async (req, res) => {
     const {
       name,
       price,
+      retailPrice,
       description,
       quantity,
       unit,
@@ -124,6 +125,7 @@ export const addItem = async (req, res) => {
     const newItem = new Item({
       name,
       price,
+      retailPrice,
       sku,
       description,
       quantity,
@@ -175,7 +177,7 @@ export const addItem = async (req, res) => {
 export const restockItem = async (req, res) => {
   try {
     const { itemId } = req.params;
-    const { quantity, price, reference, location, remarks } = req.body;
+    const { quantity, price, retailPrice, reference, location, remarks } = req.body;
 
     if (!quantity || quantity <= 0) {
       return res
@@ -194,6 +196,7 @@ export const restockItem = async (req, res) => {
     item.status = StatusEnum.AVAILABLE;
     if (price) {
       item.price = price;
+      item.retailPrice = retailPrice;
     }
     await item.save();
 
@@ -237,7 +240,7 @@ export const restockItem = async (req, res) => {
 export const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, variant, description, price, location, status } = req.body;
+    const { name, variant, description, price, retailPrice, location, status } = req.body;
 
     const item = await Item.findById(id);
     if (!item) {
@@ -251,6 +254,7 @@ export const updateItem = async (req, res) => {
     if (variant !== undefined) item.variant = variant;
     if (description !== undefined) item.description = description;
     if (price !== undefined) item.price = price;
+    if (retailPrice !== undefined) item.retailPrice = retailPrice;
     if (location !== undefined) item.location = location;
     if (status !== undefined) item.status = status;
 

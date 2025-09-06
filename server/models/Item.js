@@ -12,6 +12,10 @@ const itemSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    retailPrice: {
+      type: Number,
+      required: true,
+    },
     sku: {
       type: String,
       required: true,

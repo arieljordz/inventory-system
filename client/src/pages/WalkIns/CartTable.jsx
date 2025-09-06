@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
+import { formatAmount } from "../../utils/commonUtils";
+import { TextInput, SelectInput } from "../../components/FormInputs";
+import { PaymentMethodEnum } from "../../enums/enums";
 
 const CartTable = ({
   cart,
@@ -11,6 +14,10 @@ const CartTable = ({
   totalAmount,
   handleSubmit,
 }) => {
+  const paymentMethodOptions = useMemo(
+    () => Object.values(PaymentMethodEnum).map((v) => ({ label: v, value: v })),
+    []
+  );
   return (
     <div className="card h-100">
       <div className="card-header">
@@ -38,7 +45,7 @@ const CartTable = ({
                     <td>
                       {c.name} {c.variant && `(${c.variant})`}
                     </td>
-                    <td>₱{c.price}</td>
+                    <td>{formatAmount(c.retailPrice)}</td>
                     <td>
                       <input
                         type="number"
@@ -48,10 +55,10 @@ const CartTable = ({
                           updateQuantity(c.itemId, e.target.value)
                         }
                         className="form-control form-control-sm text-center"
-                        style={{ width: "120px" }}
+                        style={{ width: "100px" }}
                       />
                     </td>
-                    <td>₱{c.price * c.quantity}</td>
+                    <td>{formatAmount(c.retailPrice * c.quantity)}</td>
                     <td>
                       <button
                         className="btn btn-sm btn-danger"
@@ -81,19 +88,16 @@ const CartTable = ({
         </div>
 
         <div className="form-group">
-          <label>Payment Method</label>
-          <select
+          <SelectInput
+            label="Payment Method"
             value={paymentMethod}
             onChange={(e) => setPaymentMethod(e.target.value)}
-            className="form-control"
-          >
-            <option value="Cash">Cash</option>
-            <option value="GCash">GCash</option>
-            <option value="Bank Transfer">Bank Transfer</option>
-          </select>
+            options={paymentMethodOptions}
+            required
+          />
         </div>
 
-        <h5 className="mt-3">Total: ₱{totalAmount}</h5>
+        <h5 className="mt-3">Total: {formatAmount(totalAmount)}</h5>
         <button className="btn btn-success mt-2 w-100" onClick={handleSubmit}>
           Complete Transaction
         </button>

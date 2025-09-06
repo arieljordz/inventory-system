@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useRef } from "react";
+import { formatAmount } from "../../utils/commonUtils";
 
 const ItemsTable = ({
   items,
@@ -10,6 +11,14 @@ const ItemsTable = ({
   setPage,
   addToCart,
 }) => {
+  const inputRef = useRef(null);
+
+  const handleClearSearch = () => {
+    setSearch("");
+    setPage(1);
+    inputRef.current.focus();
+  };
+
   return (
     <div className="card h-100">
       <div className="card-header">
@@ -17,11 +26,17 @@ const ItemsTable = ({
       </div>
 
       <div className="card-body">
-        {/* Search with icon */}
+        {/* Search input */}
         <div className="input-group mb-2">
+          <div className="input-group-prepend">
+            <span className="input-group-text">
+              <i className="fas fa-search"></i>
+            </span>
+          </div>
           <input
+            ref={inputRef}
             type="text"
-            className="form-control form-control-sm"
+            className="form-control"
             placeholder="Search items..."
             value={search}
             onChange={(e) => {
@@ -29,10 +44,21 @@ const ItemsTable = ({
               setPage(1);
             }}
           />
-          <span className="input-group-text">
-            <i className="fas fa-search"></i>
-          </span>
+          {search && (
+            <div className="input-group-append">
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                onClick={handleClearSearch}
+                title="Clear search"
+              >
+                <i className="fas fa-times"></i>
+              </button>
+            </div>
+          )}
         </div>
+
+        {/* Table */}
         <div className="table-responsive">
           <table className="table table-hover">
             <thead>
@@ -48,10 +74,7 @@ const ItemsTable = ({
                 <tr>
                   <td colSpan="4" className="text-center py-4">
                     <div className="d-flex justify-content-center align-items-center">
-                      <div
-                        className="spinner-border text-primary mr-2"
-                        role="status"
-                      >
+                      <div className="spinner-border text-primary mr-2" role="status">
                         <span className="sr-only">Loading...</span>
                       </div>
                       <span className="text-muted">Loading items...</span>
@@ -64,14 +87,14 @@ const ItemsTable = ({
                     <td>
                       {item.name} {item.variant && `(${item.variant})`}
                     </td>
-                    <td>₱{item.price}</td>
+                    <td>{formatAmount(item.retailPrice)}</td>
                     <td>{item.quantity}</td>
                     <td>
                       <button
                         className="btn btn-sm btn-primary"
                         onClick={() => addToCart(item)}
                       >
-                        <i class="fas fa-plus mr-1"></i>
+                        <i className="fas fa-plus mr-1"></i>
                         Add
                       </button>
                     </td>

@@ -7,6 +7,7 @@ import InventoryDetail from "../models/InventoryDetail.js";
 import Order from "../models/Order.js";
 import ItemMovement from "../models/ItemMovement.js";
 import Item from "../models/Item.js";
+import WalkInTransaction from "../models/WalkInTransaction.js";
 import { NewReportTypeEnum } from "../enums/enums.js";
 import {
   buildDateFilter,
@@ -47,6 +48,58 @@ export const getOrdersReport = async (filters = {}) => {
   return flattenReportData(
     rows,
     reportColumnsConfig[NewReportTypeEnum.ORDERS_REPORT]
+  );
+};
+
+export const getWalkInsReport = async (filters = {}) => {
+  const { startDate, endDate, buyerName, paymentMethod } = filters;
+
+  // Build date filter
+  const filter = buildDateFilter(startDate, endDate, "createdAt");
+
+  // Optional filters
+  if (buyerName && buyerName.trim() !== "") {
+    filter.buyerName = { $regex: buyerName.trim(), $options: "i" };
+  }
+
+  if (paymentMethod && paymentMethod !== "All") {
+    filter.paymentMethod = {
+      $regex: `^${paymentMethod.trim()}$`,
+      $options: "i",
+    };
+  }
+
+  const rows = await WalkInTransaction.find(filter)
+    .populate("items.item")
+    .lean();
+
+  // Map transactions into report-ready rows
+  const mappedRows = rows.map((tx) => {
+    // Format each item as "(Quantity)ItemName-Variant"
+    const itemNames = tx.items
+      .map((i) => {
+        const qty = i.quantity;
+        const name = i.item.name;
+        const variant = i.item.variant ? `-${i.item.variant}` : "";
+        return `(${qty})${name}${variant}`;
+      })
+      .join(", ");
+
+    const totalPrice = tx.items.reduce((sum, i) => sum + i.total, 0);
+
+    return {
+      itemName: itemNames,
+      quantity: tx.items.reduce((sum, i) => sum + i.quantity, 0), // total quantity
+      total: totalPrice,
+      buyerName: tx.buyerName,
+      paymentMethod: tx.paymentMethod,
+      createdAt: tx.createdAt,
+    };
+  });
+
+  return flattenReportData(
+    mappedRows,
+    reportColumnsConfig[NewReportTypeEnum.WALK_INS_REPORT]
   );
 };
 
@@ -139,7 +192,9 @@ export const getInventoryDetailsReport = async (filters = {}) => {
   // Filter by Order status
   if (status && status !== "All") {
     const statusRegex = new RegExp(`^${status.trim()}$`, "i");
-    rows = rows.filter((row) => row.order && statusRegex.test(row.order.status));
+    rows = rows.filter(
+      (row) => row.order && statusRegex.test(row.order.status)
+    );
   }
 
   return flattenReportData(
@@ -154,7 +209,14 @@ export const generateReport = async (req, res) => {
       reportType,
       startDate,
       endDate,
-      filters: { platform, paymentStatus, movementType, status },
+      filters: {
+        platform,
+        paymentStatus,
+        movementType,
+        status,
+        buyerName,
+        paymentMethod,
+      },
     } = req.body;
 
     console.log("req.body:", req.body);
@@ -170,6 +232,15 @@ export const generateReport = async (req, res) => {
           status,
         });
         // console.log("ORDERS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.WALK_INS_REPORT:
+        data = await getWalkInsReport({
+          startDate,
+          endDate,
+          buyerName,
+          paymentMethod,
+        });
+        // console.log("WALK_INS_REPORT:", data);
         break;
       case NewReportTypeEnum.PRODUCTS_REPORT:
         data = await getProductsReport({

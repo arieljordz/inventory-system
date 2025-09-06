@@ -38,6 +38,30 @@ export const reportColumnsConfig = {
     { key: "orderDate", label: "Order Date", format: "date", align: "center" },
   ],
 
+  [NewReportTypeEnum.WALK_INS_REPORT]: [
+    { key: "itemName", label: "Items", format: "proper", align: "left" },
+    {
+      key: "total",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "buyerName", label: "Buyer", format: "proper", align: "center" },
+    {
+      key: "paymentMethod",
+      label: "Payment",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "createdAt",
+      label: "Transaction Date",
+      format: "date",
+      align: "center",
+    },
+  ],
+
   [NewReportTypeEnum.PRODUCTS_REPORT]: [
     { key: "name", label: "Product Name", format: "proper", align: "left" },
     { key: "sku", label: "SKU", format: "uppercase", align: "center" },
@@ -67,7 +91,14 @@ export const reportColumnsConfig = {
     { key: "quantity", label: "Quantity", format: "number", align: "center" },
     {
       key: "price",
-      label: "Price",
+      label: "Original Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "retailPrice",
+      label: "Retail Price",
       format: "money",
       align: "right",
       total: true,
@@ -96,6 +127,13 @@ export const reportColumnsConfig = {
     {
       key: "price",
       label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "retailPrice",
+      label: "Retail Price",
       format: "money",
       align: "right",
       total: true,

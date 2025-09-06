@@ -46,17 +46,17 @@ export const createWalkInTransaction = async (req, res) => {
       await movement.save();
 
       // log audit
-      await logAudit({
-        action: "WALKIN_SALE",
-        user: req.user?._id,
-        description: `Walk-in sale: ${item.name}, qty: ${quantity}, new balance: ${item.quantity}`,
-        collectionName: "Item",
-        documentId: item._id,
-        before,
-        after: item.toObject(),
-        ip: req.ip,
-        userAgent: req.headers["user-agent"],
-      });
+      // await logAudit({
+      //   action: "WALKIN_SALE",
+      //   user: req.user?._id,
+      //   description: `Walk-in sale: ${item.name}, qty: ${quantity}, new balance: ${item.quantity}`,
+      //   collectionName: "Item",
+      //   documentId: item._id,
+      //   before,
+      //   after: item.toObject(),
+      //   ip: req.ip,
+      //   userAgent: req.headers["user-agent"],
+      // });
 
       // record in transaction
       transactionItems.push({

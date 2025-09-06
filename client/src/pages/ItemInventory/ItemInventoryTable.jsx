@@ -135,6 +135,9 @@ const ItemInventoryTable = ({
           <span className="font-weight-bold">{formatAmount(item.price)}</span>
         </td>
         <td className="text-right align-middle">
+          <span className="font-weight-bold">{formatAmount(item.retailPrice)}</span>
+        </td>
+        <td className="text-right align-middle">
           <span className="font-weight-bold">
             {formatAmount(computeTotalPrice(item.quantity, item.price))}
           </span>
@@ -171,7 +174,9 @@ const ItemInventoryTable = ({
                 <th className="text-center" style={{ width: "200px" }}>
                   SKU
                 </th>
-                <th>Item Name</th>
+                <th className="text-left" style={{ width: "200px" }}>
+                  Item Name
+                </th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
                 </th>
@@ -179,7 +184,10 @@ const ItemInventoryTable = ({
                   Stock
                 </th>
                 <th className="text-right" style={{ width: "100px" }}>
-                  Price
+                  Original Price
+                </th>
+                <th className="text-right" style={{ width: "100px" }}>
+                  Retail Price
                 </th>
                 <th className="text-right" style={{ width: "100px" }}>
                   Total Price
