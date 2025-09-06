@@ -65,7 +65,7 @@ const ItemInventoryTable = ({
     if (loading) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="11" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -80,7 +80,7 @@ const ItemInventoryTable = ({
     if (!items || items.length === 0) {
       return (
         <tr>
-          <td colSpan="10" className="text-center py-4">
+          <td colSpan="11" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
               No items found

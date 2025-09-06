@@ -127,7 +127,7 @@ const WalkInsPage = () => {
     <>
       <Navpath
         levelOne="Walk-In Transactions"
-        levelTwo="Walk-Ins"
+        levelTwo="Home"
         levelThree="Walk-Ins"
       />
 
