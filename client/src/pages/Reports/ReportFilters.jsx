@@ -11,7 +11,12 @@ import {
 
 // Mapping report type → filters
 const SHOW_FILTERS = {
-  [NewReportTypeEnum.ORDERS_REPORT]: ["platform", "paymentStatus", "status"],
+  [NewReportTypeEnum.ORDERS_REPORT]: [
+    "orderId",
+    "platform",
+    "paymentStatus",
+    "status",
+  ],
   [NewReportTypeEnum.WALK_INS_REPORT]: ["buyerName", "paymentMethod"],
   [NewReportTypeEnum.PRODUCTS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEMS_REPORT]: ["status"],
@@ -52,6 +57,7 @@ const FILTER_LABELS = {
   paymentStatus: "Payment Status",
   movementType: "Movement Type",
   status: "Status",
+  orderId: "Order ID",
   buyerName: "Buyer Name",
   paymentMethod: "Payment Method",
 };
@@ -121,7 +127,15 @@ const ReportFilters = ({
                 name={key}
                 value={filters[key] || ""}
                 onChange={handleFilterChange}
-                placeholder={"Enter buyer name"}
+                placeholder="Enter buyer name"
+              />
+            ) : key === "orderId" ? (
+              <TextInput
+                label={FILTER_LABELS[key]}
+                name={key}
+                value={filters[key] || ""}
+                onChange={handleFilterChange}
+                placeholder="Enter order ID"
               />
             ) : (
               <SelectInput
@@ -129,7 +143,10 @@ const ReportFilters = ({
                 name={key}
                 value={filters[key] || ""}
                 onChange={handleFilterChange}
-                options={[{ label: "All", value: "" }, ...(FILTER_OPTIONS[key] || [])]}
+                options={[
+                  { label: "All", value: "" },
+                  ...(FILTER_OPTIONS[key] || []),
+                ]}
               />
             )}
           </div>

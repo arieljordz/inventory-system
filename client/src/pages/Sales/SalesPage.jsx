@@ -3,7 +3,6 @@ import Navpath from "../../components/Navpath";
 import { InfoBox } from "../../components/FormInputs";
 import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
-import DateRangeFilter from "../../components/DateRangeFilter";
 import SalesTable from "./SalesTable";
 import ImportModal from "./ImportModal";
 import ImportButtons from "./ImportButtons";
@@ -24,8 +23,6 @@ const SalesPage = () => {
     itemsPerPage,
     setItemsPerPage,
     totalItems,
-    dateRange,
-    setDateRange,
     fetchSales,
   } = useSalesData(5);
 
@@ -50,12 +47,9 @@ const SalesPage = () => {
           <div className="row">
             <InfoBox label="Total Sales" icon="fas fa-money-bill-wave" color="success" value={formatAmount(stats.totalSales)} />
             <InfoBox label="Total Orders" icon="fas fa-receipt" color="primary" value={stats.totalOrders} />
-            <InfoBox label="Revenue Today" icon="fas fa-calendar-day" color="info" value={formatAmount(stats.revenueToday)} />
-            <InfoBox label="Unpaid Orders" icon="fas fa-clock" color="danger" value={stats.unpaidOrders} />
+            <InfoBox label="Revenue Today" icon="fas fa-check-circle" color="info" value={stats.paidOrders} />
+            <InfoBox label="Unpaid Orders" icon="fas fas fa-times-circle" color="danger" value={stats.unpaidOrders} />
           </div>
-
-          {/* 🔹 Date Filter */}
-          <DateRangeFilter dateRange={dateRange} onDateChange={setDateRange} onFilter={fetchSales} />
 
           {/* 🔹 Import Buttons */}
           <ImportButtons

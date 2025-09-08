@@ -18,38 +18,59 @@ import {
 import { StatusEnum } from "../enums/enums.js";
 import { restockItemQuantities } from "../utils/inventoryUtils.js";
 
-export const getSalesStatsByDate = async (req, res) => {
+export const getSalesStats = async (req, res) => {
+  try {
+    const result = await Order.aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
+      { $unwind: "$product" },
+      {
+        $group: {
+          _id: null,
+          totalOrders: { $sum: 1 },
+          totalSales: { $sum: { $multiply: ["$quantity", "$product.price"] } },
+          unpaidOrders: { $sum: { $cond: [{ $eq: ["$isPaid", false] }, 1, 0] } },
+          paidOrders: { $sum: { $cond: [{ $eq: ["$isPaid", true] }, 1, 0] } },
+        },
+      },
+    ]);
+
+    const stats = result[0] || {
+      totalOrders: 0,
+      totalSales: 0,
+      unpaidOrders: 0,
+      paidOrders: 0,
+    };
+
+    res.json(stats);
+  } catch (error) {
+    console.error("Error fetching sales stats:", error);
+    res.status(500).json({ message: "Failed to fetch sales stats" });
+  }
+};
+
+export const getOrders = async (req, res) => {
   try {
     const page = Math.max(parseInt(req.query.page) || 1, 1);
     const limit = Math.min(Math.max(parseInt(req.query.limit) || 10, 1), 100);
     const search = normalizeText((req.query.search || "").trim());
-    const { start, end } = req.query;
-
     const skip = (page - 1) * limit;
 
-    /** 🔹 Date range filter */
-    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
-    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
+    // Base filter
+    let match = {};
 
-    if (isNaN(startDate) || isNaN(endDate)) {
-      return res.status(400).json({ message: "Invalid date range" });
-    }
-
-    const todayStart = moment.tz("Asia/Manila").startOf("day").toDate();
-    const todayEnd = moment.tz("Asia/Manila").endOf("day").toDate();
-
-    /** 🔹 Base filter */
-    let match = {
-      createdAt: { $gte: startDate, $lte: endDate },
-    };
-
-    /** 🔹 Search filter */
+    // Search filter
     if (search) {
       const normalizedSearch = normalizeString(search);
       const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
       const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
-      // Handle paid/unpaid
       let isPaidFilter;
       if (search.toLowerCase() === "paid") isPaidFilter = true;
       else if (search.toLowerCase() === "unpaid") isPaidFilter = false;
@@ -63,81 +84,23 @@ export const getSalesStatsByDate = async (req, res) => {
         { "product.description": rawSafeRegex },
       ];
 
-      if (isPaidFilter !== undefined) {
-        match.$or.push({ isPaid: isPaidFilter });
-      }
+      if (isPaidFilter !== undefined) match.$or.push({ isPaid: isPaidFilter });
     }
 
-    /** 🔹 Main aggregation pipeline */
+    // Fetch paginated orders
     const pipeline = [
-      {
-        $lookup: {
-          from: "products",
-          localField: "product",
-          foreignField: "_id",
-          as: "product",
-        },
-      },
+      { $lookup: { from: "products", localField: "product", foreignField: "_id", as: "product" } },
       { $unwind: "$product" },
       { $match: match },
-      { $sort: { createdAt: -1 } },
-      {
-        $facet: {
-          data: [{ $skip: skip }, { $limit: limit }],
-          stats: [
-            {
-              $group: {
-                _id: null,
-                totalOrders: { $sum: 1 },
-                totalSales: {
-                  $sum: { $multiply: ["$quantity", "$product.price"] },
-                },
-                unpaidOrders: {
-                  $sum: { $cond: [{ $eq: ["$isPaid", false] }, 1, 0] },
-                },
-              },
-            },
-          ],
-          total: [{ $count: "count" }],
-        },
-      },
+      { $sort: { orderDate: -1 } },
+      { $skip: skip },
+      { $limit: limit },
     ];
 
-    const result = await Order.aggregate(pipeline);
+    const orders = await Order.aggregate(pipeline);
 
-    const orders = result[0].data;
-    const stats = result[0].stats[0] || {
-      totalOrders: 0,
-      totalSales: 0,
-      unpaidOrders: 0,
-    };
-    const totalOrders = result[0].total[0]?.count || 0;
-
-    /** 🔹 Today’s revenue aggregation */
-    const todaysRevenueAgg = await Order.aggregate([
-      {
-        $match: { createdAt: { $gte: todayStart, $lte: todayEnd } },
-      },
-      {
-        $lookup: {
-          from: "products",
-          localField: "product",
-          foreignField: "_id",
-          as: "product",
-        },
-      },
-      { $unwind: "$product" },
-      {
-        $group: {
-          _id: null,
-          revenueToday: {
-            $sum: { $multiply: ["$quantity", "$product.price"] },
-          },
-        },
-      },
-    ]);
-
-    const revenueToday = todaysRevenueAgg[0]?.revenueToday || 0;
+    // Total orders for pagination
+    const totalOrders = await Order.countDocuments(match);
 
     res.json({
       orders,
@@ -145,13 +108,10 @@ export const getSalesStatsByDate = async (req, res) => {
       totalPages: Math.max(Math.ceil(totalOrders / limit), 1),
       currentPage: page,
       pageSize: limit,
-      totalSales: stats.totalSales,
-      unpaidOrders: stats.unpaidOrders,
-      revenueToday,
     });
   } catch (error) {
-    console.error("Error getting order stats:", error);
-    res.status(500).json({ message: "Failed to get order stats" });
+    console.error("Error fetching orders:", error);
+    res.status(500).json({ message: "Failed to fetch orders" });
   }
 };
 

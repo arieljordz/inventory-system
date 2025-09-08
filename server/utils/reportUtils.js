@@ -30,6 +30,16 @@ const columnHandlers = {
 
   price: (row) => row.product?.price || row.price || row.item?.price || 0,
 
+  retailPrice: (row) => {
+    if (row.retailPrice) {
+      return row.retailPrice;
+    }
+    if (row.item && row.item?.retailPrice) {
+      return row.item?.retailPrice;
+    }
+    return 0;
+  },
+
   totalPrice: (row) => {
     if (row.product?.price && row.quantity) {
       return row.product.price * row.quantity;
@@ -111,7 +121,6 @@ export const reportColumnsConfig = {
       align: "right",
       total: true,
     },
-    { key: "courier", label: "Courier", align: "center" },
     { key: "status", label: "Status", format: "proper", align: "center" },
     { key: "payment", label: "Payment", format: "proper", align: "center" },
     { key: "orderDate", label: "Order Date", format: "date", align: "center" },
@@ -269,7 +278,6 @@ export const reportColumnsConfig = {
       align: "right",
       total: true,
     },
-    { key: "courier", label: "Courier", align: "center" },
     { key: "status", label: "Status", format: "proper", align: "center" },
     { key: "payment", label: "Payment", format: "proper", align: "center" },
     {

@@ -16,7 +16,8 @@ import {
 } from "../utils/reportUtils.js";
 
 export const getOrdersReport = async (filters = {}) => {
-  const { startDate, endDate, paymentStatus, platform, status } = filters;
+  const { startDate, endDate, paymentStatus, platform, status, orderId } =
+    filters;
 
   const filter = buildDateFilter(startDate, endDate, "orderDate");
 
@@ -34,6 +35,10 @@ export const getOrdersReport = async (filters = {}) => {
 
   if (status && status !== "All") {
     filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
+  }
+
+  if (orderId && orderId.trim() !== "") {
+    filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
 
   // console.log("OrdersReportfilter:", filter);
@@ -210,6 +215,7 @@ export const generateReport = async (req, res) => {
       startDate,
       endDate,
       filters: {
+        orderId,
         platform,
         paymentStatus,
         movementType,
@@ -230,6 +236,7 @@ export const generateReport = async (req, res) => {
           paymentStatus,
           platform,
           status,
+          orderId,
         });
         // console.log("ORDERS_REPORT:", data);
         break;

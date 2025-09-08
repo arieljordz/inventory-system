@@ -1,6 +1,9 @@
 // src/hooks/useSalesData.js
 import { useState, useEffect, useCallback } from "react";
-import { getSalesStatsByDate } from "../services/salesService";
+import {
+  getSalesStats,
+  getOrders,
+} from "../services/salesService";
 import { getCurrentDate, getPastWeekDate } from "../utils/commonUtils";
 import { useDebounce } from "./useDebounce";
 
@@ -35,32 +38,16 @@ export const useSalesData = (initialItemsPerPage = 5) => {
   const fetchSales = useCallback(async () => {
     setLoading(true);
     try {
-      const { startDate, endDate } = dateRange;
-
-      const res = await getSalesStatsByDate({
-        start: startDate,
-        end: endDate,
+      const res = await getOrders({
         page: currentPage,
         limit: itemsPerPage,
         search: debouncedSearchTerm,
       });
 
-      const {
-        orders: fetchedOrders,
-        totalOrders,
-        totalPages,
-        totalSales,
-        unpaidOrders,
-        revenueToday,
-      } = res.data;
+      // console.log("order res:", res);
+      const { orders: fetchedOrders, totalOrders, totalPages } = res.data;
 
       setOrders(fetchedOrders || []);
-      setStats({
-        totalOrders: totalOrders ?? 0,
-        totalSales: totalSales ?? 0,
-        unpaidOrders: unpaidOrders ?? 0,
-        revenueToday: revenueToday ?? 0,
-      });
       setTotalItems(totalOrders || 0);
 
       // fix overflow page
@@ -70,12 +57,11 @@ export const useSalesData = (initialItemsPerPage = 5) => {
     } catch (error) {
       console.error("Failed to fetch sales:", error);
       setOrders([]);
-      setStats({});
       setTotalItems(0);
     } finally {
       setLoading(false);
     }
-  }, [dateRange, currentPage, itemsPerPage, debouncedSearchTerm]);
+  }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
   useEffect(() => {
     fetchSales();
@@ -85,6 +71,23 @@ export const useSalesData = (initialItemsPerPage = 5) => {
   useEffect(() => {
     if (currentPage !== 1) setCurrentPage(1);
   }, [debouncedSearchTerm]);
+
+  /** Fetch stats */
+  const fetchStats = useCallback(async () => {
+    try {
+      const res = await getSalesStats();
+      // console.log("stats res:", res);
+
+      setStats(res.data || []);
+    } catch (error) {
+      console.error("Failed to fetch stats:", error);
+      setStats([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchStats();
+  }, [fetchStats]);
 
   return {
     orders,
@@ -97,8 +100,6 @@ export const useSalesData = (initialItemsPerPage = 5) => {
     itemsPerPage,
     setItemsPerPage,
     totalItems,
-    dateRange,
-    setDateRange,
     fetchSales,
   };
 };

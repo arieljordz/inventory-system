@@ -13,9 +13,9 @@ const SearchBar = ({
 
   // Always focus when component mounts
   useEffect(() => {
-    if (!disabled && inputRef.current) {
-      inputRef.current.focus();
-    }
+    // if (!disabled && inputRef.current) {
+    //   inputRef.current.focus();
+    // }
   }, [disabled]);
 
   const handleSearchInputChange = (e) => {
@@ -27,9 +27,9 @@ const SearchBar = ({
     onItemsPerPageChange?.(value);
 
     // Refocus the search input after selecting items per page
-    if (!disabled && inputRef.current) {
-      inputRef.current.focus();
-    }
+    // if (!disabled && inputRef.current) {
+    //   inputRef.current.focus();
+    // }
   };
 
   const handleClearSearch = () => {
