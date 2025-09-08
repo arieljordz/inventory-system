@@ -257,7 +257,7 @@ export const updateItem = async (req, res) => {
     if (retailPrice !== undefined) item.retailPrice = retailPrice;
     if (location !== undefined) item.location = location;
     if (status !== undefined) item.status = status;
-    if (quantity !== undefined) item.quantity = quantity;
+    // if (quantity !== undefined) item.quantity = quantity;
 
     const updatedItem = await item.save();
 

@@ -93,7 +93,7 @@ const ItemModal = ({
                 onChange={onChange}
                 placeholder="Enter quantity"
                 required
-                // disabled={isEditMode}
+                disabled={isEditMode}
               />
             </Col>
           </Row>
