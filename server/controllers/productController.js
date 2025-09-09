@@ -397,36 +397,6 @@ export const restockProduct = async (req, res) => {
   }
 };
 
-export const getProductStats = async (req, res) => {
-  try {
-    // Count total products
-    const totalProducts = await Product.countDocuments();
-
-    // Sum total quantity of all products
-    const totalQuantityResult = await Product.aggregate([
-      { $group: { _id: null, total: { $sum: "$quantity" } } },
-    ]);
-
-    // Count products that need restock (e.g. quantity <= 5)
-    const needsRestock = await Product.countDocuments({
-      quantity: { $lte: 5 },
-    });
-
-    // Count products with quantity <= 0 (out of stock)
-    const outOfStock = await Product.countDocuments({ quantity: { $lte: 0 } });
-
-    res.json({
-      totalProducts,
-      totalQuantity: totalQuantityResult[0]?.total || 0,
-      needsRestock,
-      outOfStock,
-    });
-  } catch (error) {
-    console.error("Get Product Stats Error:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
 export const importProducts = async (req, res) => {
   try {
     if (!req.file) {

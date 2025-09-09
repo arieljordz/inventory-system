@@ -1,6 +1,52 @@
 // controllers/dashboardController.js
 import Order from "../models/Order.js";
+import Product from "../models/Product.js";
+import Item from "../models/Item.js";
 import mongoose from "mongoose";
+
+export const getInventoryStats = async (req, res) => {
+  try {
+    // 🔹 Product stats in parallel
+    const [
+      totalProducts,
+      productsNeedsRestock,
+      productsOutOfStock,
+      totalProductQuantityResult,
+    ] = await Promise.all([
+      Product.countDocuments(),
+      Product.countDocuments({ quantity: { $lte: 5 } }),
+      Product.countDocuments({ quantity: { $lte: 0 } }),
+      Product.aggregate([{ $group: { _id: null, total: { $sum: "$quantity" } } }]),
+    ]);
+
+    // 🔹 Item stats in parallel
+    const [
+      totalItems,
+      itemsNeedsRestock,
+      itemsOutOfStock,
+      totalItemQuantityResult,
+    ] = await Promise.all([
+      Item.countDocuments(),
+      Item.countDocuments({ quantity: { $lte: 5 } }),
+      Item.countDocuments({ quantity: { $lte: 0 } }),
+      Item.aggregate([{ $group: { _id: null, total: { $sum: "$quantity" } } }]),
+    ]);
+
+    res.json({
+      totalProducts,
+      productsNeedsRestock,
+      productsOutOfStock,
+      totalProductQuantity: totalProductQuantityResult[0]?.total || 0,
+      totalItems,
+      itemsNeedsRestock,
+      itemsOutOfStock,
+      totalItemQuantity: totalItemQuantityResult[0]?.total || 0,
+    });
+  } catch (error) {
+    console.error("Get Inventory Stats Error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
 
 export const getDashboardCharts = async (req, res) => {
   try {

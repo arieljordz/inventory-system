@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useSpinner } from "../../context/SpinnerContext";
 import Navpath from "../../components/Navpath";
-import { getProductStats } from "../../services/productService";
+import { getInventoryStats } from "../../services/dashboardService";
 import DashboardCharts from "./DashboardCharts";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
     totalProducts: 0,
-    totalQuantity: 0,
-    needsRestock: 0,
-    outOfStock: 0,
+    totalProductQuantity: 0,
+    productsNeedsRestock: 0,
+    productsOutOfStock: 0,
+    totalItems: 0,
+    totalItemQuantity: 0,
+    itemsNeedsRestock: 0,
+    itemsOutOfStock: 0,
   });
 
   const { hideSpinner } = useSpinner();
@@ -21,7 +25,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const { data } = await getProductStats();
+        const { data } = await getInventoryStats();
         setStats(data);
       } catch (error) {
         console.error("Failed to fetch dashboard stats:", error);
@@ -31,32 +35,61 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  const boxes = [
+  const productBoxes = [
     {
-      color: "info",
+      color: "primary",
       count: stats.totalProducts,
-      label: "Total Products",
+      label: "Products Total",
       icon: "ion ion-cube",
     },
     {
       color: "success",
-      count: stats.totalQuantity,
-      label: "Total Stock",
+      count: stats.totalProductQuantity,
+      label: "Products Total Stock",
       icon: "ion ion-archive",
     },
     {
       color: "warning",
-      count: stats.needsRestock,
-      label: "Needs Restock",
-      icon: "ion ion-alert-circled",
+      count: stats.productsNeedsRestock,
+      label: "Products Needs Restock",
+      icon: "ion ion-alert",
     },
     {
       color: "danger",
-      count: stats.outOfStock,
-      label: "Out of Stock",
-      icon: "ion ion-close-circled",
+      count: stats.productsOutOfStock,
+      label: "Products Out of Stock",
+      icon: "ion ion-close",
     },
   ];
+
+  const itemBoxes = [
+    {
+      color: "info",
+      count: stats.totalItems,
+      label: "Items Total",
+      icon: "ion ion-pricetag",
+    },
+    {
+      color: "teal",
+      count: stats.totalItemQuantity,
+      label: "Items Total Stock",
+      icon: "ion ion-ios-box",
+    },
+    {
+      color: "orange",
+      count: stats.itemsNeedsRestock,
+      label: "Items Needs Restock",
+      icon: "ion ion-alert",
+    },
+    {
+      color: "maroon",
+      count: stats.itemsOutOfStock,
+      label: "Items Out of Stock",
+      icon: "ion ion-close",
+    },
+  ];
+
+  const boxes = [...productBoxes, ...itemBoxes];
 
   return (
     <>

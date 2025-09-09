@@ -30,14 +30,8 @@ export const getProductsByStatus = ({
     params: { page, limit, search },
   });
 
-// PUT /api/products/:id
-export const tagProductForPickup = (id, pickupQty) =>
-  api.put(`api/products/${id}/pickup`, { pickupQty });
-
 export const restockProduct = (productId, data) =>
   api.post(`/api/products/${productId}/restock`, data);
-
-export const getProductStats = () => api.get("/api/products/stats");
 
 export const importProducts = (formData) =>
   api.post("/api/products/import-products", formData, multipartHeaders);

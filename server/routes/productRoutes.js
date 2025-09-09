@@ -7,7 +7,6 @@ import {
   deleteProduct,
   getProductsByStatus,
   restockProduct,
-  getProductStats,
   importProducts,
   exportProducts,
 } from "../controllers/productController.js";
@@ -21,9 +20,6 @@ const router = express.Router();
 // Public routes
 router.get("/", getProducts);
 router.get("/status/:status", getProductsByStatus);
-
-// Protected routes
-router.get("/stats", authenticate, getProductStats);
 
 // Static export/import routes should come BEFORE dynamic :id
 router.get("/export-products", authenticate, exportProducts);

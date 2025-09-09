@@ -23,6 +23,7 @@ import ReportsPage from "./pages/Reports/ReportsPage";
 import UsersPage from "./pages/Users/UsersPage";
 import SettingsPage from "./pages/Settings/SettingsPage";
 import AuditLogPage from "./pages/AuditLogs/AuditLogPage";
+import Documentation from "./pages/Dashboard/Documentation";
 
 const API_KEY = import.meta.env.VITE_GOOGLE_API_KEY;
 
@@ -38,6 +39,7 @@ function App() {
           {/* Pages with layout */}
           <Route element={<MainLayout />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/documentation" element={<Documentation />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/walk-ins" element={<WalkInsPage />} />
