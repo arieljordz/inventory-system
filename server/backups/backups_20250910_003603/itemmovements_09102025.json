@@ -9424,5 +9424,2300 @@
     "normalizedReference": "Restock",
     "totalValue": 10000,
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf8cf3bcf21a3b37ca4ab3"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "IN",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 10,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T02:12:03.620Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T02:12:03.620Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf8d45bcf21a3b37ca4acd"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "IN",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 92,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T02:13:25.483Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T02:13:25.483Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf8d4cbcf21a3b37ca4ad5"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 2,
+    "price": 100,
+    "balanceAfter": 133,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T02:13:32.851Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T02:13:32.851Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf8d68bcf21a3b37ca4ae6"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "IN",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 52,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T02:14:00.752Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T02:14:00.752Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf8d9bbcf21a3b37ca4af8"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 20,
+    "reference": "WALK_IN",
+    "location": "Main Warehouse",
+    "remarks": "Walk-in purchase by Walk-in Customer",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T02:14:51.700Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T02:14:51.700Z"
+    },
+    "normalizedReference": "WALK_IN",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf9e254ac0798233f53968"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 50,
+    "price": 100,
+    "balanceAfter": 183,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T03:25:25.098Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T03:25:25.098Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 5000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bf9e2f4ac0798233f53970"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "IN",
+    "quantity": 10,
+    "price": 110,
+    "balanceAfter": 102,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T03:25:35.487Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T03:25:35.487Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 1100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfb282f68be75c42b26986"
+    },
+    "item": {
+      "$oid": "68b571f905bc2b256f1ce825"
+    },
+    "type": "IN",
+    "quantity": 7,
+    "price": 200,
+    "balanceAfter": 8,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T04:52:18.361Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T04:52:18.361Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 1400,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfb290f68be75c42b2698e"
+    },
+    "item": {
+      "$oid": "68b571b505bc2b256f1ce81e"
+    },
+    "type": "IN",
+    "quantity": 8,
+    "price": 200,
+    "balanceAfter": 38,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T04:52:32.198Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T04:52:32.198Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 1600,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3202583a278bb2b474"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 182,
+    "reference": "2509080G4AM27A",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:42.490Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:42.490Z"
+    },
+    "normalizedReference": "2509080G4AM27A",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3202583a278bb2b478"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 51,
+    "reference": "2509080G4AM27A",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:42.603Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:42.603Z"
+    },
+    "normalizedReference": "2509080G4AM27A",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3202583a278bb2b48c"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 9,
+    "reference": "2509080KBEAYD7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:42.966Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:42.966Z"
+    },
+    "normalizedReference": "2509080KBEAYD7",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3302583a278bb2b490"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 181,
+    "reference": "2509080KBEAYD7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:43.075Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:43.075Z"
+    },
+    "normalizedReference": "2509080KBEAYD7",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3302583a278bb2b4a3"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 180,
+    "reference": "2509080KNSAE70",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:43.431Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:43.431Z"
+    },
+    "normalizedReference": "2509080KNSAE70",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3302583a278bb2b4b4"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 101,
+    "reference": "2509080M4N4KD8",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:43.789Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:43.789Z"
+    },
+    "normalizedReference": "2509080M4N4KD8",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3402583a278bb2b4c5"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 179,
+    "reference": "2509080QFNTW9D",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:44.144Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:44.144Z"
+    },
+    "normalizedReference": "2509080QFNTW9D",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3402583a278bb2b4d7"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 100,
+    "reference": "2509080VRQ2GC9",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:44.535Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:44.535Z"
+    },
+    "normalizedReference": "2509080VRQ2GC9",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3402583a278bb2b4e9"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 178,
+    "reference": "2509080WTJCNDY",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:44.923Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:44.923Z"
+    },
+    "normalizedReference": "2509080WTJCNDY",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3502583a278bb2b4ed"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 50,
+    "reference": "2509080WTJCNDY",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:45.030Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:45.030Z"
+    },
+    "normalizedReference": "2509080WTJCNDY",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3502583a278bb2b501"
+    },
+    "item": {
+      "$oid": "68b5729205bc2b256f1ce842"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 18,
+    "reference": "250908128HQTC4",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:45.399Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:45.399Z"
+    },
+    "normalizedReference": "250908128HQTC4",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3502583a278bb2b505"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 177,
+    "reference": "250908128HQTC4",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:45.515Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:45.515Z"
+    },
+    "normalizedReference": "250908128HQTC4",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3502583a278bb2b519"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 19,
+    "reference": "250908143SM17B",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless 304 Duyan Frame 8 Feet with and w/o Duyan options - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:45.884Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:45.884Z"
+    },
+    "normalizedReference": "250908143SM17B",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3502583a278bb2b51d"
+    },
+    "item": {
+      "$oid": "68b569a6650c74e5be3238b4"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 2000,
+    "balanceAfter": 2,
+    "reference": "250908143SM17B",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless 304 Duyan Frame 8 Feet with and w/o Duyan options - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:45.993Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:45.993Z"
+    },
+    "normalizedReference": "250908143SM17B",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3602583a278bb2b530"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 5,
+    "price": 100,
+    "balanceAfter": 172,
+    "reference": "25090814PCQKUU",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:46.358Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:46.358Z"
+    },
+    "normalizedReference": "25090814PCQKUU",
+    "totalValue": 500,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3602583a278bb2b542"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 8,
+    "reference": "25090815NSWEXH",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:46.717Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:46.717Z"
+    },
+    "normalizedReference": "25090815NSWEXH",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3602583a278bb2b546"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 171,
+    "reference": "25090815NSWEXH",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:46.826Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:46.826Z"
+    },
+    "normalizedReference": "25090815NSWEXH",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3702583a278bb2b564"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 170,
+    "reference": "2509091MSE3TX0",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:47.442Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:47.442Z"
+    },
+    "normalizedReference": "2509091MSE3TX0",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3702583a278bb2b568"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 49,
+    "reference": "2509091MSE3TX0",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:47.550Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:47.550Z"
+    },
+    "normalizedReference": "2509091MSE3TX0",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3702583a278bb2b57c"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 67,
+    "reference": "2509091WPF2Q1J",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:47.918Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:47.918Z"
+    },
+    "normalizedReference": "2509091WPF2Q1J",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3802583a278bb2b580"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 169,
+    "reference": "2509091WPF2Q1J",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:48.029Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:48.029Z"
+    },
+    "normalizedReference": "2509091WPF2Q1J",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3802583a278bb2b594"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 168,
+    "reference": "2509091YR7SSBE",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:48.391Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:48.391Z"
+    },
+    "normalizedReference": "2509091YR7SSBE",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3802583a278bb2b598"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 48,
+    "reference": "2509091YR7SSBE",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:48.500Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:48.500Z"
+    },
+    "normalizedReference": "2509091YR7SSBE",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3802583a278bb2b5ac"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 167,
+    "reference": "25090928PKPGJ5",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:48.896Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:48.896Z"
+    },
+    "normalizedReference": "25090928PKPGJ5",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3902583a278bb2b5be"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 166,
+    "reference": "25090929M5QJVN",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:49.255Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:49.255Z"
+    },
+    "normalizedReference": "25090929M5QJVN",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3902583a278bb2b5c2"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 47,
+    "reference": "25090929M5QJVN",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:49.363Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:49.363Z"
+    },
+    "normalizedReference": "25090929M5QJVN",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3902583a278bb2b5d5"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 110,
+    "balanceAfter": 98,
+    "reference": "2509092CPW833T",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:49.774Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:49.774Z"
+    },
+    "normalizedReference": "2509092CPW833T",
+    "totalValue": 220,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3a02583a278bb2b5e6"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 100,
+    "balanceAfter": 164,
+    "reference": "2509092K33TEBP",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:50.134Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:50.134Z"
+    },
+    "normalizedReference": "2509092K33TEBP",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3a02583a278bb2b5f7"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 163,
+    "reference": "2509092MR5AA4Q",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:50.498Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:50.498Z"
+    },
+    "normalizedReference": "2509092MR5AA4Q",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3a02583a278bb2b608"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 110,
+    "balanceAfter": 96,
+    "reference": "2509092MRX41UB",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:50.862Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:50.862Z"
+    },
+    "normalizedReference": "2509092MRX41UB",
+    "totalValue": 220,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3b02583a278bb2b619"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 162,
+    "reference": "2509092RWG30NC",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:51.223Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:51.223Z"
+    },
+    "normalizedReference": "2509092RWG30NC",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3b02583a278bb2b62a"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 10,
+    "price": 110,
+    "balanceAfter": 86,
+    "reference": "2509092TG797CC",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:51.586Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:51.586Z"
+    },
+    "normalizedReference": "2509092TG797CC",
+    "totalValue": 1100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfde3b02583a278bb2b63b"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 15,
+    "price": 100,
+    "balanceAfter": 147,
+    "reference": "2509092TH5TCNU",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for DUYAN STAINLESS RING 304 20 PCS (10 PAIRS) BEST IN ANCHORING BOTH END OF YOUR HAMMOCKS - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T07:58:51.946Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T07:58:51.946Z"
+    },
+    "normalizedReference": "2509092TH5TCNU",
+    "totalValue": 1500,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe07f02583a278bb2b731"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 146,
+    "reference": "250909204CWYED",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10Meter Static Utility Rope w/ Stainless Rings & Carabiners - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:08:31.588Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:08:31.588Z"
+    },
+    "normalizedReference": "250909204CWYED",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe07f02583a278bb2b735"
+    },
+    "item": {
+      "$oid": "68b5729205bc2b256f1ce842"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 17,
+    "reference": "250909204CWYED",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10Meter Static Utility Rope w/ Stainless Rings & Carabiners - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:08:31.695Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:08:31.695Z"
+    },
+    "normalizedReference": "250909204CWYED",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe4e802583a278bb2b8e8"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 85,
+    "reference": "2509080VRQ2GC9",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:27:20.541Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:27:20.541Z"
+    },
+    "normalizedReference": "2509080VRQ2GC9",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe4e802583a278bb2b8ec"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 66,
+    "reference": "2509080VRQ2GC9",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:27:20.662Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:27:20.662Z"
+    },
+    "normalizedReference": "2509080VRQ2GC9",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90002583a278bb2ba89"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 145,
+    "reference": "2509080NJ1MHYP",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:48.468Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:48.468Z"
+    },
+    "normalizedReference": "2509080NJ1MHYP",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90002583a278bb2ba9b"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 100,
+    "balanceAfter": 143,
+    "reference": "2509080UWGBW3T",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:48.835Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:48.835Z"
+    },
+    "normalizedReference": "2509080UWGBW3T",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90002583a278bb2ba9f"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 50,
+    "balanceAfter": 45,
+    "reference": "2509080UWGBW3T",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:48.942Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:48.942Z"
+    },
+    "normalizedReference": "2509080UWGBW3T",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90102583a278bb2bab2"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 142,
+    "reference": "250908162TNGP5",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:49.305Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:49.305Z"
+    },
+    "normalizedReference": "250908162TNGP5",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90102583a278bb2bac4"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 5,
+    "price": 100,
+    "balanceAfter": 137,
+    "reference": "25090927SKS9XY",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:49.664Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:49.664Z"
+    },
+    "normalizedReference": "25090927SKS9XY",
+    "totalValue": 500,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90102583a278bb2bac8"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 5,
+    "price": 50,
+    "balanceAfter": 40,
+    "reference": "25090927SKS9XY",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:49.782Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:49.782Z"
+    },
+    "normalizedReference": "25090927SKS9XY",
+    "totalValue": 250,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90202583a278bb2badc"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 136,
+    "reference": "2509092CTQ942F",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:50.139Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:50.139Z"
+    },
+    "normalizedReference": "2509092CTQ942F",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90202583a278bb2bae0"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 39,
+    "reference": "2509092CTQ942F",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:50.247Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:50.247Z"
+    },
+    "normalizedReference": "2509092CTQ942F",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90202583a278bb2baf4"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 65,
+    "reference": "2509092E8KXQ83",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring w/ Static Utility Rope Set 10mm, 10meters - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:50.611Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:50.611Z"
+    },
+    "normalizedReference": "2509092E8KXQ83",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90202583a278bb2baf8"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 135,
+    "reference": "2509092E8KXQ83",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring w/ Static Utility Rope Set 10mm, 10meters - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:50.722Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:50.722Z"
+    },
+    "normalizedReference": "2509092E8KXQ83",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90302583a278bb2bb0c"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 134,
+    "reference": "2509092KHARU5U",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:51.096Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:51.096Z"
+    },
+    "normalizedReference": "2509092KHARU5U",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90302583a278bb2bb10"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 38,
+    "reference": "2509092KHARU5U",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:51.204Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:51.204Z"
+    },
+    "normalizedReference": "2509092KHARU5U",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90302583a278bb2bb24"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 133,
+    "reference": "2509092R9CCT4B",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:51.567Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:51.567Z"
+    },
+    "normalizedReference": "2509092R9CCT4B",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe90302583a278bb2bb28"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 37,
+    "reference": "2509092R9CCT4B",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:44:51.677Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:44:51.677Z"
+    },
+    "normalizedReference": "2509092R9CCT4B",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91702583a278bb2bb3d"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 132,
+    "reference": "580304444485502653",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for DUYAN RING PAIR STAINLESS - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:11.259Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:11.259Z"
+    },
+    "normalizedReference": "580304444485502653",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91702583a278bb2bb4e"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 28,
+    "reference": "580304839451641598",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:11.616Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:11.616Z"
+    },
+    "normalizedReference": "580304839451641598",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91702583a278bb2bb5f"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 40,
+    "balanceAfter": 26,
+    "reference": "580304957867001567",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:11.975Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:11.975Z"
+    },
+    "normalizedReference": "580304957867001567",
+    "totalValue": 80,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91802583a278bb2bb71"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 64,
+    "reference": "580305033472279695",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10Meter Static Utility Rope w/ 2 pcs Stainless Rings - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:12.340Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:12.340Z"
+    },
+    "normalizedReference": "580305033472279695",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91802583a278bb2bb75"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 131,
+    "reference": "580305033472279695",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 10Meter Static Utility Rope w/ 2 pcs Stainless Rings - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:12.459Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:12.459Z"
+    },
+    "normalizedReference": "580305033472279695",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91802583a278bb2bb89"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 84,
+    "reference": "580305489750951355",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Makapal Ring Set w/ 2 Carabiner - 1/4\" Diameter 304 Material Heavy-Duty Balancing & Stability for Duyan or Hammocks - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:12.849Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:12.849Z"
+    },
+    "normalizedReference": "580305489750951355",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91802583a278bb2bb8d"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 36,
+    "reference": "580305489750951355",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Makapal Ring Set w/ 2 Carabiner - 1/4\" Diameter 304 Material Heavy-Duty Balancing & Stability for Duyan or Hammocks - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:12.963Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:12.963Z"
+    },
+    "normalizedReference": "580305489750951355",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91902583a278bb2bba0"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 25,
+    "reference": "580306483075909219",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:13.348Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:13.348Z"
+    },
+    "normalizedReference": "580306483075909219",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91902583a278bb2bbb1"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 82,
+    "reference": "580310469333780449",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:13.704Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:13.704Z"
+    },
+    "normalizedReference": "580310469333780449",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91a02583a278bb2bbc2"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 81,
+    "reference": "580311788015027799",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:14.068Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:14.068Z"
+    },
+    "normalizedReference": "580311788015027799",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe91a02583a278bb2bbdd"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 80,
+    "reference": "580316068392961146",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:14.682Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:14.682Z"
+    },
+    "normalizedReference": "580316068392961146",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe92802583a278bb2bc04"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 130,
+    "reference": "1030115605179819",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:28.759Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:28.759Z"
+    },
+    "normalizedReference": "1030115605179819",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe92902583a278bb2bc15"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 10,
+    "price": 100,
+    "balanceAfter": 120,
+    "reference": "1037784121400660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:29.119Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:29.119Z"
+    },
+    "normalizedReference": "1037784121400660",
+    "totalValue": 1000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bfe92902583a278bb2bc26"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 119,
+    "reference": "1037784121500660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T08:45:29.477Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T08:45:29.477Z"
+    },
+    "normalizedReference": "1037784121500660",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff11d02583a278bb2bda2"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 118,
+    "reference": "1038177110959639",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only) - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:25.268Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:25.268Z"
+    },
+    "normalizedReference": "1038177110959639",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff11e02583a278bb2bdb3"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 83,
+    "reference": "1038144753503455",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:26.002Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:26.002Z"
+    },
+    "normalizedReference": "1038144753503455",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff11e02583a278bb2bdc4"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 82,
+    "reference": "1038144753603455",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:26.421Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:26.421Z"
+    },
+    "normalizedReference": "1038144753603455",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff11f02583a278bb2bdde"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 81,
+    "reference": "1037784121600660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:27.103Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:27.103Z"
+    },
+    "normalizedReference": "1037784121600660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff11f02583a278bb2bdef"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 80,
+    "reference": "1037784121700660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:27.522Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:27.522Z"
+    },
+    "normalizedReference": "1037784121700660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff11f02583a278bb2be00"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 79,
+    "reference": "1037784121800660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:27.939Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:27.939Z"
+    },
+    "normalizedReference": "1037784121800660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff12002583a278bb2be11"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 78,
+    "reference": "1037784121900660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:28.363Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:28.363Z"
+    },
+    "normalizedReference": "1037784121900660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff12002583a278bb2be22"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 77,
+    "reference": "1037784122000660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:28.781Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:28.781Z"
+    },
+    "normalizedReference": "1037784122000660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff12102583a278bb2be33"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 76,
+    "reference": "1037784122100660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:29.201Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:29.201Z"
+    },
+    "normalizedReference": "1037784122100660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff12102583a278bb2be44"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 75,
+    "reference": "1037784122200660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:29.620Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:29.620Z"
+    },
+    "normalizedReference": "1037784122200660",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68bff12202583a278bb2be55"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 74,
+    "reference": "1037784122300660",
+    "location": "Main Warehouse",
+    "remarks": "Bundle component for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-09T09:19:30.042Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-09T09:19:30.042Z"
+    },
+    "normalizedReference": "1037784122300660",
+    "totalValue": 110,
+    "__v": 0
   }
 ]
