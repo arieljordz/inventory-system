@@ -47,7 +47,7 @@ const SalesPage = () => {
           <div className="row">
             <InfoBox label="Total Sales" icon="fas fa-money-bill-wave" color="success" value={formatAmount(stats.totalSales)} />
             <InfoBox label="Total Orders" icon="fas fa-receipt" color="primary" value={stats.totalOrders} />
-            <InfoBox label="Revenue Today" icon="fas fa-check-circle" color="info" value={stats.paidOrders} />
+            <InfoBox label="Paid Orders" icon="fas fa-check-circle" color="info" value={stats.paidOrders} />
             <InfoBox label="Unpaid Orders" icon="fas fas fa-times-circle" color="danger" value={stats.unpaidOrders} />
           </div>
 
