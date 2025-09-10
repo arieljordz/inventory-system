@@ -2,8 +2,8 @@ import React from "react";
 
 const TabSwitcher = ({ activeTab, onChange }) => {
   const tabs = [
-    { key: "products", label: "Products" },
-    { key: "items", label: "Items" },
+    { key: "products", label: "Products", icon: "fas fa-cube" },
+    { key: "items", label: "Items", icon: "fas fa-layer-group" },
   ];
 
   return (
@@ -16,6 +16,7 @@ const TabSwitcher = ({ activeTab, onChange }) => {
           }`}
           onClick={() => onChange(tab.key)}
         >
+          <i className={`${tab.icon} me-1`}></i>
           {tab.label}
         </button>
       ))}
