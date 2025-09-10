@@ -177,7 +177,13 @@ export const useAdjustments = (initialItemsPerPage = 5) => {
       // Refresh history (keep modal open)
       await fetchAdjustmentHistory(targetType, selected._id);
 
-      closeModal();
+      //   closeModal();
+      setAdjustment({
+        adjustmentType: "markup",
+        valueType: "percentage",
+        value: 0,
+        notes: "",
+      });
       if (activeTab === "products") {
         fetchProducts();
       } else {
