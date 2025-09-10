@@ -2,7 +2,7 @@
 import React, { useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
 import { UnitTypeEnum } from "../../enums/enums";
-import { TextInput, TextArea, SelectInput } from "../../components/FormInputs";
+import { TextInput, SelectInput } from "../../components/FormInputs";
 
 const ItemModal = ({
   isOpen,

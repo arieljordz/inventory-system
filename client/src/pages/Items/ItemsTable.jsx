@@ -7,7 +7,6 @@ import {
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
 import QuantityBadge from "../../components/QuantityBadge";
-import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const ItemInventoryTable = ({
   items = [],

@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Navpath from "../../components/Navpath";
 import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
-import ItemInventoryTable from "./ItemInventoryTable";
-import ItemModal from "./ItemModal";
-import RestockItemModal from "./RestockItemModal";
+import ItemInventoryTable from "./ItemsTable";
+import ItemModal from "./ItemsModal";
+import RestockItemModal from "./RestockItemsModal";
 import InfoDashboard from "./InfoDashboard";
 
 import { StatusEnum } from "../../enums/enums";
-import { useItemInventory } from "../../hooks/useItemInventory";
+import { useItemsData } from "../../hooks/useItemsData";
 
 /** ---------------------------
  * Constants
@@ -48,7 +48,7 @@ const ItemInventoryPage = () => {
     removeItem,
     restock,
     stats,
-  } = useItemInventory({
+  } = useItemsData({
     currentPage: 1,
     itemsPerPage: 5,
     searchTerm: "",

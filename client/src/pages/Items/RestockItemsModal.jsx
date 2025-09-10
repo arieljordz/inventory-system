@@ -50,7 +50,7 @@ const RestockItemModal = ({
     <Modal show={show} onHide={onClose} backdrop="static" size="md">
       <Form onSubmit={onSubmit}>
         <Modal.Header closeButton className="bg-primary text-white">
-          <Modal.Title>Restock Product</Modal.Title>
+          <Modal.Title>Restock Item</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

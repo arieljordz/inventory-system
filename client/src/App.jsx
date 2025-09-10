@@ -15,11 +15,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductsPage from "./pages/Products/ProductsPage";
 import OrderPage from "./pages/Orders/OrderPage";
 import WalkInsPage from "./pages/WalkIns/WalkInsPage";
-// import TrackingsPage from "./pages/Trackings/TrackingsPage";
-// import OrderInventoryPage from "./pages/OrderInventory/OrderInventoryPage";
-import ItemInventoryPage from "./pages/ItemInventory/ItemInventoryPage";
+import ItemsPage from "./pages/Items/ItemsPage";
 import SalesPage from "./pages/Sales/SalesPage";
 import ReportsPage from "./pages/Reports/ReportsPage";
+import ProfitsPage from "./pages/Profits/ProfitsPage";
+import AdjustmentsPage from "./pages/Adjustments/AdjustmentsPage";
 import UsersPage from "./pages/Users/UsersPage";
 import SettingsPage from "./pages/Settings/SettingsPage";
 import AuditLogPage from "./pages/AuditLogs/AuditLogPage";
@@ -43,11 +43,11 @@ function App() {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/walk-ins" element={<WalkInsPage />} />
-            {/* <Route path="/trackings" element={<TrackingsPage />} /> */}
-            {/* <Route path="/order-inventory" element={<OrderInventoryPage />} /> */}
-            <Route path="/item-inventory" element={<ItemInventoryPage />} />
+            <Route path="/items" element={<ItemsPage />} />
             <Route path="/sales" element={<SalesPage />} />
             <Route path="/reports" element={<ReportsPage />} />
+            <Route path="/cost-profits" element={<ProfitsPage />} />
+            <Route path="/price-adjustments" element={<AdjustmentsPage />} />
             <Route path="/users" element={<UsersPage />} />
             <Route path="/settings" element={<SettingsPage />} />
             <Route path="/auditlogs" element={<AuditLogPage />} />

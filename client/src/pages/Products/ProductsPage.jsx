@@ -1,11 +1,11 @@
 import Navpath from "../../components/Navpath";
 import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
-import ProductTable from "./ProductTable";
-import ProductModal from "./ProductModal";
-import RestockModal from "./RestockModal";
-import ProductImport from "./ProductImport";
-import ProductExport from "./ProductExport";
+import ProductsTable from "./ProductsTable";
+import ProductsModal from "./ProductsModal";
+import RestockProductsModal from "./RestockProductsModal";
+import ProductsImport from "./ProductsImport";
+import ProductsExport from "./ProductsExport";
 
 import { useProductsData } from "../../hooks/useProductsData";
 import { useProductModal } from "../../hooks/useProductModal";
@@ -117,8 +117,8 @@ const ProductsPage = () => {
           </div>
 
           {/* Import / Export */}
-          <ProductImport fetchProducts={fetchProducts} />
-          <ProductExport fetchProducts={fetchProducts} />
+          <ProductsImport fetchProducts={fetchProducts} />
+          <ProductsExport fetchProducts={fetchProducts} />
 
           {/* Search */}
           <SearchBar
@@ -133,7 +133,7 @@ const ProductsPage = () => {
           />
 
           {/* Table */}
-          <ProductTable
+          <ProductsTable
             products={products}
             onEdit={productModal.openEdit}
             onDelete={handleDelete}
@@ -151,7 +151,7 @@ const ProductsPage = () => {
           />
 
           {/* Product Modal */}
-          <ProductModal
+          <ProductsModal
             isOpen={productModal.isOpen}
             onClose={productModal.close}
             form={productModal.form}
@@ -162,7 +162,7 @@ const ProductsPage = () => {
           />
 
           {/* Restock Modal */}
-          <RestockModal
+          <RestockProductsModal
             show={restockModal.isOpen}
             onClose={restockModal.close}
             restockForm={restockModal.form}

@@ -1,4 +1,4 @@
-// src/hooks/useItemInventory.js
+// src/hooks/useItemsData.js
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
@@ -14,7 +14,7 @@ import {
 import { useDebounce } from "./useDebounce";
 import { useSpinner } from "../context/SpinnerContext";
 
-export const useItemInventory = (initialPagination) => {
+export const useItemsData = (initialPagination) => {
   const [items, setItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
