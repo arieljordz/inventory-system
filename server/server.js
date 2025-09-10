@@ -19,6 +19,7 @@ import orderRoutes from "./routes/orderRoutes.js";
 import walkInRoutes from "./routes/walkInRoutes.js";
 import salesRoutes from "./routes/salesRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import priceAdjustmentRoutes from "./routes/priceAdjustmentRoutes.js";
 import settingsRoutes from "./routes/settingsRoutes.js";
 import auditLogsRoutes from "./routes/auditLogsRoutes.js";
 
@@ -54,6 +55,7 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/walk-ins", walkInRoutes);
 app.use("/api/sales", salesRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/price-adjustments", priceAdjustmentRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/auditlogs", auditLogsRoutes);
 

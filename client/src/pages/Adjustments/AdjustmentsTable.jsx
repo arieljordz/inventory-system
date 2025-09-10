@@ -1,5 +1,6 @@
 import React from "react";
-import { formatAmount } from "../../utils/commonUtils";
+import { formatAmount, truncateText } from "../../utils/commonUtils";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const AdjustmentsTable = ({
   list = [],
@@ -7,7 +8,7 @@ const AdjustmentsTable = ({
   onAdjust,
   loading = false,
 }) => {
-  console.log("List:", list);
+  // console.log("List:", list);
   const handleAdjust = (item) => {
     if (loading) return;
     onAdjust?.(item, activeTab === "products" ? "Product" : "Item", item._id);
@@ -30,7 +31,7 @@ const AdjustmentsTable = ({
     if (loading) {
       return (
         <tr>
-          <td colSpan="5" className="text-center py-4">
+          <td colSpan="6" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -45,7 +46,7 @@ const AdjustmentsTable = ({
     if (!list || list.length === 0) {
       return (
         <tr>
-          <td colSpan="5" className="text-center py-4">
+          <td colSpan="6" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
               No {activeTab} found
@@ -62,7 +63,21 @@ const AdjustmentsTable = ({
           <code className="px-2 py-1 rounded">{item.sku || "N/A"}</code>
         </td>
         <td className="align-middle">
-          <span className="font-weight-medium">{item.name}</span>
+          <div className="d-flex align-items-center">
+            <div className="font-weight-medium" title={item.name || ""}>
+              <code className="px-2 py-1 rounded">
+                {truncateText(item.name, 50)}
+              </code>
+            </div>
+            <CopyToClipboardButton text={item.name} />
+          </div>
+        </td>
+        <td className="text-center align-middle">
+          {item.variant ? (
+            <span className="badge badge-secondary">{item.variant}</span>
+          ) : (
+            <span className="text-muted">-</span>
+          )}
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">{formatAmount(item.price)}</span>
@@ -75,7 +90,7 @@ const AdjustmentsTable = ({
   };
 
   return (
-    <div className="card">
+    <div className="card mb-0">
       <div className="card-header">
         <h3 className="card-title mb-0">
           <i className="fas fa-tags mr-2"></i>
@@ -95,6 +110,9 @@ const AdjustmentsTable = ({
                 </th>
                 <th className="text-left" style={{ width: "250px" }}>
                   Name
+                </th>
+                <th className="text-center" style={{ width: "150px" }}>
+                  Variant
                 </th>
                 <th className="text-right" style={{ width: "150px" }}>
                   Current Price

@@ -9,15 +9,17 @@ import {
 import { useSpinner } from "../context/SpinnerContext";
 import { useDebounce } from "./useDebounce";
 
-export const useAdjustments = (initialItemsPerPage) => {
+export const useAdjustments = (initialItemsPerPage = 5) => {
   const { showSpinner, hideSpinner } = useSpinner();
 
-  // 🔹 Tabs & Data
-  const [activeTab, setActiveTab] = useState("products");
+  // 🔹 Tabs
+  const [activeTab, setActiveTab] = useState("products"); // "products" | "items"
+
+  // 🔹 Data
   const [products, setProducts] = useState([]);
   const [items, setItems] = useState([]);
 
-  // 🔹 Modal state
+  // 🔹 Modal
   const [selected, setSelected] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
@@ -32,17 +34,23 @@ export const useAdjustments = (initialItemsPerPage) => {
   // 🔹 History
   const [adjustmentHistory, setAdjustmentHistory] = useState([]);
 
-  // 🔹 Loading & Pagination
-  const [loading, setLoading] = useState(false);
+  // 🔹 Search & Pagination
   const [searchTerm, setSearchTerm] = useState("");
   const debouncedSearchTerm = useDebounce(searchTerm, 800);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
   const [totalItems, setTotalItems] = useState(0);
 
-  // ========== CRUD Operations ==========
+  // 🔹 Loading
+  const [loading, setLoading] = useState(false);
 
-  // 📌 Fetch Products
+  // ========= HELPERS =========
+  const getTargetType = useCallback(
+    (tab = activeTab) => (tab === "products" ? "Product" : "Item"),
+    [activeTab]
+  );
+
+  // ========= FETCH HANDLERS =========
   const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
@@ -52,12 +60,11 @@ export const useAdjustments = (initialItemsPerPage) => {
         search: debouncedSearchTerm,
       });
 
-      const { data, total, totalPages } = res;
-      setProducts(data || []);
-      setTotalItems(total || 0);
+      setProducts(res.data?.products || []);
+      setTotalItems(res.data?.totalProducts || 0);
 
-      if (currentPage > totalPages && totalPages > 0) {
-        setCurrentPage(totalPages);
+      if (currentPage > res.data?.totalPages) {
+        setCurrentPage(res.data?.totalPages || 1);
       }
     } catch (err) {
       console.error("Fetch products failed:", err);
@@ -68,11 +75,6 @@ export const useAdjustments = (initialItemsPerPage) => {
     }
   }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
-  useEffect(() => {
-    if (activeTab === "products") fetchProducts();
-  }, [fetchProducts, activeTab]);
-
-  // 📌 Fetch Items
   const fetchItems = useCallback(async () => {
     setLoading(true);
     try {
@@ -82,15 +84,14 @@ export const useAdjustments = (initialItemsPerPage) => {
         search: debouncedSearchTerm,
       });
 
-      const { data, total, totalPages } = res;
-      setItems(data || []);
-      setTotalItems(total || 0);
+      setItems(res.data?.items || []);
+      setTotalItems(res.data?.totalItems || 0);
 
-      if (currentPage > totalPages && totalPages > 0) {
-        setCurrentPage(totalPages);
+      if (currentPage > res.data?.totalPages) {
+        setCurrentPage(res.data?.totalPages || 1);
       }
-    } catch (error) {
-      console.error("Fetch items failed:", error);
+    } catch (err) {
+      console.error("Fetch items failed:", err);
       setItems([]);
       setTotalItems(0);
     } finally {
@@ -98,23 +99,39 @@ export const useAdjustments = (initialItemsPerPage) => {
     }
   }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
-  useEffect(() => {
-    if (activeTab === "items") fetchItems();
-  }, [fetchItems, activeTab]);
-
-  // Reset pagination when search changes
-  useEffect(() => {
-    if (currentPage !== 1) setCurrentPage(1);
-  }, [debouncedSearchTerm]);
-
-  // 📌 Handle opening modal
-  const openModal = async (row, targetType, targetId) => {
-    setSelected(row);
-    setShowModal(true);
+  const fetchAdjustmentHistory = useCallback(async (targetType, targetId) => {
     try {
-      showSpinner();
       const res = await getAdjustmentsByTarget(targetType, targetId);
       setAdjustmentHistory(res.data || []);
+    } catch (err) {
+      console.error("Failed to fetch adjustment history:", err);
+      toast.error("Failed to refresh adjustment history");
+    }
+  }, []);
+
+  // ========= EFFECTS =========
+  useEffect(() => {
+    if (activeTab === "products") fetchProducts();
+    else fetchItems();
+  }, [activeTab, fetchProducts, fetchItems]);
+
+  useEffect(() => {
+    setCurrentPage(1); // Reset page when search changes
+  }, [debouncedSearchTerm]);
+
+  useEffect(() => {
+    setCurrentPage(1); // Reset page when switching tabs
+  }, [activeTab]);
+
+  // ========= MODAL =========
+  const openModal = async (row) => {
+    const targetType = getTargetType();
+    setSelected(row);
+    setShowModal(true);
+
+    try {
+      showSpinner();
+      await fetchAdjustmentHistory(targetType, row._id);
     } catch (err) {
       console.error("Failed to load adjustment history:", err);
     } finally {
@@ -131,41 +148,41 @@ export const useAdjustments = (initialItemsPerPage) => {
       value: 0,
       notes: "",
     });
-    setAdjustmentHistory([]);
+    // Keep history for debugging if needed
   };
 
-  // 📌 Handle form change (generic)
+  // ========= FORM =========
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setAdjustment((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setAdjustment((prev) => ({ ...prev, [name]: value }));
   };
 
-  // 📌 Apply adjustment
   const handleApply = async (e) => {
     if (e) e.preventDefault();
     if (!selected) return;
 
     try {
       showSpinner();
+      const targetType = getTargetType();
+
       const payload = {
-        targetType: activeTab === "products" ? "Product" : "Item",
+        targetType,
         targetId: selected._id,
         ...adjustment,
       };
+
       await applyAdjustment(payload);
       toast.success("Price adjusted successfully!");
 
-      // Refresh history
-      const historyRes = await getAdjustmentsByTarget(
-        payload.targetType,
-        payload.targetId
-      );
-      setAdjustmentHistory(historyRes.data || []);
+      // Refresh history (keep modal open)
+      await fetchAdjustmentHistory(targetType, selected._id);
 
       closeModal();
+      if (activeTab === "products") {
+        fetchProducts();
+      } else {
+        fetchItems();
+      }
     } catch (err) {
       console.error(err);
       toast.error("Failed to apply adjustment");
@@ -174,7 +191,7 @@ export const useAdjustments = (initialItemsPerPage) => {
     }
   };
 
-  // ========== Expose API ==========
+  // ========= RETURN =========
   return {
     // Tabs
     activeTab,

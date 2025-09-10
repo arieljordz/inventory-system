@@ -1,5 +1,7 @@
 import React from "react";
 import Navpath from "../../components/Navpath";
+import SearchBar from "../../components/SearchBar";
+import PaginationControls from "../../components/PaginationControls";
 import { useAdjustments } from "../../hooks/useAdjustments";
 import TabSwitcher from "./TabSwitcher";
 import AdjustmentsTable from "./AdjustmentsTable";
@@ -19,16 +21,18 @@ const AdjustmentsPage = () => {
     handleChange,
     handleApply,
     adjustmentHistory,
+    searchTerm,
+    setSearchTerm,
+    currentPage,
+    setCurrentPage,
+    itemsPerPage,
+    setItemsPerPage,
+    totalItems,
     loading,
-  } = useAdjustments({
-    currentPage: 1,
-    itemsPerPage: 5,
-    searchTerm: "",
-  });
+  } = useAdjustments(5);
 
   // Choose which list to show depending on the active tab
-  const list =
-    activeTab === "products" ? products?.products || [] : items?.items || [];
+  const list = activeTab === "products" ? products : items;
 
   return (
     <>
@@ -40,6 +44,18 @@ const AdjustmentsPage = () => {
 
       <section className="content">
         <div className="container-fluid">
+          {/* Search */}
+          <SearchBar
+            searchTerm={searchTerm}
+            onSearchChange={setSearchTerm}
+            itemsPerPage={itemsPerPage}
+            onItemsPerPageChange={(val) => {
+              setItemsPerPage(val);
+              setCurrentPage(1);
+            }}
+            disabled={loading}
+          />
+
           <div className="card">
             {/* Tabs */}
             <TabSwitcher activeTab={activeTab} onChange={setActiveTab} />
@@ -54,7 +70,14 @@ const AdjustmentsPage = () => {
               />
             </div>
           </div>
-
+          {/* Pagination */}
+          <PaginationControls
+            currentPage={currentPage}
+            totalItems={totalItems}
+            itemsPerPage={itemsPerPage}
+            onPageChange={setCurrentPage}
+            disabled={loading}
+          />
           {/* Modal */}
           <AdjustmentsModal
             show={showModal}

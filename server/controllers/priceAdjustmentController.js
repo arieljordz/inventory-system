@@ -1,10 +1,11 @@
-import Product from "../models/Product.model.js";
-import Item from "../models/Item.model.js";
-import PriceAdjustment from "../models/PriceAdjustment.model.js";
+import Product from "../models/Product.js";
+import Item from "../models/Item.js";
+import PriceAdjustment from "../models/PriceAdjustment.js";
 
 // 📌 Apply new adjustment (already implemented)
 export const applyAdjustment = async (req, res) => {
-  const { targetType, targetId, adjustmentType, valueType, value, notes } = req.body;
+  const { targetType, targetId, adjustmentType, valueType, value, notes } =
+    req.body;
 
   const Model = targetType === "Product" ? Product : Item;
   const target = await Model.findById(targetId);

@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useMemo } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { TextInput, SelectInput } from "../../components/FormInputs";
+import { TextInput, TextArea, SelectInput } from "../../components/FormInputs";
+import AdjustmentsHistoryList from "./AdjustmentsHistoryList";
+import { formatAmount } from "../../utils/commonUtils";
 
 const AdjustmentsModal = ({
   show,
@@ -12,6 +14,9 @@ const AdjustmentsModal = ({
   adjustmentHistory,
   activeTab,
 }) => {
+  // 🔹 Prevent hooks from running if no selection
+  if (!selected) return null;
+
   const valueRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +25,27 @@ const AdjustmentsModal = ({
     }
   }, [show]);
 
-  if (!selected) return null;
+  const computedPrice = useMemo(() => {
+    if (!selected?.price) return null;
+
+    const basePrice = selected.price;
+    let newPrice = basePrice;
+    const val = Number(adjustment.value) || 0;
+
+    if (adjustment.adjustmentType === "markup") {
+      newPrice =
+        adjustment.valueType === "percentage"
+          ? basePrice + (basePrice * val) / 100
+          : basePrice + val;
+    } else if (adjustment.adjustmentType === "discount") {
+      newPrice =
+        adjustment.valueType === "percentage"
+          ? basePrice - (basePrice * val) / 100
+          : basePrice - val;
+    }
+
+    return newPrice < 0 ? 0 : newPrice;
+  }, [selected?.price, adjustment]);
 
   return (
     <Modal show={show} onHide={onClose} backdrop="static" size="lg">
@@ -31,12 +56,10 @@ const AdjustmentsModal = ({
 
         <Modal.Body>
           <p className="mb-3 font-weight-bold">
-            {activeTab === "products" ? "Product:" : "Item:"}{" "}
-            {selected?.name || ""}
+            {activeTab === "products" ? "Product:" : "Item:"} {selected?.name}
           </p>
 
           <div className="row">
-            {/* Adjustment Form */}
             <div className="col-md-6">
               <SelectInput
                 label="Adjustment Type"
@@ -48,7 +71,8 @@ const AdjustmentsModal = ({
                   { value: "discount", label: "Discount" },
                 ]}
               />
-
+            </div>
+            <div className="col-md-6">
               <SelectInput
                 label="Value Type"
                 name="valueType"
@@ -59,7 +83,11 @@ const AdjustmentsModal = ({
                   { value: "fixed", label: "Fixed Amount" },
                 ]}
               />
+            </div>
+          </div>
 
+          <div className="row">
+            <div className="col-md-6">
               <TextInput
                 label="Value"
                 name="value"
@@ -70,37 +98,40 @@ const AdjustmentsModal = ({
                 required
                 inputRef={valueRef}
               />
+            </div>
+            <div className="col-md-6 d-flex align-items-end">
+              <div className="w-100 mt-3 p-2 border rounded bg-light">
+                <strong>Current Price:</strong> {formatAmount(selected.price)}
+                <br />
+                <strong>New Price:</strong>{" "}
+                <span
+                  className={
+                    adjustment.adjustmentType === "discount"
+                      ? "text-danger"
+                      : "text-success"
+                  }
+                >
+                  ₱{computedPrice?.toFixed(2)}
+                </span>
+              </div>
+            </div>
+          </div>
 
-              <TextInput
+          <div className="row">
+            <div className="col-12">
+              <TextArea
                 label="Notes"
                 name="notes"
-                type="textarea"
                 value={adjustment.notes}
                 onChange={onChange}
                 placeholder="Optional notes"
               />
             </div>
+          </div>
 
-            {/* History Section */}
-            <div className="col-md-6">
-              <h6>Adjustment History</h6>
-              <ul className="list-group">
-                {adjustmentHistory.length > 0 ? (
-                  adjustmentHistory.map((adj) => (
-                    <li key={adj._id} className="list-group-item">
-                      <strong>{adj.adjustmentType}</strong>{" "}
-                      {adj.valueType === "percentage"
-                        ? `${adj.value}%`
-                        : `₱${adj.value}`}{" "}
-                      → ₱{adj.newPrice}
-                      <br />
-                      <small>{adj.notes}</small>
-                    </li>
-                  ))
-                ) : (
-                  <li className="list-group-item">No adjustments yet</li>
-                )}
-              </ul>
+          <div className="row">
+            <div className="col-12">
+              <AdjustmentsHistoryList history={adjustmentHistory} />
             </div>
           </div>
         </Modal.Body>
