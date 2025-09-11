@@ -1,9 +1,9 @@
 import React from "react";
 
-const TabSwitcher = ({ activeTab, onChange }) => {
+const ProfitsTabs = ({ activeTab, onChange }) => {
   const tabs = [
-    { key: "products", label: "Products", icon: "fas fa-cube" },
-    { key: "items", label: "Items", icon: "fas fa-layer-group" },
+    { key: "platform-orders", label: "Platform Orders", icon: "fas fa-shopping-cart" },
+    { key: "walk-ins", label: "Walk-In Transactions", icon: "fas fa-cash-register" },
   ];
 
   return (
@@ -24,4 +24,4 @@ const TabSwitcher = ({ activeTab, onChange }) => {
   );
 };
 
-export default TabSwitcher;
+export default ProfitsTabs;

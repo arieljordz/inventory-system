@@ -9,7 +9,7 @@ import {
 import { useSpinner } from "../context/SpinnerContext";
 import { useDebounce } from "./useDebounce";
 
-export const useAdjustments = (initialItemsPerPage = 5) => {
+export const useAdjustmentsData = (initialItemsPerPage = 5) => {
   const { showSpinner, hideSpinner } = useSpinner();
 
   // 🔹 Tabs
@@ -172,10 +172,6 @@ export const useAdjustments = (initialItemsPerPage = 5) => {
       };
 
       await applyAdjustment(payload);
-      toast.success("Price adjusted successfully!");
-
-      // Refresh history (keep modal open)
-      await fetchAdjustmentHistory(targetType, selected._id);
 
       //   closeModal();
       setAdjustment({
@@ -189,6 +185,11 @@ export const useAdjustments = (initialItemsPerPage = 5) => {
       } else {
         fetchItems();
       }
+
+      toast.success("Price adjusted successfully!");
+
+      // Refresh history (keep modal open)
+      await fetchAdjustmentHistory(targetType, selected._id);
     } catch (err) {
       console.error(err);
       toast.error("Failed to apply adjustment");

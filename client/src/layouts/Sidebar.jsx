@@ -33,7 +33,7 @@ const menuStructure = [
     icon: "fas fa-coins",
     children: [
       { path: "/sales", label: "Sales", icon: "fas fa-receipt" },
-      { path: "/cost-profits", label: "Cost & Profits", icon: "fas fa-percentage" },
+      { path: "/cost-profits", label: "Cost & Profits", icon: "fas fa-calculator" },
     ],
   },
   {

@@ -3,7 +3,7 @@ import {
   getAllAdjustments,
   applyAdjustment,
   getAdjustmentsByTarget,
-} from "../controllers/priceAdjustmentController.js";
+} from "../controllers/adjustmentController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();

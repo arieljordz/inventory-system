@@ -2,8 +2,8 @@ import React from "react";
 import Navpath from "../../components/Navpath";
 import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
-import { useAdjustments } from "../../hooks/useAdjustments";
-import TabSwitcher from "./TabSwitcher";
+import { useAdjustmentsData } from "../../hooks/useAdjustmentsData";
+import AdjustmentsTabs from "./AdjustmentsTabs";
 import AdjustmentsTable from "./AdjustmentsTable";
 import AdjustmentsModal from "./AdjustmentsModal";
 
@@ -29,7 +29,7 @@ const AdjustmentsPage = () => {
     setItemsPerPage,
     totalItems,
     loading,
-  } = useAdjustments(5);
+  } = useAdjustmentsData(5);
 
   // Choose which list to show depending on the active tab
   const list = activeTab === "products" ? products : items;
@@ -58,7 +58,7 @@ const AdjustmentsPage = () => {
 
           <div className="card">
             {/* Tabs */}
-            <TabSwitcher activeTab={activeTab} onChange={setActiveTab} />
+            <AdjustmentsTabs activeTab={activeTab} onChange={setActiveTab} />
 
             {/* Table */}
             <div className="card-body">
