@@ -1,6 +1,6 @@
 // src/hooks/useOrdersData.js
 import { useState, useEffect, useCallback } from "react";
-import { getAllOrders } from "../services/orderService";
+import { getAllOrders, getOrderStatsByPlatform } from "../services/orderService";
 import { useDebounce } from "./useDebounce";
 
 export const useOrdersData = (initialItemsPerPage = 5) => {
@@ -13,6 +13,13 @@ export const useOrdersData = (initialItemsPerPage = 5) => {
   const [totalItems, setTotalItems] = useState(0);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);
+  
+  const [stats, setStats] = useState({
+    overall: 0,
+    shopee: 0,
+    tiktok: 0,
+    lazada: 0,
+  });
 
   const fetchOrders = useCallback(async () => {
     setLoading(true);
@@ -51,6 +58,25 @@ export const useOrdersData = (initialItemsPerPage = 5) => {
     if (currentPage !== 1) setCurrentPage(1);
   }, [debouncedSearchTerm]);
 
+  const fetchOrderStats = useCallback(async () => {
+    try {
+      const res = await getOrderStatsByPlatform();
+      setStats(res.data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setStats({
+        availableProductCount: 0,
+        totalAvailableQuantity: 0,
+        totalInToday: 0,
+        totalOutToday: 0,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchOrderStats();
+  }, [fetchOrderStats]);
+
   return {
     orders,
     loading,
@@ -62,5 +88,6 @@ export const useOrdersData = (initialItemsPerPage = 5) => {
     setItemsPerPage,
     totalItems,
     fetchOrders,
+    stats,
   };
 };

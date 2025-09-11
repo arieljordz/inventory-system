@@ -1,6 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import { getOrdersWithProfits, getWalkInTransactionsWithProfits } from "../services/profitsService";
+import {
+  getProfitStats,
+  getOrdersWithProfits,
+  getWalkInTransactionsWithProfits,
+} from "../services/profitsService";
 import { useSpinner } from "../context/SpinnerContext";
 import { useDebounce } from "./useDebounce";
 
@@ -24,6 +28,13 @@ export const useProfitsData = (initialItemsPerPage = 5) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
   const [totalItems, setTotalItems] = useState(0);
+
+  const [stats, setStats] = useState({
+    overallOrders: 0,
+    overallCost: 0,
+    overallRevenue: 0,
+    overallProfit: 0,
+  });
 
   // 🔹 Loading
   const [loading, setLoading] = useState(false);
@@ -104,6 +115,25 @@ export const useProfitsData = (initialItemsPerPage = 5) => {
     setShowModal(false);
   };
 
+  const fetchProfitStats = useCallback(async () => {
+    try {
+      const res = await getProfitStats();
+      setStats(res.data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setStats({
+        overallOrders: 0,
+        overallCost: 0,
+        overallRevenue: 0,
+        overallProfit: 0,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProfitStats();
+  }, [fetchProfitStats]);
+
   // ========= RETURN =========
   return {
     // Tabs
@@ -131,5 +161,6 @@ export const useProfitsData = (initialItemsPerPage = 5) => {
 
     // Loading
     loading,
+    stats,
   };
 };

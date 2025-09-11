@@ -3,6 +3,7 @@ import { useSpinner } from "../../context/SpinnerContext";
 import Navpath from "../../components/Navpath";
 import { getInventoryStats } from "../../services/dashboardService";
 import DashboardCharts from "./DashboardCharts";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
@@ -17,6 +18,7 @@ const Dashboard = () => {
   });
 
   const { hideSpinner } = useSpinner();
+  const navigate = useNavigate();
 
   useEffect(() => {
     hideSpinner();
@@ -41,24 +43,28 @@ const Dashboard = () => {
       count: stats.totalProducts,
       label: "Products Total",
       icon: "ion ion-cube",
+      path: "/products", // redirect path
     },
     {
       color: "success",
       count: stats.totalProductQuantity,
       label: "Products Total Stock",
       icon: "ion ion-archive",
+      path: "/products",
     },
     {
       color: "warning",
       count: stats.productsNeedsRestock,
       label: "Products Needs Restock",
       icon: "ion ion-alert",
+      path: "/products",
     },
     {
       color: "danger",
       count: stats.productsOutOfStock,
       label: "Products Out of Stock",
       icon: "ion ion-close",
+      path: "/products",
     },
   ];
 
@@ -68,24 +74,28 @@ const Dashboard = () => {
       count: stats.totalItems,
       label: "Items Total",
       icon: "ion ion-pricetag",
+      path: "/items",
     },
     {
       color: "teal",
       count: stats.totalItemQuantity,
       label: "Items Total Stock",
       icon: "ion ion-ios-box",
+      path: "/items",
     },
     {
       color: "orange",
       count: stats.itemsNeedsRestock,
       label: "Items Needs Restock",
       icon: "ion ion-alert",
+      path: "/items",
     },
     {
       color: "maroon",
       count: stats.itemsOutOfStock,
       label: "Items Out of Stock",
       icon: "ion ion-close",
+      path: "/items",
     },
   ];
 
@@ -107,6 +117,7 @@ const Dashboard = () => {
                   <div
                     className={`small-box bg-${box.color}`}
                     style={{ cursor: "pointer" }}
+                    onClick={() => navigate(box.path)} // 🔹 navigate on click
                   >
                     <div className="inner">
                       <h3>

@@ -1,11 +1,14 @@
 import express from "express";
 import {
+  getProfitStats,
   getOrdersWithProfits,
   getWalkInTransactionsWithProfits,
 } from "../controllers/profitController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
 const router = express.Router();
+
+router.get("/stats", getProfitStats);
 
 // 📌 Get all price profits (with pagination & search)
 router.get("/profits", authenticate, getOrdersWithProfits);

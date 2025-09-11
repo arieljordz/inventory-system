@@ -4,6 +4,7 @@ import SearchBar from "../../components/SearchBar";
 import PaginationControls from "../../components/PaginationControls";
 import OrderTable from "./OrderTable";
 import ImportModal from "./ImportModal";
+import InfoDashboard from "./InfoDashboard";
 import { useOrdersData } from "../../hooks/useOrdersData";
 import { useOrderImportModal } from "../../hooks/useOrderImportModal";
 
@@ -19,19 +20,31 @@ const OrderPage = () => {
     setItemsPerPage,
     totalItems,
     fetchOrders,
+    stats,
   } = useOrdersData(5);
 
   const imp = useOrderImportModal(fetchOrders);
 
   return (
     <>
-      <Navpath levelOne="Order Management" levelTwo="Home" levelThree="Orders" />
+      <Navpath
+        levelOne="Order Management"
+        levelTwo="Home"
+        levelThree="Orders"
+      />
 
       <section className="content">
         <div className="container-fluid">
+          {/* 🔹 Dashboard */}
+          <InfoDashboard stats={stats} />
+
           {/* Import Button */}
           <div className="mb-3">
-            <button className="btn btn-success" onClick={imp.openModal} disabled={loading}>
+            <button
+              className="btn btn-success"
+              onClick={imp.openModal}
+              disabled={loading}
+            >
               <i className="fas fa-file-import mr-1"></i> Import Orders
             </button>
           </div>
@@ -41,7 +54,10 @@ const OrderPage = () => {
             searchTerm={searchTerm}
             onSearchChange={setSearchTerm}
             itemsPerPage={itemsPerPage}
-            onItemsPerPageChange={(val) => { setItemsPerPage(val); setCurrentPage(1); }}
+            onItemsPerPageChange={(val) => {
+              setItemsPerPage(val);
+              setCurrentPage(1);
+            }}
             disabled={loading}
           />
 

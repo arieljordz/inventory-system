@@ -7,6 +7,9 @@ const multipartHeaders = {
 export const getAllOrders = ({ page = 1, limit = 10, search = "" } = {}) =>
   api.get("/api/orders", { params: { page, limit, search } });
 
+export const getOrderStatsByPlatform = () =>
+  api.get(`/api/orders/stats`);
+
 export const getAllOrdersByDate = (start, end) =>
   api.get("/api/orders/by-date", {
     params: { start, end },

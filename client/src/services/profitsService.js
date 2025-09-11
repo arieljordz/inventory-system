@@ -1,5 +1,8 @@
 import api from "../api/api";
 
+export const getProfitStats = () =>
+  api.get(`/api/cost-profits/stats`);
+
 // 📌 Fetch all items
 export const getOrdersWithProfits = ({ page = 1, limit = 10, search = "" } = {}) =>
   api.get("/api/cost-profits/profits", { params: { page, limit, search } });

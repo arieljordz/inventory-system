@@ -7,7 +7,7 @@
     "price": 100,
     "sku": "RING-SMALL-68944",
     "description": "",
-    "quantity": 35,
+    "quantity": 90,
     "unit": "pcs",
     "variant": "Small",
     "supplier": "",
@@ -19,7 +19,7 @@
       "$date": "2025-09-01T09:14:28.945Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:42:29.234Z"
+      "$date": "2025-09-11T04:25:12.951Z"
     },
     "normalizedSku": "ring-small-68944",
     "__v": 0,
@@ -34,7 +34,7 @@
     "price": 110,
     "sku": "RING-BIG-19502",
     "description": "",
-    "quantity": 40,
+    "quantity": 58,
     "unit": "pcs",
     "variant": "Big",
     "supplier": "",
@@ -46,7 +46,7 @@
       "$date": "2025-09-01T09:15:19.503Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:42:29.653Z"
+      "$date": "2025-09-11T04:25:52.576Z"
     },
     "normalizedSku": "ring-big-19502",
     "__v": 0,
@@ -142,19 +142,19 @@
     "price": 2000,
     "sku": "FRAME-8-FEE-26175",
     "description": "",
-    "quantity": 0,
+    "quantity": 5,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
     "location": "Main Warehouse",
-    "status": "Out of Stock",
+    "status": "Available",
     "normalizedName": "frame stainless",
     "normalizedVariant": "8 feet",
     "createdAt": {
       "$date": "2025-09-01T09:38:46.176Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:41:16.463Z"
+      "$date": "2025-09-11T04:26:25.400Z"
     },
     "normalizedSku": "frame-8-fee-26175",
     "__v": 0,

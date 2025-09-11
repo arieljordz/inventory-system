@@ -6,6 +6,7 @@ import { useProfitsData } from "../../hooks/useProfitsData";
 import ProfitsTabs from "./ProfitsTabs";
 import ProfitsTable from "./ProfitsTable";
 import ProfitsModal from "./ProfitsModal";
+import InfoDashboard from "./InfoDashboard";
 
 const ProfitsPage = () => {
   const {
@@ -25,6 +26,7 @@ const ProfitsPage = () => {
     setItemsPerPage,
     totalItems,
     loading,
+    stats,
   } = useProfitsData(5);
 
   // Choose which list to show depending on the active tab
@@ -39,6 +41,9 @@ const ProfitsPage = () => {
 
       <section className="content">
         <div className="container-fluid">
+          {/* 🔹 Dashboard */}
+          <InfoDashboard stats={stats} />
+
           {/* Search */}
           <SearchBar
             searchTerm={searchTerm}
@@ -57,7 +62,12 @@ const ProfitsPage = () => {
 
             {/* Table */}
             <div className="card-body">
-              <ProfitsTable list={list} onView={openModal} activeTab={activeTab} loading={loading} />
+              <ProfitsTable
+                list={list}
+                onView={openModal}
+                activeTab={activeTab}
+                loading={loading}
+              />
             </div>
           </div>
           {/* Pagination */}
@@ -68,7 +78,7 @@ const ProfitsPage = () => {
             onPageChange={setCurrentPage}
             disabled={loading}
           />
-                    {/* Modal */}
+          {/* Modal */}
           <ProfitsModal
             show={showModal}
             onClose={closeModal}

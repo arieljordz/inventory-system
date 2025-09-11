@@ -156557,5 +156557,236 @@
       "$date": "2025-09-10T05:42:29.865Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c24f29fa01fe2ca5e2fbe9"
+    },
+    "action": "RESTOCK_ITEM",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Restocked item: Ring, quantity: 55, new balance: 90",
+    "collectionName": "Item",
+    "documentId": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b563f4650c74e5be32382b"
+      },
+      "name": "Ring",
+      "price": 100,
+      "sku": "RING-SMALL-68944",
+      "description": "",
+      "quantity": 35,
+      "unit": "pcs",
+      "variant": "Small",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "ring",
+      "normalizedVariant": "small",
+      "createdAt": {
+        "$date": "2025-09-01T09:14:28.945Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:42:29.234Z"
+      },
+      "normalizedSku": "ring-small-68944",
+      "__v": 0,
+      "normalizedDescription": "",
+      "retailPrice": 160
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b563f4650c74e5be32382b"
+      },
+      "name": "Ring",
+      "price": 100,
+      "sku": "RING-SMALL-68944",
+      "description": "",
+      "quantity": 90,
+      "unit": "pcs",
+      "variant": "Small",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "ring",
+      "normalizedVariant": "small",
+      "createdAt": {
+        "$date": "2025-09-01T09:14:28.945Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-11T04:25:12.951Z"
+      },
+      "normalizedSku": "ring-small-68944",
+      "__v": 0,
+      "normalizedDescription": "",
+      "retailPrice": 160
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-11T04:25:13.094Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-11T04:25:13.094Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c24f50fa01fe2ca5e2fbf1"
+    },
+    "action": "RESTOCK_ITEM",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Restocked item: Ring, quantity: 18, new balance: 58",
+    "collectionName": "Item",
+    "documentId": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b56427650c74e5be323834"
+      },
+      "name": "Ring",
+      "price": 110,
+      "sku": "RING-BIG-19502",
+      "description": "",
+      "quantity": 40,
+      "unit": "pcs",
+      "variant": "Big",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "ring",
+      "normalizedVariant": "big",
+      "createdAt": {
+        "$date": "2025-09-01T09:15:19.503Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:42:29.653Z"
+      },
+      "normalizedSku": "ring-big-19502",
+      "__v": 0,
+      "normalizedDescription": "",
+      "retailPrice": 220
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b56427650c74e5be323834"
+      },
+      "name": "Ring",
+      "price": 110,
+      "sku": "RING-BIG-19502",
+      "description": "",
+      "quantity": 58,
+      "unit": "pcs",
+      "variant": "Big",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "ring",
+      "normalizedVariant": "big",
+      "createdAt": {
+        "$date": "2025-09-01T09:15:19.503Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-11T04:25:52.576Z"
+      },
+      "normalizedSku": "ring-big-19502",
+      "__v": 0,
+      "normalizedDescription": "",
+      "retailPrice": 220
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-11T04:25:52.666Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-11T04:25:52.666Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c24f71fa01fe2ca5e2fc0b"
+    },
+    "action": "RESTOCK_ITEM",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Restocked item: Frame Stainless, quantity: 5, new balance: 5",
+    "collectionName": "Item",
+    "documentId": {
+      "$oid": "68b569a6650c74e5be3238b4"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b569a6650c74e5be3238b4"
+      },
+      "name": "Frame Stainless",
+      "price": 2000,
+      "sku": "FRAME-8-FEE-26175",
+      "description": "",
+      "quantity": 0,
+      "unit": "pcs",
+      "variant": "8 feet",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Out of Stock",
+      "normalizedName": "frame stainless",
+      "normalizedVariant": "8 feet",
+      "createdAt": {
+        "$date": "2025-09-01T09:38:46.176Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:41:16.463Z"
+      },
+      "normalizedSku": "frame-8-fee-26175",
+      "__v": 0,
+      "normalizedDescription": "",
+      "retailPrice": 2300
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b569a6650c74e5be3238b4"
+      },
+      "name": "Frame Stainless",
+      "price": 2000,
+      "sku": "FRAME-8-FEE-26175",
+      "description": "",
+      "quantity": 5,
+      "unit": "pcs",
+      "variant": "8 feet",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "frame stainless",
+      "normalizedVariant": "8 feet",
+      "createdAt": {
+        "$date": "2025-09-01T09:38:46.176Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-11T04:26:25.400Z"
+      },
+      "normalizedSku": "frame-8-fee-26175",
+      "__v": 0,
+      "normalizedDescription": "",
+      "retailPrice": 2300
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-11T04:26:25.496Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-11T04:26:25.496Z"
+    },
+    "__v": 0
   }
 ]

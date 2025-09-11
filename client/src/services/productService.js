@@ -38,3 +38,6 @@ export const importProducts = (formData) =>
 
 export const exportProducts = () =>
   api.get("/api/products/export-products", { responseType: "arraybuffer" });
+
+export const getInventoryStats = () =>
+  api.get(`/api/products/stats`);

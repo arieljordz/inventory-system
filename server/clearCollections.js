@@ -52,16 +52,15 @@ async function clearCollections() {
     await client.connect();
     const db = client.db();
 
-    // List all collections
-    const allCollections = [
-      "auditlogs",
-      "inventorydetails",
-      "orders",
-      "products",
-      "items",
-      "ItemMovements",
-      // "users",
-    ];
+    // 🔹 Fetch available collections dynamically
+    const collections = await db.listCollections().toArray();
+    const allCollections = collections.map((c) => c.name);
+
+    if (allCollections.length === 0) {
+      console.log("No collections found in the database.");
+      rl.close();
+      return;
+    }
 
     const confirmed = await askConfirmation(
       `⚠️  Do you want to proceed with clearing collections?\nDatabase: ${CLEAR_URI}`

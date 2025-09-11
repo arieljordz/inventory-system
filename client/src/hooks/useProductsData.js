@@ -1,6 +1,6 @@
 // src/hooks/useProductsData.js
 import { useState, useEffect, useCallback } from "react";
-import { getProducts } from "../services/productService";
+import { getProducts, getInventoryStats } from "../services/productService";
 import { useDebounce } from "./useDebounce";
 
 export const useProductsData = (initialItemsPerPage = 5) => {
@@ -13,6 +13,13 @@ export const useProductsData = (initialItemsPerPage = 5) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
   const [totalItems, setTotalItems] = useState(0);
+
+  const [stats, setStats] = useState({
+    availableProductCount: 0,
+    totalAvailableQuantity: 0,
+    totalInToday: 0,
+    totalOutToday: 0,
+  });
 
   const fetchProducts = useCallback(async () => {
     setLoading(true);
@@ -47,6 +54,25 @@ export const useProductsData = (initialItemsPerPage = 5) => {
     if (currentPage !== 1) setCurrentPage(1);
   }, [debouncedSearchTerm]);
 
+  const fetchProductStats = useCallback(async () => {
+    try {
+      const res = await getInventoryStats();
+      setStats(res.data);
+    } catch (error) {
+      console.error("Fetch error:", error);
+      setStats({
+        availableProductCount: 0,
+        totalAvailableQuantity: 0,
+        totalInToday: 0,
+        totalOutToday: 0,
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchProductStats();
+  }, [fetchProductStats]);
+
   return {
     products,
     loading,
@@ -58,5 +84,6 @@ export const useProductsData = (initialItemsPerPage = 5) => {
     setItemsPerPage,
     totalItems,
     fetchProducts,
+    stats,
   };
 };

@@ -9,6 +9,7 @@ import {
   restockProduct,
   importProducts,
   exportProducts,
+  getInventoryStats,
 } from "../controllers/productController.js";
 
 import upload from "../middlewares/uploadMiddleware.js";
@@ -20,6 +21,7 @@ const router = express.Router();
 // Public routes
 router.get("/", getProducts);
 router.get("/status/:status", getProductsByStatus);
+router.get("/stats", getInventoryStats); 
 
 // Static export/import routes should come BEFORE dynamic :id
 router.get("/export-products", authenticate, exportProducts);

@@ -3,7 +3,7 @@ import XLSX from "xlsx";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
 import InventoryDetail from "../models/InventoryDetail.js";
-import { StatusEnum } from "../enums/enums.js";
+import { StatusEnum, PlatformEnum } from "../enums/enums.js";
 import { logAudit } from "../utils/auditLogger.js";
 import {
   normalizeString,
@@ -316,4 +316,39 @@ export const processOrdersImport = async (rows, platform, req) => {
     },
     details: results,
   };
+};
+
+export const getOrderStatsByPlatform = async (req, res) => {
+  try {
+    // Aggregate counts grouped by platform
+    const counts = await Order.aggregate([
+      {
+        $group: {
+          _id: "$platform",
+          total: { $sum: 1 },
+        },
+      },
+    ]);
+
+    // Format results into an object
+    const stats = {
+      overall: 0,
+      shopee: 0,
+      tiktok: 0,
+      lazada: 0,
+    };
+
+    counts.forEach((entry) => {
+      const platform = entry._id?.toLowerCase();
+      stats.overall += entry.total;
+      if (platform === PlatformEnum.SHOPEE.toLocaleLowerCase()) stats.shopee = entry.total;
+      if (platform === PlatformEnum.TIKTOK.toLocaleLowerCase()) stats.tiktok = entry.total;
+      if (platform === PlatformEnum.LAZADA.toLocaleLowerCase()) stats.lazada = entry.total;
+    });
+
+    return res.status(200).json(stats);
+  } catch (error) {
+    console.error("Error fetching order stats:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
+  }
 };

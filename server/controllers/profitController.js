@@ -305,3 +305,113 @@ export const getWalkInTransactionsWithProfits = async (req, res) => {
   }
 };
 
+// 📊 Get Overall Profit Stats
+export const getProfitStats = async (req, res) => {
+  try {
+    const search = (req.query.search || "").trim();
+    const searchRegex = new RegExp(search, "i");
+
+    const match = search
+      ? {
+          $or: [
+            { platformOrderId: searchRegex },
+            { platform: searchRegex },
+            { status: searchRegex },
+          ],
+        }
+      : {};
+
+    const pipeline = [
+      { $match: match },
+
+      // Lookup product info
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "productInfo",
+        },
+      },
+      { $unwind: "$productInfo" },
+
+      // Lookup component items
+      {
+        $lookup: {
+          from: "items",
+          localField: "productInfo.components.item",
+          foreignField: "_id",
+          as: "itemsInfo",
+        },
+      },
+
+      // Compute product cost
+      {
+        $addFields: {
+          productCost: {
+            $multiply: [
+              {
+                $sum: {
+                  $map: {
+                    input: "$productInfo.components",
+                    as: "comp",
+                    in: {
+                      $multiply: [
+                        {
+                          $getField: {
+                            field: "price",
+                            input: {
+                              $first: {
+                                $filter: {
+                                  input: "$itemsInfo",
+                                  cond: { $eq: ["$$this._id", "$$comp.item"] },
+                                },
+                              },
+                            },
+                          },
+                        },
+                        "$$comp.qty",
+                      ],
+                    },
+                  },
+                },
+              },
+              "$quantity",
+            ],
+          },
+          revenue: { $multiply: ["$productInfo.price", "$quantity"] },
+        },
+      },
+
+      // Profit
+      {
+        $addFields: {
+          profit: { $subtract: ["$revenue", "$productCost"] },
+        },
+      },
+
+      // Final grouping for totals
+      {
+        $group: {
+          _id: null,
+          overallOrders: { $sum: 1 },
+          overallCost: { $sum: "$productCost" },
+          overallRevenue: { $sum: "$revenue" },
+          overallProfit: { $sum: "$profit" },
+        },
+      },
+    ];
+
+    const result = await Order.aggregate(pipeline);
+
+    return res.status(200).json(result[0] || {
+      overallOrders: 0,
+      overallCost: 0,
+      overallRevenue: 0,
+      overallProfit: 0,
+    });
+  } catch (error) {
+    console.error("Get Profit Stats Error:", error);
+    return res.status(500).json({ message: "Server error", error: error.message });
+  }
+};

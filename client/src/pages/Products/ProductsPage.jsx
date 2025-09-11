@@ -6,6 +6,7 @@ import ProductsModal from "./ProductsModal";
 import RestockProductsModal from "./RestockProductsModal";
 import ProductsImport from "./ProductsImport";
 import ProductsExport from "./ProductsExport";
+import InfoDashboard from "./InfoDashboard";
 
 import { useProductsData } from "../../hooks/useProductsData";
 import { useProductModal } from "../../hooks/useProductModal";
@@ -26,6 +27,7 @@ const ProductsPage = () => {
     setItemsPerPage,
     totalItems,
     fetchProducts,
+    stats,
   } = useProductsData(5);
 
   const productModal = useProductModal(fetchProducts);
@@ -105,6 +107,9 @@ const ProductsPage = () => {
 
       <section className="content">
         <div className="container-fluid">
+           {/* 🔹 Dashboard */}
+          <InfoDashboard stats={stats} />
+
           {/* Add Product Button */}
           <div className="mb-3">
             <button

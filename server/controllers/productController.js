@@ -1,3 +1,5 @@
+
+import moment from "moment-timezone";
 import Product from "../models/Product.js";
 import Item from "../models/Item.js";
 import InventoryDetail from "../models/InventoryDetail.js";
@@ -586,3 +588,44 @@ export const exportProducts = async (req, res) => {
     res.status(500).json({ message: "Failed to export products" });
   }
 };
+
+export const getInventoryStats = async (req, res) => {
+  try {
+    const startOfDay = moment.tz("Asia/Manila").startOf("day").toDate();
+    const endOfDay = moment.tz("Asia/Manila").endOf("day").toDate();
+
+    // 🔹 Products that are currently available
+    const availableProducts = await Product.find({ status: StatusEnum.AVAILABLE });
+    const availableProductCount = availableProducts.length;
+
+    // 🔹 Total available product quantity
+    const totalAvailableQuantity = availableProducts.reduce(
+      (sum, product) => sum + (product.quantity || 0),
+      0
+    );
+
+    // 🔹 Movements today (IN/OUT)
+    const todaysMovements = await InventoryDetail.find({
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
+    });
+
+    const totalInToday = todaysMovements
+      .filter((m) => m.movementType === "IN")
+      .reduce((sum, m) => sum + m.quantity, 0);
+
+    const totalOutToday = todaysMovements
+      .filter((m) => m.movementType === "OUT")
+      .reduce((sum, m) => sum + m.quantity, 0);
+
+    res.json({
+      availableProductCount,
+      totalAvailableQuantity,
+      totalInToday,
+      totalOutToday,
+    });
+  } catch (error) {
+    console.error("Error getting inventory stats:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+

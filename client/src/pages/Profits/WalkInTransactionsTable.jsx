@@ -1,5 +1,6 @@
 import React from "react";
 import { formatAmount, formatDate } from "../../utils/commonUtils";
+import StatusBadge from "../../components/StatusBadge";
 
 const WalkInTransactionsTable = ({ list, onView, loading }) => {
   const handleView = (tx) => {
@@ -21,7 +22,7 @@ const WalkInTransactionsTable = ({ list, onView, loading }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="8" className="text-center py-4">
+          <td colSpan="9" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status" />
               <span className="text-muted">Loading transactions...</span>
@@ -34,7 +35,7 @@ const WalkInTransactionsTable = ({ list, onView, loading }) => {
     if (!list || list.length === 0) {
       return (
         <tr>
-          <td colSpan="8" className="text-center py-4">
+          <td colSpan="9" className="text-center py-4">
             <i className="fas fa-box-open fa-2x mb-2 d-block text-muted"></i>
             <span className="text-muted">No transactions found</span>
           </td>
@@ -67,6 +68,9 @@ const WalkInTransactionsTable = ({ list, onView, loading }) => {
         <td className="text-center align-middle">
           <small className="text-muted">{formatDate(tx.createdAt)}</small>
         </td>
+        <td className="text-center align-middle">
+          <StatusBadge status={"Completed"} />
+        </td>
         <td className="text-center align-middle">{renderActionButtons(tx)}</td>
       </tr>
     ));
@@ -93,6 +97,7 @@ const WalkInTransactionsTable = ({ list, onView, loading }) => {
                 <th className="text-right">Revenue</th>
                 <th className="text-right">Profit</th>
                 <th className="text-center">Purchase Date</th>
+                <th className="text-center">Status</th>
                 <th className="text-center">Action</th>
               </tr>
             </thead>
