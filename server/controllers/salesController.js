@@ -20,7 +20,25 @@ import { restockItemQuantities } from "../utils/inventoryUtils.js";
 
 export const getSalesStats = async (req, res) => {
   try {
+    // 🔹 Determine start and end of current month
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // e.g. Sept 1, 2025
+    const endDate = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0,
+      23,
+      59,
+      59,
+      999
+    ); // e.g. Sept 30, 2025 23:59:59
+
     const result = await Order.aggregate([
+      {
+        $match: {
+          orderDate: { $gte: startDate, $lte: endDate }, // ✅ only current month
+        },
+      },
       {
         $lookup: {
           from: "products",
@@ -35,8 +53,12 @@ export const getSalesStats = async (req, res) => {
           _id: null,
           totalOrders: { $sum: 1 },
           totalSales: { $sum: { $multiply: ["$quantity", "$product.price"] } },
-          unpaidOrders: { $sum: { $cond: [{ $eq: ["$isPaid", false] }, 1, 0] } },
-          paidOrders: { $sum: { $cond: [{ $eq: ["$isPaid", true] }, 1, 0] } },
+          unpaidOrders: {
+            $sum: { $cond: [{ $eq: ["$isPaid", false] }, 1, 0] },
+          },
+          paidOrders: {
+            $sum: { $cond: [{ $eq: ["$isPaid", true] }, 1, 0] },
+          },
         },
       },
     ]);

@@ -30,7 +30,7 @@ export const useOrderInventory = (initialItemsPerPage = 5) => {
     endDate: getCurrentDate(),
   });
 
-  const debouncedSearchTerm = useDebounce(searchTerm, 500);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   const fetchInventory = useCallback(async () => {
     setLoading(true);

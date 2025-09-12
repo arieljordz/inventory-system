@@ -26,7 +26,7 @@ export const useItemsData = (initialPagination) => {
     totalOutToday: 0,
   });
 
-  const debouncedSearch = useDebounce(pagination.searchTerm, 500);
+  const debouncedSearch = useDebounce(pagination.searchTerm, 1000);
   const { showSpinner, hideSpinner } = useSpinner();
 
   const fetchItems = useCallback(async () => {

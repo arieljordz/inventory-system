@@ -6,16 +6,16 @@ const SearchBar = ({
   itemsPerPage = 10,
   onItemsPerPageChange,
   itemsPerPageOptions = [5, 10, 20, 50, 100],
-  placeholder = "Search products...",
+  placeholder = "Search here...",
   disabled = false,
 }) => {
   const inputRef = useRef(null);
 
   // Always focus when component mounts
   useEffect(() => {
-    // if (!disabled && inputRef.current) {
-    //   inputRef.current.focus();
-    // }
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
   }, [disabled]);
 
   const handleSearchInputChange = (e) => {
@@ -27,9 +27,9 @@ const SearchBar = ({
     onItemsPerPageChange?.(value);
 
     // Refocus the search input after selecting items per page
-    // if (!disabled && inputRef.current) {
-    //   inputRef.current.focus();
-    // }
+    if (!disabled && inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const handleClearSearch = () => {

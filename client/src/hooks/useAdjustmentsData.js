@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 import {
   getProducts,
   getAllItems,
@@ -36,7 +37,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
 
   // 🔹 Search & Pagination
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 800);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
   const [totalItems, setTotalItems] = useState(0);
@@ -161,6 +162,19 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
     if (e) e.preventDefault();
     if (!selected) return;
 
+    // 🔹 Ask confirmation before proceeding
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to apply this price adjustment?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, apply it!",
+    });
+
+    if (!result.isConfirmed) return; // Cancel if user clicks "No"
+
     try {
       showSpinner();
       const targetType = getTargetType();
@@ -173,23 +187,52 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
 
       await applyAdjustment(payload);
 
-      //   closeModal();
+      // Reset adjustment form
       setAdjustment({
         adjustmentType: "markup",
         valueType: "percentage",
         value: 0,
         notes: "",
       });
+
+      // 🔹 Refresh list
       if (activeTab === "products") {
-        fetchProducts();
+        await fetchProducts();
       } else {
-        fetchItems();
+        await fetchItems();
+      }
+
+      // 🔹 Refresh history
+      await fetchAdjustmentHistory(targetType, selected._id);
+
+      // 🔹 Refresh selected details (important for modal)
+      try {
+        if (targetType === "Product") {
+          const updated = await getProducts({
+            page: 1,
+            limit: 1,
+            search: selected.name,
+          });
+          const fresh = updated.data?.products?.find(
+            (p) => p._id === selected._id
+          );
+          if (fresh) setSelected(fresh);
+        } else {
+          const updated = await getAllItems({
+            page: 1,
+            limit: 1,
+            search: selected.name,
+          });
+          const fresh = updated.data?.items?.find(
+            (i) => i._id === selected._id
+          );
+          if (fresh) setSelected(fresh);
+        }
+      } catch (err) {
+        console.error("Failed to refresh selected:", err);
       }
 
       toast.success("Price adjusted successfully!");
-
-      // Refresh history (keep modal open)
-      await fetchAdjustmentHistory(targetType, selected._id);
     } catch (err) {
       console.error(err);
       toast.error("Failed to apply adjustment");

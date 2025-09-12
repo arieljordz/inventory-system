@@ -311,15 +311,32 @@ export const getProfitStats = async (req, res) => {
     const search = (req.query.search || "").trim();
     const searchRegex = new RegExp(search, "i");
 
-    const match = search
-      ? {
-          $or: [
-            { platformOrderId: searchRegex },
-            { platform: searchRegex },
-            { status: searchRegex },
-          ],
-        }
-      : {};
+    // 🔹 Determine start and end of current month
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // e.g. Sept 1, 2025
+    const endDate = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0,
+      23,
+      59,
+      59,
+      999
+    ); // e.g. Sept 30, 2025 23:59:59
+
+    // 🔹 Match conditions
+    const match = {
+      orderDate: { $gte: startDate, $lte: endDate }, // ✅ limit to current month
+      ...(search
+        ? {
+            $or: [
+              { platformOrderId: searchRegex },
+              { platform: searchRegex },
+              { status: searchRegex },
+            ],
+          }
+        : {}),
+    };
 
     const pipeline = [
       { $match: match },
@@ -404,14 +421,19 @@ export const getProfitStats = async (req, res) => {
 
     const result = await Order.aggregate(pipeline);
 
-    return res.status(200).json(result[0] || {
-      overallOrders: 0,
-      overallCost: 0,
-      overallRevenue: 0,
-      overallProfit: 0,
-    });
+    return res.status(200).json(
+      result[0] || {
+        overallOrders: 0,
+        overallCost: 0,
+        overallRevenue: 0,
+        overallProfit: 0,
+      }
+    );
   } catch (error) {
     console.error("Get Profit Stats Error:", error);
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
+

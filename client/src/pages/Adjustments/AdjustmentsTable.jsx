@@ -17,7 +17,7 @@ const AdjustmentsTable = ({
   const renderActionButtons = (item) => (
     <div className="btn-group" role="group">
       <button
-        className="btn btn-sm btn-warning"
+        className="btn btn-sm btn-success"
         title="Adjust Price"
         onClick={() => handleAdjust(item)}
         disabled={loading}

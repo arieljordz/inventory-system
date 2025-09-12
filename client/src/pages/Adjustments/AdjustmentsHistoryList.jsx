@@ -32,15 +32,23 @@ const AdjustmentsHistoryList = ({ history = [], pageSize = 5 }) => {
           const isDiscount = adj.adjustmentType === "discount";
           const badgeClass = isDiscount ? "text-danger" : "text-success";
           const valueDisplay =
-            adj.valueType === "percentage" ? `${adj.value}%` : `₱${adj.value}`;
+            adj.valueType === "percentage"
+              ? `${adj.value}%`
+              : `₱${Number(adj.value).toFixed(2)}`;
 
           return (
             <li key={adj._id} className="list-group-item">
+              {/* Old price */}
+              <span className="text-muted">
+                ₱{Number(adj.oldPrice).toFixed(2)}
+              </span>{" "}
+              {/* Adjustment type + value */}
               <strong className={badgeClass}>
                 {adj.adjustmentType.charAt(0).toUpperCase() +
                   adj.adjustmentType.slice(1)}
               </strong>{" "}
               {valueDisplay} →{" "}
+              {/* New price */}
               <span className={badgeClass}>
                 ₱{Number(adj.newPrice).toFixed(2)}
               </span>
@@ -77,7 +85,9 @@ const AdjustmentsHistoryList = ({ history = [], pageSize = 5 }) => {
               </Pagination.Item>
             ))}
             <Pagination.Next
-              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              onClick={() =>
+                setCurrentPage((p) => Math.min(p + 1, totalPages))
+              }
               disabled={currentPage === totalPages}
             />
             <Pagination.Last

@@ -24,7 +24,7 @@ export const useProfitsData = (initialItemsPerPage = 5) => {
 
   // 🔹 Search & Pagination
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 800);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
   const [totalItems, setTotalItems] = useState(0);

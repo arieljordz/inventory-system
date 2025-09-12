@@ -320,8 +320,18 @@ export const processOrdersImport = async (rows, platform, req) => {
 
 export const getOrderStatsByPlatform = async (req, res) => {
   try {
-    // Aggregate counts grouped by platform
+    // 🔹 Determine start and end of current month
+    const now = new Date();
+    const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Sept 1, 2025
+    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999); // Sept 30, 2025 23:59:59
+
+    // 🔹 Aggregate counts grouped by platform, filtered by current month
     const counts = await Order.aggregate([
+      {
+        $match: {
+          orderDate: { $gte: startDate, $lte: endDate },
+        },
+      },
       {
         $group: {
           _id: "$platform",
@@ -330,7 +340,7 @@ export const getOrderStatsByPlatform = async (req, res) => {
       },
     ]);
 
-    // Format results into an object
+    // 🔹 Format results into a stats object
     const stats = {
       overall: 0,
       shopee: 0,
@@ -341,14 +351,15 @@ export const getOrderStatsByPlatform = async (req, res) => {
     counts.forEach((entry) => {
       const platform = entry._id?.toLowerCase();
       stats.overall += entry.total;
-      if (platform === PlatformEnum.SHOPEE.toLocaleLowerCase()) stats.shopee = entry.total;
-      if (platform === PlatformEnum.TIKTOK.toLocaleLowerCase()) stats.tiktok = entry.total;
-      if (platform === PlatformEnum.LAZADA.toLocaleLowerCase()) stats.lazada = entry.total;
+      if (platform === PlatformEnum.SHOPEE.toLowerCase()) stats.shopee = entry.total;
+      if (platform === PlatformEnum.TIKTOK.toLowerCase()) stats.tiktok = entry.total;
+      if (platform === PlatformEnum.LAZADA.toLowerCase()) stats.lazada = entry.total;
     });
 
     return res.status(200).json(stats);
   } catch (error) {
-    console.error("Error fetching order stats:", error);
+    console.error("Error fetching monthly order stats:", error);
     return res.status(500).json({ message: "Server error", error: error.message });
   }
 };
+

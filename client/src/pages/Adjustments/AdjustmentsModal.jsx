@@ -16,18 +16,21 @@ const AdjustmentsModal = ({
 }) => {
   const valueRef = useRef(null);
 
+  // 🔹 Autofocus on value input when modal opens
   useEffect(() => {
     if (show && valueRef.current) {
       valueRef.current.focus();
     }
   }, [show]);
 
+  // 🔹 Compute the new price after applying adjustment
   const computedPrice = useMemo(() => {
     if (!selected?.price) return null;
 
     const basePrice = selected.price;
-    let newPrice = basePrice;
     const val = Number(adjustment.value) || 0;
+
+    let newPrice = basePrice;
 
     if (adjustment.adjustmentType === "markup") {
       newPrice =
@@ -44,23 +47,36 @@ const AdjustmentsModal = ({
     return newPrice < 0 ? 0 : newPrice;
   }, [selected?.price, adjustment]);
 
+  // 🔹 Validation: disable Apply if no product/item or invalid adjustment
+  const isApplyDisabled =
+    !selected || !adjustment.value || Number(adjustment.value) === 0;
+
   return (
     <Modal show={show} onHide={onClose} backdrop="static" size="lg">
       <Form onSubmit={onApply}>
+        {/* HEADER */}
         <Modal.Header closeButton className="bg-success text-white">
           <Modal.Title>Price Adjustments</Modal.Title>
         </Modal.Header>
 
+        {/* BODY */}
         <Modal.Body>
           {!selected ? (
             <p className="text-muted">No product or item selected.</p>
           ) : (
             <>
-              <p className="mb-3 font-weight-bold">
-                {activeTab === "products" ? "Product:" : "Item:"}{" "}
-                {selected.name}
-              </p>
+              {/* Basic Info */}
+              <div className="mb-3">
+                <p className="fw-bold mb-1">
+                  {activeTab === "products" ? "Product:" : "Item:"}{" "}
+                  <span className="text-primary">{selected.name}</span>
+                </p>
+                <p className="fw-bold mb-0">
+                  Variant: <span className="text-secondary">{selected.variant}</span>
+                </p>
+              </div>
 
+              {/* Adjustment Settings */}
               <div className="row">
                 <div className="col-md-6">
                   <SelectInput
@@ -88,6 +104,7 @@ const AdjustmentsModal = ({
                 </div>
               </div>
 
+              {/* Value + Preview */}
               <div className="row">
                 <div className="col-md-6">
                   <TextInput
@@ -98,28 +115,32 @@ const AdjustmentsModal = ({
                     onChange={onChange}
                     placeholder="Enter adjustment value"
                     required
+                    min="1"
                     inputRef={valueRef}
                   />
                 </div>
                 <div className="col-md-6 d-flex align-items-end">
-                  <div className="w-100 mt-3 p-2 border rounded bg-light">
-                    <strong>Current Price:</strong>{" "}
-                    {formatAmount(selected.price)}
-                    <br />
-                    <strong>New Price:</strong>{" "}
-                    <span
-                      className={
-                        adjustment.adjustmentType === "discount"
-                          ? "text-danger"
-                          : "text-success"
-                      }
-                    >
-                      ₱{computedPrice?.toFixed(2)}
-                    </span>
+                  <div className="w-100 mt-3 p-3 border rounded bg-light">
+                    <p className="mb-1">
+                      <strong>Current Price:</strong> {formatAmount(selected.price)}
+                    </p>
+                    <p className="mb-0">
+                      <strong>New Price:</strong>{" "}
+                      <span
+                        className={
+                          adjustment.adjustmentType === "discount"
+                            ? "text-danger fw-bold"
+                            : "text-success fw-bold"
+                        }
+                      >
+                        ₱{computedPrice?.toFixed(2)}
+                      </span>
+                    </p>
                   </div>
                 </div>
               </div>
 
+              {/* Notes */}
               <div className="row">
                 <div className="col-12">
                   <TextArea
@@ -132,7 +153,8 @@ const AdjustmentsModal = ({
                 </div>
               </div>
 
-              <div className="row">
+              {/* History */}
+              <div className="row mt-1">
                 <div className="col-12">
                   <AdjustmentsHistoryList history={adjustmentHistory} />
                 </div>
@@ -141,11 +163,12 @@ const AdjustmentsModal = ({
           )}
         </Modal.Body>
 
+        {/* FOOTER */}
         <Modal.Footer>
           <Button variant="secondary" onClick={onClose}>
             <i className="fas fa-times-circle me-1"></i> Cancel
           </Button>
-          <Button type="submit" variant="success" disabled={!selected}>
+          <Button type="submit" variant="success" disabled={isApplyDisabled}>
             <i className="fas fa-check-circle me-1"></i> Apply
           </Button>
         </Modal.Footer>

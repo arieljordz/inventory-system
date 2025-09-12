@@ -8,7 +8,7 @@ export const useProductsData = (initialItemsPerPage = 5) => {
   const [loading, setLoading] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState("");
-  const debouncedSearchTerm = useDebounce(searchTerm, 800);
+  const debouncedSearchTerm = useDebounce(searchTerm, 1000);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(initialItemsPerPage);
