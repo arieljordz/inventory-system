@@ -156788,5 +156788,1590 @@
       "$date": "2025-09-11T04:26:25.496Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c8f77a653f752a89e9be"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set, variant: FRAME ONLY",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b8fc60476ac98675b38c9b"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b8fc60476ac98675b38c9b"
+      },
+      "name": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "price": 1769,
+      "description": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "image": "",
+      "imageId": "",
+      "quantity": 97,
+      "sku": "DUYAN-FRAME-96955",
+      "variant": "FRAME ONLY",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc0371ee2f0795e647f745"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b569a6650c74e5be3238b4"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc0371ee2f0795e647f746"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:41:36.957Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:41:16.549Z"
+      },
+      "normalizedName": "duyan frame (detachable) frame only or with hammock set",
+      "normalizedVariant": "frame only",
+      "normalizedSku": "duyan-frame-96955",
+      "normalizedDescription": "duyan frame (detachable) frame only or with hammock set",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b8fc60476ac98675b38c9b"
+      },
+      "name": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "price": 1769,
+      "description": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "image": "",
+      "imageId": "",
+      "quantity": 97,
+      "sku": "DUYAN-FRAME-96955",
+      "variant": "FRAME ONLY",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c8f77a653f752a89e9b9"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b56932650c74e5be3238ad"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c8f77a653f752a89e9ba"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:41:36.957Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:17:10.715Z"
+      },
+      "normalizedName": "duyan frame (detachable) frame only or with hammock set",
+      "normalizedVariant": "frame only",
+      "normalizedSku": "duyan-frame-96955",
+      "normalizedDescription": "duyan frame (detachable) frame only or with hammock set",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:17:11.165Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:17:11.165Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c9727a653f752a89e9d7"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Hammock Frame Foldable Detachable, variant: 10 feet",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b7bfdc905e371d38cb1caf"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b7bfdc905e371d38cb1caf"
+      },
+      "name": "Hammock Frame Foldable Detachable",
+      "price": 1889,
+      "description": "Hammock Frame Foldable Detachable",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "HAMMO-10-FE-68297",
+      "variant": "10 feet",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bbc6c72f35835cfdb9eed6"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T04:11:08.298Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-06T05:29:43.328Z"
+      },
+      "normalizedName": "hammock frame foldable detachable",
+      "normalizedVariant": "10 feet",
+      "normalizedSku": "hammo-10-fe-68297",
+      "normalizedDescription": "hammock frame foldable detachable",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b7bfdc905e371d38cb1caf"
+      },
+      "name": "Hammock Frame Foldable Detachable",
+      "price": 1889,
+      "description": "Hammock Frame Foldable Detachable",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "HAMMO-10-FE-68297",
+      "variant": "10 feet",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9727a653f752a89e9d2"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b569d1650c74e5be3238bb"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9727a653f752a89e9d3"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T04:11:08.298Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:19:14.063Z"
+      },
+      "normalizedName": "hammock frame foldable detachable",
+      "normalizedVariant": "10 feet",
+      "normalizedSku": "hammo-10-fe-68297",
+      "normalizedDescription": "hammock frame foldable detachable",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:19:14.111Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:19:14.111Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c9817a653f752a89e9f1"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: 10 Set Ring & Carabiner Stainless Wholesale Price mas Pinamura, variant: Default",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b8fe87476ac98675b38dc7"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b8fe87476ac98675b38dc7"
+      },
+      "name": "10 Set Ring & Carabiner Stainless Wholesale Price mas Pinamura",
+      "price": 2679,
+      "description": "10 Set Ring & Carabiner Stainless Wholesale Price mas Pinamura",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "10-SE-DEFAU-47740",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 10,
+          "_id": {
+            "$oid": "68bc035bee2f0795e647f72d"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b56475650c74e5be323844"
+          },
+          "qty": 10,
+          "_id": {
+            "$oid": "68bc035bee2f0795e647f72e"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:50:47.809Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-06T09:48:11.326Z"
+      },
+      "normalizedName": "10 set ring & carabiner stainless wholesale price mas pinamura",
+      "normalizedVariant": "default",
+      "normalizedSku": "10-se-defau-47740",
+      "normalizedDescription": "10 set ring & carabiner stainless wholesale price mas pinamura",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b8fe87476ac98675b38dc7"
+      },
+      "name": "10 Set Ring & Carabiner Stainless Wholesale Price mas Pinamura",
+      "price": 2679,
+      "description": "10 Set Ring & Carabiner Stainless Wholesale Price mas Pinamura",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "10-SE-DEFAU-47740",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 10,
+          "_id": {
+            "$oid": "68c3c9817a653f752a89e9ec"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b56475650c74e5be323844"
+          },
+          "qty": 10,
+          "_id": {
+            "$oid": "68c3c9817a653f752a89e9ed"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:50:47.809Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:19:29.305Z"
+      },
+      "normalizedName": "10 set ring & carabiner stainless wholesale price mas pinamura",
+      "normalizedVariant": "default",
+      "normalizedSku": "10-se-defau-47740",
+      "normalizedDescription": "10 set ring & carabiner stainless wholesale price mas pinamura",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:19:29.349Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:19:29.349Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c98b7a653f752a89ea07"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock, variant: maka",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b8fe05476ac98675b38d4a"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b8fe05476ac98675b38d4a"
+      },
+      "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "price": 269,
+      "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "DUYAN-MAKA-17569",
+      "variant": "maka",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b56427650c74e5be323834"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc02e9ee2f0795e647f6eb"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:48:37.570Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-06T09:46:17.476Z"
+      },
+      "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "normalizedVariant": "maka",
+      "normalizedSku": "duyan-maka-17569",
+      "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b8fe05476ac98675b38d4a"
+      },
+      "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "price": 269,
+      "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "DUYAN-MAKA-17569",
+      "variant": "maka",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b56427650c74e5be323834"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c98b7a653f752a89ea04"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:48:37.570Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:19:39.890Z"
+      },
+      "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "normalizedVariant": "maka",
+      "normalizedSku": "duyan-maka-17569",
+      "normalizedDescription": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:19:39.932Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:19:39.932Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c99c7a653f752a89ea21"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set, variant: FRAME ONLY",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b8fc60476ac98675b38c9b"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b8fc60476ac98675b38c9b"
+      },
+      "name": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "price": 1769,
+      "description": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "image": "",
+      "imageId": "",
+      "quantity": 97,
+      "sku": "DUYAN-FRAME-96955",
+      "variant": "FRAME ONLY",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c8f77a653f752a89e9b9"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b56932650c74e5be3238ad"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c8f77a653f752a89e9ba"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:41:36.957Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:17:10.715Z"
+      },
+      "normalizedName": "duyan frame (detachable) frame only or with hammock set",
+      "normalizedVariant": "frame only",
+      "normalizedSku": "duyan-frame-96955",
+      "normalizedDescription": "duyan frame (detachable) frame only or with hammock set",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b8fc60476ac98675b38c9b"
+      },
+      "name": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "price": 1769,
+      "description": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "image": "",
+      "imageId": "",
+      "quantity": 97,
+      "sku": "DUYAN-FRAME-96955",
+      "variant": "FRAME ONLY",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c99c7a653f752a89ea1c"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b56932650c74e5be3238ad"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c99c7a653f752a89ea1d"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:41:36.957Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:19:56.393Z"
+      },
+      "normalizedName": "duyan frame (detachable) frame only or with hammock set",
+      "normalizedVariant": "frame only",
+      "normalizedSku": "duyan-frame-96955",
+      "normalizedDescription": "duyan frame (detachable) frame only or with hammock set",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:19:56.436Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:19:56.436Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c9a57a653f752a89ea3b"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan Ring w/ Static Utility Rope Set 10mm, 10meters, variant: Orange",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b8fa6f476ac98675b38a45"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b8fa6f476ac98675b38a45"
+      },
+      "name": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "price": 459,
+      "description": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "DUYAN-ORANG-99418",
+      "variant": "Orange",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b571f905bc2b256f1ce825"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc038dee2f0795e647f75e"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc038dee2f0795e647f75f"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:33:19.507Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-06T09:49:01.813Z"
+      },
+      "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "normalizedVariant": "orange",
+      "normalizedSku": "duyan-orang-99418",
+      "normalizedDescription": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b8fa6f476ac98675b38a45"
+      },
+      "name": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "price": 459,
+      "description": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "DUYAN-ORANG-99418",
+      "variant": "Orange",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b571f905bc2b256f1ce825"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9a57a653f752a89ea36"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9a57a653f752a89ea37"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-04T02:33:19.507Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:20:05.801Z"
+      },
+      "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "normalizedVariant": "orange",
+      "normalizedSku": "duyan-orang-99418",
+      "normalizedDescription": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:20:05.843Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:20:05.843Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c9b17a653f752a89ea55"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Hammock Frame Foldable Detachable, variant: 10 feet",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b7bfdc905e371d38cb1caf"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b7bfdc905e371d38cb1caf"
+      },
+      "name": "Hammock Frame Foldable Detachable",
+      "price": 1889,
+      "description": "Hammock Frame Foldable Detachable",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "HAMMO-10-FE-68297",
+      "variant": "10 feet",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9727a653f752a89e9d2"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b569d1650c74e5be3238bb"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9727a653f752a89e9d3"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T04:11:08.298Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:19:14.063Z"
+      },
+      "normalizedName": "hammock frame foldable detachable",
+      "normalizedVariant": "10 feet",
+      "normalizedSku": "hammo-10-fe-68297",
+      "normalizedDescription": "hammock frame foldable detachable",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b7bfdc905e371d38cb1caf"
+      },
+      "name": "Hammock Frame Foldable Detachable",
+      "price": 1889,
+      "description": "Hammock Frame Foldable Detachable",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "HAMMO-10-FE-68297",
+      "variant": "10 feet",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9b17a653f752a89ea50"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b569d1650c74e5be3238bb"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9b17a653f752a89ea51"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T04:11:08.298Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:20:17.024Z"
+      },
+      "normalizedName": "hammock frame foldable detachable",
+      "normalizedVariant": "10 feet",
+      "normalizedSku": "hammo-10-fe-68297",
+      "normalizedDescription": "hammock frame foldable detachable",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:20:17.065Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:20:17.065Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c9d47a653f752a89ea7d"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: FRAME DETACHABLE HAMMOCK FRAME, variant: Default",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b7bdb1905e371d38cb1b6a"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b7bdb1905e371d38cb1b6a"
+      },
+      "name": "FRAME DETACHABLE HAMMOCK FRAME",
+      "price": 1599,
+      "description": "FRAME DETACHABLE HAMMOCK FRAME",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "FRAME-DEFAU-13953",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc03a1ee2f0795e647f782"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b569a6650c74e5be3238b4"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc03a1ee2f0795e647f783"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T04:01:53.954Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-06T09:49:21.223Z"
+      },
+      "normalizedName": "frame detachable hammock frame",
+      "normalizedVariant": "default",
+      "normalizedSku": "frame-defau-13953",
+      "normalizedDescription": "frame detachable hammock frame",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b7bdb1905e371d38cb1b6a"
+      },
+      "name": "FRAME DETACHABLE HAMMOCK FRAME",
+      "price": 1599,
+      "description": "FRAME DETACHABLE HAMMOCK FRAME",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "FRAME-DEFAU-13953",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9d47a653f752a89ea78"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b56932650c74e5be3238ad"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9d47a653f752a89ea79"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T04:01:53.954Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:20:52.791Z"
+      },
+      "normalizedName": "frame detachable hammock frame",
+      "normalizedVariant": "default",
+      "normalizedSku": "frame-defau-13953",
+      "normalizedDescription": "frame detachable hammock frame",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:20:52.836Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:20:52.836Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3c9e27a653f752a89ea93"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: DUYAN RING PAIR STAINLESS, variant: Default",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b7bca4905e371d38cb1b07"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b7bca4905e371d38cb1b07"
+      },
+      "name": "DUYAN RING PAIR STAINLESS",
+      "price": 189,
+      "description": "DUYAN RING PAIR STAINLESS",
+      "image": "",
+      "imageId": "",
+      "quantity": 91,
+      "sku": "DUYAN-DEFAU-44518",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc03cfee2f0795e647f799"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T03:57:24.552Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:41:58.298Z"
+      },
+      "normalizedName": "duyan ring pair stainless",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-44518",
+      "normalizedDescription": "duyan ring pair stainless",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b7bca4905e371d38cb1b07"
+      },
+      "name": "DUYAN RING PAIR STAINLESS",
+      "price": 189,
+      "description": "DUYAN RING PAIR STAINLESS",
+      "image": "",
+      "imageId": "",
+      "quantity": 91,
+      "sku": "DUYAN-DEFAU-44518",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3c9e27a653f752a89ea90"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-03T03:57:24.552Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:21:06.064Z"
+      },
+      "normalizedName": "duyan ring pair stainless",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-44518",
+      "normalizedDescription": "duyan ring pair stainless",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:21:06.105Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:21:06.105Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3ca657a653f752a89eaad"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan Ring w/ Static Utility Rope Set 10mm, 10meters, variant: Black",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b55c19650c74e5be3235dc"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b55c19650c74e5be3235dc"
+      },
+      "name": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "price": 469,
+      "description": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "image": "",
+      "imageId": "",
+      "quantity": 96,
+      "sku": "DUYAN-BLACK-57102",
+      "variant": "Black",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b564a9650c74e5be32384d"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc0407ee2f0795e647f7cc"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc0407ee2f0795e647f7cd"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:40:57.103Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:41:35.400Z"
+      },
+      "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "normalizedVariant": "black",
+      "normalizedSku": "duyan-black-57102",
+      "normalizedDescription": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b55c19650c74e5be3235dc"
+      },
+      "name": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "price": 469,
+      "description": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
+      "image": "",
+      "imageId": "",
+      "quantity": 96,
+      "sku": "DUYAN-BLACK-57102",
+      "variant": "Black",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca657a653f752a89eaa8"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b684e7c3bcfc9ab3c82028"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca657a653f752a89eaa9"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:40:57.103Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:23:17.494Z"
+      },
+      "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "normalizedVariant": "black",
+      "normalizedSku": "duyan-black-57102",
+      "normalizedDescription": "duyan ring w/ static utility rope set 10mm, 10meters",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:23:17.542Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:23:17.542Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3ca7b7a653f752a89eac7"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Static Utility Rope 10 meters by 10mm thick w/ Stainless Rings and Carabiners, variant: Army Green",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b55ba4650c74e5be3235cd"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b55ba4650c74e5be3235cd"
+      },
+      "name": "Static Utility Rope 10 meters by 10mm thick w/ Stainless Rings and Carabiners",
+      "price": 469,
+      "description": "Static Utility Rope 10 meters by 10mm thick w/ Stainless Rings and Carabiners",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "STATI-ARMY-40746",
+      "variant": "Army Green",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b5727a05bc2b256f1ce83b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68b7afd3905e371d38cb14f2"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68b7afd3905e371d38cb14f3"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:39:00.746Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-03T03:02:43.663Z"
+      },
+      "normalizedName": "static utility rope 10 meters by 10mm thick w/ stainless rings and carabiners",
+      "normalizedVariant": "army green",
+      "normalizedSku": "stati-army-40746",
+      "normalizedDescription": "static utility rope 10 meters by 10mm thick w/ stainless rings and carabiners",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b55ba4650c74e5be3235cd"
+      },
+      "name": "Static Utility Rope 10 meters by 10mm thick w/ Stainless Rings and Carabiners",
+      "price": 469,
+      "description": "Static Utility Rope 10 meters by 10mm thick w/ Stainless Rings and Carabiners",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "STATI-ARMY-40746",
+      "variant": "Army Green",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b5727a05bc2b256f1ce83b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca7b7a653f752a89eac2"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca7b7a653f752a89eac3"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:39:00.746Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:23:39.310Z"
+      },
+      "normalizedName": "static utility rope 10 meters by 10mm thick w/ stainless rings and carabiners",
+      "normalizedVariant": "army green",
+      "normalizedSku": "stati-army-40746",
+      "normalizedDescription": "static utility rope 10 meters by 10mm thick w/ stainless rings and carabiners",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:23:39.350Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:23:39.350Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3ca857a653f752a89eae1"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable, variant: Army Green Camouflag",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b55b26650c74e5be3235be"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b55b26650c74e5be3235be"
+      },
+      "name": "Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable",
+      "price": 469,
+      "description": "Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable",
+      "image": "",
+      "imageId": "",
+      "quantity": 98,
+      "sku": "STATI-ARMY-14608",
+      "variant": "Army Green Camouflag",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b5727a05bc2b256f1ce83b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc040dee2f0795e647f7e6"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc040dee2f0795e647f7e7"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:36:54.609Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:41:35.955Z"
+      },
+      "normalizedName": "static utility rope for hammock w/ stainless ring pair 304 - 10m long,10mm diameter, durable",
+      "normalizedVariant": "army green camouflag",
+      "normalizedSku": "stati-army-14608",
+      "normalizedDescription": "static utility rope for hammock w/ stainless ring pair 304 - 10m long,10mm diameter, durable",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b55b26650c74e5be3235be"
+      },
+      "name": "Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable",
+      "price": 469,
+      "description": "Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable",
+      "image": "",
+      "imageId": "",
+      "quantity": 98,
+      "sku": "STATI-ARMY-14608",
+      "variant": "Army Green Camouflag",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b5727a05bc2b256f1ce83b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca857a653f752a89eadc"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca857a653f752a89eadd"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:36:54.609Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:23:49.325Z"
+      },
+      "normalizedName": "static utility rope for hammock w/ stainless ring pair 304 - 10m long,10mm diameter, durable",
+      "normalizedVariant": "army green camouflag",
+      "normalizedSku": "stati-army-14608",
+      "normalizedDescription": "static utility rope for hammock w/ stainless ring pair 304 - 10m long,10mm diameter, durable",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:23:49.368Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:23:49.368Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3ca917a653f752a89eb04"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan Ring Stainless for Hammocks, variant: Color Family:Silver, Variation3:other:One Size",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b55909650c74e5be3234f6"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b55909650c74e5be3234f6"
+      },
+      "name": "Duyan Ring Stainless for Hammocks",
+      "price": 179,
+      "description": "Duyan Ring Stainless for Hammocks",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "DUYAN-COLOR-73294",
+      "variant": "Color Family:Silver, Variation3:other:One Size",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc0425ee2f0795e647f807"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:27:53.353Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-06T09:51:33.642Z"
+      },
+      "normalizedName": "duyan ring stainless for hammocks",
+      "normalizedVariant": "color family:silver, variation3:other:one size",
+      "normalizedSku": "duyan-color-73294",
+      "normalizedDescription": "duyan ring stainless for hammocks",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b55909650c74e5be3234f6"
+      },
+      "name": "Duyan Ring Stainless for Hammocks",
+      "price": 179,
+      "description": "Duyan Ring Stainless for Hammocks",
+      "image": "",
+      "imageId": "",
+      "quantity": 99,
+      "sku": "DUYAN-COLOR-73294",
+      "variant": "Color Family:Silver, Variation3:other:One Size",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3ca917a653f752a89eb01"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:27:53.353Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:24:01.575Z"
+      },
+      "normalizedName": "duyan ring stainless for hammocks",
+      "normalizedVariant": "color family:silver, variation3:other:one size",
+      "normalizedSku": "duyan-color-73294",
+      "normalizedDescription": "duyan ring stainless for hammocks",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:24:01.617Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:24:01.617Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c3caac7a653f752a89eb1b"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only), variant: Default",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68b55879650c74e5be3234e7"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b55879650c74e5be3234e7"
+      },
+      "name": "Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only)",
+      "price": 179,
+      "description": "Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only)",
+      "image": "",
+      "imageId": "",
+      "quantity": 94,
+      "sku": "HEAVY-DEFAU-29891",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68bc043bee2f0795e647f81b"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:25:29.894Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:42:29.319Z"
+      },
+      "normalizedName": "heavy duty hammock ring | duyan ring para sa ligtas at matibay na pagkakabit (ring only)",
+      "normalizedVariant": "default",
+      "normalizedSku": "heavy-defau-29891",
+      "normalizedDescription": "heavy duty hammock ring | duyan ring para sa ligtas at matibay na pagkakabit (ring only)",
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68b55879650c74e5be3234e7"
+      },
+      "name": "Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only)",
+      "price": 179,
+      "description": "Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only)",
+      "image": "",
+      "imageId": "",
+      "quantity": 94,
+      "sku": "HEAVY-DEFAU-29891",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "type": "bundle",
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c3caac7a653f752a89eb18"
+          }
+        }
+      ],
+      "status": "Available",
+      "createdAt": {
+        "$date": "2025-09-01T08:25:29.894Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T07:24:28.113Z"
+      },
+      "normalizedName": "heavy duty hammock ring | duyan ring para sa ligtas at matibay na pagkakabit (ring only)",
+      "normalizedVariant": "default",
+      "normalizedSku": "heavy-defau-29891",
+      "normalizedDescription": "heavy duty hammock ring | duyan ring para sa ligtas at matibay na pagkakabit (ring only)",
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-12T07:24:28.153Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T07:24:28.153Z"
+    },
+    "__v": 0
   }
 ]

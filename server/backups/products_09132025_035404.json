@@ -2904,7 +2904,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc043bee2f0795e647f81b"
+          "$oid": "68c3caac7a653f752a89eb18"
         }
       }
     ],
@@ -2913,7 +2913,7 @@
       "$date": "2025-09-01T08:25:29.894Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:42:29.319Z"
+      "$date": "2025-09-12T07:24:28.113Z"
     },
     "normalizedName": "heavy duty hammock ring | duyan ring para sa ligtas at matibay na pagkakabit (ring only)",
     "normalizedVariant": "default",
@@ -2943,7 +2943,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc0425ee2f0795e647f807"
+          "$oid": "68c3ca917a653f752a89eb01"
         }
       }
     ],
@@ -2952,7 +2952,7 @@
       "$date": "2025-09-01T08:27:53.353Z"
     },
     "updatedAt": {
-      "$date": "2025-09-06T09:51:33.642Z"
+      "$date": "2025-09-12T07:24:01.575Z"
     },
     "normalizedName": "duyan ring stainless for hammocks",
     "normalizedVariant": "color family:silver, variation3:other:one size",
@@ -2982,7 +2982,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc040dee2f0795e647f7e6"
+          "$oid": "68c3ca857a653f752a89eadc"
         }
       },
       {
@@ -2991,7 +2991,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc040dee2f0795e647f7e7"
+          "$oid": "68c3ca857a653f752a89eadd"
         }
       }
     ],
@@ -3000,7 +3000,7 @@
       "$date": "2025-09-01T08:36:54.609Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:41:35.955Z"
+      "$date": "2025-09-12T07:23:49.325Z"
     },
     "normalizedName": "static utility rope for hammock w/ stainless ring pair 304 - 10m long,10mm diameter, durable",
     "normalizedVariant": "army green camouflag",
@@ -3030,7 +3030,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68b7afd3905e371d38cb14f2"
+          "$oid": "68c3ca7b7a653f752a89eac2"
         }
       },
       {
@@ -3039,7 +3039,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68b7afd3905e371d38cb14f3"
+          "$oid": "68c3ca7b7a653f752a89eac3"
         }
       }
     ],
@@ -3048,7 +3048,7 @@
       "$date": "2025-09-01T08:39:00.746Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T03:02:43.663Z"
+      "$date": "2025-09-12T07:23:39.310Z"
     },
     "normalizedName": "static utility rope 10 meters by 10mm thick w/ stainless rings and carabiners",
     "normalizedVariant": "army green",
@@ -3074,20 +3074,20 @@
     "components": [
       {
         "item": {
-          "$oid": "68b564a9650c74e5be32384d"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68bc0407ee2f0795e647f7cc"
-        }
-      },
-      {
-        "item": {
           "$oid": "68b563f4650c74e5be32382b"
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc0407ee2f0795e647f7cd"
+          "$oid": "68c3ca657a653f752a89eaa8"
+        }
+      },
+      {
+        "item": {
+          "$oid": "68b684e7c3bcfc9ab3c82028"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c3ca657a653f752a89eaa9"
         }
       }
     ],
@@ -3096,7 +3096,7 @@
       "$date": "2025-09-01T08:40:57.103Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:41:35.400Z"
+      "$date": "2025-09-12T07:23:17.494Z"
     },
     "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
     "normalizedVariant": "black",
@@ -3126,7 +3126,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc03cfee2f0795e647f799"
+          "$oid": "68c3c9e27a653f752a89ea90"
         }
       }
     ],
@@ -3135,7 +3135,7 @@
       "$date": "2025-09-03T03:57:24.552Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:41:58.298Z"
+      "$date": "2025-09-12T07:21:06.064Z"
     },
     "normalizedName": "duyan ring pair stainless",
     "normalizedVariant": "default",
@@ -3165,16 +3165,16 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc03a1ee2f0795e647f782"
+          "$oid": "68c3c9d47a653f752a89ea78"
         }
       },
       {
         "item": {
-          "$oid": "68b569a6650c74e5be3238b4"
+          "$oid": "68b56932650c74e5be3238ad"
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc03a1ee2f0795e647f783"
+          "$oid": "68c3c9d47a653f752a89ea79"
         }
       }
     ],
@@ -3183,7 +3183,7 @@
       "$date": "2025-09-03T04:01:53.954Z"
     },
     "updatedAt": {
-      "$date": "2025-09-06T09:49:21.223Z"
+      "$date": "2025-09-12T07:20:52.791Z"
     },
     "normalizedName": "frame detachable hammock frame",
     "normalizedVariant": "default",
@@ -3213,7 +3213,16 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bbc6c72f35835cfdb9eed6"
+          "$oid": "68c3c9b17a653f752a89ea50"
+        }
+      },
+      {
+        "item": {
+          "$oid": "68b569d1650c74e5be3238bb"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c3c9b17a653f752a89ea51"
         }
       }
     ],
@@ -3222,7 +3231,7 @@
       "$date": "2025-09-03T04:11:08.298Z"
     },
     "updatedAt": {
-      "$date": "2025-09-06T05:29:43.328Z"
+      "$date": "2025-09-12T07:20:17.024Z"
     },
     "normalizedName": "hammock frame foldable detachable",
     "normalizedVariant": "10 feet",
@@ -3252,7 +3261,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc038dee2f0795e647f75e"
+          "$oid": "68c3c9a57a653f752a89ea36"
         }
       },
       {
@@ -3261,7 +3270,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc038dee2f0795e647f75f"
+          "$oid": "68c3c9a57a653f752a89ea37"
         }
       }
     ],
@@ -3270,7 +3279,7 @@
       "$date": "2025-09-04T02:33:19.507Z"
     },
     "updatedAt": {
-      "$date": "2025-09-06T09:49:01.813Z"
+      "$date": "2025-09-12T07:20:05.801Z"
     },
     "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
     "normalizedVariant": "orange",
@@ -3300,16 +3309,16 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc0371ee2f0795e647f745"
+          "$oid": "68c3c99c7a653f752a89ea1c"
         }
       },
       {
         "item": {
-          "$oid": "68b569a6650c74e5be3238b4"
+          "$oid": "68b56932650c74e5be3238ad"
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc0371ee2f0795e647f746"
+          "$oid": "68c3c99c7a653f752a89ea1d"
         }
       }
     ],
@@ -3318,7 +3327,7 @@
       "$date": "2025-09-04T02:41:36.957Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:41:16.549Z"
+      "$date": "2025-09-12T07:19:56.393Z"
     },
     "normalizedName": "duyan frame (detachable) frame only or with hammock set",
     "normalizedVariant": "frame only",
@@ -3348,7 +3357,7 @@
         },
         "qty": 1,
         "_id": {
-          "$oid": "68bc02e9ee2f0795e647f6eb"
+          "$oid": "68c3c98b7a653f752a89ea04"
         }
       }
     ],
@@ -3357,7 +3366,7 @@
       "$date": "2025-09-04T02:48:37.570Z"
     },
     "updatedAt": {
-      "$date": "2025-09-06T09:46:17.476Z"
+      "$date": "2025-09-12T07:19:39.890Z"
     },
     "normalizedName": "duyan ring stainless 304 (makapal type) – heavy duty, kalawang-free, matibay na para sa hammock",
     "normalizedVariant": "maka",
@@ -3387,7 +3396,7 @@
         },
         "qty": 10,
         "_id": {
-          "$oid": "68bc035bee2f0795e647f72d"
+          "$oid": "68c3c9817a653f752a89e9ec"
         }
       },
       {
@@ -3396,7 +3405,7 @@
         },
         "qty": 10,
         "_id": {
-          "$oid": "68bc035bee2f0795e647f72e"
+          "$oid": "68c3c9817a653f752a89e9ed"
         }
       }
     ],
@@ -3405,7 +3414,7 @@
       "$date": "2025-09-04T02:50:47.809Z"
     },
     "updatedAt": {
-      "$date": "2025-09-06T09:48:11.326Z"
+      "$date": "2025-09-12T07:19:29.305Z"
     },
     "normalizedName": "10 set ring & carabiner stainless wholesale price mas pinamura",
     "normalizedVariant": "default",
