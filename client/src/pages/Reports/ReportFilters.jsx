@@ -27,6 +27,12 @@ const SHOW_FILTERS = {
     "movementType",
     "status",
   ],
+  [NewReportTypeEnum.PROFITS_REPORT]: [
+    "orderId",
+    "platform",
+    "paymentStatus",
+    "status",
+  ],
 };
 
 const FILTER_OPTIONS = {

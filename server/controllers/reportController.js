@@ -208,6 +208,129 @@ export const getInventoryDetailsReport = async (filters = {}) => {
   );
 };
 
+export const getOrdersWithProfitsReport = async (filters = {}) => {
+  try {
+    const { startDate, endDate, paymentStatus, platform, status, orderId } =
+      filters;
+
+    const filter = buildDateFilter(startDate, endDate, "orderDate");
+
+    if (paymentStatus && paymentStatus !== "All") {
+      filter.isPaid = paymentStatus === "paid";
+    }
+
+    if (platform && platform !== "All") {
+      filter.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
+    }
+
+    if (status && status !== "All") {
+      filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
+    }
+
+    if (orderId && orderId.trim() !== "") {
+      filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
+    }
+
+    const pipeline = [
+      { $match: filter },
+
+      // 🔹 Lookup product
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
+      { $unwind: "$product" },
+
+      // 🔹 Lookup all items referenced in product.components
+      {
+        $lookup: {
+          from: "items",
+          localField: "product.components.item",
+          foreignField: "_id",
+          as: "items",
+        },
+      },
+
+      // 🔹 Compute cost, revenue, profit
+      {
+        $addFields: {
+          productCost: {
+            $multiply: [
+              {
+                $sum: {
+                  $map: {
+                    input: "$product.components",
+                    as: "comp",
+                    in: {
+                      $multiply: [
+                        {
+                          $getField: {
+                            field: "price",
+                            input: {
+                              $first: {
+                                $filter: {
+                                  input: "$items",
+                                  cond: { $eq: ["$$this._id", "$$comp.item"] },
+                                },
+                              },
+                            },
+                          },
+                        },
+                        "$$comp.qty",
+                      ],
+                    },
+                  },
+                },
+              },
+              "$quantity",
+            ],
+          },
+          revenue: { $multiply: ["$product.price", "$quantity"] },
+        },
+      },
+      {
+        $addFields: {
+          profit: { $subtract: ["$revenue", "$productCost"] },
+        },
+      },
+
+      // 🔹 Projection (keep only report fields)
+      {
+        $project: {
+          _id: 0,
+          platform: 1,
+          platformOrderId: 1,
+          status: 1,
+          orderDate: 1,
+          cost: "$productCost",
+          revenue: 1,
+          profit: 1,
+          paymentStatus: {
+            $cond: [{ $eq: ["$isPaid", true] }, "Paid", "Unpaid"],
+          },
+        },
+      },
+
+      { $sort: { orderDate: -1 } },
+    ];
+
+    const rows = await Order.aggregate(pipeline);
+
+    // console.log("rows:", rows);
+    return flattenReportData(
+      rows,
+      reportColumnsConfig[NewReportTypeEnum.PROFITS_REPORT]
+    );
+  } catch (err) {
+    console.error("getOrdersWithProfitsReport error:", err);
+    throw err;
+  }
+};
+
 export const generateReport = async (req, res) => {
   try {
     const {
@@ -225,7 +348,7 @@ export const generateReport = async (req, res) => {
       },
     } = req.body;
 
-    console.log("req.body:", req.body);
+    // console.log("req.body:", req.body);
     let data;
 
     switch (reportType) {
@@ -283,6 +406,17 @@ export const generateReport = async (req, res) => {
           status,
         });
         // console.log("INVENTORY_DETAILS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.PROFITS_REPORT:
+        data = await getOrdersWithProfitsReport({
+          startDate,
+          endDate,
+          paymentStatus,
+          platform,
+          status,
+          orderId,
+        });
+        // console.log("PROFITS_REPORT:", data);
         break;
       default:
         return res.status(400).json({ message: "Invalid report type" });

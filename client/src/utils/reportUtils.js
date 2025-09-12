@@ -198,6 +198,45 @@ export const reportColumnsConfig = {
       align: "center",
     },
   ],
+  
+  [NewReportTypeEnum.PROFITS_REPORT]: [
+    {
+      key: "platform",
+      label: "Platform",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "platformOrderId",
+      label: "Order ID",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "cost",
+      label: "Cost",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "revenue",
+      label: "Revenue",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "profit",
+      label: "Profit",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    { key: "status", label: "Status", format: "proper", align: "center" },
+    { key: "paymentStatus", label: "Payment", format: "proper", align: "center" },
+    { key: "orderDate", label: "Order Date", format: "date", align: "center" },
+  ],
 };
 
 export const formatCellValue = (value, format) => {
