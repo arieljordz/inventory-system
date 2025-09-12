@@ -66,7 +66,7 @@ const AdjustmentsTable = ({
           <div className="d-flex align-items-center">
             <div className="font-weight-medium" title={item.name || ""}>
               <code className="px-2 py-1 rounded">
-                {truncateText(item.name, 50)}
+                {truncateText(item.name, 100)}
               </code>
             </div>
             <CopyToClipboardButton text={item.name} />
@@ -102,24 +102,12 @@ const AdjustmentsTable = ({
           <table className="table table-hover table-striped mb-0">
             <thead className="thead-light">
               <tr>
-                <th className="text-center" style={{ width: "50px" }}>
-                  #
-                </th>
-                <th className="text-center" style={{ width: "150px" }}>
-                  SKU
-                </th>
-                <th className="text-left" style={{ width: "250px" }}>
-                  Name
-                </th>
-                <th className="text-center" style={{ width: "150px" }}>
-                  Variant
-                </th>
-                <th className="text-right" style={{ width: "150px" }}>
-                  Current Price
-                </th>
-                <th className="text-center" style={{ width: "120px" }}>
-                  Action
-                </th>
+                <th className="text-center">#</th>
+                <th className="text-center">SKU</th>
+                <th className="text-left">Name</th>
+                <th className="text-center">Variant</th>
+                <th className="text-right">Current Price</th>
+                <th className="text-center">Action</th>
               </tr>
             </thead>
             <tbody>{renderTableRows()}</tbody>
