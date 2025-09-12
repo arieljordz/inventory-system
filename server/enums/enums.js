@@ -43,9 +43,9 @@ export const NewReportTypeEnum = Object.freeze({
   ORDERS_REPORT: "Orders Report",
   WALK_INS_REPORT: "Walk-Ins Report",
   PRODUCTS_REPORT: "Products Report",
+  PRODUCT_MOVEMENTS_REPORT: "Product Movements Report",
   ITEMS_REPORT: "Items Report",
   ITEM_MOVEMENTS_REPORT: "Item Movements Report",
-  INVENTORY_DETAILS_REPORT: "Inventory Details Report",
   PROFITS_REPORT: "Costs & Profits Report",
 });
 

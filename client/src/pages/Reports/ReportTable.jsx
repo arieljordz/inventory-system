@@ -24,7 +24,6 @@ const ReportTable = ({ reportData, dataCount, columns, reportType }) => {
           <div className="card-header bg-primary text-white d-flex align-items-center">
             <h5 className="mb-0">{reportType}</h5>
 
-            {/* Pushes to the right */}
             <span className="badge bg-light text-dark px-3 py-2 rounded-pill shadow-sm ms-auto">
               {dataCount} Records
             </span>
@@ -37,7 +36,11 @@ const ReportTable = ({ reportData, dataCount, columns, reportType }) => {
               <thead className="table-light">
                 <tr>
                   {columns.map((col) => (
-                    <th key={col.key} style={{ whiteSpace: "nowrap" }}>
+                    <th
+                      key={col.key}
+                      className={`text-${col.align || "left"}`}
+                      style={{ whiteSpace: "nowrap" }}
+                    >
                       {col.label}
                     </th>
                   ))}

@@ -3,8 +3,6 @@ import { NewReportTypeEnum } from "../enums/enums";
 
 export const reportColumnsConfig = {
   [NewReportTypeEnum.ORDERS_REPORT]: [
-    { key: "product", label: "Product Name", format: "proper", align: "left" },
-    { key: "variant", label: "Variant", format: "proper", align: "center" },
     {
       key: "platform",
       label: "Platform",
@@ -33,7 +31,12 @@ export const reportColumnsConfig = {
       total: true,
     },
     { key: "status", label: "Status", format: "proper", align: "center" },
-    { key: "payment", label: "Payment", format: "proper", align: "center" },
+    {
+      key: "paymentStatus",
+      label: "Payment Status",
+      format: "proper",
+      align: "center",
+    },
     { key: "orderDate", label: "Order Date", format: "date", align: "center" },
   ],
 
@@ -46,7 +49,7 @@ export const reportColumnsConfig = {
       align: "right",
       total: true,
     },
-    { key: "buyerName", label: "Buyer", format: "proper", align: "center" },
+    { key: "buyerName", label: "Customer Name", format: "proper", align: "center" },
     {
       key: "paymentMethod",
       label: "Payment",
@@ -62,10 +65,15 @@ export const reportColumnsConfig = {
   ],
 
   [NewReportTypeEnum.PRODUCTS_REPORT]: [
-    { key: "name", label: "Product Name", format: "proper", align: "left" },
+    {
+      key: "productName",
+      label: "Product Name",
+      format: "proper",
+      align: "left",
+    },
     { key: "sku", label: "SKU", format: "uppercase", align: "center" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
-    { key: "quantity", label: "Stock", format: "number", align: "center" },
+    { key: "stock", label: "Stock", format: "number", align: "center" },
     {
       key: "price",
       label: "Price",
@@ -81,15 +89,57 @@ export const reportColumnsConfig = {
       total: true,
     },
     { key: "status", label: "Status", format: "proper", align: "center" },
-    { key: "createdAt", label: "Date Added", format: "date", align: "center" },
+    { key: "dateAdded", label: "Date Added", format: "date", align: "center" },
+  ],
+
+  [NewReportTypeEnum.PRODUCT_MOVEMENTS_REPORT]: [
+    {
+      key: "platform",
+      label: "Platform",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "platformOrderId",
+      label: "Order ID",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "movementType",
+      label: "Movement Type",
+      format: "uppercase",
+      align: "center",
+    },
+    { key: "quantity", label: "Quantity", format: "number", align: "center" },
+    {
+      key: "originalPrice",
+      label: "Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "totalPrice",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "transactionDate",
+      label: "Transaction Date",
+      format: "date",
+      align: "center",
+    },
   ],
 
   [NewReportTypeEnum.ITEMS_REPORT]: [
-    { key: "name", label: "Item Name", format: "proper", align: "left" },
+    { key: "itemName", label: "Item Name", format: "proper", align: "left" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
-    { key: "quantity", label: "Quantity", format: "number", align: "center" },
+    { key: "stock", label: "Quantity", format: "number", align: "center" },
     {
-      key: "price",
+      key: "originalPrice",
       label: "Original Price",
       format: "money",
       align: "right",
@@ -110,21 +160,21 @@ export const reportColumnsConfig = {
       total: true,
     },
     { key: "status", label: "Status", format: "proper", align: "center" },
-    { key: "createdAt", label: "Date Added", format: "date", align: "center" },
+    { key: "dateAdded", label: "Date Added", format: "date", align: "center" },
   ],
 
   [NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]: [
-    { key: "item", label: "Item Name", format: "proper", align: "left" },
+    { key: "itemName", label: "Item Name", format: "proper", align: "left" },
     { key: "variant", label: "Variant", format: "proper", align: "center" },
     {
-      key: "type",
+      key: "movementType",
       label: "Movement Type",
       format: "uppercase",
       align: "center",
     },
     { key: "quantity", label: "Quantity", format: "number", align: "center" },
     {
-      key: "price",
+      key: "originalPrice",
       label: "Price",
       format: "money",
       align: "right",
@@ -151,54 +201,13 @@ export const reportColumnsConfig = {
       align: "center",
     },
     {
-      key: "createdAt",
+      key: "transactionDate",
       label: "Transaction Date",
       format: "date",
       align: "center",
     },
   ],
 
-  [NewReportTypeEnum.INVENTORY_DETAILS_REPORT]: [
-    { key: "product", label: "Product Name", format: "proper", align: "left" },
-    { key: "variant", label: "Variant", format: "proper", align: "center" },
-    {
-      key: "platform",
-      label: "Platform",
-      format: "uppercase",
-      align: "center",
-    },
-    { key: "order", label: "Order ID", format: "uppercase", align: "center" },
-    {
-      key: "movementType",
-      label: "Movement Type",
-      format: "uppercase",
-      align: "center",
-    },
-    { key: "quantity", label: "Quantity", format: "number", align: "center" },
-    {
-      key: "price",
-      label: "Price",
-      format: "money",
-      align: "right",
-      total: true,
-    },
-    {
-      key: "totalPrice",
-      label: "Total Price",
-      format: "money",
-      align: "right",
-      total: true,
-    },
-    { key: "status", label: "Status", format: "proper", align: "center" },
-    { key: "payment", label: "Payment", format: "proper", align: "center" },
-    {
-      key: "createdAt",
-      label: "Transaction Date",
-      format: "date",
-      align: "center",
-    },
-  ],
-  
   [NewReportTypeEnum.PROFITS_REPORT]: [
     {
       key: "platform",
@@ -234,7 +243,12 @@ export const reportColumnsConfig = {
       total: true,
     },
     { key: "status", label: "Status", format: "proper", align: "center" },
-    { key: "paymentStatus", label: "Payment", format: "proper", align: "center" },
+    {
+      key: "paymentStatus",
+      label: "Payment Status",
+      format: "proper",
+      align: "center",
+    },
     { key: "orderDate", label: "Order Date", format: "date", align: "center" },
   ],
 };

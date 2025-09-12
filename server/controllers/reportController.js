@@ -9,11 +9,7 @@ import ItemMovement from "../models/ItemMovement.js";
 import Item from "../models/Item.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import { NewReportTypeEnum } from "../enums/enums.js";
-import {
-  buildDateFilter,
-  reportColumnsConfig,
-  flattenReportData,
-} from "../utils/reportUtils.js";
+import { buildDateFilter } from "../utils/reportUtils.js";
 
 export const getOrdersReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, platform, status, orderId } =
@@ -22,11 +18,7 @@ export const getOrdersReport = async (filters = {}) => {
   const filter = buildDateFilter(startDate, endDate, "orderDate");
 
   if (paymentStatus && paymentStatus !== "All") {
-    if (paymentStatus === "paid") {
-      filter.isPaid = true;
-    } else if (paymentStatus === "unpaid") {
-      filter.isPaid = false;
-    }
+    filter.isPaid = paymentStatus === "paid";
   }
 
   if (platform && platform !== "All") {
@@ -41,19 +33,22 @@ export const getOrdersReport = async (filters = {}) => {
     filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
 
-  // console.log("OrdersReportfilter:", filter);
+  // 🔹 Fetch orders with product populated
+  const orders = await Order.find(filter).populate("product").lean();
 
-  const rows = await Order.find(filter)
-    .populate({
-      path: "product",
-      populate: { path: "components.item", model: "Item" },
-    })
-    .lean();
+  // 🔹 Transform into flat rows with required columns
+  const formattedRows = orders.map((o) => ({
+    platform: o.platform,
+    platformOrderId: o.platformOrderId,
+    quantity: o.quantity,
+    price: o.product?.price ?? 0,
+    totalPrice: (o.product?.price ?? 0) * o.quantity,
+    status: o.status,
+    paymentStatus: o.isPaid ? "Paid" : "Unpaid",
+    orderDate: o.orderDate,
+  }));
 
-  return flattenReportData(
-    rows,
-    reportColumnsConfig[NewReportTypeEnum.ORDERS_REPORT]
-  );
+  return formattedRows;
 };
 
 export const getWalkInsReport = async (filters = {}) => {
@@ -79,7 +74,7 @@ export const getWalkInsReport = async (filters = {}) => {
     .lean();
 
   // Map transactions into report-ready rows
-  const mappedRows = rows.map((tx) => {
+  const formattedRows = rows.map((tx) => {
     // Format each item as "(Quantity)ItemName-Variant"
     const itemNames = tx.items
       .map((i) => {
@@ -102,48 +97,123 @@ export const getWalkInsReport = async (filters = {}) => {
     };
   });
 
-  return flattenReportData(
-    mappedRows,
-    reportColumnsConfig[NewReportTypeEnum.WALK_INS_REPORT]
-  );
+  return formattedRows;
 };
 
 export const getProductsReport = async (filters = {}) => {
   const { startDate, endDate, status } = filters;
 
-  const filter = buildDateFilter(startDate, endDate, "createdAt");
+  const filter = {};
 
   if (status && status !== "All") {
     filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
   }
 
-  // console.log("ProductsReportfilter:", filter);
+  const products = await Product.find(filter).lean();
 
-  const rows = await Product.find(filter).lean();
+  // 🔹 Transform into flat rows with required columns
+  const formattedRows = products.map((p) => ({
+    productName: p.name,
+    sku: p.sku,
+    variant: p.variant,
+    stock: p.quantity,
+    price: p.price,
+    totalPrice: (p.price ?? 0) * (p.quantity ?? 0),
+    status: p.status,
+    dateAdded: p.createdAt,
+  }));
 
-  return flattenReportData(
-    rows,
-    reportColumnsConfig[NewReportTypeEnum.PRODUCTS_REPORT]
-  );
+  return formattedRows;
+};
+
+export const getProductMovementsReport = async (filters = {}) => {
+  const { startDate, endDate, movementType, platform, orderId } = filters;
+
+  const match = buildDateFilter(startDate, endDate, "createdAt");
+
+  if (movementType && movementType !== "All") {
+    match.movementType = { $regex: `^${movementType.trim()}$`, $options: "i" };
+  }
+
+  if (platform && platform !== "All") {
+    match.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
+  }
+
+  // 🔹 Build pipeline
+  const pipeline = [
+    { $match: match },
+
+    // join product
+    {
+      $lookup: {
+        from: "products",
+        localField: "product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
+
+    // join order
+    {
+      $lookup: {
+        from: "orders",
+        localField: "order",
+        foreignField: "_id",
+        as: "order",
+      },
+    },
+    { $unwind: { path: "$order", preserveNullAndEmptyArrays: true } },
+  ];
+
+  // 🔹 OrderId filtering must happen *after lookup*
+  if (orderId && orderId.trim() !== "") {
+    pipeline.push({
+      $match: {
+        "order.platformOrderId": { $regex: orderId.trim(), $options: "i" },
+      },
+    });
+  }
+
+  const rows = await InventoryDetail.aggregate(pipeline);
+
+  // 🔹 Transform into flat structure
+  const formattedRows = rows.map((detail) => ({
+    platform: detail.platform || "N/A",
+    platformOrderId: detail.order?.platformOrderId || "N/A",
+    movementType: detail.movementType || "",
+    quantity: detail.quantity || 0,
+    originalPrice: detail.product?.price || 0,
+    totalPrice: (detail.quantity || 0) * (detail.product?.price || 0),
+    transactionDate: detail.createdAt || null,
+  }));
+  return formattedRows;
 };
 
 export const getItemsReport = async (filters = {}) => {
   const { startDate, endDate, status } = filters;
 
-  const filter = buildDateFilter(startDate, endDate, "createdAt");
+  const filter = {};
 
   if (status && status !== "All") {
     filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
   }
 
-  // console.log("ItemsReportfilter:", filter);
+  const items = await Item.find(filter).lean();
 
-  const rows = await Item.find(filter).lean();
+  // 🔹 Transform into flat rows with required columns
+  const formattedRows = items.map((i) => ({
+    itemName: i.name,
+    variant: i.variant,
+    stock: i.quantity,
+    originalPrice: i.price, // from Item.price
+    retailPrice: i.retailPrice, // from Item.retailPrice
+    totalPrice: (i.retailPrice ?? 0) * (i.quantity ?? 0),
+    status: i.status,
+    dateAdded: i.createdAt,
+  }));
 
-  return flattenReportData(
-    rows,
-    reportColumnsConfig[NewReportTypeEnum.ITEMS_REPORT]
-  );
+  return formattedRows;
 };
 
 export const getItemMovementsReport = async (filters = {}) => {
@@ -155,180 +225,141 @@ export const getItemMovementsReport = async (filters = {}) => {
     filter.type = { $regex: `^${movementType.trim()}$`, $options: "i" };
   }
 
-  // console.log("ItemMovementsReport final filter:", filter);
-
+  // 🔹 Query + join item details
   const rows = await ItemMovement.find(filter).populate("item").lean();
 
-  return flattenReportData(
-    rows,
-    reportColumnsConfig[NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]
-  );
-};
+  // 🔹 Flatten into top-level structure
+  const formattedRows = rows.map((movement) => {
+    const item = movement.item || {};
 
-export const getInventoryDetailsReport = async (filters = {}) => {
-  const { startDate, endDate, paymentStatus, movementType, platform, status } =
-    filters;
+    return {
+      itemName: item.name || "",
+      variant: item.variant || "",
+      movementType: movement.type || "",
+      quantity: movement.quantity || 0,
+      originalPrice: item.price || 0,
+      retailPrice: item.retailPrice || 0,
+      totalPrice:
+        movement.totalValue || (movement.quantity || 0) * (movement.price || 0),
+      balanceAfter: movement.balanceAfter || 0,
+      transactionDate: movement.createdAt || null,
+    };
+  });
 
-  const query = buildDateFilter(startDate, endDate, "createdAt");
-
-  if (movementType && movementType !== "All") {
-    query.movementType = { $regex: `^${movementType.trim()}$`, $options: "i" };
-  }
-
-  if (platform && platform !== "All") {
-    query.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
-  }
-
-  let rows = await InventoryDetail.find(query)
-    .populate("product")
-    .populate("order")
-    .lean();
-
-  // Filter by paymentStatus if needed
-  if (paymentStatus && paymentStatus !== "All") {
-    rows = rows.filter(
-      (row) =>
-        row.order &&
-        ((paymentStatus === "paid" && row.order.isPaid) ||
-          (paymentStatus === "unpaid" && !row.order.isPaid))
-    );
-  }
-
-  // Filter by Order status
-  if (status && status !== "All") {
-    const statusRegex = new RegExp(`^${status.trim()}$`, "i");
-    rows = rows.filter(
-      (row) => row.order && statusRegex.test(row.order.status)
-    );
-  }
-
-  return flattenReportData(
-    rows,
-    reportColumnsConfig[NewReportTypeEnum.INVENTORY_DETAILS_REPORT]
-  );
+  return formattedRows;
 };
 
 export const getOrdersWithProfitsReport = async (filters = {}) => {
-  try {
-    const { startDate, endDate, paymentStatus, platform, status, orderId } =
-      filters;
+  const { startDate, endDate, paymentStatus, platform, status, orderId } =
+    filters;
 
-    const filter = buildDateFilter(startDate, endDate, "orderDate");
+  const filter = buildDateFilter(startDate, endDate, "orderDate");
 
-    if (paymentStatus && paymentStatus !== "All") {
-      filter.isPaid = paymentStatus === "paid";
-    }
+  if (paymentStatus && paymentStatus !== "All") {
+    filter.isPaid = paymentStatus === "paid";
+  }
 
-    if (platform && platform !== "All") {
-      filter.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
-    }
+  if (platform && platform !== "All") {
+    filter.platform = { $regex: `^${platform.trim()}$`, $options: "i" };
+  }
 
-    if (status && status !== "All") {
-      filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
-    }
+  if (status && status !== "All") {
+    filter.status = { $regex: `^${status.trim()}$`, $options: "i" };
+  }
 
-    if (orderId && orderId.trim() !== "") {
-      filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
-    }
+  if (orderId && orderId.trim() !== "") {
+    filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
+  }
 
-    const pipeline = [
-      { $match: filter },
+  const pipeline = [
+    { $match: filter },
 
-      // 🔹 Lookup product
-      {
-        $lookup: {
-          from: "products",
-          localField: "product",
-          foreignField: "_id",
-          as: "product",
-        },
+    // 🔹 Lookup product
+    {
+      $lookup: {
+        from: "products",
+        localField: "product",
+        foreignField: "_id",
+        as: "product",
       },
-      { $unwind: "$product" },
+    },
+    { $unwind: "$product" },
 
-      // 🔹 Lookup all items referenced in product.components
-      {
-        $lookup: {
-          from: "items",
-          localField: "product.components.item",
-          foreignField: "_id",
-          as: "items",
-        },
+    // 🔹 Lookup all items referenced in product.components
+    {
+      $lookup: {
+        from: "items",
+        localField: "product.components.item",
+        foreignField: "_id",
+        as: "items",
       },
+    },
 
-      // 🔹 Compute cost, revenue, profit
-      {
-        $addFields: {
-          productCost: {
-            $multiply: [
-              {
-                $sum: {
-                  $map: {
-                    input: "$product.components",
-                    as: "comp",
-                    in: {
-                      $multiply: [
-                        {
-                          $getField: {
-                            field: "price",
-                            input: {
-                              $first: {
-                                $filter: {
-                                  input: "$items",
-                                  cond: { $eq: ["$$this._id", "$$comp.item"] },
-                                },
+    // 🔹 Compute cost, revenue, profit
+    {
+      $addFields: {
+        productCost: {
+          $multiply: [
+            {
+              $sum: {
+                $map: {
+                  input: "$product.components",
+                  as: "comp",
+                  in: {
+                    $multiply: [
+                      {
+                        $getField: {
+                          field: "price",
+                          input: {
+                            $first: {
+                              $filter: {
+                                input: "$items",
+                                cond: { $eq: ["$$this._id", "$$comp.item"] },
                               },
                             },
                           },
                         },
-                        "$$comp.qty",
-                      ],
-                    },
+                      },
+                      "$$comp.qty",
+                    ],
                   },
                 },
               },
-              "$quantity",
-            ],
-          },
-          revenue: { $multiply: ["$product.price", "$quantity"] },
+            },
+            "$quantity",
+          ],
+        },
+        revenue: { $multiply: ["$product.price", "$quantity"] },
+      },
+    },
+    {
+      $addFields: {
+        profit: { $subtract: ["$revenue", "$productCost"] },
+      },
+    },
+
+    // 🔹 Projection (keep only report fields)
+    {
+      $project: {
+        _id: 0,
+        platform: 1,
+        platformOrderId: 1,
+        status: 1,
+        orderDate: 1,
+        cost: "$productCost",
+        revenue: 1,
+        profit: 1,
+        paymentStatus: {
+          $cond: [{ $eq: ["$isPaid", true] }, "Paid", "Unpaid"],
         },
       },
-      {
-        $addFields: {
-          profit: { $subtract: ["$revenue", "$productCost"] },
-        },
-      },
+    },
 
-      // 🔹 Projection (keep only report fields)
-      {
-        $project: {
-          _id: 0,
-          platform: 1,
-          platformOrderId: 1,
-          status: 1,
-          orderDate: 1,
-          cost: "$productCost",
-          revenue: 1,
-          profit: 1,
-          paymentStatus: {
-            $cond: [{ $eq: ["$isPaid", true] }, "Paid", "Unpaid"],
-          },
-        },
-      },
+    { $sort: { orderDate: -1 } },
+  ];
 
-      { $sort: { orderDate: -1 } },
-    ];
-
-    const rows = await Order.aggregate(pipeline);
-
-    // console.log("rows:", rows);
-    return flattenReportData(
-      rows,
-      reportColumnsConfig[NewReportTypeEnum.PROFITS_REPORT]
-    );
-  } catch (err) {
-    console.error("getOrdersWithProfitsReport error:", err);
-    throw err;
-  }
+  const formattedRows = await Order.aggregate(pipeline);
+  return formattedRows;
 };
 
 export const generateReport = async (req, res) => {
@@ -380,6 +411,16 @@ export const generateReport = async (req, res) => {
         });
         // console.log("PRODUCTS_REPORT:", data);
         break;
+      case NewReportTypeEnum.PRODUCT_MOVEMENTS_REPORT:
+        data = await getProductMovementsReport({
+          startDate,
+          endDate,
+          movementType,
+          platform,
+          orderId,
+        });
+        // console.log("PRODUCT_MOVEMENTS_REPORT:", data);
+        break;
       case NewReportTypeEnum.ITEMS_REPORT:
         data = await getItemsReport({
           startDate,
@@ -395,17 +436,6 @@ export const generateReport = async (req, res) => {
           movementType,
         });
         // console.log("ITEM_MOVEMENTS_REPORT:", data);
-        break;
-      case NewReportTypeEnum.INVENTORY_DETAILS_REPORT:
-        data = await getInventoryDetailsReport({
-          startDate,
-          endDate,
-          paymentStatus,
-          movementType,
-          platform,
-          status,
-        });
-        // console.log("INVENTORY_DETAILS_REPORT:", data);
         break;
       case NewReportTypeEnum.PROFITS_REPORT:
         data = await getOrdersWithProfitsReport({

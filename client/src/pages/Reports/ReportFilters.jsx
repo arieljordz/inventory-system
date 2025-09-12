@@ -21,11 +21,10 @@ const SHOW_FILTERS = {
   [NewReportTypeEnum.PRODUCTS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEMS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]: ["movementType"],
-  [NewReportTypeEnum.INVENTORY_DETAILS_REPORT]: [
+  [NewReportTypeEnum.PRODUCT_MOVEMENTS_REPORT]: [
+    "orderId",
     "platform",
-    "paymentStatus",
     "movementType",
-    "status",
   ],
   [NewReportTypeEnum.PROFITS_REPORT]: [
     "orderId",
