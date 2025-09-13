@@ -340,6 +340,7 @@ export const processSalesImport = async ({
   return results;
 };
 
+// --- Import Returns ---
 export const importReturnsByPlatform = async (req, res) => {
   try {
     const platform = (req.body.platform || "").toLowerCase();
@@ -352,17 +353,15 @@ export const importReturnsByPlatform = async (req, res) => {
     const { sheetName, fields: rawFieldMap, requiredHeaders = [] } = config;
     const expectedHeaders = Object.values(rawFieldMap).map(normalizeHeader);
 
-    // --- Validate file ---
+    // --- Validate uploaded file ---
     try {
       validateFile(req.file);
     } catch (err) {
       return res.status(400).json({ message: err.message });
     }
 
-    // --- Load workbook ---
+    // --- Load workbook & sheet ---
     const workbook = XLSX.read(req.file.buffer, { type: "buffer" });
-
-    // ✅ Strict sheet validation (no fallback)
     const targetSheetName = workbook.SheetNames.find(
       (s) => normalizeHeader(s) === normalizeHeader(sheetName)
     );
@@ -380,18 +379,17 @@ export const importReturnsByPlatform = async (req, res) => {
     });
 
     // --- Detect header row ---
-    let { headerRowIndex, columnIndexMap } = detectHeaderRow(
+    const { headerRowIndex, columnIndexMap } = detectHeaderRow(
       sheetData,
       expectedHeaders
     );
-
     if (headerRowIndex === -1) {
       return res.status(400).json({
         message: "No valid header row found. Check the template.",
       });
     }
 
-    // ✅ Required header validation
+    // --- Check required headers ---
     const normalizedHeaders = sheetData[headerRowIndex].map(normalizeHeader);
     const missingHeaders = requiredHeaders
       .map(normalizeHeader)
@@ -408,7 +406,7 @@ export const importReturnsByPlatform = async (req, res) => {
     // --- Build final field map ---
     const finalFieldMap = buildFinalFieldMap(rawFieldMap, columnIndexMap);
 
-    // --- Process rows ---
+    // --- Process import ---
     const results = await processReturnsImport({
       sheetData,
       headerRowIndex,
@@ -424,6 +422,7 @@ export const importReturnsByPlatform = async (req, res) => {
         notFound: results.notFound.length,
         failedRestocks: results.failedRestocks.length,
         skipped: results.skipped.length,
+        duplicates: results.duplicates.length,
       },
       details: results,
     });
@@ -433,6 +432,7 @@ export const importReturnsByPlatform = async (req, res) => {
   }
 };
 
+// --- Process Returns Import ---
 export const processReturnsImport = async ({
   sheetData,
   headerRowIndex,
@@ -453,6 +453,7 @@ export const processReturnsImport = async ({
   const seenOrderIds = new Set();
 
   for (const row of rows) {
+    // Skip empty rows
     if (!row || !row.some((c) => String(c || "").trim())) continue;
 
     const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
@@ -463,11 +464,11 @@ export const processReturnsImport = async ({
       continue;
     }
 
-    // ✅ Skip duplicates within this file
+    // Prevent duplicate processing within the file
     if (seenOrderIds.has(platformOrderId)) {
       results.duplicates.push({
         platformOrderId,
-        reason: "Duplicate in uploaded file - skipped",
+        reason: "Duplicate in uploaded file",
       });
       continue;
     }
@@ -487,17 +488,18 @@ export const processReturnsImport = async ({
       if (order.status === StatusEnum.RETURNED) {
         results.alreadyReturned.push({
           platformOrderId,
-          reason: "Order is already returned",
+          reason: "Order already marked as returned",
         });
         continue;
       }
 
+      // --- Update order status ---
       const before = order.toObject();
       order.status = StatusEnum.RETURNED;
       order.isPaid = false;
       await order.save();
 
-      // Restock products
+      // --- Restock products ---
       if (order.products?.length) {
         for (const item of order.products) {
           try {
@@ -518,12 +520,16 @@ export const processReturnsImport = async ({
         }
       }
 
-      results.updated.push({ platformOrderId, reason: "Marked as returned" });
+      results.updated.push({
+        platformOrderId,
+        reason: "Order marked as returned and restocked",
+      });
 
+      // --- Log audit ---
       await logAudit({
         action: "UPDATE_RETURN_STATUS",
         user: req.user?._id,
-        description: `Returned order from ${platform} with Order ID: ${platformOrderId}`,
+        description: `Marked order as returned from ${platform} (ID: ${platformOrderId})`,
         collectionName: "Order",
         documentId: order._id,
         before,

@@ -97,10 +97,10 @@ const buildSalesRow = (idx, item, type = "paid") => {
 // Build a single Returns row for the result table
 const buildReturnsRow = (idx, item, type = "returned") => {
   let remarks = "";
-  let color = "black";
+  let color = "orange";
 
   if (type === "returned") {
-    remarks = "Order is now returned";
+    remarks = item.reason;
     color = "green";
   } else {
     switch (item.reason) {
@@ -108,13 +108,9 @@ const buildReturnsRow = (idx, item, type = "returned") => {
         remarks = item.reason;
         color = "red";
         break;
-      case "Order is already returned":
+      case "Order already marked as returned":
         remarks = item.reason;
         color = "blue";
-        break;
-      case "Failed to restock returned product":
-        remarks = item.reason;
-        color = "orange";
         break;
       default:
         remarks = item.reason || "Skipped";
@@ -218,15 +214,13 @@ export const showSalesImportResults = (details, platform) => {
 
   if (details?.alreadyPaid?.length) {
     details.alreadyPaid.forEach((item, idx) => {
-      rows.push(buildSalesRow(idx, item, "paid"));
+      rows.push(buildSalesRow(idx, item, "alreadyPaid"));
     });
   }
 
   if (details?.notFound?.length) {
     details.notFound.forEach((item, idx) => {
-      rows.push(
-        buildSalesRow(details.alreadyPaid?.length + idx, item, "unpaid")
-      );
+      rows.push(buildSalesRow(idx, item, "unpaid"));
     });
   }
 
@@ -244,7 +238,7 @@ export const showReturnImportResults = (details, platform) => {
 
   if (details?.updated?.length) {
     details.updated.forEach((item, idx) => {
-      rows.push(buildOrderRow(details.updated?.length + idx, item, "returned"));
+      rows.push(buildOrderRow(idx, item, "returned"));
     });
   }
 
@@ -256,27 +250,19 @@ export const showReturnImportResults = (details, platform) => {
 
   if (details?.notFound?.length) {
     details.notFound.forEach((item, idx) => {
-      rows.push(
-        buildReturnsRow(details.alreadyReturned?.length + idx, item, "notFound")
-      );
+      rows.push(buildReturnsRow(idx, item, "notFound"));
     });
   }
 
   if (details?.skipped?.length) {
     details.skipped.forEach((item, idx) => {
-      rows.push(buildOrderRow(details.updated?.length + idx, item, "skipped"));
+      rows.push(buildOrderRow(idx, item, "skipped"));
     });
   }
 
   if (details?.failedRestocks?.length) {
     details.failedRestocks.forEach((item, idx) => {
-      rows.push(
-        buildOrderRow(
-          details.failedRestocks?.length + idx,
-          item,
-          "failed restock"
-        )
-      );
+      rows.push(buildOrderRow(idx, item, "failed restock"));
     });
   }
 

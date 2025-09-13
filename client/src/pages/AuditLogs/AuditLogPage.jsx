@@ -18,7 +18,7 @@ const AuditLogPage = () => {
   /** 🔹 Search & pagination state */
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalItems, setTotalItems] = useState(0);
 
   const debouncedSearchTerm = useDebounce(searchTerm, 1000);

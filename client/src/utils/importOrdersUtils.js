@@ -14,7 +14,7 @@ export const showOrderImportResults = (details, platform) => {
 
   if (details?.skipped?.length) {
     details.skipped.forEach((item, idx) => {
-      rows.push(buildOrderRow(details.imported?.length + idx, item, "skipped"));
+      rows.push(buildOrderRow(idx, item, "skipped"));
     });
   }
 
