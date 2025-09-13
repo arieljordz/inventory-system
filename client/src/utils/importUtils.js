@@ -25,7 +25,8 @@ const buildOrderRow = (idx, item, type = "imported") => {
   let color = "black";
 
   if (type === "imported") {
-    remarks = "Imported Order";
+    // console.log("reason:", item.reason);
+    remarks = item.reason === undefined ? "Imported Order, quantity updated" : "Imported Order";
     color = "green";
   } else {
     switch (item.reason) {
@@ -33,7 +34,7 @@ const buildOrderRow = (idx, item, type = "imported") => {
         remarks = item.reason;
         color = "red";
         break;
-      case "Order already imported":
+      case "Order already imported, No change in quantity":
         remarks = item.reason;
         color = "blue";
         break;

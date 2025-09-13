@@ -39,6 +39,7 @@ export const useOrderImportModal = (refreshOrders) => {
         showSpinner();
         const res = await importOrdersByPlatform(formData);
         const { details } = res.data;
+        // console.log("details:", details);
         if (details) showOrderImportResults(details, platform);
         await refreshOrders();
       } catch (err) {

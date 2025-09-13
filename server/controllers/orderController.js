@@ -195,6 +195,130 @@ export const importOrdersByPlatform = async (req, res) => {
 };
 
 // --- Modular row processor (platform-agnostic) ---
+// export const processOrdersImport = async (rows, platform, req) => {
+//   const results = { imported: [], skipped: [] };
+
+//   for (const row of rows) {
+//     try {
+//       const platformOrderId = row.platformOrderId;
+//       const name = normalizeText(row.name);
+//       const courier = normalizeText(row.courier);
+//       const variant = normalizeText(row.variant || "Default");
+//       const quantity = parseInt(row.quantity) || 0;
+//       const orderDate = parseOrderDate(row.orderDate);
+
+//       if (!platformOrderId || !name || !courier || quantity <= 0) {
+//         results.skipped.push({
+//           platformOrderId: platformOrderId || "N/A",
+//           reason: "Invalid row data",
+//         });
+//         continue;
+//       }
+
+//       const product = await Product.findOne({
+//         normalizedName: normalizeString(name),
+//         normalizedVariant: normalizeString(variant),
+//       });
+
+//       if (!product) {
+//         results.skipped.push({ platformOrderId, reason: "Product not found" });
+//         continue;
+//       }
+
+//       const existingOrder = await Order.findOne({
+//         product: product._id,
+//         platform,
+//         platformOrderId,
+//       });
+//       if (existingOrder) {
+//         results.skipped.push({
+//           platformOrderId,
+//           reason: "Order already imported",
+//         });
+//         continue;
+//       }
+
+//       if (quantity > product.quantity) {
+//         results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
+//         continue;
+//       }
+
+//       const order = await Order.create({
+//         product: product._id,
+//         quantity,
+//         platform,
+//         platformOrderId,
+//         courier,
+//         orderDate,
+//         remarks: "Tagged for pickup - imported orders",
+//       });
+
+//       try {
+//         // Update item quantities
+//         await updateItemQuantities(product, quantity, {
+//           userId: req.user?._id,
+//           platformOrderId,
+//           platform,
+//           courier,
+//         });
+//       } catch (err) {
+//         results.skipped.push({
+//           platformOrderId,
+//           reason: `Stock Item update failed: ${err.message}`,
+//         });
+//         continue;
+//       }
+
+//       const inventoryDetail = await InventoryDetail.create({
+//         product: product._id,
+//         order: order._id,
+//         movementType: "OUT",
+//         quantity,
+//         courier,
+//         platform,
+//         status: StatusEnum.ON_PROCESS,
+//         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
+//       });
+
+//       // refresh product so it has the latest quantity/status
+//       const updatedProduct = await Product.findById(product._id);
+
+//       results.imported.push({
+//         platformOrderId,
+//         product: updatedProduct,
+//         order,
+//         inventoryDetail,
+//       });
+
+//       await logAudit({
+//         action: "IMPORT_ORDER",
+//         user: req.user?._id || null,
+//         description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
+//         collectionName: "Order",
+//         documentId: order._id,
+//         before: null,
+//         after: { order, inventoryDetail, product: updatedProduct },
+//         ip: req.ip,
+//         userAgent: req.headers["user-agent"],
+//       });
+//     } catch (err) {
+//       results.skipped.push({
+//         platformOrderId: row.platformOrderId || "N/A",
+//         reason: `Error: ${err.message}`,
+//       });
+//     }
+//   }
+
+//   return {
+//     summary: {
+//       imported: results.imported.length,
+//       skipped: results.skipped.length,
+//     },
+//     details: results,
+//   };
+// };
+
+// --- Modular row processor (platform-agnostic) ---
 export const processOrdersImport = async (rows, platform, req) => {
   const results = { imported: [], skipped: [] };
 
@@ -225,19 +349,91 @@ export const processOrdersImport = async (rows, platform, req) => {
         continue;
       }
 
+      // 🔹 Check if order already exists
       const existingOrder = await Order.findOne({
         product: product._id,
         platform,
         platformOrderId,
       });
+
       if (existingOrder) {
-        results.skipped.push({
-          platformOrderId,
-          reason: "Order already imported",
-        });
-        continue;
+        // --- Re-import case ---
+        const oldQty = existingOrder.quantity;
+        const qtyDiff = quantity - oldQty;
+
+        if (qtyDiff === 0) {
+          results.skipped.push({
+            platformOrderId,
+            reason: "Order already imported, No change in quantity",
+          });
+          continue;
+        }
+
+        if (qtyDiff > 0 && qtyDiff > product.quantity) {
+          results.skipped.push({
+            platformOrderId,
+            reason: "Insufficient stock for adjustment",
+          });
+          continue;
+        }
+
+        try {
+          // Adjust stock (positive = take more stock, negative = return stock)
+          await updateItemQuantities(product, qtyDiff, {
+            userId: req.user?._id,
+            platformOrderId,
+            platform,
+            courier,
+          });
+
+          // Update order
+          existingOrder.quantity = quantity;
+          await existingOrder.save();
+
+          // Update inventory detail
+          const inventoryDetail = await InventoryDetail.findOne({
+            order: existingOrder._id,
+          });
+          if (inventoryDetail) {
+            inventoryDetail.quantity = quantity;
+            inventoryDetail.remarks = `Adjusted order - Order ID: ${platformOrderId}`;
+            await inventoryDetail.save();
+          }
+
+          // Refresh product
+          const updatedProduct = await Product.findById(product._id);
+
+          results.imported.push({
+            platformOrderId,
+            product: updatedProduct,
+            order: existingOrder,
+            inventoryDetail,
+            adjustment: true,
+          });
+
+          await logAudit({
+            action: "REIMPORT_ORDER",
+            user: req.user?._id || null,
+            description: `Adjusted imported order from ${platform} with Order ID: ${platformOrderId}`,
+            collectionName: "Order",
+            documentId: existingOrder._id,
+            before: { oldQuantity: oldQty },
+            after: { newQuantity: quantity },
+            ip: req.ip,
+            userAgent: req.headers["user-agent"],
+          });
+
+          continue; // ✅ skip "create new" flow
+        } catch (err) {
+          results.skipped.push({
+            platformOrderId,
+            reason: `Re-import failed: ${err.message}`,
+          });
+          continue;
+        }
       }
 
+      // --- New order flow ---
       if (quantity > product.quantity) {
         results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
         continue;
@@ -254,7 +450,6 @@ export const processOrdersImport = async (rows, platform, req) => {
       });
 
       try {
-        // Update item quantities
         await updateItemQuantities(product, quantity, {
           userId: req.user?._id,
           platformOrderId,
@@ -280,24 +475,31 @@ export const processOrdersImport = async (rows, platform, req) => {
         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
       });
 
-      // refresh product so it has the latest quantity/status
       const updatedProduct = await Product.findById(product._id);
 
       results.imported.push({
         platformOrderId,
         product: updatedProduct,
-        order,
+        order: existingOrder || order, // use whichever exists
         inventoryDetail,
+        adjustment: !!existingOrder,
+        reason: existingOrder
+          ? "Imported Order, quantity updated"
+          : "Imported Order",
       });
 
       await logAudit({
-        action: "IMPORT_ORDER",
+        action: existingOrder ? "REIMPORT_ORDER" : "IMPORT_ORDER",
         user: req.user?._id || null,
-        description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
+        description: existingOrder
+          ? `Adjusted imported order from ${platform} with Order ID: ${platformOrderId}`
+          : `Imported order from ${platform} with Order ID: ${platformOrderId}`,
         collectionName: "Order",
-        documentId: order._id,
-        before: null,
-        after: { order, inventoryDetail, product: updatedProduct },
+        documentId: (existingOrder || order)._id,
+        before: existingOrder ? { oldQuantity: oldQty } : null,
+        after: existingOrder
+          ? { newQuantity: quantity }
+          : { order, inventoryDetail, product: updatedProduct },
         ip: req.ip,
         userAgent: req.headers["user-agent"],
       });
@@ -323,7 +525,15 @@ export const getOrderStatsByPlatform = async (req, res) => {
     // 🔹 Determine start and end of current month
     const now = new Date();
     const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Sept 1, 2025
-    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999); // Sept 30, 2025 23:59:59
+    const endDate = new Date(
+      now.getFullYear(),
+      now.getMonth() + 1,
+      0,
+      23,
+      59,
+      59,
+      999
+    ); // Sept 30, 2025 23:59:59
 
     // 🔹 Aggregate counts grouped by platform, filtered by current month
     const counts = await Order.aggregate([
@@ -351,15 +561,19 @@ export const getOrderStatsByPlatform = async (req, res) => {
     counts.forEach((entry) => {
       const platform = entry._id?.toLowerCase();
       stats.overall += entry.total;
-      if (platform === PlatformEnum.SHOPEE.toLowerCase()) stats.shopee = entry.total;
-      if (platform === PlatformEnum.TIKTOK.toLowerCase()) stats.tiktok = entry.total;
-      if (platform === PlatformEnum.LAZADA.toLowerCase()) stats.lazada = entry.total;
+      if (platform === PlatformEnum.SHOPEE.toLowerCase())
+        stats.shopee = entry.total;
+      if (platform === PlatformEnum.TIKTOK.toLowerCase())
+        stats.tiktok = entry.total;
+      if (platform === PlatformEnum.LAZADA.toLowerCase())
+        stats.lazada = entry.total;
     });
 
     return res.status(200).json(stats);
   } catch (error) {
     console.error("Error fetching monthly order stats:", error);
-    return res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
-

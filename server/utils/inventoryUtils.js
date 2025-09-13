@@ -7,19 +7,105 @@ import { StatusEnum, MovementTypeEnum } from "../enums/enums.js";
 import { logAudit } from "./auditLogger.js";
 
 // update items quantity
+// export const updateItemQuantities = async (product, orderQty, options = {}) => {
+//   const { userId, platformOrderId, platform, courier } = options;
+
+//   if (product.type === "single") {
+//     // Product is directly tied to an Item
+//     const item = await Item.findOne({
+//       normalizedName: product.normalizedName,
+//       normalizedVariant: product.normalizedVariant,
+//     });
+
+//     if (!item) throw new Error("Item not found for single product");
+
+//     const newItemQty = item.quantity - orderQty;
+//     if (newItemQty < 0) throw new Error("Insufficient stock for item");
+
+//     // Update Item
+//     await Item.findByIdAndUpdate(item._id, {
+//       quantity: newItemQty,
+//       ...(newItemQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+//     });
+
+//     // Update Product
+//     const newProductQty = product.quantity - orderQty;
+//     await Product.findByIdAndUpdate(product._id, {
+//       quantity: newProductQty,
+//       ...(newProductQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+//     });
+
+//     // Record Movement
+//     await ItemMovement.create({
+//       item: item._id,
+//       type: "OUT",
+//       quantity: orderQty,
+//       price: item.price,
+//       balanceAfter: newItemQty,
+//       reference: platformOrderId,
+//       remarks: `Order from ${platform} - ${courier}`,
+//       createdBy: userId || null,
+//     });
+//   }
+
+//   if (product.type === "bundle") {
+//     // Reduce stock for each component item
+//     for (const comp of product.components) {
+//       const item = await Item.findById(comp.item);
+//       if (!item) continue;
+
+//       const totalQty = comp.qty * orderQty;
+//       const newItemQty = item.quantity - totalQty;
+//       if (newItemQty < 0)
+//         throw new Error(
+//           `Insufficient stock for item: ${item.name} (bundle component)`
+//         );
+
+//       // Update Item
+//       await Item.findByIdAndUpdate(item._id, {
+//         quantity: newItemQty,
+//         ...(newItemQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+//       });
+
+//       // Record Movement
+//       await ItemMovement.create({
+//         item: item._id,
+//         type: "OUT",
+//         quantity: totalQty,
+//         price: item.price,
+//         balanceAfter: newItemQty,
+//         reference: platformOrderId,
+//         remarks: `Bundle component for ${product.name} - ${platform}`,
+//         createdBy: userId || null,
+//       });
+//     }
+
+//     // Update Product after processing all components
+//     const newProductQty = product.quantity - orderQty;
+//     await Product.findByIdAndUpdate(product._id, {
+//       quantity: newProductQty,
+//       ...(newProductQty === 0 && { status: StatusEnum.OUT_OF_STOCK }),
+//     });
+//   }
+// };
+
+// update items quantity
 export const updateItemQuantities = async (product, orderQty, options = {}) => {
   const { userId, platformOrderId, platform, courier } = options;
 
+  if (orderQty === 0) return; // no change
+
+  // Determine movement type based on qtyDiff
+  const movementType = orderQty > 0 ? "OUT" : "IN";
+
   if (product.type === "single") {
-    // Product is directly tied to an Item
     const item = await Item.findOne({
       normalizedName: product.normalizedName,
       normalizedVariant: product.normalizedVariant,
     });
-
     if (!item) throw new Error("Item not found for single product");
 
-    const newItemQty = item.quantity - orderQty;
+    const newItemQty = item.quantity - orderQty; // subtracting works for negative too
     if (newItemQty < 0) throw new Error("Insufficient stock for item");
 
     // Update Item
@@ -38,18 +124,19 @@ export const updateItemQuantities = async (product, orderQty, options = {}) => {
     // Record Movement
     await ItemMovement.create({
       item: item._id,
-      type: "OUT",
-      quantity: orderQty,
+      type: movementType,
+      quantity: Math.abs(orderQty),
       price: item.price,
       balanceAfter: newItemQty,
       reference: platformOrderId,
-      remarks: `Order from ${platform} - ${courier}`,
+      remarks: `${
+        movementType === "OUT" ? "Order" : "Adjustment"
+      } from ${platform} - ${courier}`,
       createdBy: userId || null,
     });
   }
 
   if (product.type === "bundle") {
-    // Reduce stock for each component item
     for (const comp of product.components) {
       const item = await Item.findById(comp.item);
       if (!item) continue;
@@ -70,17 +157,19 @@ export const updateItemQuantities = async (product, orderQty, options = {}) => {
       // Record Movement
       await ItemMovement.create({
         item: item._id,
-        type: "OUT",
-        quantity: totalQty,
+        type: movementType,
+        quantity: Math.abs(totalQty),
         price: item.price,
         balanceAfter: newItemQty,
         reference: platformOrderId,
-        remarks: `Bundle component for ${product.name} - ${platform}`,
+        remarks: `Bundle ${
+          movementType === "OUT" ? "deduction" : "restock"
+        } for ${product.name} - ${platform}`,
         createdBy: userId || null,
       });
     }
 
-    // Update Product after processing all components
+    // Update Product
     const newProductQty = product.quantity - orderQty;
     await Product.findByIdAndUpdate(product._id, {
       quantity: newProductQty,
