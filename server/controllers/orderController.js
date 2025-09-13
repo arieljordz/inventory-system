@@ -2,21 +2,20 @@ import moment from "moment-timezone";
 import XLSX from "xlsx";
 import Product from "../models/Product.js";
 import Order from "../models/Order.js";
-import InventoryDetail from "../models/InventoryDetail.js";
-import { StatusEnum, PlatformEnum } from "../enums/enums.js";
-import { logAudit } from "../utils/auditLogger.js";
+import { PlatformEnum } from "../enums/enums.js";
 import {
   normalizeString,
   escapeRegex,
   normalizeText,
   parseOrderDate,
+  normalizeHeader,
+  validateFile,
 } from "../utils/commonUtils.js";
 import {
   orderPlatformConfigs,
-  normalizeHeader,
-  validateFile,
-} from "../utils/importUtils.js";
-import { updateItemQuantities } from "../utils/inventoryUtils.js";
+  handleReimportOrder,
+  handleNewOrder,
+} from "../utils/importOrdersUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
@@ -195,130 +194,6 @@ export const importOrdersByPlatform = async (req, res) => {
 };
 
 // --- Modular row processor (platform-agnostic) ---
-// export const processOrdersImport = async (rows, platform, req) => {
-//   const results = { imported: [], skipped: [] };
-
-//   for (const row of rows) {
-//     try {
-//       const platformOrderId = row.platformOrderId;
-//       const name = normalizeText(row.name);
-//       const courier = normalizeText(row.courier);
-//       const variant = normalizeText(row.variant || "Default");
-//       const quantity = parseInt(row.quantity) || 0;
-//       const orderDate = parseOrderDate(row.orderDate);
-
-//       if (!platformOrderId || !name || !courier || quantity <= 0) {
-//         results.skipped.push({
-//           platformOrderId: platformOrderId || "N/A",
-//           reason: "Invalid row data",
-//         });
-//         continue;
-//       }
-
-//       const product = await Product.findOne({
-//         normalizedName: normalizeString(name),
-//         normalizedVariant: normalizeString(variant),
-//       });
-
-//       if (!product) {
-//         results.skipped.push({ platformOrderId, reason: "Product not found" });
-//         continue;
-//       }
-
-//       const existingOrder = await Order.findOne({
-//         product: product._id,
-//         platform,
-//         platformOrderId,
-//       });
-//       if (existingOrder) {
-//         results.skipped.push({
-//           platformOrderId,
-//           reason: "Order already imported",
-//         });
-//         continue;
-//       }
-
-//       if (quantity > product.quantity) {
-//         results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
-//         continue;
-//       }
-
-//       const order = await Order.create({
-//         product: product._id,
-//         quantity,
-//         platform,
-//         platformOrderId,
-//         courier,
-//         orderDate,
-//         remarks: "Tagged for pickup - imported orders",
-//       });
-
-//       try {
-//         // Update item quantities
-//         await updateItemQuantities(product, quantity, {
-//           userId: req.user?._id,
-//           platformOrderId,
-//           platform,
-//           courier,
-//         });
-//       } catch (err) {
-//         results.skipped.push({
-//           platformOrderId,
-//           reason: `Stock Item update failed: ${err.message}`,
-//         });
-//         continue;
-//       }
-
-//       const inventoryDetail = await InventoryDetail.create({
-//         product: product._id,
-//         order: order._id,
-//         movementType: "OUT",
-//         quantity,
-//         courier,
-//         platform,
-//         status: StatusEnum.ON_PROCESS,
-//         remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
-//       });
-
-//       // refresh product so it has the latest quantity/status
-//       const updatedProduct = await Product.findById(product._id);
-
-//       results.imported.push({
-//         platformOrderId,
-//         product: updatedProduct,
-//         order,
-//         inventoryDetail,
-//       });
-
-//       await logAudit({
-//         action: "IMPORT_ORDER",
-//         user: req.user?._id || null,
-//         description: `Imported order from ${platform} with Order ID: ${platformOrderId}`,
-//         collectionName: "Order",
-//         documentId: order._id,
-//         before: null,
-//         after: { order, inventoryDetail, product: updatedProduct },
-//         ip: req.ip,
-//         userAgent: req.headers["user-agent"],
-//       });
-//     } catch (err) {
-//       results.skipped.push({
-//         platformOrderId: row.platformOrderId || "N/A",
-//         reason: `Error: ${err.message}`,
-//       });
-//     }
-//   }
-
-//   return {
-//     summary: {
-//       imported: results.imported.length,
-//       skipped: results.skipped.length,
-//     },
-//     details: results,
-//   };
-// };
-
-// --- Modular row processor (platform-agnostic) ---
 export const processOrdersImport = async (rows, platform, req) => {
   const results = { imported: [], skipped: [] };
 
@@ -349,160 +224,39 @@ export const processOrdersImport = async (rows, platform, req) => {
         continue;
       }
 
-      // 🔹 Check if order already exists
       const existingOrder = await Order.findOne({
         product: product._id,
         platform,
         platformOrderId,
       });
-
+      // --- Re-import order case ---
       if (existingOrder) {
-        // --- Re-import case ---
-        const oldQty = existingOrder.quantity;
-        const qtyDiff = quantity - oldQty;
+        const reimportResult = await handleReimportOrder({
+          existingOrder,
+          product,
+          quantity,
+          platform,
+          platformOrderId,
+          courier,
+          req,
+        });
 
-        if (qtyDiff === 0) {
-          results.skipped.push({
-            platformOrderId,
-            reason: "Order already imported, No change in quantity",
-          });
-          continue;
-        }
-
-        if (qtyDiff > 0 && qtyDiff > product.quantity) {
-          results.skipped.push({
-            platformOrderId,
-            reason: "Insufficient stock for adjustment",
-          });
-          continue;
-        }
-
-        try {
-          // Adjust stock (positive = take more stock, negative = return stock)
-          await updateItemQuantities(product, qtyDiff, {
-            userId: req.user?._id,
-            platformOrderId,
-            platform,
-            courier,
-          });
-
-          // Update order
-          existingOrder.quantity = quantity;
-          await existingOrder.save();
-
-          // Update inventory detail
-          const inventoryDetail = await InventoryDetail.findOne({
-            order: existingOrder._id,
-          });
-          if (inventoryDetail) {
-            inventoryDetail.quantity = quantity;
-            inventoryDetail.remarks = `Adjusted order - Order ID: ${platformOrderId}`;
-            await inventoryDetail.save();
-          }
-
-          // Refresh product
-          const updatedProduct = await Product.findById(product._id);
-
-          results.imported.push({
-            platformOrderId,
-            product: updatedProduct,
-            order: existingOrder,
-            inventoryDetail,
-            adjustment: true,
-          });
-
-          await logAudit({
-            action: "REIMPORT_ORDER",
-            user: req.user?._id || null,
-            description: `Adjusted imported order from ${platform} with Order ID: ${platformOrderId}`,
-            collectionName: "Order",
-            documentId: existingOrder._id,
-            before: { oldQuantity: oldQty },
-            after: { newQuantity: quantity },
-            ip: req.ip,
-            userAgent: req.headers["user-agent"],
-          });
-
-          continue; // ✅ skip "create new" flow
-        } catch (err) {
-          results.skipped.push({
-            platformOrderId,
-            reason: `Re-import failed: ${err.message}`,
-          });
-          continue;
-        }
-      }
-
-      // --- New order flow ---
-      if (quantity > product.quantity) {
-        results.skipped.push({ platformOrderId, reason: "Insufficient stock" });
+        results[reimportResult.type].push(reimportResult.data);
         continue;
       }
 
-      const order = await Order.create({
-        product: product._id,
+      // --- New order case ---
+      const newOrderResult = await handleNewOrder({
+        product,
         quantity,
         platform,
         platformOrderId,
         courier,
         orderDate,
-        remarks: "Tagged for pickup - imported orders",
+        req,
       });
 
-      try {
-        await updateItemQuantities(product, quantity, {
-          userId: req.user?._id,
-          platformOrderId,
-          platform,
-          courier,
-        });
-      } catch (err) {
-        results.skipped.push({
-          platformOrderId,
-          reason: `Stock Item update failed: ${err.message}`,
-        });
-        continue;
-      }
-
-      const inventoryDetail = await InventoryDetail.create({
-        product: product._id,
-        order: order._id,
-        movementType: "OUT",
-        quantity,
-        courier,
-        platform,
-        status: StatusEnum.ON_PROCESS,
-        remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
-      });
-
-      const updatedProduct = await Product.findById(product._id);
-
-      results.imported.push({
-        platformOrderId,
-        product: updatedProduct,
-        order: existingOrder || order, // use whichever exists
-        inventoryDetail,
-        adjustment: !!existingOrder,
-        reason: existingOrder
-          ? "Imported Order, quantity updated"
-          : "Imported Order",
-      });
-
-      await logAudit({
-        action: existingOrder ? "REIMPORT_ORDER" : "IMPORT_ORDER",
-        user: req.user?._id || null,
-        description: existingOrder
-          ? `Adjusted imported order from ${platform} with Order ID: ${platformOrderId}`
-          : `Imported order from ${platform} with Order ID: ${platformOrderId}`,
-        collectionName: "Order",
-        documentId: (existingOrder || order)._id,
-        before: existingOrder ? { oldQuantity: oldQty } : null,
-        after: existingOrder
-          ? { newQuantity: quantity }
-          : { order, inventoryDetail, product: updatedProduct },
-        ip: req.ip,
-        userAgent: req.headers["user-agent"],
-      });
+      results[newOrderResult.type].push(newOrderResult.data);
     } catch (err) {
       results.skipped.push({
         platformOrderId: row.platformOrderId || "N/A",

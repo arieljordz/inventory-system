@@ -1,47 +1,4 @@
-import { StatusEnum } from "../enums/enums.js";
-
-export const getStatusBadgeData = (
-  status,
-  customColorMap = {},
-  customLabelMap = {}
-) => {
-  // Normalize status to string
-  const statusKey = typeof status === "boolean" ? String(status) : status;
-
-  const defaultColorMap = {
-    [StatusEnum.AVAILABLE]: "success",
-    [StatusEnum.OUT_OF_STOCK]: "danger",
-    [StatusEnum.ON_PROCESS]: "info",
-    [StatusEnum.TO_SHIP]: "warning",
-    [StatusEnum.SHIPPING]: "primary",
-    [StatusEnum.RETURNED]: "dark",
-    [StatusEnum.DELIVERED]: "secondary",
-    [StatusEnum.COMPLETED]: "success",
-    true: "success",
-    false: "secondary",
-  };
-
-  const defaultLabelMap = {
-    [StatusEnum.AVAILABLE]: "In Stock",
-    [StatusEnum.OUT_OF_STOCK]: "No Stock",
-    [StatusEnum.ON_PROCESS]: "On Process",
-    [StatusEnum.TO_SHIP]: "To Ship",
-    [StatusEnum.SHIPPING]: "Shipping",
-    [StatusEnum.RETURNED]: "Returned",
-    [StatusEnum.DELIVERED]: "Delivered",
-    [StatusEnum.COMPLETED]: "Completed",
-    true: "Paid",
-    false: "Unpaid",
-  };
-
-  const colorMap = { ...defaultColorMap, ...customColorMap };
-  const labelMap = { ...defaultLabelMap, ...customLabelMap };
-
-  return {
-    label: labelMap[statusKey] ?? statusKey,
-    color: colorMap[statusKey] ?? "secondary",
-  };
-};
+import path from "path";
 
 // Escape regex special characters for queries
 export const escapeRegex = (text = "") =>
@@ -130,3 +87,64 @@ export function parseOrderDate(orderDate) {
   // Otherwise assume it's a string that JS can parse
   return new Date(orderDate);
 }
+
+// helpers for import
+export const validateFile = (file) => {
+  if (!file?.buffer) {
+    throw new Error("No valid file uploaded");
+  }
+
+  const ext = path
+    .extname(file.originalname || "")
+    .toLowerCase()
+    .replace(".", "");
+  if (!["csv", "xlsx", "xls"].includes(ext)) {
+    throw new Error(
+      "Unsupported file format. Please upload .csv, .xlsx, or .xls files."
+    );
+  }
+};
+
+export const normalizeHeader = (str) =>
+  str
+    ?.toString()
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ") // collapse multiple spaces
+    .replace(/[_\-\/]/g, " "); // treat _, -, / as spaces
+
+// --- Detect Header Row Helper ---
+export const detectHeaderRow = (sheetData, expectedHeaders) => {
+  let headerRowIndex = -1;
+  let columnIndexMap = {};
+  let bestMatchCount = 0;
+
+  for (let r = 0; r < sheetData.length; r++) {
+    const row = sheetData[r] || [];
+    const headersInRow = {};
+    row.forEach((cellValue, colNumber) => {
+      if (cellValue) headersInRow[normalizeHeader(cellValue)] = colNumber;
+    });
+
+    const matches = expectedHeaders.filter(
+      (h) => headersInRow[h] !== undefined
+    );
+    if (matches.length > bestMatchCount) {
+      bestMatchCount = matches.length;
+      headerRowIndex = r;
+      columnIndexMap = headersInRow;
+    }
+  }
+
+  return { headerRowIndex, columnIndexMap };
+};
+
+// --- Build Field Map Helper ---
+export const buildFinalFieldMap = (rawFieldMap, columnIndexMap) => {
+  const finalFieldMap = {};
+  Object.entries(rawFieldMap).forEach(([key, fieldName]) => {
+    const colIndex = columnIndexMap[normalizeHeader(fieldName)];
+    if (colIndex !== undefined) finalFieldMap[key] = colIndex;
+  });
+  return finalFieldMap;
+};

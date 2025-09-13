@@ -62,6 +62,7 @@ export const useSalesImportModal = (refreshData) => {
         const res = await handler.api(formData);
         const { details } = res.data;
 
+        // console.log("sales res:", res);
         handler.showResults(details, platform);
         await refreshData();
       } catch (err) {

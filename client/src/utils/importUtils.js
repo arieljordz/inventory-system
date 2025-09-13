@@ -22,25 +22,21 @@ const buildCopyButton = (platformOrderId) => {
 // Build a single Order row for the result table
 const buildOrderRow = (idx, item, type = "imported") => {
   let remarks = "";
-  let color = "black";
+  let color = "red";
 
   if (type === "imported") {
     // console.log("reason:", item.reason);
-    remarks = item.reason === undefined ? "Imported Order, quantity updated" : "Imported Order";
+    remarks = item.reason;
     color = "green";
   } else {
     switch (item.reason) {
       case "Product not found":
         remarks = item.reason;
-        color = "red";
+        color = "orange";
         break;
-      case "Order already imported, No change in quantity":
+      case "Order already imported":
         remarks = item.reason;
         color = "blue";
-        break;
-      case "Insufficient stock":
-        remarks = item.reason;
-        color = "orange";
         break;
       default:
         remarks = item.reason || "Skipped";
@@ -245,7 +241,7 @@ export const showSalesImportResults = (details, platform) => {
 export const showReturnImportResults = (details, platform) => {
   const rows = [];
   // console.log("details:", details);
-  
+
   if (details?.updated?.length) {
     details.updated.forEach((item, idx) => {
       rows.push(buildOrderRow(details.updated?.length + idx, item, "returned"));
@@ -274,7 +270,13 @@ export const showReturnImportResults = (details, platform) => {
 
   if (details?.failedRestocks?.length) {
     details.failedRestocks.forEach((item, idx) => {
-      rows.push(buildOrderRow(details.failedRestocks?.length + idx, item, "failed restock"));
+      rows.push(
+        buildOrderRow(
+          details.failedRestocks?.length + idx,
+          item,
+          "failed restock"
+        )
+      );
     });
   }
 

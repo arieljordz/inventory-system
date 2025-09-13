@@ -2,21 +2,19 @@ import * as XLSX from "xlsx";
 import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import { logAudit } from "../utils/auditLogger.js";
-import {
-  salesPlatformConfigs,
-  returnPlatformConfigs,
-  normalizeHeader,
-  validateFile,
-  detectHeaderRow,
-  buildFinalFieldMap,
-} from "../utils/importUtils.js";
+import { returnPlatformConfigs } from "../utils/importReturnsUtils.js";
+import { salesPlatformConfigs } from "../utils/importSalesUtils.js";
 import {
   normalizeString,
   escapeRegex,
   normalizeText,
+  normalizeHeader,
+  validateFile,
+  detectHeaderRow,
+  buildFinalFieldMap,
 } from "../utils/commonUtils.js";
 import { StatusEnum } from "../enums/enums.js";
-import { restockItemQuantities } from "../utils/inventoryUtils.js";
+import { restockItemQuantities } from "../utils/itemQuantityUtils.js";
 
 export const getSalesStats = async (req, res) => {
   try {
@@ -111,7 +109,14 @@ export const getOrders = async (req, res) => {
 
     // Fetch paginated orders
     const pipeline = [
-      { $lookup: { from: "products", localField: "product", foreignField: "_id", as: "product" } },
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
       { $unwind: "$product" },
       { $match: match },
       { $sort: { orderDate: -1 } },
