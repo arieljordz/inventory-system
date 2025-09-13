@@ -1,7 +1,7 @@
 // src/hooks/useSalesImportModal.js
 import { useState, useCallback } from "react";
 import { toast } from "react-toastify";
-import { importHandlers } from "../utils/importUtils";
+import { importHandlers } from "../utils/importSalesUtils";
 import { useSpinner } from "../context/SpinnerContext";
 import { PlatformEnum, CourierEnum } from "../enums/enums";
 
@@ -67,7 +67,9 @@ export const useSalesImportModal = (refreshData) => {
         await refreshData();
       } catch (err) {
         console.error(`${importType} import failed:`, err);
-        toast.error(err.response?.data?.message || `Failed to import ${importType}.`);
+        toast.error(
+          err.response?.data?.message || `Failed to import ${importType}.`
+        );
       } finally {
         hideSpinner();
         closeImportModal();

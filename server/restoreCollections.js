@@ -24,9 +24,7 @@ function askConfirmation(message) {
 }
 
 async function selectBackupFiles() {
-  const files = fs
-    .readdirSync(BACKUP_DIR)
-    .filter((f) => f.endsWith(".json"));
+  const files = fs.readdirSync(BACKUP_DIR).filter((f) => f.endsWith(".json"));
 
   if (files.length === 0) {
     console.log("No JSON backup files found.");
@@ -61,10 +59,9 @@ function reviveDocument(doc) {
   if (Array.isArray(doc)) {
     return doc.map((item) => reviveDocument(item));
   } else if (doc && typeof doc === "object") {
-    // Extended JSON conversions
     if (doc.$oid) return new ObjectId(doc.$oid);
     if (doc.$date) return new Date(doc.$date);
-    if (doc.$numberInt) return new Int32(doc.$numberInt); // <-- Int32 support
+    if (doc.$numberInt) return new Int32(doc.$numberInt);
     if (doc.$numberLong) return Long.fromString(doc.$numberLong);
     if (doc.$numberDouble) return new Double(parseFloat(doc.$numberDouble));
     if (doc.$numberDecimal) return Decimal128.fromString(doc.$numberDecimal);
@@ -112,19 +109,11 @@ async function restoreCollections() {
       const collectionName = file.split("_")[0]; // assumes: collectionname_timestamp.json
       const rawData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
-      // Convert extended JSON back to MongoDB objects
       const data = rawData.map((doc) => reviveDocument(doc));
-
-      const overwrite = await askConfirmation(
-        `Do you want to overwrite the collection '${collectionName}'?`
-      );
-      if (!overwrite) {
-        console.log(`Skipped restoring collection: ${collectionName}`);
-        continue;
-      }
 
       const collection = db.collection(collectionName);
 
+      // Always overwrite
       await collection.deleteMany({});
       if (data.length > 0) {
         await collection.insertMany(data);

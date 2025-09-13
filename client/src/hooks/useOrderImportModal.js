@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { importOrdersByPlatform } from "../services/orderService";
 import { useSpinner } from "../context/SpinnerContext";
 import { PlatformEnum } from "../enums/enums";
-import { showOrderImportResults } from "../utils/importUtils";
+import { showOrderImportResults } from "../utils/importOrdersUtils";
 
 export const useOrderImportModal = (refreshOrders) => {
   const { showSpinner, hideSpinner } = useSpinner();

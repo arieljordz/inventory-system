@@ -1,6 +1,111 @@
 [
   {
     "_id": {
+      "$oid": "68b578c705bc2b256f1ce92c"
+    },
+    "item": {
+      "$oid": "68b5720e05bc2b256f1ce82c"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:19.195Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:19.195Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b5b77fbb6afdb60842de57"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 1200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restocking",
+    "createdBy": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T15:10:55.004Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T15:10:55.004Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 120000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b56475650c74e5be323846"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 50,
+    "balanceAfter": 100,
+    "reference": "Initial Stock",
+    "location": "Main Warehouse",
+    "remarks": "Initial stock added with item creation",
+    "createdAt": {
+      "$date": "2025-09-01T09:16:37.287Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-08T07:08:38.905Z"
+    },
+    "normalizedReference": "Initial Stock",
+    "totalValue": 5000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b578b905bc2b256f1ce91c"
+    },
+    "item": {
+      "$oid": "68b5729205bc2b256f1ce842"
+    },
+    "type": "IN",
+    "quantity": 100,
+    "price": 200,
+    "balanceAfter": 100,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-01T10:43:05.050Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-01T10:43:05.050Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
       "$oid": "68b563f4650c74e5be32382d"
     },
     "item": {
@@ -45,30 +150,6 @@
     },
     "normalizedReference": "Initial Stock",
     "totalValue": 11000,
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b56475650c74e5be323846"
-    },
-    "item": {
-      "$oid": "68b56475650c74e5be323844"
-    },
-    "type": "IN",
-    "quantity": 100,
-    "price": 50,
-    "balanceAfter": 100,
-    "reference": "Initial Stock",
-    "location": "Main Warehouse",
-    "remarks": "Initial stock added with item creation",
-    "createdAt": {
-      "$date": "2025-09-01T09:16:37.287Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-08T07:08:38.905Z"
-    },
-    "normalizedReference": "Initial Stock",
-    "totalValue": 5000,
     "__v": 0
   },
   {
@@ -151,33 +232,6 @@
   },
   {
     "_id": {
-      "$oid": "68b578b905bc2b256f1ce91c"
-    },
-    "item": {
-      "$oid": "68b5729205bc2b256f1ce842"
-    },
-    "type": "IN",
-    "quantity": 100,
-    "price": 200,
-    "balanceAfter": 100,
-    "reference": "Restock",
-    "location": "Main Warehouse",
-    "remarks": "Restock",
-    "createdBy": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "createdAt": {
-      "$date": "2025-09-01T10:43:05.050Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-01T10:43:05.050Z"
-    },
-    "normalizedReference": "Restock",
-    "totalValue": 20000,
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68b578c105bc2b256f1ce924"
     },
     "item": {
@@ -205,29 +259,29 @@
   },
   {
     "_id": {
-      "$oid": "68b578c705bc2b256f1ce92c"
+      "$oid": "68b5b772bb6afdb60842de47"
     },
     "item": {
-      "$oid": "68b5720e05bc2b256f1ce82c"
+      "$oid": "68b569d1650c74e5be3238bb"
     },
     "type": "IN",
     "quantity": 100,
-    "price": 200,
+    "price": 1700,
     "balanceAfter": 100,
     "reference": "Restock",
     "location": "Main Warehouse",
-    "remarks": "Restock",
+    "remarks": "Restocking",
     "createdBy": {
-      "$oid": "6884500702d0150075c6b43a"
+      "$oid": "687dc354c1eb70666039fa18"
     },
     "createdAt": {
-      "$date": "2025-09-01T10:43:19.195Z"
+      "$date": "2025-09-01T15:10:42.942Z"
     },
     "updatedAt": {
-      "$date": "2025-09-01T10:43:19.195Z"
+      "$date": "2025-09-01T15:10:42.942Z"
     },
     "normalizedReference": "Restock",
-    "totalValue": 20000,
+    "totalValue": 170000,
     "__v": 0
   },
   {
@@ -286,33 +340,6 @@
   },
   {
     "_id": {
-      "$oid": "68b5b772bb6afdb60842de47"
-    },
-    "item": {
-      "$oid": "68b569d1650c74e5be3238bb"
-    },
-    "type": "IN",
-    "quantity": 100,
-    "price": 1700,
-    "balanceAfter": 100,
-    "reference": "Restock",
-    "location": "Main Warehouse",
-    "remarks": "Restocking",
-    "createdBy": {
-      "$oid": "687dc354c1eb70666039fa18"
-    },
-    "createdAt": {
-      "$date": "2025-09-01T15:10:42.942Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-01T15:10:42.942Z"
-    },
-    "normalizedReference": "Restock",
-    "totalValue": 170000,
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68b5b778bb6afdb60842de4f"
     },
     "item": {
@@ -336,33 +363,6 @@
     },
     "normalizedReference": "Restock",
     "totalValue": 200000,
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b5b77fbb6afdb60842de57"
-    },
-    "item": {
-      "$oid": "68b56932650c74e5be3238ad"
-    },
-    "type": "IN",
-    "quantity": 100,
-    "price": 1200,
-    "balanceAfter": 100,
-    "reference": "Restock",
-    "location": "Main Warehouse",
-    "remarks": "Restocking",
-    "createdBy": {
-      "$oid": "687dc354c1eb70666039fa18"
-    },
-    "createdAt": {
-      "$date": "2025-09-01T15:10:55.004Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-01T15:10:55.004Z"
-    },
-    "normalizedReference": "Restock",
-    "totalValue": 120000,
     "__v": 0
   },
   {

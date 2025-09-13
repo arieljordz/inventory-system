@@ -266,59 +266,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541c4534336e7e1c5d0e"
-    },
-    "action": "IMPORT_PRODUCT",
-    "user": {
-      "$oid": "687dc354c1eb70666039fa18"
-    },
-    "description": "Imported product via Excel: 20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
-    "collectionName": "Product",
-    "documentId": {
-      "$oid": "68ab541c4534336e7e1c5ca6"
-    },
-    "before": null,
-    "after": {
-      "name": "20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
-      "price": 2299,
-      "description": "20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
-      "image": "",
-      "imageId": "",
-      "quantity": 100,
-      "sku": "20-PC-39068",
-      "variant": "Default",
-      "category": "",
-      "unit": "pcs",
-      "supplier": "",
-      "location": "Main Warehouse",
-      "status": "Available",
-      "normalizedName": "20 pcs hammock ring (makapal )stainless 304 (20 pcs) outdoor type heavy duty, rust resistant",
-      "normalizedVariant": "default",
-      "normalizedSku": "20-pc-39068",
-      "normalizedDescription": "20 pcs hammock ring (makapal )stainless 304 (20 pcs) outdoor type heavy duty, rust resistant",
-      "_id": {
-        "$oid": "68ab541c4534336e7e1c5ca6"
-      },
-      "createdAt": {
-        "$date": "2025-08-24T18:04:12.198Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-24T18:04:12.198Z"
-      },
-      "__v": 0
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:12.897Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-24T18:04:12.897Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68ab541c4534336e7e1c5d0a"
     },
     "action": "IMPORT_PRODUCT",
@@ -367,6 +314,59 @@
     },
     "updatedAt": {
       "$date": "2025-08-24T18:04:12.895Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ab541c4534336e7e1c5d0e"
+    },
+    "action": "IMPORT_PRODUCT",
+    "user": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "description": "Imported product via Excel: 20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541c4534336e7e1c5ca6"
+    },
+    "before": null,
+    "after": {
+      "name": "20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
+      "price": 2299,
+      "description": "20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "20-PC-39068",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "20 pcs hammock ring (makapal )stainless 304 (20 pcs) outdoor type heavy duty, rust resistant",
+      "normalizedVariant": "default",
+      "normalizedSku": "20-pc-39068",
+      "normalizedDescription": "20 pcs hammock ring (makapal )stainless 304 (20 pcs) outdoor type heavy duty, rust resistant",
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5ca6"
+      },
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.198Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-24T18:04:12.198Z"
+      },
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:12.897Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-24T18:04:12.897Z"
     },
     "__v": 0
   },
@@ -690,59 +690,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541d4534336e7e1c5d24"
-    },
-    "action": "IMPORT_PRODUCT",
-    "user": {
-      "$oid": "687dc354c1eb70666039fa18"
-    },
-    "description": "Imported product via Excel: Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
-    "collectionName": "Product",
-    "documentId": {
-      "$oid": "68ab541c4534336e7e1c5ca4"
-    },
-    "before": null,
-    "after": {
-      "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
-      "price": 299,
-      "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
-      "image": "",
-      "imageId": "",
-      "quantity": 100,
-      "sku": "DUYAN-RING-W-CARABINER-76753",
-      "variant": "Ring w/ Carabiner",
-      "category": "",
-      "unit": "pcs",
-      "supplier": "",
-      "location": "Main Warehouse",
-      "status": "Available",
-      "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
-      "normalizedVariant": "ring w/ carabiner",
-      "normalizedSku": "duyan-ring-w-carabiner-76753",
-      "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
-      "_id": {
-        "$oid": "68ab541c4534336e7e1c5ca4"
-      },
-      "createdAt": {
-        "$date": "2025-08-24T18:04:12.197Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-24T18:04:12.197Z"
-      },
-      "__v": 0
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:13.091Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-24T18:04:13.091Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68ab541c4534336e7e1c5d22"
     },
     "action": "IMPORT_PRODUCT",
@@ -791,6 +738,59 @@
     },
     "updatedAt": {
       "$date": "2025-08-24T18:04:12.999Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ab541d4534336e7e1c5d24"
+    },
+    "action": "IMPORT_PRODUCT",
+    "user": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "description": "Imported product via Excel: Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "before": null,
+    "after": {
+      "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+      "price": 299,
+      "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "DUYAN-RING-W-CARABINER-76753",
+      "variant": "Ring w/ Carabiner",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+      "normalizedVariant": "ring w/ carabiner",
+      "normalizedSku": "duyan-ring-w-carabiner-76753",
+      "normalizedDescription": "duyan ring stainless - 3/16\" heavy-duty stainless shafting 304, rustproof and durable",
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5ca4"
+      },
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.197Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-24T18:04:12.197Z"
+      },
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:13.091Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-24T18:04:13.091Z"
     },
     "__v": 0
   },
@@ -849,59 +849,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541d4534336e7e1c5d28"
-    },
-    "action": "IMPORT_PRODUCT",
-    "user": {
-      "$oid": "687dc354c1eb70666039fa18"
-    },
-    "description": "Imported product via Excel: 40 PCS HAMMOCK RING - SULIT-TIPID for RESELLERS duyanring #ringstainless #hammocks #hammockring",
-    "collectionName": "Product",
-    "documentId": {
-      "$oid": "68ab541c4534336e7e1c5cc4"
-    },
-    "before": null,
-    "after": {
-      "name": "40 PCS HAMMOCK RING - SULIT-TIPID for RESELLERS duyanring #ringstainless #hammocks #hammockring",
-      "price": 2989,
-      "description": "40 PCS HAMMOCK RING - SULIT-TIPID for RESELLERS duyanring #ringstainless #hammocks #hammockring",
-      "image": "",
-      "imageId": "",
-      "quantity": 100,
-      "sku": "40-PC-DEFAULT-42072",
-      "variant": "Default",
-      "category": "",
-      "unit": "pcs",
-      "supplier": "",
-      "location": "Main Warehouse",
-      "status": "Available",
-      "normalizedName": "40 pcs hammock ring - sulit-tipid for resellers duyanring #ringstainless #hammocks #hammockring",
-      "normalizedVariant": "default",
-      "normalizedSku": "40-pc-default-42072",
-      "normalizedDescription": "40 pcs hammock ring - sulit-tipid for resellers duyanring #ringstainless #hammocks #hammockring",
-      "_id": {
-        "$oid": "68ab541c4534336e7e1c5cc4"
-      },
-      "createdAt": {
-        "$date": "2025-08-24T18:04:12.399Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-24T18:04:12.399Z"
-      },
-      "__v": 0
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:13.093Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-24T18:04:13.093Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68ab541d4534336e7e1c5d2e"
     },
     "action": "IMPORT_PRODUCT",
@@ -955,54 +902,107 @@
   },
   {
     "_id": {
-      "$oid": "68ab541c4534336e7e1c5d1c"
+      "$oid": "68ab541d4534336e7e1c5d2c"
     },
     "action": "IMPORT_PRODUCT",
     "user": {
       "$oid": "687dc354c1eb70666039fa18"
     },
-    "description": "Imported product via Excel: DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+    "description": "Imported product via Excel: Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares)",
     "collectionName": "Product",
     "documentId": {
-      "$oid": "68ab541c4534336e7e1c5cb4"
+      "$oid": "68ab541c4534336e7e1c5cc0"
     },
     "before": null,
     "after": {
-      "name": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
-      "price": 2199,
-      "description": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "name": "Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares)",
+      "price": 288,
+      "description": "Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares)",
       "image": "",
       "imageId": "",
       "quantity": 100,
-      "sku": "DUYAN-FRAME-WITH-DUYAN-SET-81812",
-      "variant": "FRAME with DUYAN SET",
+      "sku": "COMPL-REGULAR-SIZE-316MM-24426",
+      "variant": "Regular size 3/16mm",
       "category": "",
       "unit": "pcs",
       "supplier": "",
       "location": "Main Warehouse",
       "status": "Available",
-      "normalizedName": "duyan frame (detachable) frame only or with hammock set",
-      "normalizedVariant": "frame with duyan set",
-      "normalizedSku": "duyan-frame-with-duyan-set-81812",
-      "normalizedDescription": "duyan frame (detachable) frame only or with hammock set",
+      "normalizedName": "complete set hammock stainless ring with 2 pcs carabiner ( pares-pares)",
+      "normalizedVariant": "regular size 3/16mm",
+      "normalizedSku": "compl-regular-size-316mm-24426",
+      "normalizedDescription": "complete set hammock stainless ring with 2 pcs carabiner ( pares-pares)",
       "_id": {
-        "$oid": "68ab541c4534336e7e1c5cb4"
+        "$oid": "68ab541c4534336e7e1c5cc0"
       },
       "createdAt": {
-        "$date": "2025-08-24T18:04:12.305Z"
+        "$date": "2025-08-24T18:04:12.397Z"
       },
       "updatedAt": {
-        "$date": "2025-08-24T18:04:12.305Z"
+        "$date": "2025-08-24T18:04:12.397Z"
       },
       "__v": 0
     },
     "ip": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
     "createdAt": {
-      "$date": "2025-08-24T18:04:12.995Z"
+      "$date": "2025-08-24T18:04:13.095Z"
     },
     "updatedAt": {
-      "$date": "2025-08-24T18:04:12.995Z"
+      "$date": "2025-08-24T18:04:13.095Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ab541d4534336e7e1c5d28"
+    },
+    "action": "IMPORT_PRODUCT",
+    "user": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "description": "Imported product via Excel: 40 PCS HAMMOCK RING - SULIT-TIPID for RESELLERS duyanring #ringstainless #hammocks #hammockring",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541c4534336e7e1c5cc4"
+    },
+    "before": null,
+    "after": {
+      "name": "40 PCS HAMMOCK RING - SULIT-TIPID for RESELLERS duyanring #ringstainless #hammocks #hammockring",
+      "price": 2989,
+      "description": "40 PCS HAMMOCK RING - SULIT-TIPID for RESELLERS duyanring #ringstainless #hammocks #hammockring",
+      "image": "",
+      "imageId": "",
+      "quantity": 100,
+      "sku": "40-PC-DEFAULT-42072",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "40 pcs hammock ring - sulit-tipid for resellers duyanring #ringstainless #hammocks #hammockring",
+      "normalizedVariant": "default",
+      "normalizedSku": "40-pc-default-42072",
+      "normalizedDescription": "40 pcs hammock ring - sulit-tipid for resellers duyanring #ringstainless #hammocks #hammockring",
+      "_id": {
+        "$oid": "68ab541c4534336e7e1c5cc4"
+      },
+      "createdAt": {
+        "$date": "2025-08-24T18:04:12.399Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-24T18:04:12.399Z"
+      },
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:13.093Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-24T18:04:13.093Z"
     },
     "__v": 0
   },
@@ -1061,54 +1061,54 @@
   },
   {
     "_id": {
-      "$oid": "68ab541d4534336e7e1c5d2c"
+      "$oid": "68ab541c4534336e7e1c5d1c"
     },
     "action": "IMPORT_PRODUCT",
     "user": {
       "$oid": "687dc354c1eb70666039fa18"
     },
-    "description": "Imported product via Excel: Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares)",
+    "description": "Imported product via Excel: DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
     "collectionName": "Product",
     "documentId": {
-      "$oid": "68ab541c4534336e7e1c5cc0"
+      "$oid": "68ab541c4534336e7e1c5cb4"
     },
     "before": null,
     "after": {
-      "name": "Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares)",
-      "price": 288,
-      "description": "Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares)",
+      "name": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
+      "price": 2199,
+      "description": "DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set",
       "image": "",
       "imageId": "",
       "quantity": 100,
-      "sku": "COMPL-REGULAR-SIZE-316MM-24426",
-      "variant": "Regular size 3/16mm",
+      "sku": "DUYAN-FRAME-WITH-DUYAN-SET-81812",
+      "variant": "FRAME with DUYAN SET",
       "category": "",
       "unit": "pcs",
       "supplier": "",
       "location": "Main Warehouse",
       "status": "Available",
-      "normalizedName": "complete set hammock stainless ring with 2 pcs carabiner ( pares-pares)",
-      "normalizedVariant": "regular size 3/16mm",
-      "normalizedSku": "compl-regular-size-316mm-24426",
-      "normalizedDescription": "complete set hammock stainless ring with 2 pcs carabiner ( pares-pares)",
+      "normalizedName": "duyan frame (detachable) frame only or with hammock set",
+      "normalizedVariant": "frame with duyan set",
+      "normalizedSku": "duyan-frame-with-duyan-set-81812",
+      "normalizedDescription": "duyan frame (detachable) frame only or with hammock set",
       "_id": {
-        "$oid": "68ab541c4534336e7e1c5cc0"
+        "$oid": "68ab541c4534336e7e1c5cb4"
       },
       "createdAt": {
-        "$date": "2025-08-24T18:04:12.397Z"
+        "$date": "2025-08-24T18:04:12.305Z"
       },
       "updatedAt": {
-        "$date": "2025-08-24T18:04:12.397Z"
+        "$date": "2025-08-24T18:04:12.305Z"
       },
       "__v": 0
     },
     "ip": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
     "createdAt": {
-      "$date": "2025-08-24T18:04:13.095Z"
+      "$date": "2025-08-24T18:04:12.995Z"
     },
     "updatedAt": {
-      "$date": "2025-08-24T18:04:13.095Z"
+      "$date": "2025-08-24T18:04:12.995Z"
     },
     "__v": 0
   },
@@ -68296,40 +68296,40 @@
   },
   {
     "_id": {
-      "$oid": "68b692bf3b0a8a8970175edc"
+      "$oid": "68b692bf3b0a8a8970175ee8"
     },
     "action": "UPDATE_RETURN_STATUS",
     "user": {
       "$oid": "6884500702d0150075c6b43a"
     },
-    "description": "Marked order 250823H1P2NFTA as returned via import (shopee)",
+    "description": "Marked order 250823HVT922H0 as returned via import (shopee)",
     "collectionName": "Order",
     "documentId": {
-      "$oid": "68ac08b50f6158c26fcb0faf"
+      "$oid": "68ac08b50f6158c26fcb0fca"
     },
     "before": {
       "_id": {
-        "$oid": "68ac08b50f6158c26fcb0faf"
+        "$oid": "68ac08b50f6158c26fcb0fca"
       },
       "product": {
-        "$oid": "68ab541c4534336e7e1c5cc8"
+        "$oid": "68ab541c4534336e7e1c5cae"
       },
       "quantity": 1,
-      "platformOrderId": "250823H1P2NFTA",
+      "platformOrderId": "250823HVT922H0",
       "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
+      "courier": "Standard Local-Flash Express",
       "status": "On Process",
       "isPaid": false,
       "remarks": "Tagged for pickup - imported orders",
       "createdAt": {
-        "$date": "2025-08-25T06:54:45.105Z"
+        "$date": "2025-08-25T06:54:45.834Z"
       },
       "updatedAt": {
-        "$date": "2025-08-25T06:54:45.105Z"
+        "$date": "2025-08-25T06:54:45.834Z"
       },
       "__v": 0,
       "orderDate": {
-        "$date": "2025-09-02T06:46:23.143Z"
+        "$date": "2025-09-02T06:46:23.690Z"
       }
     },
     "after": {
@@ -68338,10 +68338,112 @@
     "ip": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
     "createdAt": {
-      "$date": "2025-09-02T06:46:23.344Z"
+      "$date": "2025-09-02T06:46:23.739Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T06:46:23.344Z"
+      "$date": "2025-09-02T06:46:23.739Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693253b0a8a8970175f01"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822GAF98U23 as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf11f0f6158c26fcb0ad1"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf11f0f6158c26fcb0ad1"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "quantity": 5,
+      "platformOrderId": "250822GAF98U23",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:07.485Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:07.485Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:05.803Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:05.854Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:05.854Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693273b0a8a8970175f3a"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823HUGSH18C as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1230f6158c26fcb0b58"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1230f6158c26fcb0b58"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cb6"
+      },
+      "quantity": 2,
+      "platformOrderId": "250823HUGSH18C",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:11.102Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:11.102Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:07.721Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:07.759Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:07.759Z"
     },
     "__v": 0
   },
@@ -68393,108 +68495,6 @@
     },
     "updatedAt": {
       "$date": "2025-09-02T06:46:23.489Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b692bf3b0a8a8970175ee4"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HUR61GHA as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68ac08b50f6158c26fcb0fc1"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68ac08b50f6158c26fcb0fc1"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cca"
-      },
-      "quantity": 1,
-      "platformOrderId": "250823HUR61GHA",
-      "platform": "shopee",
-      "courier": "Standard Local-Flash Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T06:54:45.585Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T06:54:45.585Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:46:23.575Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:46:23.615Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:46:23.615Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b692bf3b0a8a8970175ee8"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HVT922H0 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68ac08b50f6158c26fcb0fca"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68ac08b50f6158c26fcb0fca"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cae"
-      },
-      "quantity": 1,
-      "platformOrderId": "250823HVT922H0",
-      "platform": "shopee",
-      "courier": "Standard Local-Flash Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T06:54:45.834Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T06:54:45.834Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:46:23.690Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:46:23.739Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:46:23.739Z"
     },
     "__v": 0
   },
@@ -68602,159 +68602,6 @@
   },
   {
     "_id": {
-      "$oid": "68b693253b0a8a8970175ef8"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822G2YQK9QB as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf11e0f6158c26fcb0ab6"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf11e0f6158c26fcb0ab6"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cba"
-      },
-      "quantity": 2,
-      "platformOrderId": "250822G2YQK9QB",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:06.754Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:06.754Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:05.495Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:05.544Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:05.544Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693253b0a8a8970175efc"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822G5ATUPJ5 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf11e0f6158c26fcb0abf"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf11e0f6158c26fcb0abf"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cb0"
-      },
-      "quantity": 1,
-      "platformOrderId": "250822G5ATUPJ5",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:06.998Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:06.998Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:05.620Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:05.681Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:05.681Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693253b0a8a8970175f01"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822GAF98U23 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf11f0f6158c26fcb0ad1"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf11f0f6158c26fcb0ad1"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5caa"
-      },
-      "quantity": 5,
-      "platformOrderId": "250822GAF98U23",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:07.485Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:07.485Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:05.803Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:05.854Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:05.854Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68b693263b0a8a8970175f05"
     },
     "action": "UPDATE_RETURN_STATUS",
@@ -68801,210 +68648,6 @@
     },
     "updatedAt": {
       "$date": "2025-09-02T06:48:06.033Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693263b0a8a8970175f09"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822GBWWQAHB as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf11f0f6158c26fcb0ae3"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf11f0f6158c26fcb0ae3"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cb8"
-      },
-      "quantity": 1,
-      "platformOrderId": "250822GBWWQAHB",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:07.971Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:07.971Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:06.115Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:06.165Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:06.165Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693263b0a8a8970175f0d"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822GCCH111B as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1200f6158c26fcb0aec"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1200f6158c26fcb0aec"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5caa"
-      },
-      "quantity": 1,
-      "platformOrderId": "250822GCCH111B",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:08.215Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:08.215Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:06.248Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:06.295Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:06.295Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693263b0a8a8970175f11"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822GGQGXAXG as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1200f6158c26fcb0af5"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1200f6158c26fcb0af5"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cbc"
-      },
-      "quantity": 1,
-      "platformOrderId": "250822GGQGXAXG",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:08.458Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:08.458Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:06.370Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:06.418Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:06.418Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693263b0a8a8970175f15"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822GH1CN9VW as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1200f6158c26fcb0afe"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1200f6158c26fcb0afe"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cb2"
-      },
-      "quantity": 1,
-      "platformOrderId": "250822GH1CN9VW",
-      "platform": "shopee",
-      "courier": "Standard Local-J&T Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:08.699Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:08.699Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:06.495Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:06.582Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:06.582Z"
     },
     "__v": 0
   },
@@ -69112,210 +68755,6 @@
   },
   {
     "_id": {
-      "$oid": "68b693263b0a8a8970175f21"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250822GN8U4Q35 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1210f6158c26fcb0b19"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1210f6158c26fcb0b19"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5ccc"
-      },
-      "quantity": 2,
-      "platformOrderId": "250822GN8U4Q35",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:09.422Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:09.422Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:06.923Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:06.963Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:06.963Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693273b0a8a8970175f26"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823GYVTMMW6 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1210f6158c26fcb0b2b"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1210f6158c26fcb0b2b"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cbe"
-      },
-      "quantity": 1,
-      "platformOrderId": "250823GYVTMMW6",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:09.902Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:09.902Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:07.080Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:07.132Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:07.132Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693273b0a8a8970175f2a"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HFR15JSF as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1220f6158c26fcb0b34"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1220f6158c26fcb0b34"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cc0"
-      },
-      "quantity": 4,
-      "platformOrderId": "250823HFR15JSF",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:10.143Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:10.143Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:07.209Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:07.248Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:07.248Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693273b0a8a8970175f2e"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HH6VC597 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1220f6158c26fcb0b3d"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1220f6158c26fcb0b3d"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cc2"
-      },
-      "quantity": 1,
-      "platformOrderId": "250823HH6VC597",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:10.383Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:10.383Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:07.324Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:07.364Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:07.364Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68b693273b0a8a8970175f32"
     },
     "action": "UPDATE_RETURN_STATUS",
@@ -69362,159 +68801,6 @@
     },
     "updatedAt": {
       "$date": "2025-09-02T06:48:07.480Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693273b0a8a8970175f36"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HNEUXQ12 as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1220f6158c26fcb0b4f"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1220f6158c26fcb0b4f"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5caa"
-      },
-      "quantity": 3,
-      "platformOrderId": "250823HNEUXQ12",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:10.861Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:10.861Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:07.598Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:07.645Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:07.645Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693273b0a8a8970175f3a"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HUGSH18C as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1230f6158c26fcb0b58"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1230f6158c26fcb0b58"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cb6"
-      },
-      "quantity": 2,
-      "platformOrderId": "250823HUGSH18C",
-      "platform": "shopee",
-      "courier": "Standard Local-SPX Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:11.102Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:11.102Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:07.721Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:07.759Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:07.759Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b693273b0a8a8970175f3e"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823HWMYJ2BH as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1230f6158c26fcb0b61"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1230f6158c26fcb0b61"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cb6"
-      },
-      "quantity": 1,
-      "platformOrderId": "250823HWMYJ2BH",
-      "platform": "shopee",
-      "courier": "Standard Local-Flash Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:11.340Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:11.340Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:07.895Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:07.940Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:07.940Z"
     },
     "__v": 0
   },
@@ -69622,57 +68908,6 @@
   },
   {
     "_id": {
-      "$oid": "68b693283b0a8a8970175f4a"
-    },
-    "action": "UPDATE_RETURN_STATUS",
-    "user": {
-      "$oid": "6884500702d0150075c6b43a"
-    },
-    "description": "Marked order 250823J2W54XQM as returned via import (shopee)",
-    "collectionName": "Order",
-    "documentId": {
-      "$oid": "68abf1240f6158c26fcb0b7c"
-    },
-    "before": {
-      "_id": {
-        "$oid": "68abf1240f6158c26fcb0b7c"
-      },
-      "product": {
-        "$oid": "68ab541c4534336e7e1c5cb6"
-      },
-      "quantity": 1,
-      "platformOrderId": "250823J2W54XQM",
-      "platform": "shopee",
-      "courier": "Standard Local-Flash Express",
-      "status": "On Process",
-      "isPaid": false,
-      "remarks": "Tagged for pickup - imported orders",
-      "createdAt": {
-        "$date": "2025-08-25T05:14:12.064Z"
-      },
-      "updatedAt": {
-        "$date": "2025-08-25T05:14:12.064Z"
-      },
-      "__v": 0,
-      "orderDate": {
-        "$date": "2025-09-02T06:48:08.303Z"
-      }
-    },
-    "after": {
-      "status": "Returned"
-    },
-    "ip": "::1",
-    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
-    "createdAt": {
-      "$date": "2025-09-02T06:48:08.343Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-02T06:48:08.343Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68b693283b0a8a8970175f4e"
     },
     "action": "UPDATE_RETURN_STATUS",
@@ -69770,6 +69005,771 @@
     },
     "updatedAt": {
       "$date": "2025-09-02T06:48:08.642Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693253b0a8a8970175efc"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822G5ATUPJ5 as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf11e0f6158c26fcb0abf"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf11e0f6158c26fcb0abf"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cb0"
+      },
+      "quantity": 1,
+      "platformOrderId": "250822G5ATUPJ5",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:06.998Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:06.998Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:05.620Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:05.681Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:05.681Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693263b0a8a8970175f21"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822GN8U4Q35 as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1210f6158c26fcb0b19"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1210f6158c26fcb0b19"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5ccc"
+      },
+      "quantity": 2,
+      "platformOrderId": "250822GN8U4Q35",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:09.422Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:09.422Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:06.923Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:06.963Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:06.963Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693273b0a8a8970175f26"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823GYVTMMW6 as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1210f6158c26fcb0b2b"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1210f6158c26fcb0b2b"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cbe"
+      },
+      "quantity": 1,
+      "platformOrderId": "250823GYVTMMW6",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:09.902Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:09.902Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:07.080Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:07.132Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:07.132Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693273b0a8a8970175f36"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823HNEUXQ12 as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1220f6158c26fcb0b4f"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1220f6158c26fcb0b4f"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "quantity": 3,
+      "platformOrderId": "250823HNEUXQ12",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:10.861Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:10.861Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:07.598Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:07.645Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:07.645Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693273b0a8a8970175f2a"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823HFR15JSF as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1220f6158c26fcb0b34"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1220f6158c26fcb0b34"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cc0"
+      },
+      "quantity": 4,
+      "platformOrderId": "250823HFR15JSF",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:10.143Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:10.143Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:07.209Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:07.248Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:07.248Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693273b0a8a8970175f2e"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823HH6VC597 as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1220f6158c26fcb0b3d"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1220f6158c26fcb0b3d"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cc2"
+      },
+      "quantity": 1,
+      "platformOrderId": "250823HH6VC597",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:10.383Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:10.383Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:07.324Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:07.364Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:07.364Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693263b0a8a8970175f09"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822GBWWQAHB as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf11f0f6158c26fcb0ae3"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf11f0f6158c26fcb0ae3"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cb8"
+      },
+      "quantity": 1,
+      "platformOrderId": "250822GBWWQAHB",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:07.971Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:07.971Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:06.115Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:06.165Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:06.165Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b692bf3b0a8a8970175edc"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823H1P2NFTA as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ac08b50f6158c26fcb0faf"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68ac08b50f6158c26fcb0faf"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cc8"
+      },
+      "quantity": 1,
+      "platformOrderId": "250823H1P2NFTA",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T06:54:45.105Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T06:54:45.105Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:46:23.143Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:46:23.344Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:46:23.344Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b692bf3b0a8a8970175ee4"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823HUR61GHA as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ac08b50f6158c26fcb0fc1"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68ac08b50f6158c26fcb0fc1"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cca"
+      },
+      "quantity": 1,
+      "platformOrderId": "250823HUR61GHA",
+      "platform": "shopee",
+      "courier": "Standard Local-Flash Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T06:54:45.585Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T06:54:45.585Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:46:23.575Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:46:23.615Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:46:23.615Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693263b0a8a8970175f0d"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822GCCH111B as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1200f6158c26fcb0aec"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1200f6158c26fcb0aec"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5caa"
+      },
+      "quantity": 1,
+      "platformOrderId": "250822GCCH111B",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:08.215Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:08.215Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:06.248Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:06.295Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:06.295Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693283b0a8a8970175f4a"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823J2W54XQM as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1240f6158c26fcb0b7c"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1240f6158c26fcb0b7c"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cb6"
+      },
+      "quantity": 1,
+      "platformOrderId": "250823J2W54XQM",
+      "platform": "shopee",
+      "courier": "Standard Local-Flash Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:12.064Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:12.064Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:08.303Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:08.343Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:08.343Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693253b0a8a8970175ef8"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822G2YQK9QB as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf11e0f6158c26fcb0ab6"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf11e0f6158c26fcb0ab6"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cba"
+      },
+      "quantity": 2,
+      "platformOrderId": "250822G2YQK9QB",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:06.754Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:06.754Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:05.495Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:05.544Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:05.544Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693263b0a8a8970175f11"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822GGQGXAXG as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1200f6158c26fcb0af5"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1200f6158c26fcb0af5"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cbc"
+      },
+      "quantity": 1,
+      "platformOrderId": "250822GGQGXAXG",
+      "platform": "shopee",
+      "courier": "Standard Local-SPX Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:08.458Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:08.458Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:06.370Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:06.418Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:06.418Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693263b0a8a8970175f15"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250822GH1CN9VW as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1200f6158c26fcb0afe"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1200f6158c26fcb0afe"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cb2"
+      },
+      "quantity": 1,
+      "platformOrderId": "250822GH1CN9VW",
+      "platform": "shopee",
+      "courier": "Standard Local-J&T Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:08.699Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:08.699Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:06.495Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:06.582Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:06.582Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68b693273b0a8a8970175f3e"
+    },
+    "action": "UPDATE_RETURN_STATUS",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order 250823HWMYJ2BH as returned via import (shopee)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68abf1230f6158c26fcb0b61"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68abf1230f6158c26fcb0b61"
+      },
+      "product": {
+        "$oid": "68ab541c4534336e7e1c5cb6"
+      },
+      "quantity": 1,
+      "platformOrderId": "250823HWMYJ2BH",
+      "platform": "shopee",
+      "courier": "Standard Local-Flash Express",
+      "status": "On Process",
+      "isPaid": false,
+      "remarks": "Tagged for pickup - imported orders",
+      "createdAt": {
+        "$date": "2025-08-25T05:14:11.340Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-25T05:14:11.340Z"
+      },
+      "__v": 0,
+      "orderDate": {
+        "$date": "2025-09-02T06:48:07.895Z"
+      }
+    },
+    "after": {
+      "status": "Returned"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-02T06:48:07.940Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-02T06:48:07.940Z"
     },
     "__v": 0
   },
@@ -158371,6 +158371,61 @@
     },
     "updatedAt": {
       "$date": "2025-09-12T07:24:28.153Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c48498ef299a5af937ec63"
+    },
+    "action": "UPDATE_USER",
+    "user": {
+      "$oid": "687dc354c1eb70666039fa18"
+    },
+    "description": "Updated user: Ariel Sueno (apsueno@gmail.com)",
+    "collectionName": "User",
+    "documentId": {
+      "$oid": "68c48457ef299a5af937ec49"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68c48457ef299a5af937ec49"
+      },
+      "name": "Ariel Sueno",
+      "email": "apsueno@gmail.com",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocLoAFArNTOWSbO7dEWOwrU70G31C1rNck8_3sQB3jFzb1zWrtZl=s96-c",
+      "isVerified": false,
+      "createdAt": {
+        "$date": "2025-09-12T20:36:39.315Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T20:36:39.315Z"
+      },
+      "__v": 0
+    },
+    "after": {
+      "_id": {
+        "$oid": "68c48457ef299a5af937ec49"
+      },
+      "name": "Ariel Sueno",
+      "email": "apsueno@gmail.com",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocLoAFArNTOWSbO7dEWOwrU70G31C1rNck8_3sQB3jFzb1zWrtZl=s96-c",
+      "isVerified": true,
+      "createdAt": {
+        "$date": "2025-09-12T20:36:39.315Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-12T20:37:44.948Z"
+      },
+      "__v": 0
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36",
+    "createdAt": {
+      "$date": "2025-09-12T20:37:44.999Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-12T20:37:44.999Z"
     },
     "__v": 0
   }

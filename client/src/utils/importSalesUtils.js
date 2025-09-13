@@ -60,10 +60,10 @@ const buildOrderRow = (idx, item, type = "imported") => {
 // Build a single Sales row for the result table
 const buildSalesRow = (idx, item, type = "paid") => {
   let remarks = "";
-  let color = "black";
+  let color = "orange";
 
   if (type === "paid") {
-    remarks = "Order is now paid";
+    remarks = item.reason;
     color = "green";
   } else {
     switch (item.reason) {
@@ -71,7 +71,7 @@ const buildSalesRow = (idx, item, type = "paid") => {
         remarks = item.reason;
         color = "red";
         break;
-      case "Order is already paid":
+      case "Order already marked as paid":
         remarks = item.reason;
         color = "blue";
         break;
@@ -135,9 +135,7 @@ const buildReturnsRow = (idx, item, type = "returned") => {
   `;
 };
 
-//    =========================================================================
-//    Generic SweetAlert2 Table Renderer
-//    =========================================================================
+// Show import results
 const showImportResults = (rows, title, successMessage) => {
   // console.log("rows:", rows);
   if (rows.length > 0) {
@@ -185,10 +183,6 @@ const showImportResults = (rows, title, successMessage) => {
   }
 };
 
-//    =========================================================================
-//    Public Exports
-//    =========================================================================
-
 // Show Order Import Results
 export const showOrderImportResults = (details, platform) => {
   const rows = [];
@@ -215,6 +209,12 @@ export const showOrderImportResults = (details, platform) => {
 // Show Sales Import Results
 export const showSalesImportResults = (details, platform) => {
   const rows = [];
+
+  if (details?.updated?.length) {
+    details.updated.forEach((item, idx) => {
+      rows.push(buildSalesRow(idx, item, "paid"));
+    });
+  }
 
   if (details?.alreadyPaid?.length) {
     details.alreadyPaid.forEach((item, idx) => {
@@ -287,10 +287,7 @@ export const showReturnImportResults = (details, platform) => {
   );
 };
 
-//    =========================================================================
-//    Import Handlers Configuration
-//    =========================================================================
-
+// Import Handlers
 export const importHandlers = {
   sales: {
     api: importSalesByPlatform,

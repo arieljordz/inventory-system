@@ -235,6 +235,7 @@ export const importSalesByPlatform = async (req, res) => {
   }
 };
 
+// --- Process Sales Import ---
 export const processSalesImport = async ({
   sheetData,
   headerRowIndex,
@@ -254,18 +255,23 @@ export const processSalesImport = async ({
   const seenOrderIds = new Set();
 
   for (const row of rows) {
+    // Skip empty rows
     if (!row || !row.some((c) => String(c || "").trim())) continue;
 
     const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
       .toString()
       .trim();
 
+    const orderNumber = (row[finalFieldMap.orderNumber] || "")
+      .toString()
+      .trim();
+
+    // --- Validation ---
     if (!platformOrderId) {
       results.skipped.push({ reason: "Missing platformOrderId", row });
       continue;
     }
 
-    // ✅ Detect duplicates in the same file
     if (seenOrderIds.has(platformOrderId)) {
       results.duplicates.push({
         platformOrderId,
@@ -276,32 +282,46 @@ export const processSalesImport = async ({
     seenOrderIds.add(platformOrderId);
 
     try {
+      // --- Find order in DB ---
       const order = await Order.findOne({
         platform: platform.toLowerCase(),
         platformOrderId,
       });
 
       if (!order) {
-        results.notFound.push({ platformOrderId, reason: "Order not found" });
+        results.notFound.push({
+          platformOrderId,
+          reason: "Order not found",
+        });
         continue;
       }
 
       if (order.isPaid) {
-        results.alreadyPaid.push({ platformOrderId, reason: "Already paid" });
+        results.alreadyPaid.push({
+          platformOrderId,
+          reason: "Order already marked as paid",
+        });
         continue;
       }
 
+      // --- Update order ---
       const before = { isPaid: order.isPaid };
       order.isPaid = true;
+      order.orderNumber = orderNumber || order.orderNumber; // fallback if blank
       order.status = StatusEnum.COMPLETED;
+
       await order.save();
 
-      results.updated.push({ platformOrderId, reason: "Order is now paid" });
+      results.updated.push({
+        platformOrderId,
+        reason: "Order marked as paid",
+      });
 
+      // --- Log audit ---
       await logAudit({
         action: "UPDATE_PAYMENT",
         user: req.user?._id,
-        description: `Paid order from ${platform} with Order ID: ${platformOrderId}`,
+        description: `Marked order as paid from ${platform} (ID: ${platformOrderId})`,
         collectionName: "Order",
         documentId: order._id,
         before,
@@ -312,7 +332,7 @@ export const processSalesImport = async ({
     } catch (err) {
       results.skipped.push({
         platformOrderId,
-        reason: `Error processing order: ${err.message}`,
+        reason: `Error: ${err.message}`,
       });
     }
   }

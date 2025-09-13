@@ -28,9 +28,7 @@ const buildFileName = (reportName, startDate, endDate, extension) => {
   return `${reportName}${range}.${extension}`;
 };
 
-/**
- * Export to Excel
- */
+// Export to Excel
 export const exportToExcel = async (
   data,
   columns,
@@ -77,9 +75,7 @@ export const exportToExcel = async (
   link.click();
 };
 
-/**
- * Export to PDF
- */
+// Export to PDF
 export const exportToPDF = (
   data,
   columns,

@@ -89,6 +89,28 @@
   },
   {
     "_id": {
+      "$oid": "68ab541c4534336e7e1c5cd6"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca6"
+    },
+    "order": null,
+    "movementType": "IN",
+    "quantity": 100,
+    "courier": "",
+    "platform": "",
+    "status": "Available",
+    "remarks": "Initial stock - imported",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:12.595Z"
+    },
+    "updatedAt": {
+      "$date": "2025-08-24T18:04:12.595Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
       "$oid": "68ab541c4534336e7e1c5cd8"
     },
     "product": {
@@ -128,28 +150,6 @@
     },
     "updatedAt": {
       "$date": "2025-08-24T18:04:12.597Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68ab541c4534336e7e1c5cd6"
-    },
-    "product": {
-      "$oid": "68ab541c4534336e7e1c5ca6"
-    },
-    "order": null,
-    "movementType": "IN",
-    "quantity": 100,
-    "courier": "",
-    "platform": "",
-    "status": "Available",
-    "remarks": "Initial stock - imported",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:12.595Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-24T18:04:12.595Z"
     },
     "__v": 0
   },

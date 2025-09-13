@@ -6,6 +6,7 @@ export const salesPlatformConfigs = {
     sheetName: "Income",
     fields: {
       platformOrderId: "Order ID",
+      orderNumber: "Order ID", 
     },
     requiredHeaders: ["Order ID", "Buyer Payment Method"],
   },
@@ -13,13 +14,15 @@ export const salesPlatformConfigs = {
     sheetName: "Order details",
     fields: {
       platformOrderId: "Order/adjustment ID",
+      orderNumber: "Order/adjustment ID", 
     },
     requiredHeaders: ["Order/adjustment ID", "Order settled time"],
   },
   lazada: {
     sheetName: "Income Overview",
     fields: {
-      platformOrderId: "Order Number",
+      platformOrderId: "Order Line ID",
+      orderNumber: "Order Number", 
     },
     requiredHeaders: ["Order Number", "Statement Period"],
   },
