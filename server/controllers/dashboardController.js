@@ -2,11 +2,10 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import Item from "../models/Item.js";
-import mongoose from "mongoose";
 
 export const getInventoryStats = async (req, res) => {
   try {
-    // 🔹 Product stats in parallel
+    // 🔹 Product stats
     const [
       totalProducts,
       productsNeedsRestock,
@@ -16,10 +15,12 @@ export const getInventoryStats = async (req, res) => {
       Product.countDocuments(),
       Product.countDocuments({ quantity: { $lte: 5 } }),
       Product.countDocuments({ quantity: { $lte: 0 } }),
-      Product.aggregate([{ $group: { _id: null, total: { $sum: "$quantity" } } }]),
+      Product.aggregate([
+        { $group: { _id: null, total: { $sum: "$quantity" } } },
+      ]),
     ]);
 
-    // 🔹 Item stats in parallel
+    // 🔹 Item stats
     const [
       totalItems,
       itemsNeedsRestock,
@@ -50,9 +51,62 @@ export const getInventoryStats = async (req, res) => {
 
 export const getDashboardCharts = async (req, res) => {
   try {
-    // 🔹 Revenue by Month (Area Chart)
+    // 🔹 Revenue by Month (Area Chart - Current Year)
+    const dateNow = new Date();
+    const startOfYear = new Date(dateNow.getFullYear(), 0, 1); // Jan 1, current year
+    const endOfYear = new Date(dateNow.getFullYear(), 11, 31, 23, 59, 59, 999); // Dec 31, current year
+
     const revenueData = await Order.aggregate([
-      { $match: { orderDate: { $ne: null } } },
+      {
+        $match: {
+          orderDate: { $gte: startOfYear, $lte: endOfYear },
+        },
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "product",
+        },
+      },
+      { $unwind: "$product" },
+      {
+        $addFields: {
+          revenue: { $multiply: ["$quantity", "$product.price"] },
+        },
+      },
+      {
+        $group: {
+          _id: { month: { $month: "$orderDate" } },
+          revenue: { $sum: "$revenue" },
+        },
+      },
+      { $sort: { "_id.month": 1 } },
+    ]);
+
+    const monthNames = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+
+    const areaChartData = revenueData.map((d) => ({
+      month: monthNames[d._id.month - 1],
+      revenue: d.revenue,
+    }));
+
+    // 🔹 Overall revenue by Platform
+    const revenueByPlatform = await Order.aggregate([
       {
         $lookup: {
           from: "products",
@@ -64,46 +118,120 @@ export const getDashboardCharts = async (req, res) => {
       { $unwind: "$productDetails" },
       {
         $group: {
-          _id: { $month: "$orderDate" },
-          revenue: {
+          _id: "$platform",
+          totalRevenue: {
             $sum: { $multiply: ["$quantity", "$productDetails.price"] },
           },
         },
       },
-      { $sort: { _id: 1 } },
     ]);
 
-    const monthNames = [
-      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-    ];
-
-    const areaChartData = revenueData.map((d) => ({
-      month: monthNames[d._id - 1],
-      revenue: d.revenue,
+    const revenueDonutChartData = revenueByPlatform.map((d) => ({
+      label: d._id,
+      value: d.totalRevenue,
     }));
 
-    // 🔹 Overall Sales Distribution by Platform (Donut Chart)
-    const donutData = await Order.aggregate([
+    // 🔹 Overall orders by Platform
+    const ordersByPlatform = await Order.aggregate([
       {
         $group: {
           _id: "$platform",
-          totalSales: { $sum: "$quantity" },
+          totalOrders: { $sum: "$quantity" },
         },
       },
     ]);
 
-    const donutChartData = donutData.map((d) => ({
+    const ordersDonutChartData = ordersByPlatform.map((d) => ({
       label: d._id,
-      value: d.totalSales,
+      value: d.totalOrders,
     }));
 
-    // 🔹 Current Month Sales Distribution by Platform (Donut Chart)
+    // 🔹 Overall profit by Platform
+    const profitByPlatform = await Order.aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "product",
+          foreignField: "_id",
+          as: "productInfo",
+        },
+      },
+      { $unwind: "$productInfo" },
+      {
+        $lookup: {
+          from: "items",
+          localField: "productInfo.components.item",
+          foreignField: "_id",
+          as: "itemsInfo",
+        },
+      },
+      {
+        $addFields: {
+          productCost: {
+            $multiply: [
+              {
+                $sum: {
+                  $map: {
+                    input: "$productInfo.components",
+                    as: "comp",
+                    in: {
+                      $multiply: [
+                        {
+                          $getField: {
+                            field: "price",
+                            input: {
+                              $first: {
+                                $filter: {
+                                  input: "$itemsInfo",
+                                  cond: { $eq: ["$$this._id", "$$comp.item"] },
+                                },
+                              },
+                            },
+                          },
+                        },
+                        "$$comp.qty",
+                      ],
+                    },
+                  },
+                },
+              },
+              "$quantity",
+            ],
+          },
+        },
+      },
+      {
+        $addFields: {
+          revenue: { $multiply: ["$productInfo.price", "$quantity"] },
+          profit: {
+            $subtract: [
+              { $multiply: ["$productInfo.price", "$quantity"] },
+              "$productCost",
+            ],
+          },
+        },
+      },
+      {
+        $group: {
+          _id: "$platform",
+          totalRevenue: { $sum: "$revenue" },
+          totalCost: { $sum: "$productCost" },
+          totalProfit: { $sum: "$profit" },
+        },
+      },
+    ]);
+
+    const profitDonutChartData = profitByPlatform.map((d) => ({
+      label: d._id,
+      value: d.totalProfit,
+    }));
+
+    // 🔹 Current Month Orders by Platform
     const now = new Date();
     const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
     const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
 
-    const monthlyDonutData = await Order.aggregate([
+    const monthlyOrdersByPlatform = await Order.aggregate([
       {
         $match: {
           orderDate: { $gte: startOfMonth, $lte: endOfMonth },
@@ -112,23 +240,23 @@ export const getDashboardCharts = async (req, res) => {
       {
         $group: {
           _id: "$platform",
-          totalSales: { $sum: "$quantity" },
+          totalOrders: { $sum: "$quantity" },
         },
       },
     ]);
 
-    const monthlyDonutChartData = monthlyDonutData.map((d) => ({
+    const monthlyDonutChartData = monthlyOrdersByPlatform.map((d) => ({
       month: monthNames[now.getMonth()],
       platform: d._id,
-      value: d.totalSales,
+      value: d.totalOrders,
     }));
-
-    // console.log("monthlyDonutChartData:", monthlyDonutChartData);
 
     return res.json({
       areaChartData,
-      donutChartData,
-      monthlyDonutChartData,
+      revenueDonutChartData, // 💰 revenue per platform
+      ordersDonutChartData, // 📦 orders per platform
+      profitDonutChartData, // 📊 profit per platform
+      monthlyDonutChartData, // 📅 current month orders by platform
     });
   } catch (error) {
     console.error("Error generating dashboard charts:", error);

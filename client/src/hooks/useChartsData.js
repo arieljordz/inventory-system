@@ -4,7 +4,9 @@ import { getDashboardCharts } from "../services/dashboardService";
 
 export const useChartsData = () => {
   const [areaChartData, setAreaChartData] = useState([]);
-  const [donutChartData, setDonutChartData] = useState([]);
+  const [revenueDonutChartData, setRevenueDonutChartData] = useState([]);
+  const [ordersDonutChartData, setOrdersDonutChartData] = useState([]);
+  const [profitDonutChartData, setProfitDonutChartData] = useState([]);
   const [monthlyDonutChartData, setMonthlyDonutChartData] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -14,11 +16,13 @@ export const useChartsData = () => {
         setLoading(true);
 
         const { data } = await getDashboardCharts();
-        // console.log("charts response:", data);
+        console.log("charts response:", data);
 
         // ✅ Data already structured in backend
         setAreaChartData(data.areaChartData ?? []);
-        setDonutChartData(data.donutChartData ?? []);
+        setRevenueDonutChartData(data.revenueDonutChartData ?? []);
+        setOrdersDonutChartData(data.ordersDonutChartData ?? []);
+        setProfitDonutChartData(data.profitDonutChartData ?? []);
         setMonthlyDonutChartData(data.monthlyDonutChartData ?? []);
       } catch (error) {
         console.error("Error fetching dashboard charts:", error);
@@ -33,7 +37,9 @@ export const useChartsData = () => {
   return {
     loading,
     areaChartData,
-    donutChartData,
+    revenueDonutChartData,
+    ordersDonutChartData,
+    profitDonutChartData,
     monthlyDonutChartData,
   };
 };

@@ -3,25 +3,31 @@ import Chart from "chart.js/auto";
 import { useChartsData } from "../../hooks/useChartsData";
 
 function DashboardCharts() {
-  const { areaChartData, donutChartData, monthlyDonutChartData } = useChartsData();
+  const { areaChartData, revenueDonutChartData, profitDonutChartData } =
+    useChartsData();
 
   const revenueRef = useRef(null);
-  const salesRef = useRef(null);
-  const salesPerMonthRef = useRef(null);
+  const revenueDonutRef = useRef(null);
+  const profitDonutRef = useRef(null);
 
-  const revenueChartRef = useRef(null);
-  const salesChartRef = useRef(null);
-  const salesPerMonthChartRef = useRef(null);
+  const revenueChartInstance = useRef(null);
+  const revenueDonutInstance = useRef(null);
+  const profitDonutInstance = useRef(null);
 
   useEffect(() => {
-    // Destroy previous charts
-    if (revenueChartRef.current) revenueChartRef.current.destroy();
-    if (salesChartRef.current) salesChartRef.current.destroy();
-    if (salesPerMonthChartRef.current) salesPerMonthChartRef.current.destroy();
+    // Destroy old instances
+    [revenueChartInstance, revenueDonutInstance, profitDonutInstance].forEach(
+      (chartRef) => {
+        if (chartRef.current) {
+          chartRef.current.destroy();
+          chartRef.current = null;
+        }
+      }
+    );
 
-    // ✅ Revenue Line Chart
+    // ✅ Revenue Area Chart
     if (revenueRef.current && areaChartData?.length) {
-      revenueChartRef.current = new Chart(revenueRef.current, {
+      revenueChartInstance.current = new Chart(revenueRef.current, {
         type: "line",
         data: {
           labels: areaChartData.map((d) => d.month || "N/A"),
@@ -41,16 +47,17 @@ function DashboardCharts() {
       });
     }
 
-    // ✅ Sales Donut Chart
-    if (salesRef.current && donutChartData?.length) {
-      salesChartRef.current = new Chart(salesRef.current, {
+    // ✅ Revenue Donut Chart
+    if (revenueDonutRef.current && revenueDonutChartData?.length) {
+      revenueDonutInstance.current = new Chart(revenueDonutRef.current, {
         type: "doughnut",
         data: {
-          labels: donutChartData.map((d) => d.label || "N/A"),
+          labels: revenueDonutChartData.map((d) => d.label || "N/A"),
           datasets: [
             {
-              data: donutChartData.map((d) => d.value),
-              backgroundColor: ["#f56954", "#00a65a", "#f39c12", "#3c8dbc", "#d2d6de"],
+              label: "Revenue",
+              data: revenueDonutChartData.map((d) => d.value),
+              backgroundColor: ["#f56954", "#f39c12", "#605ca8"],
             },
           ],
         },
@@ -58,23 +65,24 @@ function DashboardCharts() {
       });
     }
 
-    // ✅ Sales Per Month Donut Chart
-    if (salesPerMonthRef.current && monthlyDonutChartData?.length) {
-      salesPerMonthChartRef.current = new Chart(salesPerMonthRef.current, {
+    // ✅ Profit Donut Chart
+    if (profitDonutRef.current && profitDonutChartData?.length) {
+      profitDonutInstance.current = new Chart(profitDonutRef.current, {
         type: "doughnut",
         data: {
-          labels: monthlyDonutChartData.map((d) => d.platform || "N/A"),
+          labels: profitDonutChartData.map((d) => d.label || "N/A"),
           datasets: [
             {
-              data: monthlyDonutChartData.map((d) => d.value),
-              backgroundColor: ["#00c0ef", "#3c8dbc", "#f39c12", "#d81b60", "#605ca8"],
+              label: "Profit",
+              data: profitDonutChartData.map((d) => d.value),
+              backgroundColor: ["#d81b60", "#3c8dbc", "#10b981"],
             },
           ],
         },
         options: { responsive: true, maintainAspectRatio: false },
       });
     }
-  }, [areaChartData, donutChartData, monthlyDonutChartData]);
+  }, [areaChartData, revenueDonutChartData, profitDonutChartData]);
 
   return (
     <div className="row">
@@ -83,7 +91,7 @@ function DashboardCharts() {
         <div className="card h-100">
           <div className="card-header">
             <h3 className="card-title">
-              <i className="fas fa-chart-line mr-1" /> Revenue
+              <i className="fas fa-chart-line mr-1" /> Revenue Trend
             </h3>
           </div>
           <div className="card-body">
@@ -94,33 +102,33 @@ function DashboardCharts() {
         </div>
       </div>
 
-      {/* Sales Donut Chart */}
+      {/* Revenue Donut Chart */}
       <div className="col-12 col-md-6 col-lg-3 mb-4">
         <div className="card h-100">
           <div className="card-header">
             <h3 className="card-title">
-              <i className="fas fa-chart-pie mr-1" /> Sales by Platform
+              <i className="fas fa-chart-pie mr-1" /> Revenue by Platform
             </h3>
           </div>
           <div className="card-body">
             <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={salesRef} />
+              <canvas ref={revenueDonutRef} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Sales Per Month Donut Chart */}
+      {/* Profit Donut Chart */}
       <div className="col-12 col-md-6 col-lg-3 mb-4">
         <div className="card h-100">
           <div className="card-header">
             <h3 className="card-title">
-              <i className="fas fa-chart-pie mr-1" /> Sales Per Month
+              <i className="fas fa-coins mr-1" /> Profit by Platform
             </h3>
           </div>
           <div className="card-body">
             <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={salesPerMonthRef} />
+              <canvas ref={profitDonutRef} />
             </div>
           </div>
         </div>
