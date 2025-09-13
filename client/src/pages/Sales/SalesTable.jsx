@@ -58,6 +58,23 @@ const SalesTable = ({ orders = [], loading = false }) => {
             "-"
           )}
         </td>
+        <td className="text-center align-middle">
+          {order.orderNumber ? (
+            <div className="d-flex align-items-center justify-content-center">
+              <code className="pr-2" title={order.orderNumber}>
+                {truncateText(order.orderNumber, 80)}
+              </code>
+              <CopyToClipboardButton text={order.orderNumber} />
+            </div>
+          ) : (
+            <div className="d-flex align-items-center justify-content-center">
+              <code className="pr-2" title={order.platformOrderId}>
+                {truncateText(order.platformOrderId, 80)}
+              </code>
+              <CopyToClipboardButton text={order.platformOrderId} />
+            </div>
+          )}
+        </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
             <div
@@ -79,9 +96,6 @@ const SalesTable = ({ orders = [], loading = false }) => {
           ) : (
             <span className="text-muted">-</span>
           )}
-        </td>
-        <td className="text-center align-middle small">
-          {order.courier || "-"}
         </td>
         <td className="text-center align-middle">
           <QuantityBadge quantity={order.quantity} unit={order.unit} />
@@ -130,15 +144,12 @@ const SalesTable = ({ orders = [], loading = false }) => {
                 <th className="text-center" style={{ width: "180px" }}>
                   Platform Order ID
                 </th>
-                {/* <th className="text-center" style={{ width: "120px" }}>
-                  SKU
-                </th> */}
+                <th className="text-center" style={{ width: "180px" }}>
+                  Order Number
+                </th>
                 <th>Product Name</th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Variant
-                </th>
-                <th className="text-center" style={{ width: "150px" }}>
-                  Courier
                 </th>
                 <th className="text-center" style={{ width: "100px" }}>
                   Quantity

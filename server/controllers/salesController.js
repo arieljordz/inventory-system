@@ -98,6 +98,7 @@ export const getOrders = async (req, res) => {
       match.$or = [
         { status: rawSafeRegex },
         { platformOrderId: rawSafeRegex },
+        { orderNumber: rawSafeRegex },
         { "product.normalizedName": safeRegex },
         { "product.normalizedVariant": safeRegex },
         { "product.sku": rawSafeRegex },

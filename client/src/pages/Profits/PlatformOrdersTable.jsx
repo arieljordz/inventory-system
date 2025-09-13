@@ -27,7 +27,7 @@ const PlatformOrdersTable = ({ list, onView, loading }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status" />
               <span className="text-muted">Loading orders...</span>
@@ -40,7 +40,7 @@ const PlatformOrdersTable = ({ list, onView, loading }) => {
     if (!list || list.length === 0) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <i className="fas fa-box-open fa-2x mb-2 d-block text-muted"></i>
             <span className="text-muted">No orders found</span>
           </td>
@@ -64,6 +64,23 @@ const PlatformOrdersTable = ({ list, onView, loading }) => {
             </div>
           ) : (
             "-"
+          )}
+        </td>
+        <td className="text-center align-middle">
+          {order.orderNumber ? (
+            <div className="d-flex align-items-center justify-content-center">
+              <code className="pr-2">
+                {truncateText(order.orderNumber, 80)}
+              </code>
+              <CopyToClipboardButton text={order.orderNumber} />
+            </div>
+          ) : (
+            <div className="d-flex align-items-center justify-content-center">
+              <code className="pr-2">
+                {truncateText(order.platformOrderId, 80)}
+              </code>
+              <CopyToClipboardButton text={order.platformOrderId} />
+            </div>
           )}
         </td>
         <td className="text-right text-danger align-middle">
@@ -113,7 +130,8 @@ const PlatformOrdersTable = ({ list, onView, loading }) => {
                   #
                 </th>
                 <th className="text-center">Platform</th>
-                <th className="text-center">Order ID</th>
+                <th className="text-center">Platform Order ID</th>
+                <th className="text-center">Order Number</th>
                 <th className="text-right">Cost</th>
                 <th className="text-right">Revenue</th>
                 <th className="text-right">Profit</th>

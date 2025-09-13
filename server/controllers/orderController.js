@@ -35,6 +35,7 @@ export const getAllOrders = async (req, res) => {
           $or: [
             { status: rawSafeRegex },
             { platformOrderId: rawSafeRegex },
+            { orderNumber: rawSafeRegex },
             { "product.normalizedName": safeRegex },
             { "product.normalizedVariant": safeRegex },
             { "product.sku": rawSafeRegex },
@@ -200,6 +201,7 @@ export const processOrdersImport = async (rows, platform, req) => {
   for (const row of rows) {
     try {
       const platformOrderId = row.platformOrderId;
+      const orderNumber = row.orderNumber;
       const name = normalizeText(row.name);
       const courier = normalizeText(row.courier);
       const variant = normalizeText(row.variant || "Default");
@@ -237,6 +239,7 @@ export const processOrdersImport = async (rows, platform, req) => {
           quantity,
           platform,
           platformOrderId,
+          orderNumber,
           courier,
           req,
         });
@@ -251,6 +254,7 @@ export const processOrdersImport = async (rows, platform, req) => {
         quantity,
         platform,
         platformOrderId,
+        orderNumber,
         courier,
         orderDate,
         req,

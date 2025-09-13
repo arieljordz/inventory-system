@@ -7,6 +7,7 @@ import {
 } from "../../utils/commonUtils";
 import StatusBadge from "../../components/StatusBadge";
 import QuantityBadge from "../../components/QuantityBadge";
+import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const ItemInventoryTable = ({
   items = [],
@@ -111,11 +112,13 @@ const ItemInventoryTable = ({
               />
             )}
             <div className="d-flex align-items-center">
-              <div className="font-weight-medium">
+              <div className="font-weight-medium" title={item.name}>
                 <code className="px-2 py-1 rounded">
-                  {truncateText(item.name, 60)} {item.variant && `(${item.variant})`}
+                  {truncateText(item.name, 60)}{" "}
+                  {item.variant && `(${item.variant})`}
                 </code>
               </div>
+              <CopyToClipboardButton text={item.name} />
             </div>
           </div>
         </td>
@@ -133,7 +136,9 @@ const ItemInventoryTable = ({
           <span className="font-weight-bold">{formatAmount(item.price)}</span>
         </td>
         <td className="text-right align-middle">
-          <span className="font-weight-bold">{formatAmount(item.retailPrice)}</span>
+          <span className="font-weight-bold">
+            {formatAmount(item.retailPrice)}
+          </span>
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">

@@ -66,7 +66,14 @@ const AdjustmentsTable = ({
           <div className="d-flex align-items-center">
             <div className="font-weight-medium" title={item.name || ""}>
               <code className="px-2 py-1 rounded">
-                {truncateText(item.name, 100)}
+                {activeTab === "products" ? (
+                  truncateText(item.name, 100)
+                ) : (
+                  <>
+                    {truncateText(item.name, 60)}{" "}
+                    {item.variant && `(${item.variant})`}
+                  </>
+                )}
               </code>
             </div>
             <CopyToClipboardButton text={item.name} />
@@ -106,7 +113,7 @@ const AdjustmentsTable = ({
                 <th className="text-center">SKU</th>
                 <th className="text-left">Name</th>
                 <th className="text-center">Variant</th>
-                <th className="text-right">Current Price</th>
+                <th className="text-right">Adjusted Price</th>
                 <th className="text-center">Action</th>
               </tr>
             </thead>

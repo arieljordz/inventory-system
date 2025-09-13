@@ -13,6 +13,7 @@ export const orderPlatformConfigs = {
     sheetName: "orders",
     fieldMap: {
       platformOrderId: "Order ID",
+      orderNumber: "Order ID",
       name: "Product Name",
       courier: "Shipping Option",
       variant: "Variation Name",
@@ -24,6 +25,7 @@ export const orderPlatformConfigs = {
     sheetName: "OrderSKUList",
     fieldMap: {
       platformOrderId: "Order ID",
+      orderNumber: "Order ID",
       name: "Product Name",
       courier: "Delivery Option",
       variant: "Variation",
@@ -35,6 +37,7 @@ export const orderPlatformConfigs = {
     sheetName: "sheet1",
     fieldMap: {
       platformOrderId: "orderItemId",
+      orderNumber: "orderNumber",
       name: "itemName",
       courier: "shippingProviderType",
       variant: "variation",
@@ -51,6 +54,7 @@ export const handleReimportOrder = async ({
   quantity,
   platform,
   platformOrderId,
+  orderNumber,
   courier,
   req,
 }) => {
@@ -86,6 +90,7 @@ export const handleReimportOrder = async ({
     });
 
     existingOrder.quantity = quantity;
+    existingOrder.orderNumber = orderNumber;
     await existingOrder.save();
 
     const inventoryDetail = await InventoryDetail.findOne({
@@ -140,6 +145,7 @@ export const handleNewOrder = async ({
   quantity,
   platform,
   platformOrderId,
+  orderNumber,
   courier,
   orderDate,
   req,
@@ -156,6 +162,7 @@ export const handleNewOrder = async ({
     quantity,
     platform,
     platformOrderId,
+    orderNumber,
     courier,
     orderDate,
     remarks: "Tagged for pickup - imported orders",

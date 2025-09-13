@@ -18,6 +18,11 @@ const orderSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
+    orderNumber: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     platform: {
       type: String,
       required: true,
@@ -30,7 +35,7 @@ const orderSchema = new mongoose.Schema(
     },
     orderDate: {
       type: Date,
-      default: Date.now, 
+      default: Date.now,
     },
     status: {
       type: String,
