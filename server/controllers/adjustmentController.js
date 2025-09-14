@@ -4,46 +4,58 @@ import PriceAdjustment from "../models/PriceAdjustment.js";
 
 // 📌 Apply new adjustment (already implemented)
 export const applyAdjustment = async (req, res) => {
-  const { targetType, targetId, adjustmentType, valueType, value, notes } =
-    req.body;
+  try {
+    const { targetType, targetId, adjustmentType, valueType, notes } = req.body;
 
-  const Model = targetType === "Product" ? Product : Item;
-  const target = await Model.findById(targetId);
-  if (!target) return res.status(404).json({ message: "Target not found" });
+    // Always force numeric value
+    const value = Number(req.body.value);
+    if (isNaN(value)) {
+      return res
+        .status(400)
+        .json({ message: "Invalid value: must be a number" });
+    }
 
-  const oldPrice = target.price;
-  let newPrice = oldPrice;
+    const Model = targetType === "Product" ? Product : Item;
+    const target = await Model.findById(targetId);
+    if (!target) return res.status(404).json({ message: "Target not found" });
 
-  if (adjustmentType === "markup") {
-    newPrice =
-      valueType === "percentage"
-        ? oldPrice + (oldPrice * value) / 100
-        : oldPrice + value;
-  } else if (adjustmentType === "discount") {
-    newPrice =
-      valueType === "percentage"
-        ? oldPrice - (oldPrice * value) / 100
-        : oldPrice - value;
+    const oldPrice = target.price;
+    let newPrice = oldPrice;
+
+    if (adjustmentType === "markup") {
+      newPrice =
+        valueType === "percentage"
+          ? oldPrice + (oldPrice * value) / 100
+          : oldPrice + value;
+    } else if (adjustmentType === "discount") {
+      newPrice =
+        valueType === "percentage"
+          ? oldPrice - (oldPrice * value) / 100
+          : oldPrice - value;
+    }
+
+    if (newPrice < 0) newPrice = 0;
+
+    target.price = newPrice;
+    await target.save();
+
+    const adjustment = await PriceAdjustment.create({
+      targetType,
+      targetId,
+      adjustmentType,
+      valueType,
+      value,
+      oldPrice,
+      newPrice,
+      appliedBy: req.user?._id,
+      notes,
+    });
+
+    res.json({ message: "Adjustment applied", adjustment, newPrice });
+  } catch (error) {
+    console.error("applyAdjustment error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
-
-  if (newPrice < 0) newPrice = 0;
-
-  target.price = newPrice;
-  await target.save();
-
-  const adjustment = await PriceAdjustment.create({
-    targetType,
-    targetId,
-    adjustmentType,
-    valueType,
-    value,
-    oldPrice,
-    newPrice,
-    appliedBy: req.user?._id,
-    notes,
-  });
-
-  res.json({ message: "Adjustment applied", adjustment, newPrice });
 };
 
 // 📌 Get all adjustments with pagination & search

@@ -63,7 +63,16 @@ const ProductModal = ({
             </Col>
           </Row>
           <Row>
-            <Col md={12}>
+            <Col md={4}>
+              <TextInput
+                label="Shop Name"
+                name="shopName"
+                value={form.shopName}
+                onChange={onChange}
+                placeholder="Enter shop name"
+              />
+            </Col>
+            <Col md={8}>
               <TextInput
                 label="Variant"
                 name="variant"

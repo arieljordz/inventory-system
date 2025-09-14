@@ -1,101 +1,46 @@
 import React from "react";
-import { formatAmount, truncateText } from "../../utils/commonUtils";
-import CopyToClipboardButton from "../../components/CopyToClipboardButton";
+import ProductsTable from "./ProductsTable";
+import ItemsTable from "./ItemsTable";
 
-const AdjustmentsTable = ({
-  list = [],
-  activeTab,
-  onAdjust,
-  loading = false,
-}) => {
-  // console.log("List:", list);
-  const handleAdjust = (item) => {
-    if (loading) return;
-    onAdjust?.(item, activeTab === "products" ? "Product" : "Item", item._id);
-  };
+// 🔹 Action Buttons (shared only here)
+const ActionButtons = ({ item, loading, onAdjust, type }) => (
+  <div className="btn-group" role="group">
+    <button
+      className="btn btn-sm btn-success"
+      title="Adjust Price"
+      onClick={() => !loading && onAdjust?.(item, type, item._id)}
+      disabled={loading}
+    >
+      <i className="fas fa-sliders-h"></i>
+    </button>
+  </div>
+);
 
-  const renderActionButtons = (item) => (
-    <div className="btn-group" role="group">
-      <button
-        className="btn btn-sm btn-success"
-        title="Adjust Price"
-        onClick={() => handleAdjust(item)}
-        disabled={loading}
-      >
-        <i className="fas fa-sliders-h"></i>
-      </button>
-    </div>
-  );
-
-  const renderTableRows = () => {
-    if (loading) {
-      return (
-        <tr>
-          <td colSpan="6" className="text-center py-4">
-            <div className="d-flex justify-content-center align-items-center">
-              <div className="spinner-border text-primary mr-2" role="status">
-                <span className="sr-only">Loading...</span>
-              </div>
-              <span className="text-muted">Loading {activeTab}...</span>
-            </div>
-          </td>
-        </tr>
-      );
-    }
-
-    if (!list || list.length === 0) {
-      return (
-        <tr>
-          <td colSpan="6" className="text-center py-4">
-            <div className="text-muted">
-              <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
-              No {activeTab} found
-            </div>
-          </td>
-        </tr>
-      );
-    }
-
-    return list.map((item, index) => (
-      <tr key={item._id} className={loading ? "table-secondary" : ""}>
-        <td className="text-center align-middle">{index + 1}</td>
-        <td className="text-center align-middle">
-          <code className="px-2 py-1 rounded">{item.sku || "N/A"}</code>
-        </td>
-        <td className="align-middle">
-          <div className="d-flex align-items-center">
-            <div className="font-weight-medium" title={item.name || ""}>
-              <code className="px-2 py-1 rounded">
-                {activeTab === "products" ? (
-                  truncateText(item.name, 100)
-                ) : (
-                  <>
-                    {truncateText(item.name, 60)}{" "}
-                    {item.variant && `(${item.variant})`}
-                  </>
-                )}
-              </code>
-            </div>
-            <CopyToClipboardButton text={item.name} />
+// 🔹 Table State Row (shared only here)
+const TableStateRow = ({ loading, activeTab }) => (
+  <tr>
+    <td
+      colSpan={activeTab === "products" ? "7" : "6"}
+      className="text-center py-4"
+    >
+      {loading ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <div className="spinner-border text-primary mr-2" role="status">
+            <span className="sr-only">Loading...</span>
           </div>
-        </td>
-        <td className="text-center align-middle">
-          {item.variant ? (
-            <span className="badge badge-secondary">{item.variant}</span>
-          ) : (
-            <span className="text-muted">-</span>
-          )}
-        </td>
-        <td className="text-right align-middle">
-          <span className="font-weight-bold">{formatAmount(item.price)}</span>
-        </td>
-        <td className="text-center align-middle">
-          {renderActionButtons(item)}
-        </td>
-      </tr>
-    ));
-  };
+          <span className="text-muted">Loading {activeTab}...</span>
+        </div>
+      ) : (
+        <div className="text-muted">
+          <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
+          No {activeTab} found
+        </div>
+      )}
+    </td>
+  </tr>
+);
 
+const AdjustmentsTable = ({ list = [], activeTab, onAdjust, loading = false }) => {
   return (
     <div className="card mb-0">
       <div className="card-header">
@@ -106,19 +51,23 @@ const AdjustmentsTable = ({
       </div>
       <div className="card-body p-0">
         <div className="table-responsive">
-          <table className="table table-hover table-striped mb-0">
-            <thead className="thead-light">
-              <tr>
-                <th className="text-center">#</th>
-                <th className="text-center">SKU</th>
-                <th className="text-left">Name</th>
-                <th className="text-center">Variant</th>
-                <th className="text-right">Adjusted Price</th>
-                <th className="text-center">Action</th>
-              </tr>
-            </thead>
-            <tbody>{renderTableRows()}</tbody>
-          </table>
+          {activeTab === "products" ? (
+            <ProductsTable
+              list={list}
+              loading={loading}
+              onAdjust={onAdjust}
+              ActionButtons={ActionButtons}
+              TableStateRow={TableStateRow}
+            />
+          ) : (
+            <ItemsTable
+              list={list}
+              loading={loading}
+              onAdjust={onAdjust}
+              ActionButtons={ActionButtons}
+              TableStateRow={TableStateRow}
+            />
+          )}
         </div>
       </div>
     </div>

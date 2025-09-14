@@ -25,13 +25,12 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
   const [showModal, setShowModal] = useState(false);
 
   // 🔹 Adjustment form
-  const defaultAdjustment = {
+  const [adjustment, setAdjustment] = useState({
     adjustmentType: "markup",
     valueType: "percentage",
     value: 0,
     notes: "",
-  };
-  const [adjustment, setAdjustment] = useState(defaultAdjustment);
+  });
 
   // 🔹 History
   const [adjustmentHistory, setAdjustmentHistory] = useState([]);
@@ -52,60 +51,54 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
     [activeTab]
   );
 
-  const resetAdjustmentForm = () => setAdjustment(defaultAdjustment);
-
   // ========= FETCH HANDLERS =========
-  const fetchProducts = useCallback(
-    async (
-      page = currentPage,
-      limit = itemsPerPage,
-      search = debouncedSearchTerm
-    ) => {
-      setLoading(true);
-      try {
-        const res = await getProducts({ page, limit, search });
-        setProducts(res.data?.products || []);
-        setTotalItems(res.data?.totalProducts || 0);
+  const fetchProducts = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await getProducts({
+        page: currentPage,
+        limit: itemsPerPage,
+        search: debouncedSearchTerm,
+      });
 
-        if (page > res.data?.totalPages) {
-          setCurrentPage(res.data?.totalPages || 1);
-        }
-      } catch (err) {
-        console.error("Fetch products failed:", err);
-        setProducts([]);
-        setTotalItems(0);
-      } finally {
-        setLoading(false);
+      setProducts(res.data?.products || []);
+      setTotalItems(res.data?.totalProducts || 0);
+
+      if (currentPage > res.data?.totalPages) {
+        setCurrentPage(res.data?.totalPages || 1);
       }
-    },
-    [currentPage, itemsPerPage, debouncedSearchTerm]
-  );
+    } catch (err) {
+      console.error("Fetch products failed:", err);
+      setProducts([]);
+      setTotalItems(0);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
-  const fetchItems = useCallback(
-    async (
-      page = currentPage,
-      limit = itemsPerPage,
-      search = debouncedSearchTerm
-    ) => {
-      setLoading(true);
-      try {
-        const res = await getAllItems({ page, limit, search });
-        setItems(res.data?.items || []);
-        setTotalItems(res.data?.totalItems || 0);
+  const fetchItems = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await getAllItems({
+        page: currentPage,
+        limit: itemsPerPage,
+        search: debouncedSearchTerm,
+      });
 
-        if (page > res.data?.totalPages) {
-          setCurrentPage(res.data?.totalPages || 1);
-        }
-      } catch (err) {
-        console.error("Fetch items failed:", err);
-        setItems([]);
-        setTotalItems(0);
-      } finally {
-        setLoading(false);
+      setItems(res.data?.items || []);
+      setTotalItems(res.data?.totalItems || 0);
+
+      if (currentPage > res.data?.totalPages) {
+        setCurrentPage(res.data?.totalPages || 1);
       }
-    },
-    [currentPage, itemsPerPage, debouncedSearchTerm]
-  );
+    } catch (err) {
+      console.error("Fetch items failed:", err);
+      setItems([]);
+      setTotalItems(0);
+    } finally {
+      setLoading(false);
+    }
+  }, [currentPage, itemsPerPage, debouncedSearchTerm]);
 
   const fetchAdjustmentHistory = useCallback(async (targetType, targetId) => {
     try {
@@ -150,7 +143,12 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
   const closeModal = () => {
     setSelected(null);
     setShowModal(false);
-    resetAdjustmentForm();
+    setAdjustment({
+      adjustmentType: "markup",
+      valueType: "percentage",
+      value: 0,
+      notes: "",
+    });
     // Keep history for debugging if needed
   };
 
@@ -164,6 +162,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
     if (e) e.preventDefault();
     if (!selected) return;
 
+    // 🔹 Ask confirmation before proceeding
     const result = await Swal.fire({
       title: "Are you sure?",
       text: "Do you want to apply this price adjustment?",
@@ -174,7 +173,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
       confirmButtonText: "Yes, apply it!",
     });
 
-    if (!result.isConfirmed) return;
+    if (!result.isConfirmed) return; // Cancel if user clicks "No"
 
     try {
       showSpinner();
@@ -188,19 +187,25 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
 
       await applyAdjustment(payload);
 
-      resetAdjustmentForm();
-      closeModal();
-      // 🔹 Force refresh from page 1 with raw search term
+      // Reset adjustment form
+      setAdjustment({
+        adjustmentType: "markup",
+        valueType: "percentage",
+        value: 0,
+        notes: "",
+      });
+
+      // 🔹 Refresh list
       if (activeTab === "products") {
-        await fetchProducts(currentPage, itemsPerPage, searchTerm);
+        await fetchProducts();
       } else {
-        await fetchItems(currentPage, itemsPerPage, searchTerm);
+        await fetchItems();
       }
 
       // 🔹 Refresh history
       await fetchAdjustmentHistory(targetType, selected._id);
 
-      // 🔹 Refresh selected details (for modal)
+      // 🔹 Refresh selected details (important for modal)
       try {
         if (targetType === "Product") {
           const updated = await getProducts({

@@ -64,7 +64,7 @@ const ProductTable = ({
     if (loading) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -79,7 +79,7 @@ const ProductTable = ({
     if (!products || products.length === 0) {
       return (
         <tr>
-          <td colSpan="9" className="text-center py-4">
+          <td colSpan="10" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-box-open fa-2x mb-2 d-block"></i>
               No products found
@@ -95,6 +95,11 @@ const ProductTable = ({
         <td className="text-center align-middle">
           <code className="px-2 py-1 rounded">
             {product.sku.toUpperCase() || "N/A"}
+          </code>
+        </td>
+        <td className="text-center align-middle">
+          <code className="px-2 py-1 rounded">
+            {product.shopName?.toUpperCase() || "N/A"}
           </code>
         </td>
         <td className="align-middle">
@@ -164,8 +169,11 @@ const ProductTable = ({
                 <th className="text-center" style={{ width: "50px" }}>
                   #
                 </th>
-                <th className="text-center" style={{ width: "200px" }}>
+                <th className="text-center" style={{ width: "150px" }}>
                   SKU
+                </th>
+                <th className="text-center" style={{ width: "150px" }}>
+                  Shop Name
                 </th>
                 <th>Product Name</th>
                 <th className="text-center" style={{ width: "100px" }}>
