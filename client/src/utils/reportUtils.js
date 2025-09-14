@@ -49,7 +49,12 @@ export const reportColumnsConfig = {
       align: "right",
       total: true,
     },
-    { key: "buyerName", label: "Customer Name", format: "proper", align: "center" },
+    {
+      key: "buyerName",
+      label: "Customer Name",
+      format: "proper",
+      align: "center",
+    },
     {
       key: "paymentMethod",
       label: "Payment",
@@ -250,6 +255,72 @@ export const reportColumnsConfig = {
       align: "center",
     },
     { key: "orderDate", label: "Order Date", format: "date", align: "center" },
+  ],
+
+  [NewReportTypeEnum.ADJUSTMENTS_REPORT]: [
+    {
+      key: "targetType",
+      label: "Target Type",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "shopName",
+      label: "Shop Name",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "targetName",
+      label: "Product Name",
+      format: "proper",
+      align: "left",
+    },
+    { key: "variant", label: "Variant", format: "proper", align: "center" },
+    {
+      key: "adjustmentType",
+      label: "Adjustment Type",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "valueType",
+      label: "Value Type",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "value",
+      label: "Value",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "oldPrice",
+      label: "Old Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "newPrice",
+      label: "Current Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "appliedBy",
+      label: "Applied By",
+      format: "lowercase",
+      align: "center",
+    },
+    {
+      key: "dateApplied",
+      label: "Applied Date",
+      format: "date",
+      align: "center",
+    },
   ],
 };
 

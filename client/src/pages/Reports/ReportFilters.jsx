@@ -7,9 +7,10 @@ import {
   PlatformEnum,
   StatusEnum,
   PaymentMethodEnum,
+  TargetTypeEnum,
 } from "../../enums/enums";
 
-// Mapping report type → filters
+// 🔹 Mapping report type → filters
 const SHOW_FILTERS = {
   [NewReportTypeEnum.ORDERS_REPORT]: [
     "orderId",
@@ -32,8 +33,14 @@ const SHOW_FILTERS = {
     "paymentStatus",
     "status",
   ],
+  [NewReportTypeEnum.ADJUSTMENTS_REPORT]: [
+    "targetType",
+    "itemName",
+    "shopName",
+  ],
 };
 
+// 🔹 Enum → Select options
 const FILTER_OPTIONS = {
   platform: Object.values(PlatformEnum).map((v) => ({
     label: v,
@@ -55,8 +62,13 @@ const FILTER_OPTIONS = {
     label: v,
     value: v.toLowerCase(),
   })),
+  targetType: Object.values(TargetTypeEnum).map((v) => ({
+    label: v,
+    value: v.toLowerCase(),
+  })),
 };
 
+// 🔹 Labels
 const FILTER_LABELS = {
   platform: "Platform",
   paymentStatus: "Payment Status",
@@ -65,6 +77,23 @@ const FILTER_LABELS = {
   orderId: "Order ID",
   buyerName: "Buyer Name",
   paymentMethod: "Payment Method",
+  targetType: "Target Type",
+  itemName: "Product/Item Name",
+  shopName: "Shop Name",
+};
+
+// 🔹 Input config (decides if it's text or select)
+const FILTER_CONFIG = {
+  orderId: { type: "text", placeholder: "Enter order ID" },
+  buyerName: { type: "text", placeholder: "Enter buyer name" },
+  itemName: { type: "text", placeholder: "Enter product/item name" },
+  shopName: { type: "text", placeholder: "Enter shop name" },
+  platform: { type: "select" },
+  paymentStatus: { type: "select" },
+  movementType: { type: "select" },
+  status: { type: "select" },
+  paymentMethod: { type: "select" },
+  targetType: { type: "select" },
 };
 
 const ReportFilters = ({
@@ -87,9 +116,49 @@ const ReportFilters = ({
 
   const activeFilters = SHOW_FILTERS[reportType] || [];
 
+  // 🔹 Unified renderer for filters
+  const renderFilter = (key) => {
+    const config = FILTER_CONFIG[key];
+    const label = FILTER_LABELS[key];
+    const value = filters[key] || "";
+
+    if (!config) return null;
+
+    if (config.type === "text") {
+      return (
+        <TextInput
+          key={key}
+          label={label}
+          name={key}
+          value={value}
+          onChange={handleFilterChange}
+          placeholder={config.placeholder}
+        />
+      );
+    }
+
+    if (config.type === "select") {
+      return (
+        <SelectInput
+          key={key}
+          label={label}
+          name={key}
+          value={value}
+          onChange={handleFilterChange}
+          options={[
+            { label: "All", value: "" },
+            ...(FILTER_OPTIONS[key] || []),
+          ]}
+        />
+      );
+    }
+
+    return null;
+  };
+
   return (
     <>
-      {/* Top Row: Report Type + Date Range */}
+      {/* 🔹 Top Row: Report Type + Date Range */}
       <div className="row g-3">
         <div className="col-md-2">
           <SelectInput
@@ -122,38 +191,11 @@ const ReportFilters = ({
         </div>
       </div>
 
-      {/* Dynamic Filters + Buttons */}
+      {/* 🔹 Dynamic Filters + Buttons */}
       <div className="row g-3">
         {activeFilters.map((key) => (
           <div className="col-md-2" key={key}>
-            {key === "buyerName" ? (
-              <TextInput
-                label={FILTER_LABELS[key]}
-                name={key}
-                value={filters[key] || ""}
-                onChange={handleFilterChange}
-                placeholder="Enter buyer name"
-              />
-            ) : key === "orderId" ? (
-              <TextInput
-                label={FILTER_LABELS[key]}
-                name={key}
-                value={filters[key] || ""}
-                onChange={handleFilterChange}
-                placeholder="Enter order ID"
-              />
-            ) : (
-              <SelectInput
-                label={FILTER_LABELS[key]}
-                name={key}
-                value={filters[key] || ""}
-                onChange={handleFilterChange}
-                options={[
-                  { label: "All", value: "" },
-                  ...(FILTER_OPTIONS[key] || []),
-                ]}
-              />
-            )}
+            {renderFilter(key)}
           </div>
         ))}
 

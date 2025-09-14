@@ -20,7 +20,7 @@ export const useReportData = (reportType) => {
           filters,
         };
 
-        // console.log("payload:", payload);
+        console.log("payload:", payload);
         const response = await generateReport(payload);
 
         if (response?.data?.success) {

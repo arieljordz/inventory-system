@@ -8,6 +8,7 @@ import Order from "../models/Order.js";
 import ItemMovement from "../models/ItemMovement.js";
 import Item from "../models/Item.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
+import PriceAdjustment from "../models/PriceAdjustment.js";
 import { NewReportTypeEnum } from "../enums/enums.js";
 import { buildDateFilter } from "../utils/reportUtils.js";
 
@@ -362,6 +363,116 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
   return formattedRows;
 };
 
+export const getPriceAdjustmentsReport = async (filters = {}) => {
+  const { startDate, endDate, targetType, itemName, shopName } = filters;
+
+  const match = buildDateFilter(startDate, endDate, "createdAt");
+
+  // ✅ Case-insensitive targetType
+  if (targetType && targetType.toLowerCase() !== "All") {
+    match.targetType = new RegExp(`^${targetType}$`, "i");
+  }
+
+  const pipeline = [
+    { $match: match },
+
+    // Lookup Product target
+    {
+      $lookup: {
+        from: "products",
+        localField: "targetId",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+
+    // Lookup Item target
+    {
+      $lookup: {
+        from: "items",
+        localField: "targetId",
+        foreignField: "_id",
+        as: "item",
+      },
+    },
+
+    // Merge product or item into single "target"
+    {
+      $addFields: {
+        target: {
+          $cond: [
+            { $eq: ["$targetType", "Product"] },
+            { $arrayElemAt: ["$product", 0] },
+            { $arrayElemAt: ["$item", 0] },
+          ],
+        },
+      },
+    },
+
+    // Lookup appliedBy user (✅ no filter, just attach info)
+    {
+      $lookup: {
+        from: "users",
+        localField: "appliedBy",
+        foreignField: "_id",
+        as: "appliedBy",
+      },
+    },
+    { $unwind: { path: "$appliedBy", preserveNullAndEmptyArrays: true } },
+  ];
+
+  // ✅ Regex filters AFTER lookup
+  if (itemName || shopName) {
+    const regexMatch = {};
+    if (itemName) {
+      regexMatch["target.normalizedName"] = {
+        $regex: normalizeString(itemName),
+        $options: "i",
+      };
+    }
+    if (shopName) {
+      regexMatch["target.shopName"] = {
+        $regex: shopName,
+        $options: "i",
+      };
+    }
+    pipeline.push({ $match: regexMatch });
+  }
+
+  pipeline.push(
+    // Sort by createdAt descending
+    { $sort: { createdAt: -1 } },
+
+    // Group by targetId → only latest adjustment
+    {
+      $group: {
+        _id: "$targetId",
+        doc: { $first: "$$ROOT" },
+      },
+    },
+    { $replaceRoot: { newRoot: "$doc" } },
+
+    // Final projection
+    {
+      $project: {
+        targetType: 1,
+        targetName: "$target.name",
+        variant: "$target.variant",
+        shopName: "$target.shopName",
+        adjustmentType: 1,
+        valueType: 1,
+        value: 1,
+        oldPrice: 1,
+        newPrice: 1,
+        appliedBy: "$appliedBy.email", // ✅ only display, no filtering
+        dateApplied: "$createdAt",
+      },
+    }
+  );
+
+  return await PriceAdjustment.aggregate(pipeline);
+};
+
 export const generateReport = async (req, res) => {
   try {
     const {
@@ -376,6 +487,9 @@ export const generateReport = async (req, res) => {
         status,
         buyerName,
         paymentMethod,
+        targetType,
+        itemName,
+        shopName,
       },
     } = req.body;
 
@@ -447,6 +561,17 @@ export const generateReport = async (req, res) => {
           orderId,
         });
         // console.log("PROFITS_REPORT:", data);
+        break;
+        getPriceAdjustmentsReport;
+      case NewReportTypeEnum.ADJUSTMENTS_REPORT:
+        data = await getPriceAdjustmentsReport({
+          startDate,
+          endDate,
+          targetType,
+          itemName,
+          shopName,
+        });
+        // console.log("ADJUSTMENTS_REPORT:", data);
         break;
       default:
         return res.status(400).json({ message: "Invalid report type" });

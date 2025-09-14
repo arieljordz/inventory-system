@@ -47,6 +47,7 @@ export const NewReportTypeEnum = Object.freeze({
   ITEMS_REPORT: "Items Report",
   ITEM_MOVEMENTS_REPORT: "Item Movements Report",
   PROFITS_REPORT: "Costs & Profits Report",
+  ADJUSTMENTS_REPORT: "Price Adjustments Report",
 });
 
 export const PlatformEnum = Object.freeze({
@@ -65,4 +66,9 @@ export const PaymentMethodEnum = Object.freeze({
   CASH: "Cash",
   GCASH: "GCash",
   BANK_TRANSFER: "Bank Transfer",
+});
+
+export const TargetTypeEnum = Object.freeze({
+  PRODUCT_TYPE: "Product",
+  ITEM_TYPE: "Item",
 });
