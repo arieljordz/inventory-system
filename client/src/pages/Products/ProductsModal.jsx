@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-import { UnitTypeEnum, StatusEnum } from "../../enums/enums";
+import { UnitTypeEnum, ShopNameEnum } from "../../enums/enums";
 import { TextInput, TextArea, SelectInput } from "../../components/FormInputs";
 import BundleSelector from "./BundleSelector";
 
@@ -16,6 +16,15 @@ const ProductModal = ({
   const unitOptions = useMemo(
     () =>
       Object.entries(UnitTypeEnum).map(([key, value]) => ({
+        label: value,
+        value: key,
+      })),
+    []
+  );
+
+  const shopOptions = useMemo(
+    () =>
+      Object.entries(ShopNameEnum).map(([key, value]) => ({
         label: value,
         value: key,
       })),
@@ -64,12 +73,13 @@ const ProductModal = ({
           </Row>
           <Row>
             <Col md={4}>
-              <TextInput
+              <SelectInput
                 label="Shop Name"
                 name="shopName"
                 value={form.shopName}
                 onChange={onChange}
-                placeholder="Enter shop name"
+                options={shopOptions}
+                required
               />
             </Col>
             <Col md={8}>

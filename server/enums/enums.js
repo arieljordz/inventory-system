@@ -72,3 +72,10 @@ export const TargetTypeEnum = Object.freeze({
   PRODUCT_TYPE: "Product",
   ITEM_TYPE: "Item",
 });
+
+export const ShopNameEnum = Object.freeze({
+  LHANZSHOP: "S-LHANZSHOP",
+  ARNSHOP: "S-ARNSHOP",
+  T_SHOP: "T-SHOP",
+  L_SHOP: "L-SHOP",
+});
