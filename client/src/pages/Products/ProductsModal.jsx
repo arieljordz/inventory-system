@@ -26,7 +26,7 @@ const ProductModal = ({
     () =>
       Object.entries(ShopNameEnum).map(([key, value]) => ({
         label: value,
-        value: key,
+        value: value,
       })),
     []
   );
