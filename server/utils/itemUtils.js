@@ -2,51 +2,7 @@
 import mongoose from "mongoose";
 import Item from "../models/Item.js";
 
-export const deductBundleComponents = async (components, bundleQuantity) => {
-  for (const comp of components) {
-    const itemDoc = await Item.findById(comp.item);
-    if (!itemDoc) {
-      throw new Error(`Item with ID ${comp.item} not found.`);
-    }
-
-    const requiredQty = comp.qty * bundleQuantity;
-    // const requiredQty = comp.qty * 1; // Always deduct 1 bundle at a time
-    if (itemDoc.quantity < requiredQty) {
-      throw new Error(
-        `Insufficient stock for item "${itemDoc.name}". Required: ${requiredQty}, Available: ${itemDoc.quantity}`
-      );
-    }
-
-    itemDoc.quantity -= requiredQty;
-    await itemDoc.save();
-  }
-};
-
-// Update bundle components for existing product
-export const updateBundleComponents = async (oldComponents, newComponents, oldQty, newQty) => {
-  // Restock old components
-  for (const comp of oldComponents) {
-    const item = await Item.findById(comp.item);
-    if (item) {
-      item.quantity += comp.qty * oldQty;
-      await item.save();
-    }
-  }
-
-  // Deduct new components
-  for (const comp of newComponents) {
-    const item = await Item.findById(comp.item);
-    if (!item) throw new Error(`Item not found: ${comp.item}`);
-    if (item.quantity < comp.qty * newQty) {
-      throw new Error(`Not enough stock for item: ${item.name}`);
-    }
-    item.quantity -= comp.qty * newQty;
-    await item.save();
-  }
-};
-
 // Validate and parse components array
-
 export const validateComponents = async (components) => {
   let parsed = components;
 

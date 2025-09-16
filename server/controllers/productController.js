@@ -1,4 +1,3 @@
-
 import moment from "moment-timezone";
 import Product from "../models/Product.js";
 import Item from "../models/Item.js";
@@ -13,11 +12,7 @@ import {
   normalizeText,
 } from "../utils/commonUtils.js";
 import ExcelJS from "exceljs";
-import {
-  deductBundleComponents,
-  updateBundleComponents,
-  validateComponents,
-} from "../utils/itemUtils.js";
+import { validateComponents } from "../utils/itemUtils.js";
 
 export const addProduct = async (req, res) => {
   try {
@@ -55,15 +50,6 @@ export const addProduct = async (req, res) => {
 
     // Validate components
     const validComponents = await validateComponents(newComponents);
-
-    // Deduct item quantities if it's a bundle
-    // if (type === "bundle" && validComponents.length > 0 && quantity > 0) {
-    //   try {
-    //     await deductBundleComponents(validComponents, quantity);
-    //   } catch (err) {
-    //     return res.status(400).json({ message: err.message });
-    //   }
-    // }
 
     // Create product
     const newProduct = new Product({
@@ -262,15 +248,6 @@ export const updateProduct = async (req, res) => {
 
     // Validate components
     const validComponents = await validateComponents(newComponents);
-
-    // Update bundle components if type is bundle
-    // if (product.type === "bundle" && validComponents.length > 0 && quantity !== undefined) {
-    //   try {
-    //     await updateBundleComponents(product.components, validComponents, product.quantity, quantity);
-    //   } catch (err) {
-    //     return res.status(400).json({ message: err.message });
-    //   }
-    // }
 
     updateFields.components = validComponents;
     if (quantity !== undefined) updateFields.quantity = quantity;
@@ -597,7 +574,9 @@ export const getInventoryStats = async (req, res) => {
     const endOfDay = moment.tz("Asia/Manila").endOf("day").toDate();
 
     // 🔹 Products that are currently available
-    const availableProducts = await Product.find({ status: StatusEnum.AVAILABLE });
+    const availableProducts = await Product.find({
+      status: StatusEnum.AVAILABLE,
+    });
     const availableProductCount = availableProducts.length;
 
     // 🔹 Total available product quantity
@@ -630,4 +609,3 @@ export const getInventoryStats = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-

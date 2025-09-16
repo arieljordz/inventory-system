@@ -97,24 +97,24 @@ productSchema.pre("findOneAndUpdate", function (next) {
   if (!update) return next();
 
   // Normalize any updated fields
-  if (update.name) {
-    update.name = normalizeText(update.name);
-    update.normalizedName = normalizeString(update.name);
+  if ("name" in update) {
+    update.name = normalizeText(update.name || "");
+    update.normalizedName = normalizeString(update.name || "");
   }
 
-  if (update.variant) {
-    update.variant = normalizeText(update.variant);
-    update.normalizedVariant = normalizeString(update.variant);
+  if ("sku" in update) {
+    update.sku = normalizeText(update.sku || "");
+    update.normalizedSku = normalizeString(update.sku || "");
   }
 
-  if (update.sku) {
-    update.sku = normalizeText(update.sku);
-    update.normalizedSku = normalizeString(update.sku);
+  if ("description" in update) {
+    update.description = normalizeText(update.description || "");
+    update.normalizedDescription = normalizeString(update.description || "");
   }
 
-  if (update.description) {
-    update.description = normalizeText(update.description);
-    update.normalizedDescription = normalizeString(update.description);
+  if ("variant" in update) {
+    update.variant = normalizeText(update.variant || "");
+    update.normalizedVariant = normalizeString(update.variant || "");
   }
 
   next();

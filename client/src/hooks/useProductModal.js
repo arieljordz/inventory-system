@@ -67,24 +67,43 @@ export const useProductModal = (refreshProducts) => {
     }
   }, []);
 
-  // Submit product
+  // --- utils to build formData ---
+  const buildFormData = (data, alwaysInclude = ["variant"]) => {
+    const formData = new FormData();
+
+    Object.entries(data).forEach(([key, value]) => {
+      // ✅ Always include certain fields (e.g., variant), even if empty
+      if (alwaysInclude.includes(key)) {
+        formData.append(key, value ?? "");
+        return;
+      }
+
+      // ✅ Skip null/empty values for everything else
+      if (value === null || value === "") return;
+
+      // ✅ Special handling for components
+      if (key === "components") {
+        formData.append(key, JSON.stringify(value));
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    return formData;
+  };
+
+  // --- submit handler ---
   const handleSubmit = useCallback(
     async (overrideForm) => {
       const dataToSubmit = overrideForm || form;
 
-      console.log("handleSubmit data:", dataToSubmit);
+      // console.log("handleSubmit data:", dataToSubmit);
+
       showSpinner();
       try {
-        const formData = new FormData();
-        Object.entries(dataToSubmit).forEach(([key, value]) => {
-          if (value !== null && value !== "") {
-            if (key === "components") {
-              formData.append(key, JSON.stringify(value)); // ✅ send bundle components
-            } else {
-              formData.append(key, value);
-            }
-          }
-        });
+        const formData = buildFormData(dataToSubmit);
+
+        // console.log("formData:", [...formData.entries()]);
 
         if (isEditMode) {
           await updateProduct(dataToSubmit._id, formData);
