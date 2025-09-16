@@ -84,38 +84,6 @@
   },
   {
     "_id": {
-      "$oid": "68a76f99f8ed01f9f4528e95"
-    },
-    "name": "Benciel Cabutin",
-    "email": "cabutinb@gmail.com",
-    "picture": "https://lh3.googleusercontent.com/a/ACg8ocIa8RJ5mK7gRa0gcr1tYSn8UOdxxoVbgeZsQAsq_F31Ll_ABL6-=s96-c",
-    "isVerified": false,
-    "createdAt": {
-      "$date": "2025-08-21T19:12:25.131Z"
-    },
-    "updatedAt": {
-      "$date": "2025-08-21T19:12:25.131Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
-      "$oid": "68b95e97b168bf5606f84335"
-    },
-    "name": "Mark",
-    "email": "graphic2023designer@gmail.com",
-    "picture": "https://lh3.googleusercontent.com/a/ACg8ocJ6TU6Zy2h8vWdpu8GlUb5HSzBuURzPaRsRXKNx8kGRP6XuTA=s96-c",
-    "isVerified": false,
-    "createdAt": {
-      "$date": "2025-09-04T09:40:39.859Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-04T09:40:39.859Z"
-    },
-    "__v": 0
-  },
-  {
-    "_id": {
       "$oid": "68c48457ef299a5af937ec49"
     },
     "name": "Ariel Sueno",

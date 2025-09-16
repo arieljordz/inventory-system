@@ -158428,5 +158428,893 @@
       "$date": "2025-09-12T20:37:44.999Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4974bebbbb19e6a16a"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250826SQK05QJU)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ad961b9a20ce4d9ffb5bff"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:37.946Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:37.946Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4a74bebbbb19e6a171"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250826SD8NP96C)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ad961b9a20ce4d9ffb5bed"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:38.205Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:38.205Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4a74bebbbb19e6a175"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250823J3PMH32R)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ac08b60f6158c26fcb0fd3"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:38.337Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:38.337Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4a74bebbbb19e6a17e"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250823HU4T5JQY)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ac08b50f6158c26fcb0fb8"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:38.676Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:38.676Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4b74bebbbb19e6a18b"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508281Y7A42FV)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afa0"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:39.180Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:39.180Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4b74bebbbb19e6a191"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508282EC5EFDD)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afb2"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:39.404Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:39.404Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4b74bebbbb19e6a195"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250829439J50GX)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1400ac72707e46e24affa"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:39.536Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:39.536Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4b74bebbbb19e6a199"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250828250K43DS)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afa9"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:39.671Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:39.671Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4b74bebbbb19e6a19d"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508294SP83UTC)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b28593660fc9078ca30453"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:39.803Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:39.803Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4c74bebbbb19e6a1a4"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250823H1P2NFTA)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ac08b50f6158c26fcb0faf"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:40.059Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:40.059Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4c74bebbbb19e6a1a8"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508293QQXQETE)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afcd"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:40.188Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:40.188Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4c74bebbbb19e6a1ae"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250829437SX8GH)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b1400ac72707e46e24aff1"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:40.408Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:40.408Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4d74bebbbb19e6a1c0"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508293PSAB2P9)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afc4"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:41.119Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:41.119Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4d74bebbbb19e6a1c9"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250823HVT922H0)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ac08b50f6158c26fcb0fca"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:41.462Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:41.462Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4d74bebbbb19e6a1d0"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250902E6PDKY2V)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b7babc905e371d38cb1a50"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:41.715Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:41.715Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4d74bebbbb19e6a1d4"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508293W4N9Y5C)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14009c72707e46e24afdf"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:41.846Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:41.846Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4d74bebbbb19e6a1d8"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250901C5Q3QX7R)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b7bab9905e371d38cb19da"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:41.977Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:41.977Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4e74bebbbb19e6a1dc"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250826SNSMA9KQ)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68ad961b9a20ce4d9ffb5bf6"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:42.110Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:42.110Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4e74bebbbb19e6a1e3"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 2508293JT40WVU)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b14008c72707e46e24afbb"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:42.366Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:42.366Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4e74bebbbb19e6a1e7"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 25082814C9EE6W)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68afbd395c6696b43e65e975"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:42.498Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:42.498Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c67f4e74bebbbb19e6a1ec"
+    },
+    "action": "UPDATE_PAYMENT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Marked order as paid from shopee (ID: 250902EXUX8DNE)",
+    "collectionName": "Order",
+    "documentId": {
+      "$oid": "68b81025fe19b07adad92da3"
+    },
+    "before": {
+      "isPaid": false
+    },
+    "after": {
+      "isPaid": true
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T08:39:42.674Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T08:39:42.674Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c68b9f74bebbbb19e6a3dc"
+    },
+    "action": "DELETE_USER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Deleted user: Benciel Cabutin (cabutinb@gmail.com)",
+    "collectionName": "User",
+    "documentId": {
+      "$oid": "68a76f99f8ed01f9f4528e95"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68a76f99f8ed01f9f4528e95"
+      },
+      "name": "Benciel Cabutin",
+      "email": "cabutinb@gmail.com",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocIa8RJ5mK7gRa0gcr1tYSn8UOdxxoVbgeZsQAsq_F31Ll_ABL6-=s96-c",
+      "isVerified": false,
+      "createdAt": {
+        "$date": "2025-08-21T19:12:25.131Z"
+      },
+      "updatedAt": {
+        "$date": "2025-08-21T19:12:25.131Z"
+      },
+      "__v": 0
+    },
+    "after": null,
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T09:32:15.868Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T09:32:15.868Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c68bad74bebbbb19e6a3e3"
+    },
+    "action": "DELETE_USER",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Deleted user: Mark (graphic2023designer@gmail.com)",
+    "collectionName": "User",
+    "documentId": {
+      "$oid": "68b95e97b168bf5606f84335"
+    },
+    "before": {
+      "_id": {
+        "$oid": "68b95e97b168bf5606f84335"
+      },
+      "name": "Mark",
+      "email": "graphic2023designer@gmail.com",
+      "picture": "https://lh3.googleusercontent.com/a/ACg8ocJ6TU6Zy2h8vWdpu8GlUb5HSzBuURzPaRsRXKNx8kGRP6XuTA=s96-c",
+      "isVerified": false,
+      "createdAt": {
+        "$date": "2025-09-04T09:40:39.859Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-04T09:40:39.859Z"
+      },
+      "__v": 0
+    },
+    "after": null,
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T09:32:29.018Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T09:32:29.018Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c68c6c74bebbbb19e6a537"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan Stainless Ring ( 2 PCS ), variant: Default",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541d4534336e7e1c5d34"
+    },
+    "before": {
+      "type": "bundle",
+      "_id": {
+        "$oid": "68ab541d4534336e7e1c5d34"
+      },
+      "name": "Duyan Stainless Ring ( 2 PCS )",
+      "price": 189,
+      "description": "Duyan Stainless Ring ( 2 PCS )",
+      "image": "",
+      "imageId": "",
+      "quantity": 53,
+      "sku": "DUYAN-DEFAU-53766",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan stainless ring ( 2 pcs )",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-53766",
+      "normalizedDescription": "duyan stainless ring ( 2 pcs )",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:13.224Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-10T05:42:01.969Z"
+      },
+      "__v": 0,
+      "components": []
+    },
+    "after": {
+      "_id": {
+        "$oid": "68ab541d4534336e7e1c5d34"
+      },
+      "name": "Duyan Stainless Ring ( 2 PCS )",
+      "price": 189,
+      "description": "Duyan Stainless Ring ( 2 PCS )",
+      "image": "",
+      "imageId": "",
+      "quantity": 53,
+      "sku": "DUYAN-DEFAU-53766",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan stainless ring ( 2 pcs )",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-53766",
+      "normalizedDescription": "duyan stainless ring ( 2 pcs )",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:13.224Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-14T09:35:40.554Z"
+      },
+      "__v": 0,
+      "components": [
+        {
+          "item": {
+            "$oid": "68b563f4650c74e5be32382b"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c68c6c74bebbbb19e6a534"
+          }
+        }
+      ],
+      "type": "bundle"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T09:35:40.611Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T09:35:40.611Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68c6944574bebbbb19e6a71d"
+    },
+    "action": "UPDATE_PRODUCT",
+    "user": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "description": "Updated product: Duyan FRAME Detachable ( Portable), variant: Default",
+    "collectionName": "Product",
+    "documentId": {
+      "$oid": "68ab541d4534336e7e1c5d38"
+    },
+    "before": {
+      "type": "bundle",
+      "_id": {
+        "$oid": "68ab541d4534336e7e1c5d38"
+      },
+      "name": "Duyan FRAME Detachable ( Portable)",
+      "price": 1799,
+      "description": "Duyan FRAME Detachable ( Portable)",
+      "image": "",
+      "imageId": "",
+      "quantity": 92,
+      "sku": "DUYAN-DEFAU-41055",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan frame detachable ( portable)",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-41055",
+      "normalizedDescription": "duyan frame detachable ( portable)",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:13.291Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-09T08:45:15.224Z"
+      },
+      "__v": 0,
+      "components": []
+    },
+    "after": {
+      "_id": {
+        "$oid": "68ab541d4534336e7e1c5d38"
+      },
+      "name": "Duyan FRAME Detachable ( Portable)",
+      "price": 1799,
+      "description": "Duyan FRAME Detachable ( Portable)",
+      "image": "",
+      "imageId": "",
+      "quantity": 92,
+      "sku": "DUYAN-DEFAU-41055",
+      "variant": "Default",
+      "category": "",
+      "unit": "pcs",
+      "supplier": "",
+      "location": "Main Warehouse",
+      "status": "Available",
+      "normalizedName": "duyan frame detachable ( portable)",
+      "normalizedVariant": "default",
+      "normalizedSku": "duyan-defau-41055",
+      "normalizedDescription": "duyan frame detachable ( portable)",
+      "createdAt": {
+        "$date": "2025-08-24T18:04:13.291Z"
+      },
+      "updatedAt": {
+        "$date": "2025-09-14T10:09:09.659Z"
+      },
+      "__v": 0,
+      "components": [
+        {
+          "item": {
+            "$oid": "68b56932650c74e5be3238ad"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c6944574bebbbb19e6a718"
+          }
+        },
+        {
+          "item": {
+            "$oid": "68bbc6862f35835cfdb9ee97"
+          },
+          "qty": 1,
+          "_id": {
+            "$oid": "68c6944574bebbbb19e6a719"
+          }
+        }
+      ],
+      "type": "bundle"
+    },
+    "ip": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 Edg/140.0.0.0",
+    "createdAt": {
+      "$date": "2025-09-14T10:09:09.713Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-14T10:09:09.713Z"
+    },
+    "__v": 0
   }
 ]

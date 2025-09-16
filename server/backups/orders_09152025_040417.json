@@ -3305,19 +3305,20 @@
     "platformOrderId": "250823H1P2NFTA",
     "platform": "shopee",
     "courier": "Standard Local-SPX Express",
-    "status": "Returned",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-25T06:54:45.105Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T06:46:23.144Z"
+      "$date": "2025-09-14T08:39:40.014Z"
     },
     "__v": 0,
     "orderDate": {
       "$date": "2025-09-02T06:46:23.143Z"
-    }
+    },
+    "orderNumber": "250823H1P2NFTA"
   },
   {
     "_id": {
@@ -3330,19 +3331,20 @@
     "platformOrderId": "250823HU4T5JQY",
     "platform": "shopee",
     "courier": "Standard Local-Flash Express",
-    "status": "Returned",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-25T06:54:45.343Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T06:46:23.420Z"
+      "$date": "2025-09-14T08:39:38.630Z"
     },
     "__v": 0,
     "orderDate": {
       "$date": "2025-09-02T06:46:23.420Z"
-    }
+    },
+    "orderNumber": "250823HU4T5JQY"
   },
   {
     "_id": {
@@ -3380,19 +3382,20 @@
     "platformOrderId": "250823HVT922H0",
     "platform": "shopee",
     "courier": "Standard Local-Flash Express",
-    "status": "Returned",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-25T06:54:45.834Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T06:46:23.691Z"
+      "$date": "2025-09-14T08:39:41.417Z"
     },
     "__v": 0,
     "orderDate": {
       "$date": "2025-09-02T06:46:23.690Z"
-    }
+    },
+    "orderNumber": "250823HVT922H0"
   },
   {
     "_id": {
@@ -3405,19 +3408,20 @@
     "platformOrderId": "250823J3PMH32R",
     "platform": "shopee",
     "courier": "Standard Local-SPX Express",
-    "status": "Returned",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-25T06:54:46.070Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T06:46:23.828Z"
+      "$date": "2025-09-14T08:39:38.291Z"
     },
     "__v": 0,
     "orderDate": {
       "$date": "2025-09-02T06:46:23.827Z"
-    }
+    },
+    "orderNumber": "250823J3PMH32R"
   },
   {
     "_id": {
@@ -4504,16 +4508,20 @@
     "platformOrderId": "250826SD8NP96C",
     "platform": "shopee",
     "courier": "Standard Local-SPX Express",
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-26T11:10:19.489Z"
     },
     "updatedAt": {
-      "$date": "2025-08-26T11:10:19.489Z"
+      "$date": "2025-09-14T08:39:38.159Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderDate": {
+      "$date": "2025-09-14T08:39:38.158Z"
+    },
+    "orderNumber": "250826SD8NP96C"
   },
   {
     "_id": {
@@ -4526,16 +4534,20 @@
     "platformOrderId": "250826SNSMA9KQ",
     "platform": "shopee",
     "courier": "Standard Local-SPX Express",
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-26T11:10:19.746Z"
     },
     "updatedAt": {
-      "$date": "2025-08-26T11:10:19.746Z"
+      "$date": "2025-09-14T08:39:42.065Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderDate": {
+      "$date": "2025-09-14T08:39:42.064Z"
+    },
+    "orderNumber": "250826SNSMA9KQ"
   },
   {
     "_id": {
@@ -4548,16 +4560,20 @@
     "platformOrderId": "250826SQK05QJU",
     "platform": "shopee",
     "courier": "Standard Local-SPX Express",
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-26T11:10:19.978Z"
     },
     "updatedAt": {
-      "$date": "2025-08-26T11:10:19.978Z"
+      "$date": "2025-09-14T08:39:37.850Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderDate": {
+      "$date": "2025-09-14T08:39:37.846Z"
+    },
+    "orderNumber": "250826SQK05QJU"
   },
   {
     "_id": {
@@ -6934,16 +6950,17 @@
     "orderDate": {
       "$date": "2025-08-28T08:11:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-28T02:21:45.618Z"
     },
     "updatedAt": {
-      "$date": "2025-08-28T02:21:45.618Z"
+      "$date": "2025-09-14T08:39:42.452Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "25082814C9EE6W"
   },
   {
     "_id": {
@@ -8559,16 +8576,17 @@
     "orderDate": {
       "$date": "2025-08-28T16:11:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:08.173Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:08.173Z"
+      "$date": "2025-09-14T08:39:39.135Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508281Y7A42FV"
   },
   {
     "_id": {
@@ -8584,16 +8602,17 @@
     "orderDate": {
       "$date": "2025-08-28T17:55:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:08.436Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:08.436Z"
+      "$date": "2025-09-14T08:39:39.625Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "250828250K43DS"
   },
   {
     "_id": {
@@ -8609,16 +8628,17 @@
     "orderDate": {
       "$date": "2025-08-28T20:42:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:08.684Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:08.684Z"
+      "$date": "2025-09-14T08:39:39.354Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508282EC5EFDD"
   },
   {
     "_id": {
@@ -8634,16 +8654,17 @@
     "orderDate": {
       "$date": "2025-08-29T07:34:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:08.931Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:08.931Z"
+      "$date": "2025-09-14T08:39:42.321Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508293JT40WVU"
   },
   {
     "_id": {
@@ -8659,16 +8680,17 @@
     "orderDate": {
       "$date": "2025-08-29T08:45:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:09.180Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:09.180Z"
+      "$date": "2025-09-14T08:39:41.074Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508293PSAB2P9"
   },
   {
     "_id": {
@@ -8684,16 +8706,17 @@
     "orderDate": {
       "$date": "2025-08-29T09:03:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:09.433Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:09.433Z"
+      "$date": "2025-09-14T08:39:40.143Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508293QQXQETE"
   },
   {
     "_id": {
@@ -8734,16 +8757,17 @@
     "orderDate": {
       "$date": "2025-08-29T10:39:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:09.924Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:09.924Z"
+      "$date": "2025-09-14T08:39:41.800Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508293W4N9Y5C"
   },
   {
     "_id": {
@@ -8784,16 +8808,17 @@
     "orderDate": {
       "$date": "2025-08-29T12:28:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:10.430Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:10.430Z"
+      "$date": "2025-09-14T08:39:40.363Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "250829437SX8GH"
   },
   {
     "_id": {
@@ -8809,16 +8834,17 @@
     "orderDate": {
       "$date": "2025-08-29T12:29:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-29T05:52:10.674Z"
     },
     "updatedAt": {
-      "$date": "2025-08-29T05:52:10.674Z"
+      "$date": "2025-09-14T08:39:39.488Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "250829439J50GX"
   },
   {
     "_id": {
@@ -9284,16 +9310,17 @@
     "orderDate": {
       "$date": "2025-08-29T19:10:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-08-30T05:01:07.557Z"
     },
     "updatedAt": {
-      "$date": "2025-08-30T05:01:07.557Z"
+      "$date": "2025-09-14T08:39:39.757Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "2508294SP83UTC"
   },
   {
     "_id": {
@@ -12409,16 +12436,17 @@
     "orderDate": {
       "$date": "2025-09-01T17:34:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-09-03T03:49:13.670Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T03:49:13.670Z"
+      "$date": "2025-09-14T08:39:41.932Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "250901C5Q3QX7R"
   },
   {
     "_id": {
@@ -12534,16 +12562,17 @@
     "orderDate": {
       "$date": "2025-09-02T12:57:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-09-03T03:49:16.364Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T03:49:16.364Z"
+      "$date": "2025-09-14T08:39:41.670Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "250902E6PDKY2V"
   },
   {
     "_id": {
@@ -12959,16 +12988,17 @@
     "orderDate": {
       "$date": "2025-09-02T20:09:00.000Z"
     },
-    "status": "On Process",
-    "isPaid": false,
+    "status": "Completed",
+    "isPaid": true,
     "remarks": "Tagged for pickup - imported orders",
     "createdAt": {
       "$date": "2025-09-03T09:53:41.227Z"
     },
     "updatedAt": {
-      "$date": "2025-09-03T09:53:41.227Z"
+      "$date": "2025-09-14T08:39:42.628Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "250902EXUX8DNE"
   },
   {
     "_id": {
