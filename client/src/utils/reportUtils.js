@@ -47,6 +47,12 @@ export const reportColumnsConfig = {
   ],
 
   [NewReportTypeEnum.WALK_INS_REPORT]: [
+    {
+      key: "transactionId",
+      label: "Transaction ID",
+      format: "uppercase",
+      align: "center",
+    },
     { key: "itemName", label: "Items", format: "proper", align: "left" },
     {
       key: "total",
@@ -113,6 +119,12 @@ export const reportColumnsConfig = {
     {
       key: "platformOrderId",
       label: "Order ID",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "orderNumber",
+      label: "Order Number",
       format: "uppercase",
       align: "center",
     },

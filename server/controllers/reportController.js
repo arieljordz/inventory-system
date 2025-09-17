@@ -44,7 +44,7 @@ export const getOrdersReport = async (filters = {}) => {
     return {
       platform: o.platform,
       platformOrderId: o.platformOrderId,
-      orderNumber: o.orderNumber,
+      orderNumber: o.orderNumber ?? o.platformOrderId,
       quantity: o.quantity,
       price: effectivePrice,
       totalPrice: effectivePrice * o.quantity,
@@ -94,6 +94,7 @@ export const getWalkInsReport = async (filters = {}) => {
     const totalPrice = tx.items.reduce((sum, i) => sum + i.total, 0);
 
     return {
+      transactionId: tx._id,
       itemName: itemNames,
       quantity: tx.items.reduce((sum, i) => sum + i.quantity, 0), // total quantity
       total: totalPrice,
@@ -135,6 +136,7 @@ export const getProductsReport = async (filters = {}) => {
 export const getProductMovementsReport = async (filters = {}) => {
   const { startDate, endDate, movementType, platform, orderId } = filters;
 
+  // 🔹 Base match filter (by createdAt)
   const match = buildDateFilter(startDate, endDate, "createdAt");
 
   if (movementType && movementType !== "All") {
@@ -149,7 +151,7 @@ export const getProductMovementsReport = async (filters = {}) => {
   const pipeline = [
     { $match: match },
 
-    // join product
+    // Join product
     {
       $lookup: {
         from: "products",
@@ -160,7 +162,7 @@ export const getProductMovementsReport = async (filters = {}) => {
     },
     { $unwind: { path: "$product", preserveNullAndEmptyArrays: true } },
 
-    // join order
+    // Join order
     {
       $lookup: {
         from: "orders",
@@ -183,16 +185,25 @@ export const getProductMovementsReport = async (filters = {}) => {
 
   const rows = await InventoryDetail.aggregate(pipeline);
 
-  // 🔹 Transform into flat structure
-  const formattedRows = rows.map((detail) => ({
-    platform: detail.platform || "N/A",
-    platformOrderId: detail.order?.platformOrderId || "N/A",
-    movementType: detail.movementType || "",
-    quantity: detail.quantity || 0,
-    originalPrice: detail.order?.price || 0,
-    totalPrice: (detail.quantity || 0) * (detail.order?.price || 0),
-    transactionDate: detail.createdAt || null,
-  }));
+  // 🔹 Transform into flat structure with effective price
+  const formattedRows = rows.map((detail) => {
+    const effectivePrice =
+      detail.order?.price != null && detail.order?.price !== ""
+        ? detail.order.price
+        : detail.product?.price || 0;
+
+    return {
+      platform: detail.platform || "N/A",
+      platformOrderId: detail.order?.platformOrderId || "N/A",
+      orderNumber: detail.order?.orderNumber ?? detail.order?.platformOrderId,
+      movementType: detail.movementType || "",
+      quantity: detail.quantity || 0,
+      originalPrice: effectivePrice,
+      totalPrice: (detail.quantity || 0) * effectivePrice,
+      transactionDate: detail.createdAt || null,
+    };
+  });
+
   return formattedRows;
 };
 
@@ -373,7 +384,7 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
         _id: 0,
         platform: 1,
         platformOrderId: 1,
-        orderNumber: 1,
+        orderNumber: { $ifNull: ["$orderNumber", "$platformOrderId"] },
         status: 1,
         orderDate: 1,
         cost: 1,
