@@ -11780,7 +11780,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1036115574624873",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -11794,9 +11794,10 @@
       "$date": "2025-09-02T08:45:18.147Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T08:45:18.147Z"
+      "$date": "2025-09-17T00:37:02.497Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1036115574524873"
   },
   {
     "_id": {
@@ -11805,7 +11806,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1036115574724873",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -11819,9 +11820,10 @@
       "$date": "2025-09-02T08:45:18.435Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T08:45:18.435Z"
+      "$date": "2025-09-17T00:37:02.939Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1036115574524873"
   },
   {
     "_id": {
@@ -11830,7 +11832,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1036068140900496",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -11844,9 +11846,10 @@
       "$date": "2025-09-02T08:45:18.710Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T08:45:18.710Z"
+      "$date": "2025-09-17T00:37:03.373Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1036068140800496"
   },
   {
     "_id": {
@@ -11855,7 +11858,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1036068141000496",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -11869,9 +11872,10 @@
       "$date": "2025-09-02T08:45:18.983Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T08:45:18.983Z"
+      "$date": "2025-09-17T00:37:03.814Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1036068140800496"
   },
   {
     "_id": {
@@ -11905,7 +11909,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1035872759339470",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -11919,9 +11923,10 @@
       "$date": "2025-09-02T08:45:19.551Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T08:45:19.551Z"
+      "$date": "2025-09-17T00:37:04.321Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1035872759239470"
   },
   {
     "_id": {
@@ -11930,7 +11935,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1035872759439470",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -11944,9 +11949,10 @@
       "$date": "2025-09-02T08:45:19.825Z"
     },
     "updatedAt": {
-      "$date": "2025-09-02T08:45:19.825Z"
+      "$date": "2025-09-17T00:37:04.756Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1035872759239470"
   },
   {
     "_id": {
@@ -13758,7 +13764,7 @@
     "product": {
       "$oid": "68b90176476ac98675b38f63"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1036231771872858",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -13772,9 +13778,10 @@
       "$date": "2025-09-04T03:07:24.869Z"
     },
     "updatedAt": {
-      "$date": "2025-09-04T03:07:24.869Z"
+      "$date": "2025-09-17T00:49:07.937Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1036231771672858"
   },
   {
     "_id": {
@@ -15583,7 +15590,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1028621263282733",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -15597,9 +15604,10 @@
       "$date": "2025-09-05T01:07:10.384Z"
     },
     "updatedAt": {
-      "$date": "2025-09-05T01:07:10.384Z"
+      "$date": "2025-09-17T01:07:40.725Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1028621263182733"
   },
   {
     "_id": {
@@ -20208,7 +20216,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 1,
+    "quantity": 2,
     "platformOrderId": "1029598838699965",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -20222,9 +20230,10 @@
       "$date": "2025-09-08T08:05:22.089Z"
     },
     "updatedAt": {
-      "$date": "2025-09-08T08:05:22.089Z"
+      "$date": "2025-09-17T01:16:19.088Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1029598838599965"
   },
   {
     "_id": {
@@ -21458,7 +21467,7 @@
     "product": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
-    "quantity": 10,
+    "quantity": 1,
     "platformOrderId": "1037784121400660",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -21472,9 +21481,10 @@
       "$date": "2025-09-09T08:45:29.012Z"
     },
     "updatedAt": {
-      "$date": "2025-09-09T08:45:29.012Z"
+      "$date": "2025-09-17T01:16:17.741Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1037784121300660"
   },
   {
     "_id": {
@@ -23433,7 +23443,7 @@
     "product": {
       "$oid": "68b55879650c74e5be3234e7"
     },
-    "quantity": 2,
+    "quantity": 1,
     "platformOrderId": "1038325344812205",
     "platform": "lazada",
     "courier": "STANDARD",
@@ -23447,9 +23457,10 @@
       "$date": "2025-09-10T05:42:29.151Z"
     },
     "updatedAt": {
-      "$date": "2025-09-10T05:42:29.151Z"
+      "$date": "2025-09-17T01:17:48.026Z"
     },
-    "__v": 0
+    "__v": 0,
+    "orderNumber": "1038325344712205"
   },
   {
     "_id": {
@@ -27685,6 +27696,5154 @@
     },
     "updatedAt": {
       "$date": "2025-09-16T07:27:49.446Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0a9edc65eb3efeb1249c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1028877007250384",
+    "orderNumber": "1028877007150384",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-04T22:13:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:10:54.163Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:10:54.163Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0a9edc65eb3efeb124ad"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1028837645500815",
+    "orderNumber": "1028837645400815",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-04T20:45:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:10:54.600Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:10:54.600Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0dfcdc65eb3efeb1296f"
+    },
+    "product": {
+      "$oid": "68ca0ddcdc65eb3efeb12946"
+    },
+    "quantity": 2,
+    "platformOrderId": "2509116D2AJ7ST",
+    "orderNumber": "2509116D2AJ7ST",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-11T00:16:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:16.326Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:16.326Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e1edc65eb3efeb129f5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580331012509894330",
+    "orderNumber": "580331012509894330",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-10T14:09:28.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:50.868Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:50.868Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e1fdc65eb3efeb12a12"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580333667353789599",
+    "orderNumber": "580333667353789599",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-10T18:22:38.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:51.654Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:51.654Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e20dc65eb3efeb12a23"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580334129953080752",
+    "orderNumber": "580334129953080752",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-10T19:08:26.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:52.094Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:52.094Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e20dc65eb3efeb12a34"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580334338259191021",
+    "orderNumber": "580334338259191021",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-10T19:27:43.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:52.532Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:52.532Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e21dc65eb3efeb12a45"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580336946675483668",
+    "orderNumber": "580336946675483668",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-10T22:56:12.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:53.048Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:53.048Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e21dc65eb3efeb12a56"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 4,
+    "platformOrderId": "580337232663446801",
+    "orderNumber": "580337232663446801",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-10T23:20:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:25:53.488Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:25:53.488Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e4edc65eb3efeb12a79"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 2,
+    "platformOrderId": "250911814W0NB8",
+    "orderNumber": "250911814W0NB8",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-11T15:48:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:26:38.576Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:26:38.576Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e50dc65eb3efeb12ab3"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250912A0AT0M65",
+    "orderNumber": "250912A0AT0M65",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T10:39:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:26:40.031Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:26:40.031Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca0e50dc65eb3efeb12acb"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250912A9MWKS2J",
+    "orderNumber": "250912A9MWKS2J",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T13:26:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T01:26:40.637Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T01:26:40.637Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca2fe624d30bc9278e26a8"
+    },
+    "product": {
+      "$oid": "68ca2fb824d30bc9278e25cc"
+    },
+    "quantity": 1,
+    "platformOrderId": "2509118S8JDVF7",
+    "orderNumber": "2509118S8JDVF7",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-11T23:00:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:49:58.780Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:49:58.780Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31d824d30bc9278e2797"
+    },
+    "product": {
+      "$oid": "68c8ecc613874a33e709ddf3"
+    },
+    "quantity": 1,
+    "platformOrderId": "2509129U3UJ298",
+    "orderNumber": "2509129U3UJ298",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T09:05:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:16.333Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:16.333Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31d824d30bc9278e27af"
+    },
+    "product": {
+      "$oid": "68c8ecc613874a33e709ddf3"
+    },
+    "quantity": 1,
+    "platformOrderId": "2509129WHSEJT5",
+    "orderNumber": "2509129WHSEJT5",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T09:49:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:16.866Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:16.866Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31d924d30bc9278e27d6"
+    },
+    "product": {
+      "$oid": "68c8edf213874a33e709de1b"
+    },
+    "quantity": 1,
+    "platformOrderId": "250912A506SV09",
+    "orderNumber": "250912A506SV09",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T12:02:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:17.690Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:17.690Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ea24d30bc9278e27fc"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 2,
+    "platformOrderId": "580352506647709262",
+    "orderNumber": "580352506647709262",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T07:35:39.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:34.807Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:34.807Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31eb24d30bc9278e280d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 5,
+    "platformOrderId": "580353155142550984",
+    "orderNumber": "580353155142550984",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T09:02:50.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:35.213Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:35.213Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31eb24d30bc9278e2821"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580354146746729761",
+    "orderNumber": "580354146746729761",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T10:44:15.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:35.688Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:35.688Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ec24d30bc9278e2832"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580354304964265798",
+    "orderNumber": "580354304964265798",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T11:00:24.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:36.088Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:36.088Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ec24d30bc9278e2843"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580355437658015056",
+    "orderNumber": "580355437658015056",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T12:45:48.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:36.487Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:36.487Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ed24d30bc9278e285d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580343869311124912",
+    "orderNumber": "580343869311124912",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-11T14:35:48.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:37.150Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:37.150Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ed24d30bc9278e286e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 2,
+    "platformOrderId": "580345845571159812",
+    "orderNumber": "580345845571159812",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-11T17:35:48.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:37.553Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:37.553Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ee24d30bc9278e288b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 2,
+    "platformOrderId": "580349135932262195",
+    "orderNumber": "580349135932262195",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-11T21:51:07.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:38.179Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:38.179Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca31ee24d30bc9278e289c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580349731777054502",
+    "orderNumber": "580349731777054502",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-11T22:40:46.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T03:58:38.583Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T03:58:38.583Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca333724d30bc9278e28bc"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 15,
+    "platformOrderId": "250912AF4RB4CV",
+    "orderNumber": "250912AF4RB4CV",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-12T15:04:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:04:07.829Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:04:07.829Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca333924d30bc9278e28ec"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 3,
+    "platformOrderId": "250913CBX3DAD7",
+    "orderNumber": "250913CBX3DAD7",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T09:12:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:04:09.185Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:04:09.185Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c224d30bc9278e2954"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913CWSAF5VK",
+    "orderNumber": "250913CWSAF5VK",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T14:31:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:14:58.507Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:14:58.507Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c324d30bc9278e296b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913CXQMC46B",
+    "orderNumber": "250913CXQMC46B",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T14:48:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:14:59.032Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:14:59.032Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c324d30bc9278e297c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D0DGJTCP",
+    "orderNumber": "250913D0DGJTCP",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T15:18:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:14:59.427Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:14:59.427Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c324d30bc9278e298d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9c"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D5MSKKWB",
+    "orderNumber": "250913D5MSKKWB",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T16:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:14:59.824Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:14:59.824Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c424d30bc9278e299d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ccc"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D5MSKKWB",
+    "orderNumber": "250913D5MSKKWB",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T16:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:00.222Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:00.222Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c424d30bc9278e29a8"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D748UAE0",
+    "orderNumber": "250913D748UAE0",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-13T17:18:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:00.499Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:00.499Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c424d30bc9278e29b9"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D85XFKP4",
+    "orderNumber": "250913D85XFKP4",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T17:37:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:00.899Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:00.899Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c524d30bc9278e29cb"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913DB4TYUU9",
+    "orderNumber": "250913DB4TYUU9",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-13T18:30:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:01.302Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:01.302Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c524d30bc9278e29e2"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 20,
+    "platformOrderId": "250913DC288AY3",
+    "orderNumber": "250913DC288AY3",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T18:47:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:01.830Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:01.830Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c624d30bc9278e29f3"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913DC54RCWP",
+    "orderNumber": "250913DC54RCWP",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T18:48:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:02.231Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:02.231Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c624d30bc9278e2a05"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 2,
+    "platformOrderId": "250913DMS5MR4U",
+    "orderNumber": "250913DMS5MR4U",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T21:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:02.633Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:02.633Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c724d30bc9278e2a1c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913DN64G826",
+    "orderNumber": "250913DN64G826",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T21:30:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:03.375Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:03.375Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c724d30bc9278e2a2e"
+    },
+    "product": {
+      "$oid": "68ad6942917fe15f5a6d5fea"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913DQGW86US",
+    "orderNumber": "250913DQGW86US",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T22:12:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:03.789Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:03.789Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c824d30bc9278e2a46"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913DTBKA6NC",
+    "orderNumber": "250913DTBKA6NC",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T23:03:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:04.307Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:04.307Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c824d30bc9278e2a5d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914EPX00326",
+    "orderNumber": "250914EPX00326",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-14T07:34:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:04.828Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:04.828Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c924d30bc9278e2a6e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914ET0JQDBU",
+    "orderNumber": "250914ET0JQDBU",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T08:29:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:05.229Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:05.229Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35c924d30bc9278e2a80"
+    },
+    "product": {
+      "$oid": "68ad68a3917fe15f5a6d5fd2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914EV80MSY4",
+    "orderNumber": "250914EV80MSY4",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T09:09:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:05.627Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:05.627Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35ca24d30bc9278e2a97"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914EVG8TUJ3",
+    "orderNumber": "250914EVG8TUJ3",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T09:14:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:06.143Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:06.143Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35ca24d30bc9278e2aa9"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cc0"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914EXCQTG6E",
+    "orderNumber": "250914EXCQTG6E",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T09:47:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:06.540Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:06.540Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cb24d30bc9278e2ac1"
+    },
+    "product": {
+      "$oid": "68b5405a26af3d81efd99d8f"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914EYM8CSJW",
+    "orderNumber": "250914EYM8CSJW",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-14T10:10:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:07.063Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:07.063Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cb24d30bc9278e2ad8"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9c"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914F186Q17F",
+    "orderNumber": "250914F186Q17F",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T10:39:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:07.577Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:07.577Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cc24d30bc9278e2aec"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914F67AAX9K",
+    "orderNumber": "250914F67AAX9K",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T12:08:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:08.082Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:08.082Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cc24d30bc9278e2afd"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FBU8KW5D",
+    "orderNumber": "250914FBU8KW5D",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T13:48:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:08.480Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:08.480Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cc24d30bc9278e2b0e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FDCNTREM",
+    "orderNumber": "250914FDCNTREM",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T14:16:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:08.877Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:08.877Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cd24d30bc9278e2b20"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FPKMB0AB",
+    "orderNumber": "250914FPKMB0AB",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T17:01:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:09.306Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:09.306Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cd24d30bc9278e2b32"
+    },
+    "product": {
+      "$oid": "68b137e6fcac7c6d18772d2a"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FQ47H21N",
+    "orderNumber": "250914FQ47H21N",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T17:10:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:09.704Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:09.704Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35ce24d30bc9278e2b49"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 2,
+    "platformOrderId": "250914FTGTNTJG",
+    "orderNumber": "250914FTGTNTJG",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T18:11:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:10.217Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:10.217Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35ce24d30bc9278e2b5a"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 2,
+    "platformOrderId": "250914FUG168XB",
+    "orderNumber": "250914FUG168XB",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T18:28:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:10.616Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:10.616Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cf24d30bc9278e2b6c"
+    },
+    "product": {
+      "$oid": "68ad68a3917fe15f5a6d5fd2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914G0VTJD3J",
+    "orderNumber": "250914G0VTJD3J",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T20:05:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:11.015Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:11.015Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35cf24d30bc9278e2b84"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914G23AQVBY",
+    "orderNumber": "250914G23AQVBY",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-14T20:26:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:11.528Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:11.528Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d024d30bc9278e2b9c"
+    },
+    "product": {
+      "$oid": "68ad67bd917fe15f5a6d5fb8"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914G2QXQKQF",
+    "orderNumber": "250914G2QXQKQF",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T20:38:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:12.043Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:12.043Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d024d30bc9278e2bb4"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cbe"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914G2QXQKQF",
+    "orderNumber": "250914G2QXQKQF",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T20:38:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:12.589Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:12.589Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d124d30bc9278e2bcc"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cc0"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914G4JU5DYB",
+    "orderNumber": "250914G4JU5DYB",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T21:11:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:13.103Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:13.103Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d124d30bc9278e2be4"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 2,
+    "platformOrderId": "250914G4Q5E9YG",
+    "orderNumber": "250914G4Q5E9YG",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T21:13:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:13.619Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:13.619Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d224d30bc9278e2bfc"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914GA506C03",
+    "orderNumber": "250914GA506C03",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T22:51:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:14.145Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:14.145Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d224d30bc9278e2c13"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915H1NVVRH0",
+    "orderNumber": "250915H1NVVRH0",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T05:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:14.661Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:14.661Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d324d30bc9278e2c24"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915H6VC4MW6",
+    "orderNumber": "250915H6VC4MW6",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-15T07:25:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:15.059Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:15.059Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d324d30bc9278e2c36"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb8"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HA6UMANF",
+    "orderNumber": "250915HA6UMANF",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-15T08:24:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:15.452Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:15.452Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d424d30bc9278e2c4e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 2,
+    "platformOrderId": "250915HG36UVWW",
+    "orderNumber": "250915HG36UVWW",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T10:10:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:16.005Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:16.005Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d424d30bc9278e2c60"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HMHW0PFH",
+    "orderNumber": "250915HMHW0PFH",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T11:29:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:16.439Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:16.439Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca35d424d30bc9278e2c71"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HUNCCBCM",
+    "orderNumber": "250915HUNCCBCM",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T13:37:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:15:16.839Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:16.839Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca36b824d30bc9278e2d6b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916M2HNHSEG",
+    "orderNumber": "250916M2HNHSEG",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T10:45:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:19:04.387Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:19:04.387Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca36b824d30bc9278e2d83"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 2,
+    "platformOrderId": "250916MA4NT8VT",
+    "orderNumber": "250916MA4NT8VT",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T13:01:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:19:04.989Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:19:04.989Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca36b924d30bc9278e2d94"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MFS90J2D",
+    "orderNumber": "250916MFS90J2D",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T14:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:19:05.419Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:19:05.419Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca36b924d30bc9278e2da6"
+    },
+    "product": {
+      "$oid": "68ca0ddcdc65eb3efeb12946"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MFS90J2D",
+    "orderNumber": "250916MFS90J2D",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T14:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:19:05.849Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:19:05.849Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378024d30bc9278e2e5c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cae"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D0B0GE3F",
+    "orderNumber": "250913D0B0GE3F",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T15:17:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:24.620Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:24.620Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378124d30bc9278e2e6d"
+    },
+    "product": {
+      "$oid": "68aeb6f7df4ba09ed7118533"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D3S92V2V",
+    "orderNumber": "250913D3S92V2V",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T16:19:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:25.055Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:25.055Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378124d30bc9278e2e7f"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D5Q049MU",
+    "orderNumber": "250913D5Q049MU",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T16:53:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:25.486Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:25.486Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378224d30bc9278e2e97"
+    },
+    "product": {
+      "$oid": "68b286b7660fc9078ca30499"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913D69UTKKA",
+    "orderNumber": "250913D69UTKKA",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T17:04:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:26.044Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:26.044Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378224d30bc9278e2eaf"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cc8"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913DP2JC49W",
+    "orderNumber": "250913DP2JC49W",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T21:46:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:26.603Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:26.603Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378324d30bc9278e2ec7"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cc8"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914ERHC1J9W",
+    "orderNumber": "250914ERHC1J9W",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T08:03:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:27.162Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:27.162Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378324d30bc9278e2ede"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cae"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914ESUXWYRS",
+    "orderNumber": "250914ESUXWYRS",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T08:26:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:27.728Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:27.728Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378424d30bc9278e2eef"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cac"
+    },
+    "quantity": 10,
+    "platformOrderId": "250914F4BUQNVM",
+    "orderNumber": "250914F4BUQNVM",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T11:34:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:28.159Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:28.159Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378424d30bc9278e2f00"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cae"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914F7SQ0J2X",
+    "orderNumber": "250914F7SQ0J2X",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T12:36:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:28.588Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:28.588Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378524d30bc9278e2f12"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FA2D0330",
+    "orderNumber": "250914FA2D0330",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-14T13:16:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:29.037Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:29.037Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378524d30bc9278e2f2a"
+    },
+    "product": {
+      "$oid": "68b55b26650c74e5be3235be"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FT7TQQN0",
+    "orderNumber": "250914FT7TQQN0",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T18:06:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:29.593Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:29.593Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378624d30bc9278e2f42"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914G5ATVU48",
+    "orderNumber": "250914G5ATVU48",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-14T21:24:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:30.155Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:30.155Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378624d30bc9278e2f5a"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cae"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915H4GAARXX",
+    "orderNumber": "250915H4GAARXX",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T06:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:30.757Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:30.757Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378724d30bc9278e2f6c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HGT80FMW",
+    "orderNumber": "250915HGT80FMW",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T10:22:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:31.192Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:31.192Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378724d30bc9278e2f84"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HKA5RSN8",
+    "orderNumber": "250915HKA5RSN8",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T11:07:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:31.750Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:31.750Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378824d30bc9278e2f9c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cca"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HNFTG9ME",
+    "orderNumber": "250915HNFTG9ME",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T11:46:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:32.310Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:32.310Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378824d30bc9278e2fb3"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cae"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HU1M33BE",
+    "orderNumber": "250915HU1M33BE",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-15T13:26:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:32.867Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:32.867Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca378924d30bc9278e2fc5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HV6HRHBH",
+    "orderNumber": "250915HV6HRHBH",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T13:46:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:22:33.301Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:22:33.301Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391524d30bc9278e31d8"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580369512142505753",
+    "orderNumber": "580369512142505753",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T15:10:57.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:09.858Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:09.858Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391624d30bc9278e31e9"
+    },
+    "product": {
+      "$oid": "68aecaa492b53ade0d5eddac"
+    },
+    "quantity": 1,
+    "platformOrderId": "580369564921988456",
+    "orderNumber": "580369564921988456",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T15:15:18.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:10.289Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:10.289Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391624d30bc9278e31fb"
+    },
+    "product": {
+      "$oid": "68afc9f023d68441798a75d5"
+    },
+    "quantity": 1,
+    "platformOrderId": "580369699634054676",
+    "orderNumber": "580369699634054676",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T15:30:20.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:10.719Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:10.719Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391724d30bc9278e3212"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 5,
+    "platformOrderId": "580370630663178198",
+    "orderNumber": "580370630663178198",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T16:53:13.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:11.282Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:11.282Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391724d30bc9278e3223"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580370637810206700",
+    "orderNumber": "580370637810206700",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T16:50:02.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:11.713Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:11.713Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391824d30bc9278e3235"
+    },
+    "product": {
+      "$oid": "68b2876d660fc9078ca3055e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580372180997866804",
+    "orderNumber": "580372180997866804",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T19:01:58.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:12.145Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:12.145Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391824d30bc9278e324c"
+    },
+    "product": {
+      "$oid": "68aecaa492b53ade0d5eddac"
+    },
+    "quantity": 1,
+    "platformOrderId": "580374287404532999",
+    "orderNumber": "580374287404532999",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T21:43:39.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:12.711Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:12.711Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391924d30bc9278e325d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca2"
+    },
+    "quantity": 1,
+    "platformOrderId": "580375818442146927",
+    "orderNumber": "580375818442146927",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T23:37:56.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:13.142Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:13.142Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391924d30bc9278e326f"
+    },
+    "product": {
+      "$oid": "68b2876d660fc9078ca3055e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580376843595187497",
+    "orderNumber": "580376843595187497",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T01:36:39.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:13.573Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:13.573Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391a24d30bc9278e3285"
+    },
+    "product": {
+      "$oid": "68ac095e0f6158c26fcb10c9"
+    },
+    "quantity": 1,
+    "platformOrderId": "580379108732863861",
+    "orderNumber": "580379108732863861",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T09:47:34.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:14.134Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:14.134Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391a24d30bc9278e3291"
+    },
+    "product": {
+      "$oid": "68b28813660fc9078ca30599"
+    },
+    "quantity": 2,
+    "platformOrderId": "580379361598146104",
+    "orderNumber": "580379361598146104",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T10:11:58.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:14.435Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:14.435Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391a24d30bc9278e329b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca2"
+    },
+    "quantity": 1,
+    "platformOrderId": "580380162299627271",
+    "orderNumber": "580380162299627271",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T11:19:38.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:14.731Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:14.731Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391b24d30bc9278e32ac"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580380678309184779",
+    "orderNumber": "580380678309184779",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T12:03:29.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:15.169Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:15.169Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391b24d30bc9278e32bd"
+    },
+    "product": {
+      "$oid": "68b7bca4905e371d38cb1b07"
+    },
+    "quantity": 1,
+    "platformOrderId": "580382081505658301",
+    "orderNumber": "580382081505658301",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T13:56:43.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:15.601Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:15.601Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391c24d30bc9278e32ce"
+    },
+    "product": {
+      "$oid": "68ab541d4534336e7e1c5d34"
+    },
+    "quantity": 1,
+    "platformOrderId": "580383154722932446",
+    "orderNumber": "580383154722932446",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T15:22:56.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:16.031Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:16.031Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391c24d30bc9278e32d4"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 2,
+    "platformOrderId": "580383154831722042",
+    "orderNumber": "580383154831722042",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-14T15:21:34.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:16.198Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:16.198Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391d24d30bc9278e32e5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580389457486579027",
+    "orderNumber": "580389457486579027",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T00:07:43.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:17.010Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:17.010Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391d24d30bc9278e32f6"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca2"
+    },
+    "quantity": 4,
+    "platformOrderId": "580389837203080195",
+    "orderNumber": "580389837203080195",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T00:53:22.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:17.455Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:17.455Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391d24d30bc9278e3307"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580390111938249967",
+    "orderNumber": "580390111938249967",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T01:36:32.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:17.885Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:17.885Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391e24d30bc9278e3318"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580391306599498983",
+    "orderNumber": "580391306599498983",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T07:36:47.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:18.314Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:18.314Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391e24d30bc9278e3329"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580391632107570317",
+    "orderNumber": "580391632107570317",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T08:19:17.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:18.746Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:18.746Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391f24d30bc9278e333a"
+    },
+    "product": {
+      "$oid": "68b5486622ceb19c40457e01"
+    },
+    "quantity": 1,
+    "platformOrderId": "580391767215801822",
+    "orderNumber": "580391767215801822",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T08:37:55.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:19.191Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:19.191Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca391f24d30bc9278e334b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580392400791111424",
+    "orderNumber": "580392400791111424",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T09:53:38.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:19.622Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:19.622Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca392024d30bc9278e335c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580392872180942685",
+    "orderNumber": "580392872180942685",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T10:39:37.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:20.053Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:20.053Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca392024d30bc9278e336e"
+    },
+    "product": {
+      "$oid": "68b7bdb1905e371d38cb1b6a"
+    },
+    "quantity": 1,
+    "platformOrderId": "580393172060571263",
+    "orderNumber": "580393172060571263",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T11:08:41.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:20.485Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:20.485Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca392124d30bc9278e3385"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580393886083548435",
+    "orderNumber": "580393886083548435",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T12:14:22.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:21.046Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:21.046Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca392124d30bc9278e3397"
+    },
+    "product": {
+      "$oid": "68b28813660fc9078ca30599"
+    },
+    "quantity": 1,
+    "platformOrderId": "580393911736435865",
+    "orderNumber": "580393911736435865",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T12:17:05.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:21.475Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:21.475Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca392124d30bc9278e33a1"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca2"
+    },
+    "quantity": 2,
+    "platformOrderId": "580394288153331128",
+    "orderNumber": "580394288153331128",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-15T12:50:50.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T04:29:21.781Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:29:21.781Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56d59f0dd1b2870f9735"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cca"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MGND9T13",
+    "orderNumber": "250916MGND9T13",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T14:58:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:05.596Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:05.596Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56d69f0dd1b2870f974d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917NKV9KTGN",
+    "orderNumber": "250917NKV9KTGN",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T01:28:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:06.185Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:06.185Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56d69f0dd1b2870f9765"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PEFDK0HX",
+    "orderNumber": "250917PEFDK0HX",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-17T09:24:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:06.753Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:06.753Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56d79f0dd1b2870f977d"
+    },
+    "product": {
+      "$oid": "68b55c19650c74e5be3235dc"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PFNR1E6B",
+    "orderNumber": "250917PFNR1E6B",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T09:45:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:07.322Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:07.322Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56e89f0dd1b2870f979e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb8"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MH58MGGX",
+    "orderNumber": "250916MH58MGGX",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T15:07:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:24.445Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:24.445Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56e99f0dd1b2870f97b6"
+    },
+    "product": {
+      "$oid": "68b8fc60476ac98675b38c9b"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MMP728C5",
+    "orderNumber": "250916MMP728C5",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T16:10:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:25.020Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:25.020Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56e99f0dd1b2870f97ce"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 2,
+    "platformOrderId": "250916MPV4DK94",
+    "orderNumber": "250916MPV4DK94",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T16:49:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:25.642Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:25.642Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ea9f0dd1b2870f97e5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cba"
+    },
+    "quantity": 10,
+    "platformOrderId": "250916MQ948BK2",
+    "orderNumber": "250916MQ948BK2",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T16:56:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:26.210Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:26.210Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ea9f0dd1b2870f97f6"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MS4W9J83",
+    "orderNumber": "250916MS4W9J83",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T17:30:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:26.644Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:26.644Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56eb9f0dd1b2870f9807"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MSFB41SF",
+    "orderNumber": "250916MSFB41SF",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T17:35:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:27.082Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:27.082Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56eb9f0dd1b2870f9819"
+    },
+    "product": {
+      "$oid": "68b8fc60476ac98675b38c9b"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MSPF1NA2",
+    "orderNumber": "250916MSPF1NA2",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T17:39:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:27.552Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:27.552Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ec9f0dd1b2870f9830"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MU31P2UE",
+    "orderNumber": "250916MU31P2UE",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T18:04:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:28.116Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:28.116Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ec9f0dd1b2870f9841"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916MX914A02",
+    "orderNumber": "250916MX914A02",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T19:01:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:28.609Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:28.609Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ed9f0dd1b2870f9852"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916N05E81R6",
+    "orderNumber": "250916N05E81R6",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T19:35:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:29.044Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:29.044Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ed9f0dd1b2870f9863"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916N0A30SFE",
+    "orderNumber": "250916N0A30SFE",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T19:38:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:29.473Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:29.473Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ed9f0dd1b2870f9875"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916N0TGFPJA",
+    "orderNumber": "250916N0TGFPJA",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T19:47:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:29.913Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:29.913Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ee9f0dd1b2870f988d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916N19TQ83F",
+    "orderNumber": "250916N19TQ83F",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T19:55:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:30.477Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:30.477Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ef9f0dd1b2870f98a4"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 2,
+    "platformOrderId": "250916N1Q2356R",
+    "orderNumber": "250916N1Q2356R",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T20:03:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:31.125Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:31.125Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56ef9f0dd1b2870f98b6"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916N5E32PNS",
+    "orderNumber": "250916N5E32PNS",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T21:09:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:31.558Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:31.558Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f09f0dd1b2870f98cc"
+    },
+    "product": {
+      "$oid": "68ad6ac3917fe15f5a6d607d"
+    },
+    "quantity": 5,
+    "platformOrderId": "250916N8CTUCA5",
+    "orderNumber": "250916N8CTUCA5",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T22:02:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:32.126Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:32.126Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f09f0dd1b2870f98d8"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cc6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250916N9149BFH",
+    "orderNumber": "250916N9149BFH",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T22:14:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:32.433Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:32.433Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f09f0dd1b2870f98ef"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 5,
+    "platformOrderId": "250916NAH9EHV5",
+    "orderNumber": "250916NAH9EHV5",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-16T22:41:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:32.995Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:32.995Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f19f0dd1b2870f9902"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917NV92V43H",
+    "orderNumber": "250917NV92V43H",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T03:58:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:33.467Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:33.467Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f29f0dd1b2870f991a"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917NVV63S5T",
+    "orderNumber": "250917NVV63S5T",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T04:09:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:34.038Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:34.038Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f29f0dd1b2870f9932"
+    },
+    "product": {
+      "$oid": "68ad68f6917fe15f5a6d5fde"
+    },
+    "quantity": 2,
+    "platformOrderId": "250917P8R6DRD1",
+    "orderNumber": "250917P8R6DRD1",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T07:41:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:34.598Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:34.598Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f39f0dd1b2870f9949"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PM58XV09",
+    "orderNumber": "250917PM58XV09",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T11:06:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:35.159Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:35.159Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f39f0dd1b2870f995a"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5caa"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PMN590AJ",
+    "orderNumber": "250917PMN590AJ",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-17T11:14:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:35.592Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:35.592Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f49f0dd1b2870f996b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PR013S4X",
+    "orderNumber": "250917PR013S4X",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T12:14:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:36.029Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:36.029Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f49f0dd1b2870f997d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb2"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PTVP39VW",
+    "orderNumber": "250917PTVP39VW",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T13:06:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:36.461Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:36.461Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f59f0dd1b2870f9994"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca8"
+    },
+    "quantity": 2,
+    "platformOrderId": "250917PU8S9Q7S",
+    "orderNumber": "250917PU8S9Q7S",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T13:13:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:37.030Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:37.030Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f59f0dd1b2870f99a5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cb6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PX8KCHPM",
+    "orderNumber": "250917PX8KCHPM",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T14:06:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:37.483Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:37.483Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f59f0dd1b2870f99b7"
+    },
+    "product": {
+      "$oid": "68b5405a26af3d81efd99d8f"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PX8UXDTP",
+    "orderNumber": "250917PX8UXDTP",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T14:07:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:37.918Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:37.918Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca56f69f0dd1b2870f99cf"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cc6"
+    },
+    "quantity": 1,
+    "platformOrderId": "250917PXV22SMG",
+    "orderNumber": "250917PXV22SMG",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-17T14:17:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:36:38.480Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:36:38.480Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5be39f0dd1b2870f9d94"
+    },
+    "product": {
+      "$oid": "68ca5bd29f0dd1b2870f9d6a"
+    },
+    "quantity": 1,
+    "platformOrderId": "2509118S8JDVF7",
+    "orderNumber": "2509118S8JDVF7",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-11T23:00:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:57:39.762Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:57:39.762Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c349f0dd1b2870f9df8"
+    },
+    "product": {
+      "$oid": "68ca1352dc65eb3efeb12d2e"
+    },
+    "quantity": 4,
+    "platformOrderId": "2509129KNNRRKU",
+    "orderNumber": "2509129KNNRRKU",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-12T06:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T06:59:00.249Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T06:59:00.249Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c969f0dd1b2870f9e87"
+    },
+    "product": {
+      "$oid": "68ad6333917fe15f5a6d5e60"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031454606742602",
+    "orderNumber": "1031454606642602",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:38:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:38.883Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:38.883Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c979f0dd1b2870f9e9e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039403959279819",
+    "orderNumber": "1039403959179819",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:39.454Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:39.454Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c979f0dd1b2870f9eaf"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039403959379819",
+    "orderNumber": "1039403959179819",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:39.899Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:39.899Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c989f0dd1b2870f9ec0"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039403959479819",
+    "orderNumber": "1039403959179819",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:40.334Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:40.334Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c989f0dd1b2870f9ed1"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039403959579819",
+    "orderNumber": "1039403959179819",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:40.769Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:40.769Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c999f0dd1b2870f9ee2"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039403959679819",
+    "orderNumber": "1039403959179819",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:41.208Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:41.208Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c999f0dd1b2870f9ef3"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039403959779819",
+    "orderNumber": "1039403959179819",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T07:23:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:41.644Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:41.644Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c9a9f0dd1b2870f9f04"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031369639696821",
+    "orderNumber": "1031369639596821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-11T21:59:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:42.083Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:42.083Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c9a9f0dd1b2870f9f15"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031369639796821",
+    "orderNumber": "1031369639596821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-11T21:59:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:42.522Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:42.522Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c9a9f0dd1b2870f9f26"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031369639896821",
+    "orderNumber": "1031369639596821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-11T21:59:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:42.959Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:42.959Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5c9b9f0dd1b2870f9f37"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031369639996821",
+    "orderNumber": "1031369639596821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-11T21:59:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:00:43.407Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:00:43.407Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca5e649f0dd1b2870f9fbb"
+    },
+    "product": {
+      "$oid": "68ca5e119f0dd1b2870f9f57"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039263136488978",
+    "orderNumber": "1039263136388978",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-11T19:35:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:08:20.347Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:08:20.347Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca601d9f0dd1b2870fa173"
+    },
+    "product": {
+      "$oid": "68ca5f629f0dd1b2870fa0f5"
+    },
+    "quantity": 2,
+    "platformOrderId": "250913CMW1BV7Q",
+    "orderNumber": "250913CMW1BV7Q",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T11:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:15:41.545Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:15:41.545Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca601e9f0dd1b2870fa18f"
+    },
+    "product": {
+      "$oid": "68ca60069f0dd1b2870fa128"
+    },
+    "quantity": 1,
+    "platformOrderId": "250913CSN24H1R",
+    "orderNumber": "250913CSN24H1R",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-13T13:17:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:15:42.131Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:15:42.131Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca603b9f0dd1b2870fa205"
+    },
+    "product": {
+      "$oid": "68b55c19650c74e5be3235dc"
+    },
+    "quantity": 1,
+    "platformOrderId": "250912AN9Q4J6U",
+    "orderNumber": "250912AN9Q4J6U",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T16:54:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:11.276Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:11.276Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca603b9f0dd1b2870fa21c"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5cae"
+    },
+    "quantity": 1,
+    "platformOrderId": "250912AY9PSRC2",
+    "orderNumber": "250912AY9PSRC2",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T19:53:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:11.829Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:11.829Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca603c9f0dd1b2870fa22e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca4"
+    },
+    "quantity": 2,
+    "platformOrderId": "250912AYK0A8XJ",
+    "orderNumber": "250912AYK0A8XJ",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-12T19:58:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:12.254Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:12.254Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605d9f0dd1b2870fa257"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580359753685239654",
+    "orderNumber": "580359753685239654",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T19:25:51.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:45.277Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:45.277Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605d9f0dd1b2870fa268"
+    },
+    "product": {
+      "$oid": "68ad6c1a917fe15f5a6d611d"
+    },
+    "quantity": 1,
+    "platformOrderId": "580361528822236622",
+    "orderNumber": "580361528822236622",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-12T21:52:13.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:45.701Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:45.701Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605e9f0dd1b2870fa27a"
+    },
+    "product": {
+      "$oid": "68b2876d660fc9078ca3055e"
+    },
+    "quantity": 2,
+    "platformOrderId": "580364110667416736",
+    "orderNumber": "580364110667416736",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T04:17:37.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:46.125Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:46.125Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605e9f0dd1b2870fa280"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca2"
+    },
+    "quantity": 1,
+    "platformOrderId": "580365379135112489",
+    "orderNumber": "580365379135112489",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T08:52:27.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:46.295Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:46.295Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605e9f0dd1b2870fa291"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580365443624961792",
+    "orderNumber": "580365443624961792",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T08:58:48.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:46.718Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:46.718Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605f9f0dd1b2870fa2a2"
+    },
+    "product": {
+      "$oid": "68ab541d4534336e7e1c5d34"
+    },
+    "quantity": 1,
+    "platformOrderId": "580365590306129330",
+    "orderNumber": "580365590306129330",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T09:14:09.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:47.137Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:47.137Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605f9f0dd1b2870fa2b3"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580366621392209837",
+    "orderNumber": "580366621392209837",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T11:00:25.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:47.560Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:47.560Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca605f9f0dd1b2870fa2c4"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca2"
+    },
+    "quantity": 1,
+    "platformOrderId": "580366868348503449",
+    "orderNumber": "580366868348503449",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T11:21:14.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:47.982Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:47.982Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60609f0dd1b2870fa2d5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 2,
+    "platformOrderId": "580367000294229962",
+    "orderNumber": "580367000294229962",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T11:30:19.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:48.403Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:48.403Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60609f0dd1b2870fa2e6"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "quantity": 1,
+    "platformOrderId": "580367663765423937",
+    "orderNumber": "580367663765423937",
+    "platform": "tiktok",
+    "courier": "Standard shipping",
+    "orderDate": {
+      "$date": "2025-09-13T12:31:11.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:16:48.825Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:16:48.825Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a79f0dd1b2870fa31b"
+    },
+    "product": {
+      "$oid": "68ad6333917fe15f5a6d5e60"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039665386010128",
+    "orderNumber": "1039665385910128",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T09:36:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:17:59.173Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:17:59.173Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a79f0dd1b2870fa332"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031690010096821",
+    "orderNumber": "1031690009996821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T07:44:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:17:59.726Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:17:59.726Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a89f0dd1b2870fa343"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031690010196821",
+    "orderNumber": "1031690009996821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T07:44:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:00.159Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:00.159Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a89f0dd1b2870fa349"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031690010296821",
+    "orderNumber": "1031690009996821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T07:44:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:00.325Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:00.325Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a89f0dd1b2870fa34f"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031677090682909",
+    "orderNumber": "1031677090582909",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T06:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:00.488Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:00.488Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a89f0dd1b2870fa355"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031677090782909",
+    "orderNumber": "1031677090582909",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T06:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:00.652Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:00.652Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a89f0dd1b2870fa35b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031677090882909",
+    "orderNumber": "1031677090582909",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T06:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:00.822Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:00.822Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a89f0dd1b2870fa361"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031677090982909",
+    "orderNumber": "1031677090582909",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-13T06:42:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:00.988Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:00.988Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a99f0dd1b2870fa367"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031620412436903",
+    "orderNumber": "1031620412336903",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T21:01:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:01.154Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:01.154Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a99f0dd1b2870fa36d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039546170496821",
+    "orderNumber": "1039546170396821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T18:29:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:01.318Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:01.318Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a99f0dd1b2870fa373"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039546170596821",
+    "orderNumber": "1039546170396821",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T18:29:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:01.482Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:01.482Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60a99f0dd1b2870fa379"
+    },
+    "product": {
+      "$oid": "68b55909650c74e5be3234f6"
+    },
+    "quantity": 1,
+    "platformOrderId": "1039534524424840",
+    "orderNumber": "1039534524324840",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T17:16:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:01.646Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:01.646Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca60aa9f0dd1b2870fa38a"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "quantity": 1,
+    "platformOrderId": "1031535892680434",
+    "orderNumber": "1031535892580434",
+    "platform": "lazada",
+    "courier": "STANDARD",
+    "orderDate": {
+      "$date": "2025-09-12T15:40:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:18:02.069Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:18:02.069Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca64fd9f0dd1b2870fa4f0"
+    },
+    "product": {
+      "$oid": "68ca1352dc65eb3efeb12d2e"
+    },
+    "quantity": 2,
+    "platformOrderId": "250914F200N64E",
+    "orderNumber": "250914F200N64E",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-14T10:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:36:29.867Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:36:29.867Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca67c99f0dd1b2870fa79a"
+    },
+    "product": {
+      "$oid": "68ca66cd9f0dd1b2870fa61d"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914F200N64E",
+    "orderNumber": "250914F200N64E",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-14T10:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:48:25.300Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:48:25.300Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca67ca9f0dd1b2870fa7b2"
+    },
+    "product": {
+      "$oid": "68ca66369f0dd1b2870fa5f7"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914F200N64E",
+    "orderNumber": "250914F200N64E",
+    "platform": "shopee",
+    "courier": "Standard Local-Flash Express",
+    "orderDate": {
+      "$date": "2025-09-14T10:52:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:48:26.091Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:48:26.091Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca67ca9f0dd1b2870fa7d3"
+    },
+    "product": {
+      "$oid": "68ca67bc9f0dd1b2870fa735"
+    },
+    "quantity": 1,
+    "platformOrderId": "250914FMNNK90C",
+    "orderNumber": "250914FMNNK90C",
+    "platform": "shopee",
+    "courier": "Standard Local-J&T Express",
+    "orderDate": {
+      "$date": "2025-09-14T16:26:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:48:26.840Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:48:26.840Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ca69ea9f0dd1b2870fa90d"
+    },
+    "product": {
+      "$oid": "68ca699d9f0dd1b2870fa866"
+    },
+    "quantity": 1,
+    "platformOrderId": "250915HKART0SA",
+    "orderNumber": "250915HKART0SA",
+    "platform": "shopee",
+    "courier": "Standard Local-SPX Express",
+    "orderDate": {
+      "$date": "2025-09-15T11:07:00.000Z"
+    },
+    "status": "On Process",
+    "isPaid": false,
+    "remarks": "Tagged for pickup - imported orders",
+    "createdAt": {
+      "$date": "2025-09-17T07:57:30.976Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T07:57:30.976Z"
     },
     "__v": 0
   }
