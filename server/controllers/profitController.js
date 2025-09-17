@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import { normalizeString } from "../utils/commonUtils.js";
@@ -47,6 +48,19 @@ export const getOrdersWithProfits = async (req, res) => {
         },
       },
 
+      // Compute effectivePrice = order.price OR fallback to productInfo.price
+      {
+        $addFields: {
+          effectivePrice: {
+            $cond: {
+              if: { $gt: ["$price", 0] }, // use order.price if > 0
+              then: "$price",
+              else: "$productInfo.price", // fallback to product price
+            },
+          },
+        },
+      },
+
       // Calculate productCost = sum(item.price × qtyInProduct) × order.quantity
       {
         $addFields: {
@@ -84,13 +98,13 @@ export const getOrdersWithProfits = async (req, res) => {
         },
       },
 
-      // Calculate revenue & profit
+      // Calculate revenue & profit using effectivePrice
       {
         $addFields: {
-          revenue: { $multiply: ["$productInfo.price", "$quantity"] },
+          revenue: { $multiply: ["$effectivePrice", "$quantity"] },
           profit: {
             $subtract: [
-              { $multiply: ["$productInfo.price", "$quantity"] },
+              { $multiply: ["$effectivePrice", "$quantity"] },
               "$productCost",
             ],
           },
@@ -117,7 +131,7 @@ export const getOrdersWithProfits = async (req, res) => {
               variant: "$productInfo.variant",
               quantity: "$quantity",
               cost: "$productCost",
-              price: "$productInfo.price",
+              price: "$effectivePrice", // <-- use effectivePrice here
               revenue: "$revenue",
               profit: "$profit",
             },
@@ -201,10 +215,7 @@ export const getWalkInTransactionsWithProfits = async (req, res) => {
     // 🔍 Searchable fields
     const match = search
       ? {
-          $or: [
-            { buyerName: searchRegex },
-            { paymentMethod: searchRegex },
-          ],
+          $or: [{ buyerName: searchRegex }, { paymentMethod: searchRegex }],
         }
       : {};
 
@@ -310,23 +321,15 @@ export const getProfitStats = async (req, res) => {
   try {
     const search = (req.query.search || "").trim();
     const searchRegex = new RegExp(search, "i");
+    const timezone = "Asia/Manila"; // adjust if needed
 
-    // 🔹 Determine start and end of current month
-    const now = new Date();
-    const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // e.g. Sept 1, 2025
-    const endDate = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      0,
-      23,
-      59,
-      59,
-      999
-    ); // e.g. Sept 30, 2025 23:59:59
+    // 🔹 Current month range (timezone-aware)
+    const startDate = moment().tz(timezone).startOf("month").toDate();
+    const endDate = moment().tz(timezone).endOf("month").toDate();
 
     // 🔹 Match conditions
     const match = {
-      orderDate: { $gte: startDate, $lte: endDate }, // ✅ limit to current month
+      orderDate: { $gte: startDate, $lte: endDate },
       ...(search
         ? {
             $or: [
@@ -362,57 +365,78 @@ export const getProfitStats = async (req, res) => {
         },
       },
 
-      // Compute product cost
+      // 🔹 Compute effectivePrice = order.price OR fallback to product.price OR 0
       {
         $addFields: {
-          productCost: {
+          effectivePrice: {
+            $ifNull: ["$price", { $ifNull: ["$productInfo.price", 0] }],
+          },
+        },
+      },
+
+      // 🔹 Compute product cost & revenue
+      {
+        $addFields: {
+          cost: {
             $multiply: [
               {
-                $sum: {
-                  $map: {
-                    input: "$productInfo.components",
-                    as: "comp",
-                    in: {
-                      $multiply: [
-                        {
-                          $getField: {
-                            field: "price",
-                            input: {
-                              $first: {
-                                $filter: {
-                                  input: "$itemsInfo",
-                                  cond: { $eq: ["$$this._id", "$$comp.item"] },
+                $ifNull: [
+                  {
+                    $sum: {
+                      $map: {
+                        input: "$productInfo.components",
+                        as: "comp",
+                        in: {
+                          $multiply: [
+                            {
+                              $ifNull: [
+                                {
+                                  $getField: {
+                                    field: "price",
+                                    input: {
+                                      $first: {
+                                        $filter: {
+                                          input: "$itemsInfo",
+                                          cond: {
+                                            $eq: ["$$this._id", "$$comp.item"],
+                                          },
+                                        },
+                                      },
+                                    },
+                                  },
                                 },
-                              },
+                                0,
+                              ],
                             },
-                          },
+                            "$$comp.qty",
+                          ],
                         },
-                        "$$comp.qty",
-                      ],
+                      },
                     },
                   },
-                },
+                  0,
+                ],
               },
               "$quantity",
             ],
           },
-          revenue: { $multiply: ["$productInfo.price", "$quantity"] },
+          revenue: { $multiply: ["$effectivePrice", "$quantity"] },
         },
       },
 
-      // Profit
+      // 🔹 Profit
       {
         $addFields: {
-          profit: { $subtract: ["$revenue", "$productCost"] },
+          profit: { $subtract: ["$revenue", "$cost"] },
         },
       },
 
-      // Final grouping for totals
+      // 🔹 Final grouping for totals
       {
         $group: {
           _id: null,
           overallOrders: { $sum: 1 },
-          overallCost: { $sum: "$productCost" },
+          overallCost: { $sum: "$cost" },
           overallRevenue: { $sum: "$revenue" },
           overallProfit: { $sum: "$profit" },
         },
@@ -430,10 +454,9 @@ export const getProfitStats = async (req, res) => {
       }
     );
   } catch (error) {
-    console.error("Get Profit Stats Error:", error);
+    console.error("❌ Get Profit Stats Error:", error);
     return res
       .status(500)
       .json({ message: "Server error", error: error.message });
   }
 };
-

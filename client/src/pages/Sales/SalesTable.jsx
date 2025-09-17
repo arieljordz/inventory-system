@@ -103,7 +103,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
         <td className="text-right align-middle">
           <span className="font-weight-bold">
             {formatAmount(
-              computeTotalPrice(order.quantity, order.product?.price)
+              computeTotalPrice(order.quantity, order.price ?? order.product?.price)
             )}
           </span>
         </td>

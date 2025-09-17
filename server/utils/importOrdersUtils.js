@@ -18,6 +18,7 @@ export const orderPlatformConfigs = {
       courier: "Shipping Option",
       variant: "Variation Name",
       quantity: "Quantity",
+      price: "Original Price",
       orderDate: "Order Creation Date",
     },
   },
@@ -30,6 +31,7 @@ export const orderPlatformConfigs = {
       courier: "Delivery Option",
       variant: "Variation",
       quantity: "Quantity",
+      price: "SKU Unit Original Price",
       orderDate: "Created Time",
     },
   },
@@ -42,6 +44,7 @@ export const orderPlatformConfigs = {
       courier: "shippingProviderType",
       variant: "variation",
       quantity: "Quantity",
+      price: "unitPrice",
       orderDate: "createTime",
     },
   },
@@ -52,6 +55,7 @@ export const handleReimportOrder = async ({
   existingOrder,
   product,
   quantity,
+  price,
   platform,
   platformOrderId,
   orderNumber,
@@ -90,6 +94,7 @@ export const handleReimportOrder = async ({
     });
 
     existingOrder.quantity = quantity;
+    existingOrder.price = price;
     existingOrder.orderNumber = orderNumber;
     await existingOrder.save();
 
@@ -143,6 +148,7 @@ export const handleReimportOrder = async ({
 export const handleNewOrder = async ({
   product,
   quantity,
+  price,
   platform,
   platformOrderId,
   orderNumber,
@@ -160,12 +166,13 @@ export const handleNewOrder = async ({
   const order = await Order.create({
     product: product._id,
     quantity,
+    price,
     platform,
     platformOrderId,
     orderNumber,
     courier,
     orderDate,
-    remarks: "Tagged for pickup - imported orders",
+    remarks: "On process - imported orders",
   });
 
   try {
@@ -193,7 +200,7 @@ export const handleNewOrder = async ({
     courier,
     platform,
     status: StatusEnum.ON_PROCESS,
-    remarks: `Tagged for pickup - Order ID: ${platformOrderId}`,
+    remarks: `On process - Order ID: ${platformOrderId}`,
   });
 
   const updatedProduct = await Product.findById(product._id);

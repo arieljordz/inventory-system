@@ -38,16 +38,21 @@ export const getOrdersReport = async (filters = {}) => {
   const orders = await Order.find(filter).populate("product").lean();
 
   // 🔹 Transform into flat rows with required columns
-  const formattedRows = orders.map((o) => ({
-    platform: o.platform,
-    platformOrderId: o.platformOrderId,
-    quantity: o.quantity,
-    price: o.product?.price ?? 0,
-    totalPrice: (o.product?.price ?? 0) * o.quantity,
-    status: o.status,
-    paymentStatus: o.isPaid ? "Paid" : "Unpaid",
-    orderDate: o.orderDate,
-  }));
+  const formattedRows = orders.map((o) => {
+    const effectivePrice = o.price ?? o.product?.price ?? 0;
+
+    return {
+      platform: o.platform,
+      platformOrderId: o.platformOrderId,
+      orderNumber: o.orderNumber,
+      quantity: o.quantity,
+      price: effectivePrice,
+      totalPrice: effectivePrice * o.quantity,
+      status: o.status,
+      paymentStatus: o.isPaid ? "Paid" : "Unpaid",
+      orderDate: o.orderDate,
+    };
+  });
 
   return formattedRows;
 };
@@ -184,8 +189,8 @@ export const getProductMovementsReport = async (filters = {}) => {
     platformOrderId: detail.order?.platformOrderId || "N/A",
     movementType: detail.movementType || "",
     quantity: detail.quantity || 0,
-    originalPrice: detail.product?.price || 0,
-    totalPrice: (detail.quantity || 0) * (detail.product?.price || 0),
+    originalPrice: detail.order?.price || 0,
+    totalPrice: (detail.quantity || 0) * (detail.order?.price || 0),
     transactionDate: detail.createdAt || null,
   }));
   return formattedRows;
@@ -296,46 +301,69 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
       },
     },
 
-    // 🔹 Compute cost, revenue, profit
+    // 🔹 Compute effectivePrice = order.price OR fallback to product.price OR 0
     {
       $addFields: {
-        productCost: {
+        effectivePrice: {
+          $ifNull: ["$price", { $ifNull: ["$product.price", 0] }],
+        },
+      },
+    },
+
+    // 🔹 Compute cost & revenue
+    {
+      $addFields: {
+        cost: {
           $multiply: [
             {
-              $sum: {
-                $map: {
-                  input: "$product.components",
-                  as: "comp",
-                  in: {
-                    $multiply: [
-                      {
-                        $getField: {
-                          field: "price",
-                          input: {
-                            $first: {
-                              $filter: {
-                                input: "$items",
-                                cond: { $eq: ["$$this._id", "$$comp.item"] },
+              $ifNull: [
+                {
+                  $sum: {
+                    $map: {
+                      input: "$product.components",
+                      as: "comp",
+                      in: {
+                        $multiply: [
+                          {
+                            $ifNull: [
+                              {
+                                $getField: {
+                                  field: "price",
+                                  input: {
+                                    $first: {
+                                      $filter: {
+                                        input: "$items",
+                                        cond: {
+                                          $eq: ["$$this._id", "$$comp.item"],
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
                               },
-                            },
+                              0,
+                            ],
                           },
-                        },
+                          "$$comp.qty",
+                        ],
                       },
-                      "$$comp.qty",
-                    ],
+                    },
                   },
                 },
-              },
+                0,
+              ],
             },
             "$quantity",
           ],
         },
-        revenue: { $multiply: ["$product.price", "$quantity"] },
+        revenue: { $multiply: ["$effectivePrice", "$quantity"] },
       },
     },
+
+    // 🔹 Compute profit = revenue - cost
     {
       $addFields: {
-        profit: { $subtract: ["$revenue", "$productCost"] },
+        profit: { $subtract: ["$revenue", "$cost"] },
       },
     },
 
@@ -345,9 +373,10 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
         _id: 0,
         platform: 1,
         platformOrderId: 1,
+        orderNumber: 1,
         status: 1,
         orderDate: 1,
-        cost: "$productCost",
+        cost: 1,
         revenue: 1,
         profit: 1,
         paymentStatus: {
@@ -359,8 +388,7 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
     { $sort: { orderDate: -1 } },
   ];
 
-  const formattedRows = await Order.aggregate(pipeline);
-  return formattedRows;
+  return Order.aggregate(pipeline);
 };
 
 export const getPriceAdjustmentsReport = async (filters = {}) => {

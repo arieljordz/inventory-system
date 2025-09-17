@@ -1,9 +1,14 @@
 // routes/userRoutes.js
 import { Router } from "express";
-import { createWalkInTransaction } from "../controllers/walkInController.js";
+import {
+  getMonthlyWalkInStats,
+  createWalkInTransaction,
+} from "../controllers/walkInController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
 const router = Router();
+
+router.get("/stats", authenticate, getMonthlyWalkInStats);
 
 router.post("/", authenticate, createWalkInTransaction);
 

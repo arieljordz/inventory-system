@@ -15,6 +15,12 @@ export const reportColumnsConfig = {
       format: "uppercase",
       align: "center",
     },
+    {
+      key: "orderNumber",
+      label: "Order Number",
+      format: "uppercase",
+      align: "center",
+    },
     { key: "quantity", label: "Quantity", format: "number", align: "center" },
     {
       key: "price",
@@ -223,6 +229,12 @@ export const reportColumnsConfig = {
     {
       key: "platformOrderId",
       label: "Order ID",
+      format: "uppercase",
+      align: "center",
+    },
+    {
+      key: "orderNumber",
+      label: "Order Number",
       format: "uppercase",
       align: "center",
     },

@@ -18,18 +18,11 @@ import { restockItemQuantities } from "../utils/itemQuantityUtils.js";
 
 export const getSalesStats = async (req, res) => {
   try {
-    // 🔹 Determine start and end of current month
-    const now = new Date();
-    const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // e.g. Sept 1, 2025
-    const endDate = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      0,
-      23,
-      59,
-      59,
-      999
-    ); // e.g. Sept 30, 2025 23:59:59
+    const timezone = "Asia/Manila"; // adjust if needed
+
+    // 🔹 Start & end of current month using moment
+    const startDate = moment().tz(timezone).startOf("month").toDate();
+    const endDate = moment().tz(timezone).endOf("month").toDate();
 
     const result = await Order.aggregate([
       {
@@ -46,11 +39,25 @@ export const getSalesStats = async (req, res) => {
         },
       },
       { $unwind: "$product" },
+
+      // 🔹 Compute effectivePrice: use order.price if exists, else product.price
+      {
+        $addFields: {
+          effectivePrice: {
+            $cond: {
+              if: { $ifNull: ["$price", false] }, // check if order.price exists
+              then: "$price",
+              else: "$product.price",
+            },
+          },
+        },
+      },
+
       {
         $group: {
           _id: null,
           totalOrders: { $sum: 1 },
-          totalSales: { $sum: { $multiply: ["$quantity", "$product.price"] } },
+          totalSales: { $sum: { $multiply: ["$quantity", "$effectivePrice"] } },
           unpaidOrders: {
             $sum: { $cond: [{ $eq: ["$isPaid", false] }, 1, 0] },
           },
@@ -70,7 +77,7 @@ export const getSalesStats = async (req, res) => {
 
     res.json(stats);
   } catch (error) {
-    console.error("Error fetching sales stats:", error);
+    console.error("❌ Error fetching sales stats:", error);
     res.status(500).json({ message: "Failed to fetch sales stats" });
   }
 };

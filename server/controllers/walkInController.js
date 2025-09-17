@@ -1,4 +1,5 @@
 // controllers/walkInController.js
+import moment from "moment-timezone";
 import Item from "../models/Item.js";
 import ItemMovement from "../models/ItemMovement.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
@@ -99,5 +100,84 @@ export const createWalkInTransaction = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const getMonthlyWalkInStats = async (req, res) => {
+  try {
+    const timezone = "Asia/Manila"; // adjust if needed
+    const startOfMonth = moment().tz(timezone).startOf("month").toDate();
+    const endOfMonth = moment().tz(timezone).endOf("month").toDate();
+
+    // 🔹 Aggregate this month's stats
+    const stats = await WalkInTransaction.aggregate([
+      {
+        $match: {
+          createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+        },
+      },
+      {
+        $facet: {
+          totals: [
+            {
+              $group: {
+                _id: null,
+                totalSales: { $sum: "$totalAmount" },
+                transactionCount: { $sum: 1 },
+              },
+            },
+          ],
+          topItem: [
+            { $unwind: "$items" },
+            {
+              $group: {
+                _id: "$items.item", // references Item model
+                totalQty: { $sum: "$items.quantity" },
+              },
+            },
+            { $sort: { totalQty: -1 } },
+            { $limit: 1 },
+          ],
+        },
+      },
+    ]);
+
+    // 🔹 Extract results safely
+    const totals = stats[0]?.totals[0] || {
+      totalSales: 0,
+      transactionCount: 0,
+    };
+    const topItemData = stats[0]?.topItem[0] || null;
+
+    // 🔹 Compute average transaction value
+    const avgTransactionValue =
+      totals.transactionCount > 0
+        ? totals.totalSales / totals.transactionCount
+        : 0;
+
+    // 🔹 Get top-selling item details
+    let topSellingItem = null;
+    if (topItemData?._id) {
+      const item = await Item.findById(topItemData._id).select("name sku");
+      topSellingItem = {
+        name: item?.name || "Unknown Item",
+        sku: item?.sku || "",
+        quantity: topItemData.totalQty,
+      };
+    }
+
+    res.json({
+      range: {
+        start: startOfMonth,
+        end: endOfMonth,
+      },
+      totalSales: totals.totalSales,
+      transactionCount: totals.transactionCount,
+      avgTransactionValue,
+      topSellingItem,
+    });
+  } catch (err) {
+    console.error("❌ Error getting monthly walk-in stats:", err);
+    res.status(500).json({ message: "Failed to fetch monthly walk-in stats" });
   }
 };

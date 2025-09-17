@@ -55,7 +55,7 @@ export const getAllOrders = async (req, res) => {
       },
       { $unwind: "$product" },
       { $match: match },
-      { $sort: { createdAt: -1 } },
+      { $sort: { orderDate: -1 } },
       {
         $facet: {
           data: [{ $skip: skip }, { $limit: limit }],
@@ -206,6 +206,7 @@ export const processOrdersImport = async (rows, platform, req) => {
       const courier = normalizeText(row.courier);
       const variant = normalizeText(row.variant || "Default");
       const quantity = parseInt(row.quantity) || 0;
+      const price = parseFloat(row.price) || 0;
       const orderDate = parseOrderDate(row.orderDate);
 
       if (!platformOrderId || !name || !courier || quantity <= 0) {
@@ -237,6 +238,7 @@ export const processOrdersImport = async (rows, platform, req) => {
           existingOrder,
           product,
           quantity,
+          price,
           platform,
           platformOrderId,
           orderNumber,
@@ -252,6 +254,7 @@ export const processOrdersImport = async (rows, platform, req) => {
       const newOrderResult = await handleNewOrder({
         product,
         quantity,
+        price,
         platform,
         platformOrderId,
         orderNumber,
@@ -280,18 +283,11 @@ export const processOrdersImport = async (rows, platform, req) => {
 
 export const getOrderStatsByPlatform = async (req, res) => {
   try {
-    // 🔹 Determine start and end of current month
-    const now = new Date();
-    const startDate = new Date(now.getFullYear(), now.getMonth(), 1); // Sept 1, 2025
-    const endDate = new Date(
-      now.getFullYear(),
-      now.getMonth() + 1,
-      0,
-      23,
-      59,
-      59,
-      999
-    ); // Sept 30, 2025 23:59:59
+    const timezone = "Asia/Manila"; // adjust if needed
+
+    // 🔹 Start & end of current month
+    const startDate = moment().tz(timezone).startOf("month").toDate();
+    const endDate = moment().tz(timezone).endOf("month").toDate();
 
     // 🔹 Aggregate counts grouped by platform, filtered by current month
     const counts = await Order.aggregate([
@@ -319,6 +315,7 @@ export const getOrderStatsByPlatform = async (req, res) => {
     counts.forEach((entry) => {
       const platform = entry._id?.toLowerCase();
       stats.overall += entry.total;
+
       if (platform === PlatformEnum.SHOPEE.toLowerCase())
         stats.shopee = entry.total;
       if (platform === PlatformEnum.TIKTOK.toLowerCase())
@@ -329,7 +326,7 @@ export const getOrderStatsByPlatform = async (req, res) => {
 
     return res.status(200).json(stats);
   } catch (error) {
-    console.error("Error fetching monthly order stats:", error);
+    console.error("❌ Error fetching monthly order stats:", error);
     return res
       .status(500)
       .json({ message: "Server error", error: error.message });
