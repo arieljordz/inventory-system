@@ -11,6 +11,7 @@ import PaymentBadge from "../../components/PaymentBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const SalesTable = ({ orders = [], loading = false }) => {
+  
   const renderTableRows = () => {
     if (loading) {
       return (

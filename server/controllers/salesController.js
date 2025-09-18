@@ -289,6 +289,7 @@ export const processSalesImport = async ({
     seenOrderIds.add(platformOrderId);
 
     try {
+      // console.log("Looking for:", { platform, platformOrderId });
       // --- Find order in DB ---
       const order = await Order.findOne({
         platform: platform.toLowerCase(),
@@ -343,7 +344,7 @@ export const processSalesImport = async ({
       });
     }
   }
-
+  // console.log("results:", results);
   return results;
 };
 

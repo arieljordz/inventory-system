@@ -21,9 +21,9 @@ export const salesPlatformConfigs = {
   lazada: {
     sheetName: "Income Overview",
     fields: {
-      platformOrderId: "Order Line ID",
-      orderNumber: "Order Number", 
+      platformOrderId: "orderItemId",
+      orderNumber: "orderNumber", 
     },
-    requiredHeaders: ["Order Number", "Statement Period"],
+    requiredHeaders: ["orderNumber", "orderItemId"],
   },
 };
