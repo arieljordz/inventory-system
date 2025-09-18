@@ -1,4 +1,5 @@
 // controllers/settingsController.js
+import { FeatureFlagEnum } from "../enums/enums.js";
 import {
   MongoClient,
   ObjectId,
@@ -17,9 +18,7 @@ dotenv.config();
 const BACKUP_URI = process.env.BACKUP_URI;
 const BACKUP_DIR = path.resolve("./backups");
 
-//
-// 🔹 Get all collection names
-//
+// Get all collection names
 export const getCollections = async (req, res) => {
   const client = new MongoClient(BACKUP_URI);
   try {
@@ -38,9 +37,7 @@ export const getCollections = async (req, res) => {
   }
 };
 
-//
-// 🔹 Transform function (Extended JSON types)
-//
+// Transform function (Extended JSON types)
 function transformToExtendedJSON(value) {
   if (value instanceof ObjectId) return { $oid: value.toString() };
   if (value instanceof Date) return { $date: value.toISOString() };
@@ -67,9 +64,7 @@ function transformToExtendedJSON(value) {
   return value;
 }
 
-//
-// 🔹 Format timestamp folder name
-//
+// Format timestamp folder name
 function formatTimestampToDateTime(timestamp) {
   const date = new Date(timestamp);
   return `${date.getFullYear()}${String(date.getMonth() + 1).padStart(
@@ -82,9 +77,7 @@ function formatTimestampToDateTime(timestamp) {
   ).padStart(2, "0")}`;
 }
 
-//
-// 🔹 Format suffix for JSON filenames (_MMDDYYYY)
-//
+// Format suffix for JSON filenames (_MMDDYYYY)
 function formatDateSuffix() {
   const now = new Date();
   const mm = String(now.getMonth() + 1).padStart(2, "0");
@@ -93,9 +86,7 @@ function formatDateSuffix() {
   return `_${mm}${dd}${yyyy}`;
 }
 
-//
-// 🔹 Manual Backup Endpoint (creates timestamped folder + JSON files)
-//
+// Manual Backup Endpoint (creates timestamped folder + JSON files)
 export const backupCollections = async (req, res) => {
   const client = new MongoClient(BACKUP_URI);
 
@@ -154,9 +145,7 @@ export const backupCollections = async (req, res) => {
   }
 };
 
-//
-// 🔹 Download a single backup JSON file
-//
+// Download a single backup JSON file
 export const downloadBackup = async (req, res) => {
   const file = req.params.file;
   const safePath = path.normalize(file).replace(/^(\.\.(\/|\\|$))+/, "");
@@ -167,4 +156,22 @@ export const downloadBackup = async (req, res) => {
   }
 
   res.download(filePath);
+};
+
+// Feature Flags
+export const getFeatureFlags = async (req, res) => {
+  try {
+    // convert enum into array
+    const flags = Object.values(FeatureFlagEnum).map((flag) => ({
+      key: flag.key,
+      name: flag.name,
+      description: flag.description,
+      enabled: flag.defaultEnabled, // later you can fetch this from DB if needed
+    }));
+
+    return res.json(flags);
+  } catch (error) {
+    console.error("Error fetching feature flags:", error);
+    return res.status(500).json({ message: "Failed to load feature flags" });
+  }
 };

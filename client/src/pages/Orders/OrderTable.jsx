@@ -76,21 +76,18 @@ const OrderTable = ({ orders = [], loading = false }) => {
         </td>
         <td className="align-middle">
           <div className="d-flex align-items-center">
-            <div
-              className="font-weight-medium"
-              title={order.product?.name || ""}
-            >
+            <div className="font-weight-medium" title={order.productName || ""}>
               <code className="px-2 py-1 rounded">
-                {truncateText(order.product?.name, 50)}
+                {truncateText(order.productName, 50)}
               </code>
             </div>
-            <CopyToClipboardButton text={order.product?.name} />
+            <CopyToClipboardButton text={order.productName} />
           </div>
         </td>
         <td className="text-center align-middle">
-          {order.product?.variant ? (
+          {order.productVariant ? (
             <span className="badge badge-secondary">
-              {order.product?.variant}
+              {order.productVariant}
             </span>
           ) : (
             <span className="text-muted">-</span>
@@ -101,9 +98,7 @@ const OrderTable = ({ orders = [], loading = false }) => {
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">
-            {formatAmount(
-              computeTotalPrice(order.quantity, order.price ?? order.product?.price)
-            )}
+            {formatAmount(computeTotalPrice(order.quantity, order.price))}
           </span>
         </td>
         <td className="text-center align-middle">

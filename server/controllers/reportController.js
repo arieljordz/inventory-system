@@ -10,7 +10,10 @@ import Item from "../models/Item.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import PriceAdjustment from "../models/PriceAdjustment.js";
 import { NewReportTypeEnum } from "../enums/enums.js";
-import { buildDateFilter } from "../utils/reportUtils.js";
+import {
+  buildDateFilter,
+  getEffectivePriceStage,
+} from "../utils/reportUtils.js";
 
 export const getOrdersReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, platform, status, orderId } =
@@ -269,6 +272,7 @@ export const getItemMovementsReport = async (filters = {}) => {
 export const getOrdersWithProfitsReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, platform, status, orderId } =
     filters;
+  const priceMode = "productFirst"; // orderFirst
 
   const filter = buildDateFilter(startDate, endDate, "orderDate");
 
@@ -291,7 +295,6 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
   const pipeline = [
     { $match: filter },
 
-    // 🔹 Lookup product
     {
       $lookup: {
         from: "products",
@@ -302,7 +305,6 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
     },
     { $unwind: "$product" },
 
-    // 🔹 Lookup all items referenced in product.components
     {
       $lookup: {
         from: "items",
@@ -312,16 +314,9 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
       },
     },
 
-    // 🔹 Compute effectivePrice = order.price OR fallback to product.price OR 0
-    {
-      $addFields: {
-        effectivePrice: {
-          $ifNull: ["$price", { $ifNull: ["$product.price", 0] }],
-        },
-      },
-    },
+    // 👇 insert the handler here
+    getEffectivePriceStage(priceMode),
 
-    // 🔹 Compute cost & revenue
     {
       $addFields: {
         cost: {
@@ -371,14 +366,8 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
       },
     },
 
-    // 🔹 Compute profit = revenue - cost
-    {
-      $addFields: {
-        profit: { $subtract: ["$revenue", "$cost"] },
-      },
-    },
+    { $addFields: { profit: { $subtract: ["$revenue", "$cost"] } } },
 
-    // 🔹 Projection (keep only report fields)
     {
       $project: {
         _id: 0,

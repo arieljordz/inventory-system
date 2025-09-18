@@ -15,6 +15,7 @@ import {
 } from "../utils/commonUtils.js";
 import { StatusEnum } from "../enums/enums.js";
 import { restockItemQuantities } from "../utils/itemQuantityUtils.js";
+import { getEffectivePriceStage } from "../utils/reportUtils.js";
 
 export const getSalesStats = async (req, res) => {
   try {
@@ -89,6 +90,8 @@ export const getOrders = async (req, res) => {
     const search = normalizeText((req.query.search || "").trim());
     const skip = (page - 1) * limit;
 
+    const priceMode = "productFirst"; // orderFirst
+
     // Base filter
     let match = {};
 
@@ -127,14 +130,21 @@ export const getOrders = async (req, res) => {
       },
       { $unwind: "$product" },
       { $match: match },
+
+      // 👇 inject effectivePrice computation here
+      getEffectivePriceStage(priceMode),
+
+      {
+        $addFields: {
+          price: "$effectivePrice",
+        },
+      },
       { $sort: { orderDate: -1 } },
       { $skip: skip },
       { $limit: limit },
     ];
 
     const orders = await Order.aggregate(pipeline);
-
-    // Total orders for pagination
     const totalOrders = await Order.countDocuments(match);
 
     res.json({

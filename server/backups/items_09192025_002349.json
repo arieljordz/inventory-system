@@ -7,7 +7,7 @@
     "price": 100,
     "sku": "RING-SMALL-68944",
     "description": "",
-    "quantity": 54,
+    "quantity": 30,
     "unit": "pcs",
     "variant": "Small",
     "supplier": "",
@@ -19,7 +19,7 @@
       "$date": "2025-09-01T09:14:28.945Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:48:26.917Z"
+      "$date": "2025-09-18T07:58:25.036Z"
     },
     "normalizedSku": "ring-small-68944",
     "__v": 0,
@@ -34,19 +34,19 @@
     "price": 110,
     "sku": "RING-BIG-19502",
     "description": "",
-    "quantity": 0,
+    "quantity": 80,
     "unit": "pcs",
     "variant": "Big",
     "supplier": "",
     "location": "Main Warehouse",
-    "status": "Out of Stock",
+    "status": "Available",
     "normalizedName": "ring",
     "normalizedVariant": "big",
     "createdAt": {
       "$date": "2025-09-01T09:15:19.503Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:17:59.810Z"
+      "$date": "2025-09-18T07:58:40.760Z"
     },
     "normalizedSku": "ring-big-19502",
     "__v": 0,
@@ -61,7 +61,7 @@
     "price": 50,
     "sku": "CARAB-DEFAU-97240",
     "description": "",
-    "quantity": 175,
+    "quantity": 164,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -73,7 +73,7 @@
       "$date": "2025-09-01T09:16:37.241Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:36:29.954Z"
+      "$date": "2025-09-18T07:26:45.920Z"
     },
     "normalizedSku": "carab-defau-97240",
     "__v": 0,
@@ -115,7 +115,7 @@
     "price": 1200,
     "sku": "FRAME-8-FEE-10691",
     "description": "",
-    "quantity": 6,
+    "quantity": 4,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -127,7 +127,7 @@
       "$date": "2025-09-01T09:36:50.692Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:57:31.188Z"
+      "$date": "2025-09-18T07:35:16.288Z"
     },
     "normalizedSku": "frame-8-fee-10691",
     "__v": 0,
@@ -142,7 +142,7 @@
     "price": 2000,
     "sku": "FRAME-8-FEE-26175",
     "description": "",
-    "quantity": 6,
+    "quantity": 16,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -154,7 +154,7 @@
       "$date": "2025-09-01T09:38:46.176Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T06:36:38.133Z"
+      "$date": "2025-09-18T07:57:20.640Z"
     },
     "normalizedSku": "frame-8-fee-26175",
     "__v": 0,
@@ -169,7 +169,7 @@
     "price": 1700,
     "sku": "FRAME-10-FE-69282",
     "description": "",
-    "quantity": 5,
+    "quantity": 14,
     "unit": "pcs",
     "variant": "10 feet",
     "supplier": "",
@@ -181,7 +181,7 @@
       "$date": "2025-09-01T09:39:29.282Z"
     },
     "updatedAt": {
-      "$date": "2025-09-08T07:05:12.639Z"
+      "$date": "2025-09-18T07:56:54.973Z"
     },
     "normalizedSku": "frame-10-fe-69282",
     "__v": 0,
@@ -196,7 +196,7 @@
     "price": 200,
     "sku": "ROPE-RED-89314",
     "description": "",
-    "quantity": 36,
+    "quantity": 35,
     "unit": "pcs",
     "variant": "Red",
     "supplier": "",
@@ -208,7 +208,7 @@
       "$date": "2025-09-01T10:13:09.315Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:48:27.037Z"
+      "$date": "2025-09-18T03:21:44.511Z"
     },
     "normalizedSku": "rope-red-89314",
     "__v": 0,
@@ -277,7 +277,7 @@
     "price": 200,
     "sku": "ROPE-DARK-86140",
     "description": "",
-    "quantity": 30,
+    "quantity": 26,
     "unit": "pcs",
     "variant": "Dark Green",
     "supplier": "",
@@ -289,7 +289,7 @@
       "$date": "2025-09-01T10:16:26.140Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:48:26.289Z"
+      "$date": "2025-09-18T07:23:52.320Z"
     },
     "normalizedSku": "rope-dark-86140",
     "__v": 0,
@@ -304,7 +304,7 @@
     "price": 200,
     "sku": "ROPE-GREEN-10873",
     "description": "",
-    "quantity": 15,
+    "quantity": 13,
     "unit": "pcs",
     "variant": "Green",
     "supplier": "",
@@ -316,7 +316,7 @@
       "$date": "2025-09-01T10:16:50.873Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T04:15:11.092Z"
+      "$date": "2025-09-18T07:26:41.047Z"
     },
     "normalizedSku": "rope-green-10873",
     "__v": 0,
@@ -331,7 +331,7 @@
     "price": 20,
     "sku": "ROUND-2-FEE-53108",
     "description": "",
-    "quantity": 99,
+    "quantity": 92,
     "unit": "pcs",
     "variant": "2 feet",
     "supplier": "",
@@ -343,7 +343,7 @@
       "$date": "2025-09-01T10:17:33.109Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:16:48.066Z"
+      "$date": "2025-09-18T07:31:54.275Z"
     },
     "normalizedSku": "round-2-fee-53108",
     "__v": 0,
@@ -358,7 +358,7 @@
     "price": 40,
     "sku": "ROUND-DEFAU-89656",
     "description": "",
-    "quantity": 29,
+    "quantity": 55,
     "unit": "pcs",
     "variant": "4 feet",
     "supplier": "",
@@ -370,7 +370,7 @@
       "$date": "2025-09-01T10:18:09.656Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:16:48.909Z"
+      "$date": "2025-09-18T07:56:10.578Z"
     },
     "normalizedSku": "round-defau-89656",
     "__v": 0,
@@ -412,19 +412,19 @@
     "price": 200,
     "sku": "ROPE-BLACK-39060",
     "description": "",
-    "quantity": 0,
+    "quantity": 5,
     "unit": "pcs",
     "variant": "Black",
     "supplier": "",
     "location": "Main Warehouse",
-    "status": "Out of Stock",
+    "status": "Available",
     "normalizedName": "rope",
     "normalizedVariant": "black",
     "createdAt": {
       "$date": "2025-09-02T05:47:19.061Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:48:25.695Z"
+      "$date": "2025-09-18T07:55:19.396Z"
     },
     "normalizedSku": "rope-black-39060",
     "normalizedDescription": "",
@@ -466,7 +466,7 @@
     "price": 100,
     "sku": "BAG-F-DEFAU-18924",
     "description": "",
-    "quantity": 2,
+    "quantity": 11,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -478,7 +478,7 @@
       "$date": "2025-09-06T05:28:38.926Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T07:57:31.060Z"
+      "$date": "2025-09-18T07:55:32.028Z"
     },
     "normalizedSku": "bag-f-defau-18924",
     "normalizedDescription": "",

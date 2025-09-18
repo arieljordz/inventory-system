@@ -3,6 +3,7 @@ import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import { normalizeString } from "../utils/commonUtils.js";
+import { getEffectivePriceStage } from "../utils/reportUtils.js";
 
 // 📌 Get all unique orders with products, items, and profit info
 export const getOrdersWithProfits = async (req, res) => {
@@ -13,6 +14,8 @@ export const getOrdersWithProfits = async (req, res) => {
 
     const search = (req.query.search || "").trim();
     const searchRegex = new RegExp(normalizeString(search), "i");
+
+    const priceMode = "productFirst"; // or "orderFirst"
 
     const match = search
       ? {
@@ -27,41 +30,28 @@ export const getOrdersWithProfits = async (req, res) => {
     const pipeline = [
       { $match: match },
 
-      // Lookup product info
       {
         $lookup: {
           from: "products",
           localField: "product",
           foreignField: "_id",
-          as: "productInfo",
+          as: "product",
         },
       },
-      { $unwind: "$productInfo" },
+      { $unwind: "$product" },
 
-      // Lookup component items (if bundle)
       {
         $lookup: {
           from: "items",
-          localField: "productInfo.components.item",
+          localField: "product.components.item",
           foreignField: "_id",
           as: "itemsInfo",
         },
       },
 
-      // Compute effectivePrice = order.price OR fallback to productInfo.price
-      {
-        $addFields: {
-          effectivePrice: {
-            $cond: {
-              if: { $gt: ["$price", 0] }, // use order.price if > 0
-              then: "$price",
-              else: "$productInfo.price", // fallback to product price
-            },
-          },
-        },
-      },
+      // 👇 inject effectivePrice stage dynamically
+      getEffectivePriceStage(priceMode),
 
-      // Calculate productCost = sum(item.price × qtyInProduct) × order.quantity
       {
         $addFields: {
           productCost: {
@@ -69,7 +59,7 @@ export const getOrdersWithProfits = async (req, res) => {
               {
                 $sum: {
                   $map: {
-                    input: "$productInfo.components",
+                    input: "$product.components",
                     as: "comp",
                     in: {
                       $multiply: [
@@ -98,7 +88,6 @@ export const getOrdersWithProfits = async (req, res) => {
         },
       },
 
-      // Calculate revenue & profit using effectivePrice
       {
         $addFields: {
           revenue: { $multiply: ["$effectivePrice", "$quantity"] },
@@ -111,7 +100,6 @@ export const getOrdersWithProfits = async (req, res) => {
         },
       },
 
-      // Group by order
       {
         $group: {
           _id: "$_id",
@@ -126,12 +114,12 @@ export const getOrdersWithProfits = async (req, res) => {
 
           products: {
             $push: {
-              sku: "$productInfo.sku",
-              name: "$productInfo.name",
-              variant: "$productInfo.variant",
+              sku: "$product.sku",
+              name: "$product.name",
+              variant: "$product.variant",
               quantity: "$quantity",
               cost: "$productCost",
-              price: "$effectivePrice", // <-- use effectivePrice here
+              price: "$effectivePrice",
               revenue: "$revenue",
               profit: "$profit",
             },
@@ -140,7 +128,7 @@ export const getOrdersWithProfits = async (req, res) => {
           items: {
             $push: {
               $map: {
-                input: "$productInfo.components",
+                input: "$product.components",
                 as: "comp",
                 in: {
                   $let: {
@@ -350,16 +338,16 @@ export const getProfitStats = async (req, res) => {
           from: "products",
           localField: "product",
           foreignField: "_id",
-          as: "productInfo",
+          as: "product",
         },
       },
-      { $unwind: "$productInfo" },
+      { $unwind: "$product" },
 
       // Lookup component items
       {
         $lookup: {
           from: "items",
-          localField: "productInfo.components.item",
+          localField: "product.components.item",
           foreignField: "_id",
           as: "itemsInfo",
         },
@@ -369,7 +357,7 @@ export const getProfitStats = async (req, res) => {
       {
         $addFields: {
           effectivePrice: {
-            $ifNull: ["$price", { $ifNull: ["$productInfo.price", 0] }],
+            $ifNull: ["$price", { $ifNull: ["$product.price", 0] }],
           },
         },
       },
@@ -384,7 +372,7 @@ export const getProfitStats = async (req, res) => {
                   {
                     $sum: {
                       $map: {
-                        input: "$productInfo.components",
+                        input: "$product.components",
                         as: "comp",
                         in: {
                           $multiply: [

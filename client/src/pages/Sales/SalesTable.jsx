@@ -11,7 +11,6 @@ import PaymentBadge from "../../components/PaymentBadge";
 import CopyToClipboardButton from "../../components/CopyToClipboardButton";
 
 const SalesTable = ({ orders = [], loading = false }) => {
-  
   const renderTableRows = () => {
     if (loading) {
       return (
@@ -103,9 +102,7 @@ const SalesTable = ({ orders = [], loading = false }) => {
         </td>
         <td className="text-right align-middle">
           <span className="font-weight-bold">
-            {formatAmount(
-              computeTotalPrice(order.quantity, order.price ?? order.product?.price)
-            )}
+            {formatAmount(computeTotalPrice(order.quantity, order.price))}
           </span>
         </td>
         <td className="text-center align-middle">

@@ -16,6 +16,7 @@ import {
   handleReimportOrder,
   handleNewOrder,
 } from "../utils/importOrdersUtils.js";
+import { getEffectivePriceStage } from "../utils/reportUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
@@ -28,6 +29,8 @@ export const getAllOrders = async (req, res) => {
     const rawSafeRegex = new RegExp(escapeRegex(search), "i");
 
     const skip = (page - 1) * limit;
+
+    const priceMode = "productFirst"; // or "orderFirst"
 
     // Build search query
     const match = search
@@ -55,7 +58,30 @@ export const getAllOrders = async (req, res) => {
       },
       { $unwind: "$product" },
       { $match: match },
+
+      // 🔹 Inject effectivePrice stage
+      getEffectivePriceStage(priceMode),
+
       { $sort: { orderDate: -1 } },
+      {
+        $project: {
+          _id: 1,
+          orderNumber: 1,
+          platform: 1,
+          platformOrderId: 1,
+          quantity: 1,
+          status: 1,
+          isPaid: 1,
+          orderDate: 1,
+          // flatten product fields
+          productId: "$product._id",
+          productName: "$product.name",
+          productSku: "$product.sku",
+          productVariant: "$product.normalizedVariant",
+          productDescription: "$product.description",
+          price: "$effectivePrice", // 🔹 use computed price
+        },
+      },
       {
         $facet: {
           data: [{ $skip: skip }, { $limit: limit }],
