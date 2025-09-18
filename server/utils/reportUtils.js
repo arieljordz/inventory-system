@@ -1,4 +1,5 @@
 import moment from "moment-timezone";
+import { fetchFeatureFlag } from "./featureFlagUtils.js";
 
 export const buildDateFilter = (startDate, endDate, field = "createdAt") => {
   const filter = {};
@@ -12,8 +13,27 @@ export const buildDateFilter = (startDate, endDate, field = "createdAt") => {
   return filter;
 };
 
-export const getEffectivePriceStage = (mode = "orderFirst") => {
-  if (mode === "orderFirst") {
+export const getEffectivePriceStage = async () => {
+  const productPriceMode = await fetchFeatureFlag("product_price_mode");
+
+  if (productPriceMode === true) {
+    return {
+      $addFields: {
+        effectivePrice: {
+          $cond: {
+            if: {
+              $and: [
+                { $ne: ["$product.price", null] },
+                { $gt: ["$product.price", 0] },
+              ],
+            },
+            then: "$product.price",
+            else: "$price",
+          },
+        },
+      },
+    };
+  } else if (productPriceMode === false) {
     return {
       $addFields: {
         effectivePrice: {
@@ -21,20 +41,6 @@ export const getEffectivePriceStage = (mode = "orderFirst") => {
             if: { $and: [{ $ne: ["$price", null] }, { $gt: ["$price", 0] }] },
             then: "$price",
             else: "$product.price",
-          },
-        },
-      },
-    };
-  } else if (mode === "productFirst") {
-    return {
-      $addFields: {
-        effectivePrice: {
-          $cond: {
-            if: {
-              $and: [{ $ne: ["$product.price", null] }, { $gt: ["$product.price", 0] }],
-            },
-            then: "$product.price",
-            else: "$price",
           },
         },
       },
@@ -47,4 +53,3 @@ export const getEffectivePriceStage = (mode = "orderFirst") => {
     },
   };
 };
-

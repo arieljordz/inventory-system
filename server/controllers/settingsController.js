@@ -1,5 +1,5 @@
 // controllers/settingsController.js
-import { FeatureFlagEnum } from "../enums/enums.js";
+import FeatureFlag from "../models/FeatureFlag.js";
 import {
   MongoClient,
   ObjectId,
@@ -158,20 +158,55 @@ export const downloadBackup = async (req, res) => {
   res.download(filePath);
 };
 
-// Feature Flags
+// Feature Flags End Points
 export const getFeatureFlags = async (req, res) => {
   try {
-    // convert enum into array
-    const flags = Object.values(FeatureFlagEnum).map((flag) => ({
-      key: flag.key,
-      name: flag.name,
-      description: flag.description,
-      enabled: flag.defaultEnabled, // later you can fetch this from DB if needed
-    }));
-
+    const flags = await FeatureFlag.find().sort({ createdAt: -1 });
     return res.json(flags);
   } catch (error) {
     console.error("Error fetching feature flags:", error);
-    return res.status(500).json({ message: "Failed to load feature flags" });
+    return res.status(500).json({ message: "Failed to fetch feature flags" });
+  }
+};
+
+export const updateFeatureFlag = async (req, res) => {
+  try {
+    const { key } = req.params;
+    const { enabled, description } = req.body;
+
+    const flag = await FeatureFlag.findOneAndUpdate(
+      { key },
+      {
+        ...(enabled !== undefined && { enabled }),
+        ...(description !== undefined && { description }),
+        updatedBy: req.user?._id, // optional
+      },
+      { new: true }
+    );
+
+    if (!flag) {
+      return res.status(404).json({ message: `Feature flag '${key}' not found` });
+    }
+
+    return res.json(flag);
+  } catch (error) {
+    console.error("Error updating feature flag:", error);
+    return res.status(500).json({ message: "Failed to update feature flag" });
+  }
+};
+
+export const getFeatureFlag = async (req, res) => {
+  try {
+    const { key } = req.params;
+    const flag = await FeatureFlag.findOne({ key });
+
+    if (!flag) {
+      return res.status(404).json({ message: `Feature flag '${key}' not found` });
+    }
+
+    return res.json(flag);
+  } catch (error) {
+    console.error("Error fetching feature flag:", error);
+    return res.status(500).json({ message: "Failed to fetch feature flag" });
   }
 };

@@ -12,3 +12,9 @@ export const downloadBackup = (filePath) =>
 export const getCollections = () => api.get("/api/settings/collections");
 
 export const getFeatureFlags = () => api.get("/api/settings/feature-flags");
+
+export const getFeatureFlag = (key) =>
+  api.get(`/api/settings/feature-flags/${key}`);
+
+export const updateFeatureFlag = (key, enabled) =>
+  api.put(`/api/settings/feature-flags/${key}`, { enabled });

@@ -13,6 +13,7 @@ import {
 
 import { useDebounce } from "./useDebounce";
 import { useSpinner } from "../context/SpinnerContext";
+import { VerificationCodeEnum } from "../enums/enums";
 
 export const useItemsData = (initialPagination) => {
   const [items, setItems] = useState([]);
@@ -144,7 +145,7 @@ export const useItemsData = (initialPagination) => {
           Swal.showValidationMessage("Please enter a verification code");
           return false;
         }
-        if (value !== "1234") {
+        if (value !== VerificationCodeEnum.VERIFICATION_CODE) {
           Swal.showValidationMessage("Invalid verification code");
           return false;
         }

@@ -90,8 +90,6 @@ export const getOrders = async (req, res) => {
     const search = normalizeText((req.query.search || "").trim());
     const skip = (page - 1) * limit;
 
-    const priceMode = "productFirst"; // orderFirst
-
     // Base filter
     let match = {};
 
@@ -118,6 +116,8 @@ export const getOrders = async (req, res) => {
       if (isPaidFilter !== undefined) match.$or.push({ isPaid: isPaidFilter });
     }
 
+    const effectivePriceStage = await getEffectivePriceStage();
+
     // Fetch paginated orders
     const pipeline = [
       {
@@ -131,8 +131,7 @@ export const getOrders = async (req, res) => {
       { $unwind: "$product" },
       { $match: match },
 
-      // 👇 inject effectivePrice computation here
-      getEffectivePriceStage(priceMode),
+      effectivePriceStage, // ✅ now it’s a plain object
 
       {
         $addFields: {

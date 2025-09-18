@@ -79,3 +79,7 @@ export const ShopNameEnum = Object.freeze({
   T_SHOP: "T-SHOP",
   L_SHOP: "L-SHOP",
 });
+
+export const VerificationCodeEnum = Object.freeze({
+  VERIFICATION_CODE: "1245",
+});

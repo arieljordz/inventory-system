@@ -5,6 +5,8 @@ import {
   backupCollections,
   downloadBackup,
   getFeatureFlags,
+  getFeatureFlag,
+  updateFeatureFlag,
 } from "../controllers/settingsController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
@@ -17,5 +19,9 @@ router.post("/backup", authenticate, backupCollections);
 router.get("/backup/download/:file", authenticate, downloadBackup);
 
 router.get("/feature-flags", authenticate, getFeatureFlags);
+
+router.get("/feature-flags/:key", authenticate, getFeatureFlag);
+
+router.put("/feature-flags/:key", authenticate, updateFeatureFlag);
 
 export default router;

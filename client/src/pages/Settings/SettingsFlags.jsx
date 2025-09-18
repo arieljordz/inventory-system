@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useSpinner } from "../../context/SpinnerContext";
-import { getFeatureFlags } from "../../services/settingsService";
+import {
+  getFeatureFlags,
+  updateFeatureFlag,
+} from "../../services/settingsService";
 
 const SettingsFlags = () => {
   const { showSpinner, hideSpinner } = useSpinner();
   const [flags, setFlags] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // Fetch feature flags
   useEffect(() => {
     const fetchFlags = async () => {
       try {
         setLoading(true);
         const res = await getFeatureFlags();
-        console.log("res:", res);
         setFlags(res.data || []);
       } catch (error) {
         console.error("Failed to load feature flags", error);
@@ -24,7 +27,31 @@ const SettingsFlags = () => {
     };
 
     fetchFlags();
-  }, []);
+  }, [showSpinner, hideSpinner]);
+
+  // Handle toggle
+  const handleToggle = async (key, currentValue) => {
+    try {
+      showSpinner();
+      const newValue = !currentValue;
+
+      await updateFeatureFlag(key, newValue);
+
+      // Update UI optimistically
+      setFlags((prevFlags) =>
+        prevFlags.map((flag) =>
+          flag.key === key ? { ...flag, enabled: newValue } : flag
+        )
+      );
+
+      toast.success(`Feature flag '${key}' updated successfully`);
+    } catch (error) {
+      console.error("Failed to update feature flag", error);
+      toast.error("Failed to update feature flag");
+    } finally {
+      hideSpinner();
+    }
+  };
 
   return (
     <div className="container mt-3">
@@ -50,15 +77,17 @@ const SettingsFlags = () => {
               <tbody>
                 {flags.map(({ key, name, description, enabled }) => (
                   <tr key={key}>
-                    <td>{name}</td>
-                    <td className="text-muted">{description}</td>
+                    <td>{name || key}</td>
+                    <td className="text-muted">
+                      {description || "No description"}
+                    </td>
                     <td className="text-center">
                       <div className="form-check form-switch d-flex justify-content-center">
                         <input
                           className="form-check-input"
                           type="checkbox"
                           checked={enabled}
-                          readOnly
+                          onChange={() => handleToggle(key, enabled)}
                         />
                       </div>
                     </td>

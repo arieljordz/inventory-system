@@ -12,6 +12,7 @@ import { useProductsData } from "../../hooks/useProductsData";
 import { useProductModal } from "../../hooks/useProductModal";
 import { useProductRestockModal } from "../../hooks/useProductRestockModal";
 import { deleteProduct } from "../../services/productService";
+import { VerificationCodeEnum } from "../../enums/enums";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
 
@@ -60,7 +61,7 @@ const ProductsPage = () => {
           Swal.showValidationMessage("Please enter a verification code");
           return false;
         }
-        if (value !== "1234") {
+        if (value !== VerificationCodeEnum.VERIFICATION_CODE) {
           Swal.showValidationMessage("Invalid verification code");
           return false;
         }

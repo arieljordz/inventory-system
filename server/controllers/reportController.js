@@ -272,7 +272,6 @@ export const getItemMovementsReport = async (filters = {}) => {
 export const getOrdersWithProfitsReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, platform, status, orderId } =
     filters;
-  const priceMode = "productFirst"; // orderFirst
 
   const filter = buildDateFilter(startDate, endDate, "orderDate");
 
@@ -291,6 +290,8 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
   if (orderId && orderId.trim() !== "") {
     filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
+
+  const effectivePriceStage = await getEffectivePriceStage();
 
   const pipeline = [
     { $match: filter },
@@ -314,8 +315,7 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
       },
     },
 
-    // 👇 insert the handler here
-    getEffectivePriceStage(priceMode),
+    effectivePriceStage, // ✅ now it’s a plain object
 
     {
       $addFields: {

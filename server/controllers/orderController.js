@@ -30,8 +30,6 @@ export const getAllOrders = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    const priceMode = "productFirst"; // or "orderFirst"
-
     // Build search query
     const match = search
       ? {
@@ -47,6 +45,8 @@ export const getAllOrders = async (req, res) => {
         }
       : {};
 
+    const effectivePriceStage = await getEffectivePriceStage();
+
     const pipeline = [
       {
         $lookup: {
@@ -59,8 +59,7 @@ export const getAllOrders = async (req, res) => {
       { $unwind: "$product" },
       { $match: match },
 
-      // 🔹 Inject effectivePrice stage
-      getEffectivePriceStage(priceMode),
+      effectivePriceStage, // ✅ now it’s a plain object
 
       { $sort: { orderDate: -1 } },
       {

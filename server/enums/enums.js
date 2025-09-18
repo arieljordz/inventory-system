@@ -80,17 +80,6 @@ export const ShopNameEnum = Object.freeze({
   L_SHOP: "L-SHOP",
 });
 
-export const FeatureFlagEnum = Object.freeze({
-  PRODUCT_PRICE: {
-    key: "product_price",
-    name: "Product Price Mode",
-    description: "Use product-based pricing for calculations",
-    defaultEnabled: true,
-  },
-  ORDER_PRICE: {
-    key: "order_price",
-    name: "Order Price Mode",
-    description: "Use order-based pricing for calculations",
-    defaultEnabled: false,
-  },
+export const VerificationCodeEnum = Object.freeze({
+  VERIFICATION_CODE: "1245",
 });

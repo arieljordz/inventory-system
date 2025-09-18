@@ -15,8 +15,6 @@ export const getOrdersWithProfits = async (req, res) => {
     const search = (req.query.search || "").trim();
     const searchRegex = new RegExp(normalizeString(search), "i");
 
-    const priceMode = "productFirst"; // or "orderFirst"
-
     const match = search
       ? {
           $or: [
@@ -26,6 +24,8 @@ export const getOrdersWithProfits = async (req, res) => {
           ],
         }
       : {};
+
+    const effectivePriceStage = await getEffectivePriceStage();
 
     const pipeline = [
       { $match: match },
@@ -49,8 +49,7 @@ export const getOrdersWithProfits = async (req, res) => {
         },
       },
 
-      // 👇 inject effectivePrice stage dynamically
-      getEffectivePriceStage(priceMode),
+      effectivePriceStage, // ✅ now it’s a plain object
 
       {
         $addFields: {
