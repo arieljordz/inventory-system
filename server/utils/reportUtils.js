@@ -3,13 +3,19 @@ import { fetchFeatureFlag } from "./featureFlagUtils.js";
 
 export const buildDateFilter = (startDate, endDate, field = "createdAt") => {
   const filter = {};
-  if (startDate)
-    filter[field] = { $gte: moment(startDate).startOf("day").toDate() };
-  if (endDate)
+  const tz = "Asia/Manila";
+
+  if (startDate) {
+    filter[field] = {
+      $gte: moment.tz(startDate, tz).startOf("day").toDate(),
+    };
+  }
+  if (endDate) {
     filter[field] = {
       ...filter[field],
-      $lte: moment(endDate).endOf("day").toDate(),
+      $lte: moment.tz(endDate, tz).endOf("day").toDate(),
     };
+  }
   return filter;
 };
 
