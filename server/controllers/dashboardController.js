@@ -2,6 +2,7 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import Item from "../models/Item.js";
+import { getYearRange, getCurrentMonthRange } from "../utils/dateUtils.js";
 
 export const getInventoryStats = async (req, res) => {
   try {
@@ -51,10 +52,10 @@ export const getInventoryStats = async (req, res) => {
 
 export const getDashboardCharts = async (req, res) => {
   try {
+    const year = new Date().getFullYear();
+
     // 🔹 Revenue by Month (Area Chart - Current Year)
-    const dateNow = new Date();
-    const startOfYear = new Date(dateNow.getFullYear(), 0, 1); // Jan 1, current year
-    const endOfYear = new Date(dateNow.getFullYear(), 11, 31, 23, 59, 59, 999); // Dec 31, current year
+    const { start: startOfYear, end: endOfYear } = getYearRange(year);
 
     const revenueData = await Order.aggregate([
       {
@@ -227,9 +228,7 @@ export const getDashboardCharts = async (req, res) => {
     }));
 
     // 🔹 Current Month Orders by Platform
-    const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    const { start: startOfMonth, end: endOfMonth } = getCurrentMonthRange();
 
     const monthlyOrdersByPlatform = await Order.aggregate([
       {
@@ -245,6 +244,7 @@ export const getDashboardCharts = async (req, res) => {
       },
     ]);
 
+    const now = new Date();
     const monthlyDonutChartData = monthlyOrdersByPlatform.map((d) => ({
       month: monthNames[now.getMonth()],
       platform: d._id,
@@ -253,10 +253,10 @@ export const getDashboardCharts = async (req, res) => {
 
     return res.json({
       areaChartData,
-      revenueDonutChartData, // 💰 revenue per platform
-      ordersDonutChartData, // 📦 orders per platform
-      profitDonutChartData, // 📊 profit per platform
-      monthlyDonutChartData, // 📅 current month orders by platform
+      revenueDonutChartData,
+      ordersDonutChartData,
+      profitDonutChartData,
+      monthlyDonutChartData,
     });
   } catch (error) {
     console.error("Error generating dashboard charts:", error);

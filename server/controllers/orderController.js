@@ -16,7 +16,8 @@ import {
   handleReimportOrder,
   handleNewOrder,
 } from "../utils/importOrdersUtils.js";
-import { getEffectivePriceStage } from "../utils/reportUtils.js";
+import { getCurrentMonthRange } from "../utils/dateUtils.js";
+import { getEffectivePriceStage } from "../utils/priceUtils.js";
 
 export const getAllOrders = async (req, res) => {
   try {
@@ -103,26 +104,6 @@ export const getAllOrders = async (req, res) => {
   } catch (error) {
     console.error("Get Orders Error:", error);
     res.status(500).json({ message: "Server error" });
-  }
-};
-
-export const getAllOrdersByDate = async (req, res) => {
-  try {
-    const { start, end } = req.query;
-
-    const startDate = moment.tz(start, "Asia/Manila").startOf("day").toDate();
-    const endDate = moment.tz(end, "Asia/Manila").endOf("day").toDate();
-
-    const orders = await Order.find({
-      createdAt: { $gte: startDate, $lte: endDate },
-    })
-      .populate("product", "name sku price image description")
-      .sort({ createdAt: -1 });
-
-    res.status(200).json(orders);
-  } catch (error) {
-    console.error("Get Orders Error:", error);
-    res.status(500).json({ message: "Failed to fetch orders." });
   }
 };
 
@@ -308,11 +289,8 @@ export const processOrdersImport = async (rows, platform, req) => {
 
 export const getOrderStatsByPlatform = async (req, res) => {
   try {
-    const timezone = "Asia/Manila"; // adjust if needed
-
-    // 🔹 Start & end of current month
-    const startDate = moment().tz(timezone).startOf("month").toDate();
-    const endDate = moment().tz(timezone).endOf("month").toDate();
+    // 🔹 Current month range (timezone-aware)
+    const { start: startDate, end: endDate } = getCurrentMonthRange();
 
     // 🔹 Aggregate counts grouped by platform, filtered by current month
     const counts = await Order.aggregate([

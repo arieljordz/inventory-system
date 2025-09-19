@@ -1,7 +1,6 @@
 import express from "express";
 import {
   getAllOrders,
-  getAllOrdersByDate,
   importOrdersByPlatform,
   getOrderStatsByPlatform,
 } from "../controllers/orderController.js";
@@ -12,7 +11,6 @@ const router = express.Router();
 
 router.get("/", getAllOrders);
 router.get("/stats", getOrderStatsByPlatform);
-router.get("/by-date", getAllOrdersByDate); 
 router.post("/import-orders", authenticate, memoryUpload.single("file"), importOrdersByPlatform); 
 
 export default router;

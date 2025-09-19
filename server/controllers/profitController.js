@@ -3,7 +3,8 @@ import moment from "moment-timezone";
 import Order from "../models/Order.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import { normalizeString } from "../utils/commonUtils.js";
-import { getEffectivePriceStage } from "../utils/reportUtils.js";
+import { getCurrentMonthRange } from "../utils/dateUtils.js";
+import { getEffectivePriceStage } from "../utils/priceUtils.js";
 
 // 📌 Get all unique orders with products, items, and profit info
 export const getOrdersWithProfits = async (req, res) => {
@@ -308,11 +309,9 @@ export const getProfitStats = async (req, res) => {
   try {
     const search = (req.query.search || "").trim();
     const searchRegex = new RegExp(search, "i");
-    const timezone = "Asia/Manila"; // adjust if needed
 
     // 🔹 Current month range (timezone-aware)
-    const startDate = moment().tz(timezone).startOf("month").toDate();
-    const endDate = moment().tz(timezone).endOf("month").toDate();
+    const { start: startDate, end: endDate } = getCurrentMonthRange();
 
     // 🔹 Match conditions
     const match = {
@@ -328,10 +327,11 @@ export const getProfitStats = async (req, res) => {
         : {}),
     };
 
+    // 🔹 Get effectivePrice stage (from feature flag)
+    const effectivePriceStage = await getEffectivePriceStage();
+
     const pipeline = [
       { $match: match },
-
-      // Lookup product info
       {
         $lookup: {
           from: "products",
@@ -341,8 +341,6 @@ export const getProfitStats = async (req, res) => {
         },
       },
       { $unwind: "$product" },
-
-      // Lookup component items
       {
         $lookup: {
           from: "items",
@@ -352,16 +350,9 @@ export const getProfitStats = async (req, res) => {
         },
       },
 
-      // 🔹 Compute effectivePrice = order.price OR fallback to product.price OR 0
-      {
-        $addFields: {
-          effectivePrice: {
-            $ifNull: ["$price", { $ifNull: ["$product.price", 0] }],
-          },
-        },
-      },
+      // ✅ Inject effectivePrice logic here
+      effectivePriceStage,
 
-      // 🔹 Compute product cost & revenue
       {
         $addFields: {
           cost: {
@@ -410,15 +401,11 @@ export const getProfitStats = async (req, res) => {
           revenue: { $multiply: ["$effectivePrice", "$quantity"] },
         },
       },
-
-      // 🔹 Profit
       {
         $addFields: {
           profit: { $subtract: ["$revenue", "$cost"] },
         },
       },
-
-      // 🔹 Final grouping for totals
       {
         $group: {
           _id: null,
@@ -447,3 +434,5 @@ export const getProfitStats = async (req, res) => {
       .json({ message: "Server error", error: error.message });
   }
 };
+
+

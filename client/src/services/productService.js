@@ -19,17 +19,6 @@ export const updateProduct = (id, formData) =>
 // Delete a product
 export const deleteProduct = (id) => api.delete(`/api/products/${id}`);
 
-// Get products by status
-export const getProductsByStatus = ({
-  status,
-  page = 1,
-  limit = 10,
-  search = "",
-} = {}) =>
-  api.get(`/api/products/status/${encodeURIComponent(status)}`, {
-    params: { page, limit, search },
-  });
-
 export const restockProduct = (productId, data) =>
   api.post(`/api/products/${productId}/restock`, data);
 

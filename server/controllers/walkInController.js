@@ -4,6 +4,7 @@ import Item from "../models/Item.js";
 import ItemMovement from "../models/ItemMovement.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import { logAudit } from "../utils/auditLogger.js";
+import { getCurrentMonthRange } from "../utils/dateUtils.js";
 
 export const createWalkInTransaction = async (req, res) => {
   try {
@@ -105,15 +106,14 @@ export const createWalkInTransaction = async (req, res) => {
 
 export const getMonthlyWalkInStats = async (req, res) => {
   try {
-    const timezone = "Asia/Manila"; // adjust if needed
-    const startOfMonth = moment().tz(timezone).startOf("month").toDate();
-    const endOfMonth = moment().tz(timezone).endOf("month").toDate();
+    // 🔹 Current month range (timezone-aware)
+    const { start: startDate, end: endDate } = getCurrentMonthRange();
 
     // 🔹 Aggregate this month's stats
     const stats = await WalkInTransaction.aggregate([
       {
         $match: {
-          createdAt: { $gte: startOfMonth, $lte: endOfMonth },
+          createdAt: { $gte: startDate, $lte: endDate },
         },
       },
       {
@@ -168,8 +168,8 @@ export const getMonthlyWalkInStats = async (req, res) => {
 
     res.json({
       range: {
-        start: startOfMonth,
-        end: endOfMonth,
+        start: startDate,
+        end: endDate,
       },
       totalSales: totals.totalSales,
       transactionCount: totals.transactionCount,

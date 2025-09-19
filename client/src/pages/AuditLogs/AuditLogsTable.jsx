@@ -7,7 +7,7 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="8" className="text-center py-4">
+          <td colSpan="7" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -22,7 +22,7 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
     if (!auditLogs || auditLogs.length === 0) {
       return (
         <tr>
-          <td colSpan="8" className="text-center py-4">
+          <td colSpan="7" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-file-alt fa-2x mb-2 d-block"></i>
               No audit logs found
@@ -57,14 +57,13 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
         <td className="align-middle small">
           <div className="d-flex align-items-center">
             <div className="pr-2" title={log.description || ""}>
-              {truncateText(log.description, 80)}
+              {truncateText(log.description, 150)}
             </div>
             {log.description && (
               <CopyToClipboardButton text={log.description} />
             )}
           </div>
         </td>
-        <td className="text-center align-middle">{log.ip || "-"}</td>
         <td className="text-center align-middle">
           <small className="text-muted">{formatDateTime(log.createdAt)}</small>
         </td>
@@ -101,9 +100,6 @@ const AuditLogsTable = ({ auditLogs = [], loading = false }) => {
                   Document ID
                 </th>
                 <th>Description</th>
-                <th className="text-center" style={{ width: "120px" }}>
-                  IP
-                </th>
                 <th className="text-center" style={{ width: "220px" }}>
                   Date
                 </th>

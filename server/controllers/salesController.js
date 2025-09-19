@@ -15,20 +15,21 @@ import {
 } from "../utils/commonUtils.js";
 import { StatusEnum } from "../enums/enums.js";
 import { restockItemQuantities } from "../utils/itemQuantityUtils.js";
-import { getEffectivePriceStage } from "../utils/reportUtils.js";
+import { getCurrentMonthRange } from "../utils/dateUtils.js";
+import { getEffectivePriceStage } from "../utils/priceUtils.js";
 
 export const getSalesStats = async (req, res) => {
   try {
-    const timezone = "Asia/Manila"; // adjust if needed
+    // 🔹 Current month range (timezone-aware)
+    const { start: startDate, end: endDate } = getCurrentMonthRange();
 
-    // 🔹 Start & end of current month using moment
-    const startDate = moment().tz(timezone).startOf("month").toDate();
-    const endDate = moment().tz(timezone).endOf("month").toDate();
+    // 🔹 Decide how effectivePrice is computed
+    const effectivePriceStage = await getEffectivePriceStage();
 
     const result = await Order.aggregate([
       {
         $match: {
-          orderDate: { $gte: startDate, $lte: endDate }, // ✅ only current month
+          orderDate: { $gte: startDate, $lte: endDate },
         },
       },
       {
@@ -41,18 +42,7 @@ export const getSalesStats = async (req, res) => {
       },
       { $unwind: "$product" },
 
-      // 🔹 Compute effectivePrice: use order.price if exists, else product.price
-      {
-        $addFields: {
-          effectivePrice: {
-            $cond: {
-              if: { $ifNull: ["$price", false] }, // check if order.price exists
-              then: "$price",
-              else: "$product.price",
-            },
-          },
-        },
-      },
+      effectivePriceStage, // ✅ now it’s a plain object
 
       {
         $group: {

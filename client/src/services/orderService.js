@@ -10,10 +10,5 @@ export const getAllOrders = ({ page = 1, limit = 10, search = "" } = {}) =>
 export const getOrderStatsByPlatform = () =>
   api.get(`/api/orders/stats`);
 
-export const getAllOrdersByDate = (start, end) =>
-  api.get("/api/orders/by-date", {
-    params: { start, end },
-  });
-
 export const importOrdersByPlatform = (formData) =>
   api.post("/api/orders/import-orders", formData, multipartHeaders);

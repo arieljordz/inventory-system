@@ -5,7 +5,6 @@ import {
   getProductById,
   updateProduct,
   deleteProduct,
-  getProductsByStatus,
   restockProduct,
   importProducts,
   exportProducts,
@@ -20,7 +19,6 @@ const router = express.Router();
 
 // Public routes
 router.get("/", getProducts);
-router.get("/status/:status", getProductsByStatus);
 router.get("/stats", getInventoryStats); 
 
 // Static export/import routes should come BEFORE dynamic :id

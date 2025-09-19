@@ -1,23 +1,4 @@
-import moment from "moment-timezone";
 import { fetchFeatureFlag } from "./featureFlagUtils.js";
-
-export const buildDateFilter = (startDate, endDate, field = "createdAt") => {
-  const filter = {};
-  const tz = "Asia/Manila";
-
-  if (startDate) {
-    filter[field] = {
-      $gte: moment.tz(startDate, tz).startOf("day").toDate(),
-    };
-  }
-  if (endDate) {
-    filter[field] = {
-      ...filter[field],
-      $lte: moment.tz(endDate, tz).endOf("day").toDate(),
-    };
-  }
-  return filter;
-};
 
 export const getEffectivePriceStage = async () => {
   const productPriceMode = await fetchFeatureFlag("product_price_mode");

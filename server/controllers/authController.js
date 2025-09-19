@@ -37,13 +37,6 @@ export const googleLogin = async (req, res) => {
 
     // Set cookie with JWT
     const jwtToken = generateToken(user);
-    // res.cookie("token", jwtToken, {
-    //   httpOnly: true,
-    //   secure: process.env.NODE_ENV === "production",
-    //   sameSite: "Lax",
-    //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    // });
-
     res.cookie("token", jwtToken, {
       httpOnly: true,
       secure: true, // must be true for SameSite=None

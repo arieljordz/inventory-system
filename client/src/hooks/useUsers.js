@@ -9,6 +9,7 @@ import {
   updateUser,
   deleteUser,
 } from "../services/userService";
+import { VerificationCodeEnum } from "../enums/enums";
 
 export const useUsers = (
   initialParams = { page: 1, limit: 10, search: "" }
@@ -116,7 +117,7 @@ export const useUsers = (
           Swal.showValidationMessage("Please enter a verification code");
           return false;
         }
-        if (value !== "1234") {
+        if (value !== VerificationCodeEnum.VERIFICATION_CODE) {
           Swal.showValidationMessage("Invalid verification code");
           return false;
         }

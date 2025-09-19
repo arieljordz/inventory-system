@@ -154,59 +154,6 @@ export const getProducts = async (req, res) => {
   }
 };
 
-export const getProductsByStatus = async (req, res) => {
-  try {
-    const page = Math.max(parseInt(req.query.page) || 1, 1);
-    const limit = Math.min(Math.max(parseInt(req.query.limit) || 5, 1), 100);
-    const search = (req.query.search || "").trim();
-    const normalizedSearch = normalizeString(search);
-    const safeRegex = new RegExp(escapeRegex(normalizedSearch), "i");
-    const rawSafeRegex = new RegExp(escapeRegex(search), "i");
-    const { status } = req.params;
-
-    // console.log("search:", search);
-    // console.log("normalizedSearch:", normalizedSearch);
-
-    // Validate status
-    if (!Object.values(StatusEnum).includes(status)) {
-      return res.status(400).json({ message: "Invalid status" });
-    }
-
-    // Build query with status filter
-    const query = {
-      status,
-      ...(search
-        ? {
-            $or: [
-              { normalizedName: safeRegex },
-              { normalizedVariant: safeRegex },
-              { sku: rawSafeRegex },
-              { description: rawSafeRegex },
-            ],
-          }
-        : {}),
-    };
-
-    const skip = (page - 1) * limit;
-
-    const [products, totalProducts] = await Promise.all([
-      Product.find(query).sort({ createdAt: -1 }).skip(skip).limit(limit),
-      Product.countDocuments(query),
-    ]);
-
-    res.status(200).json({
-      products,
-      totalProducts,
-      totalPages: Math.max(Math.ceil(totalProducts / limit), 1),
-      currentPage: page,
-      pageSize: limit,
-    });
-  } catch (error) {
-    console.error("Get Products by Status Error:", error);
-    res.status(500).json({ message: "Server error" });
-  }
-};
-
 export const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);

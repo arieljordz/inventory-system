@@ -10,10 +10,8 @@ import Item from "../models/Item.js";
 import WalkInTransaction from "../models/WalkInTransaction.js";
 import PriceAdjustment from "../models/PriceAdjustment.js";
 import { NewReportTypeEnum } from "../enums/enums.js";
-import {
-  buildDateFilter,
-  getEffectivePriceStage,
-} from "../utils/reportUtils.js";
+import { getEffectivePriceStage } from "../utils/priceUtils.js";
+import { buildDateFilter } from "../utils/dateUtils.js";
 
 export const getOrdersReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, platform, status, orderId } =
