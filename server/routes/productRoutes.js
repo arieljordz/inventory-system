@@ -13,7 +13,9 @@ import {
 
 import upload from "../middlewares/uploadMiddleware.js";
 import memoryUpload from "../middlewares/memoryUploadMiddleware.js";
+import { UserRoleEnum } from "../enums/enums.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
+import { authorize } from "../middlewares/roleMiddleware.js";
 
 const router = express.Router();
 
@@ -28,7 +30,7 @@ router.post("/import-products", authenticate, memoryUpload.single("file"), impor
 // CRUD routes
 router.post("/", authenticate, upload.single("image"), addProduct);
 router.put("/:id", authenticate, upload.single("image"), updateProduct);
-router.delete("/:id", authenticate, deleteProduct);
+router.delete("/:id", authenticate, authorize(UserRoleEnum.ADMIN), deleteProduct);
 
 // Restock
 router.post("/:productId/restock", authenticate, restockProduct);

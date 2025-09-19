@@ -152,7 +152,6 @@ export const useUsers = (
       toast.success("User deleted successfully.");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete user");
-      toast.error("Failed to delete user");
       throw err;
     } finally {
       setLoading(false);

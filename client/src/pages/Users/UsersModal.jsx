@@ -1,7 +1,8 @@
 // src/pages/Users/UsersModal.jsx
-import React from "react";
+import React, { useMemo } from "react";
 import { Modal, Button, Form, Row, Col } from "react-bootstrap";
-import { TextInput } from "../../components/FormInputs";
+import { TextInput, SelectInput } from "../../components/FormInputs";
+import { UserRoleEnum } from "../../enums/enums";
 
 const UsersModal = ({
   isOpen,
@@ -11,6 +12,14 @@ const UsersModal = ({
   onSubmit,
   isEditMode,
 }) => {
+  const roleOptions = useMemo(
+    () =>
+      Object.entries(UserRoleEnum).map(([key, value]) => ({
+        label: key,
+        value: value,
+      })),
+    []
+  );
   /** 🔹 Header style based on mode */
   const headerClass = isEditMode
     ? "bg-warning text-dark"
@@ -93,6 +102,16 @@ const UsersModal = ({
           </Row>
 
           <Row>
+            <Col md={6}>
+              <SelectInput
+                label="Role"
+                name="role"
+                value={form.role}
+                onChange={handleChange}
+                options={roleOptions}
+                required
+              />
+            </Col>
             <Col md={6} className="d-flex align-items-center mt-3">
               <Form.Check
                 type="checkbox"

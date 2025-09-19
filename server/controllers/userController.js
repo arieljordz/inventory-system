@@ -1,27 +1,38 @@
 // controllers/userController.js
+import bcrypt from "bcryptjs";
 import User from "../models/User.js";
 import { logAudit } from "../utils/auditLogger.js";
+import { UserRoleEnum } from "../enums/enums.js";
 
 // --- Create a user ---
 export const createUser = async (req, res) => {
   try {
-    const { name, email, picture, password, isVerified } = req.body;
+    const { name, email, picture, password, isVerified, role } = req.body;
 
-    // prevent duplicates
+    // 🔹 Prevent duplicates
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "Email already in use" });
     }
 
+    // 🔹 Hash password if provided
+    let hashedPassword;
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      hashedPassword = await bcrypt.hash(password, salt);
+    }
+
+    // 🔹 Create user
     const user = await User.create({
       name,
       email,
       picture,
-      password,
+      password: hashedPassword,
       isVerified,
+      role,
     });
 
-    // Log audit
+    // 🔹 Log audit
     await logAudit({
       action: "CREATE_USER",
       user: req.user?._id,
@@ -35,6 +46,7 @@ export const createUser = async (req, res) => {
 
     res.status(201).json(user);
   } catch (err) {
+    console.error("❌ Create User Error:", err);
     res.status(500).json({ message: err.message || "Failed to create user" });
   }
 };
@@ -88,22 +100,31 @@ export const getUserById = async (req, res) => {
 };
 
 // --- Update user ---
+
 export const updateUser = async (req, res) => {
   try {
-    const { name, email, picture, password, isVerified } = req.body;
+    const { name, email, picture, password, isVerified, role } = req.body;
 
     const beforeUser = await User.findById(req.params.id);
     if (!beforeUser) {
       return res.status(404).json({ message: "User not found" });
     }
 
+    // 🔹 Prepare update object
+    const updateData = { name, email, picture, isVerified, role };
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      updateData.password = await bcrypt.hash(password, salt);
+    }
+
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { name, email, picture, password, isVerified },
+      updateData,
       { new: true, runValidators: true }
     );
 
-    // Log audit
+    // 🔹 Log audit
     await logAudit({
       action: "UPDATE_USER",
       user: req.user?._id,
@@ -118,6 +139,7 @@ export const updateUser = async (req, res) => {
 
     res.json(updatedUser);
   } catch (err) {
+    console.error("❌ Update User Error:", err);
     res.status(500).json({ message: err.message || "Failed to update user" });
   }
 };
@@ -126,9 +148,11 @@ export const updateUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const user = await User.findByIdAndDelete(req.params.id);
-    if (!user) return res.status(404).json({ message: "User not found" });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    // Log audit
+    // 🔹 Log audit
     await logAudit({
       action: "DELETE_USER",
       user: req.user?._id,
@@ -142,6 +166,7 @@ export const deleteUser = async (req, res) => {
 
     res.json({ message: "User deleted successfully" });
   } catch (err) {
+    console.error("❌ Delete User Error:", err);
     res.status(500).json({ message: err.message || "Failed to delete user" });
   }
 };

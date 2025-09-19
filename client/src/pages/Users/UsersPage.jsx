@@ -34,6 +34,7 @@ const UsersPage = () => {
     picture: "",
     password: "",
     isVerified: true,
+    role:"",
   });
 
   const openCreate = () => {
@@ -44,6 +45,7 @@ const UsersPage = () => {
       picture: "",
       password: "",
       isVerified: true,
+      role:"",
     });
     setIsModalOpen(true);
   };

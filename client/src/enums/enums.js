@@ -83,3 +83,8 @@ export const ShopNameEnum = Object.freeze({
 export const VerificationCodeEnum = Object.freeze({
   VERIFICATION_CODE: "1245",
 });
+
+export const UserRoleEnum = Object.freeze({
+  ADMIN: "admin",
+  USER: "user",
+});
