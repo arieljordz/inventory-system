@@ -36,7 +36,7 @@ const UsersTable = ({ users = [], onEdit, onDelete, loading = false }) => {
     if (loading) {
       return (
         <tr>
-          <td colSpan="6" className="text-center py-4">
+          <td colSpan="7" className="text-center py-4">
             <div className="d-flex justify-content-center align-items-center">
               <div className="spinner-border text-primary mr-2" role="status">
                 <span className="sr-only">Loading...</span>
@@ -51,7 +51,7 @@ const UsersTable = ({ users = [], onEdit, onDelete, loading = false }) => {
     if (!users || users.length === 0) {
       return (
         <tr>
-          <td colSpan="6" className="text-center py-4">
+          <td colSpan="7" className="text-center py-4">
             <div className="text-muted">
               <i className="fas fa-users fa-2x mb-2 d-block"></i>
               No users found
@@ -87,6 +87,11 @@ const UsersTable = ({ users = [], onEdit, onDelete, loading = false }) => {
             <span>{user.email}</span>
           </div>
         </td>
+        <td className="align-middle">
+          <div className="d-flex align-items-center">
+            <span>{user.role}</span>
+          </div>
+        </td>
         <td className="text-center align-middle">
           <VerifiedBadge status={user.isVerified} />
         </td>
@@ -115,6 +120,7 @@ const UsersTable = ({ users = [], onEdit, onDelete, loading = false }) => {
                 </th>
                 <th style={{ width: "250px" }}>Name</th>
                 <th style={{ width: "250px" }}>Email</th>
+                <th style={{ width: "120px" }}>Role</th>
                 <th className="text-center" style={{ width: "120px" }}>
                   Status
                 </th>

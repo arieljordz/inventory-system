@@ -1,7 +1,6 @@
 // hooks/useUsers.js
 import { useState, useEffect, useCallback } from "react";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
 import {
   getUsers,
   getUserById,
@@ -9,7 +8,7 @@ import {
   updateUser,
   deleteUser,
 } from "../services/userService";
-import { VerificationCodeEnum } from "../enums/enums";
+import { verifyAction, confirmAction } from "./useVerification";
 
 export const useUsers = (
   initialParams = { page: 1, limit: 10, search: "" }
@@ -90,65 +89,26 @@ export const useUsers = (
     }
   }, []);
 
+  // 🔹 Main delete handler
   const removeUser = async (id) => {
-    const verificationResult = await Swal.fire({
-      title: "Verification Required",
-      text: "Please enter the verification code to proceed with deletion:",
-      input: "text",
-      inputPlaceholder: "Enter verification code",
-      showCancelButton: true,
-      confirmButtonColor: "#007bff",
-      cancelButtonColor: "#6c757d",
-      confirmButtonText: "Verify",
-      cancelButtonText: "Cancel",
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-      didOpen: () => {
-        const input = Swal.getInput();
-        if (input) {
-          input.style.textAlign = "center";
-          input.style.fontSize = "18px";
-          input.style.fontWeight = "bold";
-          input.style.letterSpacing = "2px";
-        }
-      },
-      preConfirm: (value) => {
-        if (!value) {
-          Swal.showValidationMessage("Please enter a verification code");
-          return false;
-        }
-        if (value !== VerificationCodeEnum.VERIFICATION_CODE) {
-          Swal.showValidationMessage("Invalid verification code");
-          return false;
-        }
-        return true;
-      },
-    });
+    // Step 1: Verification
+    const isVerified = await verifyAction();
+    if (!isVerified) return;
 
-    if (!verificationResult.isConfirmed) {
-      return;
-    }
-
-    const confirmResult = await Swal.fire({
+    // Step 2: Confirmation
+    const isConfirmed = await confirmAction({
       title: "Are you sure?",
-      text: "This action cannot be undone.",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#d33",
-      cancelButtonColor: "#6c757d",
-      confirmButtonText: "Yes, delete it!",
-      cancelButtonText: "Cancel",
+      text: "This will permanently delete the user.",
+      confirmText: "Yes, delete it!",
+      confirmColor: "#d33",
     });
+    if (!isConfirmed) return;
 
-    if (!confirmResult.isConfirmed) {
-      return;
-    }
-
+    // Step 3: Deletion
     setLoading(true);
     try {
       await deleteUser(id);
       setUsers((prev) => prev.filter((u) => u._id !== id));
-
       toast.success("User deleted successfully.");
     } catch (err) {
       setError(err.response?.data?.message || "Failed to delete user");
