@@ -31507,5 +31507,3299 @@
     "normalizedReference": "1041142154031419",
     "totalValue": 110,
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ce52f112b2d12307e4be0e"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 19,
+    "reference": "250919UV5QMECT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-20T07:08:33.001Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-20T07:08:33.001Z"
+    },
+    "normalizedReference": "250919UV5QMECT",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68ce52f112b2d12307e4be12"
+    },
+    "item": {
+      "$oid": "68b7ae5a905e371d38cb14ab"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 16,
+    "reference": "250919UV5QMECT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-20T07:08:33.116Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-20T07:08:33.116Z"
+    },
+    "normalizedReference": "250919UV5QMECT",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09572dcf3b5f47b4c9a13"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 18,
+    "reference": "250919VAP8G32F",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:50.299Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:50.299Z"
+    },
+    "normalizedReference": "250919VAP8G32F",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09572dcf3b5f47b4c9a17"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 158,
+    "reference": "250919VAP8G32F",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:50.434Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:50.434Z"
+    },
+    "normalizedReference": "250919VAP8G32F",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09572dcf3b5f47b4c9a2b"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 17,
+    "reference": "250919VG4YY4DV",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:50.863Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:50.863Z"
+    },
+    "normalizedReference": "250919VG4YY4DV",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09572dcf3b5f47b4c9a2f"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 157,
+    "reference": "250919VG4YY4DV",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:50.993Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:50.993Z"
+    },
+    "normalizedReference": "250919VG4YY4DV",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09573dcf3b5f47b4c9a42"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 16,
+    "reference": "250919VGV23J6F",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:51.421Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:51.421Z"
+    },
+    "normalizedReference": "250919VGV23J6F",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09573dcf3b5f47b4c9a53"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 15,
+    "reference": "250919VP1NMBMT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:51.849Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:51.849Z"
+    },
+    "normalizedReference": "250919VP1NMBMT",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09574dcf3b5f47b4c9a64"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 14,
+    "reference": "2509200TBBAQF1",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:52.278Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:52.278Z"
+    },
+    "normalizedReference": "2509200TBBAQF1",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09574dcf3b5f47b4c9a75"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 13,
+    "reference": "2509200WX1XPW7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:52.711Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:52.711Z"
+    },
+    "normalizedReference": "2509200WX1XPW7",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09575dcf3b5f47b4c9a87"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 12,
+    "reference": "25092016D5M4JN",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:53.142Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:53.142Z"
+    },
+    "normalizedReference": "25092016D5M4JN",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d09575dcf3b5f47b4c9a8b"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 156,
+    "reference": "25092016D5M4JN",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T00:16:53.271Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T00:16:53.271Z"
+    },
+    "normalizedReference": "25092016D5M4JN",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b60315dfb11fe06b4347"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 30,
+    "price": 100,
+    "balanceAfter": 42,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:35:47.742Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:35:47.742Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 3000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b68115dfb11fe06b4354"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 20,
+    "price": 100,
+    "balanceAfter": 22,
+    "reference": "WALK_IN",
+    "location": "Main Warehouse",
+    "remarks": "Walk-in purchase by Walk-in Customer",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:37:53.840Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:37:53.840Z"
+    },
+    "normalizedReference": "WALK_IN",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b69a15dfb11fe06b435e"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 20,
+    "price": 110,
+    "balanceAfter": 9,
+    "reference": "WALK_IN",
+    "location": "Main Warehouse",
+    "remarks": "Walk-in purchase by Walk-in Customer",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:38:18.421Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:38:18.421Z"
+    },
+    "normalizedReference": "WALK_IN",
+    "totalValue": 2200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b6aa15dfb11fe06b436a"
+    },
+    "item": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb3"
+    },
+    "type": "OUT",
+    "quantity": 3,
+    "price": 330,
+    "balanceAfter": 13,
+    "reference": "WALK_IN",
+    "location": "Main Warehouse",
+    "remarks": "Walk-in purchase by Walk-in Customer",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:38:34.782Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:38:34.782Z"
+    },
+    "normalizedReference": "WALK_IN",
+    "totalValue": 990,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b73715dfb11fe06b439b"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "IN",
+    "quantity": 23,
+    "price": 200,
+    "balanceAfter": 24,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:40:55.377Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:40:55.377Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 4600,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b75215dfb11fe06b43a3"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "IN",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 25,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:41:22.190Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:41:22.190Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b79415dfb11fe06b43c6"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "IN",
+    "quantity": 2,
+    "price": 200,
+    "balanceAfter": 26,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:42:28.002Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:42:28.002Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 400,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0b82615dfb11fe06b43e6"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 40,
+    "price": 50,
+    "balanceAfter": 116,
+    "reference": "WALK_IN",
+    "location": "Main Warehouse",
+    "remarks": "Walk-in purchase by Walk-in Customer",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:44:54.887Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:44:54.887Z"
+    },
+    "normalizedReference": "WALK_IN",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9d15dfb11fe06b464f"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 25,
+    "reference": "250919V1YKMXYB",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:41.769Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:41.769Z"
+    },
+    "normalizedReference": "250919V1YKMXYB",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9d15dfb11fe06b4653"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 21,
+    "reference": "250919V1YKMXYB",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:41.892Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:41.892Z"
+    },
+    "normalizedReference": "250919V1YKMXYB",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9e15dfb11fe06b4666"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 8,
+    "reference": "250919V4K3V6KM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:42.297Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:42.297Z"
+    },
+    "normalizedReference": "250919V4K3V6KM",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9e15dfb11fe06b4678"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 24,
+    "reference": "250919V6XKG539",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:42.704Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:42.704Z"
+    },
+    "normalizedReference": "250919V6XKG539",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9e15dfb11fe06b467c"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 20,
+    "reference": "250919V6XKG539",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:42.824Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:42.824Z"
+    },
+    "normalizedReference": "250919V6XKG539",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9f15dfb11fe06b4699"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 19,
+    "reference": "250919VE3V4VY4",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:43.509Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:43.509Z"
+    },
+    "normalizedReference": "250919VE3V4VY4",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bb9f15dfb11fe06b46aa"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 18,
+    "reference": "250919VEFH2F78",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:43.909Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:43.909Z"
+    },
+    "normalizedReference": "250919VEFH2F78",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba015dfb11fe06b46c5"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 17,
+    "reference": "250919VG4A0N61",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:44.598Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:44.598Z"
+    },
+    "normalizedReference": "250919VG4A0N61",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba115dfb11fe06b46d6"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 16,
+    "reference": "250919VHURSWKP",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:45.001Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:45.001Z"
+    },
+    "normalizedReference": "250919VHURSWKP",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba115dfb11fe06b46e7"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 15,
+    "reference": "250919VJE743XE",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:45.410Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:45.410Z"
+    },
+    "normalizedReference": "250919VJE743XE",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba115dfb11fe06b46f8"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 14,
+    "reference": "250919VKNE5JX0",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:45.808Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:45.808Z"
+    },
+    "normalizedReference": "250919VKNE5JX0",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba215dfb11fe06b4709"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 13,
+    "reference": "250919VRBX5FK4",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:46.229Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:46.229Z"
+    },
+    "normalizedReference": "250919VRBX5FK4",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba215dfb11fe06b471a"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 12,
+    "reference": "250919VSKT7ESK",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:46.626Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:46.626Z"
+    },
+    "normalizedReference": "250919VSKT7ESK",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba315dfb11fe06b472f"
+    },
+    "item": {
+      "$oid": "68b681ecc3bcfc9ab3c81fb3"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 330,
+    "balanceAfter": 12,
+    "reference": "250919VVE007AW",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:47.030Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:47.030Z"
+    },
+    "normalizedReference": "250919VVE007AW",
+    "totalValue": 330,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba315dfb11fe06b4733"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 11,
+    "reference": "250919VVE007AW",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:47.150Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:47.150Z"
+    },
+    "normalizedReference": "250919VVE007AW",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba315dfb11fe06b4737"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 115,
+    "reference": "250919VVE007AW",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:47.269Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:47.269Z"
+    },
+    "normalizedReference": "250919VVE007AW",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba315dfb11fe06b473b"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 1200,
+    "balanceAfter": 5,
+    "reference": "250919VVE007AW",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:47.389Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:47.389Z"
+    },
+    "normalizedReference": "250919VVE007AW",
+    "totalValue": 1200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba315dfb11fe06b473f"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 17,
+    "reference": "250919VVE007AW",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:47.510Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:47.510Z"
+    },
+    "normalizedReference": "250919VVE007AW",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba315dfb11fe06b4758"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 7,
+    "reference": "250919VW1JJA3Y",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:47.910Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:47.910Z"
+    },
+    "normalizedReference": "250919VW1JJA3Y",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba415dfb11fe06b4769"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 10,
+    "reference": "2509200EDNK4YQ",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:48.313Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:48.313Z"
+    },
+    "normalizedReference": "2509200EDNK4YQ",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba415dfb11fe06b477b"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 23,
+    "reference": "2509200JYUCU4R",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:48.714Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:48.714Z"
+    },
+    "normalizedReference": "2509200JYUCU4R",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba415dfb11fe06b477f"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 9,
+    "reference": "2509200JYUCU4R",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:48.835Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:48.835Z"
+    },
+    "normalizedReference": "2509200JYUCU4R",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba515dfb11fe06b4793"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 8,
+    "reference": "2509200U2PXDXM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:49.234Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:49.234Z"
+    },
+    "normalizedReference": "2509200U2PXDXM",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba515dfb11fe06b4797"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 114,
+    "reference": "2509200U2PXDXM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Complete Set  Hammock Stainless Ring with 2 pcs Carabiner ( Pares-Pares) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:49.353Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:49.353Z"
+    },
+    "normalizedReference": "2509200U2PXDXM",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba515dfb11fe06b47ab"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 24,
+    "reference": "2509200V7JP466",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:49.751Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:49.751Z"
+    },
+    "normalizedReference": "2509200V7JP466",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba515dfb11fe06b47af"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 7,
+    "reference": "2509200V7JP466",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:49.872Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:49.872Z"
+    },
+    "normalizedReference": "2509200V7JP466",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba615dfb11fe06b47cd"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 22,
+    "reference": "2509200XGBJ1G7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:50.550Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:50.550Z"
+    },
+    "normalizedReference": "2509200XGBJ1G7",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba615dfb11fe06b47d1"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 6,
+    "reference": "2509200XGBJ1G7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:50.669Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:50.669Z"
+    },
+    "normalizedReference": "2509200XGBJ1G7",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba715dfb11fe06b47ee"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 3,
+    "price": 100,
+    "balanceAfter": 3,
+    "reference": "2509200XNWVD8S",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:51.349Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:51.349Z"
+    },
+    "normalizedReference": "2509200XNWVD8S",
+    "totalValue": 300,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba715dfb11fe06b4800"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 2,
+    "reference": "2509200XT4C3AY",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:51.754Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:51.754Z"
+    },
+    "normalizedReference": "2509200XT4C3AY",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba715dfb11fe06b4804"
+    },
+    "item": {
+      "$oid": "68b56475650c74e5be323844"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 50,
+    "balanceAfter": 113,
+    "reference": "2509200XT4C3AY",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:51.877Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:51.877Z"
+    },
+    "normalizedReference": "2509200XT4C3AY",
+    "totalValue": 50,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba815dfb11fe06b4817"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 1,
+    "reference": "2509200Y10NHC7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:52.282Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:52.282Z"
+    },
+    "normalizedReference": "2509200Y10NHC7",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba815dfb11fe06b4829"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 16,
+    "reference": "2509200YC0JA16",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless 304 Duyan Frame 8 Feet with and w/o Duyan options - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:52.682Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:52.682Z"
+    },
+    "normalizedReference": "2509200YC0JA16",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba815dfb11fe06b482d"
+    },
+    "item": {
+      "$oid": "68b569a6650c74e5be3238b4"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 2000,
+    "balanceAfter": 15,
+    "reference": "2509200YC0JA16",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless 304 Duyan Frame 8 Feet with and w/o Duyan options - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:52.813Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:52.813Z"
+    },
+    "normalizedReference": "2509200YC0JA16",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba915dfb11fe06b4846"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 0,
+    "reference": "25092012SWQNTV",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:53.368Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:53.368Z"
+    },
+    "normalizedReference": "25092012SWQNTV",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bba915dfb11fe06b4858"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 21,
+    "reference": "25092013B9NX61",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10Meter Static Utility Rope w/ Stainless Rings & Carabiners - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:53.794Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:53.794Z"
+    },
+    "normalizedReference": "25092013B9NX61",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bbaa15dfb11fe06b4869"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 15,
+    "reference": "25092017KG1KVX",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:54.224Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:54.224Z"
+    },
+    "normalizedReference": "25092017KG1KVX",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bbaa15dfb11fe06b486d"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 1200,
+    "balanceAfter": 4,
+    "reference": "25092017KG1KVX",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME (DETACHABLE) FRAME only or with Hammock Set - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T02:59:54.344Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T02:59:54.344Z"
+    },
+    "normalizedReference": "25092017KG1KVX",
+    "totalValue": 1200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0415dfb11fe06b4889"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 54,
+    "reference": "580445117957179035",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:24.569Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:24.569Z"
+    },
+    "normalizedReference": "580445117957179035",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0515dfb11fe06b48ac"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 82,
+    "reference": "580447312534472057",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:25.433Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:25.433Z"
+    },
+    "normalizedReference": "580447312534472057",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0515dfb11fe06b48bd"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 53,
+    "reference": "580448213347895208",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:25.833Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:25.833Z"
+    },
+    "normalizedReference": "580448213347895208",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0615dfb11fe06b48d8"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 52,
+    "reference": "580451924654064819",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:26.515Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:26.515Z"
+    },
+    "normalizedReference": "580451924654064819",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0615dfb11fe06b48e9"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 51,
+    "reference": "580452177227712328",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:26.918Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:26.918Z"
+    },
+    "normalizedReference": "580452177227712328",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0715dfb11fe06b48fa"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 20,
+    "balanceAfter": 80,
+    "reference": "580452891995571533",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:27.329Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:27.329Z"
+    },
+    "normalizedReference": "580452891995571533",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0715dfb11fe06b4911"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 6,
+    "price": 20,
+    "balanceAfter": 74,
+    "reference": "580454554851706480",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:27.888Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:27.888Z"
+    },
+    "normalizedReference": "580454554851706480",
+    "totalValue": 120,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0815dfb11fe06b4922"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 50,
+    "reference": "580454659067184156",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:28.290Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:28.290Z"
+    },
+    "normalizedReference": "580454659067184156",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0815dfb11fe06b4933"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 49,
+    "reference": "580454788006315212",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:28.687Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:28.687Z"
+    },
+    "normalizedReference": "580454788006315212",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0915dfb11fe06b4944"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 73,
+    "reference": "580454976013042975",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:29.090Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:29.090Z"
+    },
+    "normalizedReference": "580454976013042975",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0bc0915dfb11fe06b495b"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 72,
+    "reference": "580455317123007576",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T03:01:29.642Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T03:01:29.642Z"
+    },
+    "normalizedReference": "580455317123007576",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed56cdea616f57c0995e"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 6,
+    "reference": "2509201GHWQDU7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:50.504Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:50.504Z"
+    },
+    "normalizedReference": "2509201GHWQDU7",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed57cdea616f57c0997c"
+    },
+    "item": {
+      "$oid": "68ca5bb59f0dd1b2870f9d5f"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 20,
+    "balanceAfter": 46,
+    "reference": "2509201RATVT75",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting 304 | 2 Feet & 4 Feet Long  3/16 (4.78mm) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:51.259Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:51.259Z"
+    },
+    "normalizedReference": "2509201RATVT75",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed57cdea616f57c0998e"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 20,
+    "reference": "2509201RG1PTKH",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:51.690Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:51.690Z"
+    },
+    "normalizedReference": "2509201RG1PTKH",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed58cdea616f57c099b1"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 19,
+    "reference": "25092029CPCU5B",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:52.640Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:52.640Z"
+    },
+    "normalizedReference": "25092029CPCU5B",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed58cdea616f57c099bc"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 18,
+    "reference": "2509202B2BXRKQ",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:52.928Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:52.928Z"
+    },
+    "normalizedReference": "2509202B2BXRKQ",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed59cdea616f57c099c0"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 5,
+    "reference": "2509202B2BXRKQ",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Static Utility Rope w/ Makapal 1/4 Stainless Ring for Hammocks - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:53.057Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:53.057Z"
+    },
+    "normalizedReference": "2509202B2BXRKQ",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed59cdea616f57c099dd"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 4,
+    "reference": "2509213AWFSG53",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:53.723Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:53.723Z"
+    },
+    "normalizedReference": "2509213AWFSG53",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5bcdea616f57c09a11"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 17,
+    "reference": "2509213VA5FEQT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:55.099Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:55.099Z"
+    },
+    "normalizedReference": "2509213VA5FEQT",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5bcdea616f57c09a1b"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 3,
+    "reference": "2509213WJPEUUT",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:55.389Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:55.389Z"
+    },
+    "normalizedReference": "2509213WJPEUUT",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5ccdea616f57c09a36"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 110,
+    "balanceAfter": 1,
+    "reference": "25092147S24H9H",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:56.096Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:56.096Z"
+    },
+    "normalizedReference": "25092147S24H9H",
+    "totalValue": 220,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5ccdea616f57c09a48"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 16,
+    "reference": "25092148FCDQQC",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:56.516Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:56.516Z"
+    },
+    "normalizedReference": "25092148FCDQQC",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5dcdea616f57c09a68"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 14,
+    "reference": "2509214HN1YHSK",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Hammock Frame Foldable Detachable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:57.332Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:57.332Z"
+    },
+    "normalizedReference": "2509214HN1YHSK",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5dcdea616f57c09a6c"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 1200,
+    "balanceAfter": 3,
+    "reference": "2509214HN1YHSK",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Hammock Frame Foldable Detachable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:57.459Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:57.459Z"
+    },
+    "normalizedReference": "2509214HN1YHSK",
+    "totalValue": 1200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5ecdea616f57c09a93"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 23,
+    "reference": "2509214QA2K4TN",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:58.406Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:58.406Z"
+    },
+    "normalizedReference": "2509214QA2K4TN",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5ecdea616f57c09a9d"
+    },
+    "item": {
+      "$oid": "68ca5bb59f0dd1b2870f9d5f"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 45,
+    "reference": "2509214RX2PK8K",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting 304 | 2 Feet & 4 Feet Long  3/16 (4.78mm) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:58.694Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:58.694Z"
+    },
+    "normalizedReference": "2509214RX2PK8K",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed5fcdea616f57c09abb"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 0,
+    "reference": "2509225NU9JEJH",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:31:59.437Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:31:59.437Z"
+    },
+    "normalizedReference": "2509225NU9JEJH",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed60cdea616f57c09ad9"
+    },
+    "item": {
+      "$oid": "68bbc6862f35835cfdb9ee97"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 100,
+    "balanceAfter": 13,
+    "reference": "250922684B44CU",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME DETACHABLE FOR OFFICE, BEACH, FARM ( Frame Only) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:32:00.177Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:32:00.177Z"
+    },
+    "normalizedReference": "250922684B44CU",
+    "totalValue": 100,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed60cdea616f57c09add"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 1200,
+    "balanceAfter": 2,
+    "reference": "250922684B44CU",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for DUYAN FRAME DETACHABLE FOR OFFICE, BEACH, FARM ( Frame Only) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:32:00.304Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:32:00.304Z"
+    },
+    "normalizedReference": "250922684B44CU",
+    "totalValue": 1200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0ed60cdea616f57c09af1"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 15,
+    "reference": "25092268BE2PSD",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:32:00.719Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:32:00.719Z"
+    },
+    "normalizedReference": "25092268BE2PSD",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f32bcdea616f57c09eed"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 71,
+    "reference": "2509214M3QKRKM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting 304 | 2 Feet & 4 Feet Long  3/16 (4.78mm) - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:56:43.287Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:56:43.287Z"
+    },
+    "normalizedReference": "2509214M3QKRKM",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f33dcdea616f57c09f3d"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 22,
+    "reference": "2509201YKWGUVJ",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring w/ Static Utility Rope Set 10mm, 10meters - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:57:01.022Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:57:01.022Z"
+    },
+    "normalizedReference": "2509201YKWGUVJ",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f33dcdea616f57c09f48"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 21,
+    "reference": "250920202Y69G7",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring w/ Static Utility Rope Set 10mm, 10meters - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:57:01.324Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:57:01.324Z"
+    },
+    "normalizedReference": "250920202Y69G7",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f33dcdea616f57c09f5a"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 20,
+    "reference": "25092027MPCUKK",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring w/ Static Utility Rope Set 10mm, 10meters - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:57:01.787Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:57:01.787Z"
+    },
+    "normalizedReference": "25092027MPCUKK",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f33ecdea616f57c09f79"
+    },
+    "item": {
+      "$oid": "68b684e7c3bcfc9ab3c82028"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 14,
+    "reference": "25092140566HFM",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Static Utility Rope for Hammock w/ Stainless Ring Pair 304 - 10m Long,10mm Diameter, Durable - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:57:02.581Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:57:02.581Z"
+    },
+    "normalizedReference": "25092140566HFM",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f33fcdea616f57c09fa4"
+    },
+    "item": {
+      "$oid": "68b5727a05bc2b256f1ce83b"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 200,
+    "balanceAfter": 19,
+    "reference": "25092263CQT2WB",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring w/ Static Utility Rope Set 10mm, 10meters - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T06:57:03.707Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T06:57:03.707Z"
+    },
+    "normalizedReference": "25092263CQT2WB",
+    "totalValue": 200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50bcdea616f57c09fd7"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 48,
+    "reference": "580458449464034869",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:43.546Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:43.546Z"
+    },
+    "normalizedReference": "580458449464034869",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50ccdea616f57c09fe8"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 40,
+    "balanceAfter": 46,
+    "reference": "580458761597650336",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:44.025Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:44.025Z"
+    },
+    "normalizedReference": "580458761597650336",
+    "totalValue": 80,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50ccdea616f57c0a005"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 45,
+    "reference": "580460176155903376",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:44.803Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:44.803Z"
+    },
+    "normalizedReference": "580460176155903376",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50dcdea616f57c0a016"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 44,
+    "reference": "580462011380761639",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:45.233Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:45.233Z"
+    },
+    "normalizedReference": "580462011380761639",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50dcdea616f57c0a027"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 43,
+    "reference": "580462427115062772",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:45.660Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:45.660Z"
+    },
+    "normalizedReference": "580462427115062772",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50ecdea616f57c0a038"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 42,
+    "reference": "580464300739495330",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:46.088Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:46.088Z"
+    },
+    "normalizedReference": "580464300739495330",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50ecdea616f57c0a04f"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 41,
+    "reference": "580464951833626404",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:46.686Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:46.686Z"
+    },
+    "normalizedReference": "580464951833626404",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50fcdea616f57c0a060"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 40,
+    "balanceAfter": 39,
+    "reference": "580465709899679561",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:47.112Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:47.112Z"
+    },
+    "normalizedReference": "580465709899679561",
+    "totalValue": 80,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f50fcdea616f57c0a071"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 38,
+    "reference": "580465955726985062",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:47.543Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:47.543Z"
+    },
+    "normalizedReference": "580465955726985062",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f510cdea616f57c0a09b"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 37,
+    "reference": "580468905454110317",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:48.644Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:48.644Z"
+    },
+    "normalizedReference": "580468905454110317",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f511cdea616f57c0a0ac"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 70,
+    "reference": "580469701746329463",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:49.080Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:49.080Z"
+    },
+    "normalizedReference": "580469701746329463",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f511cdea616f57c0a0bd"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 3,
+    "price": 40,
+    "balanceAfter": 34,
+    "reference": "580469808138520483",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:49.529Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:49.529Z"
+    },
+    "normalizedReference": "580469808138520483",
+    "totalValue": 120,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f511cdea616f57c0a0ce"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 3,
+    "price": 40,
+    "balanceAfter": 31,
+    "reference": "580470301266183793",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:49.952Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:49.952Z"
+    },
+    "normalizedReference": "580470301266183793",
+    "totalValue": 120,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f512cdea616f57c0a0df"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 30,
+    "reference": "580470438887130267",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:50.378Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:50.378Z"
+    },
+    "normalizedReference": "580470438887130267",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f512cdea616f57c0a0f0"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 29,
+    "reference": "580471202016232579",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:50.803Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:50.803Z"
+    },
+    "normalizedReference": "580471202016232579",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f513cdea616f57c0a101"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 28,
+    "reference": "580471476354909206",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:51.255Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:51.255Z"
+    },
+    "normalizedReference": "580471476354909206",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f513cdea616f57c0a112"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 27,
+    "reference": "580471738557105558",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:51.708Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:51.708Z"
+    },
+    "normalizedReference": "580471738557105558",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f514cdea616f57c0a129"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 69,
+    "reference": "580472139091248797",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:52.302Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:52.302Z"
+    },
+    "normalizedReference": "580472139091248797",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f514cdea616f57c0a140"
+    },
+    "item": {
+      "$oid": "68b572bd05bc2b256f1ce849"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 20,
+    "balanceAfter": 68,
+    "reference": "580473546841359852",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:52.894Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:52.894Z"
+    },
+    "normalizedReference": "580473546841359852",
+    "totalValue": 20,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f515cdea616f57c0a157"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 40,
+    "balanceAfter": 25,
+    "reference": "580476432196732273",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:04:53.490Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:04:53.490Z"
+    },
+    "normalizedReference": "580476432196732273",
+    "totalValue": 80,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f5a5cdea616f57c0a2dc"
+    },
+    "item": {
+      "$oid": "68b56932650c74e5be3238ad"
+    },
+    "type": "IN",
+    "quantity": 20,
+    "price": 1200,
+    "balanceAfter": 22,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:07:17.673Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:07:17.673Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 24000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f5b9cdea616f57c0a2e5"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "IN",
+    "quantity": 20,
+    "price": 110,
+    "balanceAfter": 20,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:07:37.238Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:07:37.238Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 2200,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0f5c2cdea616f57c0a2ed"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 20,
+    "price": 100,
+    "balanceAfter": 20,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:07:46.754Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:07:46.754Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 2000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0fc34283ea4463d59bca3"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 5,
+    "price": 100,
+    "balanceAfter": 15,
+    "reference": "2509202C5YHSKJ",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Duyan Ring Stainless 304 2 pcs already - shopee",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:35:16.708Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:35:16.708Z"
+    },
+    "normalizedReference": "2509202C5YHSKJ",
+    "totalValue": 500,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0fc8a283ea4463d59bf4f"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 40,
+    "balanceAfter": 24,
+    "reference": "580478566993855837",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:36:42.758Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:36:42.758Z"
+    },
+    "normalizedReference": "580478566993855837",
+    "totalValue": 40,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0fc8b283ea4463d59bf60"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 40,
+    "balanceAfter": 22,
+    "reference": "580479262308337303",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:36:43.198Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:36:43.198Z"
+    },
+    "normalizedReference": "580479262308337303",
+    "totalValue": 80,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0fc8b283ea4463d59bf71"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 2,
+    "price": 40,
+    "balanceAfter": 20,
+    "reference": "580479353572198360",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:36:43.634Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:36:43.634Z"
+    },
+    "normalizedReference": "580479353572198360",
+    "totalValue": 80,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d0fc8c283ea4463d59bf82"
+    },
+    "item": {
+      "$oid": "68b572e105bc2b256f1ce850"
+    },
+    "type": "OUT",
+    "quantity": 3,
+    "price": 40,
+    "balanceAfter": 17,
+    "reference": "580480303362181016",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more - tiktok",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-22T07:36:44.071Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-22T07:36:44.071Z"
+    },
+    "normalizedReference": "580480303362181016",
+    "totalValue": 120,
+    "__v": 0
   }
 ]

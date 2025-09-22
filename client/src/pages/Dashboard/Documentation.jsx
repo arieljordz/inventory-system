@@ -9,9 +9,14 @@ const Documentation = () => {
         <>
           <p className="font-semibold mb-2">Product CRUD Operations</p>
           <ul className="list-disc ml-6 mb-4">
-            <li>Create new products with detailed specifications and variations</li>
+            <li>
+              Create new products with detailed specifications and variations
+            </li>
             <li>Update product information, pricing, and descriptions</li>
-            <li>Browse a comprehensive product catalog with search and filtering options</li>
+            <li>
+              Browse a comprehensive product catalog with search and filtering
+              options
+            </li>
             <li>Delete or archive discontinued products</li>
           </ul>
 
@@ -33,7 +38,9 @@ const Documentation = () => {
         <>
           <p className="font-semibold mb-2">Multi-Platform Order Management</p>
           <ul className="list-disc ml-6 mb-4">
-            <li>Import orders automatically from Shopee, TikTok Shop, and Lazada</li>
+            <li>
+              Import orders automatically from Shopee, TikTok Shop, and Lazada
+            </li>
             <li>Real-time order status updates and tracking</li>
             <li>Bulk order import with data validation</li>
             <li>Track order statuses: Processing, Returned, Completed</li>
@@ -50,7 +57,9 @@ const Documentation = () => {
           <p className="font-semibold mb-2">Walk-in Transaction Processing</p>
           <ul className="list-disc ml-6 mb-4">
             <li>Point-of-sale interface for physical store transactions</li>
-            <li>Support for multiple payment methods (cash, GCash, bank transfer)</li>
+            <li>
+              Support for multiple payment methods (cash, GCash, bank transfer)
+            </li>
             <li>Receipt generation and printing capabilities</li>
           </ul>
 
@@ -99,7 +108,9 @@ const Documentation = () => {
       title: "🔗 Data Management & Integration",
       content: (
         <>
-          <p className="font-semibold mb-2">Platform Integration & Data Tools</p>
+          <p className="font-semibold mb-2">
+            Platform Integration & Data Tools
+          </p>
           <ul className="list-disc ml-6 mb-4">
             <li>Bulk product import using Excel templates</li>
             <li>Seamless synchronization of imported data and updates</li>
@@ -107,6 +118,86 @@ const Documentation = () => {
             <li>Data validation and duplicate prevention</li>
             <li>Audit trail for all data modifications</li>
             <li>Backup and restore functionality</li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      key: "6",
+      title: "📤 Exporting Order Reports",
+      content: (
+        <>
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            🛍️ Shopee – Exporting Returns/Refunds/Cancelled Orders
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">My Orders</span>
+            </li>
+            <li>
+              Go to{" "}
+              <span className="font-medium">Return / Refund / Cancel</span> tab
+            </li>
+            <li>
+              Select <span className="font-medium">All Orders</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button to
+              download the file
+            </li>
+          </ul>
+
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            📦 Lazada – Exporting Failed/Cancelled Orders
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">My Orders</span>
+            </li>
+            <li>
+              Go to{" "}
+              <span className="font-medium">
+                Failed Delivery / Cancellation / Return / Refund
+              </span>
+            </li>
+            <li>
+              Select <span className="font-medium">All Orders</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button to
+              download the file
+            </li>
+          </ul>
+
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            🎵 TikTok Shop – Exporting Cancelled Orders
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">My Orders</span>
+            </li>
+            <li>
+              Go to the <span className="font-medium">Cancelled</span> tab
+            </li>
+            <li>
+              Select <span className="font-medium">All Orders</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button to
+              download the file
+            </li>
           </ul>
         </>
       ),
@@ -161,24 +252,30 @@ const Documentation = () => {
         </h5>
         <ul className="list-disc ml-6 space-y-1">
           <li>
-            <strong>Centralized Management:</strong> Manage all platforms from a single dashboard
+            <strong>Centralized Management:</strong> Manage all platforms from a
+            single dashboard
           </li>
           <li>
-            <strong>Real-time Synchronization:</strong> Keep inventory and orders updated instantly across channels
+            <strong>Real-time Synchronization:</strong> Keep inventory and
+            orders updated instantly across channels
           </li>
           <li>
-            <strong>Automated Workflows:</strong> Reduce manual effort with intelligent automation
+            <strong>Automated Workflows:</strong> Reduce manual effort with
+            intelligent automation
           </li>
           <li>
-            <strong>Comprehensive Reporting:</strong> Make informed decisions with detailed analytics
+            <strong>Comprehensive Reporting:</strong> Make informed decisions
+            with detailed analytics
           </li>
           <li>
-            <strong>Scalable Architecture:</strong> Flexible system that grows with your business
+            <strong>Scalable Architecture:</strong> Flexible system that grows
+            with your business
           </li>
         </ul>
         <p className="mt-4 text-sm">
-          🔧 <strong>Need technical support?</strong> Contact our development team
-          for assistance with system configuration, platform integrations, or custom reporting requirements.
+          🔧 <strong>Need technical support?</strong> Contact our development
+          team for assistance with system configuration, platform integrations,
+          or custom reporting requirements.
         </p>
       </div>
     </div>
