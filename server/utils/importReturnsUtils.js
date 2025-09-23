@@ -6,6 +6,7 @@ export const returnPlatformConfigs = {
     sheetName: "orders",
     fields: {
       platformOrderId: "Order ID",
+      orderNumber: "Order ID", 
     },
     requiredHeaders: ["Order ID", "Adjustment Amount"],
   },
@@ -13,6 +14,7 @@ export const returnPlatformConfigs = {
     sheetName: "OrderSKUList",
     fields: {
       platformOrderId: "Order ID",
+      orderNumber: "Order/adjustment ID", 
     },
     requiredHeaders: ["Order ID", "Sku Quantity of return"],
   },
@@ -20,6 +22,7 @@ export const returnPlatformConfigs = {
     sheetName: "sheet1",
     fields: {
       platformOrderId: "orderItemId",
+      orderNumber: "orderNumber", 
     },
     requiredHeaders: ["orderItemId", "Guarantee"],
   },

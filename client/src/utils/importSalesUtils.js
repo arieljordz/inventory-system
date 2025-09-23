@@ -19,44 +19,6 @@ const buildCopyButton = (platformOrderId) => {
   `;
 };
 
-// Build a single Order row for the result table
-const buildOrderRow = (idx, item, type = "imported") => {
-  let remarks = "";
-  let color = "red";
-
-  if (type === "imported") {
-    // console.log("reason:", item.reason);
-    remarks = item.reason;
-    color = "green";
-  } else {
-    switch (item.reason) {
-      case "Product not found":
-        remarks = item.reason;
-        color = "orange";
-        break;
-      case "Order already imported":
-        remarks = item.reason;
-        color = "blue";
-        break;
-      default:
-        remarks = item.reason || "Skipped";
-    }
-  }
-
-  return `
-    <tr>
-      <td style="padding:6px; border:1px solid #ccc; text-align:center;">${
-        idx + 1
-      }</td>
-      <td style="padding:6px; border:1px solid #ccc;">
-        ${item.platformOrderId}
-        ${buildCopyButton(item.platformOrderId)}
-      </td>
-      <td style="padding:6px; border:1px solid #ccc; color:${color}">${remarks}</td>
-    </tr>
-  `;
-};
-
 // Build a single Sales row for the result table
 const buildSalesRow = (idx, item, type = "paid") => {
   let remarks = "";
@@ -143,7 +105,7 @@ const showImportResults = (rows, title, successMessage) => {
             <thead>
               <tr>
                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; text-align:center; color:white;">#</th>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Order ID</th>
+                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white; width:250px;">Order ID</th>
                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Remarks</th>
               </tr>
             </thead>
@@ -177,29 +139,6 @@ const showImportResults = (rows, title, successMessage) => {
   } else {
     toast.success(successMessage);
   }
-};
-
-// Show Order Import Results
-export const showOrderImportResults = (details, platform) => {
-  const rows = [];
-
-  if (details?.imported?.length) {
-    details.imported.forEach((item, idx) => {
-      rows.push(buildOrderRow(idx, item, "imported"));
-    });
-  }
-
-  if (details?.skipped?.length) {
-    details.skipped.forEach((item, idx) => {
-      rows.push(buildOrderRow(details.imported?.length + idx, item, "skipped"));
-    });
-  }
-
-  showImportResults(
-    rows,
-    `${toProperCase(platform)} Import Results`,
-    "Orders imported successfullys!"
-  );
 };
 
 // Show Sales Import Results
@@ -238,7 +177,7 @@ export const showReturnImportResults = (details, platform) => {
 
   if (details?.updated?.length) {
     details.updated.forEach((item, idx) => {
-      rows.push(buildOrderRow(idx, item, "returned"));
+      rows.push(buildReturnsRow(idx, item, "returned"));
     });
   }
 
@@ -256,13 +195,13 @@ export const showReturnImportResults = (details, platform) => {
 
   if (details?.skipped?.length) {
     details.skipped.forEach((item, idx) => {
-      rows.push(buildOrderRow(idx, item, "skipped"));
+      rows.push(buildReturnsRow(idx, item, "skipped"));
     });
   }
 
   if (details?.failedRestocks?.length) {
     details.failedRestocks.forEach((item, idx) => {
-      rows.push(buildOrderRow(idx, item, "failed restock"));
+      rows.push(buildReturnsRow(idx, item, "failed restock"));
     });
   }
 

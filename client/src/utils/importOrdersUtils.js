@@ -88,7 +88,7 @@ const showImportResults = (rows, title, successMessage) => {
             <thead>
               <tr>
                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; text-align:center; color:white;">#</th>
-                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Order ID</th>
+                <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white; width:250px;">Order ID</th>
                 <th style="padding:6px; border:1px solid #ebf3ffff; background:#3886fcff; color:white;">Remarks</th>
               </tr>
             </thead>

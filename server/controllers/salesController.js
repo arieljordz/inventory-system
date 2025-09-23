@@ -332,7 +332,7 @@ export const processSalesImport = async ({
         collectionName: "Order",
         documentId: order._id,
         before,
-        after: { isPaid: true },
+        after: order.toObject(),
         ip: req.ip,
         userAgent: req.headers["user-agent"],
       });
@@ -466,6 +466,12 @@ export const processReturnsImport = async ({
     const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
       .toString()
       .trim();
+
+    const orderNumber = (row[finalFieldMap.orderNumber] || "")
+      .toString()
+      .trim();
+
+    // --- Validation ---
     if (!platformOrderId) {
       results.skipped.push({ reason: "Missing platformOrderId", row });
       continue;
@@ -503,6 +509,7 @@ export const processReturnsImport = async ({
       // --- Update order status ---
       const before = order.toObject();
       order.status = StatusEnum.RETURNED;
+      order.orderNumber = orderNumber || order.orderNumber; // fallback if blank
       order.isPaid = false;
       await order.save();
 
@@ -540,14 +547,14 @@ export const processReturnsImport = async ({
         collectionName: "Order",
         documentId: order._id,
         before,
-        after: { status: StatusEnum.RETURNED },
+        after: order.toObject(),
         ip: req.ip,
         userAgent: req.headers["user-agent"],
       });
     } catch (err) {
       results.skipped.push({
         platformOrderId,
-        reason: `Error processing order: ${err.message}`,
+        reason: `Error: ${err.message}`,
       });
     }
   }

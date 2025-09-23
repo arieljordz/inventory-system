@@ -43,48 +43,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541c4534336e7e1c5c9e"
-    },
-    "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
-    "price": 89,
-    "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
-    "image": "",
-    "imageId": "",
-    "quantity": 192,
-    "sku": "STAIN-4-FEE-91451",
-    "variant": "4 Feet",
-    "category": "",
-    "unit": "pcs",
-    "supplier": "",
-    "location": "Main Warehouse",
-    "status": "Available",
-    "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
-    "normalizedVariant": "4 feet",
-    "normalizedSku": "stain-4-fee-91451",
-    "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:12.193Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-22T07:36:44.115Z"
-    },
-    "__v": 1,
-    "components": [
-      {
-        "item": {
-          "$oid": "68b572e105bc2b256f1ce850"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68c97e370b748e2db2354132"
-        }
-      }
-    ],
-    "type": "bundle",
-    "shopName": "T-Shop"
-  },
-  {
-    "_id": {
       "$oid": "68ab541c4534336e7e1c5ca0"
     },
     "name": "2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE",
@@ -92,7 +50,7 @@
     "description": "2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE",
     "image": "",
     "imageId": "",
-    "quantity": 19,
+    "quantity": 14,
     "sku": "2-PCS-DEFAU-88133",
     "variant": "Default",
     "category": "",
@@ -108,7 +66,7 @@
       "$date": "2025-08-24T18:04:12.195Z"
     },
     "updatedAt": {
-      "$date": "2025-09-19T08:23:07.163Z"
+      "$date": "2025-09-23T06:14:20.957Z"
     },
     "__v": 0,
     "components": [
@@ -127,6 +85,48 @@
   },
   {
     "_id": {
+      "$oid": "68ab541c4534336e7e1c5c9e"
+    },
+    "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+    "price": 89,
+    "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
+    "image": "",
+    "imageId": "",
+    "quantity": 185,
+    "sku": "STAIN-4-FEE-91451",
+    "variant": "4 Feet",
+    "category": "",
+    "unit": "pcs",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+    "normalizedVariant": "4 feet",
+    "normalizedSku": "stain-4-fee-91451",
+    "normalizedDescription": "stainless steel shafting round bar – 3/16\" (202/304) length: sold per 4 feet material: durable 202/304 stainless steel – rust-resistant, heavy-duty, and multipurpose! ️ versatile uses: bbq grill stick lechon manok rod pam-pana ng isda and many more",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:12.193Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-23T06:12:37.736Z"
+    },
+    "__v": 1,
+    "components": [
+      {
+        "item": {
+          "$oid": "68b572e105bc2b256f1ce850"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c97e370b748e2db2354132"
+        }
+      }
+    ],
+    "type": "bundle",
+    "shopName": "T-Shop"
+  },
+  {
+    "_id": {
       "$oid": "68ab541c4534336e7e1c5ca2"
     },
     "name": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
@@ -134,7 +134,7 @@
     "description": "Stainless Steel Shafting Round Bar – 3/16\" (202/304)   Length: Sold per 4 Feet  Material: Durable 202/304 Stainless Steel – Rust-resistant, heavy-duty, and multipurpose!  ️ Versatile Uses:  BBQ Grill Stick  Lechon Manok Rod  Pam-pana ng isda and many more",
     "image": "",
     "imageId": "",
-    "quantity": 72,
+    "quantity": 71,
     "sku": "STAIN-2-FEE-77290",
     "variant": "2 Feet",
     "category": "",
@@ -150,7 +150,7 @@
       "$date": "2025-08-24T18:04:12.196Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T03:01:29.682Z"
+      "$date": "2025-09-23T06:12:35.430Z"
     },
     "__v": 0,
     "components": [
@@ -176,7 +176,7 @@
     "description": "20 PCS Hammock Ring (MAKAPAL )Stainless 304 (20 PCS) Outdoor Type Heavy Duty, Rust Resistant",
     "image": "",
     "imageId": "",
-    "quantity": 86,
+    "quantity": 85,
     "sku": "20-PC-DEFAU-61233",
     "variant": "Default",
     "category": "",
@@ -192,7 +192,7 @@
       "$date": "2025-08-24T18:04:12.198Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T06:36:29.649Z"
+      "$date": "2025-09-23T06:09:53.490Z"
     },
     "__v": 0,
     "components": [
@@ -211,6 +211,48 @@
   },
   {
     "_id": {
+      "$oid": "68ab541c4534336e7e1c5ca8"
+    },
+    "name": "Stainless Ring 2 Pieces for Hammocks / Duyan - Open for resellers, Big Discounts for repeat buyers",
+    "price": 199,
+    "description": "Stainless Ring 2 Pieces for Hammocks / Duyan - Open for resellers, Big Discounts for repeat buyers",
+    "image": "",
+    "imageId": "",
+    "quantity": 82,
+    "sku": "STAIN-DEFAU-57138",
+    "variant": "Default",
+    "category": "",
+    "unit": "pcs",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "stainless ring 2 pieces for hammocks / duyan - open for resellers, big discounts for repeat buyers",
+    "normalizedVariant": "default",
+    "normalizedSku": "stain-defau-57138",
+    "normalizedDescription": "stainless ring 2 pieces for hammocks / duyan - open for resellers, big discounts for repeat buyers",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:12.199Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-23T06:09:54.878Z"
+    },
+    "__v": 0,
+    "components": [
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c97d680b748e2db23540bd"
+        }
+      }
+    ],
+    "type": "bundle",
+    "shopName": "S-Lhanzshop"
+  },
+  {
+    "_id": {
       "$oid": "68ab541c4534336e7e1c5ca4"
     },
     "name": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
@@ -218,7 +260,7 @@
     "description": "Duyan Ring Stainless - 3/16\" Heavy-Duty Stainless Shafting 304, Rustproof and Durable",
     "image": "",
     "imageId": "",
-    "quantity": 85,
+    "quantity": 80,
     "sku": "DUYAN-RING-73158",
     "variant": "Ring w/ Carabiner",
     "category": "",
@@ -234,7 +276,7 @@
       "$date": "2025-08-24T18:04:12.197Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T00:16:51.036Z"
+      "$date": "2025-09-23T06:09:38.477Z"
     },
     "__v": 0,
     "components": [
@@ -262,48 +304,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541c4534336e7e1c5ca8"
-    },
-    "name": "Stainless Ring 2 Pieces for Hammocks / Duyan - Open for resellers, Big Discounts for repeat buyers",
-    "price": 199,
-    "description": "Stainless Ring 2 Pieces for Hammocks / Duyan - Open for resellers, Big Discounts for repeat buyers",
-    "image": "",
-    "imageId": "",
-    "quantity": 84,
-    "sku": "STAIN-DEFAU-57138",
-    "variant": "Default",
-    "category": "",
-    "unit": "pcs",
-    "supplier": "",
-    "location": "Main Warehouse",
-    "status": "Available",
-    "normalizedName": "stainless ring 2 pieces for hammocks / duyan - open for resellers, big discounts for repeat buyers",
-    "normalizedVariant": "default",
-    "normalizedSku": "stain-defau-57138",
-    "normalizedDescription": "stainless ring 2 pieces for hammocks / duyan - open for resellers, big discounts for repeat buyers",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:12.199Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-19T06:36:44.769Z"
-    },
-    "__v": 0,
-    "components": [
-      {
-        "item": {
-          "$oid": "68b563f4650c74e5be32382b"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68c97d680b748e2db23540bd"
-        }
-      }
-    ],
-    "type": "bundle",
-    "shopName": "S-Lhanzshop"
-  },
-  {
-    "_id": {
       "$oid": "68ab541c4534336e7e1c5caa"
     },
     "name": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
@@ -311,7 +311,7 @@
     "description": "Duyan Ring Stainless 304 (Makapal Type) – Heavy Duty, Kalawang-Free, Matibay na para sa  Hammock",
     "image": "",
     "imageId": "",
-    "quantity": 10,
+    "quantity": 4,
     "sku": "DUYAN-DEFAU-51336",
     "variant": "Default",
     "category": "",
@@ -327,7 +327,7 @@
       "$date": "2025-08-24T18:04:12.294Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T06:31:59.480Z"
+      "$date": "2025-09-23T06:09:57.806Z"
     },
     "__v": 0,
     "components": [
@@ -566,7 +566,7 @@
     "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
     "image": "",
     "imageId": "",
-    "quantity": 18,
+    "quantity": 14,
     "sku": "10-ME-BLACK-26170",
     "variant": "Black",
     "category": "",
@@ -582,7 +582,7 @@
       "$date": "2025-08-24T18:04:12.304Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T02:59:50.711Z"
+      "$date": "2025-09-23T06:09:58.337Z"
     },
     "__v": 0,
     "components": [
@@ -602,6 +602,57 @@
         "qty": 1,
         "_id": {
           "$oid": "68c97cee0b748e2db235403f"
+        }
+      }
+    ],
+    "type": "bundle",
+    "shopName": "S-Lhanzshop"
+  },
+  {
+    "_id": {
+      "$oid": "68ab541c4534336e7e1c5cb8"
+    },
+    "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+    "price": 489,
+    "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
+    "image": "",
+    "imageId": "",
+    "quantity": 62,
+    "sku": "10-ME-ARMY-80989",
+    "variant": "Army Green",
+    "category": "",
+    "unit": "pcs",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+    "normalizedVariant": "army green",
+    "normalizedSku": "10-me-army-80989",
+    "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:12.393Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-23T06:09:54.022Z"
+    },
+    "__v": 0,
+    "components": [
+      {
+        "item": {
+          "$oid": "68b5727a05bc2b256f1ce83b"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c97cbb0b748e2db2353fd8"
+        }
+      },
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c97cbb0b748e2db2353fd9"
         }
       }
     ],
@@ -633,10 +684,29 @@
       "$date": "2025-08-24T18:04:12.395Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T06:31:55.725Z"
+      "$date": "2025-09-23T07:08:38.637Z"
     },
     "__v": 0,
-    "components": [],
+    "components": [
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68d247769fb339237eeb70bb"
+        }
+      },
+      {
+        "item": {
+          "$oid": "68b56475650c74e5be323844"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68d247769fb339237eeb70bc"
+        }
+      }
+    ],
     "shopName": "S-Lhanzshop",
     "type": "bundle"
   },
@@ -684,57 +754,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541c4534336e7e1c5cb8"
-    },
-    "name": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
-    "price": 489,
-    "description": "10 Meter Static Utility Safety Rope w/ 2 Stainless Ring & 2 Carabiners  Set for Hammocks Duyan",
-    "image": "",
-    "imageId": "",
-    "quantity": 63,
-    "sku": "10-ME-ARMY-80989",
-    "variant": "Army Green",
-    "category": "",
-    "unit": "pcs",
-    "supplier": "",
-    "location": "Main Warehouse",
-    "status": "Available",
-    "normalizedName": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
-    "normalizedVariant": "army green",
-    "normalizedSku": "10-me-army-80989",
-    "normalizedDescription": "10 meter static utility safety rope w/ 2 stainless ring & 2 carabiners set for hammocks duyan",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:12.393Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-22T02:59:49.913Z"
-    },
-    "__v": 0,
-    "components": [
-      {
-        "item": {
-          "$oid": "68b5727a05bc2b256f1ce83b"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68c97cbb0b748e2db2353fd8"
-        }
-      },
-      {
-        "item": {
-          "$oid": "68b563f4650c74e5be32382b"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68c97cbb0b748e2db2353fd9"
-        }
-      }
-    ],
-    "type": "bundle",
-    "shopName": "S-Lhanzshop"
-  },
-  {
-    "_id": {
       "$oid": "68ab541c4534336e7e1c5cb6"
     },
     "name": "Duyan Ring Stainless 304 2 pcs already",
@@ -742,7 +761,7 @@
     "description": "Duyan Ring Stainless 304 2 pcs already",
     "image": "",
     "imageId": "",
-    "quantity": 99,
+    "quantity": 96,
     "sku": "DUYAN-DEFAU-88335",
     "variant": "Default",
     "category": "",
@@ -758,7 +777,7 @@
       "$date": "2025-08-24T18:04:12.391Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T07:35:16.754Z"
+      "$date": "2025-09-23T06:09:58.741Z"
     },
     "__v": 1,
     "components": [
@@ -816,7 +835,7 @@
     "description": "Duyan Stainless Ring Pair for Hammocks different sizes, Anchors w/ rope to post for better stability",
     "image": "",
     "imageId": "",
-    "quantity": 76,
+    "quantity": 75,
     "sku": "DUYAN-2-RIN-81623",
     "variant": "2 ring w/ carabiner",
     "category": "",
@@ -832,7 +851,7 @@
       "$date": "2025-08-24T18:04:12.494Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T00:16:53.314Z"
+      "$date": "2025-09-23T06:09:35.802Z"
     },
     "__v": 0,
     "components": [
@@ -1004,57 +1023,6 @@
   },
   {
     "_id": {
-      "$oid": "68ab541c4534336e7e1c5cbe"
-    },
-    "name": "10Meter Static Utility Rope w/ Stainless Rings & Carabiners",
-    "price": 489,
-    "description": "10Meter Static Utility Rope w/ Stainless Rings & Carabiners",
-    "image": "",
-    "imageId": "",
-    "quantity": 92,
-    "sku": "10MET-BLACK-26667",
-    "variant": "Black",
-    "category": "",
-    "unit": "pcs",
-    "supplier": "",
-    "location": "Main Warehouse",
-    "status": "Available",
-    "normalizedName": "10meter static utility rope w/ stainless rings & carabiners",
-    "normalizedVariant": "black",
-    "normalizedSku": "10met-black-26667",
-    "normalizedDescription": "10meter static utility rope w/ stainless rings & carabiners",
-    "createdAt": {
-      "$date": "2025-08-24T18:04:12.396Z"
-    },
-    "updatedAt": {
-      "$date": "2025-09-17T04:15:12.868Z"
-    },
-    "__v": 0,
-    "components": [
-      {
-        "item": {
-          "$oid": "68b684e7c3bcfc9ab3c82028"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68c97c800b748e2db2353f9b"
-        }
-      },
-      {
-        "item": {
-          "$oid": "68b563f4650c74e5be32382b"
-        },
-        "qty": 1,
-        "_id": {
-          "$oid": "68c97c800b748e2db2353f9c"
-        }
-      }
-    ],
-    "type": "bundle",
-    "shopName": "S-Lhanzshop"
-  },
-  {
-    "_id": {
       "$oid": "68ab541c4534336e7e1c5cc6"
     },
     "name": "THICK (Makapal) STAINLESS RING FOR DUYAN 2 PCS w/ or w/o Carabiner",
@@ -1157,6 +1125,57 @@
   },
   {
     "_id": {
+      "$oid": "68ab541c4534336e7e1c5cbe"
+    },
+    "name": "10Meter Static Utility Rope w/ Stainless Rings & Carabiners",
+    "price": 489,
+    "description": "10Meter Static Utility Rope w/ Stainless Rings & Carabiners",
+    "image": "",
+    "imageId": "",
+    "quantity": 92,
+    "sku": "10MET-BLACK-26667",
+    "variant": "Black",
+    "category": "",
+    "unit": "pcs",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "10meter static utility rope w/ stainless rings & carabiners",
+    "normalizedVariant": "black",
+    "normalizedSku": "10met-black-26667",
+    "normalizedDescription": "10meter static utility rope w/ stainless rings & carabiners",
+    "createdAt": {
+      "$date": "2025-08-24T18:04:12.396Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-17T04:15:12.868Z"
+    },
+    "__v": 0,
+    "components": [
+      {
+        "item": {
+          "$oid": "68b684e7c3bcfc9ab3c82028"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c97c800b748e2db2353f9b"
+        }
+      },
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68c97c800b748e2db2353f9c"
+        }
+      }
+    ],
+    "type": "bundle",
+    "shopName": "S-Lhanzshop"
+  },
+  {
+    "_id": {
       "$oid": "68ab541d4534336e7e1c5d34"
     },
     "name": "Duyan Stainless Ring ( 2 PCS )",
@@ -1164,7 +1183,7 @@
     "description": "Duyan Stainless Ring ( 2 PCS )",
     "image": "",
     "imageId": "",
-    "quantity": 40,
+    "quantity": 38,
     "sku": "DUYAN-DEFAU-53766",
     "variant": "Default",
     "category": "",
@@ -1180,7 +1199,7 @@
       "$date": "2025-08-24T18:04:13.224Z"
     },
     "updatedAt": {
-      "$date": "2025-09-19T06:38:44.057Z"
+      "$date": "2025-09-23T06:12:38.537Z"
     },
     "__v": 0,
     "components": [
@@ -1257,7 +1276,7 @@
     "description": "Stainless Steel Hammock Ring for Duyan - Non-Rusty & Stable - Pack of 2 - Without Carabiner - Pure Stainless Steel Material",
     "image": "",
     "imageId": "",
-    "quantity": 91,
+    "quantity": 89,
     "sku": "STAIN-DEFAU-33888",
     "variant": "Default",
     "category": "",
@@ -1269,14 +1288,24 @@
       "$date": "2025-08-25T06:57:34.686Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T03:01:26.154Z"
+      "$date": "2025-09-23T07:06:56.317Z"
     },
     "normalizedName": "stainless steel hammock ring for duyan - non-rusty & stable - pack of 2 - without carabiner - pure stainless steel material",
     "normalizedVariant": "default",
     "normalizedSku": "stain-defau-33888",
     "normalizedDescription": "stainless steel hammock ring for duyan - non-rusty & stable - pack of 2 - without carabiner - pure stainless steel material",
     "__v": 0,
-    "components": [],
+    "components": [
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68d247109fb339237eeb70a1"
+        }
+      }
+    ],
     "shopName": "T-Shop",
     "type": "bundle"
   },
@@ -1669,7 +1698,7 @@
     "description": "1 Set Already 2 Pcs Ring & 2 Pcs Heavy Duty Carabiner Direct Supplier Snap Clip For Hammocks Outdoor",
     "image": "",
     "imageId": "",
-    "quantity": 61,
+    "quantity": 60,
     "sku": "1-SET-RING-32560",
     "variant": "Ring w/ Carabiners",
     "category": "",
@@ -1681,7 +1710,7 @@
       "$date": "2025-08-26T07:57:42.634Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T02:59:51.917Z"
+      "$date": "2025-09-23T06:09:55.928Z"
     },
     "normalizedName": "1 set already 2 pcs ring & 2 pcs heavy duty carabiner direct supplier snap clip for hammocks outdoor",
     "normalizedVariant": "ring w/ carabiners",
@@ -2099,7 +2128,7 @@
     "description": "Stainless Steel Shafting Round Bar 3/16\" x 2 Feet Cuttings - 304 High-Quality Steel for Industrial & DIY Projects",
     "image": "",
     "imageId": "",
-    "quantity": 72,
+    "quantity": 56,
     "sku": "STAIN-2-FEE-04005",
     "variant": "Default",
     "category": "",
@@ -2111,7 +2140,7 @@
       "$date": "2025-08-27T09:06:44.099Z"
     },
     "updatedAt": {
-      "$date": "2025-09-22T07:04:52.937Z"
+      "$date": "2025-09-23T06:12:40.429Z"
     },
     "normalizedName": "stainless steel shafting round bar 3/16\" x 2 feet cuttings - 304 high-quality steel for industrial & diy projects",
     "normalizedVariant": "default",
@@ -2285,7 +2314,7 @@
     "description": "Makapal Ring Set w/ 2 Carabiner - 1/4\" Diameter 304 Material Heavy-Duty Balancing & Stability for Duyan or Hammocks",
     "image": "",
     "imageId": "",
-    "quantity": 92,
+    "quantity": 91,
     "sku": "MAKAP-DEFAU-60660",
     "variant": "Default",
     "category": "",
@@ -2297,7 +2326,7 @@
       "$date": "2025-08-28T03:16:00.704Z"
     },
     "updatedAt": {
-      "$date": "2025-09-19T06:38:43.540Z"
+      "$date": "2025-09-23T06:12:41.747Z"
     },
     "normalizedName": "makapal ring set w/ 2 carabiner - 1/4\" diameter 304 material heavy-duty balancing & stability for duyan or hammocks",
     "normalizedVariant": "default",
@@ -2993,7 +3022,7 @@
     "description": "Heavy Duty Hammock Ring | Duyan Ring Para sa Ligtas at Matibay na Pagkakabit (ring only)",
     "image": "",
     "imageId": "",
-    "quantity": 94,
+    "quantity": 86,
     "sku": "HEAVY-DEFAU-29891",
     "variant": "Default",
     "category": "",
@@ -3015,7 +3044,7 @@
       "$date": "2025-09-01T08:25:29.894Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T01:17:47.982Z"
+      "$date": "2025-09-23T06:14:19.276Z"
     },
     "normalizedName": "heavy duty hammock ring | duyan ring para sa ligtas at matibay na pagkakabit (ring only)",
     "normalizedVariant": "default",
@@ -3171,7 +3200,7 @@
     "description": "Duyan Ring w/ Static Utility Rope Set 10mm, 10meters",
     "image": "",
     "imageId": "",
-    "quantity": 91,
+    "quantity": 90,
     "sku": "DUYAN-BLACK-57102",
     "variant": "Black",
     "category": "",
@@ -3202,7 +3231,7 @@
       "$date": "2025-09-01T08:40:57.103Z"
     },
     "updatedAt": {
-      "$date": "2025-09-19T06:32:43.129Z"
+      "$date": "2025-09-23T06:09:37.427Z"
     },
     "normalizedName": "duyan ring w/ static utility rope set 10mm, 10meters",
     "normalizedVariant": "black",
@@ -3220,7 +3249,7 @@
     "description": "DUYAN RING PAIR STAINLESS",
     "image": "",
     "imageId": "",
-    "quantity": 77,
+    "quantity": 71,
     "sku": "DUYAN-DEFAU-44518",
     "variant": "Default",
     "category": "",
@@ -3242,7 +3271,7 @@
       "$date": "2025-09-03T03:57:24.552Z"
     },
     "updatedAt": {
-      "$date": "2025-09-19T06:38:46.045Z"
+      "$date": "2025-09-23T06:12:42.697Z"
     },
     "normalizedName": "duyan ring pair stainless",
     "normalizedVariant": "default",
@@ -4008,7 +4037,7 @@
     "description": "Duyan Stainless Ring ( Pair) with Carabiner Pair Set Already",
     "image": "",
     "imageId": "",
-    "quantity": 97,
+    "quantity": 96,
     "sku": "DUYAN-DEFAU-43403",
     "variant": "Default",
     "category": "",
@@ -4039,7 +4068,7 @@
       "$date": "2025-09-08T07:50:43.486Z"
     },
     "updatedAt": {
-      "$date": "2025-09-18T02:59:09.304Z"
+      "$date": "2025-09-23T06:12:42.274Z"
     },
     "normalizedName": "duyan stainless ring ( pair) with carabiner pair set already",
     "normalizedVariant": "default",
@@ -4631,7 +4660,7 @@
     "image": "",
     "imageId": "",
     "shopName": "",
-    "quantity": 97,
+    "quantity": 96,
     "sku": "STATI-ARMY-84218",
     "variant": "Army Green",
     "category": "",
@@ -4662,7 +4691,7 @@
       "$date": "2025-09-17T01:24:44.299Z"
     },
     "updatedAt": {
-      "$date": "2025-09-17T04:19:06.151Z"
+      "$date": "2025-09-23T06:09:56.454Z"
     },
     "normalizedName": "static utility rope safety rope ( black) climbing rappelling rescue 10meter w/ carabiners in",
     "normalizedVariant": "army green",
@@ -4790,7 +4819,7 @@
     "image": "",
     "imageId": "",
     "shopName": "S-ARNSHOP",
-    "quantity": 98,
+    "quantity": 97,
     "sku": "STATI-BLACK-86943",
     "variant": "Black",
     "category": "",
@@ -4821,7 +4850,7 @@
       "$date": "2025-09-17T04:28:07.023Z"
     },
     "updatedAt": {
-      "$date": "2025-09-19T06:32:44.177Z"
+      "$date": "2025-09-23T06:09:39.007Z"
     },
     "normalizedName": "static utility rope for hammock w/ stainless ring pair 304 - 10m long,10mm diameter, durable",
     "normalizedVariant": "black",
@@ -5526,6 +5555,46 @@
     "normalizedVariant": "2 feet/ 60cm,3/16\"",
     "normalizedSku": "stain-2-fee-84928",
     "normalizedDescription": "stainless steel shafting 304 | 2 feet & 4 feet long 3/16 (4.78mm)",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d23a379c9369ea930a0ba1"
+    },
+    "name": "Military Hammock / Duyan with Mosquito Net 7 FEET",
+    "price": 459,
+    "description": "Military Hammock / Duyan with Mosquito Net 7 FEET",
+    "image": "",
+    "imageId": "",
+    "shopName": "",
+    "quantity": 99,
+    "sku": "MILIT-DEFAU-27561",
+    "variant": "Default",
+    "category": "",
+    "unit": "pcs",
+    "type": "bundle",
+    "components": [
+      {
+        "item": {
+          "$oid": "68b681ecc3bcfc9ab3c81fb3"
+        },
+        "qty": 1,
+        "_id": {
+          "$oid": "68d23a379c9369ea930a0ba2"
+        }
+      }
+    ],
+    "status": "Available",
+    "createdAt": {
+      "$date": "2025-09-23T06:12:07.601Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-23T06:12:24.730Z"
+    },
+    "normalizedName": "military hammock / duyan with mosquito net 7 feet",
+    "normalizedVariant": "default",
+    "normalizedSku": "milit-defau-27561",
+    "normalizedDescription": "military hammock / duyan with mosquito net 7 feet",
     "__v": 0
   }
 ]

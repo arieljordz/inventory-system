@@ -7,11 +7,27 @@
     "description": "Toggle between product-based and order-based pricing",
     "enabled": true,
     "updatedAt": {
-      "$date": "2025-09-18T20:18:10.472Z"
+      "$date": "2025-09-23T07:13:55.303Z"
     },
     "updatedBy": {
-      "$oid": "687dc354c1eb70666039fa18"
+      "$oid": "6884500702d0150075c6b43a"
     }
+  },
+  {
+    "_id": {
+      "$oid": "68cc68d772f5b08bebd22406"
+    },
+    "key": "maintenance_mode",
+    "description": "Put system into maintenance mode (blocks non-admin users)",
+    "enabled": false
+  },
+  {
+    "_id": {
+      "$oid": "68cc68d772f5b08bebd22407"
+    },
+    "key": "beta_features",
+    "description": "Enable beta features for selected users",
+    "enabled": false
   },
   {
     "_id": {
@@ -34,21 +50,5 @@
     "updatedBy": {
       "$oid": "687dc354c1eb70666039fa18"
     }
-  },
-  {
-    "_id": {
-      "$oid": "68cc68d772f5b08bebd22406"
-    },
-    "key": "maintenance_mode",
-    "description": "Put system into maintenance mode (blocks non-admin users)",
-    "enabled": false
-  },
-  {
-    "_id": {
-      "$oid": "68cc68d772f5b08bebd22407"
-    },
-    "key": "beta_features",
-    "description": "Enable beta features for selected users",
-    "enabled": false
   }
 ]
