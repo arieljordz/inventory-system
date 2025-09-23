@@ -35,6 +35,8 @@ export const getOrdersReport = async (filters = {}) => {
     filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
 
+  console.log("Order Filter:", filter);
+
   // 🔹 Fetch orders with product populated
   const orders = await Order.find(filter).populate("product").lean();
 
@@ -289,11 +291,14 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
     filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
 
+   console.log("ProfitsReport Filter:", filter);
+
   const effectivePriceStage = await getEffectivePriceStage();
 
   const pipeline = [
     { $match: filter },
 
+    // Attach product
     {
       $lookup: {
         from: "products",
@@ -304,6 +309,17 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
     },
     { $unwind: "$product" },
 
+    // ✅ Compute effectivePrice
+    effectivePriceStage,
+
+    // ✅ Revenue first (no lookups that can duplicate!)
+    {
+      $addFields: {
+        revenue: { $multiply: ["$quantity", "$effectivePrice"] },
+      },
+    },
+
+    // Lookup items for cost AFTER revenue is locked in
     {
       $lookup: {
         from: "items",
@@ -312,8 +328,6 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
         as: "items",
       },
     },
-
-    effectivePriceStage, // ✅ now it’s a plain object
 
     {
       $addFields: {
@@ -360,12 +374,17 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
             "$quantity",
           ],
         },
-        revenue: { $multiply: ["$effectivePrice", "$quantity"] },
       },
     },
 
-    { $addFields: { profit: { $subtract: ["$revenue", "$cost"] } } },
+    // ✅ Profit = revenue - cost
+    {
+      $addFields: {
+        profit: { $subtract: ["$revenue", "$cost"] },
+      },
+    },
 
+    // Clean projection
     {
       $project: {
         _id: 0,
