@@ -124,7 +124,148 @@ const Documentation = () => {
     },
     {
       key: "6",
-      title: "📤 Exporting Order Reports",
+      title: "📦 Exporting New Orders",
+      content: (
+        <>
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            🛍️ Shopee – Exporting Orders
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">Orders</span>
+            </li>
+            <li>
+              Go to <span className="font-medium">My Orders</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button
+            </li>
+          </ul>
+
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            📦 Lazada – Exporting Orders
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">Orders</span>
+            </li>
+            <li>
+              Go to <span className="font-medium">Orders</span>
+            </li>
+            <li>
+              Select <span className="font-medium">Hand Over</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button
+            </li>
+          </ul>
+
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            🎵 TikTok Shop – Exporting Orders
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">Orders</span>
+            </li>
+            <li>
+              Go to <span className="font-medium">Manage Orders</span>
+            </li>
+            <li>
+              Select <span className="font-medium">Awaiting Collection</span>
+            </li>
+            <li>
+              Select <span className="font-medium">All Orders</span>
+            </li>
+            <li>
+              Click on <span className="font-medium">Excel</span>
+            </li>
+            <li>
+              Then click <span className="font-medium">Export</span>
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      key: "7",
+      title: "💰 Exporting Sales Reports",
+      content: (
+        <>
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            🛍️ Shopee – Exporting Sales
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">Finance</span>
+            </li>
+            <li>
+              Go to <span className="font-medium">My Income</span>
+            </li>
+            <li>
+              Select <span className="font-medium">Released</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button
+            </li>
+          </ul>
+
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            📦 Lazada – Exporting Sales
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">Finance</span>
+            </li>
+            <li>
+              Go to <span className="font-medium">My Income</span>
+            </li>
+            <li>
+              Select <span className="font-medium">Released</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button
+            </li>
+          </ul>
+
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            🎵 TikTok Shop – Exporting Sales
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Navigate to <span className="font-medium">Finance</span>
+            </li>
+            <li>
+              Go to <span className="font-medium">Transactions</span>
+            </li>
+            <li>
+              Select <span className="font-medium">Settled</span>
+            </li>
+            <li>
+              Apply the required{" "}
+              <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              Click on the <span className="font-medium">Export</span> button
+            </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      key: "8",
+      title: "📤 Exporting Return Orders",
       content: (
         <>
           <p className="font-semibold mb-2 flex items-center gap-2">
@@ -198,6 +339,44 @@ const Documentation = () => {
               Click on the <span className="font-medium">Export</span> button to
               download the file
             </li>
+          </ul>
+        </>
+      ),
+    },
+    {
+      key: "9",
+      title: "📊 Generating Reports",
+      content: (
+        <>
+          <p className="font-semibold mb-2 flex items-center gap-2">
+            📝 Steps to Generate Reports
+          </p>
+          <ul className="list-disc ml-6 mb-4 text-sm text-gray-700">
+            <li>
+              Set the required <span className="font-medium">Date Filter</span>
+            </li>
+            <li>
+              For <span className="font-medium">Paid Orders</span>, set{" "}
+              <span className="font-medium">Payment Status</span> to{" "}
+              <span className="font-medium">Paid</span> and{" "}
+              <span className="font-medium">Status</span> to{" "}
+              <span className="font-medium">Completed</span>
+            </li>
+            <li>
+              For <span className="font-medium">Unpaid Orders</span>, set{" "}
+              <span className="font-medium">Payment Status</span> to{" "}
+              <span className="font-medium">Unpaid</span> and{" "}
+              <span className="font-medium">Status</span> to{" "}
+              <span className="font-medium">On Process</span>
+            </li>
+            <li>
+              For <span className="font-medium">Returned Orders</span>, set{" "}
+              <span className="font-medium">Payment Status</span> to{" "}
+              <span className="font-medium">Unpaid</span> and{" "}
+              <span className="font-medium">Status</span> to{" "}
+              <span className="font-medium">Returned</span>
+            </li>
+            <li>Optionally, you may apply other filters as needed</li>
           </ul>
         </>
       ),
