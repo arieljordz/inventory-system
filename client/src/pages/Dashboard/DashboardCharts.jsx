@@ -1,137 +1,120 @@
-import React, { useEffect, useRef } from "react";
-import Chart from "chart.js/auto";
+import React from "react";
 import { useChartsData } from "../../hooks/useChartsData";
+import ChartCard from "./ChartCard";
 
 function DashboardCharts() {
-  const { areaChartData, revenueDonutChartData, profitDonutChartData } =
+  const { revenueByMonth, ordersByMonth, revenueByPlatform, profitByPlatform } =
     useChartsData();
 
-  const revenueRef = useRef(null);
-  const revenueDonutRef = useRef(null);
-  const profitDonutRef = useRef(null);
+  // ✅ Fixed platform order (normalized)
+  const PLATFORM_ORDER = ["Shopee", "Tiktok", "Lazada"];
+  const colors = ["#36a2eb", "#ff6384", "#ffcd56"];
 
-  const revenueChartInstance = useRef(null);
-  const revenueDonutInstance = useRef(null);
-  const profitDonutInstance = useRef(null);
+  // ✅ Helper to normalize platform names
+  const normalize = (str) =>
+    str ? str.trim().toLowerCase() : "";
 
-  useEffect(() => {
-    // Destroy old instances
-    [revenueChartInstance, revenueDonutInstance, profitDonutInstance].forEach(
-      (chartRef) => {
-        if (chartRef.current) {
-          chartRef.current.destroy();
-          chartRef.current = null;
-        }
-      }
-    );
+  const matchPlatform = (entry, platform) =>
+    normalize(entry.platform) === normalize(platform);
 
-    // ✅ Revenue Area Chart
-    if (revenueRef.current && areaChartData?.length) {
-      revenueChartInstance.current = new Chart(revenueRef.current, {
-        type: "line",
-        data: {
-          labels: areaChartData.map((d) => d.month || "N/A"),
-          datasets: [
-            {
-              label: "Revenue",
-              data: areaChartData.map((d) => d.revenue),
-              backgroundColor: "rgba(60,141,188,0.2)",
-              borderColor: "rgba(60,141,188,1)",
-              borderWidth: 2,
-              fill: true,
-              tension: 0.3,
-            },
-          ],
-        },
-        options: { responsive: true, maintainAspectRatio: false },
-      });
-    }
+  // 📈 Revenue Line Chart
+  const revenueChart = {
+    type: "line",
+    title: "Revenue Trend",
+    icon: "fa-chart-line",
+    labels: revenueByMonth?.map((d) => d.month) || [],
+    datasets: [
+      {
+        label: "Revenue",
+        data: revenueByMonth?.map((d) => d.revenue) || [],
+        backgroundColor: "rgba(60,141,188,0.2)",
+        borderColor: "rgba(60,141,188,1)",
+        borderWidth: 2,
+        fill: true,
+        tension: 0.3,
+      },
+    ],
+  };
 
-    // ✅ Revenue Donut Chart
-    if (revenueDonutRef.current && revenueDonutChartData?.length) {
-      revenueDonutInstance.current = new Chart(revenueDonutRef.current, {
-        type: "doughnut",
-        data: {
-          labels: revenueDonutChartData.map((d) => d.label || "N/A"),
-          datasets: [
-            {
-              label: "Revenue",
-              data: revenueDonutChartData.map((d) => d.value),
-              backgroundColor: ["#f56954", "#f39c12", "#605ca8"],
-            },
-          ],
-        },
-        options: { responsive: true, maintainAspectRatio: false },
-      });
-    }
+  // 📊 Orders Bar Chart (multi-dataset grouped by platform)
+  const ordersByPlatformChart = {
+    type: "bar",
+    title: "Orders by Platform",
+    icon: "fa-chart-bar",
+    labels: ordersByMonth?.map((d) => d.month) || [],
+    datasets:
+      PLATFORM_ORDER.map((platform, idx) => ({
+        label: platform,
+        data:
+          ordersByMonth?.map((m) => {
+            const entry = m.platforms.find((p) =>
+              matchPlatform(p, platform)
+            );
+            return entry ? entry.orders : 0;
+          }) || [],
+        backgroundColor: colors[idx % colors.length],
+      })) || [],
+    options: { scales: { y: { beginAtZero: true } } },
+  };
 
-    // ✅ Profit Donut Chart
-    if (profitDonutRef.current && profitDonutChartData?.length) {
-      profitDonutInstance.current = new Chart(profitDonutRef.current, {
-        type: "doughnut",
-        data: {
-          labels: profitDonutChartData.map((d) => d.label || "N/A"),
-          datasets: [
-            {
-              label: "Profit",
-              data: profitDonutChartData.map((d) => d.value),
-              backgroundColor: ["#d81b60", "#3c8dbc", "#10b981"],
-            },
-          ],
-        },
-        options: { responsive: true, maintainAspectRatio: false },
-      });
-    }
-  }, [areaChartData, revenueDonutChartData, profitDonutChartData]);
+  // 📊 Revenue Bar Chart (multi-dataset grouped by platform)
+  const revenueByPlatformChart = {
+    type: "bar",
+    title: "Revenue by Platform",
+    icon: "fa-chart-bar",
+    labels: revenueByPlatform?.map((d) => d.month) || [],
+    datasets:
+      PLATFORM_ORDER.map((platform, idx) => ({
+        label: platform,
+        data:
+          revenueByPlatform?.map((m) => {
+            const entry = m.platforms.find((p) =>
+              matchPlatform(p, platform)
+            );
+            return entry ? entry.revenue : 0;
+          }) || [],
+        backgroundColor: colors[idx % colors.length],
+      })) || [],
+    options: { scales: { y: { beginAtZero: true } } },
+  };
+
+  // 💰 Profit Bar Chart (multi-dataset grouped by platform)
+  const profitByPlatformChart = {
+    type: "bar",
+    title: "Profit by Platform",
+    icon: "fa-chart-bar",
+    labels: profitByPlatform?.map((d) => d.month) || [],
+    datasets:
+      PLATFORM_ORDER.map((platform, idx) => ({
+        label: platform,
+        data:
+          profitByPlatform?.map((m) => {
+            const entry = m.platforms.find((p) =>
+              matchPlatform(p, platform)
+            );
+            return entry ? entry.profit : 0;
+          }) || [],
+        backgroundColor: colors[idx % colors.length],
+      })) || [],
+    options: { scales: { y: { beginAtZero: true } } },
+  };
 
   return (
     <div className="row">
-      {/* Revenue Area Chart */}
       <div className="col-12 col-lg-6 mb-4">
-        <div className="card h-100">
-          <div className="card-header">
-            <h3 className="card-title">
-              <i className="fas fa-chart-line mr-1" /> Revenue Trend
-            </h3>
-          </div>
-          <div className="card-body">
-            <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={revenueRef} />
-            </div>
-          </div>
-        </div>
+        <ChartCard {...revenueChart} />
       </div>
 
-      {/* Revenue Donut Chart */}
-      <div className="col-12 col-md-6 col-lg-3 mb-4">
-        <div className="card h-100">
-          <div className="card-header">
-            <h3 className="card-title">
-              <i className="fas fa-chart-pie mr-1" /> Revenue by Platform
-            </h3>
-          </div>
-          <div className="card-body">
-            <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={revenueDonutRef} />
-            </div>
-          </div>
-        </div>
+      <div className="col-12 col-lg-6 mb-4">
+        <ChartCard {...ordersByPlatformChart} />
       </div>
 
-      {/* Profit Donut Chart */}
-      <div className="col-12 col-md-6 col-lg-3 mb-4">
-        <div className="card h-100">
-          <div className="card-header">
-            <h3 className="card-title">
-              <i className="fas fa-coins mr-1" /> Profit by Platform
-            </h3>
-          </div>
-          <div className="card-body">
-            <div style={{ position: "relative", height: 300 }}>
-              <canvas ref={profitDonutRef} />
-            </div>
-          </div>
-        </div>
+      <div className="col-12 col-lg-6 mb-4">
+        <ChartCard {...revenueByPlatformChart} />
+      </div>
+
+      <div className="col-12 col-lg-6 mb-4">
+        <ChartCard {...profitByPlatformChart} />
       </div>
     </div>
   );

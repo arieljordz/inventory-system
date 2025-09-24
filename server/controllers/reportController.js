@@ -291,8 +291,6 @@ export const getOrdersWithProfitsReport = async (filters = {}) => {
     filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
 
-   console.log("ProfitsReport Filter:", filter);
-
   const effectivePriceStage = await getEffectivePriceStage();
 
   const pipeline = [

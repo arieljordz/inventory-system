@@ -3,11 +3,10 @@ import { useState, useEffect } from "react";
 import { getDashboardCharts } from "../services/dashboardService";
 
 export const useChartsData = () => {
-  const [areaChartData, setAreaChartData] = useState([]);
-  const [revenueDonutChartData, setRevenueDonutChartData] = useState([]);
-  const [ordersDonutChartData, setOrdersDonutChartData] = useState([]);
-  const [profitDonutChartData, setProfitDonutChartData] = useState([]);
-  const [monthlyDonutChartData, setMonthlyDonutChartData] = useState([]);
+  const [revenueByMonth, setRevenueByMonth] = useState([]);
+  const [ordersByMonth, setOrdersByMonth] = useState([]);
+  const [revenueByPlatform, setRevenueByPlatform] = useState([]);
+  const [profitByPlatform, setProfitByPlatform] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,12 +17,11 @@ export const useChartsData = () => {
         const { data } = await getDashboardCharts();
         console.log("charts response:", data);
 
-        // ✅ Data already structured in backend
-        setAreaChartData(data.areaChartData ?? []);
-        setRevenueDonutChartData(data.revenueDonutChartData ?? []);
-        setOrdersDonutChartData(data.ordersDonutChartData ?? []);
-        setProfitDonutChartData(data.profitDonutChartData ?? []);
-        setMonthlyDonutChartData(data.monthlyDonutChartData ?? []);
+        // ✅ Match backend field names
+        setRevenueByMonth(data.revenueByMonth ?? []);
+        setOrdersByMonth(data.ordersByMonth ?? []);
+        setRevenueByPlatform(data.revenueByPlatform ?? []);
+        setProfitByPlatform(data.profitByPlatform ?? []);
       } catch (error) {
         console.error("Error fetching dashboard charts:", error);
       } finally {
@@ -36,10 +34,9 @@ export const useChartsData = () => {
 
   return {
     loading,
-    areaChartData,
-    revenueDonutChartData,
-    ordersDonutChartData,
-    profitDonutChartData,
-    monthlyDonutChartData,
+    revenueByMonth,
+    ordersByMonth,
+    revenueByPlatform,
+    profitByPlatform,
   };
 };

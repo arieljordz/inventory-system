@@ -2,48 +2,28 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import Item from "../models/Item.js";
-import { getYearRange, getCurrentMonthRange } from "../utils/dateUtils.js";
+import { getYearRange } from "../utils/dateUtils.js";
 import { getEffectivePriceStage } from "../utils/priceUtils.js";
 
 export const getInventoryStats = async (req, res) => {
   try {
     // 🔹 Product stats
-    const [
-      totalProducts,
-      productsNeedsRestock,
-      productsOutOfStock,
-      totalProductQuantityResult,
-    ] = await Promise.all([
-      Product.countDocuments(),
-      Product.countDocuments({ quantity: { $lte: 5 } }),
+    const [productsNeedsRestock, productsOutOfStock] = await Promise.all([
+      Product.countDocuments({ quantity: { $lte: 10 } }),
       Product.countDocuments({ quantity: { $lte: 0 } }),
-      Product.aggregate([
-        { $group: { _id: null, total: { $sum: "$quantity" } } },
-      ]),
     ]);
 
     // 🔹 Item stats
-    const [
-      totalItems,
-      itemsNeedsRestock,
-      itemsOutOfStock,
-      totalItemQuantityResult,
-    ] = await Promise.all([
-      Item.countDocuments(),
+    const [itemsNeedsRestock, itemsOutOfStock] = await Promise.all([
       Item.countDocuments({ quantity: { $lte: 5 } }),
       Item.countDocuments({ quantity: { $lte: 0 } }),
-      Item.aggregate([{ $group: { _id: null, total: { $sum: "$quantity" } } }]),
     ]);
 
     res.json({
-      totalProducts,
       productsNeedsRestock,
       productsOutOfStock,
-      totalProductQuantity: totalProductQuantityResult[0]?.total || 0,
-      totalItems,
       itemsNeedsRestock,
       itemsOutOfStock,
-      totalItemQuantity: totalItemQuantityResult[0]?.total || 0,
     });
   } catch (error) {
     console.error("Get Inventory Stats Error:", error);
@@ -60,7 +40,6 @@ const getRevenueByMonth = async (year) => {
     {
       $match: {
         orderDate: { $gte: startOfYear, $lte: endOfYear },
-        // 🔹 remove hardcoded filters to align with profits report
       },
     },
 
@@ -95,8 +74,18 @@ const getRevenueByMonth = async (year) => {
   ]);
 
   const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
   ];
 
   return revenueData.map((d) => ({
@@ -105,204 +94,297 @@ const getRevenueByMonth = async (year) => {
   }));
 };
 
-// 📌 Revenue by Platform (Current Month Only)
-const getRevenueByPlatform = async () => {
-  const { start, end } = getCurrentMonthRange();
-  const effectivePriceStage = await getEffectivePriceStage();
+// 📌 Orders by Month grouped by Platform
+const getOrdersByMonthPlatform = async (year) => {
+  const { start: startOfYear, end: endOfYear } = getYearRange(year);
 
-  const data = await Order.aggregate([
-    // ✅ Filter only current month
+  const ordersData = await Order.aggregate([
     {
       $match: {
-        orderDate: { $gte: start, $lte: end },
+        orderDate: { $gte: startOfYear, $lte: endOfYear },
       },
     },
-
-    // ✅ Attach product details
-    {
-      $lookup: {
-        from: "products",
-        localField: "product",
-        foreignField: "_id",
-        as: "productDetails",
-      },
-    },
-    { $unwind: "$productDetails" },
-
-    // ✅ Compute effective price
-    effectivePriceStage,
-
-    // ✅ Group by platform only (no need for month/year in _id)
     {
       $group: {
-        _id: "$platform",
-        value: { $sum: { $multiply: ["$quantity", "$effectivePrice"] } },
+        _id: {
+          year: { $year: { date: "$orderDate", timezone: "Asia/Manila" } },
+          month: { $month: { date: "$orderDate", timezone: "Asia/Manila" } },
+          platform: "$platform",
+        },
+        totalOrders: { $sum: 1 },
       },
     },
-
-    { $sort: { value: -1 } }, // optional: highest revenue first
+    { $sort: { "_id.year": 1, "_id.month": 1 } },
   ]);
 
-  // ✅ Return same structure as before
-  return data.map((d) => ({
-    label: d._id,
-    value: d.value,
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // 🔹 Restructure into grouped by month
+  const grouped = {};
+  ordersData.forEach((d) => {
+    const month = monthNames[d._id.month - 1];
+    if (!grouped[month]) {
+      grouped[month] = [];
+    }
+    grouped[month].push({
+      platform: d._id.platform,
+      orders: d.totalOrders,
+    });
+  });
+
+  // 🔹 Convert to array
+  return Object.entries(grouped).map(([month, platforms]) => ({
+    month,
+    platforms,
   }));
 };
 
-// 📌 Orders by Platform
-const getOrdersByPlatform = async () => {
-  const data = await Order.aggregate([
-    {
-      $group: {
-        _id: "$platform",
-        totalOrders: { $sum: "$quantity" },
-      },
-    },
-  ]);
-
-  return data.map((d) => ({ label: d._id, value: d.totalOrders }));
-};
-
-// 📌 Profit by Platform (Current Month Only)
-const getProfitByPlatform = async () => {
-  const { start, end } = getCurrentMonthRange(); // filter by current month
+// 📌 Revenue by Month + Platform
+const getRevenueByMonthPlatform = async (year) => {
+  const { start: startOfYear, end: endOfYear } = getYearRange(year);
   const effectivePriceStage = await getEffectivePriceStage();
 
-  const data = await Order.aggregate([
-    // ✅ Only include current month orders
-    {
-      $match: {
-        orderDate: { $gte: start, $lte: end },
-      },
-    },
+  const pipeline = [
+    // Match orders within the year
+    { $match: { orderDate: { $gte: startOfYear, $lte: endOfYear } } },
 
-    // ✅ Lookup product details
+    // Lookup product
     {
       $lookup: {
         from: "products",
         localField: "product",
         foreignField: "_id",
-        as: "productInfo",
+        as: "product",
       },
     },
-    { $unwind: "$productInfo" },
+    { $unwind: "$product" },
 
-    // ✅ Lookup item details for cost calculation
+    // Lookup items referenced in product components (not strictly needed for revenue,
+    // but kept here for parity with profit pipeline so both stay in sync)
     {
       $lookup: {
         from: "items",
-        localField: "productInfo.components.item",
+        localField: "product.components.item",
         foreignField: "_id",
         as: "itemsInfo",
       },
     },
 
-    // ✅ Attach effective price logic
+    // Attach effective price stage
     effectivePriceStage,
 
-    // ✅ Compute product cost safely
-    {
-      $addFields: {
-        productCost: {
-          $multiply: [
-            {
-              $sum: {
-                $map: {
-                  input: "$productInfo.components",
-                  as: "comp",
-                  in: {
-                    $multiply: [
-                      {
-                        $ifNull: [
-                          {
-                            $getField: {
-                              field: "price",
-                              input: {
-                                $first: {
-                                  $filter: {
-                                    input: "$itemsInfo",
-                                    cond: { $eq: ["$$this._id", "$$comp.item"] },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                          0, // 👈 fallback if no price found
-                        ],
-                      },
-                      "$$comp.qty",
-                    ],
-                  },
-                },
-              },
-            },
-            "$quantity",
-          ],
-        },
-      },
-    },
-
-    // ✅ Add revenue + profit (ensure no null values)
+    // Compute revenue
     {
       $addFields: {
         revenue: { $multiply: ["$quantity", "$effectivePrice"] },
-        profit: {
-          $subtract: [
-            { $ifNull: [{ $multiply: ["$quantity", "$effectivePrice"] }, 0] },
-            { $ifNull: ["$productCost", 0] },
+      },
+    },
+
+    // Group by year+month+platform
+    {
+      $group: {
+        _id: {
+          year: { $year: { date: "$orderDate", timezone: "Asia/Manila" } },
+          month: { $month: { date: "$orderDate", timezone: "Asia/Manila" } },
+          platform: "$platform",
+        },
+        totalRevenue: { $sum: "$revenue" },
+      },
+    },
+
+    // Sort results
+    { $sort: { "_id.year": 1, "_id.month": 1, "_id.platform": 1 } },
+  ];
+
+  const data = await Order.aggregate(pipeline);
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // ✅ Reshape into { month, platforms[] }
+  const grouped = {};
+  data.forEach((d) => {
+    const month = monthNames[d._id.month - 1];
+    if (!grouped[month]) grouped[month] = { month, platforms: [] };
+
+    grouped[month].platforms.push({
+      platform: d._id.platform,
+      revenue: d.totalRevenue,
+    });
+  });
+
+  return Object.values(grouped);
+};
+
+// 📌 Profit by Month + Platform
+const getProfitByMonthPlatform = async (year) => {
+  const { start: startOfYear, end: endOfYear } = getYearRange(year);
+  const effectivePriceStage = await getEffectivePriceStage();
+
+  const pipeline = [
+    // Match orders within year
+    { $match: { orderDate: { $gte: startOfYear, $lte: endOfYear } } },
+
+    // Lookup product
+    {
+      $lookup: {
+        from: "products",
+        localField: "product",
+        foreignField: "_id",
+        as: "product",
+      },
+    },
+    { $unwind: "$product" },
+
+    // Attach effective price stage
+    effectivePriceStage,
+
+    // ✅ Revenue first (safe from lookup duplication)
+    {
+      $addFields: {
+        revenue: { $multiply: ["$quantity", "$effectivePrice"] },
+      },
+    },
+
+    // Lookup items after revenue is fixed
+    {
+      $lookup: {
+        from: "items",
+        localField: "product.components.item",
+        foreignField: "_id",
+        as: "itemsInfo",
+      },
+    },
+
+    // ✅ Compute cost per unit × quantity
+    {
+      $addFields: {
+        cost: {
+          $multiply: [
+            {
+              $ifNull: [
+                {
+                  $sum: {
+                    $map: {
+                      input: "$product.components",
+                      as: "comp",
+                      in: {
+                        $multiply: [
+                          {
+                            $ifNull: [
+                              {
+                                $getField: {
+                                  field: "price",
+                                  input: {
+                                    $first: {
+                                      $filter: {
+                                        input: "$itemsInfo",
+                                        cond: {
+                                          $eq: ["$$this._id", "$$comp.item"],
+                                        },
+                                      },
+                                    },
+                                  },
+                                },
+                              },
+                              0,
+                            ],
+                          },
+                          "$$comp.qty",
+                        ],
+                      },
+                    },
+                  },
+                },
+                0,
+              ],
+            },
+            "$quantity", // ✅ scale by order quantity
           ],
         },
       },
     },
 
-    // ✅ Group by platform
+    // Compute profit
+    {
+      $addFields: {
+        profit: { $subtract: ["$revenue", "$cost"] },
+      },
+    },
+
+    // Group by year+month+platform
     {
       $group: {
-        _id: "$platform",
+        _id: {
+          year: { $year: { date: "$orderDate", timezone: "Asia/Manila" } },
+          month: { $month: { date: "$orderDate", timezone: "Asia/Manila" } },
+          platform: "$platform",
+        },
         totalRevenue: { $sum: "$revenue" },
-        totalCost: { $sum: "$productCost" },
         totalProfit: { $sum: "$profit" },
       },
     },
 
-    { $sort: { totalProfit: -1 } },
-  ]);
-
-  // ✅ Return same structure as revenue report
-  return data.map((d) => ({
-    label: d._id,
-    value: d.totalProfit,
-  }));
-};
-
-// 📌 Monthly Orders by Platform
-const getMonthlyOrdersByPlatform = async () => {
-  const { start: startOfMonth, end: endOfMonth } = getCurrentMonthRange();
-
-  const data = await Order.aggregate([
-    {
-      $match: { orderDate: { $gte: startOfMonth, $lte: endOfMonth } },
-    },
-    {
-      $group: {
-        _id: "$platform",
-        totalOrders: { $sum: "$quantity" },
-      },
-    },
-  ]);
-
-  const now = new Date();
-  const monthNames = [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun",
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+    // Sort results
+    { $sort: { "_id.year": 1, "_id.month": 1, "_id.platform": 1 } },
   ];
 
-  return data.map((d) => ({
-    month: monthNames[now.getMonth()],
-    platform: d._id,
-    value: d.totalOrders,
-  }));
+  const data = await Order.aggregate(pipeline);
+
+  const monthNames = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+
+  // ✅ Reshape into { month, platforms[] }
+  const grouped = {};
+  data.forEach((d) => {
+    const month = monthNames[d._id.month - 1];
+    if (!grouped[month]) grouped[month] = { month, platforms: [] };
+
+    grouped[month].platforms.push({
+      platform: d._id.platform,
+      revenue: d.totalRevenue,
+      profit: d.totalProfit,
+    });
+  });
+
+  return Object.values(grouped);
 };
 
 // 📌 Main Controller
@@ -310,30 +392,22 @@ export const getDashboardCharts = async (req, res) => {
   try {
     const year = new Date().getFullYear();
 
-    const [
-      areaChartData,
-      revenueDonutChartData,
-      ordersDonutChartData,
-      profitDonutChartData,
-      monthlyDonutChartData,
-    ] = await Promise.all([
-      getRevenueByMonth(year),
-      getRevenueByPlatform(year),
-      getOrdersByPlatform(),
-      getProfitByPlatform(),
-      getMonthlyOrdersByPlatform(),
-    ]);
+    const [revenueByMonth, ordersByMonth, revenueByPlatform, profitByPlatform] =
+      await Promise.all([
+        getRevenueByMonth(year),
+        getOrdersByMonthPlatform(year),
+        getRevenueByMonthPlatform(year),
+        getProfitByMonthPlatform(year),
+      ]);
 
     return res.json({
-      areaChartData,
-      revenueDonutChartData,
-      ordersDonutChartData,
-      profitDonutChartData,
-      monthlyDonutChartData,
+      revenueByMonth,
+      ordersByMonth,
+      revenueByPlatform,
+      profitByPlatform,
     });
   } catch (error) {
     console.error("Error generating dashboard charts:", error);
     res.status(500).json({ message: "Server Error" });
   }
 };
-

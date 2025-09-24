@@ -7,12 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [stats, setStats] = useState({
-    totalProducts: 0,
-    totalProductQuantity: 0,
     productsNeedsRestock: 0,
     productsOutOfStock: 0,
-    totalItems: 0,
-    totalItemQuantity: 0,
     itemsNeedsRestock: 0,
     itemsOutOfStock: 0,
   });
@@ -39,20 +35,6 @@ const Dashboard = () => {
 
   const productBoxes = [
     {
-      color: "primary",
-      count: stats.totalProducts,
-      label: "Products Total",
-      icon: "ion ion-cube",
-      path: "/products", // redirect path
-    },
-    {
-      color: "success",
-      count: stats.totalProductQuantity,
-      label: "Products Total Stock",
-      icon: "ion ion-archive",
-      path: "/products",
-    },
-    {
       color: "warning",
       count: stats.productsNeedsRestock,
       label: "Products Needs Restock",
@@ -69,20 +51,6 @@ const Dashboard = () => {
   ];
 
   const itemBoxes = [
-    {
-      color: "info",
-      count: stats.totalItems,
-      label: "Items Total",
-      icon: "ion ion-pricetag",
-      path: "/items",
-    },
-    {
-      color: "teal",
-      count: stats.totalItemQuantity,
-      label: "Items Total Stock",
-      icon: "ion ion-ios-box",
-      path: "/items",
-    },
     {
       color: "orange",
       count: stats.itemsNeedsRestock,
