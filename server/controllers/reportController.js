@@ -35,10 +35,13 @@ export const getOrdersReport = async (filters = {}) => {
     filter.platformOrderId = { $regex: orderId.trim(), $options: "i" };
   }
 
-  console.log("Order Filter:", filter);
+  // console.log("Order Filter:", filter);
 
   // 🔹 Fetch orders with product populated
-  const orders = await Order.find(filter).populate("product").lean();
+  const orders = await Order.find(filter)
+    .populate("product")
+    .sort({ orderDate: -1 })
+    .lean();
 
   // 🔹 Transform into flat rows with required columns
   const formattedRows = orders.map((o) => {
@@ -80,6 +83,7 @@ export const getWalkInsReport = async (filters = {}) => {
 
   const rows = await WalkInTransaction.find(filter)
     .populate("items.item")
+    .sort({ createdAt: -1 })
     .lean();
 
   // Map transactions into report-ready rows
@@ -186,6 +190,9 @@ export const getProductMovementsReport = async (filters = {}) => {
     });
   }
 
+  // 🔹 Add sort by createdAt descending
+  pipeline.push({ $sort: { createdAt: -1 } });
+
   const rows = await InventoryDetail.aggregate(pipeline);
 
   // 🔹 Transform into flat structure with effective price
@@ -246,7 +253,10 @@ export const getItemMovementsReport = async (filters = {}) => {
   }
 
   // 🔹 Query + join item details
-  const rows = await ItemMovement.find(filter).populate("item").lean();
+  const rows = await ItemMovement.find(filter)
+    .populate("item")
+    .sort({ createdAt: -1 })
+    .lean();
 
   // 🔹 Flatten into top-level structure
   const formattedRows = rows.map((movement) => {
