@@ -5,9 +5,9 @@
     },
     "key": "product_price_mode",
     "description": "Toggle between product-based and order-based pricing",
-    "enabled": true,
+    "enabled": false,
     "updatedAt": {
-      "$date": "2025-09-23T07:13:55.303Z"
+      "$date": "2025-09-29T06:25:33.011Z"
     },
     "updatedBy": {
       "$oid": "6884500702d0150075c6b43a"

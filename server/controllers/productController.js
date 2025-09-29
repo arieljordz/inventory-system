@@ -30,6 +30,11 @@ export const addProduct = async (req, res) => {
       components = "[]",
     } = req.body;
 
+    // ✅ Ensure variant is "Default" if null, undefined, or empty string
+    if (!variant || variant.trim() === "") {
+      variant = "Default";
+    }
+
     // Normalize fields
     const normalizedName = normalizeString(normalizeText(name));
     const normalizedVariant = normalizeString(normalizeText(variant));

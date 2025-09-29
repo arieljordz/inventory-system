@@ -40309,5 +40309,464 @@
     "normalizedReference": "250924BEK4WYFN",
     "totalValue": 100,
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e17fe49501b3345f29"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 101,
+    "reference": "1042487962476151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:41.815Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:41.815Z"
+    },
+    "normalizedReference": "1042487962476151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e27fe49501b3345f3a"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 100,
+    "reference": "1042487962576151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:42.217Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:42.217Z"
+    },
+    "normalizedReference": "1042487962576151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e27fe49501b3345f4b"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 99,
+    "reference": "1042487962676151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:42.618Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:42.618Z"
+    },
+    "normalizedReference": "1042487962676151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e37fe49501b3345f5c"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 98,
+    "reference": "1042487962776151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:43.017Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:43.017Z"
+    },
+    "normalizedReference": "1042487962776151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e37fe49501b3345f6d"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 97,
+    "reference": "1042487962876151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:43.452Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:43.452Z"
+    },
+    "normalizedReference": "1042487962876151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e37fe49501b3345f7e"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 96,
+    "reference": "1042487962976151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:43.853Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:43.853Z"
+    },
+    "normalizedReference": "1042487962976151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e47fe49501b3345f8f"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 95,
+    "reference": "1042487963076151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:44.250Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:44.250Z"
+    },
+    "normalizedReference": "1042487963076151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e47fe49501b3345fa0"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 94,
+    "reference": "1042487963176151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:44.651Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:44.651Z"
+    },
+    "normalizedReference": "1042487963176151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e57fe49501b3345fb1"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 93,
+    "reference": "1042487963276151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:45.055Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:45.055Z"
+    },
+    "normalizedReference": "1042487963276151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e57fe49501b3345fc2"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 92,
+    "reference": "1042487963376151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:45.467Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:45.467Z"
+    },
+    "normalizedReference": "1042487963376151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e57fe49501b3345fd3"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 91,
+    "reference": "1042487963476151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:45.873Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:45.873Z"
+    },
+    "normalizedReference": "1042487963476151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e67fe49501b3345fe4"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 90,
+    "reference": "1042487963576151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:46.289Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:46.289Z"
+    },
+    "normalizedReference": "1042487963576151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e67fe49501b3345ff5"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 89,
+    "reference": "1042487963676151",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:46.684Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:46.684Z"
+    },
+    "normalizedReference": "1042487963676151",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e77fe49501b3346006"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 88,
+    "reference": "1034440014656694",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:47.082Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:47.082Z"
+    },
+    "normalizedReference": "1034440014656694",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e77fe49501b3346017"
+    },
+    "item": {
+      "$oid": "68b56427650c74e5be323834"
+    },
+    "type": "OUT",
+    "quantity": 1,
+    "price": 110,
+    "balanceAfter": 87,
+    "reference": "1034440014756694",
+    "location": "Main Warehouse",
+    "remarks": "Bundle deduction for 2 PCS DUYAN RING MAKAPAL STAINLESS STEEL 304 TYPE - lazada",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-26T06:42:47.477Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:47.477Z"
+    },
+    "normalizedReference": "1034440014756694",
+    "totalValue": 110,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d9fc4fb5c310587a2105ab"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "IN",
+    "quantity": 200,
+    "price": 100,
+    "balanceAfter": 253,
+    "reference": "Restock",
+    "location": "Main Warehouse",
+    "remarks": "Restock",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-29T03:26:07.315Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-29T03:26:07.315Z"
+    },
+    "normalizedReference": "Restock",
+    "totalValue": 20000,
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d9fc70b5c310587a2105b8"
+    },
+    "item": {
+      "$oid": "68b563f4650c74e5be32382b"
+    },
+    "type": "OUT",
+    "quantity": 150,
+    "price": 100,
+    "balanceAfter": 103,
+    "reference": "WALK_IN",
+    "location": "Main Warehouse",
+    "remarks": "Walk-in purchase by Walk-in Customer",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-29T03:26:40.643Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-29T03:26:40.643Z"
+    },
+    "normalizedReference": "WALK_IN",
+    "totalValue": 15000,
+    "__v": 0
   }
 ]

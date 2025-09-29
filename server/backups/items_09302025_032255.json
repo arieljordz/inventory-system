@@ -7,7 +7,7 @@
     "price": 100,
     "sku": "RING-SMALL-68944",
     "description": "",
-    "quantity": 53,
+    "quantity": 103,
     "unit": "pcs",
     "variant": "Small",
     "supplier": "",
@@ -19,7 +19,7 @@
       "$date": "2025-09-01T09:14:28.945Z"
     },
     "updatedAt": {
-      "$date": "2025-09-25T07:18:22.075Z"
+      "$date": "2025-09-29T03:26:40.597Z"
     },
     "normalizedSku": "ring-small-68944",
     "__v": 0,
@@ -34,7 +34,7 @@
     "price": 110,
     "sku": "RING-BIG-19502",
     "description": "",
-    "quantity": 102,
+    "quantity": 87,
     "unit": "pcs",
     "variant": "Big",
     "supplier": "",
@@ -46,7 +46,7 @@
       "$date": "2025-09-01T09:15:19.503Z"
     },
     "updatedAt": {
-      "$date": "2025-09-25T07:21:11.664Z"
+      "$date": "2025-09-26T06:42:47.436Z"
     },
     "normalizedSku": "ring-big-19502",
     "__v": 0,

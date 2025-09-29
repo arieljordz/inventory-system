@@ -56,11 +56,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
 
   // ========= FETCH HANDLERS =========
   const fetchProducts = useCallback(
-    async (
-      page = currentPage,
-      limit = itemsPerPage,
-      search = debouncedSearchTerm
-    ) => {
+    async (page, limit, search) => {
       setLoading(true);
       try {
         const res = await getProducts({ page, limit, search });
@@ -70,6 +66,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
         if (page > res.data?.totalPages) {
           setCurrentPage(res.data?.totalPages || 1);
         }
+        return res; // ✅ return response for chaining
       } catch (err) {
         console.error("Fetch products failed:", err);
         setProducts([]);
@@ -78,15 +75,11 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
         setLoading(false);
       }
     },
-    [currentPage, itemsPerPage, debouncedSearchTerm]
+    []
   );
 
   const fetchItems = useCallback(
-    async (
-      page = currentPage,
-      limit = itemsPerPage,
-      search = debouncedSearchTerm
-    ) => {
+    async (page, limit, search) => {
       setLoading(true);
       try {
         const res = await getAllItems({ page, limit, search });
@@ -96,6 +89,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
         if (page > res.data?.totalPages) {
           setCurrentPage(res.data?.totalPages || 1);
         }
+        return res; // ✅ return response for chaining
       } catch (err) {
         console.error("Fetch items failed:", err);
         setItems([]);
@@ -104,7 +98,7 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
         setLoading(false);
       }
     },
-    [currentPage, itemsPerPage, debouncedSearchTerm]
+    []
   );
 
   const fetchAdjustmentHistory = useCallback(async (targetType, targetId) => {
@@ -117,11 +111,19 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
     }
   }, []);
 
+  // ========= CENTRAL REFRESH =========
+  const refreshData = useCallback(() => {
+    if (activeTab === "products") {
+      return fetchProducts(currentPage, itemsPerPage, debouncedSearchTerm);
+    } else {
+      return fetchItems(currentPage, itemsPerPage, debouncedSearchTerm);
+    }
+  }, [activeTab, currentPage, itemsPerPage, debouncedSearchTerm, fetchProducts, fetchItems]);
+
   // ========= EFFECTS =========
   useEffect(() => {
-    if (activeTab === "products") fetchProducts();
-    else fetchItems();
-  }, [activeTab, fetchProducts, fetchItems]);
+    refreshData();
+  }, [refreshData]);
 
   useEffect(() => {
     setCurrentPage(1); // Reset page when search changes
@@ -190,39 +192,21 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
 
       resetAdjustmentForm();
       closeModal();
-      // 🔹 Force refresh from page 1 with raw search term
-      if (activeTab === "products") {
-        await fetchProducts(currentPage, itemsPerPage, searchTerm);
-      } else {
-        await fetchItems(currentPage, itemsPerPage, searchTerm);
-      }
+
+      // ✅ Centralized refresh
+      const updatedList = await refreshData();
 
       // 🔹 Refresh history
       await fetchAdjustmentHistory(targetType, selected._id);
 
-      // 🔹 Refresh selected details (for modal)
+      // 🔹 Refresh selected details (from updated list)
       try {
-        if (targetType === "Product") {
-          const updated = await getProducts({
-            page: 1,
-            limit: 1,
-            search: selected.name,
-          });
-          const fresh = updated.data?.products?.find(
-            (p) => p._id === selected._id
-          );
-          if (fresh) setSelected(fresh);
-        } else {
-          const updated = await getAllItems({
-            page: 1,
-            limit: 1,
-            search: selected.name,
-          });
-          const fresh = updated.data?.items?.find(
-            (i) => i._id === selected._id
-          );
-          if (fresh) setSelected(fresh);
-        }
+        const fresh =
+          activeTab === "products"
+            ? updatedList?.data?.products?.find((p) => p._id === selected._id)
+            : updatedList?.data?.items?.find((i) => i._id === selected._id);
+
+        if (fresh) setSelected(fresh);
       } catch (err) {
         console.error("Failed to refresh selected:", err);
       }
@@ -271,5 +255,8 @@ export const useAdjustmentsData = (initialItemsPerPage = 5) => {
 
     // Loading
     loading,
+
+    // Refresh
+    refreshData,
   };
 };

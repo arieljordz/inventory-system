@@ -41710,5 +41710,386 @@
       "$date": "2025-09-25T07:55:43.797Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635bf7fe49501b3345edf"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "movementType": "IN",
+    "quantity": 50,
+    "courier": "",
+    "platform": "",
+    "status": "Available",
+    "remarks": "Restock",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:07.200Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:07.200Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e17fe49501b3345f2d"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e17fe49501b3345f25"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487962476151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:41.900Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:41.900Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e27fe49501b3345f3e"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e27fe49501b3345f36"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487962576151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:42.299Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:42.299Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e27fe49501b3345f4f"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e27fe49501b3345f47"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487962676151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:42.700Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:42.700Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e37fe49501b3345f60"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e27fe49501b3345f58"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487962776151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:43.099Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:43.099Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e37fe49501b3345f71"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e37fe49501b3345f69"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487962876151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:43.535Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:43.535Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e37fe49501b3345f82"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e37fe49501b3345f7a"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487962976151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:43.935Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:43.935Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e47fe49501b3345f93"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e47fe49501b3345f8b"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963076151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:44.334Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:44.334Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e47fe49501b3345fa4"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e47fe49501b3345f9c"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963176151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:44.733Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:44.733Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e57fe49501b3345fb5"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e47fe49501b3345fad"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963276151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:45.137Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:45.137Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e57fe49501b3345fc6"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e57fe49501b3345fbe"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963376151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:45.551Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:45.551Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e57fe49501b3345fd7"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e57fe49501b3345fcf"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963476151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:45.963Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:45.963Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e67fe49501b3345fe8"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e67fe49501b3345fe0"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963576151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:46.371Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:46.371Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e67fe49501b3345ff9"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e67fe49501b3345ff1"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1042487963676151",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:46.769Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:46.769Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e77fe49501b334600a"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e67fe49501b3346002"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1034440014656694",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:47.164Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:47.164Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d635e77fe49501b334601b"
+    },
+    "product": {
+      "$oid": "68ab541c4534336e7e1c5ca0"
+    },
+    "order": {
+      "$oid": "68d635e77fe49501b3346013"
+    },
+    "movementType": "OUT",
+    "quantity": 1,
+    "courier": "STANDARD",
+    "platform": "lazada",
+    "status": "On Process",
+    "remarks": "On process - Order ID: 1034440014756694",
+    "createdAt": {
+      "$date": "2025-09-26T06:42:47.558Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-26T06:42:47.558Z"
+    },
+    "__v": 0
   }
 ]

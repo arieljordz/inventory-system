@@ -246,5 +246,36 @@
       "$date": "2025-09-22T02:44:54.930Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "68d9fc70b5c310587a2105ba"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "quantity": 150,
+        "price": 100,
+        "total": 15000,
+        "_id": {
+          "$oid": "68d9fc70b5c310587a2105bb"
+        }
+      }
+    ],
+    "totalAmount": 15000,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2025-09-29T03:26:40.691Z"
+    },
+    "updatedAt": {
+      "$date": "2025-09-29T03:26:40.691Z"
+    },
+    "__v": 0
   }
 ]
