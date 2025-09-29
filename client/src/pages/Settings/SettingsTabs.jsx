@@ -4,6 +4,7 @@ const SettingsTabs = ({ activeTab, onChange }) => {
   const tabs = [
     { key: "backup", label: "System Backups", icon: "fas fa-database" },
     { key: "feature-flag", label: "Feature Flags", icon: "fas fa-flag" },
+    { key: "support", label: "Supports", icon: "fas fa-tools" },
   ];
 
   return (

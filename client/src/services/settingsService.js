@@ -18,3 +18,13 @@ export const getFeatureFlag = (key) =>
 
 export const updateFeatureFlag = (key, enabled) =>
   api.put(`/api/settings/feature-flags/${key}`, { enabled });
+
+export const getOrderByNumber = async (orderNumber) => {
+  const res = await api.get(`/api/settings/number/${orderNumber}`);
+  return res.data;
+};
+
+export const updateOrderByNumber = async (orderNumber, updateData) => {
+  const res = await api.put(`/api/settings/number/${orderNumber}`, updateData);
+  return res.data;
+};

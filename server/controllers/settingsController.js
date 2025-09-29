@@ -1,4 +1,6 @@
 // controllers/settingsController.js
+import Order from "../models/Order.js";
+import { logAudit } from "../utils/auditLogger.js";
 import FeatureFlag from "../models/FeatureFlag.js";
 import {
   MongoClient,
@@ -210,3 +212,77 @@ export const getFeatureFlag = async (req, res) => {
     return res.status(500).json({ message: "Failed to fetch feature flag" });
   }
 };
+
+// Support Order Endpoints
+export const getOrderByNumber = async (req, res) => {
+  try {
+    const { orderNumber } = req.params;
+    const order = await Order.findOne({ orderNumber }).populate("product");
+
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    res.json(order);
+  } catch (error) {
+    console.error("Error fetching order:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const updateOrderByNumber = async (req, res) => {
+  try {
+    const { orderNumber } = req.params;
+    const { status, isPaid, remarks, quantity, price, orderDate } = req.body;
+
+    const order = await Order.findOne({ orderNumber });
+    if (!order) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    // 🔹 Store "before" snapshot
+    const before = order.toObject();
+
+    // 🔹 Update allowed fields if provided
+    if (status) order.status = status;
+    if (typeof isPaid === "boolean") order.isPaid = isPaid;
+    if (remarks !== undefined) order.remarks = remarks;
+
+    if (quantity !== undefined && !isNaN(quantity)) {
+      order.quantity = Number(quantity);
+    }
+
+    if (price !== undefined && !isNaN(price)) {
+      order.price = Number(price);
+    }
+
+    if (orderDate) {
+      const parsedDate = new Date(orderDate);
+      if (!isNaN(parsedDate)) {
+        order.orderDate = parsedDate;
+      }
+    }
+
+    await order.save();
+
+    // 🔹 Audit log
+    await logAudit({
+      action: "SUPPORT_UPDATE_ORDER",
+      user: req.user?._id || null,
+      description: `Updated order ${order.orderNumber}`,
+      collectionName: "Order",
+      documentId: order._id,
+      before,
+      after: order.toObject(),
+      ip: req.ip,
+      userAgent: req.headers["user-agent"],
+    });
+
+    res.json({ message: "Order updated successfully", order });
+  } catch (error) {
+    console.error("Error updating order:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+

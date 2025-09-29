@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navpath from "../../components/Navpath";
 import SettingsBackups from "./SettingsBackups";
+import SettingsSupports from "./SettingsSupports";
 import SettingsFlags from "./SettingsFlags";
 import SettingsTabs from "./SettingsTabs";
 
@@ -13,6 +14,8 @@ const SettingsPage = () => {
         return <SettingsBackups />;
       case "feature-flag":
         return <SettingsFlags />;
+      case "support":
+        return <SettingsSupports />;
       default:
         return null;
     }
@@ -20,7 +23,11 @@ const SettingsPage = () => {
 
   return (
     <>
-      <Navpath levelOne="Settings" levelTwo="System" levelThree="Configuration" />
+      <Navpath
+        levelOne="Settings"
+        levelTwo="System"
+        levelThree="Configuration"
+      />
 
       <section className="content">
         <div className="container-fluid">

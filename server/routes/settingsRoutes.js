@@ -7,6 +7,8 @@ import {
   getFeatureFlags,
   getFeatureFlag,
   updateFeatureFlag,
+  getOrderByNumber,
+  updateOrderByNumber,
 } from "../controllers/settingsController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
@@ -23,5 +25,9 @@ router.get("/feature-flags", authenticate, getFeatureFlags);
 router.get("/feature-flags/:key", authenticate, getFeatureFlag);
 
 router.put("/feature-flags/:key", authenticate, updateFeatureFlag);
+
+router.get("/number/:orderNumber", authenticate, getOrderByNumber);
+
+router.put("/number/:orderNumber", authenticate, updateOrderByNumber);
 
 export default router;
