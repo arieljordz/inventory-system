@@ -261,7 +261,7 @@ export const processSalesImport = async ({
   const seenOrderIds = new Set();
 
   for (const row of rows) {
-    // Skip empty rows
+    // --- Skip empty rows ---
     if (!row || !row.some((c) => String(c || "").trim())) continue;
 
     const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
@@ -288,14 +288,13 @@ export const processSalesImport = async ({
     seenOrderIds.add(platformOrderId);
 
     try {
-      // console.log("Looking for:", { platform, platformOrderId });
-      // --- Find order in DB ---
-      const order = await Order.findOne({
+      // --- Find all matching orders in DB ---
+      const orders = await Order.find({
         platform: platform.toLowerCase(),
         platformOrderId,
       });
 
-      if (!order) {
+      if (orders.length === 0) {
         results.notFound.push({
           platformOrderId,
           reason: "Order not found",
@@ -303,39 +302,42 @@ export const processSalesImport = async ({
         continue;
       }
 
-      if (order.isPaid) {
-        results.alreadyPaid.push({
+      // --- Process each order (handle duplicates individually) ---
+      for (const order of orders) {
+        if (order.isPaid) {
+          results.alreadyPaid.push({
+            platformOrderId,
+            reason: "Order already marked as paid",
+          });
+          continue;
+        }
+
+        // --- Update order ---
+        const before = { isPaid: order.isPaid };
+        order.isPaid = true;
+        order.orderNumber = orderNumber || order.orderNumber; // fallback if blank
+        order.status = StatusEnum.COMPLETED;
+
+        await order.save();
+
+        results.updated.push({
           platformOrderId,
-          reason: "Order already marked as paid",
+          reason: "Order marked as paid",
         });
-        continue;
+
+        // --- Log audit ---
+        await logAudit({
+          action: "UPDATE_PAYMENT",
+          user: req.user?._id,
+          description: `Marked order as paid from ${platform} (ID: ${platformOrderId})`,
+          collectionName: "Order",
+          documentId: order._id,
+          before,
+          after: order.toObject(),
+          ip: req.ip,
+          userAgent: req.headers["user-agent"],
+        });
       }
-
-      // --- Update order ---
-      const before = { isPaid: order.isPaid };
-      order.isPaid = true;
-      order.orderNumber = orderNumber || order.orderNumber; // fallback if blank
-      order.status = StatusEnum.COMPLETED;
-
-      await order.save();
-
-      results.updated.push({
-        platformOrderId,
-        reason: "Order marked as paid",
-      });
-
-      // --- Log audit ---
-      await logAudit({
-        action: "UPDATE_PAYMENT",
-        user: req.user?._id,
-        description: `Marked order as paid from ${platform} (ID: ${platformOrderId})`,
-        collectionName: "Order",
-        documentId: order._id,
-        before,
-        after: order.toObject(),
-        ip: req.ip,
-        userAgent: req.headers["user-agent"],
-      });
     } catch (err) {
       results.skipped.push({
         platformOrderId,
@@ -460,7 +462,7 @@ export const processReturnsImport = async ({
   const seenOrderIds = new Set();
 
   for (const row of rows) {
-    // Skip empty rows
+    // --- Skip empty rows ---
     if (!row || !row.some((c) => String(c || "").trim())) continue;
 
     const platformOrderId = (row[finalFieldMap.platformOrderId] || "")
@@ -477,7 +479,7 @@ export const processReturnsImport = async ({
       continue;
     }
 
-    // Prevent duplicate processing within the file
+    // --- Prevent duplicate processing within the uploaded file ---
     if (seenOrderIds.has(platformOrderId)) {
       results.duplicates.push({
         platformOrderId,
@@ -488,69 +490,73 @@ export const processReturnsImport = async ({
     seenOrderIds.add(platformOrderId);
 
     try {
-      const order = await Order.findOne({
+      // --- Find all matching orders in DB ---
+      const orders = await Order.find({
         platform: platform.toLowerCase(),
         platformOrderId,
       });
 
-      if (!order) {
+      if (orders.length === 0) {
         results.notFound.push({ platformOrderId, reason: "Order not found" });
         continue;
       }
 
-      if (order.status === StatusEnum.RETURNED) {
-        results.alreadyReturned.push({
-          platformOrderId,
-          reason: "Order already marked as returned",
-        });
-        continue;
-      }
+      // --- Process each order (handle duplicates individually) ---
+      for (const order of orders) {
+        if (order.status === StatusEnum.RETURNED) {
+          results.alreadyReturned.push({
+            platformOrderId,
+            reason: "Order already marked as returned",
+          });
+          continue;
+        }
 
-      // --- Update order status ---
-      const before = order.toObject();
-      order.status = StatusEnum.RETURNED;
-      order.orderNumber = orderNumber || order.orderNumber; // fallback if blank
-      order.isPaid = false;
-      await order.save();
+        // --- Update order status ---
+        const before = order.toObject();
+        order.status = StatusEnum.RETURNED;
+        order.orderNumber = orderNumber || order.orderNumber; // fallback if blank
+        order.isPaid = false;
+        await order.save();
 
-      // --- Restock products ---
-      if (order.products?.length) {
-        for (const item of order.products) {
-          try {
-            await restockItemQuantities(item.product, item.quantity, {
-              userId: req.user?._id,
-              platformOrderId: order.platformOrderId,
-              platform,
-              courier: order.courier,
-            });
-          } catch (err) {
-            results.failedRestocks.push({
-              platformOrderId: order.platformOrderId,
-              productId: item.product,
-              quantity: item.quantity,
-              reason: err.message,
-            });
+        // --- Restock products ---
+        if (order.products?.length) {
+          for (const item of order.products) {
+            try {
+              await restockItemQuantities(item.product, item.quantity, {
+                userId: req.user?._id,
+                platformOrderId: order.platformOrderId,
+                platform,
+                courier: order.courier,
+              });
+            } catch (err) {
+              results.failedRestocks.push({
+                platformOrderId: order.platformOrderId,
+                productId: item.product,
+                quantity: item.quantity,
+                reason: err.message,
+              });
+            }
           }
         }
+
+        results.updated.push({
+          platformOrderId,
+          reason: "Order marked as returned and restocked",
+        });
+
+        // --- Log audit ---
+        await logAudit({
+          action: "UPDATE_RETURN_STATUS",
+          user: req.user?._id,
+          description: `Marked order as returned from ${platform} (ID: ${platformOrderId})`,
+          collectionName: "Order",
+          documentId: order._id,
+          before,
+          after: order.toObject(),
+          ip: req.ip,
+          userAgent: req.headers["user-agent"],
+        });
       }
-
-      results.updated.push({
-        platformOrderId,
-        reason: "Order marked as returned and restocked",
-      });
-
-      // --- Log audit ---
-      await logAudit({
-        action: "UPDATE_RETURN_STATUS",
-        user: req.user?._id,
-        description: `Marked order as returned from ${platform} (ID: ${platformOrderId})`,
-        collectionName: "Order",
-        documentId: order._id,
-        before,
-        after: order.toObject(),
-        ip: req.ip,
-        userAgent: req.headers["user-agent"],
-      });
     } catch (err) {
       results.skipped.push({
         platformOrderId,
@@ -558,6 +564,6 @@ export const processReturnsImport = async ({
       });
     }
   }
-
+  // console.log("results:", results);
   return results;
 };
