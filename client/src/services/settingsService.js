@@ -24,7 +24,7 @@ export const getOrderByNumber = async (orderNumber) => {
   return res.data;
 };
 
-export const updateOrderByNumber = async (orderNumber, updateData) => {
-  const res = await api.put(`/api/settings/number/${orderNumber}`, updateData);
+export const updateOrderById = async (id, updateData) => {
+  const res = await api.put(`/api/settings/${id}`, updateData);
   return res.data;
 };

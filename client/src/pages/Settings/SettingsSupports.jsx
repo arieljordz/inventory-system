@@ -5,14 +5,16 @@ import { TextInput, SelectInput } from "../../components/FormInputs";
 import { useSpinner } from "../../context/SpinnerContext";
 import {
   getOrderByNumber,
-  updateOrderByNumber,
+  updateOrderById,
 } from "../../services/settingsService";
+import OrdersTable from "./OrdersTable";
 
 const SettingsSupports = () => {
   const { showSpinner, hideSpinner } = useSpinner();
 
   const [orderNumber, setOrderNumber] = useState("");
-  const [form, setForm] = useState(null);
+  const [results, setResults] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const statusOptions = useMemo(
@@ -24,26 +26,24 @@ const SettingsSupports = () => {
     []
   );
 
-  // 🔹 Handle input changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm((prev) => ({
+    setSelectedOrder((prev) => ({
       ...prev,
       [name]: type === "checkbox" ? checked : value,
     }));
   };
 
-  // 🔹 Reset search & form
   const handleClearSearch = () => {
     setOrderNumber("");
-    setForm(null);
+    setResults([]);
+    setSelectedOrder(null);
     setLoading(false);
   };
 
-  // 🔹 Fetch order by orderNumber
   const handleSearch = async (e) => {
     e.preventDefault();
-    if (!orderNumber.trim()) return; // ⬅️ No toast on empty search
+    if (!orderNumber.trim()) return;
 
     try {
       showSpinner();
@@ -51,49 +51,52 @@ const SettingsSupports = () => {
 
       const data = await getOrderByNumber(orderNumber.trim());
 
-      if (!data) {
+      if (!data || data.length === 0) {
         toast.error("Order not found");
-        setForm(null);
+        setResults([]);
+        setSelectedOrder(null);
         return;
       }
 
-      setForm({
-        orderNumber: data.orderNumber,
-        status: data.status || "",
-        isPaid: data.isPaid || false,
-        remarks: data.remarks || "",
-        quantity: data.quantity || 0,
-        price: data.price || 0,
-        orderDate: data.orderDate
-          ? new Date(data.orderDate).toISOString().slice(0, 10)
-          : "",
-        platform: data.platform,
-        courier: data.courier,
-        product: data.product,
-      });
+      setResults(data);
     } catch (error) {
       console.error(error);
-      toast.error("Failed to fetch order");
+      toast.error("Failed to fetch orders");
     } finally {
       hideSpinner();
       setLoading(false);
     }
   };
 
-  // 🔹 Update order
   const handleUpdate = async () => {
-    if (!form) return;
+    if (!selectedOrder) return;
 
     try {
       showSpinner();
-      await updateOrderByNumber(form.orderNumber, {
-        status: form.status,
-        isPaid: form.isPaid,
-        remarks: form.remarks,
-        quantity: Number(form.quantity),
-        price: Number(form.price),
-        orderDate: form.orderDate ? new Date(form.orderDate) : null,
-      });
+
+      const payload = {
+        status: selectedOrder.status,
+        isPaid: selectedOrder.isPaid,
+        remarks: selectedOrder.remarks,
+      };
+
+      if (
+        selectedOrder.quantity !== undefined &&
+        selectedOrder.quantity !== ""
+      ) {
+        payload.quantity = Number(selectedOrder.quantity);
+      }
+
+      if (selectedOrder.price !== undefined && selectedOrder.price !== "") {
+        payload.price = Number(selectedOrder.price);
+      }
+
+      if (selectedOrder.orderDate) {
+        payload.orderDate = selectedOrder.orderDate; // keep as string/ISO
+      }
+
+      await updateOrderById(selectedOrder._id, payload);
+
       toast.success("Order updated successfully");
     } catch (error) {
       console.error(error);
@@ -117,7 +120,7 @@ const SettingsSupports = () => {
             value={orderNumber}
             onChange={(e) => setOrderNumber(e.target.value)}
           />
-          {form ? (
+          {results.length > 0 ? (
             <button
               type="button"
               className="btn btn-outline-danger"
@@ -126,35 +129,44 @@ const SettingsSupports = () => {
               ❌
             </button>
           ) : (
-            <button type="submit" className="btn btn-primary" disabled={loading}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+            >
               {loading ? "..." : "🔍"}
             </button>
           )}
         </div>
       </form>
 
+      {/* Results Table */}
+      <OrdersTable results={results} onSelect={setSelectedOrder} />
+
       {/* Order Details Form */}
-      {form && (
-        <div className="card p-3">
+      {selectedOrder && (
+        <div className="card p-3 mt-3">
           <h5>Order Details</h5>
           <p>
-            <strong>Platform:</strong> {form.platform}
+            <strong>Platform:</strong> {selectedOrder.platform}
           </p>
           <p>
-            <strong>Courier:</strong> {form.courier}
+            <strong>Courier:</strong> {selectedOrder.courier}
           </p>
           <p>
-            <strong>Product:</strong> {form.product?.name || "N/A"}
+            <strong>Product:</strong> {selectedOrder.product?.name || "N/A"}
+          </p>
+          <p>
+            <strong>Variant:</strong> {selectedOrder.product?.variant || "N/A"}
           </p>
 
           <div className="row">
-            {/* Left Column */}
             <div className="col-md-6">
               <TextInput
                 label="Quantity"
                 name="quantity"
                 type="number"
-                value={form.quantity}
+                value={selectedOrder.quantity}
                 onChange={handleChange}
               />
 
@@ -163,7 +175,11 @@ const SettingsSupports = () => {
                 name="price"
                 type="number"
                 step="0.01"
-                value={form.price}
+                value={
+                  selectedOrder.price != null
+                    ? selectedOrder.price
+                    : selectedOrder.product?.price ?? ""
+                }
                 onChange={handleChange}
               />
 
@@ -171,17 +187,22 @@ const SettingsSupports = () => {
                 label="Order Date"
                 name="orderDate"
                 type="date"
-                value={form.orderDate}
+                value={
+                  selectedOrder.orderDate
+                    ? new Date(selectedOrder.orderDate)
+                        .toISOString()
+                        .slice(0, 10)
+                    : ""
+                }
                 onChange={handleChange}
               />
             </div>
 
-            {/* Right Column */}
             <div className="col-md-6">
               <SelectInput
                 label="Status"
                 name="status"
-                value={form.status}
+                value={selectedOrder.status}
                 onChange={handleChange}
                 options={statusOptions}
               />
@@ -190,7 +211,7 @@ const SettingsSupports = () => {
                 label="Remarks"
                 name="remarks"
                 type="text"
-                value={form.remarks}
+                value={selectedOrder.remarks}
                 onChange={handleChange}
               />
 
@@ -199,7 +220,7 @@ const SettingsSupports = () => {
                   className="form-check-input"
                   type="checkbox"
                   name="isPaid"
-                  checked={form.isPaid}
+                  checked={selectedOrder.isPaid}
                   onChange={handleChange}
                 />
                 <label className="form-check-label">Paid</label>

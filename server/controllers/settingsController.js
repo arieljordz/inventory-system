@@ -187,7 +187,9 @@ export const updateFeatureFlag = async (req, res) => {
     );
 
     if (!flag) {
-      return res.status(404).json({ message: `Feature flag '${key}' not found` });
+      return res
+        .status(404)
+        .json({ message: `Feature flag '${key}' not found` });
     }
 
     return res.json(flag);
@@ -203,7 +205,9 @@ export const getFeatureFlag = async (req, res) => {
     const flag = await FeatureFlag.findOne({ key });
 
     if (!flag) {
-      return res.status(404).json({ message: `Feature flag '${key}' not found` });
+      return res
+        .status(404)
+        .json({ message: `Feature flag '${key}' not found` });
     }
 
     return res.json(flag);
@@ -217,55 +221,45 @@ export const getFeatureFlag = async (req, res) => {
 export const getOrderByNumber = async (req, res) => {
   try {
     const { orderNumber } = req.params;
-    const order = await Order.findOne({ orderNumber }).populate("product");
+    const orders = await Order.find({ orderNumber }).populate("product");
 
-    if (!order) {
-      return res.status(404).json({ message: "Order not found" });
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({ message: "No orders found" });
     }
 
-    res.json(order);
+    // console.log("Fetched orders:", orders);
+    res.json(orders);
   } catch (error) {
-    console.error("Error fetching order:", error);
+    console.error("Error fetching orders:", error);
     res.status(500).json({ message: "Server error" });
   }
 };
 
-export const updateOrderByNumber = async (req, res) => {
+export const updateOrderById = async (req, res) => {
   try {
-    const { orderNumber } = req.params;
+    const { id } = req.params; // use unique _id instead of orderNumber
     const { status, isPaid, remarks, quantity, price, orderDate } = req.body;
 
-    const order = await Order.findOne({ orderNumber });
+    const order = await Order.findById(id);
     if (!order) {
       return res.status(404).json({ message: "Order not found" });
     }
 
-    // 🔹 Store "before" snapshot
     const before = order.toObject();
 
-    // 🔹 Update allowed fields if provided
     if (status) order.status = status;
     if (typeof isPaid === "boolean") order.isPaid = isPaid;
     if (remarks !== undefined) order.remarks = remarks;
-
-    if (quantity !== undefined && !isNaN(quantity)) {
+    if (quantity !== undefined && !isNaN(quantity))
       order.quantity = Number(quantity);
-    }
-
-    if (price !== undefined && !isNaN(price)) {
-      order.price = Number(price);
-    }
-
+    if (price !== undefined && !isNaN(price)) order.price = Number(price);
     if (orderDate) {
       const parsedDate = new Date(orderDate);
-      if (!isNaN(parsedDate)) {
-        order.orderDate = parsedDate;
-      }
+      if (!isNaN(parsedDate)) order.orderDate = parsedDate;
     }
 
     await order.save();
 
-    // 🔹 Audit log
     await logAudit({
       action: "SUPPORT_UPDATE_ORDER",
       user: req.user?._id || null,
@@ -284,5 +278,3 @@ export const updateOrderByNumber = async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 };
-
-
