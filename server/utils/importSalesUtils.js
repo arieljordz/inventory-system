@@ -13,10 +13,10 @@ export const salesPlatformConfigs = {
   tiktok: {
     sheetName: "Order details",
     fields: {
-      platformOrderId: "Order/adjustment ID",
-      orderNumber: "Order/adjustment ID", 
+      platformOrderId: "Order ID",
+      orderNumber: "Order ID", 
     },
-    requiredHeaders: ["Order/adjustment ID", "Order settled time"],
+    requiredHeaders: ["Order ID", "Order Status"],
   },
   lazada: {
     sheetName: "Income Overview",

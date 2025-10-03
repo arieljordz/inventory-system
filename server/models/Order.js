@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema(
     },
     orderNumber: {
       type: String,
-      required: true,
+      required: false,
       trim: true,
     },
     price: {
