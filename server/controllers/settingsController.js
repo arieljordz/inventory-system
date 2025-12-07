@@ -1,4 +1,5 @@
 // controllers/settingsController.js
+import Settings from "../models/Settings.js";
 import Order from "../models/Order.js";
 import { logAudit } from "../utils/auditLogger.js";
 import FeatureFlag from "../models/FeatureFlag.js";
@@ -275,6 +276,47 @@ export const updateOrderById = async (req, res) => {
     res.json({ message: "Order updated successfully", order });
   } catch (error) {
     console.error("Error updating order:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// 🔍 GET Commission
+export const getCommission = async (req, res) => {
+  try {
+    const setting = await Settings.findOne({ key: "commissionRate" });
+
+    if (!setting) {
+      return res.json({ key: "commissionRate", value: 0.25 });
+    }
+
+    res.json(setting);
+  } catch (error) {
+    console.error("Error fetching commission:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
+// ✏️ UPDATE commission
+export const updateCommission = async (req, res) => {
+  try {
+    const { value } = req.body;
+
+    if (value === undefined || typeof value !== "number") {
+      return res.status(400).json({ message: "Invalid commission value" });
+    }
+
+    const updated = await Settings.findOneAndUpdate(
+      { key: "commissionRate" },
+      { value },
+      { new: true, upsert: true }
+    );
+
+    res.json({
+      message: "Commission updated successfully",
+      data: updated,
+    });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Server error" });
   }
 };

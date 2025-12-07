@@ -2,6 +2,7 @@
 import Order from "../models/Order.js";
 import Product from "../models/Product.js";
 import Item from "../models/Item.js";
+import Settings from "../models/Settings.js";
 import { getYearRange } from "../utils/dateUtils.js";
 import { getEffectivePriceStage } from "../utils/priceUtils.js";
 
@@ -152,16 +153,14 @@ const getOrdersByMonthPlatform = async (year) => {
   }));
 };
 
-// 📌 Revenue by Month + Platform
-const getRevenueByMonthPlatform = async (year) => {
+// 📌 Revenue by Month + Platform (Minus Commission)
+const getRevenueByMonthPlatform = async (year, commissionRate = 0.25) => {
   const { start: startOfYear, end: endOfYear } = getYearRange(year);
   const effectivePriceStage = await getEffectivePriceStage();
 
   const pipeline = [
-    // Match orders within the year
     { $match: { orderDate: { $gte: startOfYear, $lte: endOfYear } } },
 
-    // Lookup product
     {
       $lookup: {
         from: "products",
@@ -172,8 +171,6 @@ const getRevenueByMonthPlatform = async (year) => {
     },
     { $unwind: "$product" },
 
-    // Lookup items referenced in product components (not strictly needed for revenue,
-    // but kept here for parity with profit pipeline so both stay in sync)
     {
       $lookup: {
         from: "items",
@@ -183,7 +180,6 @@ const getRevenueByMonthPlatform = async (year) => {
       },
     },
 
-    // Attach effective price stage
     effectivePriceStage,
 
     // Compute revenue
@@ -193,7 +189,19 @@ const getRevenueByMonthPlatform = async (year) => {
       },
     },
 
-    // Group by year+month+platform
+    // Deduct commission (dynamic)
+    {
+      $addFields: {
+        netRevenue: {
+          $multiply: [
+            "$revenue",
+            { $subtract: [1, commissionRate] }, // 1 - 0.25 = 0.75
+          ],
+        },
+      },
+    },
+
+    // Group by year, month, platform
     {
       $group: {
         _id: {
@@ -201,32 +209,20 @@ const getRevenueByMonthPlatform = async (year) => {
           month: { $month: { date: "$orderDate", timezone: "Asia/Manila" } },
           platform: "$platform",
         },
-        totalRevenue: { $sum: "$revenue" },
+        totalRevenue: { $sum: "$netRevenue" },
       },
     },
 
-    // Sort results
     { $sort: { "_id.year": 1, "_id.month": 1, "_id.platform": 1 } },
   ];
 
   const data = await Order.aggregate(pipeline);
 
   const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
   ];
 
-  // ✅ Reshape into { month, platforms[] }
   const grouped = {};
   data.forEach((d) => {
     const month = monthNames[d._id.month - 1];
@@ -241,13 +237,13 @@ const getRevenueByMonthPlatform = async (year) => {
   return Object.values(grouped);
 };
 
-// 📌 Profit by Month + Platform
-const getProfitByMonthPlatform = async (year) => {
+// 📌 Profit by Month + Platform (with Commission Deduction)
+const getProfitByMonthPlatform = async (year, commissionRate = 0.25) => {
   const { start: startOfYear, end: endOfYear } = getYearRange(year);
   const effectivePriceStage = await getEffectivePriceStage();
 
   const pipeline = [
-    // Match orders within year
+    // Match yearly orders
     { $match: { orderDate: { $gte: startOfYear, $lte: endOfYear } } },
 
     // Lookup product
@@ -261,17 +257,29 @@ const getProfitByMonthPlatform = async (year) => {
     },
     { $unwind: "$product" },
 
-    // Attach effective price stage
+    // Attach effective price
     effectivePriceStage,
 
-    // ✅ Revenue first (safe from lookup duplication)
+    // Compute base revenue
     {
       $addFields: {
         revenue: { $multiply: ["$quantity", "$effectivePrice"] },
       },
     },
 
-    // Lookup items after revenue is fixed
+    // 🔍 Deduct commission
+    {
+      $addFields: {
+        netRevenue: {
+          $multiply: [
+            "$revenue",
+            { $subtract: [1, commissionRate] } // e.g., 1 - 0.25 = 0.75
+          ]
+        }
+      }
+    },
+
+    // Items lookup (after revenue is fixed)
     {
       $lookup: {
         from: "items",
@@ -281,7 +289,7 @@ const getProfitByMonthPlatform = async (year) => {
       },
     },
 
-    // ✅ Compute cost per unit × quantity
+    // Compute total cost of components × quantity
     {
       $addFields: {
         cost: {
@@ -304,40 +312,38 @@ const getProfitByMonthPlatform = async (year) => {
                                     $first: {
                                       $filter: {
                                         input: "$itemsInfo",
-                                        cond: {
-                                          $eq: ["$$this._id", "$$comp.item"],
-                                        },
-                                      },
-                                    },
-                                  },
-                                },
+                                        cond: { $eq: ["$$this._id", "$$comp.item"] }
+                                      }
+                                    }
+                                  }
+                                }
                               },
-                              0,
-                            ],
+                              0
+                            ]
                           },
-                          "$$comp.qty",
-                        ],
-                      },
-                    },
-                  },
+                          "$$comp.qty"
+                        ]
+                      }
+                    }
+                  }
                 },
-                0,
-              ],
+                0
+              ]
             },
-            "$quantity", // ✅ scale by order quantity
-          ],
-        },
-      },
+            "$quantity"
+          ]
+        }
+      }
     },
 
-    // Compute profit
+    // Final profit = net revenue minus cost
     {
       $addFields: {
-        profit: { $subtract: ["$revenue", "$cost"] },
-      },
+        profit: { $subtract: ["$netRevenue", "$cost"] }
+      }
     },
 
-    // Group by year+month+platform
+    // Group by month + platform
     {
       $group: {
         _id: {
@@ -345,33 +351,21 @@ const getProfitByMonthPlatform = async (year) => {
           month: { $month: { date: "$orderDate", timezone: "Asia/Manila" } },
           platform: "$platform",
         },
-        totalRevenue: { $sum: "$revenue" },
+        totalRevenue: { $sum: "$netRevenue" },
         totalProfit: { $sum: "$profit" },
       },
     },
 
-    // Sort results
     { $sort: { "_id.year": 1, "_id.month": 1, "_id.platform": 1 } },
   ];
 
   const data = await Order.aggregate(pipeline);
 
   const monthNames = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec",
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
   ];
 
-  // ✅ Reshape into { month, platforms[] }
   const grouped = {};
   data.forEach((d) => {
     const month = monthNames[d._id.month - 1];
@@ -379,7 +373,7 @@ const getProfitByMonthPlatform = async (year) => {
 
     grouped[month].platforms.push({
       platform: d._id.platform,
-      revenue: d.totalRevenue,
+      revenue: d.totalRevenue, // already net revenue
       profit: d.totalProfit,
     });
   });
@@ -392,22 +386,35 @@ export const getDashboardCharts = async (req, res) => {
   try {
     const year = new Date().getFullYear();
 
-    const [revenueByMonth, ordersByMonth, revenueByPlatform, profitByPlatform] =
-      await Promise.all([
-        getRevenueByMonth(year),
-        getOrdersByMonthPlatform(year),
-        getRevenueByMonthPlatform(year),
-        getProfitByMonthPlatform(year),
-      ]);
+    // 🔍 1. Fetch commission rate from Settings
+    const setting = await Settings.findOne({ key: "commissionRate" });
+    const commissionRate = setting ? Number(setting.value) : 0.25;
 
-    return res.json({
+    // 📌 2. Run async chart calculations with commission
+    const [
       revenueByMonth,
       ordersByMonth,
       revenueByPlatform,
-      profitByPlatform,
+      profitByPlatform
+    ] = await Promise.all([
+      getRevenueByMonth(year), // No commission here
+      getOrdersByMonthPlatform(year),
+      getRevenueByMonthPlatform(year, commissionRate),
+      getProfitByMonthPlatform(year, commissionRate)
+    ]);
+
+    // 📌 3. Return combined dashboard data
+    return res.json({
+      commissionRate,
+      revenueByMonth,
+      ordersByMonth,
+      revenueByPlatform,
+      profitByPlatform
     });
+
   } catch (error) {
     console.error("Error generating dashboard charts:", error);
     res.status(500).json({ message: "Server Error" });
   }
 };
+

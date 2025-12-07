@@ -4,6 +4,7 @@ import SettingsBackups from "./SettingsBackups";
 import SettingsSupports from "./SettingsSupports";
 import SettingsFlags from "./SettingsFlags";
 import SettingsTabs from "./SettingsTabs";
+import SettingsCommissions from "./SettingsCommissions";
 
 const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState("backup");
@@ -16,6 +17,8 @@ const SettingsPage = () => {
         return <SettingsFlags />;
       case "support":
         return <SettingsSupports />;
+      case "commission":
+        return <SettingsCommissions />;
       default:
         return null;
     }

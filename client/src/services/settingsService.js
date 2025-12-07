@@ -28,3 +28,13 @@ export const updateOrderById = async (id, updateData) => {
   const res = await api.put(`/api/settings/${id}`, updateData);
   return res.data;
 };
+
+export const getCommission = async () => {
+  const res = await api.get("/api/settings/commission");
+  return res.data;
+};
+
+export const updateCommission = async (value) => {
+  const res = await api.put("/api/settings/commission", { value });
+  return res.data;
+};

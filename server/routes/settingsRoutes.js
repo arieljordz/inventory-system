@@ -9,10 +9,16 @@ import {
   updateFeatureFlag,
   getOrderByNumber,
   updateOrderById,
+  getCommission,
+  updateCommission,
 } from "../controllers/settingsController.js";
 import { authenticate } from "../middlewares/authMiddleware.js";
 
 const router = Router();
+
+router.get("/commission", authenticate, getCommission);
+
+router.put("/commission", authenticate, updateCommission);
 
 router.get("/collections", authenticate, getCollections);
 
