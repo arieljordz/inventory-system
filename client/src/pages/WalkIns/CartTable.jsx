@@ -64,7 +64,7 @@ const CartTable = ({
                         className="btn btn-sm btn-danger"
                         onClick={() => removeFromCart(c.itemId)}
                       >
-                        <i class="fas fa-trash-alt mr-1"></i>
+                        <i className="fas fa-trash-alt mr-1"></i>
                         Remove
                       </button>
                     </td>

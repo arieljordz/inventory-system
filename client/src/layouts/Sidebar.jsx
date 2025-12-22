@@ -26,6 +26,7 @@ const menuStructure = [
     children: [
       { path: "/orders", label: "Orders", icon: "fas fa-shopping-cart" },
       { path: "/walk-ins", label: "Walk-Ins", icon: "fas fa-cash-register" },
+      { path: "/freebies", label: "Freebies", icon: "fas fa-gift" },
     ],
   },
   {

@@ -15,6 +15,7 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ProductsPage from "./pages/Products/ProductsPage";
 import OrderPage from "./pages/Orders/OrderPage";
 import WalkInsPage from "./pages/WalkIns/WalkInsPage";
+import FreebiesPage from "./pages/Freebies/FreebiesPage";
 import ItemsPage from "./pages/Items/ItemsPage";
 import SalesPage from "./pages/Sales/SalesPage";
 import ReportsPage from "./pages/Reports/ReportsPage";
@@ -43,6 +44,7 @@ function App() {
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/orders" element={<OrderPage />} />
             <Route path="/walk-ins" element={<WalkInsPage />} />
+            <Route path="/freebies" element={<FreebiesPage />} />
             <Route path="/items" element={<ItemsPage />} />
             <Route path="/sales" element={<SalesPage />} />
             <Route path="/reports" element={<ReportsPage />} />

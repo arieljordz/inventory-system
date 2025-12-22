@@ -1,0 +1,16 @@
+[
+  {
+    "_id": {
+      "$oid": "6935d36a5a58f9f4cbffeb64"
+    },
+    "key": "commissionRate",
+    "__v": 0,
+    "createdAt": {
+      "$date": "2025-12-07T19:20:10.395Z"
+    },
+    "updatedAt": {
+      "$date": "2025-12-13T07:16:42.489Z"
+    },
+    "value": 0.25
+  }
+]
