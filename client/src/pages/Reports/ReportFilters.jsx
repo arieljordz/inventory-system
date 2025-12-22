@@ -19,6 +19,7 @@ const SHOW_FILTERS = {
     "status",
   ],
   [NewReportTypeEnum.WALK_INS_REPORT]: ["buyerName", "paymentMethod"],
+  [NewReportTypeEnum.FREEBIES_REPORT]: ["buyerName"],
   [NewReportTypeEnum.PRODUCTS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEMS_REPORT]: ["status"],
   [NewReportTypeEnum.ITEM_MOVEMENTS_REPORT]: ["movementType"],

@@ -12,6 +12,7 @@ import PriceAdjustment from "../models/PriceAdjustment.js";
 import { NewReportTypeEnum } from "../enums/enums.js";
 import { getEffectivePriceStage } from "../utils/priceUtils.js";
 import { buildDateFilter } from "../utils/dateUtils.js";
+import FreebiesTransaction from "../models/FreebiesTransaction.js";
 
 export const getOrdersReport = async (filters = {}) => {
   const { startDate, endDate, paymentStatus, platform, status, orderId } =
@@ -99,6 +100,50 @@ export const getWalkInsReport = async (filters = {}) => {
       .join(", ");
 
     const totalPrice = tx.items.reduce((sum, i) => sum + i.total, 0);
+
+    return {
+      transactionId: tx._id,
+      itemName: itemNames,
+      quantity: tx.items.reduce((sum, i) => sum + i.quantity, 0), // total quantity
+      total: totalPrice,
+      buyerName: tx.buyerName,
+      paymentMethod: tx.paymentMethod,
+      createdAt: tx.createdAt,
+    };
+  });
+
+  return formattedRows;
+};
+
+export const getFreebiesReport = async (filters = {}) => {
+  const { startDate, endDate, buyerName } = filters;
+
+  // Build date filter
+  const filter = buildDateFilter(startDate, endDate, "createdAt");
+
+  // Optional filters
+  if (buyerName && buyerName.trim() !== "") {
+    filter.buyerName = { $regex: buyerName.trim(), $options: "i" };
+  }
+
+  const rows = await FreebiesTransaction.find(filter)
+    .populate("items.item")
+    .sort({ createdAt: -1 })
+    .lean();
+
+  // Map transactions into report-ready rows
+  const formattedRows = rows.map((tx) => {
+    // Format each item as "(Quantity)ItemName-Variant"
+    const itemNames = tx.items
+      .map((i) => {
+        const qty = i.quantity;
+        const name = i.item.name;
+        const variant = i.item.variant ? `-${i.item.variant}` : "";
+        return `(${qty})${name}${variant}`;
+      })
+      .join(", ");
+
+    const totalPrice = tx.items.reduce((sum, i) => sum + i.referencePrice, 0);
 
     return {
       transactionId: tx._id,
@@ -569,6 +614,14 @@ export const generateReport = async (req, res) => {
           paymentMethod,
         });
         // console.log("WALK_INS_REPORT:", data);
+        break;
+      case NewReportTypeEnum.FREEBIES_REPORT:
+        data = await getFreebiesReport({
+          startDate,
+          endDate,
+          buyerName,
+        });
+        // console.log("FREEBIES_REPORT:", data);
         break;
       case NewReportTypeEnum.PRODUCTS_REPORT:
         data = await getProductsReport({

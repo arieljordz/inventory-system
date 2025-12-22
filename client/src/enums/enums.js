@@ -42,6 +42,7 @@ export const ReportTypeEnum = Object.freeze({
 export const NewReportTypeEnum = Object.freeze({
   ORDERS_REPORT: "Orders Report",
   WALK_INS_REPORT: "Walk-Ins Report",
+  FREEBIES_REPORT: "Freebies Report",
   PRODUCTS_REPORT: "Products Report",
   PRODUCT_MOVEMENTS_REPORT: "Product Movements Report",
   ITEMS_REPORT: "Items Report",

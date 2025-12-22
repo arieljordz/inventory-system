@@ -81,6 +81,40 @@ export const reportColumnsConfig = {
     },
   ],
 
+  [NewReportTypeEnum.FREEBIES_REPORT]: [
+    {
+      key: "transactionId",
+      label: "Transaction ID",
+      format: "uppercase",
+      align: "center",
+    },
+    { key: "itemName", label: "Items", format: "proper", align: "left" },
+    {
+      key: "total",
+      label: "Total Price",
+      format: "money",
+      align: "right",
+      total: true,
+    },
+    {
+      key: "buyerName",
+      label: "Customer Name",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "paymentMethod",
+      label: "Payment",
+      format: "proper",
+      align: "center",
+    },
+    {
+      key: "createdAt",
+      label: "Transaction Date",
+      format: "date",
+      align: "center",
+    },
+  ],
   [NewReportTypeEnum.PRODUCTS_REPORT]: [
     {
       key: "productName",
