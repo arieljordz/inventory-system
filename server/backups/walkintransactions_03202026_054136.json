@@ -857,5 +857,284 @@
       "$date": "2025-12-20T03:43:21.800Z"
     },
     "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "695dc19c5f7b84ceb8631860"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56427650c74e5be323834"
+        },
+        "quantity": 50,
+        "price": 110,
+        "total": 5500,
+        "_id": {
+          "$oid": "695dc19c5f7b84ceb8631861"
+        }
+      }
+    ],
+    "totalAmount": 5500,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-01-07T02:14:52.072Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-07T02:14:52.072Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "695f44b8e4da0e4f7d28e1ce"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "quantity": 200,
+        "price": 100,
+        "total": 20000,
+        "_id": {
+          "$oid": "695f44b8e4da0e4f7d28e1cf"
+        }
+      }
+    ],
+    "totalAmount": 20000,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-01-08T05:46:32.792Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-08T05:46:32.792Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "695f44c8e4da0e4f7d28e1db"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56427650c74e5be323834"
+        },
+        "quantity": 20,
+        "price": 110,
+        "total": 2200,
+        "_id": {
+          "$oid": "695f44c8e4da0e4f7d28e1dc"
+        }
+      }
+    ],
+    "totalAmount": 2200,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-01-08T05:46:48.027Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-08T05:46:48.027Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "695f5dd5288731cf27c651ff"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56475650c74e5be323844"
+        },
+        "quantity": 1,
+        "price": 50,
+        "total": 50,
+        "_id": {
+          "$oid": "695f5dd5288731cf27c65200"
+        }
+      }
+    ],
+    "totalAmount": 50,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-01-08T07:33:41.522Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-08T07:33:41.522Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6965eaa0dbc052e8bb2834a0"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56427650c74e5be323834"
+        },
+        "quantity": 50,
+        "price": 110,
+        "total": 5500,
+        "_id": {
+          "$oid": "6965eaa0dbc052e8bb2834a1"
+        }
+      }
+    ],
+    "totalAmount": 5500,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-01-13T06:48:00.895Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-13T06:48:00.895Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69a10be687c062c1b88daf22"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b563f4650c74e5be32382b"
+        },
+        "quantity": 200,
+        "price": 100,
+        "total": 20000,
+        "_id": {
+          "$oid": "69a10be687c062c1b88daf23"
+        }
+      }
+    ],
+    "totalAmount": 20000,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-02-27T03:13:42.921Z"
+    },
+    "updatedAt": {
+      "$date": "2026-02-27T03:13:42.921Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69a10bf487c062c1b88daf2f"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56427650c74e5be323834"
+        },
+        "quantity": 30,
+        "price": 110,
+        "total": 3300,
+        "_id": {
+          "$oid": "69a10bf487c062c1b88daf30"
+        }
+      }
+    ],
+    "totalAmount": 3300,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-02-27T03:13:56.339Z"
+    },
+    "updatedAt": {
+      "$date": "2026-02-27T03:13:56.339Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69aa52a337bd2f53684be567"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56427650c74e5be323834"
+        },
+        "quantity": 60,
+        "price": 110,
+        "total": 6600,
+        "_id": {
+          "$oid": "69aa52a337bd2f53684be568"
+        }
+      }
+    ],
+    "totalAmount": 6600,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-03-06T04:05:55.851Z"
+    },
+    "updatedAt": {
+      "$date": "2026-03-06T04:05:55.851Z"
+    },
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "69aa52bc37bd2f53684be579"
+    },
+    "items": [
+      {
+        "item": {
+          "$oid": "68b56475650c74e5be323844"
+        },
+        "quantity": 10,
+        "price": 50,
+        "total": 500,
+        "_id": {
+          "$oid": "69aa52bc37bd2f53684be57a"
+        }
+      }
+    ],
+    "totalAmount": 500,
+    "buyerName": "Walk-in Customer",
+    "paymentMethod": "Cash",
+    "createdBy": {
+      "$oid": "6884500702d0150075c6b43a"
+    },
+    "createdAt": {
+      "$date": "2026-03-06T04:06:20.332Z"
+    },
+    "updatedAt": {
+      "$date": "2026-03-06T04:06:20.332Z"
+    },
+    "__v": 0
   }
 ]

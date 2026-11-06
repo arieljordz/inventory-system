@@ -7,7 +7,7 @@
     "price": 100,
     "sku": "RING-SMALL-68944",
     "description": "",
-    "quantity": 4,
+    "quantity": 53,
     "unit": "pcs",
     "variant": "Small",
     "supplier": "",
@@ -19,7 +19,7 @@
       "$date": "2025-09-01T09:14:28.945Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:59:53.101Z"
+      "$date": "2026-03-19T05:27:05.653Z"
     },
     "normalizedSku": "ring-small-68944",
     "__v": 0,
@@ -34,7 +34,7 @@
     "price": 110,
     "sku": "RING-BIG-19502",
     "description": "",
-    "quantity": 4,
+    "quantity": 244,
     "unit": "pcs",
     "variant": "Big",
     "supplier": "",
@@ -46,7 +46,7 @@
       "$date": "2025-09-01T09:15:19.503Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:59:54.805Z"
+      "$date": "2026-03-19T05:26:59.754Z"
     },
     "normalizedSku": "ring-big-19502",
     "__v": 0,
@@ -61,7 +61,7 @@
     "price": 50,
     "sku": "CARAB-DEFAU-97240",
     "description": "",
-    "quantity": 15,
+    "quantity": 4,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -73,7 +73,7 @@
       "$date": "2025-09-01T09:16:37.241Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:59:53.218Z"
+      "$date": "2026-03-19T05:27:04.781Z"
     },
     "normalizedSku": "carab-defau-97240",
     "__v": 0,
@@ -115,7 +115,7 @@
     "price": 1200,
     "sku": "FRAME-8-FEE-10691",
     "description": "",
-    "quantity": 32,
+    "quantity": 26,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -127,7 +127,7 @@
       "$date": "2025-09-01T09:36:50.692Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T07:11:30.224Z"
+      "$date": "2026-03-19T05:21:22.910Z"
     },
     "normalizedSku": "frame-8-fee-10691",
     "__v": 0,
@@ -142,7 +142,7 @@
     "price": 2000,
     "sku": "FRAME-8-FEE-26175",
     "description": "",
-    "quantity": 18,
+    "quantity": 16,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -154,7 +154,7 @@
       "$date": "2025-09-01T09:38:46.176Z"
     },
     "updatedAt": {
-      "$date": "2025-12-18T03:08:15.027Z"
+      "$date": "2026-03-19T05:12:51.179Z"
     },
     "normalizedSku": "frame-8-fee-26175",
     "__v": 0,
@@ -169,7 +169,7 @@
     "price": 1700,
     "sku": "FRAME-10-FE-69282",
     "description": "",
-    "quantity": 9,
+    "quantity": 7,
     "unit": "pcs",
     "variant": "10 feet",
     "supplier": "",
@@ -181,7 +181,7 @@
       "$date": "2025-09-01T09:39:29.282Z"
     },
     "updatedAt": {
-      "$date": "2025-12-19T02:49:49.035Z"
+      "$date": "2026-01-09T05:41:06.010Z"
     },
     "normalizedSku": "frame-10-fe-69282",
     "__v": 0,
@@ -196,7 +196,7 @@
     "price": 200,
     "sku": "ROPE-RED-89314",
     "description": "",
-    "quantity": 65,
+    "quantity": 55,
     "unit": "pcs",
     "variant": "Red",
     "supplier": "",
@@ -208,7 +208,7 @@
       "$date": "2025-09-01T10:13:09.315Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T06:28:28.143Z"
+      "$date": "2026-02-26T03:12:57.627Z"
     },
     "normalizedSku": "rope-red-89314",
     "__v": 0,
@@ -223,7 +223,7 @@
     "price": 200,
     "sku": "ROPE-ORANG-57725",
     "description": "",
-    "quantity": 57,
+    "quantity": 28,
     "unit": "pcs",
     "variant": "Orange",
     "supplier": "",
@@ -235,7 +235,7 @@
       "$date": "2025-09-01T10:14:17.725Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T07:08:17.192Z"
+      "$date": "2026-03-19T05:19:59.229Z"
     },
     "normalizedSku": "rope-orang-57725",
     "__v": 0,
@@ -250,7 +250,7 @@
     "price": 200,
     "sku": "ROPE-DEFWH-78420",
     "description": "",
-    "quantity": 16,
+    "quantity": 102,
     "unit": "pcs",
     "variant": "White",
     "supplier": "",
@@ -262,7 +262,7 @@
       "$date": "2025-09-01T10:14:38.420Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T07:08:49.743Z"
+      "$date": "2026-03-19T05:20:08.030Z"
     },
     "normalizedSku": "rope-defwh-78420",
     "__v": 0,
@@ -277,7 +277,7 @@
     "price": 200,
     "sku": "ROPE-DARK-86140",
     "description": "",
-    "quantity": 54,
+    "quantity": 41,
     "unit": "pcs",
     "variant": "Dark Green",
     "supplier": "",
@@ -289,7 +289,7 @@
       "$date": "2025-09-01T10:16:26.140Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:56:41.220Z"
+      "$date": "2026-03-19T05:20:30.462Z"
     },
     "normalizedSku": "rope-dark-86140",
     "__v": 0,
@@ -304,7 +304,7 @@
     "price": 200,
     "sku": "ROPE-GREEN-10873",
     "description": "",
-    "quantity": 15,
+    "quantity": 26,
     "unit": "pcs",
     "variant": "Green",
     "supplier": "",
@@ -316,7 +316,7 @@
       "$date": "2025-09-01T10:16:50.873Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:56:17.969Z"
+      "$date": "2026-03-19T05:13:13.389Z"
     },
     "normalizedSku": "rope-green-10873",
     "__v": 0,
@@ -331,19 +331,19 @@
     "price": 20,
     "sku": "ROUND-2-FEE-53108",
     "description": "",
-    "quantity": 29,
+    "quantity": 96,
     "unit": "pcs",
-    "variant": "2 feet",
+    "variant": "2 feet /60cm,3/16",
     "supplier": "",
     "location": "Main Warehouse",
     "status": "Available",
     "normalizedName": "roundbar",
-    "normalizedVariant": "2 feet",
+    "normalizedVariant": "2 feet /60cm,3/16",
     "createdAt": {
       "$date": "2025-09-01T10:17:33.109Z"
     },
     "updatedAt": {
-      "$date": "2025-12-18T02:51:57.508Z"
+      "$date": "2026-03-19T05:21:08.358Z"
     },
     "normalizedSku": "round-2-fee-53108",
     "__v": 0,
@@ -358,7 +358,7 @@
     "price": 40,
     "sku": "ROUND-DEFAU-89656",
     "description": "",
-    "quantity": 12,
+    "quantity": 3,
     "unit": "pcs",
     "variant": "4 feet",
     "supplier": "",
@@ -370,7 +370,7 @@
       "$date": "2025-09-01T10:18:09.656Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:56:18.707Z"
+      "$date": "2026-03-19T05:19:01.581Z"
     },
     "normalizedSku": "round-defau-89656",
     "__v": 0,
@@ -385,7 +385,7 @@
     "price": 330,
     "sku": "HAMMO-DEFAU-76676",
     "description": "",
-    "quantity": 9,
+    "quantity": 38,
     "unit": "pcs",
     "variant": "Default",
     "supplier": "",
@@ -397,7 +397,7 @@
       "$date": "2025-09-02T05:34:36.683Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T07:09:23.981Z"
+      "$date": "2026-03-19T05:20:05.447Z"
     },
     "normalizedSku": "hammo-defau-76676",
     "normalizedDescription": "",
@@ -412,7 +412,7 @@
     "price": 200,
     "sku": "ROPE-BLACK-39060",
     "description": "",
-    "quantity": 33,
+    "quantity": 86,
     "unit": "pcs",
     "variant": "Black",
     "supplier": "",
@@ -424,7 +424,7 @@
       "$date": "2025-09-02T05:47:19.061Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:56:51.264Z"
+      "$date": "2026-03-19T05:27:00.189Z"
     },
     "normalizedSku": "rope-black-39060",
     "normalizedDescription": "",
@@ -439,7 +439,7 @@
     "price": 200,
     "sku": "ROPE-AZURE-86402",
     "description": "",
-    "quantity": 14,
+    "quantity": 98,
     "unit": "pcs",
     "variant": "Azure blue",
     "supplier": "",
@@ -451,7 +451,7 @@
       "$date": "2025-09-03T02:56:26.403Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:56:03.536Z"
+      "$date": "2026-03-19T05:27:00.752Z"
     },
     "normalizedSku": "rope-azure-86402",
     "normalizedDescription": "",
@@ -466,7 +466,7 @@
     "price": 100,
     "sku": "BAG-F-DEFAU-18924",
     "description": "",
-    "quantity": 18,
+    "quantity": 100,
     "unit": "pcs",
     "variant": "8 feet",
     "supplier": "",
@@ -478,7 +478,7 @@
       "$date": "2025-09-06T05:28:38.926Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T07:11:08.027Z"
+      "$date": "2026-03-19T05:27:54.769Z"
     },
     "normalizedSku": "bag-f-defau-18924",
     "normalizedDescription": "",
@@ -494,7 +494,7 @@
     "retailPrice": 30,
     "sku": "ROUND-4-FEE-13082",
     "description": "",
-    "quantity": 83,
+    "quantity": 82,
     "unit": "pcs",
     "variant": "4 feet/120cm,1/8",
     "supplier": "",
@@ -506,7 +506,7 @@
       "$date": "2025-09-17T06:56:53.083Z"
     },
     "updatedAt": {
-      "$date": "2025-12-16T06:22:14.602Z"
+      "$date": "2026-02-28T05:09:36.429Z"
     },
     "normalizedSku": "round-4-fee-13082",
     "normalizedDescription": "",
@@ -521,7 +521,7 @@
     "retailPrice": 100,
     "sku": "BAG-F-10-FE-18048",
     "description": "",
-    "quantity": 6,
+    "quantity": 5,
     "unit": "pcs",
     "variant": "10 feet",
     "supplier": "",
@@ -533,7 +533,7 @@
       "$date": "2025-09-23T02:16:58.049Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:52:22.269Z"
+      "$date": "2026-01-03T07:51:10.864Z"
     },
     "normalizedSku": "bag-f-10-fe-18048",
     "normalizedDescription": "",
@@ -560,7 +560,7 @@
       "$date": "2025-09-25T07:51:56.039Z"
     },
     "updatedAt": {
-      "$date": "2025-12-20T07:09:44.316Z"
+      "$date": "2026-02-25T04:25:14.428Z"
     },
     "normalizedSku": "nylon-defau-16038",
     "normalizedDescription": "",
@@ -629,7 +629,7 @@
     "retailPrice": 30,
     "sku": "ROUND-2-FEE-63877",
     "description": "",
-    "quantity": 48,
+    "quantity": 29,
     "unit": "pcs",
     "variant": "2 feet/60cm, 1/4\"",
     "supplier": "",
@@ -641,7 +641,7 @@
       "$date": "2025-12-11T03:42:43.879Z"
     },
     "updatedAt": {
-      "$date": "2025-12-11T04:35:15.089Z"
+      "$date": "2026-02-26T03:27:03.611Z"
     },
     "normalizedSku": "round-2-fee-63877",
     "normalizedDescription": "",
@@ -683,7 +683,7 @@
     "retailPrice": 69,
     "sku": "ROUND-2-FT-02332",
     "description": "",
-    "quantity": 97,
+    "quantity": 42,
     "unit": "pcs",
     "variant": "2 FT/60cm,1/8\" 2pcs",
     "supplier": "",
@@ -695,9 +695,90 @@
       "$date": "2025-12-12T06:31:42.345Z"
     },
     "updatedAt": {
-      "$date": "2025-12-22T06:56:21.328Z"
+      "$date": "2026-02-26T04:13:39.818Z"
     },
     "normalizedSku": "round-2-ft-02332",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6961fcbbbfceeca8aa0fcbaa"
+    },
+    "name": "Roundbar",
+    "price": 120,
+    "retailPrice": 94,
+    "sku": "ROUND-14-71459",
+    "description": "",
+    "quantity": 102,
+    "unit": "pcs",
+    "variant": "1/4\" - 4 Feet - 2 Pcs",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "roundbar",
+    "normalizedVariant": "1/4\" - 4 feet - 2 pcs",
+    "createdAt": {
+      "$date": "2026-01-10T07:16:11.460Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-10T07:22:53.651Z"
+    },
+    "normalizedSku": "round-14-71459",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6961ff98bfceeca8aa0fcd94"
+    },
+    "name": "duyan nga may buslot2",
+    "price": 250,
+    "retailPrice": 180,
+    "sku": "DUYAN-DEFAU-04583",
+    "description": "",
+    "quantity": 18,
+    "unit": "pcs",
+    "variant": "Default",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "duyan nga may buslot2",
+    "normalizedVariant": "default",
+    "createdAt": {
+      "$date": "2026-01-10T07:28:24.583Z"
+    },
+    "updatedAt": {
+      "$date": "2026-02-25T04:13:30.335Z"
+    },
+    "normalizedSku": "duyan-defau-04583",
+    "normalizedDescription": "",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "696200e0bfceeca8aa0fcde3"
+    },
+    "name": "carabiner no lock",
+    "price": 114,
+    "retailPrice": 80,
+    "sku": "CARAB-DEFAU-32783",
+    "description": "",
+    "quantity": 104,
+    "unit": "pcs",
+    "variant": "Default",
+    "supplier": "",
+    "location": "Main Warehouse",
+    "status": "Available",
+    "normalizedName": "carabiner no lock",
+    "normalizedVariant": "default",
+    "createdAt": {
+      "$date": "2026-01-10T07:33:52.784Z"
+    },
+    "updatedAt": {
+      "$date": "2026-01-10T07:34:13.791Z"
+    },
+    "normalizedSku": "carab-defau-32783",
     "normalizedDescription": "",
     "__v": 0
   }
