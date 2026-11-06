@@ -31,68 +31,113 @@ export const getAllOrders = async (req, res) => {
 
     const skip = (page - 1) * limit;
 
-    // Build search query
-    const match = search
-      ? {
+    // Step 1: Find matching product IDs when searching
+    let matchingProductIds = [];
+
+    if (search) {
+      matchingProductIds = await Order.db
+        .collection("products")
+        .distinct("_id", {
           $or: [
-            { status: rawSafeRegex },
-            { platformOrderId: rawSafeRegex },
-            { orderNumber: rawSafeRegex },
-            { "product.normalizedName": safeRegex },
-            { "product.normalizedVariant": safeRegex },
-            { "product.sku": rawSafeRegex },
-            { "product.description": rawSafeRegex },
+            { normalizedName: safeRegex },
+            { normalizedVariant: safeRegex },
+            { sku: rawSafeRegex },
+            { description: rawSafeRegex },
           ],
-        }
-      : {};
+        });
+    }
 
-    const effectivePriceStage = await getEffectivePriceStage();
-
-    const pipeline = [
-      {
-        $lookup: {
-          from: "products",
-          localField: "product",
-          foreignField: "_id",
-          as: "product",
-        },
-      },
-      { $unwind: "$product" },
-      { $match: match },
-
-      effectivePriceStage, // ✅ now it’s a plain object
-
-      { $sort: { orderDate: -1 } },
-      {
-        $project: {
-          _id: 1,
-          orderNumber: 1,
-          platform: 1,
-          platformOrderId: 1,
-          quantity: 1,
-          status: 1,
-          isPaid: 1,
-          orderDate: 1,
-          // flatten product fields
-          productId: "$product._id",
-          productName: "$product.name",
-          productSku: "$product.sku",
-          productVariant: "$product.normalizedVariant",
-          productDescription: "$product.description",
-          price: "$effectivePrice", // 🔹 use computed price
-        },
-      },
-      {
-        $facet: {
-          data: [{ $skip: skip }, { $limit: limit }],
-          total: [{ $count: "count" }],
-        },
-      },
+    // Step 2: Build order search query
+    const orderConditions = [
+      { status: rawSafeRegex },
+      { platformOrderId: rawSafeRegex },
+      { orderNumber: rawSafeRegex },
     ];
 
-    const result = await Order.aggregate(pipeline);
-    const orders = result[0].data;
-    const totalOrders = result[0].total[0]?.count || 0;
+    if (matchingProductIds.length > 0) {
+      orderConditions.push({
+        product: { $in: matchingProductIds },
+      });
+    }
+
+    const match = search
+      ? { $or: orderConditions }
+      : {};
+
+    // Step 3: Get total matching orders
+    const totalOrders = await Order.countDocuments(match);
+
+    // Step 4: Retrieve only the current page using the orderDate index
+    const pageOrders = await Order.find(match)
+      .select("_id")
+      .sort({ orderDate: -1 })
+      .hint({ orderDate: -1 })
+      .skip(skip)
+      .limit(limit)
+      .lean();
+
+    const pageIds = pageOrders.map((order) => order._id);
+
+    // Step 5: Fetch product information and calculate effective price
+    let orders = [];
+
+    if (pageIds.length > 0) {
+      const effectivePriceStage = await getEffectivePriceStage();
+
+      const pipeline = [
+        {
+          $match: {
+            _id: { $in: pageIds },
+          },
+        },
+        {
+          $lookup: {
+            from: "products",
+            localField: "product",
+            foreignField: "_id",
+            as: "product",
+          },
+        },
+        { $unwind: "$product" },
+
+        effectivePriceStage,
+
+        {
+          $project: {
+            _id: 1,
+            orderNumber: 1,
+            platform: 1,
+            platformOrderId: 1,
+            quantity: 1,
+            status: 1,
+            isPaid: 1,
+            orderDate: 1,
+
+            productId: "$product._id",
+            productName: "$product.name",
+            productSku: "$product.sku",
+            productVariant: "$product.normalizedVariant",
+            productDescription: "$product.description",
+
+            price: "$effectivePrice",
+          },
+        },
+      ];
+
+      const enrichedOrders = await Order.aggregate(pipeline);
+
+      // Preserve the original orderDate sorting
+      const ordersMap = new Map(
+        enrichedOrders.map((order) => [
+          String(order._id),
+          order,
+        ])
+      );
+
+      orders = pageOrders
+        .map((order) => ordersMap.get(String(order._id)))
+        .filter(Boolean);
+    }
 
     res.status(200).json({
       orders,
@@ -101,6 +146,7 @@ export const getAllOrders = async (req, res) => {
       currentPage: page,
       pageSize: limit,
     });
+
   } catch (error) {
     console.error("Get Orders Error:", error);
     res.status(500).json({ message: "Server error" });
